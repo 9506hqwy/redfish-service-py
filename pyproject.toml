@@ -1,0 +1,103 @@
+[project]
+name = "PACKAGE_NAME"
+version = "0.1.0"
+authors = [
+  {name="USERNAME"},
+]
+description = "PACKAGE_DESCRIPTION"
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+  # https://pypi.org/classifiers/
+  "Development Status :: 1 - Planning",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+requires-python = ">= 3.9"
+
+[project.urls]
+Homepage = "https://github.com/USERNAME/PACKAGE_NAME"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.11.2",
+  "ruff>=0.6.4",
+]
+doc = [
+  "sphinx>=7.4.7",
+]
+test = [
+  "pytest-cov>=5.0.0",
+  "pytest>=8.3.2",
+  "tox-uv>=1.11.3",
+  "tox>=4.18.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/example"]
+
+[tool.mypy]
+disallow_subclassing_any = true
+disallow_untyped_defs = true
+implicit_optional = false
+strict_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+# occur `no-data-collected` at coverage if removed.
+pythonpath = "src"
+
+[tool.ruff]
+# relaxed line length
+line-length = 99
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "N", "S", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = ["S101"]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+env_list =
+  format
+  lint
+  type
+  py39
+  py310
+  py311
+  py312
+  py313
+
+[testenv]
+deps =
+  pytest
+  pytest-cov
+commands =
+  pytest --cov-append --cov=src -v
+
+[testenv:format]
+deps = ruff
+commands =
+  ruff format --check
+
+[testenv:lint]
+deps = ruff
+commands =
+  ruff check
+
+[testenv:type]
+deps = mypy
+commands =
+  mypy ./src
+"""

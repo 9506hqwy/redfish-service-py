@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "charliermarsh.ruff",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.mypy-type-checker",
+        "ms-python.vscode-pylance",
+        "ms-vscode-remote.remote-containers",
+        "njpwerner.autodocstring",
+        "tamasfe.even-better-toml"
+    ]
+}
