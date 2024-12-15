@@ -4,10 +4,12 @@
 .tox/
 .venv/
 __pycache__/
+SchemaFiles/
 artifacts/
 coverage_html/
 dist/
 doc/
+logs/
 *.egg-info/
 
 .coverage

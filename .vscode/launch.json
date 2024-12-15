@@ -11,6 +11,16 @@
             "purpose": ["debug-test"],
             // https://docs.pytest.org/en/7.1.x/example/simple.html
             "env": {"PYTEST_ADDOPTS": "--no-cov"}
+        },
+        {
+            "name": "Python: Serve",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "redfish_service.service:app",
+                "--reload"
+            ],
         }
     ]
 }

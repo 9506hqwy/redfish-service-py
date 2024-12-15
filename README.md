@@ -1,61 +1,45 @@
-# Template for Python Package
+# Redfish Service for Python
 
-This repository provides a template for python package.
+This repository provides Redfish service library and entry script.
 
-This repository uses [uv](https://github.com/astral-sh/uv) for project management.
+## Install
 
-## Prepare
+Intall library and entry script.
 
-1. Install [uv](https://github.com/astral-sh/uv).
-1. Replace the keyword in the `pyproject.toml`.
-   - `PACKAGE_NAME`: package's name
-   - `PACKAGE_DESCRIPTION`: package's description
-   - `USERNAME`: package's author
-1. Update other content in the `pyproject.toml`.
-1. Implement `src` and `test` directories.
+```sh
+pip install git+https://github.com/9506hqwy/redfish-service-py.git
+```
+
+## Execute
+
+Start up service.
+
+```sh
+redfish-service
+```
 
 ## Development
 
-Install require libraries.
+Install dependencies libraries.
 
 ```sh
-uv sync --group dev
+uv sync --all-groups
 ```
 
-## Testing
-
-Install require libraries.
-
-```sh
-uv sync --group test
-```
-
-Execute test code.
+Run test.
 
 ```sh
 uv run tox
 ```
 
-## Documentation
-
-Install require libraries.
+Start up service.
 
 ```sh
-uv sync --group doc
+uv run redfish-service
 ```
 
-Generate API document.
+Validate service after running service.
 
 ```sh
-uv run sphinx-apidoc -F -f -a -H PROJECT -A AUTHOR -V VERSION -o doc src
-cd doc
-uv run make html
-```
-
-## Building package
-
-Build `sdist` and `bdist`.
-
-```sh
-uv build
+uv run rf_service_validator -u admin -p admin -r http://127.0.0.1:8000 --forceauth
 ```
