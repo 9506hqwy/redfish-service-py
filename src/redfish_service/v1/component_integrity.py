@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ComponentIntegrity(RedfishResource):
@@ -41,10 +41,6 @@ class ComponentIntegrityType(StrEnum):
 class Links(RedfishModel):
     components_protected: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SpdmgetSignedMeasurements(RedfishModel):

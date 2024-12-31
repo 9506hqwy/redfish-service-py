@@ -11,17 +11,13 @@ from ..resource import Location
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     on_hand_spares: list[IdRef] | None = None
     replacement_spare_sets: list[SpareResourceSet] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SpareResourceSet(RedfishResource):

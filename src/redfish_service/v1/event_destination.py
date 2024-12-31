@@ -13,7 +13,7 @@ from .values import EventType
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EventDestination(RedfishResource):
@@ -25,7 +25,7 @@ class EventDestination(RedfishResource):
     destination: str | None = None
     event_format_type: str | None = None
     event_types: list[EventType] | None = None
-    http_headers: list[HttpHeaderProperty] | None = None
+    http_headers: list[dict[str, Any]] | None = None
     include_origin_of_condition: str | None = None
     message_ids: list[str] | None = None
     metric_report_definitions: list[IdRef] | None = None
@@ -60,14 +60,6 @@ class EventDestinationProtocol(StrEnum):
 class EventFormatType(StrEnum):
     EVENT = "Event"
     METRIC_REPORT = "MetricReport"
-
-
-class HttpHeaderProperty(RedfishModel):
-    pass
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResumeSubscription(RedfishModel):

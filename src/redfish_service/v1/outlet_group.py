@@ -13,17 +13,13 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outlet_groups: list[IdRef] | None = None
     outlets: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class OutletGroup(RedfishResource):

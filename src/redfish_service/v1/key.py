@@ -10,7 +10,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EcdsacurveType(StrEnum):
@@ -45,10 +45,6 @@ class NvmeoF(RedfishModel):
     oemsecurity_protocol_type: str | None = None
     secure_hash_allow_list: list[str] | None = None
     security_protocol_type: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SshkeyType(StrEnum):

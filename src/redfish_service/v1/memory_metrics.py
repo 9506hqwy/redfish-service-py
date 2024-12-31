@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AlarmTrips(RedfishModel):
@@ -71,7 +71,3 @@ class MemoryMetrics(RedfishResource):
     life_time: LifeTime | None = None
     oem: dict[str, Any] | None = None
     operating_speed_mhz: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

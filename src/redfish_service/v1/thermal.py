@@ -45,11 +45,7 @@ class Fan(RedfishObjectId):
 
 
 class FanActions(RedfishModel):
-    oem: FanOemActions | None = None
-
-
-class FanOemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class Temperature(RedfishObjectId):
@@ -81,11 +77,7 @@ class Temperature(RedfishObjectId):
 
 
 class TemperatureActions(RedfishModel):
-    oem: TemperatureOemActions | None = None
-
-
-class TemperatureOemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class Thermal(RedfishResource):
@@ -99,8 +91,4 @@ class Thermal(RedfishResource):
 
 
 class ThermalActions(RedfishModel):
-    oem: ThermalOemActions | None = None
-
-
-class ThermalOemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None

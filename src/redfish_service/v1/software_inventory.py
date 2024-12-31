@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AdditionalVersions(RedfishModel):
@@ -27,10 +27,6 @@ class MeasurementBlock(RedfishModel):
     measurement_index: str | None = None
     measurement_size: str | None = None
     measurement_specification: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SoftwareInventory(RedfishResource):

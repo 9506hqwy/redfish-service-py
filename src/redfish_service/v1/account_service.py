@@ -42,7 +42,7 @@ class AccountService(RedfishResource):
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Authentication(RedfishModel):
@@ -101,7 +101,3 @@ class MfabypassType(StrEnum):
     ONE_TIME_PASSCODE = "OneTimePasscode"
     TIME_BASED_ONE_TIME_PASSWORD = "TimeBasedOneTimePassword"  # noqa: S105
     OEM = "OEM"
-
-
-class OemActions(RedfishModel):
-    pass

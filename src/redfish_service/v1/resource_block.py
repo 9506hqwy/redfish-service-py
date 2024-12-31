@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CompositionStatus(RedfishModel):
@@ -31,10 +31,6 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     supplying_resource_blocks: list[IdRef] | None = None
     zones: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResourceBlock(RedfishResource):

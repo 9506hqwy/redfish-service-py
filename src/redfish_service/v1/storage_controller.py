@@ -14,7 +14,7 @@ from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AttachNamespaces(RedfishModel):
@@ -61,10 +61,6 @@ class NvmeSmartcriticalWarnings(RedfishModel):
     pmrunreliable: str | None = None
     power_backup_failed: str | None = None
     spare_capacity_worn_out: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Rates(RedfishModel):

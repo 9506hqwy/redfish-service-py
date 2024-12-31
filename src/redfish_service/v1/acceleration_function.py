@@ -25,14 +25,10 @@ class AccelerationFunction(RedfishResource):
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

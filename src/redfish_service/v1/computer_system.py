@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AddResourceBlock(RedfishModel):
@@ -124,10 +124,6 @@ class MemorySummary(RedfishModel):
     status: Status | None = None
     total_system_memory_gi_b: str | None = None
     total_system_persistent_memory_gi_b: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class PowerRestorePolicyTypes(StrEnum):

@@ -12,7 +12,7 @@ from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Battery(RedfishResource):
@@ -56,10 +56,6 @@ class Links(RedfishModel):
     memory: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     storage_controllers: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Reset(RedfishModel):

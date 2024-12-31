@@ -12,7 +12,7 @@ from .resource import Identifier, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CxllogicalDevice(RedfishResource):
@@ -42,10 +42,6 @@ class Links(RedfishModel):
     memory_domains: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class QoS(RedfishModel):

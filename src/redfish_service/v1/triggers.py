@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DiscreteTrigger(RedfishModel):
@@ -25,10 +25,6 @@ class DiscreteTrigger(RedfishModel):
 class Links(RedfishModel):
     metric_report_definitions: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Threshold(RedfishModel):

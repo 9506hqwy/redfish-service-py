@@ -9,7 +9,7 @@ from ..base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class IoconnectivityLineOfService(RedfishResource):
@@ -19,7 +19,3 @@ class IoconnectivityLineOfService(RedfishResource):
     max_bytes_per_second: str | None = None
     max_iops: str | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

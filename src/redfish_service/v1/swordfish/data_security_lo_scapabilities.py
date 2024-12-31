@@ -12,7 +12,7 @@ from ..resource import Identifier
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AntiVirusScanTrigger(StrEnum):
@@ -58,10 +58,6 @@ class KeySize(StrEnum):
     BITS_128 = "Bits_128"
     BITS_192 = "Bits_192"
     BITS_256 = "Bits_256"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SecureChannelProtocol(StrEnum):

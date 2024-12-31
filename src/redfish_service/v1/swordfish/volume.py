@@ -15,7 +15,7 @@ from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AssignReplicaTarget(RedfishModel):
@@ -114,10 +114,6 @@ class NamespaceType(StrEnum):
     KEY_VALUE = "KeyValue"
     ZNS = "ZNS"
     COMPUTATIONAL = "Computational"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Operation(RedfishModel):

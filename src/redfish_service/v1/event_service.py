@@ -12,7 +12,7 @@ from .values import EventType
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EventService(RedfishResource):
@@ -36,10 +36,6 @@ class EventService(RedfishResource):
     status: Status | None = None
     subordinate_resources_supported: str | None = None
     subscriptions: IdRef | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Smtp(RedfishModel):

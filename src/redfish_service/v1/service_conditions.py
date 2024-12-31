@@ -10,11 +10,7 @@ from .resource import Health
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class ServiceConditions(RedfishResource):

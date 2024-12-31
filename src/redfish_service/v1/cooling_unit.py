@@ -14,7 +14,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CoolingEquipmentType(StrEnum):
@@ -60,7 +60,3 @@ class Links(RedfishModel):
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Assembly(RedfishResource):
@@ -48,12 +48,4 @@ class AssemblyData(RedfishObjectId):
 
 
 class AssemblyDataActions(RedfishModel):
-    oem: AssemblyDataOemActions | None = None
-
-
-class AssemblyDataOemActions(RedfishModel):
-    pass
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None

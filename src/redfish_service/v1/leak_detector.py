@@ -10,7 +10,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class LeakDetector(RedfishResource):
@@ -44,7 +44,3 @@ class LeakDetectorArrayExcerpt(RedfishModel):
 class LeakDetectorExcerpt(RedfishModel):
     data_source_uri: str | None = None
     detector_state: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

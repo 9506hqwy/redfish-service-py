@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ApplyTime(StrEnum):
@@ -30,10 +30,6 @@ class HttpPushUriApplyTime(RedfishModel):
 
 class HttpPushUriOptions(RedfishModel):
     http_push_uri_apply_time: HttpPushUriApplyTime | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SimpleUpdate(RedfishModel):

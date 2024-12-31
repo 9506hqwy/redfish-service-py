@@ -12,7 +12,7 @@ from .values import EventType
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
@@ -56,7 +56,3 @@ class LogEntryType(StrEnum):
     EVENT = "Event"
     SEL = "SEL"
     OEM = "Oem"
-
-
-class OemActions(RedfishModel):
-    pass

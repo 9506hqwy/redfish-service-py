@@ -16,7 +16,7 @@ class AsnumberRange(RedfishModel):
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AddressPool(RedfishResource):
@@ -205,10 +205,6 @@ class MaxPrefix(RedfishModel):
 class MultiplePaths(RedfishModel):
     maximum_paths: str | None = None
     use_multiple_paths_enabled: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RouteDistinguisherRange(RedfishModel):

@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class KeyService(RedfishResource):
@@ -19,7 +19,3 @@ class KeyService(RedfishResource):
     nvmeo_fkey_policies: IdRef | None = None
     nvmeo_fsecrets: IdRef | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

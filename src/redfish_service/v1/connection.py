@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Connection(RedfishResource):
@@ -51,7 +51,3 @@ class MemoryRegionInfo(RedfishModel):
     access_capabilities: list[str] | None = None
     access_state: str | None = None
     memory_region: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

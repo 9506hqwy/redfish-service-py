@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Filter(RedfishResource):
@@ -35,7 +35,3 @@ class Filter(RedfishResource):
     spare_part_number: str | None = None
     status: Status | None = None
     user_label: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

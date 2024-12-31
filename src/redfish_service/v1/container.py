@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Container(RedfishResource):
@@ -35,10 +35,6 @@ class Limits(RedfishModel):
 class Links(RedfishModel):
     container_image: IdRef | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Reset(RedfishModel):

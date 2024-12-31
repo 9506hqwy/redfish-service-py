@@ -13,7 +13,7 @@ from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ControllerCapabilities(RedfishModel):
@@ -79,10 +79,6 @@ class NetworkAdapter(RedfishResource):
 class NicPartitioning(RedfishModel):
     npar_capable: str | None = None
     npar_enabled: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetSettingsToDefault(RedfishModel):

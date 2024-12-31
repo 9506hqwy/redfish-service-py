@@ -9,7 +9,7 @@ from .privileges import PrivilegeType
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Mapping(RedfishModel):
@@ -18,10 +18,6 @@ class Mapping(RedfishModel):
     property_overrides: list[TargetPrivilegeMap] | None = None
     resource_urioverrides: list[TargetPrivilegeMap] | None = None
     subordinate_overrides: list[TargetPrivilegeMap] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class OperationMap(RedfishModel):

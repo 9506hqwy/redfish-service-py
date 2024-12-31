@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DeviceType(StrEnum):
@@ -25,10 +25,6 @@ class Links(RedfishModel):
     chassis: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class PcieDevice(RedfishResource):

@@ -13,7 +13,7 @@ from .resource import Identifier, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ConnectedEntity(RedfishModel):
@@ -66,10 +66,6 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     ports: list[IdRef] | None = None
     zones: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class PciId(RedfishModel):

@@ -10,17 +10,13 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class Attributes(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class Bios(RedfishResource):
     actions: Actions | None = None
     attribute_registry: str | None = None
-    attributes: Attributes | None = None
+    attributes: dict[str, Any] | None = None
     description: str | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
@@ -36,10 +32,6 @@ class Links(RedfishModel):
     active_software_image: IdRef | None = None
     oem: dict[str, Any] | None = None
     software_images: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetBios(RedfishModel):

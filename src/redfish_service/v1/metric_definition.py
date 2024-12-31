@@ -10,7 +10,7 @@ from .physical_context import LogicalContext
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class MetricDefinition(RedfishResource):
@@ -39,10 +39,6 @@ class MetricDefinition(RedfishResource):
     timestamp_accuracy: str | None = None
     units: str | None = None
     wildcards: list[Wildcard] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Wildcard(RedfishModel):

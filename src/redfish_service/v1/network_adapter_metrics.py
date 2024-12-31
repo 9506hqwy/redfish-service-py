@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class NetworkAdapterMetrics(RedfishResource):
@@ -29,10 +29,6 @@ class NetworkAdapterMetrics(RedfishResource):
     txbytes: str | None = None
     txmulticast_frames: str | None = None
     txunicast_frames: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetMetrics(RedfishModel):

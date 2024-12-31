@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Fabric(RedfishResource):
@@ -33,7 +33,3 @@ class Fabric(RedfishResource):
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

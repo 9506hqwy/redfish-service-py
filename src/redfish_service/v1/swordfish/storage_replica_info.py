@@ -11,11 +11,7 @@ from ..odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class ReplicaFaultDomain(StrEnum):

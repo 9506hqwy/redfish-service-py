@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class NetDevFuncMaxBwalloc(RedfishModel):
@@ -49,10 +49,6 @@ class NetworkPort(RedfishResource):
     supported_link_capabilities: list[SupportedLinkCapabilities] | None = None
     vendor_id: str | None = None
     wake_on_lanenabled: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SupportedLinkCapabilities(RedfishModel):

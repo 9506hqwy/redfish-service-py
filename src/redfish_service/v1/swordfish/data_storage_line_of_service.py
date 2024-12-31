@@ -9,7 +9,7 @@ from ..base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DataStorageLineOfService(RedfishResource):
@@ -21,7 +21,3 @@ class DataStorageLineOfService(RedfishResource):
     provisioning_policy: str | None = None
     recoverable_capacity_source_count: str | None = None
     recovery_time_objectives: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

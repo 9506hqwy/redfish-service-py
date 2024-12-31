@@ -10,7 +10,7 @@ from ..odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Capacity(RedfishModel):
@@ -38,7 +38,3 @@ class CapacitySource(RedfishResource):
     providing_memory_chunks: IdRef | None = None
     providing_pools: IdRef | None = None
     providing_volumes: IdRef | None = None
-
-
-class OemActions(RedfishModel):
-    pass

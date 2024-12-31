@@ -13,16 +13,12 @@ from .resource import Health
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     created_resources: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Payload(RedfishModel):

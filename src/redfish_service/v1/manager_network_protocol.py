@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Httpsprotocol(RedfishModel):
@@ -49,10 +49,6 @@ class Ntpprotocol(RedfishModel):
     network_supplied_servers: list[str] | None = None
     port: str | None = None
     protocol_enabled: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Protocol(RedfishModel):

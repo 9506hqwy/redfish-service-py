@@ -10,7 +10,7 @@ from .sensor import SensorArrayExcerpt
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class HeaterMetrics(RedfishResource):
@@ -21,10 +21,6 @@ class HeaterMetrics(RedfishResource):
     pre_power_on_heating_time_seconds: str | None = None
     runtime_heating_time_seconds: str | None = None
     temperature_readings_celsius: list[SensorArrayExcerpt] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetMetrics(RedfishModel):

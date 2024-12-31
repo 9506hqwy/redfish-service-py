@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ConnectionMethod(RedfishResource):
@@ -26,7 +26,3 @@ class ConnectionMethod(RedfishResource):
 class Links(RedfishModel):
     aggregation_sources: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

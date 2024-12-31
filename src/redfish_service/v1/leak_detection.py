@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class LeakDetection(RedfishResource):
@@ -29,7 +29,3 @@ class LeakDetectorGroup(RedfishModel):
     group_name: str | None = None
     humidity_percent: str | None = None
     status: Status
-
-
-class OemActions(RedfishModel):
-    pass

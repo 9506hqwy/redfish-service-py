@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CoolantConnector(RedfishResource):
@@ -44,7 +44,3 @@ class Links(RedfishModel):
     connected_cooling_loop: str | None = None
     connected_cooling_unit: str | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -13,7 +13,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class FabricAdapter(RedfishResource):
@@ -57,7 +57,3 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     pcie_devices: list[IdRef] | None = None
     processors: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AggregationSource(RedfishResource):
@@ -43,10 +43,6 @@ class Links(RedfishModel):
     connection_method: IdRef | None = None
     oem: dict[str, Any] | None = None
     resources_accessed: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RemoveSshidentityKeyPair(RedfishModel):

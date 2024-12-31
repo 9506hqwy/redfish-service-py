@@ -10,7 +10,7 @@ from .pcie_device import PcieErrors
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ClearCurrentPeriod(RedfishModel):
@@ -31,10 +31,6 @@ class InternalMemoryMetrics(RedfishModel):
 class LifeTime(RedfishModel):
     correctable_eccerror_count: str | None = None
     uncorrectable_eccerror_count: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SwitchMetrics(RedfishResource):

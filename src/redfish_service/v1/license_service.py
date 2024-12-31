@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Install(RedfishModel):
@@ -25,7 +25,3 @@ class LicenseService(RedfishResource):
     licenses: IdRef | None = None
     oem: dict[str, Any] | None = None
     service_enabled: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

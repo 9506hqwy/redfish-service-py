@@ -61,14 +61,6 @@ class Location(RedfishModel):
     postal_address: PostalAddress | None = None
 
 
-class Oem(RedfishModel):
-    pass
-
-
-class OemObject(RedfishModel):
-    pass
-
-
 class PartLocation(RedfishModel):
     location_ordinal_value: str | None = None
     location_type: str | None = None

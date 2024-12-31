@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class BootTimeStatistics(RedfishModel):
@@ -53,10 +53,6 @@ class MemoryStatistics(RedfishModel):
     shared_bytes: str | None = None
     total_bytes: str | None = None
     used_bytes: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ProcessorStatistics(RedfishModel):

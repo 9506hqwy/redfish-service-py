@@ -13,7 +13,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EthernetInterface(RedfishModel):
@@ -55,10 +55,6 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     pcie_device: IdRef | None = None
     pcie_functions: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Processor(RedfishResource):

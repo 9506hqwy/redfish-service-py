@@ -13,7 +13,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class InputRange(RedfishModel):
@@ -24,10 +24,6 @@ class InputRange(RedfishModel):
     minimum_voltage: str | None = None
     oem: dict[str, Any] | None = None
     output_wattage: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Power(RedfishResource):
@@ -58,11 +54,7 @@ class PowerControl(RedfishObjectId):
 
 
 class PowerControlActions(RedfishModel):
-    oem: PowerControlOemActions | None = None
-
-
-class PowerControlOemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class PowerLimit(RedfishModel):
@@ -108,11 +100,7 @@ class PowerSupply(RedfishObjectId):
 
 
 class PowerSupplyActions(RedfishModel):
-    oem: PowerSupplyOemActions | None = None
-
-
-class PowerSupplyOemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class PowerSupplyReset(RedfishModel):
@@ -141,8 +129,4 @@ class Voltage(RedfishObjectId):
 
 
 class VoltageActions(RedfishModel):
-    oem: VoltageOemActions | None = None
-
-
-class VoltageOemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None

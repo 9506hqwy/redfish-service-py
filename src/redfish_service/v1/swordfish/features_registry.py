@@ -10,7 +10,7 @@ from ..odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class FeatureMap(RedfishModel):
@@ -33,10 +33,6 @@ class FeaturesRegistry(RedfishResource):
     owning_entity: str
     registry_prefix: str
     registry_version: str
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SupportedFeature(RedfishModel):

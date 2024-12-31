@@ -10,7 +10,7 @@ from ..swordfish.iostatistics import Iostatistics
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class FileSystemMetrics(RedfishResource):
@@ -18,7 +18,3 @@ class FileSystemMetrics(RedfishResource):
     description: str | None = None
     iostatistics: Iostatistics | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

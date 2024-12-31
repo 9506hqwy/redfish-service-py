@@ -13,7 +13,7 @@ from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ApplicationConsistencyMethod(StrEnum):
@@ -56,10 +56,6 @@ class CreateReplicaTarget(RedfishModel):
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RemoveReplicaRelationship(RedfishModel):

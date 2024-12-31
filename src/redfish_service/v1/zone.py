@@ -11,7 +11,7 @@ from .resource import Identifier, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AddEndpoint(RedfishModel):
@@ -27,10 +27,6 @@ class Links(RedfishModel):
     involved_switches: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     resource_blocks: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RemoveEndpoint(RedfishModel):

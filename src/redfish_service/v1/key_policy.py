@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class KeyPolicy(RedfishResource):
@@ -28,7 +28,3 @@ class NvmeoF(RedfishModel):
     secure_hash_allow_list: list[str] | None = None
     security_protocol_allow_list: list[str] | None = None
     security_transport_allow_list: list[str] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

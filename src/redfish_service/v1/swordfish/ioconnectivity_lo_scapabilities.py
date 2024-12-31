@@ -11,7 +11,7 @@ from ..resource import Identifier
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class IoconnectivityLoScapabilities(RedfishResource):
@@ -23,7 +23,3 @@ class IoconnectivityLoScapabilities(RedfishResource):
     oem: dict[str, Any] | None = None
     supported_access_protocols: list[str] | None = None
     supported_lines_of_service: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

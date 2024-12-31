@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AddElements(RedfishModel):
@@ -24,10 +24,6 @@ class Aggregate(RedfishResource):
     elements: list[IdRef]
     elements_count: str | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RemoveElements(RedfishModel):

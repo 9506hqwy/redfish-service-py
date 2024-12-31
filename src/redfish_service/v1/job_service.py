@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class JobService(RedfishResource):
@@ -30,7 +30,3 @@ class JobServiceCapabilities(RedfishModel):
     max_jobs: str | None = None
     max_steps: str | None = None
     scheduling: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class InputRange(RedfishModel):
@@ -25,10 +25,6 @@ class Links(RedfishModel):
     outlet: IdRef | None = None
     power_outlets: list[IdRef] | None = None
     powering_chassis: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class OutputRail(RedfishModel):

@@ -12,7 +12,7 @@ from .vlan_network_interface import Vlan
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Ethernet(RedfishModel):
@@ -90,10 +90,6 @@ class NetworkDeviceFunction(RedfishResource):
     status: Status | None = None
     virtual_functions_enabled: str | None = None
     i_scsiboot: IScsiboot | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class IScsiboot(RedfishModel):

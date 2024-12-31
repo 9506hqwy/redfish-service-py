@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Location(RedfishModel):
@@ -27,7 +27,3 @@ class MessageRegistryFile(RedfishResource):
     location: list[Location]
     oem: dict[str, Any] | None = None
     registry: str
-
-
-class OemActions(RedfishModel):
-    pass

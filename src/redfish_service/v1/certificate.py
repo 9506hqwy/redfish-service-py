@@ -11,7 +11,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Certificate(RedfishResource):
@@ -78,10 +78,6 @@ class Links(RedfishModel):
     issuer: str | None = None
     oem: dict[str, Any] | None = None
     subjects: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Rekey(RedfishModel):

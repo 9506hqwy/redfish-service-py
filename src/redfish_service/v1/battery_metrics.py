@@ -11,7 +11,7 @@ from .sensor import SensorCurrentExcerpt, SensorExcerpt, SensorVoltageExcerpt
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class BatteryMetrics(RedfishResource):
@@ -29,7 +29,3 @@ class BatteryMetrics(RedfishResource):
     stored_charge_amp_hours: SensorExcerpt | None = None
     stored_energy_watt_hours: SensorExcerpt | None = None
     temperature_celsius: SensorExcerpt | None = None
-
-
-class OemActions(RedfishModel):
-    pass

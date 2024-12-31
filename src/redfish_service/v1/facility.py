@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Facility(RedfishResource):
@@ -50,7 +50,3 @@ class Links(RedfishModel):
     rack_pdus: list[IdRef] | None = None
     switchgear: list[IdRef] | None = None
     transfer_switches: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

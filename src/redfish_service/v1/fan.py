@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Fan(RedfishResource):
@@ -41,7 +41,3 @@ class Fan(RedfishResource):
 class Links(RedfishModel):
     cooling_chassis: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

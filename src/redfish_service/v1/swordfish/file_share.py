@@ -11,7 +11,7 @@ from ..resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class FileShare(RedfishResource):
@@ -40,7 +40,3 @@ class Links(RedfishModel):
     class_of_service: IdRef | None = None
     file_system: IdRef | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

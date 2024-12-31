@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Compose(RedfishModel):
@@ -33,7 +33,3 @@ class CompositionService(RedfishResource):
     resource_zones: IdRef | None = None
     service_enabled: str | None = None
     status: Status | None = None
-
-
-class OemActions(RedfishModel):
-    pass

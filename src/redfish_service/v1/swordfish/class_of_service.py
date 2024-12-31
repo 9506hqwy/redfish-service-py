@@ -11,7 +11,7 @@ from ..resource import Identifier
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ClassOfService(RedfishResource):
@@ -25,7 +25,3 @@ class ClassOfService(RedfishResource):
     ioperformance_lines_of_service: list[IdRef] | None = None
     identifier: Identifier | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

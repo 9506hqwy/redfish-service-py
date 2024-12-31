@@ -10,7 +10,7 @@ from ..swordfish.ioperformance_lo_scapabilities import Ioworkload
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class IoperformanceLineOfService(RedfishResource):
@@ -22,7 +22,3 @@ class IoperformanceLineOfService(RedfishResource):
     max_iooperations_per_second_per_terabyte: str | None = None
     oem: dict[str, Any] | None = None
     sample_period: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -12,8 +12,6 @@ from warnings import warn
 
 # TODO
 COMMON_VALUES: list[str] = ["EventType"]
-# TODO
-PLAIN_VALUES: list[str] = ["Oem"]
 
 
 @dataclass
@@ -25,6 +23,7 @@ class ClassInfo:
     properties: list[PropetyInfo]
     reachable: bool = False
     loaded: bool = False
+    raw: bool = False
     _module: str | None = None
 
     @property
@@ -91,7 +90,10 @@ class ClassInfo:
 
     @property
     def type_name(self) -> str:
-        return get_primitive_type_name(self.definition) or self.cls_name
+        if ty := get_primitive_type_name(self.definition):
+            return ty
+
+        return "dict[str, Any]" if self.raw else self.cls_name
 
     @property
     def version(self) -> tuple[int, int, int] | None:
@@ -412,7 +414,7 @@ def load_properties(
         if (any_of := target.definition.get("anyOf", None)) is not None:
             selected = select_definition(any_of)
             if selected is None:
-                warn(f"'{target}' is arbitrary object.")
+                target.raw = True
                 target.loaded = True
                 continue
 
@@ -427,10 +429,10 @@ def load_properties(
                 continue
 
             target.load_properties_from_definition(classall, selected)
-        elif "properties" in target.definition:
+        elif target.definition.get("properties", []):
             target.load_properties(classall)
         elif "type" in target.definition and is_object(target.definition):
-            warn(f"'{target}' is arbitrary object.")
+            target.raw = True
         else:
             raise Exception(f"Not found schema. '{target}'")
 
@@ -587,7 +589,7 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                 for i in sorted(imports, key=lambda i: i.module):
                     if i.name in COMMON_VALUES:
                         w.write(f"from {parent}values import {i.cls_name}\n")
-                    elif i.name in PLAIN_VALUES:
+                    elif isinstance(i, ClassInfo) and i.raw:
                         w.write("from typing import Any\n")
                     elif i.module != module_name:
                         w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
@@ -597,6 +599,9 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                         continue
 
                     if isinstance(c, ClassInfo) and c.is_primitive:
+                        continue
+
+                    if isinstance(c, ClassInfo) and c.raw:
                         continue
 
                     if c.versioned and any(filter(func_match_newer(c), classes)):
@@ -628,9 +633,6 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
 
                             ty = p.type if isinstance(p.type, str) else p.type.type_name
                             ty = f"list[{ty}]" if p.array else ty
-                            if ty in PLAIN_VALUES:
-                                # TODO:
-                                ty = "dict[str, Any]"
 
                             w.write(f"    {prop_name}: {ty}")
                             if p.nonable:

@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class MemoryRegion(RedfishResource):
@@ -31,10 +31,6 @@ class MemoryRegion(RedfishResource):
     sanitize_on_release: str | None = None
     shareable_region: str | None = None
     status: Status | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RegionType(StrEnum):

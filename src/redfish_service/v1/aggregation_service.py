@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AggregationService(RedfishResource):
@@ -23,10 +23,6 @@ class AggregationService(RedfishResource):
     oem: dict[str, Any] | None = None
     service_enabled: str | None = None
     status: Status | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Reset(RedfishModel):

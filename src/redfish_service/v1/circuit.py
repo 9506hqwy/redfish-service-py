@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class BreakerControl(RedfishModel):
@@ -106,10 +106,6 @@ class NominalVoltageType(StrEnum):
     DC5_V = "DC5V"
     DC3_3_V = "DC3_3V"
     DC1_8_V = "DC1_8V"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class PhaseWiringType(StrEnum):

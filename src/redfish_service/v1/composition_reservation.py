@@ -11,7 +11,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CompositionReservation(RedfishResource):
@@ -22,7 +22,3 @@ class CompositionReservation(RedfishResource):
     oem: dict[str, Any] | None = None
     reservation_time: str | None = None
     reserved_resource_blocks: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

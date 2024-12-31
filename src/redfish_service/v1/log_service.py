@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ClearLog(RedfishModel):
@@ -45,10 +45,6 @@ class LogService(RedfishResource):
     service_enabled: str | None = None
     status: Status | None = None
     syslog_filters: list[str] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class OverWritePolicy(StrEnum):

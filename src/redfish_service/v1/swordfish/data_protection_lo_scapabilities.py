@@ -12,7 +12,7 @@ from ..resource import Identifier
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DataProtectionLoScapabilities(RedfishResource):
@@ -42,10 +42,6 @@ class FailureDomainScope(StrEnum):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     supported_replica_options: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RecoveryAccessScope(StrEnum):

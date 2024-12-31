@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class JsonSchemaFile(RedfishResource):
@@ -26,7 +26,3 @@ class Location(RedfishModel):
     language: str | None = None
     publication_uri: str | None = None
     uri: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

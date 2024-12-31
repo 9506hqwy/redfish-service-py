@@ -10,16 +10,12 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ClientType(StrEnum):
     MONITOR = "Monitor"
     CONFIGURE = "Configure"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RegisteredClient(RedfishResource):

@@ -10,7 +10,7 @@ from ..base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class NvmeDeviceType(StrEnum):
@@ -26,7 +26,3 @@ class NvmeFirmwareImage(RedfishResource):
     nvme_device_type: str | None = None
     oem: dict[str, Any] | None = None
     vendor: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EjectMedia(RedfishModel):
@@ -30,10 +30,6 @@ class MediaType(StrEnum):
     FLOPPY = "Floppy"
     USBSTICK = "USBStick"
     DVD = "DVD"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class VirtualMedia(RedfishResource):

@@ -14,7 +14,7 @@ from .schedule import Schedule
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Job(RedfishResource):
@@ -57,10 +57,6 @@ class JobState(StrEnum):
 class Links(RedfishModel):
     created_resources: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Payload(RedfishModel):

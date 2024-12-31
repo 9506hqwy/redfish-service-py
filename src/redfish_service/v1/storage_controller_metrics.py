@@ -10,7 +10,7 @@ from .storage_controller import NvmeSmartcriticalWarnings
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EgcriticalWarningSummary(RedfishModel):
@@ -43,10 +43,6 @@ class NvmeSmartmetrics(RedfishModel):
     thermal_mgmt_temp2_transition_count: str | None = None
     unsafe_shutdowns: str | None = None
     warning_composite_temp_time_minutes: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class StorageControllerMetrics(RedfishResource):

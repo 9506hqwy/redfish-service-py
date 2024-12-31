@@ -13,7 +13,7 @@ from .vlan_network_interface import Vlan
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Dhcpv4Configuration(RedfishModel):
@@ -79,10 +79,6 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     ports: list[IdRef] | None = None
     related_interfaces: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class StatelessAddressAutoConfiguration(RedfishModel):

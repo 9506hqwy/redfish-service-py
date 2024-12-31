@@ -14,7 +14,7 @@ from .resource import Identifier, Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CacheSummary(RedfishModel):
@@ -28,10 +28,6 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     simple_storage: IdRef | None = None
     storage_services: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Rates(RedfishModel):
@@ -92,7 +88,7 @@ class StorageController(RedfishObjectId):
 
 
 class StorageControllerActions(RedfishModel):
-    oem: StorageControllerOemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class StorageControllerLinks(RedfishModel):
@@ -100,7 +96,3 @@ class StorageControllerLinks(RedfishModel):
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = None
     storage_services: list[IdRef] | None = None
-
-
-class StorageControllerOemActions(RedfishModel):
-    pass

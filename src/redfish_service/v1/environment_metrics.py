@@ -10,7 +10,7 @@ from .sensor import SensorFanArrayExcerpt
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class EnvironmentMetrics(RedfishResource):
@@ -27,10 +27,6 @@ class EnvironmentMetrics(RedfishResource):
     power_load_percent: str | None = None
     power_watts: str | None = None
     temperature_celsius: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetMetrics(RedfishModel):

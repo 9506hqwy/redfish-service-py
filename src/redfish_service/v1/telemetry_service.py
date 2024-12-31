@@ -11,16 +11,12 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ClearMetricReports(RedfishModel):
     target: str | None = None
     title: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetMetricReportDefinitionsToDefaults(RedfishModel):

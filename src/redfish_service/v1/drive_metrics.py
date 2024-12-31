@@ -10,7 +10,7 @@ from .storage_controller_metrics import NvmeSmartmetrics
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DriveMetrics(RedfishResource):
@@ -27,7 +27,3 @@ class DriveMetrics(RedfishResource):
     uncorrectable_ioread_error_count: str | None = None
     uncorrectable_iowrite_error_count: str | None = None
     write_ioki_bytes: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

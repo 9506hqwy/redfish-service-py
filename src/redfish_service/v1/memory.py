@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DisablePassphrase(RedfishModel):
@@ -97,10 +97,6 @@ class MemoryMedia(StrEnum):
     NAND = "NAND"
     INTEL3_DXPOINT = "Intel3DXPoint"
     PROPRIETARY = "Proprietary"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class OperatingMemoryModes(StrEnum):

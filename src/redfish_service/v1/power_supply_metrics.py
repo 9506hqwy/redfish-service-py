@@ -16,11 +16,7 @@ from .sensor import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class PowerSupplyMetrics(RedfishResource):

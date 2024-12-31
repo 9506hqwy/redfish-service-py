@@ -12,7 +12,7 @@ from ..schedule import Schedule
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CreateReplicas(RedfishModel):
@@ -33,7 +33,3 @@ class DataProtectionLineOfService(RedfishResource):
     replica_class_of_service: IdRef | None = None
     replica_type: str | None = None
     schedule: Schedule | None = None
-
-
-class OemActions(RedfishModel):
-    pass

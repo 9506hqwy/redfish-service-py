@@ -12,7 +12,7 @@ from ..resource import Identifier
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DataStorageLoScapabilities(RedfishResource):
@@ -26,10 +26,6 @@ class DataStorageLoScapabilities(RedfishResource):
     supported_provisioning_policies: list[str] | None = None
     supported_recovery_time_objectives: list[str] | None = None
     supports_space_efficiency: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ProvisioningPolicy(StrEnum):

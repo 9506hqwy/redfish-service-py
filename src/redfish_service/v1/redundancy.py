@@ -11,11 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class Redundancy(RedfishObjectId):

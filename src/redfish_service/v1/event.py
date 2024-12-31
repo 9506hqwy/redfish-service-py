@@ -11,7 +11,7 @@ from .values import EventType
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Cper(RedfishModel):
@@ -57,12 +57,4 @@ class EventRecord(RedfishModel):
 
 
 class EventRecordActions(RedfishModel):
-    oem: EventRecordOemActions | None = None
-
-
-class EventRecordOemActions(RedfishModel):
-    pass
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None

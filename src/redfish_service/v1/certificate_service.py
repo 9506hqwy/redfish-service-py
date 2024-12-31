@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CertificateService(RedfishResource):
@@ -23,10 +23,6 @@ class CertificateService(RedfishResource):
 class GenerateCsr(RedfishModel):
     target: str | None = None
     title: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ReplaceCertificate(RedfishModel):

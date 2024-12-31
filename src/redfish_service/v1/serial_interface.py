@@ -10,7 +10,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class BitRate(StrEnum):
@@ -52,10 +52,6 @@ class FlowControl(StrEnum):
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Parity(StrEnum):

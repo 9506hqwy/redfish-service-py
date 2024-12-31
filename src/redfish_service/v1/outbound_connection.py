@@ -11,20 +11,12 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class HttpheaderProperty(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     session: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class OutboundConnection(RedfishResource):
@@ -37,7 +29,7 @@ class OutboundConnection(RedfishResource):
     endpoint_uri: str | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    pre_upgrade_httpheaders: HttpheaderProperty | None = None
+    pre_upgrade_httpheaders: dict[str, Any] | None = None
     retry_policy: RetryPolicyType | None = None
     roles: list[str] | None = None
     status: Status | None = None

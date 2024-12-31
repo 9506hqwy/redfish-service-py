@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Authentication(RedfishModel):
@@ -59,7 +59,3 @@ class Ldapservice(RedfishModel):
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

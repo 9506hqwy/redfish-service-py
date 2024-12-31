@@ -11,7 +11,7 @@ from .resource import Identifier, Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Drive(RedfishResource):
@@ -58,10 +58,6 @@ class Links(RedfishModel):
     pcie_functions: list[IdRef] | None = None
     storage_pools: list[IdRef] | None = None
     volumes: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Operations(RedfishModel):

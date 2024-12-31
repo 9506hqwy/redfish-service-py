@@ -18,7 +18,7 @@ class AccessCapability(StrEnum):
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ExposeVolumes(RedfishModel):
@@ -42,10 +42,6 @@ class MappedVolume(RedfishModel):
     access_capability: str | None = None
     logical_unit_number: str | None = None
     volume: IdRef | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class StorageGroup(RedfishResource):

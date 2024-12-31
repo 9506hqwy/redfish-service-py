@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
@@ -41,7 +41,3 @@ class MemoryDomain(RedfishResource):
 
 class MemorySet(RedfishModel):
     memory_set: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

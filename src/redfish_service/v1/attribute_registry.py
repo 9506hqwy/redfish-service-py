@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AttributeRegistry(RedfishModel):
@@ -150,10 +150,6 @@ class Menus(RedfishModel):
     menu_path: str | None = None
     oem: dict[str, Any] | None = None
     read_only: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class RegistryEntries(RedfishModel):

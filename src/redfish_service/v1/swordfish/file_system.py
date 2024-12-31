@@ -15,7 +15,7 @@ from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class FileProtocol(StrEnum):
@@ -43,7 +43,7 @@ class FileSystem(RedfishResource):
     exported_shares: IdRef | None = None
     iostatistics: Iostatistics | None = None
     identifiers: list[Identifier] | None = None
-    imported_shares: list[ImportedShare] | None = None
+    imported_shares: list[dict[str, Any]] | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[str] | None = None
     max_file_name_length_bytes: str | None = None
@@ -57,16 +57,8 @@ class FileSystem(RedfishResource):
     replication_enabled: str | None = None
 
 
-class ImportedShare(RedfishModel):
-    pass
-
-
 class Links(RedfishModel):
     class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
     replica_collection: list[IdRef] | None = None
     spare_resource_sets: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

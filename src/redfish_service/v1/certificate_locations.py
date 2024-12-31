@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class CertificateLocations(RedfishResource):
@@ -23,7 +23,3 @@ class CertificateLocations(RedfishResource):
 class Links(RedfishModel):
     certificates: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

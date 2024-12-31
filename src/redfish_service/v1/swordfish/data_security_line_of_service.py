@@ -9,7 +9,7 @@ from ..base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class DataSecurityLineOfService(RedfishResource):
@@ -24,7 +24,3 @@ class DataSecurityLineOfService(RedfishResource):
     oem: dict[str, Any] | None = None
     secure_channel_protocol: str | None = None
     user_authentication_type: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

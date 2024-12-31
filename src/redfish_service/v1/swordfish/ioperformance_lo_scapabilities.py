@@ -12,7 +12,7 @@ from ..schedule import Schedule
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class IoperformanceLoScapabilities(RedfishResource):
@@ -40,7 +40,3 @@ class IoworkloadComponent(RedfishModel):
     percent_of_data: str | None = None
     percent_of_iops: str | None = None
     schedule: Schedule | None = None
-
-
-class OemActions(RedfishModel):
-    pass

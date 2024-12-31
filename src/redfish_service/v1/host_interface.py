@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AuthenticationMode(StrEnum):
@@ -56,7 +56,3 @@ class Links(RedfishModel):
     firmware_auth_role: IdRef | None = None
     kernel_auth_role: IdRef | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

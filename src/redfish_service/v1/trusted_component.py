@@ -12,7 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
@@ -23,10 +23,6 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     owner: str | None = None
     software_images: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Tpm(RedfishModel):

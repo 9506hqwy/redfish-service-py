@@ -12,7 +12,7 @@ from ..swordfish.iostatistics import Iostatistics
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
@@ -24,10 +24,6 @@ class Links(RedfishModel):
     ioconnectivity_lo_scapabilities: IdRef | None = None
     ioperformance_lo_scapabilities: IdRef | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SetEncryptionKey(RedfishModel):

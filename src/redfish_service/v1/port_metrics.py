@@ -10,7 +10,7 @@ from .pcie_device import PcieErrors
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Cxl(RedfishModel):
@@ -84,10 +84,6 @@ class Networking(RedfishModel):
     txpause_xonframes: str | None = None
     txsingle_collisions: str | None = None
     txunicast_frames: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class PortMetrics(RedfishResource):

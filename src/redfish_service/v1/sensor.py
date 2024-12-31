@@ -13,7 +13,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ElectricalContext(StrEnum):
@@ -39,10 +39,6 @@ class ElectricalContext(StrEnum):
 class Links(RedfishModel):
     associated_controls: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetMetrics(RedfishModel):

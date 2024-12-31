@@ -9,7 +9,7 @@ from .base import (
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AllowDeny(RedfishResource):
@@ -27,7 +27,3 @@ class AllowDeny(RedfishResource):
     source_port_lower: str | None = None
     source_port_upper: str | None = None
     stateful_session: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

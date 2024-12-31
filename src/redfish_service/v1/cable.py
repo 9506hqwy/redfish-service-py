@@ -12,7 +12,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Cable(RedfishResource):
@@ -82,7 +82,3 @@ class Links(RedfishModel):
     upstream_chassis: list[IdRef] | None = None
     upstream_ports: list[IdRef] | None = None
     upstream_resources: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

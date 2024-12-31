@@ -14,7 +14,7 @@ from ..swordfish.iostatistics import Iostatistics
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class AddDrives(RedfishModel):
@@ -33,10 +33,6 @@ class Links(RedfishModel):
 class NvmePoolType(StrEnum):
     ENDURANCE_GROUP = "EnduranceGroup"
     NVMSET = "NVMSet"
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class PoolType(StrEnum):

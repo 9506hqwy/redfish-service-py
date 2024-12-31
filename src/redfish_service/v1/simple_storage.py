@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Device(RedfishModel):
@@ -27,10 +27,6 @@ class Links(RedfishModel):
     chassis: IdRef | None = None
     oem: dict[str, Any] | None = None
     storage: IdRef | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class SimpleStorage(RedfishResource):

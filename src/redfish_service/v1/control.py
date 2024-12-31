@@ -11,7 +11,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Control(RedfishResource):
@@ -94,10 +94,6 @@ class ControlSingleLoopExcerpt(RedfishModel):
     reading: str | None = None
     reading_units: str | None = None
     set_point: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class ResetToDefaults(RedfishModel):

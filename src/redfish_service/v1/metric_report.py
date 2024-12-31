@@ -10,7 +10,7 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class MetricReport(RedfishResource):
@@ -31,7 +31,3 @@ class MetricValue(RedfishModel):
     metric_value: str | None = None
     oem: dict[str, Any] | None = None
     timestamp: str | None = None
-
-
-class OemActions(RedfishModel):
-    pass

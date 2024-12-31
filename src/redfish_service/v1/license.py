@@ -11,7 +11,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class ContactInfo(RedfishModel):
@@ -51,7 +51,3 @@ class Links(RedfishModel):
     authorized_devices: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     target_services: list[IdRef] | None = None
-
-
-class OemActions(RedfishModel):
-    pass

@@ -10,16 +10,12 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
+    oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outbound_connection: IdRef | None = None
-
-
-class OemActions(RedfishModel):
-    pass
 
 
 class Session(RedfishResource):

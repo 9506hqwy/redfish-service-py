@@ -13,11 +13,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    oem: OemActions | None = None
-
-
-class OemActions(RedfishModel):
-    pass
+    oem: dict[str, Any] | None = None
 
 
 class Reservoir(RedfishResource):
