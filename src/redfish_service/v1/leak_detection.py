@@ -1,0 +1,32 @@
+from __future__ import annotations  # PEP563 Forward References
+
+from typing import Any
+
+from .base import RedfishResource
+from .leak_detector import LeakDetectorArrayExcerpt
+from .odata_v4 import IdRef
+from .resource import Status
+
+
+class Actions(RedfishResource):
+    oem: OemActions | None = None
+
+
+class LeakDetection(RedfishResource):
+    actions: Actions | None = None
+    description: str | None = None
+    leak_detector_groups: list[LeakDetectorGroup] | None = None
+    leak_detectors: IdRef | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+
+
+class LeakDetectorGroup(RedfishResource):
+    detectors: list[LeakDetectorArrayExcerpt] | None = None
+    group_name: str | None = None
+    humidity_percent: str | None = None
+    status: Status
+
+
+class OemActions(RedfishResource):
+    pass

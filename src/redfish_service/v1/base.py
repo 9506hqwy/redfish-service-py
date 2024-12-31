@@ -1,7 +1,7 @@
+from typing import Any
+
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_pascal
-
-from .resource import Oem
 
 
 class RedfishModel(BaseModel):
@@ -30,4 +30,4 @@ class RedfishResourceCollection(RedfishObject):
     members_count: int = Field(alias="Members@odata.count")
     members_next: str | None = Field(alias="Members@odata.nextLink", default=None)
     name: str
-    oem: Oem | None = Field(default=None)
+    oem: dict[str, Any] | None = None

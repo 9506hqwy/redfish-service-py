@@ -1,0 +1,82 @@
+from __future__ import annotations  # PEP563 Forward References
+
+from enum import StrEnum
+from typing import Any
+
+from .base import RedfishResource
+from .odata_v4 import IdRef
+from .resource import Status
+
+
+class Actions(RedfishResource):
+    oem: OemActions | None = None
+
+
+class DeviceClass(StrEnum):
+    UNCLASSIFIED_DEVICE = "UnclassifiedDevice"
+    MASS_STORAGE_CONTROLLER = "MassStorageController"
+    NETWORK_CONTROLLER = "NetworkController"
+    DISPLAY_CONTROLLER = "DisplayController"
+    MULTIMEDIA_CONTROLLER = "MultimediaController"
+    MEMORY_CONTROLLER = "MemoryController"
+    BRIDGE = "Bridge"
+    COMMUNICATION_CONTROLLER = "CommunicationController"
+    GENERIC_SYSTEM_PERIPHERAL = "GenericSystemPeripheral"
+    INPUT_DEVICE_CONTROLLER = "InputDeviceController"
+    DOCKING_STATION = "DockingStation"
+    PROCESSOR = "Processor"
+    SERIAL_BUS_CONTROLLER = "SerialBusController"
+    WIRELESS_CONTROLLER = "WirelessController"
+    INTELLIGENT_CONTROLLER = "IntelligentController"
+    SATELLITE_COMMUNICATIONS_CONTROLLER = "SatelliteCommunicationsController"
+    ENCRYPTION_CONTROLLER = "EncryptionController"
+    SIGNAL_PROCESSING_CONTROLLER = "SignalProcessingController"
+    PROCESSING_ACCELERATORS = "ProcessingAccelerators"
+    NON_ESSENTIAL_INSTRUMENTATION = "NonEssentialInstrumentation"
+    COPROCESSOR = "Coprocessor"
+    UNASSIGNED_CLASS = "UnassignedClass"
+    OTHER = "Other"
+
+
+class FunctionType(StrEnum):
+    PHYSICAL = "Physical"
+    VIRTUAL = "Virtual"
+
+
+class Links(RedfishResource):
+    cxllogical_device: str | None = None
+    drives: list[IdRef] | None = None
+    ethernet_interfaces: list[IdRef] | None = None
+    memory_domains: list[IdRef] | None = None
+    network_device_functions: list[IdRef] | None = None
+    oem: dict[str, Any] | None = None
+    pcie_device: IdRef | None = None
+    processor: str | None = None
+    storage_controllers: list[IdRef] | None = None
+
+
+class OemActions(RedfishResource):
+    pass
+
+
+class PcieFunction(RedfishResource):
+    actions: Actions | None = None
+    bus_number: str | None = None
+    class_code: str | None = None
+    description: str | None = None
+    device_class: DeviceClass | None = None
+    device_id: str | None = None
+    device_number: str | None = None
+    enabled: bool | None = None
+    function_id: str | None = None
+    function_number: str | None = None
+    function_protocol: str | None = None
+    function_type: FunctionType | None = None
+    links: Links | None = None
+    oem: dict[str, Any] | None = None
+    revision_id: str | None = None
+    segment_number: str | None = None
+    status: Status | None = None
+    subsystem_id: str | None = None
+    subsystem_vendor_id: str | None = None
+    vendor_id: str | None = None

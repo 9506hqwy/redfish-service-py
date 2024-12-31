@@ -1,18 +1,21 @@
-from pydantic import Field
+from __future__ import annotations  # PEP563 Forward References
 
-from .base import RedfishModel
-from .resource import Health, Oem
+from typing import Any
+
+from .base import RedfishResource
+from .resolution_step import ResolutionStep
+from .resource import Health
 
 
-class Message(RedfishModel):
-    message: str | None = Field(default=None)
-    message_args: list[str] | None = Field(default=None)
+class Message(RedfishResource):
+    message: str | None = None
+    message_args: list[str] | None = None
     message_id: str
-    message_severity: Health | None = Field(default=None)
-    oem: Oem | None = Field(default=None)
-    related_properties: list[str] | None = Field(default=None)
-    resolution: str | None = Field(default=None)
-    # resolution_steps: list[] | None = Field(default=None)
-    severity: str | None = Field(default=None)
-    user_authentication_source: str | None = Field(default=None)
-    username: str | None = Field(default=None)
+    message_severity: Health | None = None
+    oem: dict[str, Any] | None = None
+    related_properties: list[str] | None = None
+    resolution: str | None = None
+    resolution_steps: list[ResolutionStep] | None = None
+    severity: str | None = None
+    user_authentication_source: str | None = None
+    username: str | None = None
