@@ -3,37 +3,41 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class DiscreteTrigger(RedfishResource):
+class DiscreteTrigger(RedfishModel):
     dwell_time: str | None = None
+    name: str | None = None
     severity: str | None = None
     value: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     metric_report_definitions: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Threshold(RedfishResource):
+class Threshold(RedfishModel):
     activation: str | None = None
     dwell_time: str | None = None
     reading: str | None = None
 
 
-class Thresholds(RedfishResource):
+class Thresholds(RedfishModel):
     lower_critical: Threshold | None = None
     lower_warning: Threshold | None = None
     upper_critical: Threshold | None = None
@@ -67,5 +71,6 @@ class Triggers(RedfishResource):
     wildcards: list[Wildcard] | None = None
 
 
-class Wildcard(RedfishResource):
+class Wildcard(RedfishModel):
+    name: str | None = None
     values: list[str] | None = None

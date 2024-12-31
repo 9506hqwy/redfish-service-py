@@ -2,12 +2,15 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -24,13 +27,13 @@ class Connection(RedfishResource):
     volume_info: list[str] | None = None
 
 
-class ConnectionKey(RedfishResource):
+class ConnectionKey(RedfishModel):
     chap: str | None = None
     dhchap: str | None = None
     gen_z: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     initiator_endpoint_groups: list[IdRef] | None = None
     initiator_endpoints: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
@@ -38,17 +41,17 @@ class Links(RedfishResource):
     target_endpoints: list[IdRef] | None = None
 
 
-class MemoryChunkInfo(RedfishResource):
+class MemoryChunkInfo(RedfishModel):
     access_capabilities: list[str] | None = None
     access_state: str | None = None
     memory_chunk: str | None = None
 
 
-class MemoryRegionInfo(RedfishResource):
+class MemoryRegionInfo(RedfishModel):
     access_capabilities: list[str] | None = None
     access_state: str | None = None
     memory_region: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

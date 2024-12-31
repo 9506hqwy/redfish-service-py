@@ -2,22 +2,25 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Capacity(RedfishResource):
+class Capacity(RedfishModel):
     data: CapacityInfo | None = None
     is_thin_provisioned: str | None = None
     metadata: CapacityInfo | None = None
     snapshot: CapacityInfo | None = None
 
 
-class CapacityInfo(RedfishResource):
+class CapacityInfo(RedfishModel):
     allocated_bytes: str | None = None
     consumed_bytes: str | None = None
     guaranteed_bytes: str | None = None
@@ -37,5 +40,5 @@ class CapacitySource(RedfishResource):
     providing_volumes: IdRef | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

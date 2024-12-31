@@ -2,12 +2,16 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishObjectId,
+    RedfishResource,
+)
 from .physical_context import PhysicalContext
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -18,7 +22,7 @@ class Assembly(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class AssemblyData(RedfishResource):
+class AssemblyData(RedfishObjectId):
     actions: AssemblyDataActions | None = None
     binary_data_uri: str | None = None
     description: str | None = None
@@ -28,6 +32,7 @@ class AssemblyData(RedfishResource):
     location_indicator_active: str | None = None
     member_id: str
     model: str | None = None
+    name: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     physical_context: PhysicalContext | None = None
@@ -42,13 +47,13 @@ class AssemblyData(RedfishResource):
     version: str | None = None
 
 
-class AssemblyDataActions(RedfishResource):
+class AssemblyDataActions(RedfishModel):
     oem: AssemblyDataOemActions | None = None
 
 
-class AssemblyDataOemActions(RedfishResource):
+class AssemblyDataOemActions(RedfishModel):
     pass
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

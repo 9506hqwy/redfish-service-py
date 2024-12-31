@@ -2,11 +2,14 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .physical_context import LogicalContext
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -38,9 +41,10 @@ class MetricDefinition(RedfishResource):
     wildcards: list[Wildcard] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Wildcard(RedfishResource):
+class Wildcard(RedfishModel):
+    name: str | None = None
     values: list[str] | None = None

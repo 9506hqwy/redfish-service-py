@@ -2,33 +2,36 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class InputRange(RedfishResource):
+class InputRange(RedfishModel):
     capacity_watts: str | None = None
     nominal_voltage_type: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outlet: IdRef | None = None
     power_outlets: list[IdRef] | None = None
     powering_chassis: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class OutputRail(RedfishResource):
+class OutputRail(RedfishModel):
     nominal_voltage: str | None = None
     physical_context: PhysicalContext | None = None
 
@@ -68,6 +71,6 @@ class PowerSupply(RedfishResource):
     version: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None

@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -31,27 +34,27 @@ class AggregationType(StrEnum):
     FULL = "Full"
 
 
-class GenerateSshidentityKeyPair(RedfishResource):
+class GenerateSshidentityKeyPair(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     connection_method: IdRef | None = None
     oem: dict[str, Any] | None = None
     resources_accessed: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class RemoveSshidentityKeyPair(RedfishResource):
+class RemoveSshidentityKeyPair(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Snmpsettings(RedfishResource):
+class Snmpsettings(RedfishModel):
     authentication_key: str | None = None
     authentication_key_set: bool | None = None
     authentication_protocol: str | None = None
@@ -61,7 +64,7 @@ class Snmpsettings(RedfishResource):
     trap_community: str | None = None
 
 
-class SshsettingsType(RedfishResource):
+class SshsettingsType(RedfishModel):
     presented_public_host_key: IdRef | None = None
     presented_public_host_key_timestamp: str | None = None
     public_identity_key: IdRef | None = None

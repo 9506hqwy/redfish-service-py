@@ -2,18 +2,21 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .cooling_loop import Coolant
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

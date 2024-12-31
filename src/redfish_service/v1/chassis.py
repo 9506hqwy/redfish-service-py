@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -68,7 +71,7 @@ class ChassisType(StrEnum):
     OTHER = "Other"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     computer_systems: list[IdRef] | None = None
     contained_by: IdRef | None = None
     contains: list[IdRef] | None = None
@@ -85,16 +88,16 @@ class Links(RedfishResource):
     switches: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class PhysicalSecurity(RedfishResource):
+class PhysicalSecurity(RedfishModel):
     intrusion_sensor: str | None = None
     intrusion_sensor_number: str | None = None
     intrusion_sensor_re_arm: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None

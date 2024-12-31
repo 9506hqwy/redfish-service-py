@@ -2,13 +2,16 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .leak_detector import LeakDetectorArrayExcerpt
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -21,12 +24,12 @@ class LeakDetection(RedfishResource):
     status: Status | None = None
 
 
-class LeakDetectorGroup(RedfishResource):
+class LeakDetectorGroup(RedfishModel):
     detectors: list[LeakDetectorArrayExcerpt] | None = None
     group_name: str | None = None
     humidity_percent: str | None = None
     status: Status
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

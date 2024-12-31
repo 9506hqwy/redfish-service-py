@@ -3,7 +3,10 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Identifier
 
@@ -16,7 +19,7 @@ class AccessState(StrEnum):
     TRANSITIONING = "Transitioning"
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -33,11 +36,11 @@ class EndpointGroup(RedfishResource):
     target_endpoint_group_identifier: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     connections: list[IdRef] | None = None
     endpoints: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

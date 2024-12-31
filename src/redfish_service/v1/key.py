@@ -3,10 +3,13 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -36,7 +39,7 @@ class Key(RedfishResource):
     user_description: str | None = None
 
 
-class NvmeoF(RedfishResource):
+class NvmeoF(RedfishModel):
     host_key_id: str | None = None
     nqn: str | None = None
     oemsecurity_protocol_type: str | None = None
@@ -44,7 +47,7 @@ class NvmeoF(RedfishResource):
     security_protocol_type: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -55,7 +58,7 @@ class SshkeyType(StrEnum):
     ED25519 = "Ed25519"
 
 
-class Sshtype(RedfishResource):
+class Sshtype(RedfishModel):
     comment: str | None = None
     fingerprint: str | None = None
     remote_server_host_name: str | None = None

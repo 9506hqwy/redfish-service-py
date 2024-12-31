@@ -3,10 +3,13 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -47,11 +50,11 @@ class FlowControl(StrEnum):
     HARDWARE = "Hardware"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

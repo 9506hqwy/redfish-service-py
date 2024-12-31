@@ -2,14 +2,17 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class BootTimeStatistics(RedfishResource):
+class BootTimeStatistics(RedfishModel):
     firmware_time_seconds: str | None = None
     initrd_time_seconds: str | None = None
     kernel_time_seconds: str | None = None
@@ -17,7 +20,7 @@ class BootTimeStatistics(RedfishResource):
     user_space_time_seconds: str | None = None
 
 
-class I2CbusStatistics(RedfishResource):
+class I2CbusStatistics(RedfishModel):
     bus_error_count: str | None = None
     i2_cbus_name: str | None = None
     nackcount: str | None = None
@@ -38,12 +41,12 @@ class ManagerDiagnosticData(RedfishResource):
     top_processes: list[str] | None = None
 
 
-class MemoryEccstatistics(RedfishResource):
+class MemoryEccstatistics(RedfishModel):
     correctable_eccerror_count: str | None = None
     uncorrectable_eccerror_count: str | None = None
 
 
-class MemoryStatistics(RedfishResource):
+class MemoryStatistics(RedfishModel):
     available_bytes: str | None = None
     buffers_and_cache_bytes: str | None = None
     free_bytes: str | None = None
@@ -52,15 +55,15 @@ class MemoryStatistics(RedfishResource):
     used_bytes: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ProcessorStatistics(RedfishResource):
+class ProcessorStatistics(RedfishModel):
     kernel_percent: str | None = None
     user_percent: str | None = None
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None

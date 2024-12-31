@@ -3,32 +3,35 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class FunctionMaxBandwidth(RedfishResource):
+class FunctionMaxBandwidth(RedfishModel):
     allocation_percent: str | None = None
     network_device_function: IdRef | None = None
 
 
-class FunctionMinBandwidth(RedfishResource):
+class FunctionMinBandwidth(RedfishModel):
     allocation_percent: str | None = None
     network_device_function: IdRef | None = None
 
 
-class GenZ(RedfishResource):
+class GenZ(RedfishModel):
     lprt: IdRef | None = None
     mprt: IdRef | None = None
     vcat: IdRef | None = None
 
 
-class LinkConfiguration(RedfishResource):
+class LinkConfiguration(RedfishModel):
     auto_speed_negotiation_capable: str | None = None
     auto_speed_negotiation_enabled: str | None = None
     capable_link_speed_gbps: list[str] | None = None
@@ -48,7 +51,7 @@ class LinkStatus(StrEnum):
     NO_LINK = "NoLink"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     associated_endpoints: list[IdRef] | None = None
     cables: list[IdRef] | None = None
     connected_ports: list[IdRef] | None = None
@@ -58,7 +61,7 @@ class Links(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -102,11 +105,11 @@ class Port(RedfishResource):
     width: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResetPpb(RedfishResource):
+class ResetPpb(RedfishModel):
     target: str | None = None
     title: str | None = None

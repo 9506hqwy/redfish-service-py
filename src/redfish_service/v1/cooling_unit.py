@@ -3,14 +3,17 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .cooling_loop import Coolant
 from .odata_v4 import IdRef
 from .redundancy import RedundantGroup
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -52,12 +55,12 @@ class CoolingUnit(RedfishResource):
     version: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: list[IdRef] | None = None
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

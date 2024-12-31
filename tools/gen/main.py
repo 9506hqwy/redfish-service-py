@@ -29,9 +29,30 @@ class ClassInfo:
 
     @property
     def base_name(self) -> str:
-        return (
-            "RedfishResourceCollection" if self.name.endswith("Collection") else "RedfishResource"
-        )
+        def get_base_class_name(d: dict[str, Any]) -> str:
+            if has_base_resource_collection(d):
+                return "RedfishResourceCollection"
+
+            if has_base_resource(d):
+                return "RedfishResource"
+
+            if has_base_object_id(d):
+                return "RedfishObjectId"
+
+            if has_base_object(d):
+                return "RedfishObject"
+
+            return "RedfishModel"
+
+        if (any_of := self.definition.get("anyOf", None)) is not None:
+            selected = select_definition(any_of)
+            if isinstance(selected, dict):
+                return get_base_class_name(selected["properties"])
+
+        if (properties := self.definition.get("properties", None)) is not None:
+            return get_base_class_name(properties)
+
+        return "RedfishModel"
 
     @property
     def cls_name(self) -> str:
@@ -87,8 +108,14 @@ class ClassInfo:
     def is_base_properties(self, name: str) -> bool:
         if self.base_name == "RedfishResourceCollection":
             return is_base_collection_properties(name)
-        else:
+        elif self.base_name == "RedfishResource":
             return is_base_resource_properties(name)
+        elif self.base_name == "RedfishObjectId":
+            return is_base_id_properties(name)
+        elif self.base_name == "RedfishObject":
+            return is_base_object_properties(name)
+        else:
+            return False
 
     def load_properties(self, classall: list[ClassInfo | EnumInfo]) -> None:
         self.load_properties_from_definition(classall, self.definition)
@@ -235,6 +262,35 @@ def get_variant_name(name: str) -> str:
     return v
 
 
+def has_base_object(definition: dict[str, Any]) -> bool:
+    return (
+        "@odata.context" in definition
+        and "@odata.etag" in definition
+        and "@odata.id" in definition
+        and "@odata.type" in definition
+    )
+
+
+def has_base_object_id(definition: dict[str, Any]) -> bool:
+    return "@odata.id" in definition and "@odata.type" not in definition
+
+
+def has_base_resource(definition: dict[str, Any]) -> bool:
+    return has_base_object(definition) and "Id" in definition and "Name" in definition
+
+
+def has_base_resource_collection(definition: dict[str, Any]) -> bool:
+    return (
+        has_base_object(definition)
+        and "Description" in definition
+        and "Members" in definition
+        and "Members@odata.count" in definition
+        and "Members@odata.nextLink" in definition
+        and "Name" in definition
+        and "Oem" in definition
+    )
+
+
 def is_array(defenition: dict[str, str]) -> bool:
     return defenition.get("type", "") in [
         "array",
@@ -249,6 +305,12 @@ def is_base_collection_properties(name: str) -> bool:
         "Members@odata.nextLink",
         "Name",
         "Oem",
+    ]
+
+
+def is_base_id_properties(name: str) -> bool:
+    return name in [
+        "@odata.id",
     ]
 
 
@@ -408,14 +470,6 @@ def func_match_newer(
     return func
 
 
-def func_match_resource(c: ClassInfo | EnumInfo) -> TypeGuard[object]:
-    return isinstance(c, ClassInfo) and c.base_name == "RedfishResource"
-
-
-def func_match_resource_collection(c: ClassInfo | EnumInfo) -> TypeGuard[object]:
-    return isinstance(c, ClassInfo) and c.base_name == "RedfishResourceCollection"
-
-
 def resolve_ref(
     classes: list[ClassInfo | EnumInfo], source: ClassInfo, ref: str
 ) -> ClassInfo | EnumInfo:
@@ -514,11 +568,11 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                 if domain_name == "swordfish":
                     parent = ".."
 
-                if any(filter(func_match_resource, classes)):
-                    w.write(f"from {parent}base import RedfishResource\n")
-
-                if any(filter(func_match_resource_collection, classes)):
-                    w.write(f"from {parent}base import RedfishResourceCollection\n")
+                w.write(f"from {parent}base import RedfishModel\n")
+                w.write(f"from {parent}base import RedfishObject\n")
+                w.write(f"from {parent}base import RedfishObjectId\n")
+                w.write(f"from {parent}base import RedfishResource\n")
+                w.write(f"from {parent}base import RedfishResourceCollection\n")
 
                 imports = set([])
                 for c in classes:

@@ -2,13 +2,17 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishObjectId,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
 
 
-class Fan(RedfishResource):
+class Fan(RedfishObjectId):
     actions: FanActions | None = None
     assembly: IdRef | None = None
     fan_name: str | None = None
@@ -23,6 +27,7 @@ class Fan(RedfishResource):
     member_id: str
     min_reading_range: str | None = None
     model: str | None = None
+    name: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     physical_context: PhysicalContext | None = None
@@ -39,15 +44,15 @@ class Fan(RedfishResource):
     upper_threshold_non_critical: str | None = None
 
 
-class FanActions(RedfishResource):
+class FanActions(RedfishModel):
     oem: FanOemActions | None = None
 
 
-class FanOemActions(RedfishResource):
+class FanOemActions(RedfishModel):
     pass
 
 
-class Temperature(RedfishResource):
+class Temperature(RedfishObjectId):
     actions: TemperatureActions | None = None
     adjusted_max_allowable_operating_value: str | None = None
     adjusted_min_allowable_operating_value: str | None = None
@@ -62,6 +67,7 @@ class Temperature(RedfishResource):
     member_id: str
     min_allowable_operating_value: str | None = None
     min_reading_range_temp: str | None = None
+    name: str | None = None
     oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     reading_celsius: str | None = None
@@ -74,11 +80,11 @@ class Temperature(RedfishResource):
     upper_threshold_user: str | None = None
 
 
-class TemperatureActions(RedfishResource):
+class TemperatureActions(RedfishModel):
     oem: TemperatureOemActions | None = None
 
 
-class TemperatureOemActions(RedfishResource):
+class TemperatureOemActions(RedfishModel):
     pass
 
 
@@ -92,9 +98,9 @@ class Thermal(RedfishResource):
     temperatures: list[Temperature] | None = None
 
 
-class ThermalActions(RedfishResource):
+class ThermalActions(RedfishModel):
     oem: ThermalOemActions | None = None
 
 
-class ThermalOemActions(RedfishResource):
+class ThermalOemActions(RedfishModel):
     pass

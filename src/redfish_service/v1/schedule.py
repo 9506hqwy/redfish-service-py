@@ -1,9 +1,11 @@
 from __future__ import annotations  # PEP563 Forward References
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 
 
-class Schedule(RedfishResource):
+class Schedule(RedfishModel):
     enabled_days_of_month: list[str] | None = None
     enabled_days_of_week: list[str] | None = None
     enabled_intervals: list[str] | None = None
@@ -11,4 +13,5 @@ class Schedule(RedfishResource):
     initial_start_time: str | None = None
     lifetime: str | None = None
     max_occurrences: str | None = None
+    name: str | None = None
     recurrence_interval: str | None = None

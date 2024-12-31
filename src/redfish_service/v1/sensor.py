@@ -3,13 +3,16 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .redundancy import RedundantGroup
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -33,21 +36,21 @@ class ElectricalContext(StrEnum):
     TOTAL = "Total"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     associated_controls: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResetToDefaults(RedfishResource):
+class ResetToDefaults(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -114,7 +117,7 @@ class Sensor(RedfishResource):
     voltage_type: str | None = None
 
 
-class SensorArrayExcerpt(RedfishResource):
+class SensorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     device_name: str | None = None
     physical_context: str | None = None
@@ -122,14 +125,14 @@ class SensorArrayExcerpt(RedfishResource):
     reading: str | None = None
 
 
-class SensorCurrentExcerpt(RedfishResource):
+class SensorCurrentExcerpt(RedfishModel):
     crest_factor: str | None = None
     data_source_uri: str | None = None
     reading: str | None = None
     thdpercent: str | None = None
 
 
-class SensorEnergykWhExcerpt(RedfishResource):
+class SensorEnergykWhExcerpt(RedfishModel):
     apparentk_vah: str | None = None
     data_source_uri: str | None = None
     lifetime_reading: str | None = None
@@ -138,12 +141,12 @@ class SensorEnergykWhExcerpt(RedfishResource):
     sensor_reset_time: str | None = None
 
 
-class SensorExcerpt(RedfishResource):
+class SensorExcerpt(RedfishModel):
     data_source_uri: str | None = None
     reading: str | None = None
 
 
-class SensorFanArrayExcerpt(RedfishResource):
+class SensorFanArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     device_name: str | None = None
     physical_context: str | None = None
@@ -152,13 +155,13 @@ class SensorFanArrayExcerpt(RedfishResource):
     speed_rpm: str | None = None
 
 
-class SensorFanExcerpt(RedfishResource):
+class SensorFanExcerpt(RedfishModel):
     data_source_uri: str | None = None
     reading: str | None = None
     speed_rpm: str | None = None
 
 
-class SensorPowerArrayExcerpt(RedfishResource):
+class SensorPowerArrayExcerpt(RedfishModel):
     apparent_va: str | None = None
     data_source_uri: str | None = None
     phase_angle_degrees: str | None = None
@@ -169,7 +172,7 @@ class SensorPowerArrayExcerpt(RedfishResource):
     reading: str | None = None
 
 
-class SensorPowerExcerpt(RedfishResource):
+class SensorPowerExcerpt(RedfishModel):
     apparent_va: str | None = None
     data_source_uri: str | None = None
     phase_angle_degrees: str | None = None
@@ -178,20 +181,20 @@ class SensorPowerExcerpt(RedfishResource):
     reading: str | None = None
 
 
-class SensorPumpExcerpt(RedfishResource):
+class SensorPumpExcerpt(RedfishModel):
     data_source_uri: str | None = None
     reading: str | None = None
     speed_rpm: str | None = None
 
 
-class SensorVoltageExcerpt(RedfishResource):
+class SensorVoltageExcerpt(RedfishModel):
     crest_factor: str | None = None
     data_source_uri: str | None = None
     reading: str | None = None
     thdpercent: str | None = None
 
 
-class Threshold(RedfishResource):
+class Threshold(RedfishModel):
     activation: str | None = None
     dwell_time: str | None = None
     hysteresis_duration: str | None = None
@@ -199,7 +202,7 @@ class Threshold(RedfishResource):
     reading: str | None = None
 
 
-class Thresholds(RedfishResource):
+class Thresholds(RedfishModel):
     lower_caution: Threshold | None = None
     lower_caution_user: Threshold | None = None
     lower_critical: Threshold | None = None

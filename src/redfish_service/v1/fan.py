@@ -2,13 +2,16 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -35,10 +38,10 @@ class Fan(RedfishResource):
     status: Status | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     cooling_chassis: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

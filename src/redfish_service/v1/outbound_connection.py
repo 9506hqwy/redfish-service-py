@@ -2,25 +2,28 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class HttpheaderProperty(RedfishResource):
+class HttpheaderProperty(RedfishModel):
     pass
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     session: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -41,7 +44,7 @@ class OutboundConnection(RedfishResource):
     web_socket_ping_interval_minutes: str | None = None
 
 
-class RetryPolicyType(RedfishResource):
+class RetryPolicyType(RedfishModel):
     connection_retry_policy: str | None = None
     retry_count: str | None = None
     retry_interval_minutes: str | None = None

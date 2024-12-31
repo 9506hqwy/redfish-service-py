@@ -2,11 +2,14 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -30,7 +33,7 @@ class LeakDetector(RedfishResource):
     user_label: str | None = None
 
 
-class LeakDetectorArrayExcerpt(RedfishResource):
+class LeakDetectorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     detector_state: str | None = None
     device_name: str | None = None
@@ -38,10 +41,10 @@ class LeakDetectorArrayExcerpt(RedfishResource):
     physical_sub_context: str | None = None
 
 
-class LeakDetectorExcerpt(RedfishResource):
+class LeakDetectorExcerpt(RedfishModel):
     data_source_uri: str | None = None
     detector_state: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

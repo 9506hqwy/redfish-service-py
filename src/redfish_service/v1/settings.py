@@ -2,7 +2,9 @@ from __future__ import annotations  # PEP563 Forward References
 
 from enum import StrEnum
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 from .message import Message
 from .odata_v4 import IdRef
 
@@ -14,7 +16,7 @@ class ApplyTime(StrEnum):
     IN_MAINTENANCE_WINDOW_ON_RESET = "InMaintenanceWindowOnReset"
 
 
-class MaintenanceWindow(RedfishResource):
+class MaintenanceWindow(RedfishModel):
     maintenance_window_duration_in_seconds: int
     maintenance_window_start_time: str
 
@@ -28,20 +30,20 @@ class OperationApplyTime(StrEnum):
     ON_TARGET_RESET = "OnTargetReset"
 
 
-class OperationApplyTimeSupport(RedfishResource):
+class OperationApplyTimeSupport(RedfishModel):
     maintenance_window_duration_in_seconds: int | None = None
     maintenance_window_resource: IdRef | None = None
     maintenance_window_start_time: str | None = None
     supported_values: list[OperationApplyTime]
 
 
-class PreferredApplyTime(RedfishResource):
+class PreferredApplyTime(RedfishModel):
     apply_time: ApplyTime | None = None
     maintenance_window_duration_in_seconds: int | None = None
     maintenance_window_start_time: str | None = None
 
 
-class Settings(RedfishResource):
+class Settings(RedfishModel):
     etag: str | None = None
     maintenance_window_resource: IdRef | None = None
     messages: list[Message] | None = None

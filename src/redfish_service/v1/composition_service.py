@@ -2,16 +2,19 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Compose(RedfishResource):
+class Compose(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -32,5 +35,5 @@ class CompositionService(RedfishResource):
     status: Status | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

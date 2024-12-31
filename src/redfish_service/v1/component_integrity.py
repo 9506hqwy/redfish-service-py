@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -35,33 +38,33 @@ class ComponentIntegrityType(StrEnum):
     OEM = "OEM"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     components_protected: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class SpdmgetSignedMeasurements(RedfishResource):
+class SpdmgetSignedMeasurements(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Spdminfo(RedfishResource):
+class Spdminfo(RedfishModel):
     component_communication: str | None = None
     identity_authentication: str | None = None
     measurement_set: str | None = None
     requester: IdRef
 
 
-class TpmgetSignedMeasurements(RedfishResource):
+class TpmgetSignedMeasurements(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Tpminfo(RedfishResource):
+class Tpminfo(RedfishModel):
     component_communication: str | None = None
     identity_authentication: str | None = None
     measurement_set: str | None = None

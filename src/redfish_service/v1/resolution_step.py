@@ -2,10 +2,12 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 
 
-class ResolutionStep(RedfishResource):
+class ResolutionStep(RedfishModel):
     action_parameters: list[str] | None = None
     action_uri: str | None = None
     oem: dict[str, Any] | None = None

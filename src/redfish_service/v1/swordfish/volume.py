@@ -3,7 +3,10 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
@@ -11,26 +14,26 @@ from ..swordfish.iostatistics import Iostatistics
 from ..swordfish.storage_replica_info import ReplicaInfo
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AssignReplicaTarget(RedfishResource):
+class AssignReplicaTarget(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ChangeRaidlayout(RedfishResource):
+class ChangeRaidlayout(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class CheckConsistency(RedfishResource):
+class CheckConsistency(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class CreateReplicaTarget(RedfishResource):
+class CreateReplicaTarget(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -41,12 +44,12 @@ class EncryptionTypes(StrEnum):
     SOFTWARE_ASSISTED = "SoftwareAssisted"
 
 
-class ForceEnable(RedfishResource):
+class ForceEnable(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Initialize(RedfishResource):
+class Initialize(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -88,7 +91,7 @@ class LbarelativePerformanceType(StrEnum):
     DEGRADED = "Degraded"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     cache_data_volumes: list[IdRef] | None = None
     cache_volume_source: str | None = None
     class_of_service: IdRef | None = None
@@ -113,11 +116,11 @@ class NamespaceType(StrEnum):
     COMPUTATIONAL = "Computational"
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Operation(RedfishResource):
+class Operation(RedfishModel):
     associated_features_registry: IdRef | None = None
     operation: str | None = None
     operation_name: str | None = None
@@ -167,27 +170,27 @@ class ReadCachePolicyType(StrEnum):
     OFF = "Off"
 
 
-class RemoveReplicaRelationship(RedfishResource):
+class RemoveReplicaRelationship(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResumeReplication(RedfishResource):
+class ResumeReplication(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ReverseReplicationRelationship(RedfishResource):
+class ReverseReplicationRelationship(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SplitReplication(RedfishResource):
+class SplitReplication(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SuspendReplication(RedfishResource):
+class SuspendReplication(RedfishModel):
     target: str | None = None
     title: str | None = None
 

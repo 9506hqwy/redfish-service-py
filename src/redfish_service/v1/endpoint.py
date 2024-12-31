@@ -2,18 +2,21 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .ipaddresses import Ipv4Address, Ipv6Address
 from .odata_v4 import IdRef
 from .protocol import Protocol
 from .resource import Identifier, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class ConnectedEntity(RedfishResource):
+class ConnectedEntity(RedfishModel):
     entity_link: IdRef | None = None
     entity_pci_id: PciId | None = None
     entity_role: str | None = None
@@ -40,20 +43,20 @@ class Endpoint(RedfishResource):
     status: Status | None = None
 
 
-class GenZ(RedfishResource):
+class GenZ(RedfishModel):
     access_key: str | None = None
     gcid: str | None = None
     region_key: str | None = None
 
 
-class IptransportDetails(RedfishResource):
+class IptransportDetails(RedfishModel):
     ipv4_address: Ipv4Address | None = None
     ipv6_address: Ipv6Address | None = None
     port: int | None = None
     transport_protocol: Protocol | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     address_pools: list[IdRef] | None = None
     connected_ports: list[IdRef] | None = None
     connections: list[IdRef] | None = None
@@ -65,11 +68,11 @@ class Links(RedfishResource):
     zones: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class PciId(RedfishResource):
+class PciId(RedfishModel):
     class_code: str | None = None
     device_id: str | None = None
     function_number: str | None = None

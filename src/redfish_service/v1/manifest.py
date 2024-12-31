@@ -1,9 +1,11 @@
 from __future__ import annotations  # PEP563 Forward References
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 
 
-class Manifest(RedfishResource):
+class Manifest(RedfishModel):
     description: str | None = None
     expand: str | None = None
     stanzas: list[str] | None = None

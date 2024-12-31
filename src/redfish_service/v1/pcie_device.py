@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -18,13 +21,13 @@ class DeviceType(StrEnum):
     SIMULATED = "Simulated"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -52,7 +55,7 @@ class PcieDevice(RedfishResource):
     uuid: str | None = None
 
 
-class PcieErrors(RedfishResource):
+class PcieErrors(RedfishModel):
     correctable_error_count: str | None = None
     fatal_error_count: str | None = None
     l0_to_recovery_count: str | None = None
@@ -63,7 +66,7 @@ class PcieErrors(RedfishResource):
     replay_rollover_count: str | None = None
 
 
-class PcieInterface(RedfishResource):
+class PcieInterface(RedfishModel):
     lanes_in_use: str | None = None
     max_lanes: str | None = None
     max_pcie_type: str | None = None

@@ -2,18 +2,21 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .ipaddresses import Ipv4Address, Ipv6Address
 from .odata_v4 import IdRef
 from .resource import Status
 from .vlan_network_interface import Vlan
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Dhcpv4Configuration(RedfishResource):
+class Dhcpv4Configuration(RedfishModel):
     dhcpenabled: str | None = None
     fallback_address: str | None = None
     use_dnsservers: str | None = None
@@ -23,7 +26,7 @@ class Dhcpv4Configuration(RedfishResource):
     use_static_routes: str | None = None
 
 
-class Dhcpv6Configuration(RedfishResource):
+class Dhcpv6Configuration(RedfishModel):
     operating_mode: str | None = None
     use_dnsservers: str | None = None
     use_domain_name: str | None = None
@@ -67,7 +70,7 @@ class EthernetInterface(RedfishResource):
     vlans: IdRef | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: IdRef | None = None
     endpoints: list[IdRef] | None = None
     host_interface: IdRef | None = None
@@ -78,10 +81,10 @@ class Links(RedfishResource):
     related_interfaces: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class StatelessAddressAutoConfiguration(RedfishResource):
+class StatelessAddressAutoConfiguration(RedfishModel):
     ipv4_auto_config_enabled: str | None = None
     ipv6_auto_config_enabled: str | None = None

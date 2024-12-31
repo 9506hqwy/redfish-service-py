@@ -2,13 +2,16 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 from .values import EventType
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -35,11 +38,11 @@ class EventService(RedfishResource):
     subscriptions: IdRef | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Smtp(RedfishResource):
+class Smtp(RedfishModel):
     authentication: str | None = None
     connection_protocol: str | None = None
     from_address: str | None = None
@@ -51,7 +54,7 @@ class Smtp(RedfishResource):
     username: str | None = None
 
 
-class SsefilterPropertiesSupported(RedfishResource):
+class SsefilterPropertiesSupported(RedfishModel):
     event_format_type: bool | None = None
     event_type: bool | None = None
     message_id: bool | None = None
@@ -62,6 +65,6 @@ class SsefilterPropertiesSupported(RedfishResource):
     subordinate_resources: bool | None = None
 
 
-class SubmitTestEvent(RedfishResource):
+class SubmitTestEvent(RedfishModel):
     target: str | None = None
     title: str | None = None

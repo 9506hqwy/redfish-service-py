@@ -2,16 +2,19 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AdditionalVersions(RedfishResource):
+class AdditionalVersions(RedfishModel):
     bootloader: str | None = None
     kernel: str | None = None
     microcode: str | None = None
@@ -19,14 +22,14 @@ class AdditionalVersions(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class MeasurementBlock(RedfishResource):
+class MeasurementBlock(RedfishModel):
     measurement: str | None = None
     measurement_index: str | None = None
     measurement_size: str | None = None
     measurement_specification: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

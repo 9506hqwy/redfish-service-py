@@ -2,15 +2,18 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class FeatureMap(RedfishResource):
+class FeatureMap(RedfishModel):
     corresponding_profile_definition: str
     description: str
     feature_name: str
@@ -32,11 +35,11 @@ class FeaturesRegistry(RedfishResource):
     registry_version: str
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class SupportedFeature(RedfishResource):
+class SupportedFeature(RedfishModel):
     corresponding_profile_definition: str
     description: str
     feature_name: str

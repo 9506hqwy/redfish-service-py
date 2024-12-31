@@ -3,15 +3,18 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -20,7 +23,7 @@ class ReplicaFaultDomain(StrEnum):
     REMOTE = "Remote"
 
 
-class ReplicaInfo(RedfishResource):
+class ReplicaInfo(RedfishModel):
     consistency_enabled: str | None = None
     consistency_state: str | None = None
     consistency_status: str | None = None

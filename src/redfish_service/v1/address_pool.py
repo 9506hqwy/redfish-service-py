@@ -2,17 +2,20 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class AsnumberRange(RedfishResource):
+class AsnumberRange(RedfishModel):
     lower: int | None = None
     upper: int | None = None
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -26,7 +29,7 @@ class AddressPool(RedfishResource):
     status: Status | None = None
 
 
-class BfdsingleHopOnly(RedfishResource):
+class BfdsingleHopOnly(RedfishModel):
     demand_mode_enabled: str | None = None
     desired_min_tx_interval_milliseconds: str | None = None
     key_chain: str | None = None
@@ -36,7 +39,7 @@ class BfdsingleHopOnly(RedfishResource):
     source_port: str | None = None
 
 
-class Bgpevpn(RedfishResource):
+class Bgpevpn(RedfishModel):
     arpproxy_enabled: str | None = None
     arpsuppression_enabled: str | None = None
     arpsupression_enabled: str | None = None
@@ -58,7 +61,7 @@ class Bgpevpn(RedfishResource):
     vlanidentifier_address_range: VlanidentifierAddressRange | None = None
 
 
-class Bgpneighbor(RedfishResource):
+class Bgpneighbor(RedfishModel):
     address: str | None = None
     allow_own_asenabled: str | None = None
     cidr: int | None = None
@@ -78,7 +81,7 @@ class Bgpneighbor(RedfishResource):
     treat_as_withdraw_enabled: str | None = None
 
 
-class Bgproute(RedfishResource):
+class Bgproute(RedfishModel):
     advertise_inactive_routes_enabled: str | None = None
     distance_external: str | None = None
     distance_internal: str | None = None
@@ -88,7 +91,7 @@ class Bgproute(RedfishResource):
     send_default_route_enabled: str | None = None
 
 
-class CommonBgpproperties(RedfishResource):
+class CommonBgpproperties(RedfishModel):
     asnumber_range: AsnumberRange | None = None
     bgpneighbor: Bgpneighbor | None = None
     bgproute: Bgproute | None = None
@@ -97,13 +100,13 @@ class CommonBgpproperties(RedfishResource):
     send_community_enabled: str | None = None
 
 
-class Dhcp(RedfishResource):
+class Dhcp(RedfishModel):
     dhcpinterface_mtubytes: str | None = None
     dhcprelay_enabled: str | None = None
     dhcpserver: list[str] | None = None
 
 
-class Ebgp(RedfishResource):
+class Ebgp(RedfishModel):
     asnumber_range: AsnumberRange | None = None
     allow_duplicate_asenabled: str | None = None
     allow_override_asenabled: str | None = None
@@ -120,17 +123,17 @@ class Ebgp(RedfishResource):
     send_community_enabled: str | None = None
 
 
-class EsinumberRange(RedfishResource):
+class EsinumberRange(RedfishModel):
     lower: int | None = None
     upper: int | None = None
 
 
-class EvinumberRange(RedfishResource):
+class EvinumberRange(RedfishModel):
     lower: int | None = None
     upper: int | None = None
 
 
-class Ethernet(RedfishResource):
+class Ethernet(RedfishModel):
     bfdsingle_hop_only: BfdsingleHopOnly | None = None
     bgpevpn: Bgpevpn | None = None
     ebgp: Ebgp | None = None
@@ -139,12 +142,12 @@ class Ethernet(RedfishResource):
     multi_protocol_ibgp: CommonBgpproperties | None = None
 
 
-class GatewayIpaddressRange(RedfishResource):
+class GatewayIpaddressRange(RedfishModel):
     lower: str | None = None
     upper: str | None = None
 
 
-class GenZ(RedfishResource):
+class GenZ(RedfishModel):
     access_key: str | None = None
     max_cid: str | None = None
     max_sid: str | None = None
@@ -152,14 +155,14 @@ class GenZ(RedfishResource):
     min_sid: str | None = None
 
 
-class GracefulRestart(RedfishResource):
+class GracefulRestart(RedfishModel):
     graceful_restart_enabled: str | None = None
     helper_mode_enabled: str | None = None
     stale_routes_time_seconds: str | None = None
     time_seconds: str | None = None
 
 
-class Ipv4(RedfishResource):
+class Ipv4(RedfishModel):
     anycast_gateway_ipaddress: str | None = None
     anycast_gateway_macaddress: str | None = None
     dhcp: Dhcp | None = None
@@ -181,48 +184,48 @@ class Ipv4(RedfishResource):
     vlanidentifier_address_range: VlanidentifierAddressRange | None = None
 
 
-class Ipv4AddressRange(RedfishResource):
+class Ipv4AddressRange(RedfishModel):
     lower: str | None = None
     upper: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     zones: list[IdRef] | None = None
 
 
-class MaxPrefix(RedfishResource):
+class MaxPrefix(RedfishModel):
     max_prefix_number: str | None = None
     restart_timer_seconds: str | None = None
     shutdown_threshold_percentage: str | None = None
     threshold_warning_only_enabled: str | None = None
 
 
-class MultiplePaths(RedfishResource):
+class MultiplePaths(RedfishModel):
     maximum_paths: str | None = None
     use_multiple_paths_enabled: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class RouteDistinguisherRange(RedfishResource):
+class RouteDistinguisherRange(RedfishModel):
     lower: int | None = None
     upper: int | None = None
 
 
-class RouteTargetRange(RedfishResource):
+class RouteTargetRange(RedfishModel):
     lower: str | None = None
     upper: str | None = None
 
 
-class SystemMacrange(RedfishResource):
+class SystemMacrange(RedfishModel):
     lower: str | None = None
     upper: str | None = None
 
 
-class VlanidentifierAddressRange(RedfishResource):
+class VlanidentifierAddressRange(RedfishModel):
     lower: str | None = None
     upper: str | None = None

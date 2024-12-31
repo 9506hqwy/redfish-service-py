@@ -2,20 +2,23 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .pcie_device import PcieErrors
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class CstateResidency(RedfishResource):
+class CstateResidency(RedfishModel):
     level: str | None = None
     residency_percent: str | None = None
 
 
-class CacheMetrics(RedfishResource):
+class CacheMetrics(RedfishModel):
     cache_miss: str | None = None
     cache_misses_per_instruction: str | None = None
     hit_ratio: str | None = None
@@ -24,17 +27,17 @@ class CacheMetrics(RedfishResource):
     occupancy_percent: str | None = None
 
 
-class CacheMetricsTotal(RedfishResource):
+class CacheMetricsTotal(RedfishModel):
     current_period: CurrentPeriod | None = None
     life_time: LifeTime | None = None
 
 
-class ClearCurrentPeriod(RedfishResource):
+class ClearCurrentPeriod(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class CoreMetrics(RedfishResource):
+class CoreMetrics(RedfishModel):
     cstate_residency: list[CstateResidency] | None = None
     core_cache: list[CacheMetrics] | None = None
     core_id: str | None = None
@@ -48,17 +51,17 @@ class CoreMetrics(RedfishResource):
     unhalted_cycles: str | None = None
 
 
-class CurrentPeriod(RedfishResource):
+class CurrentPeriod(RedfishModel):
     correctable_eccerror_count: str | None = None
     uncorrectable_eccerror_count: str | None = None
 
 
-class LifeTime(RedfishResource):
+class LifeTime(RedfishModel):
     correctable_eccerror_count: str | None = None
     uncorrectable_eccerror_count: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

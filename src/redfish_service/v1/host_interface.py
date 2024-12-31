@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -19,7 +22,7 @@ class AuthenticationMode(StrEnum):
     OEM_AUTH = "OemAuth"
 
 
-class CredentialBootstrapping(RedfishResource):
+class CredentialBootstrapping(RedfishModel):
     enable_after_reset: str | None = None
     enabled: str | None = None
     role_id: str | None = None
@@ -46,7 +49,7 @@ class HostInterface(RedfishResource):
     status: Status | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     auth_none_role: IdRef | None = None
     computer_systems: list[IdRef] | None = None
     credential_bootstrapping_role: IdRef | None = None
@@ -55,5 +58,5 @@ class Links(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

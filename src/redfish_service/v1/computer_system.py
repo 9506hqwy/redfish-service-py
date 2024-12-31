@@ -3,21 +3,24 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AddResourceBlock(RedfishResource):
+class AddResourceBlock(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Boot(RedfishResource):
+class Boot(RedfishModel):
     alias_boot_order: list[str] | None = None
     boot_next: str | None = None
     boot_options: IdRef | None = None
@@ -92,7 +95,7 @@ class ComputerSystem(RedfishResource):
     uuid: str | None = None
 
 
-class HostedServices(RedfishResource):
+class HostedServices(RedfishModel):
     oem: dict[str, Any] | None = None
     storage_services: IdRef | None = None
 
@@ -103,7 +106,7 @@ class HostingRole(StrEnum):
     SWITCH = "Switch"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: list[IdRef] | None = None
     consuming_computer_systems: list[IdRef] | None = None
     cooled_by: list[IdRef] | None = None
@@ -115,7 +118,7 @@ class Links(RedfishResource):
     supplying_computer_systems: list[IdRef] | None = None
 
 
-class MemorySummary(RedfishResource):
+class MemorySummary(RedfishModel):
     memory_mirroring: str | None = None
     metrics: IdRef | None = None
     status: Status | None = None
@@ -123,7 +126,7 @@ class MemorySummary(RedfishResource):
     total_system_persistent_memory_gi_b: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -133,7 +136,7 @@ class PowerRestorePolicyTypes(StrEnum):
     LAST_STATE = "LastState"
 
 
-class ProcessorSummary(RedfishResource):
+class ProcessorSummary(RedfishModel):
     count: str | None = None
     logical_processor_count: str | None = None
     metrics: IdRef | None = None
@@ -141,17 +144,17 @@ class ProcessorSummary(RedfishResource):
     status: Status | None = None
 
 
-class RemoveResourceBlock(RedfishResource):
+class RemoveResourceBlock(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SetDefaultBootOrder(RedfishResource):
+class SetDefaultBootOrder(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -165,7 +168,7 @@ class SystemType(StrEnum):
     COMPOSED = "Composed"
 
 
-class TrustedModules(RedfishResource):
+class TrustedModules(RedfishModel):
     firmware_version: str | None = None
     firmware_version2: str | None = None
     interface_type: str | None = None
@@ -174,7 +177,7 @@ class TrustedModules(RedfishResource):
     status: Status | None = None
 
 
-class WatchdogTimer(RedfishResource):
+class WatchdogTimer(RedfishModel):
     function_enabled: str
     oem: dict[str, Any] | None = None
     status: Status | None = None

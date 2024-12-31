@@ -2,34 +2,36 @@ from __future__ import annotations  # PEP563 Forward References
 
 from enum import StrEnum
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 
 
-class ActionResponse(RedfishResource):
+class ActionResponse(RedfishModel):
     pass
 
 
-class EnumDeprecated(RedfishResource):
+class EnumDeprecated(RedfishModel):
     pass
 
 
-class EnumDescriptions(RedfishResource):
+class EnumDescriptions(RedfishModel):
     pass
 
 
-class EnumLongDescriptions(RedfishResource):
+class EnumLongDescriptions(RedfishModel):
     pass
 
 
-class EnumTranslations(RedfishResource):
+class EnumTranslations(RedfishModel):
     pass
 
 
-class EnumVersionAdded(RedfishResource):
+class EnumVersionAdded(RedfishModel):
     pass
 
 
-class EnumVersionDeprecated(RedfishResource):
+class EnumVersionDeprecated(RedfishModel):
     pass
 
 

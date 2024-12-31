@@ -3,7 +3,10 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..swordfish.capacity import Capacity
@@ -11,7 +14,7 @@ from ..swordfish.iostatistics import Iostatistics
 from ..swordfish.storage_replica_info import ReplicaInfo
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -54,16 +57,16 @@ class FileSystem(RedfishResource):
     replication_enabled: str | None = None
 
 
-class ImportedShare(RedfishResource):
+class ImportedShare(RedfishModel):
     pass
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
     replica_collection: list[IdRef] | None = None
     spare_resource_sets: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

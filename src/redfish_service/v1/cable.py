@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -71,7 +74,7 @@ class ConnectorType(StrEnum):
     OSFP = "OSFP"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     downstream_chassis: list[IdRef] | None = None
     downstream_ports: list[IdRef] | None = None
     downstream_resources: list[IdRef] | None = None
@@ -81,5 +84,5 @@ class Links(RedfishResource):
     upstream_resources: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

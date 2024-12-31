@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -19,13 +22,13 @@ class CommandConnectTypesSupported(StrEnum):
     OEM = "Oem"
 
 
-class CommandShell(RedfishResource):
+class CommandShell(RedfishModel):
     connect_types_supported: list[CommandConnectTypesSupported] | None = None
     max_concurrent_sessions: int | None = None
     service_enabled: bool | None = None
 
 
-class ForceFailover(RedfishResource):
+class ForceFailover(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -35,13 +38,13 @@ class GraphicalConnectTypesSupported(StrEnum):
     OEM = "Oem"
 
 
-class GraphicalConsole(RedfishResource):
+class GraphicalConsole(RedfishModel):
     connect_types_supported: list[GraphicalConnectTypesSupported] | None = None
     max_concurrent_sessions: int | None = None
     service_enabled: bool | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     active_software_image: IdRef | None = None
     managed_by: list[IdRef] | None = None
     manager_for_chassis: list[IdRef] | None = None
@@ -95,21 +98,21 @@ class ManagerType(StrEnum):
     SERVICE = "Service"
 
 
-class ModifyRedundancySet(RedfishResource):
+class ModifyRedundancySet(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResetToDefaults(RedfishResource):
+class ResetToDefaults(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -121,7 +124,7 @@ class SerialConnectTypesSupported(StrEnum):
     OEM = "Oem"
 
 
-class SerialConsole(RedfishResource):
+class SerialConsole(RedfishModel):
     connect_types_supported: list[SerialConnectTypesSupported] | None = None
     max_concurrent_sessions: int | None = None
     service_enabled: bool | None = None

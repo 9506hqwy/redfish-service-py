@@ -2,16 +2,19 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class ContactInfo(RedfishResource):
+class ContactInfo(RedfishModel):
     contact_name: str | None = None
     email_address: str | None = None
     phone_number: str | None = None
@@ -44,11 +47,11 @@ class License(RedfishResource):
     status: Status | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     authorized_devices: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     target_services: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

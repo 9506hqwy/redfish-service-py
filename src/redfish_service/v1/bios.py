@@ -2,15 +2,18 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Attributes(RedfishResource):
+class Attributes(RedfishModel):
     pass
 
 
@@ -24,21 +27,21 @@ class Bios(RedfishResource):
     reset_bios_to_defaults_pending: str | None = None
 
 
-class ChangePassword(RedfishResource):
+class ChangePassword(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     active_software_image: IdRef | None = None
     oem: dict[str, Any] | None = None
     software_images: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetBios(RedfishResource):
+class ResetBios(RedfishModel):
     target: str | None = None
     title: str | None = None

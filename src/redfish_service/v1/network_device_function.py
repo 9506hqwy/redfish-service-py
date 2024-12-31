@@ -2,17 +2,20 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 from .vlan_network_interface import Vlan
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Ethernet(RedfishResource):
+class Ethernet(RedfishModel):
     ethernet_interfaces: str | None = None
     macaddress: str | None = None
     mtusize: str | None = None
@@ -22,7 +25,7 @@ class Ethernet(RedfishResource):
     vlans: IdRef | None = None
 
 
-class FibreChannel(RedfishResource):
+class FibreChannel(RedfishModel):
     allow_fipvlandiscovery: str | None = None
     boot_targets: list[str] | None = None
     fco_eactive_vlanid: str | None = None
@@ -35,11 +38,11 @@ class FibreChannel(RedfishResource):
     wwpn: str | None = None
 
 
-class Httpboot(RedfishResource):
+class Httpboot(RedfishModel):
     boot_media_uri: str | None = None
 
 
-class InfiniBand(RedfishResource):
+class InfiniBand(RedfishModel):
     mtusize: str | None = None
     node_guid: str | None = None
     permanent_node_guid: str | None = None
@@ -50,7 +53,7 @@ class InfiniBand(RedfishResource):
     system_guid: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
     ethernet_interface: IdRef | None = None
     ethernet_interfaces: list[IdRef] | None = None
@@ -89,11 +92,11 @@ class NetworkDeviceFunction(RedfishResource):
     i_scsiboot: IScsiboot | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class IScsiboot(RedfishResource):
+class IScsiboot(RedfishModel):
     authentication_method: str | None = None
     chapsecret: str | None = None
     chapusername: str | None = None

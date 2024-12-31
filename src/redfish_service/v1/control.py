@@ -2,12 +2,15 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -43,7 +46,7 @@ class Control(RedfishResource):
     status: Status | None = None
 
 
-class ControlExcerpt(RedfishResource):
+class ControlExcerpt(RedfishModel):
     allowable_max: str | None = None
     allowable_min: str | None = None
     control_mode: str | None = None
@@ -52,14 +55,14 @@ class ControlExcerpt(RedfishResource):
     reading_units: str | None = None
 
 
-class ControlLoop(RedfishResource):
+class ControlLoop(RedfishModel):
     coefficient_update_time: str | None = None
     differential: str | None = None
     integral: str | None = None
     proportional: str | None = None
 
 
-class ControlRangeExcerpt(RedfishResource):
+class ControlRangeExcerpt(RedfishModel):
     allowable_max: str | None = None
     allowable_min: str | None = None
     allowable_numeric_values: list[str] | None = None
@@ -71,7 +74,7 @@ class ControlRangeExcerpt(RedfishResource):
     setting_min: str | None = None
 
 
-class ControlSingleExcerpt(RedfishResource):
+class ControlSingleExcerpt(RedfishModel):
     allowable_max: str | None = None
     allowable_min: str | None = None
     control_mode: str | None = None
@@ -82,7 +85,7 @@ class ControlSingleExcerpt(RedfishResource):
     set_point: str | None = None
 
 
-class ControlSingleLoopExcerpt(RedfishResource):
+class ControlSingleLoopExcerpt(RedfishModel):
     allowable_max: str | None = None
     allowable_min: str | None = None
     control_loop: ControlLoop | None = None
@@ -93,10 +96,10 @@ class ControlSingleLoopExcerpt(RedfishResource):
     set_point: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetToDefaults(RedfishResource):
+class ResetToDefaults(RedfishModel):
     target: str | None = None
     title: str | None = None

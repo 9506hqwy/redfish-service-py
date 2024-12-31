@@ -3,7 +3,10 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .manager_account import AccountTypes
 from .odata_v4 import IdRef
 from .privileges import PrivilegeType
@@ -38,11 +41,11 @@ class AccountService(RedfishResource):
     tacacsplus: str | None = None
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Authentication(RedfishResource):
+class Authentication(RedfishModel):
     authentication_type: str | None = None
     encryption_key: str | None = None
     encryption_key_set: str | None = None
@@ -53,7 +56,7 @@ class Authentication(RedfishResource):
     username: str | None = None
 
 
-class ExternalAccountProvider(RedfishResource):
+class ExternalAccountProvider(RedfishModel):
     account_provider_type: str | None = None
     authentication: Authentication | None = None
     certificates: IdRef | None = None
@@ -66,14 +69,14 @@ class ExternalAccountProvider(RedfishResource):
     tacacsplus_service: str | None = None
 
 
-class LdapsearchSettings(RedfishResource):
+class LdapsearchSettings(RedfishModel):
     base_distinguished_names: list[str] | None = None
     group_name_attribute: str | None = None
     groups_attribute: str | None = None
     username_attribute: str | None = None
 
 
-class Ldapservice(RedfishResource):
+class Ldapservice(RedfishModel):
     oem: dict[str, Any] | None = None
     search_settings: LdapsearchSettings | None = None
 
@@ -85,7 +88,7 @@ class LocalAccountAuth(StrEnum):
     LOCAL_FIRST = "LocalFirst"
 
 
-class Mfabypass(RedfishResource):
+class Mfabypass(RedfishModel):
     bypass_types: list[str] | None = None
 
 
@@ -100,5 +103,5 @@ class MfabypassType(StrEnum):
     OEM = "OEM"
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

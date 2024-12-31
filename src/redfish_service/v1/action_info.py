@@ -2,7 +2,10 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
 class ActionInfo(RedfishResource):
@@ -11,7 +14,7 @@ class ActionInfo(RedfishResource):
     parameters: list[Parameters] | None = None
 
 
-class Parameters(RedfishResource):
+class Parameters(RedfishModel):
     allowable_numbers: list[str] | None = None
     allowable_pattern: str | None = None
     allowable_value_descriptions: list[str] | None = None
@@ -21,5 +24,6 @@ class Parameters(RedfishResource):
     data_type: str | None = None
     maximum_value: str | None = None
     minimum_value: str | None = None
+    name: str
     object_data_type: str | None = None
     required: bool | None = None

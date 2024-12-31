@@ -3,7 +3,10 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.storage_replica_info import ReplicaInfo
@@ -14,34 +17,34 @@ class AccessCapability(StrEnum):
     READ_WRITE = "ReadWrite"
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class ExposeVolumes(RedfishResource):
+class ExposeVolumes(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class HideVolumes(RedfishResource):
+class HideVolumes(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     child_storage_groups: list[StorageGroup] | None = None
     class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
     parent_storage_groups: list[StorageGroup] | None = None
 
 
-class MappedVolume(RedfishResource):
+class MappedVolume(RedfishModel):
     access_capability: str | None = None
     logical_unit_number: str | None = None
     volume: IdRef | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

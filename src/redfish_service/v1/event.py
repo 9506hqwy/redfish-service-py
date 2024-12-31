@@ -2,31 +2,35 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 from .odata_v4 import IdRef
 from .resource import Health
 from .values import EventType
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Cper(RedfishResource):
+class Cper(RedfishModel):
     notification_type: str | None = None
     oem: dict[str, Any] | None = None
     section_type: str | None = None
 
 
-class Event(RedfishResource):
+class Event(RedfishModel):
     actions: Actions | None = None
     context: str | None = None
     description: str | None = None
     events: list[EventRecord]
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
 
 
-class EventRecord(RedfishResource):
+class EventRecord(RedfishModel):
     actions: EventRecordActions | None = None
     additional_data_size_bytes: str | None = None
     additional_data_uri: str | None = None
@@ -52,13 +56,13 @@ class EventRecord(RedfishResource):
     specific_event_exists_in_group: bool | None = None
 
 
-class EventRecordActions(RedfishResource):
+class EventRecordActions(RedfishModel):
     oem: EventRecordOemActions | None = None
 
 
-class EventRecordOemActions(RedfishResource):
+class EventRecordOemActions(RedfishModel):
     pass
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

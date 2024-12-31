@@ -2,16 +2,19 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Httpsprotocol(RedfishResource):
+class Httpsprotocol(RedfishModel):
     certificates: IdRef | None = None
     port: str | None = None
     protocol_enabled: str | None = None
@@ -41,23 +44,23 @@ class ManagerNetworkProtocol(RedfishResource):
     virtual_media: Protocol | None = None
 
 
-class Ntpprotocol(RedfishResource):
+class Ntpprotocol(RedfishModel):
     ntpservers: list[str] | None = None
     network_supplied_servers: list[str] | None = None
     port: str | None = None
     protocol_enabled: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Protocol(RedfishResource):
+class Protocol(RedfishModel):
     port: str | None = None
     protocol_enabled: str | None = None
 
 
-class ProxyConfiguration(RedfishResource):
+class ProxyConfiguration(RedfishModel):
     enabled: bool | None = None
     exclude_addresses: list[str] | None = None
     password: str | None = None
@@ -67,7 +70,7 @@ class ProxyConfiguration(RedfishResource):
     username: str | None = None
 
 
-class Snmpprotocol(RedfishResource):
+class Snmpprotocol(RedfishModel):
     authentication_protocol: str | None = None
     community_access_mode: str | None = None
     community_strings: list[str] | None = None
@@ -81,7 +84,7 @@ class Snmpprotocol(RedfishResource):
     protocol_enabled: str | None = None
 
 
-class Ssdprotocol(RedfishResource):
+class Ssdprotocol(RedfishModel):
     notify_ipv6_scope: str | None = None
     notify_multicast_interval_seconds: str | None = None
     notify_ttl: str | None = None

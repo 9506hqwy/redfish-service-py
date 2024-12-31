@@ -3,7 +3,10 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 
 
@@ -19,11 +22,11 @@ class AccountTypes(StrEnum):
     WEB_UI = "WebUI"
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     role: IdRef | None = None
 
@@ -50,5 +53,5 @@ class ManagerAccount(RedfishResource):
     user_name: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

@@ -2,13 +2,16 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..schedule import Schedule
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -25,11 +28,12 @@ class IoperformanceLoScapabilities(RedfishResource):
     supported_lines_of_service: list[IdRef] | None = None
 
 
-class Ioworkload(RedfishResource):
+class Ioworkload(RedfishModel):
     components: list[str] | None = None
+    name: str | None = None
 
 
-class IoworkloadComponent(RedfishResource):
+class IoworkloadComponent(RedfishModel):
     average_iobytes: str | None = None
     duration: str | None = None
     ioaccess_pattern: str | None = None
@@ -38,5 +42,5 @@ class IoworkloadComponent(RedfishResource):
     schedule: Schedule | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

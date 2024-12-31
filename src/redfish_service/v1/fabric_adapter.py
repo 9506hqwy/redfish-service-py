@@ -2,14 +2,17 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -39,7 +42,7 @@ class FabricAdapter(RedfishResource):
     uuid: str | None = None
 
 
-class GenZ(RedfishResource):
+class GenZ(RedfishModel):
     msdt: IdRef | None = None
     pidt: list[str] | None = None
     ritable: list[str] | None = None
@@ -48,7 +51,7 @@ class GenZ(RedfishResource):
     ssdt: IdRef | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
     memory_domains: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
@@ -56,5 +59,5 @@ class Links(RedfishResource):
     processors: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

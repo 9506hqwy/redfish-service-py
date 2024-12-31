@@ -2,21 +2,24 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .storage_controller import NvmeSmartcriticalWarnings
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class EgcriticalWarningSummary(RedfishResource):
+class EgcriticalWarningSummary(RedfishModel):
     namespaces_in_read_only_mode: str | None = None
     reliability_degraded: str | None = None
     spare_capacity_under_threshold: str | None = None
 
 
-class NvmeSmartmetrics(RedfishResource):
+class NvmeSmartmetrics(RedfishModel):
     available_spare_percent: str | None = None
     available_spare_threshold_percent: str | None = None
     composite_temperature_celsius: str | None = None
@@ -42,7 +45,7 @@ class NvmeSmartmetrics(RedfishResource):
     warning_composite_temp_time_minutes: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

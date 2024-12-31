@@ -3,17 +3,21 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AttributeRegistry(RedfishResource):
+class AttributeRegistry(RedfishModel):
     actions: Actions | None = None
     description: str | None = None
+    id: str
     language: str
+    name: str
     oem: dict[str, Any] | None = None
     owning_entity: str
     registry_entries: RegistryEntries | None = None
@@ -29,12 +33,12 @@ class AttributeType(StrEnum):
     PASSWORD = "Password"  # noqa: S105
 
 
-class AttributeValue(RedfishResource):
+class AttributeValue(RedfishModel):
     value_display_name: str | None = None
     value_name: str
 
 
-class Attributes(RedfishResource):
+class Attributes(RedfishModel):
     attribute_name: str
     current_value: str | None = None
     default_value: str | None = None
@@ -64,13 +68,13 @@ class Attributes(RedfishResource):
     write_only: str | None = None
 
 
-class Dependencies(RedfishResource):
+class Dependencies(RedfishModel):
     dependency: Dependency | None = None
     dependency_for: str | None = None
     type: DependencyType | None = None
 
 
-class Dependency(RedfishResource):
+class Dependency(RedfishModel):
     map_from: list[MapFrom] | None = None
     map_to_attribute: str | None = None
     map_to_property: MapToProperty | None = None
@@ -81,7 +85,7 @@ class DependencyType(StrEnum):
     MAP = "Map"
 
 
-class MapFrom(RedfishResource):
+class MapFrom(RedfishModel):
     map_from_attribute: str | None = None
     map_from_condition: MapFromCondition | None = None
     map_from_property: MapFromProperty | None = None
@@ -137,7 +141,7 @@ class MapToProperty(StrEnum):
     VALUE_EXPRESSION = "ValueExpression"
 
 
-class Menus(RedfishResource):
+class Menus(RedfishModel):
     display_name: str | None = None
     display_order: str | None = None
     gray_out: str | None = None
@@ -148,17 +152,17 @@ class Menus(RedfishResource):
     read_only: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class RegistryEntries(RedfishResource):
+class RegistryEntries(RedfishModel):
     attributes: list[Attributes] | None = None
     dependencies: list[Dependencies] | None = None
     menus: list[Menus] | None = None
 
 
-class SupportedSystems(RedfishResource):
+class SupportedSystems(RedfishModel):
     firmware_version: str | None = None
     product_name: str | None = None
     system_id: str | None = None

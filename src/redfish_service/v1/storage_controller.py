@@ -2,7 +2,10 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
@@ -10,27 +13,27 @@ from .resource import Identifier, Location, Status
 from .software_inventory import MeasurementBlock
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AttachNamespaces(RedfishResource):
+class AttachNamespaces(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class CacheSummary(RedfishResource):
+class CacheSummary(RedfishModel):
     persistent_cache_size_mi_b: str | None = None
     status: Status | None = None
     total_cache_size_mi_b: str
 
 
-class DetachNamespaces(RedfishResource):
+class DetachNamespaces(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     attached_volumes: list[IdRef] | None = None
     batteries: list[IdRef] | None = None
     endpoints: list[IdRef] | None = None
@@ -40,7 +43,7 @@ class Links(RedfishResource):
     pcie_functions: list[IdRef] | None = None
 
 
-class NvmeControllerProperties(RedfishResource):
+class NvmeControllerProperties(RedfishModel):
     anacharacteristics: list[str] | None = None
     allocated_completion_queues: str | None = None
     allocated_submission_queues: str | None = None
@@ -52,7 +55,7 @@ class NvmeControllerProperties(RedfishResource):
     nvme_version: str | None = None
 
 
-class NvmeSmartcriticalWarnings(RedfishResource):
+class NvmeSmartcriticalWarnings(RedfishModel):
     media_in_read_only: str | None = None
     overall_subsystem_degraded: str | None = None
     pmrunreliable: str | None = None
@@ -60,22 +63,22 @@ class NvmeSmartcriticalWarnings(RedfishResource):
     spare_capacity_worn_out: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Rates(RedfishResource):
+class Rates(RedfishModel):
     consistency_check_rate_percent: str | None = None
     rebuild_rate_percent: str | None = None
     transformation_rate_percent: str | None = None
 
 
-class SecurityReceive(RedfishResource):
+class SecurityReceive(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SecuritySend(RedfishResource):
+class SecuritySend(RedfishModel):
     target: str | None = None
     title: str | None = None
 

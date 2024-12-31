@@ -3,23 +3,26 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class EthernetInterface(RedfishResource):
+class EthernetInterface(RedfishModel):
     max_lanes: str | None = None
     max_speed_mbps: str | None = None
     oem: dict[str, Any] | None = None
 
 
-class Fpga(RedfishResource):
+class Fpga(RedfishModel):
     external_interfaces: list[ProcessorInterface] | None = None
     firmware_id: str | None = None
     firmware_manufacturer: str | None = None
@@ -33,7 +36,7 @@ class Fpga(RedfishResource):
     reconfiguration_slots: list[FpgaReconfigurationSlot] | None = None
 
 
-class FpgaReconfigurationSlot(RedfishResource):
+class FpgaReconfigurationSlot(RedfishModel):
     acceleration_function: IdRef | None = None
     programmable_from_host: str | None = None
     slot_id: str | None = None
@@ -45,7 +48,7 @@ class FpgaType(StrEnum):
     DISCRETE = "Discrete"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: IdRef | None = None
     connected_processors: list[IdRef] | None = None
     endpoints: list[IdRef] | None = None
@@ -54,7 +57,7 @@ class Links(RedfishResource):
     pcie_functions: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -99,7 +102,7 @@ class Processor(RedfishResource):
     version: str | None = None
 
 
-class ProcessorId(RedfishResource):
+class ProcessorId(RedfishModel):
     effective_family: str | None = None
     effective_model: str | None = None
     identification_registers: str | None = None
@@ -108,19 +111,19 @@ class ProcessorId(RedfishResource):
     vendor_id: str | None = None
 
 
-class ProcessorInterface(RedfishResource):
+class ProcessorInterface(RedfishModel):
     ethernet: EthernetInterface | None = None
     interface_type: str | None = None
     pcie: PcieInterface | None = None
 
 
-class ProcessorMemory(RedfishResource):
+class ProcessorMemory(RedfishModel):
     capacity_mi_b: str | None = None
     integrated_memory: str | None = None
     memory_type: str | None = None
     speed_mhz: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None

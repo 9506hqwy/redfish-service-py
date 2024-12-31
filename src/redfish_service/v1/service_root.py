@@ -2,17 +2,20 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishModel, RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 
 
-class DeepOperations(RedfishResource):
+class DeepOperations(RedfishModel):
     deep_patch: bool | None = None
     deep_post: bool | None = None
     max_levels: int | None = None
 
 
-class Expand(RedfishResource):
+class Expand(RedfishModel):
     expand_all: bool | None = None
     levels: bool | None = None
     links: bool | None = None
@@ -25,7 +28,7 @@ class Links(RedfishModel):
     sessions: IdRef
 
 
-class ProtocolFeaturesSupported(RedfishResource):
+class ProtocolFeaturesSupported(RedfishModel):
     deep_operations: DeepOperations | None = None
     excerpt_query: bool | None = None
     expand_query: Expand | None = None

@@ -3,26 +3,29 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .message import Message
 from .odata_v4 import IdRef
 from .resource import Health
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     created_resources: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Payload(RedfishResource):
+class Payload(RedfishModel):
     http_headers: list[str] | None = None
     http_operation: str | None = None
     json_body: str | None = None

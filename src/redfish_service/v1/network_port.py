@@ -2,21 +2,24 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class NetDevFuncMaxBwalloc(RedfishResource):
+class NetDevFuncMaxBwalloc(RedfishModel):
     max_bwalloc_percent: str | None = None
     network_device_function: IdRef | None = None
 
 
-class NetDevFuncMinBwalloc(RedfishResource):
+class NetDevFuncMinBwalloc(RedfishModel):
     min_bwalloc_percent: str | None = None
     network_device_function: IdRef | None = None
 
@@ -48,11 +51,11 @@ class NetworkPort(RedfishResource):
     wake_on_lanenabled: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class SupportedLinkCapabilities(RedfishResource):
+class SupportedLinkCapabilities(RedfishModel):
     auto_speed_negotiation: str | None = None
     capable_link_speed_mbps: list[str] | None = None
     link_network_technology: str | None = None

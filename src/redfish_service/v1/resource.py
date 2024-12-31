@@ -3,12 +3,17 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource, RedfishResourceCollection
+from .base import (
+    RedfishModel,
+    RedfishObject,
+    RedfishObjectId,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resolution_step import ResolutionStep
 
 
-class Condition(RedfishResource):
+class Condition(RedfishModel):
     log_entry: IdRef | None = None
     message: str | None = None
     message_args: list[str] | None = None
@@ -28,7 +33,7 @@ class Health(StrEnum):
     CRITICAL = "Critical"
 
 
-class Identifier(RedfishResource):
+class Identifier(RedfishModel):
     durable_name: str | None = None
     durable_name_format: str | None = None
 
@@ -39,11 +44,11 @@ class IndicatorLed(StrEnum):
     OFF = "Off"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Location(RedfishResource):
+class Location(RedfishModel):
     altitude_meters: str | None = None
     contacts: list[str] | None = None
     info: str | None = None
@@ -56,15 +61,15 @@ class Location(RedfishResource):
     postal_address: PostalAddress | None = None
 
 
-class Oem(RedfishResource):
+class Oem(RedfishModel):
     pass
 
 
-class OemObject(RedfishResource):
+class OemObject(RedfishModel):
     pass
 
 
-class PartLocation(RedfishResource):
+class PartLocation(RedfishModel):
     location_ordinal_value: str | None = None
     location_type: str | None = None
     orientation: str | None = None
@@ -72,7 +77,7 @@ class PartLocation(RedfishResource):
     service_label: str | None = None
 
 
-class Placement(RedfishResource):
+class Placement(RedfishModel):
     additional_info: str | None = None
     rack: str | None = None
     rack_offset: str | None = None
@@ -80,7 +85,7 @@ class Placement(RedfishResource):
     row: str | None = None
 
 
-class PostalAddress(RedfishResource):
+class PostalAddress(RedfishModel):
     additional_code: str | None = None
     additional_info: str | None = None
     building: str | None = None
@@ -96,6 +101,7 @@ class PostalAddress(RedfishResource):
     landmark: str | None = None
     leading_street_direction: str | None = None
     location: str | None = None
+    name: str | None = None
     neighborhood: str | None = None
     pobox: str | None = None
     place_type: str | None = None
@@ -123,7 +129,7 @@ class PowerState(StrEnum):
     PAUSED = "Paused"
 
 
-class ReferenceableMember(RedfishResource):
+class ReferenceableMember(RedfishObjectId):
     member_id: str
     oem: dict[str, Any] | None = None
 
@@ -148,8 +154,10 @@ class Resource(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class ResourceCollection(RedfishResourceCollection):
-    pass
+class ResourceCollection(RedfishObject):
+    description: str | None = None
+    name: str
+    oem: dict[str, Any] | None = None
 
 
 class State(StrEnum):
@@ -168,7 +176,7 @@ class State(StrEnum):
     DEGRADED = "Degraded"
 
 
-class Status(RedfishResource):
+class Status(RedfishModel):
     conditions: list[str] | None = None
     health: str | None = None
     health_rollup: str | None = None

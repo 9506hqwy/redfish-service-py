@@ -2,13 +2,16 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .cooling_loop import Coolant
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -36,12 +39,12 @@ class CoolantConnector(RedfishResource):
     supply_temperature_celsius: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     connected_chassis: list[IdRef] | None = None
     connected_cooling_loop: str | None = None
     connected_cooling_unit: str | None = None
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

@@ -3,11 +3,14 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -38,7 +41,7 @@ class CertificateType(StrEnum):
     PKCS7 = "PKCS7"
 
 
-class Identifier(RedfishResource):
+class Identifier(RedfishModel):
     additional_common_names: list[str] | None = None
     additional_organizational_units: list[str] | None = None
     alternative_names: list[str] | None = None
@@ -71,25 +74,25 @@ class KeyUsage(StrEnum):
     OCSPSIGNING = "OCSPSigning"
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     issuer: str | None = None
     oem: dict[str, Any] | None = None
     subjects: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Rekey(RedfishResource):
+class Rekey(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Renew(RedfishResource):
+class Renew(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Spdm(RedfishResource):
+class Spdm(RedfishModel):
     slot_id: str | None = None

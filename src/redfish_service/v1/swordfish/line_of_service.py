@@ -2,7 +2,9 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishResource,
+)
 
 
 class LineOfService(RedfishResource):

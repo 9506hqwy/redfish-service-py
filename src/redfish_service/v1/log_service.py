@@ -3,21 +3,24 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class ClearLog(RedfishResource):
+class ClearLog(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class CollectDiagnosticData(RedfishResource):
+class CollectDiagnosticData(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -44,7 +47,7 @@ class LogService(RedfishResource):
     syslog_filters: list[str] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -54,6 +57,6 @@ class OverWritePolicy(StrEnum):
     NEVER_OVER_WRITES = "NeverOverWrites"
 
 
-class PushDiagnosticData(RedfishResource):
+class PushDiagnosticData(RedfishModel):
     target: str | None = None
     title: str | None = None

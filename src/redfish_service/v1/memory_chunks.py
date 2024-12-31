@@ -2,16 +2,19 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class InterleaveSet(RedfishResource):
+class InterleaveSet(RedfishModel):
     memory: IdRef | None = None
     memory_level: str | None = None
     offset_mi_b: str | None = None
@@ -19,7 +22,7 @@ class InterleaveSet(RedfishResource):
     size_mi_b: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     cxllogical_devices: list[IdRef] | None = None
     endpoints: list[IdRef] | None = None
     memory_regions: list[IdRef] | None = None
@@ -43,5 +46,5 @@ class MemoryChunks(RedfishResource):
     status: Status | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

@@ -2,35 +2,38 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class ClearMetricReports(RedfishResource):
+class ClearMetricReports(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetMetricReportDefinitionsToDefaults(RedfishResource):
+class ResetMetricReportDefinitionsToDefaults(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResetTriggersToDefaults(RedfishResource):
+class ResetTriggersToDefaults(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SubmitTestMetricReport(RedfishResource):
+class SubmitTestMetricReport(RedfishModel):
     target: str | None = None
     title: str | None = None
 

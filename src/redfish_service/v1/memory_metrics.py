@@ -2,14 +2,17 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AlarmTrips(RedfishResource):
+class AlarmTrips(RedfishModel):
     address_parity_error: str | None = None
     correctable_eccerror: str | None = None
     spare_block: str | None = None
@@ -17,16 +20,16 @@ class AlarmTrips(RedfishResource):
     uncorrectable_eccerror: str | None = None
 
 
-class Cxl(RedfishResource):
+class Cxl(RedfishModel):
     alert_capabilities: str | None = None
 
 
-class ClearCurrentPeriod(RedfishResource):
+class ClearCurrentPeriod(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class CurrentPeriod(RedfishResource):
+class CurrentPeriod(RedfishModel):
     blocks_read: str | None = None
     blocks_written: str | None = None
     correctable_eccerror_count: str | None = None
@@ -35,7 +38,7 @@ class CurrentPeriod(RedfishResource):
     uncorrectable_eccerror_count: str | None = None
 
 
-class HealthData(RedfishResource):
+class HealthData(RedfishModel):
     alarm_trips: AlarmTrips | None = None
     data_loss_detected: str | None = None
     last_shutdown_success: str | None = None
@@ -44,7 +47,7 @@ class HealthData(RedfishResource):
     remaining_spare_block_percentage: str | None = None
 
 
-class LifeTime(RedfishResource):
+class LifeTime(RedfishModel):
     blocks_read: str | None = None
     blocks_written: str | None = None
     correctable_eccerror_count: str | None = None
@@ -70,5 +73,5 @@ class MemoryMetrics(RedfishResource):
     operating_speed_mhz: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

@@ -2,29 +2,32 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .sensor import SensorArrayExcerpt
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class HeaterSummary(RedfishResource):
+class HeaterSummary(RedfishModel):
     total_pre_power_on_heating_time_seconds: str | None = None
     total_runtime_heating_time_seconds: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class TemperatureSummary(RedfishResource):
+class TemperatureSummary(RedfishModel):
     ambient: str | None = None
     exhaust: str | None = None
     intake: str | None = None

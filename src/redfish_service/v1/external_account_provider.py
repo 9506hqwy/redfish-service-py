@@ -2,15 +2,18 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Authentication(RedfishResource):
+class Authentication(RedfishModel):
     authentication_type: str | None = None
     encryption_key: str | None = None
     encryption_key_set: str | None = None
@@ -40,7 +43,7 @@ class ExternalAccountProvider(RedfishResource):
     timeout_seconds: str | None = None
 
 
-class LdapsearchSettings(RedfishResource):
+class LdapsearchSettings(RedfishModel):
     base_distinguished_names: list[str] | None = None
     email_attribute: str | None = None
     group_name_attribute: str | None = None
@@ -49,14 +52,14 @@ class LdapsearchSettings(RedfishResource):
     username_attribute: str | None = None
 
 
-class Ldapservice(RedfishResource):
+class Ldapservice(RedfishModel):
     oem: dict[str, Any] | None = None
     search_settings: LdapsearchSettings | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

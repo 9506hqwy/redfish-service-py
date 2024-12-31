@@ -2,19 +2,22 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .pcie_device import PcieErrors
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Cxl(RedfishResource):
+class Cxl(RedfishModel):
     backpressure_average_percentage: int | None = None
 
 
-class FibreChannel(RedfishResource):
+class FibreChannel(RedfishModel):
     correctable_fecerrors: str | None = None
     invalid_crcs: str | None = None
     invalid_txwords: str | None = None
@@ -32,7 +35,7 @@ class FibreChannel(RedfishResource):
     uncorrectable_fecerrors: str | None = None
 
 
-class GenZ(RedfishResource):
+class GenZ(RedfishModel):
     access_key_violations: str | None = None
     end_to_end_crcerrors: str | None = None
     llrrecovery: str | None = None
@@ -46,7 +49,7 @@ class GenZ(RedfishResource):
     txstomped_ecrc: str | None = None
 
 
-class Networking(RedfishResource):
+class Networking(RedfishModel):
     rdmaprotection_errors: str | None = None
     rdmaprotocol_errors: str | None = None
     rdmarxbytes: str | None = None
@@ -83,7 +86,7 @@ class Networking(RedfishResource):
     txunicast_frames: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -104,19 +107,19 @@ class PortMetrics(RedfishResource):
     transceivers: list[Transceiver] | None = None
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Sas(RedfishResource):
+class Sas(RedfishModel):
     invalid_dword_count: str | None = None
     loss_of_dword_synchronization_count: str | None = None
     phy_reset_problem_count: str | None = None
     running_disparity_error_count: str | None = None
 
 
-class Transceiver(RedfishResource):
+class Transceiver(RedfishModel):
     rxinput_power_milli_watts: str | None = None
     supply_voltage: str | None = None
     txbias_current_milli_amps: str | None = None

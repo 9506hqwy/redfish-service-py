@@ -2,31 +2,34 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class SpdmalgorithmSet(RedfishResource):
+class SpdmalgorithmSet(RedfishModel):
     aead: list[str] | None = None
     base_asym: list[str] | None = None
     base_hash: list[str] | None = None
 
 
-class SpdmparameterSet(RedfishResource):
+class SpdmparameterSet(RedfishModel):
     algorithms: SpdmalgorithmSet | None = None
     versions: list[str] | None = None
 
 
-class Spdmpolicy(RedfishResource):
+class Spdmpolicy(RedfishModel):
     allow_extended_algorithms: str | None = None
     allowed: SpdmparameterSet | None = None
     denied: SpdmparameterSet | None = None
@@ -47,22 +50,22 @@ class SecurityPolicy(RedfishResource):
     tls: Tlscommunication | None = None
 
 
-class TlsalgorithmSet(RedfishResource):
+class TlsalgorithmSet(RedfishModel):
     cipher_suites: list[str] | None = None
     signature_algorithms: list[str] | None = None
 
 
-class Tlscommunication(RedfishResource):
+class Tlscommunication(RedfishModel):
     client: Tlspolicy | None = None
     server: Tlspolicy | None = None
 
 
-class TlsparameterSet(RedfishResource):
+class TlsparameterSet(RedfishModel):
     algorithms: TlsalgorithmSet | None = None
     versions: list[str] | None = None
 
 
-class Tlspolicy(RedfishResource):
+class Tlspolicy(RedfishModel):
     allowed: TlsparameterSet | None = None
     denied: TlsparameterSet | None = None
     revoked_certificates: IdRef | None = None

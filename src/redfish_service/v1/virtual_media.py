@@ -3,21 +3,24 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class EjectMedia(RedfishResource):
+class EjectMedia(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class InsertMedia(RedfishResource):
+class InsertMedia(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -29,7 +32,7 @@ class MediaType(StrEnum):
     DVD = "DVD"
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 

@@ -3,16 +3,19 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class BreakerControl(RedfishResource):
+class BreakerControl(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -69,7 +72,7 @@ class Circuit(RedfishResource):
     voltage_type: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     branch_circuit: str | None = None
     distribution_circuits: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
@@ -105,7 +108,7 @@ class NominalVoltageType(StrEnum):
     DC1_8_V = "DC1_8V"
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -153,7 +156,7 @@ class PlugType(StrEnum):
     FIELD_400_V_3_P5_W_32_A = "Field_400V_3P5W_32A"
 
 
-class PowerControl(RedfishResource):
+class PowerControl(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -170,6 +173,6 @@ class PowerState(StrEnum):
     POWER_CYCLE = "PowerCycle"
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None

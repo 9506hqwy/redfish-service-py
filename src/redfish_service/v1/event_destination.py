@@ -3,13 +3,16 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 from .values import EventType
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -59,20 +62,20 @@ class EventFormatType(StrEnum):
     METRIC_REPORT = "MetricReport"
 
 
-class HttpHeaderProperty(RedfishResource):
+class HttpHeaderProperty(RedfishModel):
     pass
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResumeSubscription(RedfishResource):
+class ResumeSubscription(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Snmpsettings(RedfishResource):
+class Snmpsettings(RedfishModel):
     authentication_key: str | None = None
     authentication_protocol: str | None = None
     encryption_key: str | None = None

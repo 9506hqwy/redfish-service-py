@@ -3,12 +3,15 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -19,31 +22,31 @@ class ApplyTime(StrEnum):
     IN_MAINTENANCE_WINDOW_ON_RESET = "InMaintenanceWindowOnReset"
 
 
-class HttpPushUriApplyTime(RedfishResource):
+class HttpPushUriApplyTime(RedfishModel):
     apply_time: ApplyTime | None = None
     maintenance_window_duration_in_seconds: int | None = None
     maintenance_window_start_time: str | None = None
 
 
-class HttpPushUriOptions(RedfishResource):
+class HttpPushUriOptions(RedfishModel):
     http_push_uri_apply_time: HttpPushUriApplyTime | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class SimpleUpdate(RedfishResource):
+class SimpleUpdate(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class StartUpdate(RedfishResource):
+class StartUpdate(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class UpdateParameters(RedfishResource):
+class UpdateParameters(RedfishModel):
     oem: dict[str, Any] | None = None
     targets: list[str] | None = None
 

@@ -2,10 +2,13 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -17,7 +20,7 @@ class JsonSchemaFile(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class Location(RedfishResource):
+class Location(RedfishModel):
     archive_file: str | None = None
     archive_uri: str | None = None
     language: str | None = None
@@ -25,5 +28,5 @@ class Location(RedfishResource):
     uri: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

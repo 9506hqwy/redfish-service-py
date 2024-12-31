@@ -3,21 +3,24 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class DisablePassphrase(RedfishResource):
+class DisablePassphrase(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: IdRef | None = None
     oem: dict[str, Any] | None = None
 
@@ -82,7 +85,7 @@ class Memory(RedfishResource):
     volatile_size_mi_b: str | None = None
 
 
-class MemoryLocation(RedfishResource):
+class MemoryLocation(RedfishModel):
     channel: str | None = None
     memory_controller: str | None = None
     slot: str | None = None
@@ -96,7 +99,7 @@ class MemoryMedia(StrEnum):
     PROPRIETARY = "Proprietary"
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -106,19 +109,19 @@ class OperatingMemoryModes(StrEnum):
     BLOCK = "Block"
 
 
-class OverwriteUnit(RedfishResource):
+class OverwriteUnit(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class PowerManagementPolicy(RedfishResource):
+class PowerManagementPolicy(RedfishModel):
     average_power_budget_milli_watts: str | None = None
     max_tdpmilli_watts: str | None = None
     peak_power_budget_milli_watts: str | None = None
     policy_enabled: str | None = None
 
 
-class RegionSet(RedfishResource):
+class RegionSet(RedfishModel):
     memory_classification: str | None = None
     offset_mi_b: str | None = None
     passphrase_enabled: str | None = None
@@ -127,17 +130,17 @@ class RegionSet(RedfishResource):
     size_mi_b: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SecureEraseUnit(RedfishResource):
+class SecureEraseUnit(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SecurityCapabilities(RedfishResource):
+class SecurityCapabilities(RedfishModel):
     configuration_lock_capable: str | None = None
     data_lock_capable: str | None = None
     max_passphrase_count: str | None = None
@@ -155,11 +158,11 @@ class SecurityStates(StrEnum):
     PASSPHRASELIMIT = "Passphraselimit"
 
 
-class SetPassphrase(RedfishResource):
+class SetPassphrase(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class UnlockUnit(RedfishResource):
+class UnlockUnit(RedfishModel):
     target: str | None = None
     title: str | None = None

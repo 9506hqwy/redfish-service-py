@@ -2,18 +2,21 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .resource import Identifier, Location, Status
 from .software_inventory import MeasurementBlock
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class ControllerCapabilities(RedfishResource):
+class ControllerCapabilities(RedfishModel):
     data_center_bridging: DataCenterBridging | None = None
     npar: NicPartitioning | None = None
     npiv: Npiv | None = None
@@ -22,7 +25,7 @@ class ControllerCapabilities(RedfishResource):
     virtualization_offload: VirtualizationOffload | None = None
 
 
-class ControllerLinks(RedfishResource):
+class ControllerLinks(RedfishModel):
     network_device_functions: list[IdRef] | None = None
     network_ports: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
@@ -30,7 +33,7 @@ class ControllerLinks(RedfishResource):
     ports: list[IdRef] | None = None
 
 
-class Controllers(RedfishResource):
+class Controllers(RedfishModel):
     controller_capabilities: ControllerCapabilities | None = None
     firmware_package_version: str | None = None
     identifiers: list[Identifier] | None = None
@@ -39,11 +42,11 @@ class Controllers(RedfishResource):
     pcie_interface: PcieInterface | None = None
 
 
-class DataCenterBridging(RedfishResource):
+class DataCenterBridging(RedfishModel):
     capable: str | None = None
 
 
-class Npiv(RedfishResource):
+class Npiv(RedfishModel):
     max_device_logins: str | None = None
     max_port_logins: str | None = None
 
@@ -73,30 +76,30 @@ class NetworkAdapter(RedfishResource):
     status: Status | None = None
 
 
-class NicPartitioning(RedfishResource):
+class NicPartitioning(RedfishModel):
     npar_capable: str | None = None
     npar_enabled: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetSettingsToDefault(RedfishResource):
+class ResetSettingsToDefault(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Sriov(RedfishResource):
+class Sriov(RedfishModel):
     sriovvepacapable: str | None = None
 
 
-class VirtualFunction(RedfishResource):
+class VirtualFunction(RedfishModel):
     device_max_count: str | None = None
     min_assignment_group_size: str | None = None
     network_port_max_count: str | None = None
 
 
-class VirtualizationOffload(RedfishResource):
+class VirtualizationOffload(RedfishModel):
     sriov: Sriov | None = None
     virtual_function: VirtualFunction | None = None

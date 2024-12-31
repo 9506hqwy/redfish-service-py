@@ -2,19 +2,22 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Ethernet(RedfishResource):
+class Ethernet(RedfishModel):
     num_offloaded_ipv4_conns: str | None = None
     num_offloaded_ipv6_conns: str | None = None
 
 
-class FibreChannel(RedfishResource):
+class FibreChannel(RedfishModel):
     port_login_accepts: str | None = None
     port_login_rejects: str | None = None
     port_login_requests: str | None = None
@@ -54,10 +57,10 @@ class NetworkDeviceFunctionMetrics(RedfishResource):
     txunicast_frames: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None

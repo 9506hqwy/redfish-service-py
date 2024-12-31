@@ -2,12 +2,14 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 from .resolution_step import ResolutionStep
 from .resource import Health
 
 
-class Message(RedfishResource):
+class Message(RedfishModel):
     message: str | None = None
     message_args: list[str] | None = None
     message_id: str

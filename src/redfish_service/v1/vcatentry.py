@@ -2,14 +2,17 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -21,6 +24,6 @@ class Vcatentry(RedfishResource):
     vcentries: list[VcatableEntry] | None = None
 
 
-class VcatableEntry(RedfishResource):
+class VcatableEntry(RedfishModel):
     threshold: str | None = None
     vcmask: str | None = None

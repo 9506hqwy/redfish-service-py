@@ -2,10 +2,13 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -18,7 +21,7 @@ class KeyPolicy(RedfishResource):
     oem: dict[str, Any] | None = None
 
 
-class NvmeoF(RedfishResource):
+class NvmeoF(RedfishModel):
     cipher_suite_allow_list: list[str] | None = None
     dhgroup_allow_list: list[str] | None = None
     oemsecurity_protocol_allow_list: list[str] | None = None
@@ -27,5 +30,5 @@ class NvmeoF(RedfishResource):
     security_transport_allow_list: list[str] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

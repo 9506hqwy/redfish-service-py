@@ -3,13 +3,16 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 from ..resource import Status
 from ..swordfish.storage_replica_info import ReplicaInfo
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -21,7 +24,7 @@ class ApplicationConsistencyMethod(StrEnum):
     OTHER = "Other"
 
 
-class AssignReplicaTarget(RedfishResource):
+class AssignReplicaTarget(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -46,39 +49,39 @@ class ConsistencyType(StrEnum):
     APPLICATION_CONSISTENT = "ApplicationConsistent"
 
 
-class CreateReplicaTarget(RedfishResource):
+class CreateReplicaTarget(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class RemoveReplicaRelationship(RedfishResource):
+class RemoveReplicaRelationship(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResumeReplication(RedfishResource):
+class ResumeReplication(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ReverseReplicationRelationship(RedfishResource):
+class ReverseReplicationRelationship(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SplitReplication(RedfishResource):
+class SplitReplication(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SuspendReplication(RedfishResource):
+class SuspendReplication(RedfishModel):
     target: str | None = None
     title: str | None = None

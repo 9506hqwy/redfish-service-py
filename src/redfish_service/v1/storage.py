@@ -2,41 +2,45 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishObjectId,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
 from .resource import Identifier, Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class CacheSummary(RedfishResource):
+class CacheSummary(RedfishModel):
     persistent_cache_size_mi_b: str | None = None
     status: Status | None = None
     total_cache_size_mi_b: str
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     enclosures: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     simple_storage: IdRef | None = None
     storage_services: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Rates(RedfishResource):
+class Rates(RedfishModel):
     consistency_check_rate_percent: str | None = None
     rebuild_rate_percent: str | None = None
     transformation_rate_percent: str | None = None
 
 
-class SetEncryptionKey(RedfishResource):
+class SetEncryptionKey(RedfishModel):
     target: str | None = None
     title: str | None = None
 
@@ -60,7 +64,7 @@ class Storage(RedfishResource):
     volumes: IdRef | None = None
 
 
-class StorageController(RedfishResource):
+class StorageController(RedfishObjectId):
     actions: StorageControllerActions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -73,6 +77,7 @@ class StorageController(RedfishResource):
     manufacturer: str | None = None
     member_id: str
     model: str | None = None
+    name: str | None = None
     oem: dict[str, Any] | None = None
     pcie_interface: PcieInterface | None = None
     part_number: str | None = None
@@ -86,16 +91,16 @@ class StorageController(RedfishResource):
     supported_raidtypes: list[str] | None = None
 
 
-class StorageControllerActions(RedfishResource):
+class StorageControllerActions(RedfishModel):
     oem: StorageControllerOemActions | None = None
 
 
-class StorageControllerLinks(RedfishResource):
+class StorageControllerLinks(RedfishModel):
     endpoints: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = None
     storage_services: list[IdRef] | None = None
 
 
-class StorageControllerOemActions(RedfishResource):
+class StorageControllerOemActions(RedfishModel):
     pass

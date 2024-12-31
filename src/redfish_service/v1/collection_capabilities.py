@@ -3,22 +3,24 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+)
 from .odata_v4 import IdRef
 
 
-class Capability(RedfishResource):
+class Capability(RedfishModel):
     capabilities_object: IdRef
     links: Links
     use_case: UseCase
 
 
-class CollectionCapabilities(RedfishResource):
+class CollectionCapabilities(RedfishModel):
     capabilities: list[Capability] | None = None
     max_members: int | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
     target_collection: IdRef

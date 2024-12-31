@@ -2,12 +2,15 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Identifier, Location, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -48,7 +51,7 @@ class Drive(RedfishResource):
     write_cache_enabled: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: IdRef | None = None
     endpoints: list[IdRef] | None = None
     oem: dict[str, Any] | None = None
@@ -57,21 +60,21 @@ class Links(RedfishResource):
     volumes: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class Operations(RedfishResource):
+class Operations(RedfishModel):
     associated_task: IdRef | None = None
     operation_name: str | None = None
     percentage_complete: str | None = None
 
 
-class Reset(RedfishResource):
+class Reset(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SecureErase(RedfishResource):
+class SecureErase(RedfishModel):
     target: str | None = None
     title: str | None = None

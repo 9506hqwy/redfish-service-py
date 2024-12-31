@@ -3,22 +3,25 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 from .schedule import Schedule
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     triggers: list[IdRef] | None = None
 
 
-class Metric(RedfishResource):
+class Metric(RedfishModel):
     collection_duration: str | None = None
     collection_function: str | None = None
     collection_time_scope: str | None = None
@@ -48,7 +51,7 @@ class MetricReportDefinition(RedfishResource):
     wildcards: list[Wildcard] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -64,6 +67,7 @@ class ReportUpdatesEnum(StrEnum):
     NEW_REPORT = "NewReport"
 
 
-class Wildcard(RedfishResource):
+class Wildcard(RedfishModel):
     keys: list[str] | None = None
+    name: str | None = None
     values: list[str] | None = None

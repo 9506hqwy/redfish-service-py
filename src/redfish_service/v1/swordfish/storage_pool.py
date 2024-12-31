@@ -3,23 +3,26 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from ..base import RedfishResource
+from ..base import (
+    RedfishModel,
+    RedfishResource,
+)
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
 from ..swordfish.iostatistics import Iostatistics
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AddDrives(RedfishResource):
+class AddDrives(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     dedicated_spare_drives: list[IdRef] | None = None
     default_class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
@@ -32,7 +35,7 @@ class NvmePoolType(StrEnum):
     NVMSET = "NVMSet"
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -43,22 +46,22 @@ class PoolType(StrEnum):
     POOL = "Pool"
 
 
-class RemoveDrives(RedfishResource):
+class RemoveDrives(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SetCompressionState(RedfishResource):
+class SetCompressionState(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SetDeduplicationState(RedfishResource):
+class SetDeduplicationState(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class SetEncryptionState(RedfishResource):
+class SetEncryptionState(RedfishModel):
     target: str | None = None
     title: str | None = None
 

@@ -2,21 +2,24 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Identifier, Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class AddEndpoint(RedfishResource):
+class AddEndpoint(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     address_pools: list[IdRef] | None = None
     contained_by_zones: list[IdRef] | None = None
     contains_zones: list[IdRef] | None = None
@@ -26,11 +29,11 @@ class Links(RedfishResource):
     resource_blocks: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class RemoveEndpoint(RedfishResource):
+class RemoveEndpoint(RedfishModel):
     target: str | None = None
     title: str | None = None
 

@@ -3,16 +3,19 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 from .resource import Status
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
-class CompositionStatus(RedfishResource):
+class CompositionStatus(RedfishModel):
     composition_state: str
     max_compositions: str | None = None
     number_of_compositions: str | None = None
@@ -21,7 +24,7 @@ class CompositionStatus(RedfishResource):
     sharing_enabled: str | None = None
 
 
-class Links(RedfishResource):
+class Links(RedfishModel):
     chassis: list[IdRef] | None = None
     computer_systems: list[IdRef] | None = None
     consuming_resource_blocks: list[IdRef] | None = None
@@ -30,7 +33,7 @@ class Links(RedfishResource):
     zones: list[IdRef] | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
@@ -54,7 +57,7 @@ class ResourceBlock(RedfishResource):
     storage: list[IdRef] | None = None
 
 
-class ResourceBlockLimits(RedfishResource):
+class ResourceBlockLimits(RedfishModel):
     max_compute: str | None = None
     max_computer_system: str | None = None
     max_expansion: str | None = None

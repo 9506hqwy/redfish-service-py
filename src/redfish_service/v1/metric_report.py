@@ -2,11 +2,14 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .odata_v4 import IdRef
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -21,7 +24,7 @@ class MetricReport(RedfishResource):
     timestamp: str | None = None
 
 
-class MetricValue(RedfishResource):
+class MetricValue(RedfishModel):
     metric_definition: IdRef | None = None
     metric_id: str | None = None
     metric_property: str | None = None
@@ -30,5 +33,5 @@ class MetricValue(RedfishResource):
     timestamp: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass

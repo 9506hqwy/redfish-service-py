@@ -2,11 +2,14 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import RedfishResource
+from .base import (
+    RedfishModel,
+    RedfishResource,
+)
 from .sensor import SensorFanArrayExcerpt
 
 
-class Actions(RedfishResource):
+class Actions(RedfishModel):
     oem: OemActions | None = None
 
 
@@ -26,15 +29,15 @@ class EnvironmentMetrics(RedfishResource):
     temperature_celsius: str | None = None
 
 
-class OemActions(RedfishResource):
+class OemActions(RedfishModel):
     pass
 
 
-class ResetMetrics(RedfishResource):
+class ResetMetrics(RedfishModel):
     target: str | None = None
     title: str | None = None
 
 
-class ResetToDefaults(RedfishResource):
+class ResetToDefaults(RedfishModel):
     target: str | None = None
     title: str | None = None
