@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,14 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    force_failover: ForceFailover | None = Field(alias="#Manager.ForceFailover", default=None)
+    modify_redundancy_set: ModifyRedundancySet | None = Field(
+        alias="#Manager.ModifyRedundancySet", default=None
+    )
+    reset: Reset | None = Field(alias="#Manager.Reset", default=None)
+    reset_to_defaults: ResetToDefaults | None = Field(
+        alias="#Manager.ResetToDefaults", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -29,8 +39,8 @@ class CommandShell(RedfishModel):
 
 
 class ForceFailover(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class GraphicalConnectTypesSupported(StrEnum):
@@ -47,18 +57,34 @@ class GraphicalConsole(RedfishModel):
 class Links(RedfishModel):
     active_software_image: IdRef | None = None
     managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     manager_for_chassis: list[IdRef] | None = None
+    manager_for_chassis_odata_count: int | None = Field(
+        alias="ManagerForChassis@odata.count", default=None
+    )
     manager_for_managers: list[IdRef] | None = None
+    manager_for_managers_odata_count: int | None = Field(
+        alias="ManagerForManagers@odata.count", default=None
+    )
     manager_for_servers: list[IdRef] | None = None
+    manager_for_servers_odata_count: int | None = Field(
+        alias="ManagerForServers@odata.count", default=None
+    )
     manager_for_switches: list[IdRef] | None = None
+    manager_for_switches_odata_count: int | None = Field(
+        alias="ManagerForSwitches@odata.count", default=None
+    )
     manager_in_chassis: IdRef | None = None
     oem: dict[str, Any] | None = None
     software_images: list[IdRef] | None = None
+    software_images_odata_count: int | None = Field(
+        alias="SoftwareImages@odata.count", default=None
+    )
 
 
 class Manager(RedfishResource):
     actions: Actions | None = None
-    auto_dstenabled: bool | None = None
+    auto_dstenabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
     command_shell: CommandShell | None = None
     date_time: str | None = None
     date_time_local_offset: str | None = None
@@ -78,14 +104,15 @@ class Manager(RedfishResource):
     part_number: str | None = None
     power_state: str | None = None
     redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     remote_account_service: IdRef | None = None
     remote_redfish_service_uri: str | None = None
     serial_console: SerialConsole | None = None
     serial_interfaces: IdRef | None = None
     serial_number: str | None = None
-    service_entry_point_uuid: str | None = None
+    service_entry_point_uuid: str | None = Field(alias="ServiceEntryPointUUID", default=None)
     status: Status | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
     virtual_media: IdRef | None = None
 
 
@@ -99,18 +126,18 @@ class ManagerType(StrEnum):
 
 
 class ModifyRedundancySet(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SerialConnectTypesSupported(StrEnum):

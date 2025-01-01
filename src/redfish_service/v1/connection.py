@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -28,17 +30,29 @@ class Connection(RedfishResource):
 
 
 class ConnectionKey(RedfishModel):
-    chap: str | None = None
-    dhchap: str | None = None
+    chap: str | None = Field(alias="CHAP", default=None)
+    dhchap: str | None = Field(alias="DHCHAP", default=None)
     gen_z: str | None = None
 
 
 class Links(RedfishModel):
     initiator_endpoint_groups: list[IdRef] | None = None
+    initiator_endpoint_groups_odata_count: int | None = Field(
+        alias="InitiatorEndpointGroups@odata.count", default=None
+    )
     initiator_endpoints: list[IdRef] | None = None
+    initiator_endpoints_odata_count: int | None = Field(
+        alias="InitiatorEndpoints@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     target_endpoint_groups: list[IdRef] | None = None
+    target_endpoint_groups_odata_count: int | None = Field(
+        alias="TargetEndpointGroups@odata.count", default=None
+    )
     target_endpoints: list[IdRef] | None = None
+    target_endpoints_odata_count: int | None = Field(
+        alias="TargetEndpoints@odata.count", default=None
+    )
 
 
 class MemoryChunkInfo(RedfishModel):

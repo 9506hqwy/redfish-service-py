@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -23,6 +25,9 @@ class DataStorageLoScapabilities(RedfishResource):
     oem: dict[str, Any] | None = None
     supported_access_capabilities: list[str] | None = None
     supported_lines_of_service: list[IdRef] | None = None
+    supported_lines_of_service_odata_count: int | None = Field(
+        alias="SupportedLinesOfService@odata.count", default=None
+    )
     supported_provisioning_policies: list[str] | None = None
     supported_recovery_time_objectives: list[str] | None = None
     supports_space_efficiency: str | None = None

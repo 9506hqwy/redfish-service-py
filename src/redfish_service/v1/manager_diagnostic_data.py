@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -9,6 +11,9 @@ from .base import (
 
 
 class Actions(RedfishModel):
+    reset_metrics: ResetMetrics | None = Field(
+        alias="#ManagerDiagnosticData.ResetMetrics", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -22,8 +27,8 @@ class BootTimeStatistics(RedfishModel):
 
 class I2CbusStatistics(RedfishModel):
     bus_error_count: str | None = None
-    i2_cbus_name: str | None = None
-    nackcount: str | None = None
+    i2_cbus_name: str | None = Field(alias="I2CBusName", default=None)
+    nackcount: str | None = Field(alias="NACKCount", default=None)
     total_transaction_count: str | None = None
 
 
@@ -32,8 +37,10 @@ class ManagerDiagnosticData(RedfishResource):
     boot_time_statistics: BootTimeStatistics | None = None
     description: str | None = None
     free_storage_space_ki_b: str | None = None
-    i2_cbuses: list[I2CbusStatistics] | None = None
-    memory_eccstatistics: MemoryEccstatistics | None = None
+    i2_cbuses: list[I2CbusStatistics] | None = Field(alias="I2CBuses", default=None)
+    memory_eccstatistics: MemoryEccstatistics | None = Field(
+        alias="MemoryECCStatistics", default=None
+    )
     memory_statistics: MemoryStatistics | None = None
     oem: dict[str, Any] | None = None
     processor_statistics: ProcessorStatistics | None = None
@@ -42,8 +49,10 @@ class ManagerDiagnosticData(RedfishResource):
 
 
 class MemoryEccstatistics(RedfishModel):
-    correctable_eccerror_count: str | None = None
-    uncorrectable_eccerror_count: str | None = None
+    correctable_eccerror_count: str | None = Field(alias="CorrectableECCErrorCount", default=None)
+    uncorrectable_eccerror_count: str | None = Field(
+        alias="UncorrectableECCErrorCount", default=None
+    )
 
 
 class MemoryStatistics(RedfishModel):
@@ -61,5 +70,5 @@ class ProcessorStatistics(RedfishModel):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -16,17 +18,27 @@ class Actions(RedfishModel):
 
 class Links(RedfishModel):
     associated_domains: list[IdRef] | None = None
+    associated_domains_odata_count: int | None = Field(
+        alias="AssociatedDomains@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class NvmeDomain(RedfishResource):
-    anagroup_id: str | None = None
+    anagroup_id: str | None = Field(alias="ANAGroupId", default=None)
     actions: Actions | None = None
     available_firmware_images: list[IdRef] | None = None
+    available_firmware_images_odata_count: int | None = Field(
+        alias="AvailableFirmwareImages@odata.count", default=None
+    )
     description: str | None = None
     domain_contents: str | None = None
     domain_members: list[IdRef] | None = None
+    domain_members_odata_count: int | None = Field(alias="DomainMembers@odata.count", default=None)
     firmware_images: list[IdRef] | None = None
+    firmware_images_odata_count: int | None = Field(
+        alias="FirmwareImages@odata.count", default=None
+    )
     links: Links | None = None
     max_namespaces_supported_per_controller: str | None = None
     maximum_capacity_per_endurance_group_bytes: str | None = None

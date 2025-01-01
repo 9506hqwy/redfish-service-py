@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -25,4 +27,7 @@ class ConnectionMethod(RedfishResource):
 
 class Links(RedfishModel):
     aggregation_sources: list[IdRef] | None = None
+    aggregation_sources_odata_count: int | None = Field(
+        alias="AggregationSources@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

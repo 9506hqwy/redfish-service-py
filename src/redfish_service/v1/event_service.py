@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,9 @@ from .values import EventType
 
 
 class Actions(RedfishModel):
+    submit_test_event: SubmitTestEvent | None = Field(
+        alias="#EventService.SubmitTestEvent", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -28,8 +33,10 @@ class EventService(RedfishResource):
     oem: dict[str, Any] | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
-    smtp: Smtp | None = None
-    ssefilter_properties_supported: SsefilterPropertiesSupported | None = None
+    smtp: Smtp | None = Field(alias="SMTP", default=None)
+    ssefilter_properties_supported: SsefilterPropertiesSupported | None = Field(
+        alias="SSEFilterPropertiesSupported", default=None
+    )
     server_sent_event_uri: str | None = None
     service_enabled: str | None = None
     severities: list[str] | None = None
@@ -62,5 +69,5 @@ class SsefilterPropertiesSupported(RedfishModel):
 
 
 class SubmitTestEvent(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

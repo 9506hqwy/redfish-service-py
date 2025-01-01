@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -15,27 +17,56 @@ from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Actions(RedfishModel):
+    assign_replica_target: AssignReplicaTarget | None = Field(
+        alias="#Volume.AssignReplicaTarget", default=None
+    )
+    change_raidlayout: ChangeRaidlayout | None = Field(
+        alias="#Volume.ChangeRAIDLayout", default=None
+    )
+    check_consistency: CheckConsistency | None = Field(
+        alias="#Volume.CheckConsistency", default=None
+    )
+    create_replica_target: CreateReplicaTarget | None = Field(
+        alias="#Volume.CreateReplicaTarget", default=None
+    )
+    force_enable: ForceEnable | None = Field(alias="#Volume.ForceEnable", default=None)
+    initialize: Initialize | None = Field(alias="#Volume.Initialize", default=None)
+    remove_replica_relationship: RemoveReplicaRelationship | None = Field(
+        alias="#Volume.RemoveReplicaRelationship", default=None
+    )
+    resume_replication: ResumeReplication | None = Field(
+        alias="#Volume.ResumeReplication", default=None
+    )
+    reverse_replication_relationship: ReverseReplicationRelationship | None = Field(
+        alias="#Volume.ReverseReplicationRelationship", default=None
+    )
+    split_replication: SplitReplication | None = Field(
+        alias="#Volume.SplitReplication", default=None
+    )
+    suspend_replication: SuspendReplication | None = Field(
+        alias="#Volume.SuspendReplication", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class AssignReplicaTarget(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ChangeRaidlayout(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class CheckConsistency(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class CreateReplicaTarget(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class EncryptionTypes(StrEnum):
@@ -45,13 +76,13 @@ class EncryptionTypes(StrEnum):
 
 
 class ForceEnable(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Initialize(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class InitializeMethod(StrEnum):
@@ -93,20 +124,41 @@ class LbarelativePerformanceType(StrEnum):
 
 class Links(RedfishModel):
     cache_data_volumes: list[IdRef] | None = None
+    cache_data_volumes_odata_count: int | None = Field(
+        alias="CacheDataVolumes@odata.count", default=None
+    )
     cache_volume_source: str | None = None
     class_of_service: IdRef | None = None
     client_endpoints: list[IdRef] | None = None
+    client_endpoints_odata_count: int | None = Field(
+        alias="ClientEndpoints@odata.count", default=None
+    )
     consistency_groups: list[IdRef] | None = None
+    consistency_groups_odata_count: int | None = Field(
+        alias="ConsistencyGroups@odata.count", default=None
+    )
     controllers: list[IdRef] | None = None
+    controllers_odata_count: int | None = Field(alias="Controllers@odata.count", default=None)
     dedicated_spare_drives: list[IdRef] | None = None
+    dedicated_spare_drives_odata_count: int | None = Field(
+        alias="DedicatedSpareDrives@odata.count", default=None
+    )
     drives: list[IdRef] | None = None
+    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
     journaling_media: str | None = None
     oem: dict[str, Any] | None = None
     owning_storage_resource: IdRef | None = None
     owning_storage_service: IdRef | None = None
     server_endpoints: list[IdRef] | None = None
+    server_endpoints_odata_count: int | None = Field(
+        alias="ServerEndpoints@odata.count", default=None
+    )
     spare_resource_sets: list[IdRef] | None = None
+    spare_resource_sets_odata_count: int | None = Field(
+        alias="SpareResourceSets@odata.count", default=None
+    )
     storage_groups: list[IdRef] | None = None
+    storage_groups_odata_count: int | None = Field(alias="StorageGroups@odata.count", default=None)
 
 
 class NamespaceType(StrEnum):
@@ -167,28 +219,28 @@ class ReadCachePolicyType(StrEnum):
 
 
 class RemoveReplicaRelationship(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ResumeReplication(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ReverseReplicationRelationship(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SplitReplication(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SuspendReplication(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Volume(RedfishResource):
@@ -199,15 +251,19 @@ class Volume(RedfishResource):
     capacity: Capacity | None = None
     capacity_bytes: str | None = None
     capacity_sources: list[IdRef] | None = None
+    capacity_sources_odata_count: int | None = Field(
+        alias="CapacitySources@odata.count", default=None
+    )
     compressed: str | None = None
     connections: list[IdRef] | None = None
+    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
     deduplicated: str | None = None
     description: str | None = None
     display_name: str | None = None
     encrypted: str | None = None
     encryption_types: list[EncryptionTypes] | None = None
-    ioperf_mode_enabled: str | None = None
-    iostatistics: Iostatistics | None = None
+    ioperf_mode_enabled: str | None = Field(alias="IOPerfModeEnabled", default=None)
+    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
     identifiers: list[Identifier] | None = None
     initialize_method: str | None = None
     is_boot_capable: str | None = None
@@ -219,18 +275,21 @@ class Volume(RedfishResource):
     media_span_count: str | None = None
     metrics: IdRef | None = None
     model: str | None = None
-    nvme_namespace_properties: str | None = None
+    nvme_namespace_properties: str | None = Field(alias="NVMeNamespaceProperties", default=None)
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None
-    optimum_iosize_bytes: str | None = None
+    optimum_iosize_bytes: str | None = Field(alias="OptimumIOSizeBytes", default=None)
     provisioning_policy: str | None = None
-    raidtype: str | None = None
+    raidtype: str | None = Field(alias="RAIDType", default=None)
     read_cache_policy: str | None = None
     recoverable_capacity_source_count: str | None = None
     remaining_capacity_percent: str | None = None
     remote_replica_targets: list[str] | None = None
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
+    replica_targets_odata_count: int | None = Field(
+        alias="ReplicaTargets@odata.count", default=None
+    )
     replication_enabled: str | None = None
     status: Status | None = None
     storage_groups: IdRef | None = None

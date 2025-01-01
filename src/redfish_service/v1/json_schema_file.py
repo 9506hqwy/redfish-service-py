@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -18,6 +20,7 @@ class JsonSchemaFile(RedfishResource):
     languages: list[str]
     location: list[Location]
     oem: dict[str, Any] | None = None
+    schema_value: str = Field(alias="Schema")
 
 
 class Location(RedfishModel):

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -22,4 +24,5 @@ class BootOption(RedfishResource):
     display_name: str | None = None
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     uefi_device_path: str | None = None

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -11,6 +13,8 @@ from .resource import Identifier, Location, Status
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#Drive.Reset", default=None)
+    secure_erase: SecureErase | None = Field(alias="#Drive.SecureErase", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -28,7 +32,7 @@ class Drive(RedfishResource):
     hotspare_replacement_mode: str | None = None
     hotspare_type: str | None = None
     identifiers: list[Identifier] | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: list[Location] | None = None
     manufacturer: str | None = None
@@ -43,8 +47,8 @@ class Drive(RedfishResource):
     predicted_media_life_left_percent: str | None = None
     protocol: str | None = None
     revision: str | None = None
-    rotation_speed_rpm: str | None = None
-    sku: str | None = None
+    rotation_speed_rpm: str | None = Field(alias="RotationSpeedRPM", default=None)
+    sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
     status_indicator: str | None = None
@@ -54,10 +58,14 @@ class Drive(RedfishResource):
 class Links(RedfishModel):
     chassis: IdRef | None = None
     endpoints: list[IdRef] | None = None
+    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = None
+    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
     storage_pools: list[IdRef] | None = None
+    storage_pools_odata_count: int | None = Field(alias="StoragePools@odata.count", default=None)
     volumes: list[IdRef] | None = None
+    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
 
 
 class Operations(RedfishModel):
@@ -67,10 +75,10 @@ class Operations(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SecureErase(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

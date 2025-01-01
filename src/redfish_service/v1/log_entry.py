@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -23,7 +25,7 @@ class Links(RedfishModel):
 class LogEntry(RedfishResource):
     actions: Actions | None = None
     additional_data_size_bytes: str | None = None
-    additional_data_uri: str | None = None
+    additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
     created: str | None = None
     description: str | None = None
     diagnostic_data_type: str | None = None
@@ -39,7 +41,7 @@ class LogEntry(RedfishResource):
     message_args: list[str] | None = None
     message_id: str | None = None
     modified: str | None = None
-    oemdiagnostic_data_type: str | None = None
+    oemdiagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
     oem: dict[str, Any] | None = None
     oem_log_entry_code: str | None = None
     oem_record_format: str | None = None

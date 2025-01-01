@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,8 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    simple_update: SimpleUpdate | None = Field(alias="#UpdateService.SimpleUpdate", default=None)
+    start_update: StartUpdate | None = Field(alias="#UpdateService.StartUpdate", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -33,13 +37,13 @@ class HttpPushUriOptions(RedfishModel):
 
 
 class SimpleUpdate(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class StartUpdate(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class UpdateParameters(RedfishModel):

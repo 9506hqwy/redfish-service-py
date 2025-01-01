@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -25,7 +27,7 @@ class LeakDetector(RedfishResource):
     part_number: str | None = None
     physical_context: str | None = None
     physical_sub_context: str | None = None
-    sku: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
     sensing_frequency: str | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None

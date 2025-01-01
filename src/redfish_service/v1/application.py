@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -11,15 +13,16 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#Application.Reset", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Application(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    destination_uris: list[str] | None = None
+    destination_uris: list[str] | None = Field(alias="DestinationURIs", default=None)
     links: Links | None = None
-    metrics_uris: list[str] | None = None
+    metrics_uris: list[str] | None = Field(alias="MetricsURIs", default=None)
     oem: dict[str, Any] | None = None
     start_time: str | None = None
     status: Status | None = None
@@ -33,5 +36,5 @@ class Links(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

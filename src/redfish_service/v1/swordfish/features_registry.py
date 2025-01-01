@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -18,6 +20,7 @@ class FeatureMap(RedfishModel):
     description: str
     feature_name: str
     resources: list[IdRef] | None = None
+    resources_odata_count: int | None = Field(alias="Resources@odata.count", default=None)
     version: str
 
 
@@ -28,7 +31,7 @@ class FeaturesRegistry(RedfishResource):
     features: list[SupportedFeature] | None = None
     features_used: list[str]
     language: str
-    oemfeatures_used: list[str] | None = None
+    oemfeatures_used: list[str] | None = Field(alias="OEMFeaturesUsed", default=None)
     oem: dict[str, Any] | None = None
     owning_entity: str
     registry_prefix: str

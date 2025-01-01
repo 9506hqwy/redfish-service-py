@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,12 +14,22 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    add_resource_block: AddResourceBlock | None = Field(
+        alias="#ComputerSystem.AddResourceBlock", default=None
+    )
+    remove_resource_block: RemoveResourceBlock | None = Field(
+        alias="#ComputerSystem.RemoveResourceBlock", default=None
+    )
+    reset: Reset | None = Field(alias="#ComputerSystem.Reset", default=None)
+    set_default_boot_order: SetDefaultBootOrder | None = Field(
+        alias="#ComputerSystem.SetDefaultBootOrder", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class AddResourceBlock(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Boot(RedfishModel):
@@ -65,7 +77,7 @@ class ComputerSystem(RedfishResource):
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
     hosting_roles: list[HostingRole] | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     log_services: IdRef | None = None
     manufacturer: str | None = None
@@ -75,15 +87,18 @@ class ComputerSystem(RedfishResource):
     model: str | None = None
     network_interfaces: IdRef | None = None
     oem: dict[str, Any] | None = None
-    pcie_devices: list[IdRef] | None = None
-    pcie_functions: list[IdRef] | None = None
+    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
+    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
     part_number: str | None = None
     power_restore_policy: PowerRestorePolicyTypes | None = None
     power_state: str | None = None
     processor_summary: ProcessorSummary | None = None
     processors: IdRef | None = None
     redundancy: list[IdRef] | None = None
-    sku: str | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    sku: str | None = Field(alias="SKU", default=None)
     secure_boot: IdRef | None = None
     serial_number: str | None = None
     simple_storage: IdRef | None = None
@@ -92,7 +107,7 @@ class ComputerSystem(RedfishResource):
     sub_model: str | None = None
     system_type: SystemType | None = None
     trusted_modules: list[TrustedModules] | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
 
 
 class HostedServices(RedfishModel):
@@ -108,14 +123,28 @@ class HostingRole(StrEnum):
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
+    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
     consuming_computer_systems: list[IdRef] | None = None
+    consuming_computer_systems_odata_count: int | None = Field(
+        alias="ConsumingComputerSystems@odata.count", default=None
+    )
     cooled_by: list[IdRef] | None = None
+    cooled_by_odata_count: int | None = Field(alias="CooledBy@odata.count", default=None)
     endpoints: list[IdRef] | None = None
+    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
     managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     oem: dict[str, Any] | None = None
     powered_by: list[IdRef] | None = None
+    powered_by_odata_count: int | None = Field(alias="PoweredBy@odata.count", default=None)
     resource_blocks: list[IdRef] | None = None
+    resource_blocks_odata_count: int | None = Field(
+        alias="ResourceBlocks@odata.count", default=None
+    )
     supplying_computer_systems: list[IdRef] | None = None
+    supplying_computer_systems_odata_count: int | None = Field(
+        alias="SupplyingComputerSystems@odata.count", default=None
+    )
 
 
 class MemorySummary(RedfishModel):
@@ -141,18 +170,18 @@ class ProcessorSummary(RedfishModel):
 
 
 class RemoveResourceBlock(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SetDefaultBootOrder(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SystemType(StrEnum):

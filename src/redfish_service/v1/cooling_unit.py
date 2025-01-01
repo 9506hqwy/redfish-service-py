@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -57,6 +59,8 @@ class CoolingUnit(RedfishResource):
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
+    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     oem: dict[str, Any] | None = None

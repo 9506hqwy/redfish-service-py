@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
 )
@@ -23,6 +25,7 @@ class CollectionCapabilities(RedfishModel):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     target_collection: IdRef
 
 

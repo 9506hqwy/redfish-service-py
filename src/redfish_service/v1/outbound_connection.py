@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -26,10 +28,12 @@ class OutboundConnection(RedfishResource):
     client_certificates: IdRef | None = None
     connection_enabled: str | None = None
     description: str | None = None
-    endpoint_uri: str | None = None
+    endpoint_uri: str | None = Field(alias="EndpointURI", default=None)
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    pre_upgrade_httpheaders: dict[str, Any] | None = None
+    pre_upgrade_httpheaders: dict[str, Any] | None = Field(
+        alias="PreUpgradeHTTPHeaders", default=None
+    )
     retry_policy: RetryPolicyType | None = None
     roles: list[str] | None = None
     status: Status | None = None

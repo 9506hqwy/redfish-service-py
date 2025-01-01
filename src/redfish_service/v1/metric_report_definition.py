@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -19,6 +21,7 @@ class Actions(RedfishModel):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     triggers: list[IdRef] | None = None
+    triggers_odata_count: int | None = Field(alias="Triggers@odata.count", default=None)
 
 
 class Metric(RedfishModel):

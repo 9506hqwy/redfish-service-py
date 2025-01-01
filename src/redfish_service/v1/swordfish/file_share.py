@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -16,7 +18,7 @@ class Actions(RedfishModel):
 
 class FileShare(RedfishResource):
     actions: Actions | None = None
-    casupported: str | None = None
+    casupported: str | None = Field(alias="CASupported", default=None)
     default_access_capabilities: list[str] | None = None
     description: str | None = None
     ethernet_interfaces: IdRef | None = None

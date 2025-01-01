@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -22,6 +24,9 @@ class DataProtectionLoScapabilities(RedfishResource):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     supported_lines_of_service: list[IdRef] | None = None
+    supported_lines_of_service_odata_count: int | None = Field(
+        alias="SupportedLinesOfService@odata.count", default=None
+    )
     supported_min_lifetimes: list[str] | None = None
     supported_recovery_geographic_objectives: list[str] | None = None
     supported_recovery_point_objective_times: list[str] | None = None
@@ -42,6 +47,9 @@ class FailureDomainScope(StrEnum):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     supported_replica_options: list[IdRef] | None = None
+    supported_replica_options_odata_count: int | None = Field(
+        alias="SupportedReplicaOptions@odata.count", default=None
+    )
 
 
 class RecoveryAccessScope(StrEnum):

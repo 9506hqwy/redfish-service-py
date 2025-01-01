@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -15,7 +17,7 @@ class Actions(RedfishModel):
 
 
 class SpdmalgorithmSet(RedfishModel):
-    aead: list[str] | None = None
+    aead: list[str] | None = Field(alias="AEAD", default=None)
     base_asym: list[str] | None = None
     base_hash: list[str] | None = None
 
@@ -41,9 +43,9 @@ class SecurityPolicy(RedfishResource):
     description: str | None = None
     oem: dict[str, Any] | None = None
     override_parent_manager: bool | None = None
-    spdm: Spdmpolicy | None = None
+    spdm: Spdmpolicy | None = Field(alias="SPDM", default=None)
     status: Status | None = None
-    tls: Tlscommunication | None = None
+    tls: Tlscommunication | None = Field(alias="TLS", default=None)
 
 
 class TlsalgorithmSet(RedfishModel):

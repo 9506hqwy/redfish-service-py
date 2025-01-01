@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -10,6 +12,7 @@ from .sensor import SensorArrayExcerpt
 
 
 class Actions(RedfishModel):
+    reset_metrics: ResetMetrics | None = Field(alias="#ThermalMetrics.ResetMetrics", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -19,8 +22,8 @@ class HeaterSummary(RedfishModel):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class TemperatureSummary(RedfishModel):
@@ -40,4 +43,7 @@ class ThermalMetrics(RedfishResource):
     oem: dict[str, Any] | None = None
     power_watts: str | None = None
     temperature_readings_celsius: list[SensorArrayExcerpt] | None = None
+    temperature_readings_celsius_odata_count: int | None = Field(
+        alias="TemperatureReadingsCelsius@odata.count", default=None
+    )
     temperature_summary_celsius: TemperatureSummary | None = None

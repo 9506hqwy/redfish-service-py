@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -23,8 +25,10 @@ class DeviceType(StrEnum):
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
+    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = None
+    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
 
 
 class PcieDevice(RedfishResource):
@@ -39,24 +43,24 @@ class PcieDevice(RedfishResource):
     manufacturer: str | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
-    pcie_functions: IdRef | None = None
-    pcie_interface: PcieInterface | None = None
+    pcie_functions: IdRef | None = Field(alias="PCIeFunctions", default=None)
+    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
     part_number: str | None = None
     ready_to_remove: str | None = None
-    sku: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     slot: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
 
 
 class PcieErrors(RedfishModel):
     correctable_error_count: str | None = None
     fatal_error_count: str | None = None
     l0_to_recovery_count: str | None = None
-    nakreceived_count: str | None = None
-    naksent_count: str | None = None
+    nakreceived_count: str | None = Field(alias="NAKReceivedCount", default=None)
+    naksent_count: str | None = Field(alias="NAKSentCount", default=None)
     non_fatal_error_count: str | None = None
     replay_count: str | None = None
     replay_rollover_count: str | None = None
@@ -65,9 +69,9 @@ class PcieErrors(RedfishModel):
 class PcieInterface(RedfishModel):
     lanes_in_use: str | None = None
     max_lanes: str | None = None
-    max_pcie_type: str | None = None
+    max_pcie_type: str | None = Field(alias="MaxPCIeType", default=None)
     oem: dict[str, Any] | None = None
-    pcie_type: str | None = None
+    pcie_type: str | None = Field(alias="PCIeType", default=None)
 
 
 class PcieTypes(StrEnum):

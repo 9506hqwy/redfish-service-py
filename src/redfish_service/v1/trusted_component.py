@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,27 +14,41 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    tpmget_event_log: TpmgetEventLog | None = Field(
+        alias="#TrustedComponent.TPMGetEventLog", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     active_software_image: IdRef | None = None
     component_integrity: list[IdRef] | None = None
+    component_integrity_odata_count: int | None = Field(
+        alias="ComponentIntegrity@odata.count", default=None
+    )
     components_protected: list[IdRef] | None = None
+    components_protected_odata_count: int | None = Field(
+        alias="ComponentsProtected@odata.count", default=None
+    )
     integrated_into: IdRef | None = None
     oem: dict[str, Any] | None = None
     owner: str | None = None
     software_images: list[IdRef] | None = None
+    software_images_odata_count: int | None = Field(
+        alias="SoftwareImages@odata.count", default=None
+    )
 
 
 class Tpm(RedfishModel):
-    capabilities_vendor_id: str | None = None
-    hardware_interface_vendor_id: str | None = None
+    capabilities_vendor_id: str | None = Field(alias="CapabilitiesVendorID", default=None)
+    hardware_interface_vendor_id: str | None = Field(
+        alias="HardwareInterfaceVendorID", default=None
+    )
 
 
 class TpmgetEventLog(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class TrustedComponent(RedfishResource):
@@ -45,12 +61,12 @@ class TrustedComponent(RedfishResource):
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    sku: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
-    tpm: Tpm | None = None
+    tpm: Tpm | None = Field(alias="TPM", default=None)
     trusted_component_type: TrustedComponentType
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
 
 
 class TrustedComponentType(StrEnum):

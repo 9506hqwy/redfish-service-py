@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -42,12 +44,12 @@ class ManagerAccount(RedfishResource):
     keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
-    oemaccount_types: list[str] | None = None
+    oemaccount_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
     oem: dict[str, Any] | None = None
     password: str | None = None
     password_change_required: str | None = None
     password_expiration: str | None = None
     role_id: str | None = None
-    snmp: str | None = None
+    snmp: str | None = Field(alias="SNMP", default=None)
     strict_account_types: str | None = None
     user_name: str | None = None

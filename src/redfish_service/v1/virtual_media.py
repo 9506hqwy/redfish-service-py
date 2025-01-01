@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,17 +14,19 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    eject_media: EjectMedia | None = Field(alias="#VirtualMedia.EjectMedia", default=None)
+    insert_media: InsertMedia | None = Field(alias="#VirtualMedia.InsertMedia", default=None)
     oem: dict[str, Any] | None = None
 
 
 class EjectMedia(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class InsertMedia(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class MediaType(StrEnum):

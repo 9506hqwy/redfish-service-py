@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -13,13 +15,16 @@ from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
+    reset_settings_to_default: ResetSettingsToDefault | None = Field(
+        alias="#NetworkAdapter.ResetSettingsToDefault", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class ControllerCapabilities(RedfishModel):
     data_center_bridging: DataCenterBridging | None = None
-    npar: NicPartitioning | None = None
-    npiv: Npiv | None = None
+    npar: NicPartitioning | None = Field(alias="NPAR", default=None)
+    npiv: Npiv | None = Field(alias="NPIV", default=None)
     network_device_function_count: str | None = None
     network_port_count: str | None = None
     virtualization_offload: VirtualizationOffload | None = None
@@ -27,10 +32,16 @@ class ControllerCapabilities(RedfishModel):
 
 class ControllerLinks(RedfishModel):
     network_device_functions: list[IdRef] | None = None
+    network_device_functions_odata_count: int | None = Field(
+        alias="NetworkDeviceFunctions@odata.count", default=None
+    )
     network_ports: list[IdRef] | None = None
+    network_ports_odata_count: int | None = Field(alias="NetworkPorts@odata.count", default=None)
     oem: dict[str, Any] | None = None
-    pcie_devices: list[IdRef] | None = None
+    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
     ports: list[IdRef] | None = None
+    ports_odata_count: int | None = Field(alias="Ports@odata.count", default=None)
 
 
 class Controllers(RedfishModel):
@@ -39,7 +50,7 @@ class Controllers(RedfishModel):
     identifiers: list[Identifier] | None = None
     links: ControllerLinks | None = None
     location: Location | None = None
-    pcie_interface: PcieInterface | None = None
+    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
 
 
 class DataCenterBridging(RedfishModel):
@@ -59,7 +70,7 @@ class NetworkAdapter(RedfishResource):
     description: str | None = None
     environment_metrics: IdRef | None = None
     identifiers: list[Identifier] | None = None
-    lldpenabled: bool | None = None
+    lldpenabled: bool | None = Field(alias="LLDPEnabled", default=None)
     location: Location | None = None
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
@@ -71,7 +82,7 @@ class NetworkAdapter(RedfishResource):
     part_number: str | None = None
     ports: IdRef | None = None
     processors: IdRef | None = None
-    sku: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
 
@@ -82,12 +93,12 @@ class NicPartitioning(RedfishModel):
 
 
 class ResetSettingsToDefault(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Sriov(RedfishModel):
-    sriovvepacapable: str | None = None
+    sriovvepacapable: str | None = Field(alias="SRIOVVEPACapable", default=None)
 
 
 class VirtualFunction(RedfishModel):
@@ -97,5 +108,5 @@ class VirtualFunction(RedfishModel):
 
 
 class VirtualizationOffload(RedfishModel):
-    sriov: Sriov | None = None
+    sriov: Sriov | None = Field(alias="SRIOV", default=None)
     virtual_function: VirtualFunction | None = None

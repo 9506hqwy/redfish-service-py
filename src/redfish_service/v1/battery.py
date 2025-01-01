@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,9 @@ from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
+    calibrate: Calibrate | None = Field(alias="#Battery.Calibrate", default=None)
+    reset: Reset | None = Field(alias="#Battery.Reset", default=None)
+    self_test: SelfTest | None = Field(alias="#Battery.SelfTest", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -48,21 +53,25 @@ class Battery(RedfishResource):
 
 
 class Calibrate(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Links(RedfishModel):
     memory: list[IdRef] | None = None
+    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
     oem: dict[str, Any] | None = None
     storage_controllers: list[IdRef] | None = None
+    storage_controllers_odata_count: int | None = Field(
+        alias="StorageControllers@odata.count", default=None
+    )
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SelfTest(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

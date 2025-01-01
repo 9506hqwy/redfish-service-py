@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -20,7 +22,7 @@ class Links(RedfishModel):
 
 class Session(RedfishResource):
     actions: Actions | None = None
-    client_origin_ipaddress: str | None = None
+    client_origin_ipaddress: str | None = Field(alias="ClientOriginIPAddress", default=None)
     context: str | None = None
     created_time: str | None = None
     description: str | None = None

@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -21,7 +23,7 @@ class ClientType(StrEnum):
 class RegisteredClient(RedfishResource):
     actions: Actions | None = None
     client_type: ClientType
-    client_uri: str | None = None
+    client_uri: str | None = Field(alias="ClientURI", default=None)
     context: str | None = None
     created_date: str | None = None
     description: str | None = None

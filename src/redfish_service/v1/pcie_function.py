@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -47,15 +49,26 @@ class FunctionType(StrEnum):
 
 
 class Links(RedfishModel):
-    cxllogical_device: str | None = None
+    cxllogical_device: str | None = Field(alias="CXLLogicalDevice", default=None)
     drives: list[IdRef] | None = None
+    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
     ethernet_interfaces: list[IdRef] | None = None
+    ethernet_interfaces_odata_count: int | None = Field(
+        alias="EthernetInterfaces@odata.count", default=None
+    )
     memory_domains: list[IdRef] | None = None
+    memory_domains_odata_count: int | None = Field(alias="MemoryDomains@odata.count", default=None)
     network_device_functions: list[IdRef] | None = None
+    network_device_functions_odata_count: int | None = Field(
+        alias="NetworkDeviceFunctions@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
-    pcie_device: IdRef | None = None
+    pcie_device: IdRef | None = Field(alias="PCIeDevice", default=None)
     processor: str | None = None
     storage_controllers: list[IdRef] | None = None
+    storage_controllers_odata_count: int | None = Field(
+        alias="StorageControllers@odata.count", default=None
+    )
 
 
 class PcieFunction(RedfishResource):

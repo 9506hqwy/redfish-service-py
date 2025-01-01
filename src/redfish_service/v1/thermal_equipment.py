@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -17,7 +19,7 @@ class Actions(RedfishModel):
 
 class ThermalEquipment(RedfishResource):
     actions: Actions | None = None
-    cdus: IdRef | None = None
+    cdus: IdRef | None = Field(alias="CDUs", default=None)
     cooling_loop_redundancy: list[RedundantGroup] | None = None
     cooling_loops: IdRef | None = None
     description: str | None = None

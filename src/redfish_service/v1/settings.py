@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from enum import StrEnum
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
 )
@@ -44,7 +46,7 @@ class PreferredApplyTime(RedfishModel):
 
 
 class Settings(RedfishModel):
-    etag: str | None = None
+    etag: str | None = Field(alias="ETag", default=None)
     maintenance_window_resource: IdRef | None = None
     messages: list[Message] | None = None
     settings_object: IdRef | None = None

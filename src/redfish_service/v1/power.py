@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishObjectId,
@@ -13,6 +15,9 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    power_supply_reset: PowerSupplyReset | None = Field(
+        alias="#Power.PowerSupplyReset", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -31,9 +36,13 @@ class Power(RedfishResource):
     description: str | None = None
     oem: dict[str, Any] | None = None
     power_control: list[PowerControl] | None = None
+    power_control_odata_count: int | None = Field(alias="PowerControl@odata.count", default=None)
     power_supplies: list[PowerSupply] | None = None
+    power_supplies_odata_count: int | None = Field(alias="PowerSupplies@odata.count", default=None)
     redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     voltages: list[Voltage] | None = None
+    voltages_odata_count: int | None = Field(alias="Voltages@odata.count", default=None)
 
 
 class PowerControl(RedfishObjectId):
@@ -50,6 +59,7 @@ class PowerControl(RedfishObjectId):
     power_metrics: PowerMetric | None = None
     power_requested_watts: str | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     status: Status | None = None
 
 
@@ -76,7 +86,7 @@ class PowerSupply(RedfishObjectId):
     efficiency_percent: str | None = None
     firmware_version: str | None = None
     hot_pluggable: str | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     input_ranges: list[InputRange] | None = None
     last_power_output_watts: str | None = None
     line_input_voltage: str | None = None
@@ -93,7 +103,9 @@ class PowerSupply(RedfishObjectId):
     power_output_watts: str | None = None
     power_supply_type: str | None = None
     redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     serial_number: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
@@ -104,8 +116,8 @@ class PowerSupplyActions(RedfishModel):
 
 
 class PowerSupplyReset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Voltage(RedfishObjectId):
@@ -121,6 +133,7 @@ class Voltage(RedfishObjectId):
     physical_context: PhysicalContext | None = None
     reading_volts: str | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     sensor_number: str | None = None
     status: Status | None = None
     upper_threshold_critical: str | None = None

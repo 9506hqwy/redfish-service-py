@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -23,6 +25,6 @@ class NvmeFirmwareImage(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     firmware_version: str | None = None
-    nvme_device_type: str | None = None
+    nvme_device_type: str | None = Field(alias="NVMeDeviceType", default=None)
     oem: dict[str, Any] | None = None
     vendor: str | None = None

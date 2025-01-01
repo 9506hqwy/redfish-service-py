@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -22,3 +24,6 @@ class CompositionReservation(RedfishResource):
     oem: dict[str, Any] | None = None
     reservation_time: str | None = None
     reserved_resource_blocks: list[IdRef] | None = None
+    reserved_resource_blocks_odata_count: int | None = Field(
+        alias="ReservedResourceBlocks@odata.count", default=None
+    )

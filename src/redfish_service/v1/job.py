@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -56,6 +58,9 @@ class JobState(StrEnum):
 
 class Links(RedfishModel):
     created_resources: list[IdRef] | None = None
+    created_resources_odata_count: int | None = Field(
+        alias="CreatedResources@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
 
 

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -18,7 +20,7 @@ class AdditionalVersions(RedfishModel):
     bootloader: str | None = None
     kernel: str | None = None
     microcode: str | None = None
-    osdistribution: str | None = None
+    osdistribution: str | None = Field(alias="OSDistribution", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -38,6 +40,7 @@ class SoftwareInventory(RedfishResource):
     measurement: MeasurementBlock | None = None
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     release_date: str | None = None
     software_id: str | None = None
     status: Status | None = None

@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -32,7 +34,7 @@ class Cable(RedfishResource):
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    sku: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
     upstream_connector_types: list[ConnectorType] | None = None
@@ -76,9 +78,25 @@ class ConnectorType(StrEnum):
 
 class Links(RedfishModel):
     downstream_chassis: list[IdRef] | None = None
+    downstream_chassis_odata_count: int | None = Field(
+        alias="DownstreamChassis@odata.count", default=None
+    )
     downstream_ports: list[IdRef] | None = None
+    downstream_ports_odata_count: int | None = Field(
+        alias="DownstreamPorts@odata.count", default=None
+    )
     downstream_resources: list[IdRef] | None = None
+    downstream_resources_odata_count: int | None = Field(
+        alias="DownstreamResources@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     upstream_chassis: list[IdRef] | None = None
+    upstream_chassis_odata_count: int | None = Field(
+        alias="UpstreamChassis@odata.count", default=None
+    )
     upstream_ports: list[IdRef] | None = None
+    upstream_ports_odata_count: int | None = Field(alias="UpstreamPorts@odata.count", default=None)
     upstream_resources: list[IdRef] | None = None
+    upstream_resources_odata_count: int | None = Field(
+        alias="UpstreamResources@odata.count", default=None
+    )

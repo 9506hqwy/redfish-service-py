@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -40,4 +42,7 @@ class Fan(RedfishResource):
 
 class Links(RedfishModel):
     cooling_chassis: list[IdRef] | None = None
+    cooling_chassis_odata_count: int | None = Field(
+        alias="CoolingChassis@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

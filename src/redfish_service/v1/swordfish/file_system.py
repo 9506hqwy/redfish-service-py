@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -35,13 +37,16 @@ class FileSystem(RedfishResource):
     block_size_bytes: str | None = None
     capacity: Capacity | None = None
     capacity_sources: list[IdRef] | None = None
+    capacity_sources_odata_count: int | None = Field(
+        alias="CapacitySources@odata.count", default=None
+    )
     case_preserved: str | None = None
     case_sensitive: str | None = None
     character_code_set: list[str] | None = None
     cluster_size_bytes: str | None = None
     description: str | None = None
     exported_shares: IdRef | None = None
-    iostatistics: Iostatistics | None = None
+    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
     identifiers: list[Identifier] | None = None
     imported_shares: list[dict[str, Any]] | None = None
     links: Links | None = None
@@ -54,6 +59,9 @@ class FileSystem(RedfishResource):
     remaining_capacity_percent: str | None = None
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
+    replica_targets_odata_count: int | None = Field(
+        alias="ReplicaTargets@odata.count", default=None
+    )
     replication_enabled: str | None = None
 
 
@@ -61,4 +69,10 @@ class Links(RedfishModel):
     class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
     replica_collection: list[IdRef] | None = None
+    replica_collection_odata_count: int | None = Field(
+        alias="ReplicaCollection@odata.count", default=None
+    )
     spare_resource_sets: list[IdRef] | None = None
+    spare_resource_sets_odata_count: int | None = Field(
+        alias="SpareResourceSets@odata.count", default=None
+    )

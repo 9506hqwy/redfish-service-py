@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -17,7 +19,11 @@ class Actions(RedfishModel):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     on_hand_spares: list[IdRef] | None = None
+    on_hand_spares_odata_count: int | None = Field(alias="OnHandSpares@odata.count", default=None)
     replacement_spare_sets: list[SpareResourceSet] | None = None
+    replacement_spare_sets_odata_count: int | None = Field(
+        alias="ReplacementSpareSets@odata.count", default=None
+    )
 
 
 class SpareResourceSet(RedfishResource):

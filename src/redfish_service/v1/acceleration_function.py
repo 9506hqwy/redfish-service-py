@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -20,7 +22,7 @@ class AccelerationFunction(RedfishResource):
     oem: dict[str, Any] | None = None
     power_watts: int | None = None
     status: Status | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
     version: str | None = None
 
 
@@ -30,5 +32,7 @@ class Actions(RedfishModel):
 
 class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
+    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = None
+    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)

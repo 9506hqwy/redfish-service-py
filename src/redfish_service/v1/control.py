@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -11,6 +13,9 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    reset_to_defaults: ResetToDefaults | None = Field(
+        alias="#Control.ResetToDefaults", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -21,6 +26,9 @@ class Control(RedfishResource):
     allowable_min: str | None = None
     allowable_numeric_values: list[str] | None = None
     associated_sensors: list[IdRef] | None = None
+    associated_sensors_odata_count: int | None = Field(
+        alias="AssociatedSensors@odata.count", default=None
+    )
     control_delay_seconds: str | None = None
     control_loop: ControlLoop | None = None
     control_mode: str | None = None
@@ -35,6 +43,7 @@ class Control(RedfishResource):
     physical_context: str | None = None
     physical_sub_context: str | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     sensor: str | None = None
     set_point: str | None = None
     set_point_accuracy: str | None = None
@@ -97,5 +106,5 @@ class ControlSingleLoopExcerpt(RedfishModel):
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

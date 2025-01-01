@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -11,6 +13,8 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
+    rekey: Rekey | None = Field(alias="#Certificate.Rekey", default=None)
+    renew: Renew | None = Field(alias="#Certificate.Renew", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -26,7 +30,7 @@ class Certificate(RedfishResource):
     key_usage: list[str] | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    spdm: Spdm | None = None
+    spdm: Spdm | None = Field(alias="SPDM", default=None)
     serial_number: str | None = None
     signature_algorithm: str | None = None
     subject: Identifier | None = None
@@ -78,16 +82,17 @@ class Links(RedfishModel):
     issuer: str | None = None
     oem: dict[str, Any] | None = None
     subjects: list[IdRef] | None = None
+    subjects_odata_count: int | None = Field(alias="Subjects@odata.count", default=None)
 
 
 class Rekey(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Renew(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Spdm(RedfishModel):

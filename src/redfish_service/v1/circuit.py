@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,12 +14,15 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    breaker_control: BreakerControl | None = Field(alias="#Circuit.BreakerControl", default=None)
+    power_control: PowerControl | None = Field(alias="#Circuit.PowerControl", default=None)
+    reset_metrics: ResetMetrics | None = Field(alias="#Circuit.ResetMetrics", default=None)
     oem: dict[str, Any] | None = None
 
 
 class BreakerControl(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class BreakerStates(StrEnum):
@@ -36,11 +41,13 @@ class Circuit(RedfishResource):
     description: str | None = None
     electrical_consumer_names: list[str] | None = None
     electrical_context: str | None = None
-    electrical_source_manager_uri: str | None = None
+    electrical_source_manager_uri: str | None = Field(
+        alias="ElectricalSourceManagerURI", default=None
+    )
     electrical_source_name: str | None = None
     energyk_wh: str | None = None
     frequency_hz: str | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location_indicator_active: str | None = None
     nominal_frequency_hz: str | None = None
@@ -75,8 +82,12 @@ class Circuit(RedfishResource):
 class Links(RedfishModel):
     branch_circuit: str | None = None
     distribution_circuits: list[IdRef] | None = None
+    distribution_circuits_odata_count: int | None = Field(
+        alias="DistributionCircuits@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     outlets: list[IdRef] | None = None
+    outlets_odata_count: int | None = Field(alias="Outlets@odata.count", default=None)
     power_outlet: str | None = None
     source_circuit: str | None = None
 
@@ -153,8 +164,8 @@ class PlugType(StrEnum):
 
 
 class PowerControl(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class PowerRestorePolicyTypes(StrEnum):
@@ -170,5 +181,5 @@ class PowerState(StrEnum):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

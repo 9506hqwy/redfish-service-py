@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -13,15 +15,22 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    power_control: PowerControl | None = Field(alias="#Outlet.PowerControl", default=None)
+    reset_metrics: ResetMetrics | None = Field(alias="#Outlet.ResetMetrics", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     branch_circuit: str | None = None
     chassis: list[IdRef] | None = None
+    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
     distribution_circuits: list[IdRef] | None = None
+    distribution_circuits_odata_count: int | None = Field(
+        alias="DistributionCircuits@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     power_supplies: list[IdRef] | None = None
+    power_supplies_odata_count: int | None = Field(alias="PowerSupplies@odata.count", default=None)
 
 
 class Outlet(RedfishResource):
@@ -33,7 +42,7 @@ class Outlet(RedfishResource):
     electrical_context: str | None = None
     energyk_wh: str | None = None
     frequency_hz: str | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location_indicator_active: str | None = None
     nominal_voltage: str | None = None
@@ -61,8 +70,8 @@ class Outlet(RedfishResource):
 
 
 class PowerControl(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class PowerState(StrEnum):
@@ -89,5 +98,5 @@ class ReceptacleType(StrEnum):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -10,8 +12,8 @@ from .odata_v4 import IdRef
 
 
 class DeepOperations(RedfishModel):
-    deep_patch: bool | None = None
-    deep_post: bool | None = None
+    deep_patch: bool | None = Field(alias="DeepPATCH", default=None)
+    deep_post: bool | None = Field(alias="DeepPOST", default=None)
     max_levels: int | None = None
 
 
@@ -65,6 +67,6 @@ class ServiceRoot(RedfishResource):
     systems: IdRef | None = None
     tasks: IdRef | None = None
     telemetry_service: IdRef | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
     update_service: IdRef | None = None
     vendor: str | None = None

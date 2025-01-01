@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -28,6 +30,7 @@ class EndpointGroup(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     endpoints: list[IdRef] | None = None
+    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
     group_type: str | None = None
     identifier: Identifier | None = None
     links: Links | None = None
@@ -38,5 +41,7 @@ class EndpointGroup(RedfishResource):
 
 class Links(RedfishModel):
     connections: list[IdRef] | None = None
+    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
     endpoints: list[IdRef] | None = None
+    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
     oem: dict[str, Any] | None = None

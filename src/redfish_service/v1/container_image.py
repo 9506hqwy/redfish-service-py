@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -36,5 +38,6 @@ class ImageTypes(StrEnum):
 
 class Links(RedfishModel):
     containers: list[IdRef] | None = None
+    containers_odata_count: int | None = Field(alias="Containers@odata.count", default=None)
     oem: dict[str, Any] | None = None
     software_image: IdRef | None = None

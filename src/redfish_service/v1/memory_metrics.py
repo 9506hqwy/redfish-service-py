@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -9,15 +11,18 @@ from .base import (
 
 
 class Actions(RedfishModel):
+    clear_current_period: ClearCurrentPeriod | None = Field(
+        alias="#MemoryMetrics.ClearCurrentPeriod", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class AlarmTrips(RedfishModel):
     address_parity_error: str | None = None
-    correctable_eccerror: str | None = None
+    correctable_eccerror: str | None = Field(alias="CorrectableECCError", default=None)
     spare_block: str | None = None
     temperature: str | None = None
-    uncorrectable_eccerror: str | None = None
+    uncorrectable_eccerror: str | None = Field(alias="UncorrectableECCError", default=None)
 
 
 class Cxl(RedfishModel):
@@ -25,17 +30,19 @@ class Cxl(RedfishModel):
 
 
 class ClearCurrentPeriod(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class CurrentPeriod(RedfishModel):
     blocks_read: str | None = None
     blocks_written: str | None = None
-    correctable_eccerror_count: str | None = None
+    correctable_eccerror_count: str | None = Field(alias="CorrectableECCErrorCount", default=None)
     indeterminate_correctable_error_count: str | None = None
     indeterminate_uncorrectable_error_count: str | None = None
-    uncorrectable_eccerror_count: str | None = None
+    uncorrectable_eccerror_count: str | None = Field(
+        alias="UncorrectableECCErrorCount", default=None
+    )
 
 
 class HealthData(RedfishModel):
@@ -50,17 +57,19 @@ class HealthData(RedfishModel):
 class LifeTime(RedfishModel):
     blocks_read: str | None = None
     blocks_written: str | None = None
-    correctable_eccerror_count: str | None = None
+    correctable_eccerror_count: str | None = Field(alias="CorrectableECCErrorCount", default=None)
     indeterminate_correctable_error_count: str | None = None
     indeterminate_uncorrectable_error_count: str | None = None
-    uncorrectable_eccerror_count: str | None = None
+    uncorrectable_eccerror_count: str | None = Field(
+        alias="UncorrectableECCErrorCount", default=None
+    )
 
 
 class MemoryMetrics(RedfishResource):
     actions: Actions | None = None
     bandwidth_percent: str | None = None
     block_size_bytes: str | None = None
-    cxl: Cxl | None = None
+    cxl: Cxl | None = Field(alias="CXL", default=None)
     capacity_utilization_percent: str | None = None
     corrected_persistent_error_count: str | None = None
     corrected_volatile_error_count: str | None = None
@@ -70,4 +79,4 @@ class MemoryMetrics(RedfishResource):
     health_data: HealthData | None = None
     life_time: LifeTime | None = None
     oem: dict[str, Any] | None = None
-    operating_speed_mhz: str | None = None
+    operating_speed_mhz: str | None = Field(alias="OperatingSpeedMHz", default=None)

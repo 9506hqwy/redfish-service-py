@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -13,13 +15,17 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    power_control: PowerControl | None = Field(alias="#OutletGroup.PowerControl", default=None)
+    reset_metrics: ResetMetrics | None = Field(alias="#OutletGroup.ResetMetrics", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outlet_groups: list[IdRef] | None = None
+    outlet_groups_odata_count: int | None = Field(alias="OutletGroups@odata.count", default=None)
     outlets: list[IdRef] | None = None
+    outlets_odata_count: int | None = Field(alias="Outlets@odata.count", default=None)
 
 
 class OutletGroup(RedfishResource):
@@ -50,8 +56,8 @@ class OutletGroupType(StrEnum):
 
 
 class PowerControl(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class PowerState(StrEnum):
@@ -61,5 +67,5 @@ class PowerState(StrEnum):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

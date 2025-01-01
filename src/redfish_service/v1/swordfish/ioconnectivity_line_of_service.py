@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -17,5 +19,5 @@ class IoconnectivityLineOfService(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     max_bytes_per_second: str | None = None
-    max_iops: str | None = None
+    max_iops: str | None = Field(alias="MaxIOPS", default=None)
     oem: dict[str, Any] | None = None

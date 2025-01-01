@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -36,8 +38,17 @@ class Heater(RedfishResource):
 
 class Links(RedfishModel):
     managers: list[IdRef] | None = None
+    managers_odata_count: int | None = Field(alias="Managers@odata.count", default=None)
     memory: list[IdRef] | None = None
+    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
     network_adapters: list[IdRef] | None = None
+    network_adapters_odata_count: int | None = Field(
+        alias="NetworkAdapters@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     processors: list[IdRef] | None = None
+    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
     storage_controllers: list[IdRef] | None = None
+    storage_controllers_odata_count: int | None = Field(
+        alias="StorageControllers@odata.count", default=None
+    )

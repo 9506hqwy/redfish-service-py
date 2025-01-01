@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,12 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    generate_sshidentity_key_pair: GenerateSshidentityKeyPair | None = Field(
+        alias="#AggregationSource.GenerateSSHIdentityKeyPair", default=None
+    )
+    remove_sshidentity_key_pair: RemoveSshidentityKeyPair | None = Field(
+        alias="#AggregationSource.RemoveSSHIdentityKeyPair", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -23,8 +31,8 @@ class AggregationSource(RedfishResource):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
-    snmp: Snmpsettings | None = None
-    sshsettings: SshsettingsType | None = None
+    snmp: Snmpsettings | None = Field(alias="SNMP", default=None)
+    sshsettings: SshsettingsType | None = Field(alias="SSHSettings", default=None)
     status: Status | None = None
     user_name: str | None = None
 
@@ -35,19 +43,22 @@ class AggregationType(StrEnum):
 
 
 class GenerateSshidentityKeyPair(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Links(RedfishModel):
     connection_method: IdRef | None = None
     oem: dict[str, Any] | None = None
     resources_accessed: list[IdRef] | None = None
+    resources_accessed_odata_count: int | None = Field(
+        alias="ResourcesAccessed@odata.count", default=None
+    )
 
 
 class RemoveSshidentityKeyPair(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Snmpsettings(RedfishModel):

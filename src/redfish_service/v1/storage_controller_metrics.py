@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -28,7 +30,9 @@ class NvmeSmartmetrics(RedfishModel):
     critical_warnings: NvmeSmartcriticalWarnings | None = None
     data_units_read: str | None = None
     data_units_written: str | None = None
-    egcritical_warning_summary: EgcriticalWarningSummary | None = None
+    egcritical_warning_summary: EgcriticalWarningSummary | None = Field(
+        alias="EGCriticalWarningSummary", default=None
+    )
     host_read_commands: str | None = None
     host_write_commands: str | None = None
     media_and_data_integrity_errors: str | None = None
@@ -47,11 +51,13 @@ class NvmeSmartmetrics(RedfishModel):
 
 class StorageControllerMetrics(RedfishResource):
     actions: Actions | None = None
-    correctable_eccerror_count: str | None = None
+    correctable_eccerror_count: str | None = Field(alias="CorrectableECCErrorCount", default=None)
     correctable_parity_error_count: str | None = None
     description: str | None = None
-    nvme_smart: NvmeSmartmetrics | None = None
+    nvme_smart: NvmeSmartmetrics | None = Field(alias="NVMeSMART", default=None)
     oem: dict[str, Any] | None = None
     state_change_count: str | None = None
-    uncorrectable_eccerror_count: str | None = None
+    uncorrectable_eccerror_count: str | None = Field(
+        alias="UncorrectableECCErrorCount", default=None
+    )
     uncorrectable_parity_error_count: str | None = None

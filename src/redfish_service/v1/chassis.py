@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#Chassis.Reset", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -24,7 +27,7 @@ class Chassis(RedfishResource):
     description: str | None = None
     environmental_class: str | None = None
     height_mm: str | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
     log_services: IdRef | None = None
@@ -32,17 +35,17 @@ class Chassis(RedfishResource):
     model: str | None = None
     network_adapters: IdRef | None = None
     oem: dict[str, Any] | None = None
-    pcie_slots: IdRef | None = None
+    pcie_slots: IdRef | None = Field(alias="PCIeSlots", default=None)
     part_number: str | None = None
     physical_security: PhysicalSecurity | None = None
     power: IdRef | None = None
     power_state: str | None = None
-    sku: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
     sensors: IdRef | None = None
     serial_number: str | None = None
     status: Status | None = None
     thermal: IdRef | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
     weight_kg: str | None = None
     width_mm: str | None = None
 
@@ -73,19 +76,37 @@ class ChassisType(StrEnum):
 
 class Links(RedfishModel):
     computer_systems: list[IdRef] | None = None
+    computer_systems_odata_count: int | None = Field(
+        alias="ComputerSystems@odata.count", default=None
+    )
     contained_by: IdRef | None = None
     contains: list[IdRef] | None = None
+    contains_odata_count: int | None = Field(alias="Contains@odata.count", default=None)
     cooled_by: list[IdRef] | None = None
+    cooled_by_odata_count: int | None = Field(alias="CooledBy@odata.count", default=None)
     drives: list[IdRef] | None = None
+    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
     managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     managers_in_chassis: list[IdRef] | None = None
+    managers_in_chassis_odata_count: int | None = Field(
+        alias="ManagersInChassis@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
-    pcie_devices: list[IdRef] | None = None
+    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
     powered_by: list[IdRef] | None = None
+    powered_by_odata_count: int | None = Field(alias="PoweredBy@odata.count", default=None)
     processors: list[IdRef] | None = None
+    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
     resource_blocks: list[IdRef] | None = None
+    resource_blocks_odata_count: int | None = Field(
+        alias="ResourceBlocks@odata.count", default=None
+    )
     storage: list[IdRef] | None = None
+    storage_odata_count: int | None = Field(alias="Storage@odata.count", default=None)
     switches: list[IdRef] | None = None
+    switches_odata_count: int | None = Field(alias="Switches@odata.count", default=None)
 
 
 class PhysicalSecurity(RedfishModel):
@@ -95,5 +116,5 @@ class PhysicalSecurity(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

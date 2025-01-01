@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -12,12 +14,15 @@ from ..schedule import Schedule
 
 
 class Actions(RedfishModel):
+    create_replicas: CreateReplicas | None = Field(
+        alias="#DataProtectionLineOfService.CreateReplicas", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class CreateReplicas(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class DataProtectionLineOfService(RedfishResource):

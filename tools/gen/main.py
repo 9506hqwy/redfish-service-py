@@ -13,6 +13,9 @@ from warnings import warn
 # TODO
 COMMON_VALUES: list[str] = ["EventType"]
 
+# pydantic.BaseModel properties.
+BASE_MODEL_PROPERTIES: list[str] = ["schema"]
+
 
 @dataclass
 class ClassInfo:
@@ -132,6 +135,13 @@ class ClassInfo:
     def set_module(self, module: str) -> None:
         self._module = module
 
+    def write_to(self, w: Any) -> None:
+        w.write(f"class {self.cls_name}({self.base_name}):\n")
+        for p in self.properties:
+            p.write_to(w)
+        if len(self.properties) == 0:
+            w.write("    pass\n")
+
     def _load_property(
         self,
         classall: list[ClassInfo | EnumInfo],
@@ -223,10 +233,47 @@ class PropetyInfo:
     array: bool
     nonable: bool
 
+    @property
+    def property_name(self) -> str:
+        name = self._escape_name(self.name)
+        name = get_snake_case(name)
+        if name in BASE_MODEL_PROPERTIES:
+            name = f"{name}_value"
+        return name
+
+    @property
+    def type_name(self) -> str:
+        ty = self.type if isinstance(self.type, str) else self.type.type_name
+        return f"list[{ty}]" if self.array else ty
+
+    def write_to(self, w: Any) -> None:
+        w.write(f"    {self.property_name}: {self.type_name}")
+        if self.nonable:
+            w.write(" | None")
+
+        if self.name != get_class_name(self.property_name):
+            w.write(" \\\n")
+            if self.nonable:
+                w.write(f'        = Field(alias="{self.name}", default=None)')
+            else:
+                w.write(f'        = Field(alias="{self.name}")')
+        elif self.nonable:
+            w.write(" = None")
+
+        w.write("\n")
+
+    def _escape_name(self, name: str) -> str:
+        if name.startswith("#"):
+            # Actions property is omit schema name.
+            name = name.split(".", 1)[-1]
+
+        words = re.split("[^A-Za-z0-9_]", name)
+        return "_".join([w for w in words if w])
+
 
 def get_class_name(name: str) -> str:
     words = get_snake_case(name).split("_")
-    return "".join(map(lambda w: w.capitalize(), words))
+    return "".join([w.capitalize() for w in words])
 
 
 def get_module_name(path: Path) -> str:
@@ -531,6 +578,7 @@ def select_definition(definitions: list[dict[str, Any]]) -> str | dict[str, Any]
             return None
 
     refs: list[str] = [d["$ref"] for d in definitions if not d["$ref"].endswith("/idRef")]
+    # TODO:
     sorted_refs = sorted(refs, reverse=True)
     if len(sorted_refs) == 0:
         return None
@@ -541,58 +589,23 @@ def select_definition(definitions: list[dict[str, Any]]) -> str | dict[str, Any]
 def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
     count = 0
     for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
-        modules = sorted(list(modules_iter), key=lambda m: m.module)
-        values: list[EnumInfo] = []
-        for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
-            classes = list(classes_iter)
-            if len(classes) == 0:
-                continue
+        out_file = out_path
+        if domain_name == "swordfish":
+            out_file = out_path / "swordfish"
 
+        values: list[EnumInfo] = []
+        modules = sorted(list(modules_iter), key=lambda m: m.module)
+        for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
             if module_name.find(".") > -1:
                 continue
 
-            out_file = out_path
-            if domain_name == "swordfish":
-                out_file = out_path / "swordfish"
+            classes = sorted(list(classes_iter), key=lambda c: c.name)
+            if len(classes) == 0:
+                continue
 
             module_path = out_file / f"{module_name}.py"
-
-            classes = sorted(classes, key=lambda c: c.name)
             with module_path.open("w") as w:
-                w.write("from __future__ import annotations  # PEP563 Forward References\n")
-                w.write("\n")
-
-                if any(filter(lambda i: isinstance(i, EnumInfo), classes)):
-                    w.write("from enum import StrEnum\n")
-                    w.write("\n")
-
-                parent = "."
-                if domain_name == "swordfish":
-                    parent = ".."
-
-                w.write(f"from {parent}base import RedfishModel\n")
-                w.write(f"from {parent}base import RedfishObject\n")
-                w.write(f"from {parent}base import RedfishObjectId\n")
-                w.write(f"from {parent}base import RedfishResource\n")
-                w.write(f"from {parent}base import RedfishResourceCollection\n")
-
-                imports = set([])
-                for c in classes:
-                    if isinstance(c, EnumInfo):
-                        continue
-
-                    for p in c.properties:
-                        if isinstance(p.type, (ClassInfo, EnumInfo)):
-                            if isinstance(p.type, EnumInfo) or not p.type.is_primitive:
-                                imports.add(p.type)
-
-                for i in sorted(imports, key=lambda i: i.module):
-                    if i.name in COMMON_VALUES:
-                        w.write(f"from {parent}values import {i.cls_name}\n")
-                    elif isinstance(i, ClassInfo) and i.raw:
-                        w.write("from typing import Any\n")
-                    elif i.module != module_name:
-                        w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
+                write_imports_to(domain_name, classes, module_name, w)
 
                 for c in classes:
                     if not c.loaded:
@@ -617,40 +630,13 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
 
                     w.write("\n")
                     w.write("\n")
-                    if isinstance(c, EnumInfo):
-                        c.write_to(w)
-                    else:
-                        w.write(f"class {c.cls_name}({c.base_name}):\n")
-                        for p in c.properties:
-                            if "." in p.name or "@" in p.name:
-                                # TODO:
-                                continue
-
-                            prop_name = get_snake_case(p.name)
-                            if prop_name == "schema":
-                                # TODO:
-                                continue
-
-                            ty = p.type if isinstance(p.type, str) else p.type.type_name
-                            ty = f"list[{ty}]" if p.array else ty
-
-                            w.write(f"    {prop_name}: {ty}")
-                            if p.nonable:
-                                w.write(" | None = None\n")
-                            else:
-                                w.write("\n")
-                        if len(c.properties) == 0:
-                            w.write("    pass\n")
+                    c.write_to(w)
 
         if len(values) > 0:
-            out_file = out_path
-            if domain_name == "swordfish":
-                out_file = out_path / "swordfish"
             module_path = out_file / "values.py"
-
             with module_path.open("w") as w:
-                w.write("from enum import StrEnum\n")
-                w.write("\n")
+                write_imports_to(domain_name, classes, "values", w)
+
                 for v in values:
                     count += 1
                     print(f"{count}: {c} to {module_path}")
@@ -658,6 +644,49 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                     w.write("\n")
                     w.write("\n")
                     v.write_to(w)
+
+
+def write_imports_to(
+    domaon: str, classall: list[ClassInfo | EnumInfo], module: str, w: Any
+) -> None:
+    w.write("from __future__ import annotations  # PEP563 Forward References\n")
+    w.write("\n")
+
+    w.write("from enum import StrEnum\n")
+    w.write("from typing import Any\n")
+    w.write("\n")
+
+    w.write("from pydantic import Field\n")
+    w.write("\n")
+
+    parent = "."
+    if domaon == "swordfish":
+        parent = ".."
+
+    w.write(f"from {parent}base import RedfishModel\n")
+    w.write(f"from {parent}base import RedfishObject\n")
+    w.write(f"from {parent}base import RedfishObjectId\n")
+    w.write(f"from {parent}base import RedfishResource\n")
+    w.write(f"from {parent}base import RedfishResourceCollection\n")
+
+    imports: set[ClassInfo | EnumInfo] = set([])
+    for c in classall:
+        if isinstance(c, EnumInfo):
+            continue
+
+        for p in c.properties:
+            if isinstance(p.type, EnumInfo):
+                imports.add(p.type)
+
+            if isinstance(p.type, ClassInfo):
+                if not p.type.is_primitive and not p.type.raw:
+                    imports.add(p.type)
+
+    for i in sorted(imports, key=lambda i: i.module):
+        if i.name in COMMON_VALUES:
+            w.write(f"from {parent}values import {i.cls_name}\n")
+        elif i.module != module:
+            w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
 
 
 def main() -> int:

@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -25,7 +27,7 @@ class ReplicaInfo(RedfishModel):
     consistency_status: str | None = None
     consistency_type: str | None = None
     data_protection_line_of_service: IdRef | None = None
-    failed_copy_stops_host_io: str | None = None
+    failed_copy_stops_host_io: str | None = Field(alias="FailedCopyStopsHostIO", default=None)
     percent_synced: str | None = None
     remote_source_replica: str | None = None
     replica: IdRef | None = None

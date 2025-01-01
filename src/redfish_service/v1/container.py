@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -11,6 +13,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#Container.Reset", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -28,7 +31,7 @@ class Container(RedfishResource):
 
 
 class Limits(RedfishModel):
-    cpucount: str | None = None
+    cpucount: str | None = Field(alias="CPUCount", default=None)
     memory_bytes: str | None = None
 
 
@@ -38,5 +41,5 @@ class Links(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -32,7 +34,7 @@ class CoolingLoop(RedfishResource):
     coolant_level_percent: str | None = None
     coolant_level_status: str | None = None
     coolant_quality: str | None = None
-    cooling_manager_uri: str | None = None
+    cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
     description: str | None = None
     links: Links | None = None
     location_indicator_active: str | None = None
@@ -50,4 +52,5 @@ class Links(RedfishModel):
     chassis: str | None = None
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     oem: dict[str, Any] | None = None

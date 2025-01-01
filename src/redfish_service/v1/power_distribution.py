@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -13,13 +15,18 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    transfer_control: TransferControl | None = Field(
+        alias="#PowerDistribution.TransferControl", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
+    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -42,7 +49,7 @@ class PowerDistribution(RedfishResource):
     outlet_groups: IdRef | None = None
     outlets: IdRef | None = None
     part_number: str | None = None
-    power_capacity_va: str | None = None
+    power_capacity_va: str | None = Field(alias="PowerCapacityVA", default=None)
     power_supplies: IdRef | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     production_date: str | None = None
@@ -52,7 +59,7 @@ class PowerDistribution(RedfishResource):
     subfeeds: IdRef | None = None
     transfer_configuration: str | None = None
     transfer_criteria: str | None = None
-    uuid: str | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
     user_label: str | None = None
     version: str | None = None
 
@@ -69,5 +76,5 @@ class PowerEquipmentType(StrEnum):
 
 
 class TransferControl(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

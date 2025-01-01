@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -31,7 +33,7 @@ class MetricDefinition(RedfishResource):
     metric_properties: list[str] | None = None
     metric_type: str | None = None
     min_reading_range: str | None = None
-    oemcalculation_algorithm: str | None = None
+    oemcalculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
     oem: dict[str, Any] | None = None
     physical_context: str | None = None
     precision: str | None = None

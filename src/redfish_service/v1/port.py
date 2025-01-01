@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,8 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#Port.Reset", default=None)
+    reset_ppb: ResetPpb | None = Field(alias="#Port.ResetPPB", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -26,9 +30,9 @@ class FunctionMinBandwidth(RedfishModel):
 
 
 class GenZ(RedfishModel):
-    lprt: IdRef | None = None
-    mprt: IdRef | None = None
-    vcat: IdRef | None = None
+    lprt: IdRef | None = Field(alias="LPRT", default=None)
+    mprt: IdRef | None = Field(alias="MPRT", default=None)
+    vcat: IdRef | None = Field(alias="VCAT", default=None)
 
 
 class LinkConfiguration(RedfishModel):
@@ -53,18 +57,34 @@ class LinkStatus(StrEnum):
 
 class Links(RedfishModel):
     associated_endpoints: list[IdRef] | None = None
+    associated_endpoints_odata_count: int | None = Field(
+        alias="AssociatedEndpoints@odata.count", default=None
+    )
     cables: list[IdRef] | None = None
+    cables_odata_count: int | None = Field(alias="Cables@odata.count", default=None)
     connected_ports: list[IdRef] | None = None
+    connected_ports_odata_count: int | None = Field(
+        alias="ConnectedPorts@odata.count", default=None
+    )
     connected_switch_ports: list[IdRef] | None = None
+    connected_switch_ports_odata_count: int | None = Field(
+        alias="ConnectedSwitchPorts@odata.count", default=None
+    )
     connected_switches: list[IdRef] | None = None
+    connected_switches_odata_count: int | None = Field(
+        alias="ConnectedSwitches@odata.count", default=None
+    )
     ethernet_interfaces: list[IdRef] | None = None
+    ethernet_interfaces_odata_count: int | None = Field(
+        alias="EthernetInterfaces@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class Port(RedfishResource):
     actions: Actions | None = None
     active_width: int | None = None
-    cxl: str | None = None
+    cxl: str | None = Field(alias="CXL", default=None)
     capable_protocol_versions: list[str] | None = None
     current_protocol_version: str | None = None
     current_speed_gbps: str | None = None
@@ -95,17 +115,17 @@ class Port(RedfishResource):
     port_protocol: str | None = None
     port_type: str | None = None
     remote_port_id: str | None = None
-    sfp: str | None = None
+    sfp: str | None = Field(alias="SFP", default=None)
     signal_detected: str | None = None
     status: Status | None = None
     width: str | None = None
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ResetPpb(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
 )
@@ -13,6 +15,7 @@ class Actions(RedfishModel):
 
 
 class AttributeRegistry(RedfishModel):
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     id: str

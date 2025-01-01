@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from ..base import (
     RedfishModel,
     RedfishResource,
@@ -13,6 +15,27 @@ from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Actions(RedfishModel):
+    assign_replica_target: AssignReplicaTarget | None = Field(
+        alias="#ConsistencyGroup.AssignReplicaTarget", default=None
+    )
+    create_replica_target: CreateReplicaTarget | None = Field(
+        alias="#ConsistencyGroup.CreateReplicaTarget", default=None
+    )
+    remove_replica_relationship: RemoveReplicaRelationship | None = Field(
+        alias="#ConsistencyGroup.RemoveReplicaRelationship", default=None
+    )
+    resume_replication: ResumeReplication | None = Field(
+        alias="#ConsistencyGroup.ResumeReplication", default=None
+    )
+    reverse_replication_relationship: ReverseReplicationRelationship | None = Field(
+        alias="#ConsistencyGroup.ReverseReplicationRelationship", default=None
+    )
+    split_replication: SplitReplication | None = Field(
+        alias="#ConsistencyGroup.SplitReplication", default=None
+    )
+    suspend_replication: SuspendReplication | None = Field(
+        alias="#ConsistencyGroup.SuspendReplication", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -25,8 +48,8 @@ class ApplicationConsistencyMethod(StrEnum):
 
 
 class AssignReplicaTarget(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ConsistencyGroup(RedfishResource):
@@ -40,8 +63,12 @@ class ConsistencyGroup(RedfishResource):
     remote_replica_targets: list[str] | None = None
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
+    replica_targets_odata_count: int | None = Field(
+        alias="ReplicaTargets@odata.count", default=None
+    )
     status: Status | None = None
     volumes: list[IdRef] | None = None
+    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
 
 
 class ConsistencyType(StrEnum):
@@ -50,8 +77,8 @@ class ConsistencyType(StrEnum):
 
 
 class CreateReplicaTarget(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Links(RedfishModel):
@@ -59,25 +86,25 @@ class Links(RedfishModel):
 
 
 class RemoveReplicaRelationship(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ResumeReplication(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ReverseReplicationRelationship(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SplitReplication(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class SuspendReplication(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)

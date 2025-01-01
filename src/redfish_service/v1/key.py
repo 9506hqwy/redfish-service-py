@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -33,16 +35,16 @@ class Key(RedfishResource):
     description: str | None = None
     key_string: str | None = None
     key_type: str | None = None
-    nvmeo_f: NvmeoF | None = None
+    nvmeo_f: NvmeoF | None = Field(alias="NVMeoF", default=None)
     oem: dict[str, Any] | None = None
-    ssh: Sshtype | None = None
+    ssh: Sshtype | None = Field(alias="SSH", default=None)
     user_description: str | None = None
 
 
 class NvmeoF(RedfishModel):
     host_key_id: str | None = None
-    nqn: str | None = None
-    oemsecurity_protocol_type: str | None = None
+    nqn: str | None = Field(alias="NQN", default=None)
+    oemsecurity_protocol_type: str | None = Field(alias="OEMSecurityProtocolType", default=None)
     secure_hash_allow_list: list[str] | None = None
     security_protocol_type: str | None = None
 

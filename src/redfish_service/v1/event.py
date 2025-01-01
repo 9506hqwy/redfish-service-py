@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
 )
@@ -21,10 +23,13 @@ class Cper(RedfishModel):
 
 
 class Event(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     context: str | None = None
     description: str | None = None
     events: list[EventRecord]
+    events_odata_count: int | None = Field(alias="Events@odata.count", default=None)
     id: str
     name: str
     oem: dict[str, Any] | None = None
@@ -33,8 +38,8 @@ class Event(RedfishModel):
 class EventRecord(RedfishModel):
     actions: EventRecordActions | None = None
     additional_data_size_bytes: str | None = None
-    additional_data_uri: str | None = None
-    cper: Cper | None = None
+    additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
+    cper: Cper | None = Field(alias="CPER", default=None)
     context: str | None = None
     diagnostic_data: str | None = None
     diagnostic_data_type: str | None = None
@@ -48,7 +53,7 @@ class EventRecord(RedfishModel):
     message_args: list[str] | None = None
     message_id: str
     message_severity: Health | None = None
-    oemdiagnostic_data_type: str | None = None
+    oemdiagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
     oem: dict[str, Any] | None = None
     origin_of_condition: IdRef | None = None
     resolution: str | None = None

@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -15,11 +17,21 @@ class Actions(RedfishModel):
 
 
 class Links(RedfishModel):
-    cxllogical_devices: list[IdRef] | None = None
+    cxllogical_devices: list[IdRef] | None = Field(alias="CXLLogicalDevices", default=None)
+    cxllogical_devices_odata_count: int | None = Field(
+        alias="CXLLogicalDevices@odata.count", default=None
+    )
     fabric_adapters: list[IdRef] | None = None
+    fabric_adapters_odata_count: int | None = Field(
+        alias="FabricAdapters@odata.count", default=None
+    )
     media_controllers: list[IdRef] | None = None
+    media_controllers_odata_count: int | None = Field(
+        alias="MediaControllers@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = None
+    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
 
 
 class MemoryDomain(RedfishResource):
@@ -41,3 +53,4 @@ class MemoryDomain(RedfishResource):
 
 class MemorySet(RedfishModel):
     memory_set: list[IdRef] | None = None
+    memory_set_odata_count: int | None = Field(alias="MemorySet@odata.count", default=None)

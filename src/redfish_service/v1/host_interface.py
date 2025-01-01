@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -52,6 +54,9 @@ class HostInterface(RedfishResource):
 class Links(RedfishModel):
     auth_none_role: IdRef | None = None
     computer_systems: list[IdRef] | None = None
+    computer_systems_odata_count: int | None = Field(
+        alias="ComputerSystems@odata.count", default=None
+    )
     credential_bootstrapping_role: IdRef | None = None
     firmware_auth_role: IdRef | None = None
     kernel_auth_role: IdRef | None = None

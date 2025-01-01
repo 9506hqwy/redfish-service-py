@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishObjectId,
@@ -17,7 +19,7 @@ class Fan(RedfishObjectId):
     assembly: IdRef | None = None
     fan_name: str | None = None
     hot_pluggable: str | None = None
-    indicator_led: str | None = None
+    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
     location: Location | None = None
     lower_threshold_critical: str | None = None
     lower_threshold_fatal: str | None = None
@@ -34,7 +36,9 @@ class Fan(RedfishObjectId):
     reading: str | None = None
     reading_units: str | None = None
     redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     sensor_number: str | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
@@ -68,6 +72,7 @@ class Temperature(RedfishObjectId):
     physical_context: PhysicalContext | None = None
     reading_celsius: str | None = None
     related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     sensor_number: str | None = None
     status: Status | None = None
     upper_threshold_critical: str | None = None
@@ -84,10 +89,13 @@ class Thermal(RedfishResource):
     actions: ThermalActions | None = None
     description: str | None = None
     fans: list[Fan] | None = None
+    fans_odata_count: int | None = Field(alias="Fans@odata.count", default=None)
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     status: Status | None = None
     temperatures: list[Temperature] | None = None
+    temperatures_odata_count: int | None = Field(alias="Temperatures@odata.count", default=None)
 
 
 class ThermalActions(RedfishModel):

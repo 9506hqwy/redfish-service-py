@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -23,9 +25,14 @@ class InterleaveSet(RedfishModel):
 
 
 class Links(RedfishModel):
-    cxllogical_devices: list[IdRef] | None = None
+    cxllogical_devices: list[IdRef] | None = Field(alias="CXLLogicalDevices", default=None)
+    cxllogical_devices_odata_count: int | None = Field(
+        alias="CXLLogicalDevices@odata.count", default=None
+    )
     endpoints: list[IdRef] | None = None
+    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
     memory_regions: list[IdRef] | None = None
+    memory_regions_odata_count: int | None = Field(alias="MemoryRegions@odata.count", default=None)
     oem: dict[str, Any] | None = None
 
 

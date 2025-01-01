@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,12 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    spdmget_signed_measurements: SpdmgetSignedMeasurements | None = Field(
+        alias="#ComponentIntegrity.SPDMGetSignedMeasurements", default=None
+    )
+    tpmget_signed_measurements: TpmgetSignedMeasurements | None = Field(
+        alias="#ComponentIntegrity.TPMGetSignedMeasurements", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -24,10 +32,10 @@ class ComponentIntegrity(RedfishResource):
     last_updated: str | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    spdm: Spdminfo | None = None
+    spdm: Spdminfo | None = Field(alias="SPDM", default=None)
     status: Status | None = None
-    tpm: Tpminfo | None = None
-    target_component_uri: str
+    tpm: Tpminfo | None = Field(alias="TPM", default=None)
+    target_component_uri: str = Field(alias="TargetComponentURI")
 
 
 class ComponentIntegrityType(StrEnum):
@@ -40,12 +48,15 @@ class ComponentIntegrityType(StrEnum):
 
 class Links(RedfishModel):
     components_protected: list[IdRef] | None = None
+    components_protected_odata_count: int | None = Field(
+        alias="ComponentsProtected@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class SpdmgetSignedMeasurements(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Spdminfo(RedfishModel):
@@ -56,8 +67,8 @@ class Spdminfo(RedfishModel):
 
 
 class TpmgetSignedMeasurements(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class Tpminfo(RedfishModel):

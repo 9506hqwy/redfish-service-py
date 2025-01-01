@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -24,7 +26,7 @@ class AccountService(RedfishResource):
     additional_external_account_providers: IdRef | None = None
     auth_failure_logging_threshold: int | None = None
     description: str | None = None
-    ldap: ExternalAccountProvider | None = None
+    ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
     local_account_auth: LocalAccountAuth | None = None
     max_password_length: int | None = None
     min_password_length: int | None = None
@@ -37,8 +39,10 @@ class AccountService(RedfishResource):
     service_enabled: str | None = None
     status: Status | None = None
     supported_account_types: list[AccountTypes] | None = None
-    supported_oemaccount_types: list[str] | None = None
-    tacacsplus: str | None = None
+    supported_oemaccount_types: list[str] | None = Field(
+        alias="SupportedOEMAccountTypes", default=None
+    )
+    tacacsplus: str | None = Field(alias="TACACSplus", default=None)
 
 
 class Actions(RedfishModel):
@@ -60,13 +64,13 @@ class ExternalAccountProvider(RedfishModel):
     account_provider_type: str | None = None
     authentication: Authentication | None = None
     certificates: IdRef | None = None
-    ldapservice: Ldapservice | None = None
+    ldapservice: Ldapservice | None = Field(alias="LDAPService", default=None)
     password_set: bool | None = None
     priority: str | None = None
     remote_role_mapping: list[str] | None = None
     service_addresses: list[str] | None = None
     service_enabled: str | None = None
-    tacacsplus_service: str | None = None
+    tacacsplus_service: str | None = Field(alias="TACACSplusService", default=None)
 
 
 class LdapsearchSettings(RedfishModel):

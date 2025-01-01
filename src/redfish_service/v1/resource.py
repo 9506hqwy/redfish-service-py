@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishObject,
@@ -87,7 +89,7 @@ class PostalAddress(RedfishModel):
     district: str | None = None
     division: str | None = None
     floor: str | None = None
-    gpscoords: str | None = None
+    gpscoords: str | None = Field(alias="GPSCoords", default=None)
     house_number: str | None = None
     house_number_suffix: str | None = None
     landmark: str | None = None
@@ -95,7 +97,7 @@ class PostalAddress(RedfishModel):
     location: str | None = None
     name: str | None = None
     neighborhood: str | None = None
-    pobox: str | None = None
+    pobox: str | None = Field(alias="POBox", default=None)
     place_type: str | None = None
     postal_code: str | None = None
     road: str | None = None

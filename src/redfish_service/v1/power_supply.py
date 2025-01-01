@@ -2,6 +2,8 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -12,6 +14,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#PowerSupply.Reset", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -24,7 +27,11 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outlet: IdRef | None = None
     power_outlets: list[IdRef] | None = None
+    power_outlets_odata_count: int | None = Field(alias="PowerOutlets@odata.count", default=None)
     powering_chassis: list[IdRef] | None = None
+    powering_chassis_odata_count: int | None = Field(
+        alias="PoweringChassis@odata.count", default=None
+    )
 
 
 class OutputRail(RedfishModel):
@@ -38,7 +45,9 @@ class PowerSupply(RedfishResource):
     certificates: IdRef | None = None
     description: str | None = None
     efficiency_ratings: list[str] | None = None
-    electrical_source_manager_uris: list[str] | None = None
+    electrical_source_manager_uris: list[str] | None = Field(
+        alias="ElectricalSourceManagerURIs", default=None
+    )
     electrical_source_names: list[str] | None = None
     firmware_version: str | None = None
     hot_pluggable: str | None = None
@@ -68,5 +77,5 @@ class PowerSupply(RedfishResource):
 
 
 class Reset(RedfishModel):
-    target: str | None = None
-    title: str | None = None
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
