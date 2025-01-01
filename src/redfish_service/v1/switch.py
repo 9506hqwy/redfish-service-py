@@ -10,7 +10,7 @@ from .base import (
 )
 from .odata_v4 import IdRef
 from .protocol import Protocol
-from .resource import Location, Status
+from .resource import IndicatorLed, Location, PowerState, Status
 from .software_inventory import MeasurementBlock
 
 
@@ -45,35 +45,35 @@ class Switch(RedfishResource):
     asset_tag: str | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
     certificates: IdRef | None = None
-    current_bandwidth_gbps: str | None = None
+    current_bandwidth_gbps: float | None = None
     description: str | None = None
-    domain_id: str | None = Field(alias="DomainID", default=None)
+    domain_id: int | None = Field(alias="DomainID", default=None)
     enabled: bool | None = None
     environment_metrics: IdRef | None = None
     firmware_version: str | None = None
-    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
-    is_managed: str | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    is_managed: bool | None = None
     links: Links | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     log_services: IdRef | None = None
     manufacturer: str | None = None
-    max_bandwidth_gbps: str | None = None
+    max_bandwidth_gbps: float | None = None
     measurements: list[MeasurementBlock] | None = None
     metrics: IdRef | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     ports: IdRef | None = None
-    power_state: str | None = None
+    power_state: PowerState | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
     supported_protocols: list[Protocol] | None = None
-    switch_type: str | None = None
-    total_switch_width: str | None = None
+    switch_type: Protocol | None = None
+    total_switch_width: int | None = None
     uuid: str | None = Field(alias="UUID", default=None)
 
 

@@ -19,7 +19,7 @@ class Signature(RedfishResource):
     oem: dict[str, Any] | None = None
     signature_string: str | None = None
     signature_type: str | None = None
-    signature_type_registry: str | None = None
+    signature_type_registry: SignatureTypeRegistry | None = None
     uefi_signature_owner: str | None = None
 
 

@@ -25,8 +25,8 @@ class Compose(RedfishModel):
 class CompositionService(RedfishResource):
     actions: Actions | None = None
     active_pool: IdRef | None = None
-    allow_overprovisioning: str | None = None
-    allow_zone_affinity: str | None = None
+    allow_overprovisioning: bool | None = None
+    allow_zone_affinity: bool | None = None
     composition_reservations: IdRef | None = None
     description: str | None = None
     free_pool: IdRef | None = None
@@ -34,5 +34,5 @@ class CompositionService(RedfishResource):
     reservation_duration: str | None = None
     resource_blocks: IdRef | None = None
     resource_zones: IdRef | None = None
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     status: Status | None = None

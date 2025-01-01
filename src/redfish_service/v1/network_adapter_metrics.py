@@ -19,21 +19,21 @@ class Actions(RedfishModel):
 
 class NetworkAdapterMetrics(RedfishResource):
     actions: Actions | None = None
-    cpucore_percent: str | None = Field(alias="CPUCorePercent", default=None)
+    cpucore_percent: float | None = Field(alias="CPUCorePercent", default=None)
     description: str | None = None
-    host_bus_rxpercent: str | None = Field(alias="HostBusRXPercent", default=None)
-    host_bus_txpercent: str | None = Field(alias="HostBusTXPercent", default=None)
-    ncsirxbytes: str | None = Field(alias="NCSIRXBytes", default=None)
-    ncsirxframes: str | None = Field(alias="NCSIRXFrames", default=None)
-    ncsitxbytes: str | None = Field(alias="NCSITXBytes", default=None)
-    ncsitxframes: str | None = Field(alias="NCSITXFrames", default=None)
+    host_bus_rxpercent: float | None = Field(alias="HostBusRXPercent", default=None)
+    host_bus_txpercent: float | None = Field(alias="HostBusTXPercent", default=None)
+    ncsirxbytes: int | None = Field(alias="NCSIRXBytes", default=None)
+    ncsirxframes: int | None = Field(alias="NCSIRXFrames", default=None)
+    ncsitxbytes: int | None = Field(alias="NCSITXBytes", default=None)
+    ncsitxframes: int | None = Field(alias="NCSITXFrames", default=None)
     oem: dict[str, Any] | None = None
-    rxbytes: str | None = Field(alias="RXBytes", default=None)
-    rxmulticast_frames: str | None = Field(alias="RXMulticastFrames", default=None)
-    rxunicast_frames: str | None = Field(alias="RXUnicastFrames", default=None)
-    txbytes: str | None = Field(alias="TXBytes", default=None)
-    txmulticast_frames: str | None = Field(alias="TXMulticastFrames", default=None)
-    txunicast_frames: str | None = Field(alias="TXUnicastFrames", default=None)
+    rxbytes: int | None = Field(alias="RXBytes", default=None)
+    rxmulticast_frames: int | None = Field(alias="RXMulticastFrames", default=None)
+    rxunicast_frames: int | None = Field(alias="RXUnicastFrames", default=None)
+    txbytes: int | None = Field(alias="TXBytes", default=None)
+    txmulticast_frames: int | None = Field(alias="TXMulticastFrames", default=None)
+    txunicast_frames: int | None = Field(alias="TXUnicastFrames", default=None)
 
 
 class ResetMetrics(RedfishModel):

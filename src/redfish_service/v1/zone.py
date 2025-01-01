@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -21,6 +22,13 @@ class Actions(RedfishModel):
 class AddEndpoint(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ExternalAccessibility(StrEnum):
+    GLOBALLY_ACCESSIBLE = "GloballyAccessible"
+    NON_ZONED_ACCESSIBLE = "NonZonedAccessible"
+    ZONE_ONLY = "ZoneOnly"
+    NO_INTERNAL_ROUTING = "NoInternalRouting"
 
 
 class Links(RedfishModel):
@@ -52,11 +60,18 @@ class RemoveEndpoint(RedfishModel):
 
 class Zone(RedfishResource):
     actions: Actions | None = None
-    default_routing_enabled: str | None = None
+    default_routing_enabled: bool | None = None
     description: str | None = None
-    external_accessibility: str | None = None
+    external_accessibility: ExternalAccessibility | None = None
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
-    zone_type: str | None = None
+    zone_type: ZoneType | None = None
+
+
+class ZoneType(StrEnum):
+    DEFAULT = "Default"
+    ZONE_OF_ENDPOINTS = "ZoneOfEndpoints"
+    ZONE_OF_ZONES = "ZoneOfZones"
+    ZONE_OF_RESOURCE_BLOCKS = "ZoneOfResourceBlocks"

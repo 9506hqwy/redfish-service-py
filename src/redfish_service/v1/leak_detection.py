@@ -11,6 +11,7 @@ from .base import (
 from .leak_detector import LeakDetectorArrayExcerpt
 from .odata_v4 import IdRef
 from .resource import Status
+from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
@@ -30,5 +31,5 @@ class LeakDetectorGroup(RedfishModel):
     detectors: list[LeakDetectorArrayExcerpt] | None = None
     detectors_odata_count: int | None = Field(alias="Detectors@odata.count", default=None)
     group_name: str | None = None
-    humidity_percent: str | None = None
+    humidity_percent: SensorExcerpt | None = None
     status: Status

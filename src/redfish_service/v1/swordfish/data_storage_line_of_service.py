@@ -6,6 +6,8 @@ from ..base import (
     RedfishModel,
     RedfishResource,
 )
+from ..swordfish.data_protection_lo_scapabilities import RecoveryAccessScope
+from ..swordfish.data_storage_lo_scapabilities import ProvisioningPolicy, StorageAccessCapability
 
 
 class Actions(RedfishModel):
@@ -13,11 +15,11 @@ class Actions(RedfishModel):
 
 
 class DataStorageLineOfService(RedfishResource):
-    access_capabilities: list[str] | None = None
+    access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
     description: str | None = None
-    is_space_efficient: str | None = None
+    is_space_efficient: bool | None = None
     oem: dict[str, Any] | None = None
-    provisioning_policy: str | None = None
-    recoverable_capacity_source_count: str | None = None
-    recovery_time_objectives: str | None = None
+    provisioning_policy: ProvisioningPolicy | None = None
+    recoverable_capacity_source_count: int | None = None
+    recovery_time_objectives: RecoveryAccessScope | None = None

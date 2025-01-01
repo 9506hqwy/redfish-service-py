@@ -8,6 +8,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
+from .sensor import SensorEnergykWhExcerpt, SensorExcerpt, SensorPowerExcerpt
 
 
 class Actions(RedfishModel):
@@ -18,15 +19,15 @@ class Actions(RedfishModel):
 
 
 class PowerDistributionMetrics(RedfishResource):
-    absolute_humidity: str | None = None
+    absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
     description: str | None = None
-    energyk_wh: str | None = None
-    humidity_percent: str | None = None
+    energyk_wh: SensorEnergykWhExcerpt | None = None
+    humidity_percent: SensorExcerpt | None = None
     oem: dict[str, Any] | None = None
-    power_load_percent: str | None = None
-    power_watts: str | None = None
-    temperature_celsius: str | None = None
+    power_load_percent: SensorExcerpt | None = None
+    power_watts: SensorPowerExcerpt | None = None
+    temperature_celsius: SensorExcerpt | None = None
 
 
 class ResetMetrics(RedfishModel):

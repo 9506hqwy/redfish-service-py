@@ -30,7 +30,7 @@ class FabricAdapter(RedfishResource):
     gen_z: GenZ | None = None
     links: Links | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     manufacturer: str | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None

@@ -29,6 +29,25 @@ class Condition(RedfishModel):
     username: str | None = None
 
 
+class ContactInfo(RedfishModel):
+    contact_name: str | None = None
+    email_address: str | None = None
+    phone_number: str | None = None
+
+
+class DurableNameFormat(StrEnum):
+    NAA = "NAA"
+    IQN = "iQN"
+    FC__WWN = "FC_WWN"
+    UUID = "UUID"
+    EUI = "EUI"
+    NQN = "NQN"
+    NSID = "NSID"
+    NGUID = "NGUID"
+    MACADDRESS = "MACAddress"
+    GCXLID = "GCXLID"
+
+
 class Health(StrEnum):
     OK = "OK"
     WARNING = "Warning"
@@ -37,7 +56,7 @@ class Health(StrEnum):
 
 class Identifier(RedfishModel):
     durable_name: str | None = None
-    durable_name_format: str | None = None
+    durable_name_format: DurableNameFormat | None = None
 
 
 class IndicatorLed(StrEnum):
@@ -51,12 +70,12 @@ class Links(RedfishModel):
 
 
 class Location(RedfishModel):
-    altitude_meters: str | None = None
-    contacts: list[str] | None = None
+    altitude_meters: float | None = None
+    contacts: list[ContactInfo] | None = None
     info: str | None = None
     info_format: str | None = None
-    latitude: str | None = None
-    longitude: str | None = None
+    latitude: float | None = None
+    longitude: float | None = None
     oem: dict[str, Any] | None = None
     part_location: PartLocation | None = None
     part_location_context: str | None = None
@@ -65,11 +84,29 @@ class Location(RedfishModel):
     postal_address: PostalAddress | None = None
 
 
+class LocationType(StrEnum):
+    SLOT = "Slot"
+    BAY = "Bay"
+    CONNECTOR = "Connector"
+    SOCKET = "Socket"
+    BACKPLANE = "Backplane"
+    EMBEDDED = "Embedded"
+
+
+class Orientation(StrEnum):
+    FRONT_TO_BACK = "FrontToBack"
+    BACK_TO_FRONT = "BackToFront"
+    TOP_TO_BOTTOM = "TopToBottom"
+    BOTTOM_TO_TOP = "BottomToTop"
+    LEFT_TO_RIGHT = "LeftToRight"
+    RIGHT_TO_LEFT = "RightToLeft"
+
+
 class PartLocation(RedfishModel):
-    location_ordinal_value: str | None = None
-    location_type: str | None = None
-    orientation: str | None = None
-    reference: str | None = None
+    location_ordinal_value: int | None = None
+    location_type: LocationType | None = None
+    orientation: Orientation | None = None
+    reference: Reference | None = None
     service_label: str | None = None
 
 
@@ -86,8 +123,8 @@ class PhysicalAddress(RedfishModel):
 class Placement(RedfishModel):
     additional_info: str | None = None
     rack: str | None = None
-    rack_offset: str | None = None
-    rack_offset_units: str | None = None
+    rack_offset: int | None = None
+    rack_offset_units: RackUnits | None = None
     row: str | None = None
 
 
@@ -102,7 +139,7 @@ class PostalAddress(RedfishModel):
     division: str | None = None
     floor: str | None = None
     gpscoords: str | None = Field(alias="GPSCoords", default=None)
-    house_number: str | None = None
+    house_number: int | None = None
     house_number_suffix: str | None = None
     landmark: str | None = None
     leading_street_direction: str | None = None
@@ -135,24 +172,24 @@ class PowerState(StrEnum):
     PAUSED = "Paused"
 
 
+class RackUnits(StrEnum):
+    OPEN_U = "OpenU"
+    EIA_310 = "EIA_310"
+
+
+class Reference(StrEnum):
+    TOP = "Top"
+    BOTTOM = "Bottom"
+    FRONT = "Front"
+    REAR = "Rear"
+    LEFT = "Left"
+    RIGHT = "Right"
+    MIDDLE = "Middle"
+
+
 class ReferenceableMember(RedfishObjectId):
     member_id: str
     oem: dict[str, Any] | None = None
-
-
-class ResetType(StrEnum):
-    ON = "On"
-    FORCE_OFF = "ForceOff"
-    GRACEFUL_SHUTDOWN = "GracefulShutdown"
-    GRACEFUL_RESTART = "GracefulRestart"
-    FORCE_RESTART = "ForceRestart"
-    NMI = "Nmi"
-    FORCE_ON = "ForceOn"
-    PUSH_POWER_BUTTON = "PushPowerButton"
-    POWER_CYCLE = "PowerCycle"
-    SUSPEND = "Suspend"
-    PAUSE = "Pause"
-    RESUME = "Resume"
 
 
 class Resource(RedfishResource):
@@ -183,8 +220,8 @@ class State(StrEnum):
 
 
 class Status(RedfishModel):
-    conditions: list[str] | None = None
-    health: str | None = None
-    health_rollup: str | None = None
+    conditions: list[Condition] | None = None
+    health: Health | None = None
+    health_rollup: Health | None = None
     oem: dict[str, Any] | None = None
-    state: str | None = None
+    state: State | None = None

@@ -44,17 +44,17 @@ class DataSecurityLoScapabilities(RedfishResource):
     identifier: Identifier | None = None
     oem: dict[str, Any] | None = None
     supported_antivirus_engine_providers: list[str] | None = None
-    supported_antivirus_scan_policies: list[str] | None = None
-    supported_channel_encryption_strengths: list[str] | None = None
-    supported_data_sanitization_policies: list[str] | None = None
-    supported_host_authentication_types: list[str] | None = None
+    supported_antivirus_scan_policies: list[AntiVirusScanTrigger] | None = None
+    supported_channel_encryption_strengths: list[KeySize] | None = None
+    supported_data_sanitization_policies: list[DataSanitizationPolicy] | None = None
+    supported_host_authentication_types: list[AuthenticationType] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
         alias="SupportedLinesOfService@odata.count", default=None
     )
-    supported_media_encryption_strengths: list[str] | None = None
-    supported_secure_channel_protocols: list[str] | None = None
-    supported_user_authentication_types: list[str] | None = None
+    supported_media_encryption_strengths: list[KeySize] | None = None
+    supported_secure_channel_protocols: list[SecureChannelProtocol] | None = None
+    supported_user_authentication_types: list[AuthenticationType] | None = None
 
 
 class KeySize(StrEnum):

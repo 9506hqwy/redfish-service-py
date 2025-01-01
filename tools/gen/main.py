@@ -149,8 +149,8 @@ class ClassInfo:
         definition: dict[str, Any],
     ) -> None:
         if not self.is_base_properties(name):
-            type, array = resolve_property_type(classall, self, definition)
-            nonable = name not in self.required
+            type, array, nonable = resolve_property_type(classall, self, definition)
+            nonable = nonable or name not in self.required
             info = PropetyInfo(name, type, array, nonable)
             self.properties.append(info)
 
@@ -214,7 +214,7 @@ class EnumInfo:
         w.write(f"class {self.cls_name}(StrEnum):\n")
         for v in self.properties:
             w.write(f'    {get_variant_name(v)} = "{v}"')
-            if v.lower().find("password") > -1:
+            if any(re.finditer(r"(password|token)", v.lower())):
                 w.write("  # noqa: S105")
             w.write("\n")
         return None
@@ -235,7 +235,7 @@ class PropetyInfo:
 
     @property
     def property_name(self) -> str:
-        name = self._escape_name(self.name)
+        name = escape_name(self.name)
         name = get_snake_case(name)
         if name in BASE_MODEL_PROPERTIES:
             name = f"{name}_value"
@@ -262,13 +262,13 @@ class PropetyInfo:
 
         w.write("\n")
 
-    def _escape_name(self, name: str) -> str:
-        if name.startswith("#"):
-            # Actions property is omit schema name.
-            name = name.split(".", 1)[-1]
 
-        words = re.split("[^A-Za-z0-9_]", name)
-        return "_".join([w for w in words if w])
+def escape_name(name: str) -> str:
+    if name.startswith("#"):
+        # Actions property is omit schema name.
+        name = name.split(".", 1)[-1]
+    words = re.split("[^A-Za-z0-9_]", name)
+    return "_".join([w for w in words if w])
 
 
 def get_class_name(name: str) -> str:
@@ -305,6 +305,7 @@ def get_primitive_type_name(definition: dict[str, Any]) -> str | None:
 
 
 def get_variant_name(name: str) -> str:
+    name = escape_name(name)
     v = get_snake_case(name).upper()
     if re.match(r"^\d", v):
         v = f"N{v}"
@@ -543,9 +544,14 @@ def resolve_ref(
 
 def resolve_property_type(
     classes: list[ClassInfo | EnumInfo], source: ClassInfo, definition: dict[str, Any]
-) -> tuple[str | ClassInfo | EnumInfo, bool]:
-    if "$ref" in definition:
-        info = resolve_ref(classes, source, definition["$ref"])
+) -> tuple[str | ClassInfo | EnumInfo, bool, bool]:
+    def has_null(d: dict[str, Any]) -> bool:
+        if t := d.get("type", ""):
+            return isinstance(t, str) and t == "null"
+        return False
+
+    def get_from_ref(ref: str, noneable: bool) -> tuple[ClassInfo | EnumInfo, bool, bool]:
+        info = resolve_ref(classes, source, ref)
         if info.id_ref:
             info = next(
                 filter(
@@ -554,18 +560,43 @@ def resolve_property_type(
             )
             info.reachable = True
 
-        return (info, False)
+        return (info, False, noneable)
 
-    if "type" in definition:
-        match definition["type"]:
+    if (any_of := definition.get("anyOf", None)) is not None:
+        nonable = any((a for a in any_of if has_null(a)))
+        if nonable and len(any_of) == 2:
+            ref = next((a["$ref"] for a in any_of if "$ref" in a))
+            return get_from_ref(ref, nonable)
+
+    if (ref := definition.get("$ref", None)) is not None:
+        return get_from_ref(ref, False)
+
+    if (type := definition.get("type", None)) is not None:
+        match type:
+            case list():
+                types: list[str] = type
+                try:
+                    index = types.index("null")
+                    types.pop(index)
+                    nonable = True
+                except IndexError:
+                    nonable = False
+
+                if len(types) == 1:
+                    if name := get_primitive_type_name({"type": types[0]}):
+                        return (name, False, nonable)
+
+                warn(f"{source} {definition} is primitive")
+                return ("str", False, False)
+
             case "array":
                 item_type = resolve_property_type(classes, source, definition["items"])
-                return (item_type[0], True)
+                return (item_type[0], True, False)
             case _:
-                return (get_primitive_type_name(definition) or "str", False)
+                if name := get_primitive_type_name(definition):
+                    return (name, False, False)
 
-    # TODO:
-    return ("str", False)
+    raise Exception(f"{source} has unsuported type property.")
 
 
 def select_definition(definitions: list[dict[str, Any]]) -> str | dict[str, Any] | None:
@@ -711,7 +742,8 @@ def main() -> int:
     classall = load_classes(redfish_path, swordfish_path)
 
     for c in filter(lambda c: not c.versioned, classall):
-        c.reachable = True
+        if isinstance(c, ClassInfo):
+            c.reachable = True
 
     old_reachable = 0
     new_reachable = len(list(filter(lambda c: c.reachable, classall)))

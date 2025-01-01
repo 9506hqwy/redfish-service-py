@@ -17,15 +17,15 @@ class Actions(RedfishModel):
 
 class IoperformanceLineOfService(RedfishResource):
     actions: Actions | None = None
-    average_iooperation_latency_microseconds: str | None = Field(
+    average_iooperation_latency_microseconds: int | None = Field(
         alias="AverageIOOperationLatencyMicroseconds", default=None
     )
     description: str | None = None
-    iooperations_per_second_is_limited: str | None = Field(
+    iooperations_per_second_is_limited: bool | None = Field(
         alias="IOOperationsPerSecondIsLimited", default=None
     )
     ioworkload: Ioworkload | None = Field(alias="IOWorkload", default=None)
-    max_iooperations_per_second_per_terabyte: str | None = Field(
+    max_iooperations_per_second_per_terabyte: int | None = Field(
         alias="MaxIOOperationsPerSecondPerTerabyte", default=None
     )
     oem: dict[str, Any] | None = None

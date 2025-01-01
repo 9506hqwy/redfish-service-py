@@ -21,13 +21,13 @@ class Actions(RedfishModel):
 class Certificate(RedfishResource):
     actions: Actions | None = None
     certificate_string: str | None = None
-    certificate_type: str | None = None
-    certificate_usage_types: list[str] | None = None
+    certificate_type: CertificateType | None = None
+    certificate_usage_types: list[CertificateUsageType] | None = None
     description: str | None = None
     fingerprint: str | None = None
     fingerprint_hash_algorithm: str | None = None
     issuer: Identifier | None = None
-    key_usage: list[str] | None = None
+    key_usage: list[KeyUsage] | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
     spdm: Spdm | None = Field(alias="SPDM", default=None)
@@ -43,6 +43,20 @@ class CertificateType(StrEnum):
     PEM = "PEM"
     PEMCHAIN = "PEMchain"
     PKCS7 = "PKCS7"
+
+
+class CertificateUsageType(StrEnum):
+    USER = "User"
+    WEB = "Web"
+    SSH = "SSH"
+    DEVICE = "Device"
+    PLATFORM = "Platform"
+    BIOS = "BIOS"
+    IDEV_ID = "IDevID"
+    LDEV_ID = "LDevID"
+    IAK = "IAK"
+    LAK = "LAK"
+    EK = "EK"
 
 
 class Identifier(RedfishModel):
@@ -79,7 +93,7 @@ class KeyUsage(StrEnum):
 
 
 class Links(RedfishModel):
-    issuer: str | None = None
+    issuer: IdRef | None = None
     oem: dict[str, Any] | None = None
     subjects: list[IdRef] | None = None
     subjects_odata_count: int | None = Field(alias="Subjects@odata.count", default=None)
@@ -96,4 +110,4 @@ class Renew(RedfishModel):
 
 
 class Spdm(RedfishModel):
-    slot_id: str | None = None
+    slot_id: int | None = None

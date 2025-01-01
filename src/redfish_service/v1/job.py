@@ -33,7 +33,7 @@ class Job(RedfishResource):
     messages: list[Message] | None = None
     oem: dict[str, Any] | None = None
     payload: Payload | None = None
-    percent_complete: str | None = None
+    percent_complete: int | None = None
     schedule: Schedule | None = None
     start_time: str | None = None
     step_order: list[str] | None = None

@@ -32,19 +32,19 @@ class AddressPool(RedfishResource):
 
 
 class BfdsingleHopOnly(RedfishModel):
-    demand_mode_enabled: str | None = None
-    desired_min_tx_interval_milliseconds: str | None = None
+    demand_mode_enabled: bool | None = None
+    desired_min_tx_interval_milliseconds: int | None = None
     key_chain: str | None = None
-    local_multiplier: str | None = None
-    meticulous_mode_enabled: str | None = None
-    required_min_rx_interval_milliseconds: str | None = None
-    source_port: str | None = None
+    local_multiplier: int | None = None
+    meticulous_mode_enabled: bool | None = None
+    required_min_rx_interval_milliseconds: int | None = None
+    source_port: int | None = None
 
 
 class Bgpevpn(RedfishModel):
-    arpproxy_enabled: str | None = Field(alias="ARPProxyEnabled", default=None)
-    arpsuppression_enabled: str | None = Field(alias="ARPSuppressionEnabled", default=None)
-    arpsupression_enabled: str | None = Field(alias="ARPSupressionEnabled", default=None)
+    arpproxy_enabled: bool | None = Field(alias="ARPProxyEnabled", default=None)
+    arpsuppression_enabled: bool | None = Field(alias="ARPSuppressionEnabled", default=None)
+    arpsupression_enabled: bool | None = Field(alias="ARPSupressionEnabled", default=None)
     anycast_gateway_ipaddress: str | None = Field(alias="AnycastGatewayIPAddress", default=None)
     anycast_gateway_macaddress: str | None = Field(alias="AnycastGatewayMACAddress", default=None)
     esinumber_range: EsinumberRange | None = Field(alias="ESINumberRange", default=None)
@@ -53,15 +53,15 @@ class Bgpevpn(RedfishModel):
     gateway_ipaddress_range: GatewayIpaddressRange | None = Field(
         alias="GatewayIPAddressRange", default=None
     )
-    ndpproxy_enabled: str | None = Field(alias="NDPProxyEnabled", default=None)
-    ndpsuppression_enabled: str | None = Field(alias="NDPSuppressionEnabled", default=None)
-    ndpsupression_enabled: str | None = Field(alias="NDPSupressionEnabled", default=None)
+    ndpproxy_enabled: bool | None = Field(alias="NDPProxyEnabled", default=None)
+    ndpsuppression_enabled: bool | None = Field(alias="NDPSuppressionEnabled", default=None)
+    ndpsupression_enabled: bool | None = Field(alias="NDPSupressionEnabled", default=None)
     route_distinguisher_administrator_subfield: str | None = None
     route_distinguisher_range: RouteDistinguisherRange | None = None
     route_target_administrator_subfield: str | None = None
     route_target_range: RouteTargetRange | None = None
-    underlay_multicast_enabled: str | None = None
-    unknown_unicast_suppression_enabled: str | None = None
+    underlay_multicast_enabled: bool | None = None
+    unknown_unicast_suppression_enabled: bool | None = None
     vlanidentifier_address_range: VlanidentifierAddressRange | None = Field(
         alias="VLANIdentifierAddressRange", default=None
     )
@@ -69,32 +69,32 @@ class Bgpevpn(RedfishModel):
 
 class Bgpneighbor(RedfishModel):
     address: str | None = None
-    allow_own_asenabled: str | None = Field(alias="AllowOwnASEnabled", default=None)
+    allow_own_asenabled: bool | None = Field(alias="AllowOwnASEnabled", default=None)
     cidr: int | None = Field(alias="CIDR", default=None)
-    connect_retry_seconds: str | None = None
+    connect_retry_seconds: int | None = None
     enabled: bool | None = None
-    hold_time_seconds: str | None = None
-    keepalive_interval_seconds: str | None = None
-    local_as: str | None = Field(alias="LocalAS", default=None)
-    log_state_changes_enabled: str | None = None
+    hold_time_seconds: int | None = None
+    keepalive_interval_seconds: int | None = None
+    local_as: int | None = Field(alias="LocalAS", default=None)
+    log_state_changes_enabled: bool | None = None
     max_prefix: MaxPrefix | None = None
-    minimum_advertisement_interval_seconds: str | None = None
-    passive_mode_enabled: str | None = None
-    path_mtudiscovery_enabled: str | None = Field(alias="PathMTUDiscoveryEnabled", default=None)
-    peer_as: str | None = Field(alias="PeerAS", default=None)
-    replace_peer_asenabled: str | None = Field(alias="ReplacePeerASEnabled", default=None)
-    tcpmax_segment_size_bytes: str | None = Field(alias="TCPMaxSegmentSizeBytes", default=None)
-    treat_as_withdraw_enabled: str | None = None
+    minimum_advertisement_interval_seconds: int | None = None
+    passive_mode_enabled: bool | None = None
+    path_mtudiscovery_enabled: bool | None = Field(alias="PathMTUDiscoveryEnabled", default=None)
+    peer_as: int | None = Field(alias="PeerAS", default=None)
+    replace_peer_asenabled: bool | None = Field(alias="ReplacePeerASEnabled", default=None)
+    tcpmax_segment_size_bytes: int | None = Field(alias="TCPMaxSegmentSizeBytes", default=None)
+    treat_as_withdraw_enabled: bool | None = None
 
 
 class Bgproute(RedfishModel):
-    advertise_inactive_routes_enabled: str | None = None
-    distance_external: str | None = None
-    distance_internal: str | None = None
-    distance_local: str | None = None
-    external_compare_router_id_enabled: str | None = None
-    flap_damping_enabled: str | None = None
-    send_default_route_enabled: str | None = None
+    advertise_inactive_routes_enabled: bool | None = None
+    distance_external: int | None = None
+    distance_internal: int | None = None
+    distance_local: int | None = None
+    external_compare_router_id_enabled: bool | None = None
+    flap_damping_enabled: bool | None = None
+    send_default_route_enabled: bool | None = None
 
 
 class CommonBgpproperties(RedfishModel):
@@ -103,30 +103,30 @@ class CommonBgpproperties(RedfishModel):
     bgproute: Bgproute | None = Field(alias="BGPRoute", default=None)
     graceful_restart: GracefulRestart | None = None
     multiple_paths: MultiplePaths | None = None
-    send_community_enabled: str | None = None
+    send_community_enabled: bool | None = None
 
 
 class Dhcp(RedfishModel):
-    dhcpinterface_mtubytes: str | None = Field(alias="DHCPInterfaceMTUBytes", default=None)
-    dhcprelay_enabled: str | None = Field(alias="DHCPRelayEnabled", default=None)
+    dhcpinterface_mtubytes: int | None = Field(alias="DHCPInterfaceMTUBytes", default=None)
+    dhcprelay_enabled: bool | None = Field(alias="DHCPRelayEnabled", default=None)
     dhcpserver: list[str] | None = Field(alias="DHCPServer", default=None)
 
 
 class Ebgp(RedfishModel):
     asnumber_range: AsnumberRange | None = Field(alias="ASNumberRange", default=None)
-    allow_duplicate_asenabled: str | None = Field(alias="AllowDuplicateASEnabled", default=None)
-    allow_override_asenabled: str | None = Field(alias="AllowOverrideASEnabled", default=None)
-    always_compare_medenabled: str | None = Field(alias="AlwaysCompareMEDEnabled", default=None)
-    bgplocal_preference: str | None = Field(alias="BGPLocalPreference", default=None)
+    allow_duplicate_asenabled: bool | None = Field(alias="AllowDuplicateASEnabled", default=None)
+    allow_override_asenabled: bool | None = Field(alias="AllowOverrideASEnabled", default=None)
+    always_compare_medenabled: bool | None = Field(alias="AlwaysCompareMEDEnabled", default=None)
+    bgplocal_preference: int | None = Field(alias="BGPLocalPreference", default=None)
     bgpneighbor: Bgpneighbor | None = Field(alias="BGPNeighbor", default=None)
     bgproute: Bgproute | None = Field(alias="BGPRoute", default=None)
-    bgpweight: str | None = Field(alias="BGPWeight", default=None)
+    bgpweight: int | None = Field(alias="BGPWeight", default=None)
     graceful_restart: GracefulRestart | None = None
-    med: str | None = Field(alias="MED", default=None)
-    multihop_enabled: str | None = None
-    multihop_ttl: str | None = Field(alias="MultihopTTL", default=None)
+    med: int | None = Field(alias="MED", default=None)
+    multihop_enabled: bool | None = None
+    multihop_ttl: int | None = Field(alias="MultihopTTL", default=None)
     multiple_paths: MultiplePaths | None = None
-    send_community_enabled: str | None = None
+    send_community_enabled: bool | None = None
 
 
 class EsinumberRange(RedfishModel):
@@ -157,17 +157,17 @@ class GatewayIpaddressRange(RedfishModel):
 
 class GenZ(RedfishModel):
     access_key: str | None = None
-    max_cid: str | None = Field(alias="MaxCID", default=None)
-    max_sid: str | None = Field(alias="MaxSID", default=None)
-    min_cid: str | None = Field(alias="MinCID", default=None)
-    min_sid: str | None = Field(alias="MinSID", default=None)
+    max_cid: int | None = Field(alias="MaxCID", default=None)
+    max_sid: int | None = Field(alias="MaxSID", default=None)
+    min_cid: int | None = Field(alias="MinCID", default=None)
+    min_sid: int | None = Field(alias="MinSID", default=None)
 
 
 class GracefulRestart(RedfishModel):
-    graceful_restart_enabled: str | None = None
-    helper_mode_enabled: str | None = None
-    stale_routes_time_seconds: str | None = None
-    time_seconds: str | None = None
+    graceful_restart_enabled: bool | None = None
+    helper_mode_enabled: bool | None = None
+    stale_routes_time_seconds: int | None = None
+    time_seconds: int | None = None
 
 
 class Ipv4(RedfishModel):
@@ -176,7 +176,7 @@ class Ipv4(RedfishModel):
     dhcp: Dhcp | None = Field(alias="DHCP", default=None)
     dnsdomain_name: str | None = Field(alias="DNSDomainName", default=None)
     dnsserver: list[str] | None = Field(alias="DNSServer", default=None)
-    distribute_into_underlay_enabled: str | None = None
+    distribute_into_underlay_enabled: bool | None = None
     ebgpaddress_range: Ipv4AddressRange | None = Field(alias="EBGPAddressRange", default=None)
     fabric_link_address_range: Ipv4AddressRange | None = None
     gateway_ipaddress: str | None = Field(alias="GatewayIPAddress", default=None)
@@ -184,10 +184,10 @@ class Ipv4(RedfishModel):
     ibgpaddress_range: Ipv4AddressRange | None = Field(alias="IBGPAddressRange", default=None)
     loopback_address_range: Ipv4AddressRange | None = None
     management_address_range: Ipv4AddressRange | None = None
-    ntpoffset_hours_minutes: str | None = Field(alias="NTPOffsetHoursMinutes", default=None)
+    ntpoffset_hours_minutes: int | None = Field(alias="NTPOffsetHoursMinutes", default=None)
     ntpserver: list[str] | None = Field(alias="NTPServer", default=None)
     ntptimezone: str | None = Field(alias="NTPTimezone", default=None)
-    native_vlan: str | None = Field(alias="NativeVLAN", default=None)
+    native_vlan: int | None = Field(alias="NativeVLAN", default=None)
     system_macrange: SystemMacrange | None = Field(alias="SystemMACRange", default=None)
     vlanidentifier_address_range: VlanidentifierAddressRange | None = Field(
         alias="VLANIdentifierAddressRange", default=None
@@ -208,15 +208,15 @@ class Links(RedfishModel):
 
 
 class MaxPrefix(RedfishModel):
-    max_prefix_number: str | None = None
-    restart_timer_seconds: str | None = None
-    shutdown_threshold_percentage: str | None = None
-    threshold_warning_only_enabled: str | None = None
+    max_prefix_number: int | None = None
+    restart_timer_seconds: int | None = None
+    shutdown_threshold_percentage: float | None = None
+    threshold_warning_only_enabled: bool | None = None
 
 
 class MultiplePaths(RedfishModel):
-    maximum_paths: str | None = None
-    use_multiple_paths_enabled: str | None = None
+    maximum_paths: int | None = None
+    use_multiple_paths_enabled: bool | None = None
 
 
 class RouteDistinguisherRange(RedfishModel):
@@ -225,8 +225,8 @@ class RouteDistinguisherRange(RedfishModel):
 
 
 class RouteTargetRange(RedfishModel):
-    lower: str | None = None
-    upper: str | None = None
+    lower: int | None = None
+    upper: int | None = None
 
 
 class SystemMacrange(RedfishModel):
@@ -235,5 +235,5 @@ class SystemMacrange(RedfishModel):
 
 
 class VlanidentifierAddressRange(RedfishModel):
-    lower: str | None = None
-    upper: str | None = None
+    lower: int | None = None
+    upper: int | None = None

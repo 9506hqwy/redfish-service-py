@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -8,6 +9,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
+from .circuit import NominalVoltageType, PhaseWiringType, PlugType
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
@@ -18,9 +20,20 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class EfficiencyRating(RedfishModel):
+    efficiency_percent: float | None = None
+    load_percent: float | None = None
+
+
 class InputRange(RedfishModel):
-    capacity_watts: str | None = None
-    nominal_voltage_type: str | None = None
+    capacity_watts: float | None = None
+    nominal_voltage_type: NominalVoltageType | None = None
+
+
+class LineStatus(StrEnum):
+    NORMAL = "Normal"
+    LOSS_OF_INPUT = "LossOfInput"
+    OUT_OF_RANGE = "OutOfRange"
 
 
 class Links(RedfishModel):
@@ -35,7 +48,7 @@ class Links(RedfishModel):
 
 
 class OutputRail(RedfishModel):
-    nominal_voltage: str | None = None
+    nominal_voltage: float | None = None
     physical_context: PhysicalContext | None = None
 
 
@@ -44,36 +57,43 @@ class PowerSupply(RedfishResource):
     assembly: IdRef | None = None
     certificates: IdRef | None = None
     description: str | None = None
-    efficiency_ratings: list[str] | None = None
+    efficiency_ratings: list[EfficiencyRating] | None = None
     electrical_source_manager_uris: list[str] | None = Field(
         alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
     firmware_version: str | None = None
-    hot_pluggable: str | None = None
-    input_nominal_voltage_type: str | None = None
+    hot_pluggable: bool | None = None
+    input_nominal_voltage_type: NominalVoltageType | None = None
     input_ranges: list[InputRange] | None = None
-    line_input_status: str | None = None
+    line_input_status: LineStatus | None = None
     links: Links | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     manufacturer: str | None = None
     metrics: IdRef | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
-    output_nominal_voltage_type: str | None = None
+    output_nominal_voltage_type: NominalVoltageType | None = None
     output_rails: list[OutputRail] | None = None
     part_number: str | None = None
-    phase_wiring_type: str | None = None
-    plug_type: str | None = None
-    power_capacity_watts: str | None = None
-    power_supply_type: str | None = None
+    phase_wiring_type: PhaseWiringType | None = None
+    plug_type: PlugType | None = None
+    power_capacity_watts: float | None = None
+    power_supply_type: PowerSupplyType | None = None
     production_date: str | None = None
-    replaceable: str | None = None
+    replaceable: bool | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
     version: str | None = None
+
+
+class PowerSupplyType(StrEnum):
+    AC = "AC"
+    DC = "DC"
+    ACOR_DC = "ACorDC"
+    DCREGULATOR = "DCRegulator"
 
 
 class Reset(RedfishModel):

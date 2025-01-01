@@ -31,7 +31,7 @@ class CoolingUnit(RedfishResource):
     asset_tag: str | None = None
     coolant: Coolant | None = None
     coolant_connector_redundancy: list[RedundantGroup] | None = None
-    cooling_capacity_watts: str | None = None
+    cooling_capacity_watts: int | None = None
     description: str | None = None
     environment_metrics: IdRef | None = None
     equipment_type: CoolingEquipmentType

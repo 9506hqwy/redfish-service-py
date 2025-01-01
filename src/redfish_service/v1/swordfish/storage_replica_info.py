@@ -16,41 +16,125 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class ConsistencyState(StrEnum):
+    CONSISTENT = "Consistent"
+    INCONSISTENT = "Inconsistent"
+
+
+class ConsistencyStatus(StrEnum):
+    CONSISTENT = "Consistent"
+    IN_PROGRESS = "InProgress"
+    DISABLED = "Disabled"
+    IN_ERROR = "InError"
+
+
+class ConsistencyType(StrEnum):
+    SEQUENTIALLY_CONSISTENT = "SequentiallyConsistent"
+
+
 class ReplicaFaultDomain(StrEnum):
     LOCAL = "Local"
     REMOTE = "Remote"
 
 
 class ReplicaInfo(RedfishModel):
-    consistency_enabled: str | None = None
-    consistency_state: str | None = None
-    consistency_status: str | None = None
-    consistency_type: str | None = None
+    consistency_enabled: bool | None = None
+    consistency_state: ConsistencyState | None = None
+    consistency_status: ConsistencyStatus | None = None
+    consistency_type: ConsistencyType | None = None
     data_protection_line_of_service: IdRef | None = None
-    failed_copy_stops_host_io: str | None = Field(alias="FailedCopyStopsHostIO", default=None)
-    percent_synced: str | None = None
+    failed_copy_stops_host_io: bool | None = Field(alias="FailedCopyStopsHostIO", default=None)
+    percent_synced: int | None = None
     remote_source_replica: str | None = None
     replica: IdRef | None = None
-    replica_fault_domain: str | None = None
-    replica_priority: str | None = None
-    replica_progress_status: str | None = None
-    replica_read_only_access: str | None = None
-    replica_recovery_mode: str | None = None
-    replica_role: str | None = None
-    replica_skew_bytes: str | None = None
-    replica_state: str | None = None
-    replica_type: str | None = None
-    replica_update_mode: str | None = None
-    requested_replica_state: str | None = None
+    replica_fault_domain: ReplicaFaultDomain | None = None
+    replica_priority: ReplicaPriority | None = None
+    replica_progress_status: ReplicaProgressStatus | None = None
+    replica_read_only_access: ReplicaReadOnlyAccess | None = None
+    replica_recovery_mode: ReplicaRecoveryMode | None = None
+    replica_role: ReplicaRole | None = None
+    replica_skew_bytes: int | None = None
+    replica_state: ReplicaState | None = None
+    replica_type: ReplicaType | None = None
+    replica_update_mode: ReplicaUpdateMode | None = None
+    requested_replica_state: ReplicaState | None = None
     source_replica: IdRef | None = None
-    sync_maintained: str | None = None
-    undiscovered_element: str | None = None
+    sync_maintained: bool | None = None
+    undiscovered_element: UndiscoveredElement | None = None
     when_activated: str | None = None
     when_deactivated: str | None = None
     when_established: str | None = None
     when_suspended: str | None = None
     when_synced: str | None = None
     when_synchronized: str | None = None
+
+
+class ReplicaPriority(StrEnum):
+    LOW = "Low"
+    SAME = "Same"
+    HIGH = "High"
+    URGENT = "Urgent"
+
+
+class ReplicaProgressStatus(StrEnum):
+    COMPLETED = "Completed"
+    DORMANT = "Dormant"
+    INITIALIZING = "Initializing"
+    PREPARING = "Preparing"
+    SYNCHRONIZING = "Synchronizing"
+    RESYNCING = "Resyncing"
+    RESTORING = "Restoring"
+    FRACTURING = "Fracturing"
+    SPLITTING = "Splitting"
+    FAILING_OVER = "FailingOver"
+    FAILING_BACK = "FailingBack"
+    DETACHING = "Detaching"
+    ABORTING = "Aborting"
+    MIXED = "Mixed"
+    SUSPENDING = "Suspending"
+    REQUIRES_FRACTURE = "RequiresFracture"
+    REQUIRES_RESYNC = "RequiresResync"
+    REQUIRES_ACTIVATE = "RequiresActivate"
+    PENDING = "Pending"
+    REQUIRES_DETACH = "RequiresDetach"
+    TERMINATING = "Terminating"
+    REQUIRES_SPLIT = "RequiresSplit"
+    REQUIRES_RESUME = "RequiresResume"
+
+
+class ReplicaReadOnlyAccess(StrEnum):
+    SOURCE_ELEMENT = "SourceElement"
+    REPLICA_ELEMENT = "ReplicaElement"
+    BOTH = "Both"
+
+
+class ReplicaRecoveryMode(StrEnum):
+    AUTOMATIC = "Automatic"
+    MANUAL = "Manual"
+
+
+class ReplicaRole(StrEnum):
+    SOURCE = "Source"
+    TARGET = "Target"
+
+
+class ReplicaState(StrEnum):
+    INITIALIZED = "Initialized"
+    UNSYNCHRONIZED = "Unsynchronized"
+    SYNCHRONIZED = "Synchronized"
+    BROKEN = "Broken"
+    FRACTURED = "Fractured"
+    SPLIT = "Split"
+    INACTIVE = "Inactive"
+    SUSPENDED = "Suspended"
+    FAILEDOVER = "Failedover"
+    PREPARED = "Prepared"
+    ABORTED = "Aborted"
+    SKEWED = "Skewed"
+    MIXED = "Mixed"
+    PARTITIONED = "Partitioned"
+    INVALID = "Invalid"
+    RESTORED = "Restored"
 
 
 class ReplicaType(StrEnum):
@@ -71,3 +155,8 @@ class StorageReplicaInfo(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
+
+
+class UndiscoveredElement(StrEnum):
+    SOURCE_ELEMENT = "SourceElement"
+    REPLICA_ELEMENT = "ReplicaElement"

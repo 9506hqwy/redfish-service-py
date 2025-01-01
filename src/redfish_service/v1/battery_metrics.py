@@ -22,7 +22,7 @@ class BatteryMetrics(RedfishResource):
     cell_voltages_odata_count: int | None = Field(alias="CellVoltages@odata.count", default=None)
     charge_percent: SensorExcerpt | None = None
     description: str | None = None
-    discharge_cycles: str | None = None
+    discharge_cycles: float | None = None
     input_current_amps: SensorCurrentExcerpt | None = None
     input_voltage: SensorVoltageExcerpt | None = None
     oem: dict[str, Any] | None = None

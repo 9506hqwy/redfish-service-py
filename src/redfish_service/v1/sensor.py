@@ -10,6 +10,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
+from .physical_context import PhysicalContext, PhysicalSubContext
 from .redundancy import RedundantGroup
 from .resource import Location, Status
 
@@ -42,12 +43,51 @@ class ElectricalContext(StrEnum):
     TOTAL = "Total"
 
 
+class ImplementationType(StrEnum):
+    PHYSICAL_SENSOR = "PhysicalSensor"
+    SYNTHESIZED = "Synthesized"
+    REPORTED = "Reported"
+
+
 class Links(RedfishModel):
     associated_controls: list[IdRef] | None = None
     associated_controls_odata_count: int | None = Field(
         alias="AssociatedControls@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
+
+
+class ReadingBasisType(StrEnum):
+    ZERO = "Zero"
+    DELTA = "Delta"
+    HEADROOM = "Headroom"
+
+
+class ReadingType(StrEnum):
+    TEMPERATURE = "Temperature"
+    HUMIDITY = "Humidity"
+    POWER = "Power"
+    ENERGYK_WH = "EnergykWh"
+    ENERGY_JOULES = "EnergyJoules"
+    ENERGY_WH = "EnergyWh"
+    CHARGE_AH = "ChargeAh"
+    VOLTAGE = "Voltage"
+    CURRENT = "Current"
+    FREQUENCY = "Frequency"
+    PRESSURE = "Pressure"
+    PRESSUREK_PA = "PressurekPa"
+    PRESSURE_PA = "PressurePa"
+    LIQUID_LEVEL = "LiquidLevel"
+    ROTATIONAL = "Rotational"
+    AIR_FLOW = "AirFlow"
+    AIR_FLOW_CMM = "AirFlowCMM"
+    LIQUID_FLOW = "LiquidFlow"
+    LIQUID_FLOW_LPM = "LiquidFlowLPM"
+    BAROMETRIC = "Barometric"
+    ALTITUDE = "Altitude"
+    PERCENT = "Percent"
+    ABSOLUTE_HUMIDITY = "AbsoluteHumidity"
+    HEAT = "Heat"
 
 
 class ResetMetrics(RedfishModel):
@@ -61,152 +101,159 @@ class ResetToDefaults(RedfishModel):
 
 
 class Sensor(RedfishResource):
-    accuracy: str | None = None
+    accuracy: float | None = None
     actions: Actions | None = None
-    adjusted_max_allowable_operating_value: str | None = None
-    adjusted_min_allowable_operating_value: str | None = None
-    apparent_va: str | None = Field(alias="ApparentVA", default=None)
-    apparentk_vah: str | None = Field(alias="ApparentkVAh", default=None)
-    average_reading: str | None = None
+    adjusted_max_allowable_operating_value: float | None = None
+    adjusted_min_allowable_operating_value: float | None = None
+    apparent_va: float | None = Field(alias="ApparentVA", default=None)
+    apparentk_vah: float | None = Field(alias="ApparentkVAh", default=None)
+    average_reading: float | None = None
     averaging_interval: str | None = None
-    averaging_interval_achieved: str | None = None
-    calibration: str | None = None
+    averaging_interval_achieved: bool | None = None
+    calibration: float | None = None
     calibration_time: str | None = None
-    crest_factor: str | None = None
+    crest_factor: float | None = None
     description: str | None = None
-    electrical_context: str | None = None
-    enabled: str | None = None
-    implementation: str | None = None
-    lifetime_reading: str | None = None
+    electrical_context: ElectricalContext | None = None
+    enabled: bool | None = None
+    implementation: ImplementationType | None = None
+    lifetime_reading: float | None = None
     lifetime_start_date_time: str | None = None
     links: Links | None = None
-    load_percent: str | None = None
+    load_percent: float | None = None
     location: Location | None = None
-    lowest_reading: str | None = None
+    lowest_reading: float | None = None
     lowest_reading_time: str | None = None
     manufacturer: str | None = None
-    max_allowable_operating_value: str | None = None
-    min_allowable_operating_value: str | None = None
+    max_allowable_operating_value: float | None = None
+    min_allowable_operating_value: float | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    peak_reading: str | None = None
+    peak_reading: float | None = None
     peak_reading_time: str | None = None
-    phase_angle_degrees: str | None = None
-    physical_context: str | None = None
-    physical_sub_context: str | None = None
-    power_factor: str | None = None
-    precision: str | None = None
-    reactive_var: str | None = Field(alias="ReactiveVAR", default=None)
-    reactivek_varh: str | None = Field(alias="ReactivekVARh", default=None)
-    reading: str | None = None
-    reading_accuracy: str | None = None
-    reading_basis: str | None = None
-    reading_range_max: str | None = None
-    reading_range_min: str | None = None
+    phase_angle_degrees: float | None = None
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
+    power_factor: float | None = None
+    precision: float | None = None
+    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
+    reactivek_varh: float | None = Field(alias="ReactivekVARh", default=None)
+    reading: float | None = None
+    reading_accuracy: float | None = None
+    reading_basis: ReadingBasisType | None = None
+    reading_range_max: float | None = None
+    reading_range_min: float | None = None
     reading_time: str | None = None
-    reading_type: str | None = None
+    reading_type: ReadingType | None = None
     reading_units: str | None = None
     related_item: list[IdRef] | None = None
     related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     sku: str | None = Field(alias="SKU", default=None)
-    sensing_frequency: str | None = None
+    sensing_frequency: float | None = None
     sensing_interval: str | None = None
     sensor_group: RedundantGroup | None = None
     sensor_reset_time: str | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
-    speed_rpm: str | None = Field(alias="SpeedRPM", default=None)
+    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
     status: Status | None = None
-    thdpercent: str | None = Field(alias="THDPercent", default=None)
+    thdpercent: float | None = Field(alias="THDPercent", default=None)
     thresholds: Thresholds | None = None
     user_label: str | None = None
-    voltage_type: str | None = None
+    voltage_type: VoltageType | None = None
 
 
 class SensorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     device_name: str | None = None
-    physical_context: str | None = None
-    physical_sub_context: str | None = None
-    reading: str | None = None
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
+    reading: float | None = None
 
 
 class SensorCurrentExcerpt(RedfishModel):
-    crest_factor: str | None = None
+    crest_factor: float | None = None
     data_source_uri: str | None = None
-    reading: str | None = None
-    thdpercent: str | None = Field(alias="THDPercent", default=None)
+    reading: float | None = None
+    thdpercent: float | None = Field(alias="THDPercent", default=None)
 
 
 class SensorEnergykWhExcerpt(RedfishModel):
-    apparentk_vah: str | None = Field(alias="ApparentkVAh", default=None)
+    apparentk_vah: float | None = Field(alias="ApparentkVAh", default=None)
     data_source_uri: str | None = None
-    lifetime_reading: str | None = None
-    reactivek_varh: str | None = Field(alias="ReactivekVARh", default=None)
-    reading: str | None = None
+    lifetime_reading: float | None = None
+    reactivek_varh: float | None = Field(alias="ReactivekVARh", default=None)
+    reading: float | None = None
     sensor_reset_time: str | None = None
 
 
 class SensorExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    reading: str | None = None
+    reading: float | None = None
 
 
 class SensorFanArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     device_name: str | None = None
-    physical_context: str | None = None
-    physical_sub_context: str | None = None
-    reading: str | None = None
-    speed_rpm: str | None = Field(alias="SpeedRPM", default=None)
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
+    reading: float | None = None
+    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
 
 
 class SensorFanExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    reading: str | None = None
-    speed_rpm: str | None = Field(alias="SpeedRPM", default=None)
+    reading: float | None = None
+    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
 
 
 class SensorPowerArrayExcerpt(RedfishModel):
-    apparent_va: str | None = Field(alias="ApparentVA", default=None)
+    apparent_va: float | None = Field(alias="ApparentVA", default=None)
     data_source_uri: str | None = None
-    phase_angle_degrees: str | None = None
-    physical_context: str | None = None
-    physical_sub_context: str | None = None
-    power_factor: str | None = None
-    reactive_var: str | None = Field(alias="ReactiveVAR", default=None)
-    reading: str | None = None
+    phase_angle_degrees: float | None = None
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
+    power_factor: float | None = None
+    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
+    reading: float | None = None
 
 
 class SensorPowerExcerpt(RedfishModel):
-    apparent_va: str | None = Field(alias="ApparentVA", default=None)
+    apparent_va: float | None = Field(alias="ApparentVA", default=None)
     data_source_uri: str | None = None
-    phase_angle_degrees: str | None = None
-    power_factor: str | None = None
-    reactive_var: str | None = Field(alias="ReactiveVAR", default=None)
-    reading: str | None = None
+    phase_angle_degrees: float | None = None
+    power_factor: float | None = None
+    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
+    reading: float | None = None
 
 
 class SensorPumpExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    reading: str | None = None
-    speed_rpm: str | None = Field(alias="SpeedRPM", default=None)
+    reading: float | None = None
+    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
 
 
 class SensorVoltageExcerpt(RedfishModel):
-    crest_factor: str | None = None
+    crest_factor: float | None = None
     data_source_uri: str | None = None
-    reading: str | None = None
-    thdpercent: str | None = Field(alias="THDPercent", default=None)
+    reading: float | None = None
+    thdpercent: float | None = Field(alias="THDPercent", default=None)
 
 
 class Threshold(RedfishModel):
-    activation: str | None = None
+    activation: ThresholdActivation | None = None
     dwell_time: str | None = None
     hysteresis_duration: str | None = None
-    hysteresis_reading: str | None = None
-    reading: str | None = None
+    hysteresis_reading: float | None = None
+    reading: float | None = None
+
+
+class ThresholdActivation(StrEnum):
+    INCREASING = "Increasing"
+    DECREASING = "Decreasing"
+    EITHER = "Either"
+    DISABLED = "Disabled"
 
 
 class Thresholds(RedfishModel):

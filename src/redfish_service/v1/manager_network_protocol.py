@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -16,10 +17,16 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class EngineId(RedfishModel):
+    architecture_id: str | None = None
+    enterprise_specific_method: str | None = None
+    private_enterprise_id: str | None = None
+
+
 class Httpsprotocol(RedfishModel):
     certificates: IdRef | None = None
-    port: str | None = None
-    protocol_enabled: str | None = None
+    port: int | None = None
+    protocol_enabled: bool | None = None
 
 
 class ManagerNetworkProtocol(RedfishResource):
@@ -52,13 +59,19 @@ class ManagerNetworkProtocol(RedfishResource):
 class Ntpprotocol(RedfishModel):
     ntpservers: list[str] | None = Field(alias="NTPServers", default=None)
     network_supplied_servers: list[str] | None = None
-    port: str | None = None
-    protocol_enabled: str | None = None
+    port: int | None = None
+    protocol_enabled: bool | None = None
+
+
+class NotifyIpv6Scope(StrEnum):
+    LINK = "Link"
+    SITE = "Site"
+    ORGANIZATION = "Organization"
 
 
 class Protocol(RedfishModel):
-    port: str | None = None
-    protocol_enabled: str | None = None
+    port: int | None = None
+    protocol_enabled: bool | None = None
 
 
 class ProxyConfiguration(RedfishModel):
@@ -71,24 +84,60 @@ class ProxyConfiguration(RedfishModel):
     username: str | None = None
 
 
+class SnmpauthenticationProtocols(StrEnum):
+    ACCOUNT = "Account"
+    COMMUNITY_STRING = "CommunityString"
+    HMAC__MD5 = "HMAC_MD5"
+    HMAC__SHA96 = "HMAC_SHA96"
+    HMAC128__SHA224 = "HMAC128_SHA224"
+    HMAC192__SHA256 = "HMAC192_SHA256"
+    HMAC256__SHA384 = "HMAC256_SHA384"
+    HMAC384__SHA512 = "HMAC384_SHA512"
+
+
+class Snmpcommunity(RedfishModel):
+    access_mode: SnmpcommunityAccessMode | None = None
+    community_string: str | None = None
+    ipv4_address_range_lower: str | None = Field(alias="IPv4AddressRangeLower", default=None)
+    ipv4_address_range_upper: str | None = Field(alias="IPv4AddressRangeUpper", default=None)
+    name: str | None = None
+    restrict_community_to_ipv4_address_range: bool | None = Field(
+        alias="RestrictCommunityToIPv4AddressRange", default=None
+    )
+
+
+class SnmpcommunityAccessMode(StrEnum):
+    FULL = "Full"
+    LIMITED = "Limited"
+
+
+class SnmpencryptionProtocols(StrEnum):
+    NONE = "None"
+    ACCOUNT = "Account"
+    CBC__DES = "CBC_DES"
+    CFB128__AES128 = "CFB128_AES128"
+    CFB128__AES192 = "CFB128_AES192"
+    CFB128__AES256 = "CFB128_AES256"
+
+
 class Snmpprotocol(RedfishModel):
-    authentication_protocol: str | None = None
-    community_access_mode: str | None = None
-    community_strings: list[str] | None = None
-    enable_snmpv1: str | None = Field(alias="EnableSNMPv1", default=None)
-    enable_snmpv2c: str | None = Field(alias="EnableSNMPv2c", default=None)
-    enable_snmpv3: str | None = Field(alias="EnableSNMPv3", default=None)
-    encryption_protocol: str | None = None
-    engine_id: str | None = None
-    hide_community_strings: str | None = None
-    port: str | None = None
-    protocol_enabled: str | None = None
-    trap_port: str | None = None
+    authentication_protocol: SnmpauthenticationProtocols | None = None
+    community_access_mode: SnmpcommunityAccessMode | None = None
+    community_strings: list[Snmpcommunity] | None = None
+    enable_snmpv1: bool | None = Field(alias="EnableSNMPv1", default=None)
+    enable_snmpv2c: bool | None = Field(alias="EnableSNMPv2c", default=None)
+    enable_snmpv3: bool | None = Field(alias="EnableSNMPv3", default=None)
+    encryption_protocol: SnmpencryptionProtocols | None = None
+    engine_id: EngineId | None = None
+    hide_community_strings: bool | None = None
+    port: int | None = None
+    protocol_enabled: bool | None = None
+    trap_port: int | None = None
 
 
 class Ssdprotocol(RedfishModel):
-    notify_ipv6_scope: str | None = Field(alias="NotifyIPv6Scope", default=None)
-    notify_multicast_interval_seconds: str | None = None
-    notify_ttl: str | None = Field(alias="NotifyTTL", default=None)
-    port: str | None = None
-    protocol_enabled: str | None = None
+    notify_ipv6_scope: NotifyIpv6Scope | None = Field(alias="NotifyIPv6Scope", default=None)
+    notify_multicast_interval_seconds: int | None = None
+    notify_ttl: int | None = Field(alias="NotifyTTL", default=None)
+    port: int | None = None
+    protocol_enabled: bool | None = None

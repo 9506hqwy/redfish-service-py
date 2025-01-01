@@ -28,14 +28,14 @@ class SpdmparameterSet(RedfishModel):
 
 
 class Spdmpolicy(RedfishModel):
-    allow_extended_algorithms: str | None = None
+    allow_extended_algorithms: bool | None = None
     allowed: SpdmparameterSet | None = None
     denied: SpdmparameterSet | None = None
-    enabled: str | None = None
+    enabled: bool | None = None
     revoked_certificates: IdRef | None = None
-    secure_session_enabled: str | None = None
+    secure_session_enabled: bool | None = None
     trusted_certificates: IdRef | None = None
-    verify_certificate: str | None = None
+    verify_certificate: bool | None = None
 
 
 class SecurityPolicy(RedfishResource):
@@ -68,4 +68,4 @@ class Tlspolicy(RedfishModel):
     denied: TlsparameterSet | None = None
     revoked_certificates: IdRef | None = None
     trusted_certificates: IdRef | None = None
-    verify_certificate: str | None = None
+    verify_certificate: bool | None = None

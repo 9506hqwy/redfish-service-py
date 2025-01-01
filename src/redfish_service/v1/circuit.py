@@ -10,7 +10,15 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import IndicatorLed, PowerState, Status
+from .sensor import (
+    ElectricalContext,
+    SensorCurrentExcerpt,
+    SensorEnergykWhExcerpt,
+    SensorExcerpt,
+    SensorPowerExcerpt,
+    SensorVoltageExcerpt,
+)
 
 
 class Actions(RedfishModel):
@@ -33,54 +41,78 @@ class BreakerStates(StrEnum):
 
 class Circuit(RedfishResource):
     actions: Actions | None = None
-    breaker_state: str | None = None
-    circuit_type: str | None = None
+    breaker_state: BreakerStates | None = None
+    circuit_type: CircuitType | None = None
     configuration_locked: bool | None = None
-    critical_circuit: str | None = None
-    current_amps: str | None = None
+    critical_circuit: bool | None = None
+    current_amps: SensorCurrentExcerpt | None = None
     description: str | None = None
     electrical_consumer_names: list[str] | None = None
-    electrical_context: str | None = None
+    electrical_context: ElectricalContext | None = None
     electrical_source_manager_uri: str | None = Field(
         alias="ElectricalSourceManagerURI", default=None
     )
     electrical_source_name: str | None = None
-    energyk_wh: str | None = None
-    frequency_hz: str | None = None
-    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
+    energyk_wh: SensorEnergykWhExcerpt | None = None
+    frequency_hz: SensorExcerpt | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
-    location_indicator_active: str | None = None
-    nominal_frequency_hz: str | None = None
-    nominal_voltage: str | None = None
+    location_indicator_active: bool | None = None
+    nominal_frequency_hz: float | None = None
+    nominal_voltage: NominalVoltageType | None = None
     oem: dict[str, Any] | None = None
-    phase_wiring_type: str | None = None
-    plug_type: str | None = None
-    poly_phase_current_amps: str | None = None
-    poly_phase_energyk_wh: str | None = None
-    poly_phase_power_watts: str | None = None
-    poly_phase_voltage: str | None = None
+    phase_wiring_type: PhaseWiringType | None = None
+    plug_type: PlugType | None = None
+    poly_phase_current_amps: CurrentSensors | None = None
+    poly_phase_energyk_wh: EnergySensors | None = None
+    poly_phase_power_watts: PowerSensors | None = None
+    poly_phase_voltage: VoltageSensors | None = None
     power_control_locked: bool | None = None
-    power_cycle_delay_seconds: str | None = None
-    power_enabled: str | None = None
-    power_load_percent: str | None = None
-    power_off_delay_seconds: str | None = None
-    power_on_delay_seconds: str | None = None
-    power_restore_delay_seconds: str | None = None
+    power_cycle_delay_seconds: float | None = None
+    power_enabled: bool | None = None
+    power_load_percent: SensorExcerpt | None = None
+    power_off_delay_seconds: float | None = None
+    power_on_delay_seconds: float | None = None
+    power_restore_delay_seconds: float | None = None
     power_restore_policy: PowerRestorePolicyTypes | None = None
-    power_state: str | None = None
+    power_state: PowerState | None = None
     power_state_in_transition: bool | None = None
-    power_watts: str | None = None
-    rated_current_amps: str | None = None
+    power_watts: SensorPowerExcerpt | None = None
+    rated_current_amps: float | None = None
     status: Status | None = None
-    unbalanced_current_percent: str | None = None
-    unbalanced_voltage_percent: str | None = None
+    unbalanced_current_percent: SensorExcerpt | None = None
+    unbalanced_voltage_percent: SensorExcerpt | None = None
     user_label: str | None = None
-    voltage: str | None = None
-    voltage_type: str | None = None
+    voltage: SensorVoltageExcerpt | None = None
+    voltage_type: VoltageType | None = None
+
+
+class CircuitType(StrEnum):
+    MAINS = "Mains"
+    BRANCH = "Branch"
+    SUBFEED = "Subfeed"
+    FEEDER = "Feeder"
+    BUS = "Bus"
+
+
+class CurrentSensors(RedfishModel):
+    line1: SensorCurrentExcerpt | None = None
+    line2: SensorCurrentExcerpt | None = None
+    line3: SensorCurrentExcerpt | None = None
+    neutral: SensorCurrentExcerpt | None = None
+
+
+class EnergySensors(RedfishModel):
+    line1_to_line2: SensorEnergykWhExcerpt | None = None
+    line1_to_neutral: SensorEnergykWhExcerpt | None = None
+    line2_to_line3: SensorEnergykWhExcerpt | None = None
+    line2_to_neutral: SensorEnergykWhExcerpt | None = None
+    line3_to_line1: SensorEnergykWhExcerpt | None = None
+    line3_to_neutral: SensorEnergykWhExcerpt | None = None
 
 
 class Links(RedfishModel):
-    branch_circuit: str | None = None
+    branch_circuit: IdRef | None = None
     distribution_circuits: list[IdRef] | None = None
     distribution_circuits_odata_count: int | None = Field(
         alias="DistributionCircuits@odata.count", default=None
@@ -88,8 +120,8 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outlets: list[IdRef] | None = None
     outlets_odata_count: int | None = Field(alias="Outlets@odata.count", default=None)
-    power_outlet: str | None = None
-    source_circuit: str | None = None
+    power_outlet: IdRef | None = None
+    source_circuit: IdRef | None = None
 
 
 class NominalVoltageType(StrEnum):
@@ -174,12 +206,29 @@ class PowerRestorePolicyTypes(StrEnum):
     LAST_STATE = "LastState"
 
 
-class PowerState(StrEnum):
-    ON = "On"
-    OFF = "Off"
-    POWER_CYCLE = "PowerCycle"
+class PowerSensors(RedfishModel):
+    line1_to_line2: SensorPowerExcerpt | None = None
+    line1_to_neutral: SensorPowerExcerpt | None = None
+    line2_to_line3: SensorPowerExcerpt | None = None
+    line2_to_neutral: SensorPowerExcerpt | None = None
+    line3_to_line1: SensorPowerExcerpt | None = None
+    line3_to_neutral: SensorPowerExcerpt | None = None
 
 
 class ResetMetrics(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class VoltageSensors(RedfishModel):
+    line1_to_line2: SensorVoltageExcerpt | None = None
+    line1_to_neutral: SensorVoltageExcerpt | None = None
+    line2_to_line3: SensorVoltageExcerpt | None = None
+    line2_to_neutral: SensorVoltageExcerpt | None = None
+    line3_to_line1: SensorVoltageExcerpt | None = None
+    line3_to_neutral: SensorVoltageExcerpt | None = None
+
+
+class VoltageType(StrEnum):
+    AC = "AC"
+    DC = "DC"

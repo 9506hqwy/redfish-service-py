@@ -10,7 +10,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Location, Status
+from .resource import Location, PowerState, Status
 from .software_inventory import MeasurementBlock
 
 
@@ -26,7 +26,7 @@ class Chassis(RedfishResource):
     certificates: IdRef | None = None
     chassis_type: ChassisType
     controls: IdRef | None = None
-    depth_mm: str | None = None
+    depth_mm: float | None = None
     description: str | None = None
     doors: Doors | None = None
     drives: IdRef | None = None
@@ -35,26 +35,26 @@ class Chassis(RedfishResource):
     )
     electrical_source_names: list[str] | None = None
     environment_metrics: IdRef | None = None
-    environmental_class: str | None = None
+    environmental_class: EnvironmentalClass | None = None
     fabric_adapters: IdRef | None = None
     heating_cooling_equipment_names: list[str] | None = None
     heating_cooling_manager_uris: list[str] | None = Field(
         alias="HeatingCoolingManagerURIs", default=None
     )
-    height_mm: str | None = None
-    hot_pluggable: str | None = None
-    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
+    height_mm: float | None = None
+    hot_pluggable: bool | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     log_services: IdRef | None = None
     manufacturer: str | None = None
-    max_power_watts: str | None = None
+    max_power_watts: float | None = None
     measurements: list[MeasurementBlock] | None = None
     media_controllers: IdRef | None = None
     memory: IdRef | None = None
     memory_domains: IdRef | None = None
-    min_power_watts: str | None = None
+    min_power_watts: float | None = None
     model: str | None = None
     network_adapters: IdRef | None = None
     oem: dict[str, Any] | None = None
@@ -63,25 +63,25 @@ class Chassis(RedfishResource):
     part_number: str | None = None
     physical_security: PhysicalSecurity | None = None
     power: IdRef | None = None
-    power_state: str | None = None
+    power_state: PowerState | None = None
     power_subsystem: IdRef | None = None
-    powered_by_parent: str | None = None
+    powered_by_parent: bool | None = None
     processors: IdRef | None = None
-    replaceable: str | None = None
+    replaceable: bool | None = None
     sku: str | None = Field(alias="SKU", default=None)
     sensors: IdRef | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
     thermal: IdRef | None = None
-    thermal_direction: str | None = None
-    thermal_managed_by_parent: str | None = None
+    thermal_direction: ThermalDirection | None = None
+    thermal_managed_by_parent: bool | None = None
     thermal_subsystem: IdRef | None = None
     trusted_components: IdRef | None = None
     uuid: str | None = Field(alias="UUID", default=None)
     version: str | None = None
-    weight_kg: str | None = None
-    width_mm: str | None = None
+    weight_kg: float | None = None
+    width_mm: float | None = None
 
 
 class ChassisType(StrEnum):
@@ -111,9 +111,47 @@ class ChassisType(StrEnum):
     OTHER = "Other"
 
 
+class Door(RedfishModel):
+    door_state: DoorState | None = None
+    locked: bool | None = None
+    user_label: str | None = None
+
+
+class DoorState(StrEnum):
+    LOCKED = "Locked"
+    CLOSED = "Closed"
+    LOCKED_AND_OPEN = "LockedAndOpen"
+    OPEN = "Open"
+
+
 class Doors(RedfishModel):
-    front: str | None = None
-    rear: str | None = None
+    front: Door | None = None
+    rear: Door | None = None
+
+
+class EnvironmentalClass(StrEnum):
+    A1 = "A1"
+    A2 = "A2"
+    A3 = "A3"
+    A4 = "A4"
+
+
+class IndicatorLed(StrEnum):
+    UNKNOWN = "Unknown"
+    LIT = "Lit"
+    BLINKING = "Blinking"
+    OFF = "Off"
+
+
+class IntrusionSensor(StrEnum):
+    NORMAL = "Normal"
+    HARDWARE_INTRUSION = "HardwareIntrusion"
+    TAMPERING_DETECTED = "TamperingDetected"
+
+
+class IntrusionSensorReArm(StrEnum):
+    MANUAL = "Manual"
+    AUTOMATIC = "Automatic"
 
 
 class Links(RedfishModel):
@@ -148,7 +186,7 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
     pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
-    power_distribution: str | None = None
+    power_distribution: IdRef | None = None
     power_outlets: list[IdRef] | None = None
     power_outlets_odata_count: int | None = Field(alias="PowerOutlets@odata.count", default=None)
     power_supplies: list[IdRef] | None = None
@@ -168,11 +206,18 @@ class Links(RedfishModel):
 
 
 class PhysicalSecurity(RedfishModel):
-    intrusion_sensor: str | None = None
-    intrusion_sensor_number: str | None = None
-    intrusion_sensor_re_arm: str | None = None
+    intrusion_sensor: IntrusionSensor | None = None
+    intrusion_sensor_number: int | None = None
+    intrusion_sensor_re_arm: IntrusionSensorReArm | None = None
 
 
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ThermalDirection(StrEnum):
+    FRONT_TO_BACK = "FrontToBack"
+    BACK_TO_FRONT = "BackToFront"
+    TOP_EXHAUST = "TopExhaust"
+    SEALED = "Sealed"

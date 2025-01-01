@@ -9,6 +9,7 @@ from ..base import (
     RedfishResource,
 )
 from ..odata_v4 import IdRef
+from ..protocol import Protocol
 from ..resource import Identifier
 
 
@@ -20,10 +21,10 @@ class IoconnectivityLoScapabilities(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     identifier: Identifier | None = None
-    max_supported_bytes_per_second: str | None = None
-    max_supported_iops: str | None = Field(alias="MaxSupportedIOPS", default=None)
+    max_supported_bytes_per_second: int | None = None
+    max_supported_iops: int | None = Field(alias="MaxSupportedIOPS", default=None)
     oem: dict[str, Any] | None = None
-    supported_access_protocols: list[str] | None = None
+    supported_access_protocols: list[Protocol] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
         alias="SupportedLinesOfService@odata.count", default=None

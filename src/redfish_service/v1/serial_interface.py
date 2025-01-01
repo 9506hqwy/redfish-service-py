@@ -62,6 +62,12 @@ class Parity(StrEnum):
     SPACE = "Space"
 
 
+class PinOut(StrEnum):
+    CISCO = "Cisco"
+    CYCLADES = "Cyclades"
+    DIGI = "Digi"
+
+
 class SerialInterface(RedfishResource):
     actions: Actions | None = None
     bit_rate: BitRate | None = None
@@ -69,11 +75,11 @@ class SerialInterface(RedfishResource):
     data_bits: DataBits | None = None
     description: str | None = None
     flow_control: FlowControl | None = None
-    interface_enabled: str | None = None
+    interface_enabled: bool | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
     parity: Parity | None = None
-    pin_out: str | None = None
+    pin_out: PinOut | None = None
     signal_type: SignalType | None = None
     stop_bits: StopBits | None = None
 

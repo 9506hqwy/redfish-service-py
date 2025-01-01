@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -31,6 +32,18 @@ class Session(RedfishResource):
     oem_session_type: str | None = None
     password: str | None = None
     roles: list[str] | None = None
-    session_type: str | None = None
+    session_type: SessionTypes | None = None
     token: str | None = None
     user_name: str | None = None
+
+
+class SessionTypes(StrEnum):
+    HOST_CONSOLE = "HostConsole"
+    MANAGER_CONSOLE = "ManagerConsole"
+    IPMI = "IPMI"
+    KVMIP = "KVMIP"
+    OEM = "OEM"
+    REDFISH = "Redfish"
+    VIRTUAL_MEDIA = "VirtualMedia"
+    WEB_UI = "WebUI"
+    OUTBOUND_CONNECTION = "OutboundConnection"

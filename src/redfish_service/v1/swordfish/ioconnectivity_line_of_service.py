@@ -8,6 +8,7 @@ from ..base import (
     RedfishModel,
     RedfishResource,
 )
+from ..protocol import Protocol
 
 
 class Actions(RedfishModel):
@@ -15,9 +16,9 @@ class Actions(RedfishModel):
 
 
 class IoconnectivityLineOfService(RedfishResource):
-    access_protocols: list[str] | None = None
+    access_protocols: list[Protocol] | None = None
     actions: Actions | None = None
     description: str | None = None
-    max_bytes_per_second: str | None = None
-    max_iops: str | None = Field(alias="MaxIOPS", default=None)
+    max_bytes_per_second: int | None = None
+    max_iops: int | None = Field(alias="MaxIOPS", default=None)
     oem: dict[str, Any] | None = None

@@ -25,8 +25,8 @@ class AuthenticationMode(StrEnum):
 
 
 class CredentialBootstrapping(RedfishModel):
-    enable_after_reset: str | None = None
-    enabled: str | None = None
+    enable_after_reset: bool | None = None
+    enabled: bool | None = None
     role_id: str | None = None
 
 
@@ -36,19 +36,23 @@ class HostInterface(RedfishResource):
     authentication_modes: list[AuthenticationMode] | None = None
     credential_bootstrapping: CredentialBootstrapping | None = None
     description: str | None = None
-    externally_accessible: str | None = None
-    firmware_auth_enabled: str | None = None
+    externally_accessible: bool | None = None
+    firmware_auth_enabled: bool | None = None
     firmware_auth_role_id: str | None = None
     host_ethernet_interfaces: IdRef | None = None
-    host_interface_type: str | None = None
-    interface_enabled: str | None = None
-    kernel_auth_enabled: str | None = None
+    host_interface_type: HostInterfaceType | None = None
+    interface_enabled: bool | None = None
+    kernel_auth_enabled: bool | None = None
     kernel_auth_role_id: str | None = None
     links: Links | None = None
     manager_ethernet_interface: IdRef | None = None
     network_protocol: IdRef | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
+
+
+class HostInterfaceType(StrEnum):
+    NETWORK_HOST_INTERFACE = "NetworkHostInterface"
 
 
 class Links(RedfishModel):

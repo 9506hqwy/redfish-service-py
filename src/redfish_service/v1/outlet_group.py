@@ -11,7 +11,8 @@ from .base import (
 )
 from .circuit import PowerRestorePolicyTypes
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import PowerState, Status
+from .sensor import SensorEnergykWhExcerpt, SensorPowerExcerpt
 
 
 class Actions(RedfishModel):
@@ -33,20 +34,20 @@ class OutletGroup(RedfishResource):
     configuration_locked: bool | None = None
     created_by: str | None = None
     description: str | None = None
-    energyk_wh: str | None = None
+    energyk_wh: SensorEnergykWhExcerpt | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
     outlet_group_type: OutletGroupType | None = None
     power_control_locked: bool | None = None
-    power_cycle_delay_seconds: str | None = None
-    power_enabled: str | None = None
-    power_off_delay_seconds: str | None = None
-    power_on_delay_seconds: str | None = None
-    power_restore_delay_seconds: str | None = None
+    power_cycle_delay_seconds: float | None = None
+    power_enabled: bool | None = None
+    power_off_delay_seconds: float | None = None
+    power_on_delay_seconds: float | None = None
+    power_restore_delay_seconds: float | None = None
     power_restore_policy: PowerRestorePolicyTypes | None = None
-    power_state: str | None = None
+    power_state: PowerState | None = None
     power_state_in_transition: bool | None = None
-    power_watts: str | None = None
+    power_watts: SensorPowerExcerpt | None = None
     status: Status | None = None
 
 
@@ -58,12 +59,6 @@ class OutletGroupType(StrEnum):
 class PowerControl(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
-
-
-class PowerState(StrEnum):
-    ON = "On"
-    OFF = "Off"
-    POWER_CYCLE = "PowerCycle"
 
 
 class ResetMetrics(RedfishModel):

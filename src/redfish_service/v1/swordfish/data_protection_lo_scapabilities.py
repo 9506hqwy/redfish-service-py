@@ -11,6 +11,7 @@ from ..base import (
 )
 from ..odata_v4 import IdRef
 from ..resource import Identifier
+from ..swordfish.storage_replica_info import ReplicaType
 
 
 class Actions(RedfishModel):
@@ -28,11 +29,11 @@ class DataProtectionLoScapabilities(RedfishResource):
         alias="SupportedLinesOfService@odata.count", default=None
     )
     supported_min_lifetimes: list[str] | None = None
-    supported_recovery_geographic_objectives: list[str] | None = None
+    supported_recovery_geographic_objectives: list[FailureDomainScope] | None = None
     supported_recovery_point_objective_times: list[str] | None = None
-    supported_recovery_time_objectives: list[str] | None = None
-    supported_replica_types: list[str] | None = None
-    supports_isolated: str | None = None
+    supported_recovery_time_objectives: list[RecoveryAccessScope] | None = None
+    supported_replica_types: list[ReplicaType] | None = None
+    supports_isolated: bool | None = None
 
 
 class FailureDomainScope(StrEnum):

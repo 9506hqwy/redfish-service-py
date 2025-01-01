@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -18,24 +19,40 @@ class Actions(RedfishModel):
 
 class Redundancy(RedfishObjectId):
     actions: Actions | None = None
-    max_num_supported: str | None = None
+    max_num_supported: int | None = None
     member_id: str
-    min_num_needed: str
-    mode: str
+    min_num_needed: int | None = None
+    mode: RedundancyMode | None = None
     name: str
     oem: dict[str, Any] | None = None
-    redundancy_enabled: str | None = None
+    redundancy_enabled: bool | None = None
     redundancy_set: list[IdRef]
     redundancy_set_odata_count: int | None = Field(alias="RedundancySet@odata.count", default=None)
     status: Status
 
 
+class RedundancyMode(StrEnum):
+    FAILOVER = "Failover"
+    N_M = "N+m"
+    SHARING = "Sharing"
+    SPARING = "Sparing"
+    NOT_REDUNDANT = "NotRedundant"
+
+
+class RedundancyType(StrEnum):
+    FAILOVER = "Failover"
+    NPLUS_M = "NPlusM"
+    SHARING = "Sharing"
+    SPARING = "Sparing"
+    NOT_REDUNDANT = "NotRedundant"
+
+
 class RedundantGroup(RedfishModel):
-    max_supported_in_group: str | None = None
-    min_needed_in_group: str
+    max_supported_in_group: int | None = None
+    min_needed_in_group: int | None = None
     redundancy_group: list[IdRef]
     redundancy_group_odata_count: int | None = Field(
         alias="RedundancyGroup@odata.count", default=None
     )
-    redundancy_type: str
+    redundancy_type: RedundancyType | None = None
     status: Status

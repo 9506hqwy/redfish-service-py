@@ -11,6 +11,8 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Location
 from ..schedule import Schedule
+from ..swordfish.data_protection_lo_scapabilities import FailureDomainScope, RecoveryAccessScope
+from ..swordfish.storage_replica_info import ReplicaType
 
 
 class Actions(RedfishModel):
@@ -28,13 +30,13 @@ class CreateReplicas(RedfishModel):
 class DataProtectionLineOfService(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    is_isolated: str | None = None
+    is_isolated: bool | None = None
     min_lifetime: str | None = None
     oem: dict[str, Any] | None = None
-    recovery_geographic_objective: str | None = None
+    recovery_geographic_objective: FailureDomainScope | None = None
     recovery_point_objective_time: str | None = None
-    recovery_time_objective: str | None = None
+    recovery_time_objective: RecoveryAccessScope | None = None
     replica_access_location: Location | None = None
     replica_class_of_service: IdRef | None = None
-    replica_type: str | None = None
+    replica_type: ReplicaType | None = None
     schedule: Schedule | None = None

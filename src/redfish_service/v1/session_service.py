@@ -18,7 +18,7 @@ class SessionService(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     session_timeout: int | None = None
     sessions: IdRef | None = None
     status: Status | None = None

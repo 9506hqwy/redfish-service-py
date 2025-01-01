@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -9,7 +10,8 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import Health, Status
+from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
@@ -18,30 +20,37 @@ class Actions(RedfishModel):
 
 class Coolant(RedfishModel):
     additive_name: str | None = None
-    additive_percent: str | None = None
-    coolant_type: str | None = None
-    density_kg_per_cubic_meter: str | None = None
-    rated_service_hours: str | None = None
-    service_hours: str | None = None
+    additive_percent: float | None = None
+    coolant_type: CoolantType | None = None
+    density_kg_per_cubic_meter: float | None = None
+    rated_service_hours: float | None = None
+    service_hours: float | None = None
     serviced_date: str | None = None
-    specific_heatk_joules_per_kg_k: str | None = None
+    specific_heatk_joules_per_kg_k: float | None = None
+
+
+class CoolantType(StrEnum):
+    WATER = "Water"
+    HYDROCARBON = "Hydrocarbon"
+    FLUOROCARBON = "Fluorocarbon"
+    DIELECTRIC = "Dielectric"
 
 
 class CoolingLoop(RedfishResource):
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None
-    coolant_level_percent: str | None = None
-    coolant_level_status: str | None = None
-    coolant_quality: str | None = None
+    coolant_level_percent: SensorExcerpt | None = None
+    coolant_level_status: Health | None = None
+    coolant_quality: Health | None = None
     cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
     description: str | None = None
     links: Links | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
     primary_coolant_connectors: IdRef | None = None
-    rated_flow_liters_per_minute: str | None = None
-    rated_pressurek_pa: str | None = None
+    rated_flow_liters_per_minute: float | None = None
+    rated_pressurek_pa: float | None = None
     secondary_coolant_connectors: IdRef | None = None
     status: Status | None = None
     supply_equipment_names: list[str] | None = None
@@ -49,7 +58,7 @@ class CoolingLoop(RedfishResource):
 
 
 class Links(RedfishModel):
-    chassis: str | None = None
+    chassis: IdRef | None = None
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
     managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)

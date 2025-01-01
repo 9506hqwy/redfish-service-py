@@ -27,7 +27,7 @@ class AggregationService(RedfishResource):
     connection_methods: IdRef | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     status: Status | None = None
 
 

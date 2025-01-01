@@ -36,17 +36,17 @@ class Links(RedfishModel):
 
 class MemoryDomain(RedfishResource):
     actions: Actions | None = None
-    allows_block_provisioning: str | None = None
-    allows_memory_chunk_creation: str | None = None
-    allows_mirroring: str | None = None
-    allows_sparing: str | None = None
+    allows_block_provisioning: bool | None = None
+    allows_memory_chunk_creation: bool | None = None
+    allows_mirroring: bool | None = None
+    allows_sparing: bool | None = None
     description: str | None = None
     interleavable_memory_sets: list[MemorySet] | None = None
     links: Links | None = None
-    memory_chunk_increment_mi_b: str | None = None
+    memory_chunk_increment_mi_b: int | None = None
     memory_chunks: IdRef | None = None
-    memory_size_mi_b: str | None = None
-    min_memory_chunk_size_mi_b: str | None = None
+    memory_size_mi_b: int | None = None
+    min_memory_chunk_size_mi_b: int | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
 

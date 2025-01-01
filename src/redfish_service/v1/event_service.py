@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -8,8 +9,9 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
+from .event_destination import EventFormatType
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import Health, Status
 from .values import EventType
 
 
@@ -28,11 +30,11 @@ class EventService(RedfishResource):
     delivery_retry_attempts: int | None = None
     delivery_retry_interval_seconds: int | None = None
     description: str | None = None
-    event_format_types: list[str] | None = None
+    event_format_types: list[EventFormatType] | None = None
     event_types_for_subscription: list[EventType] | None = None
     exclude_message_id: bool | None = None
     exclude_registry_prefix: bool | None = None
-    include_origin_of_condition_supported: str | None = None
+    include_origin_of_condition_supported: bool | None = None
     oem: dict[str, Any] | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
@@ -41,23 +43,38 @@ class EventService(RedfishResource):
         alias="SSEFilterPropertiesSupported", default=None
     )
     server_sent_event_uri: str | None = None
-    service_enabled: str | None = None
-    severities: list[str] | None = None
+    service_enabled: bool | None = None
+    severities: list[Health] | None = None
     status: Status | None = None
-    subordinate_resources_supported: str | None = None
+    subordinate_resources_supported: bool | None = None
     subscriptions: IdRef | None = None
 
 
 class Smtp(RedfishModel):
-    authentication: str | None = None
-    connection_protocol: str | None = None
+    authentication: SmtpauthenticationMethods | None = None
+    connection_protocol: SmtpconnectionProtocol | None = None
     from_address: str | None = None
     password: str | None = None
     password_set: bool | None = None
-    port: str | None = None
+    port: int | None = None
     server_address: str | None = None
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     username: str | None = None
+
+
+class SmtpauthenticationMethods(StrEnum):
+    NONE = "None"
+    AUTO_DETECT = "AutoDetect"
+    PLAIN = "Plain"
+    LOGIN = "Login"
+    CRAM__MD5 = "CRAM_MD5"
+
+
+class SmtpconnectionProtocol(StrEnum):
+    NONE = "None"
+    AUTO_DETECT = "AutoDetect"
+    START_TLS = "StartTLS"
+    TLS__SSL = "TLS_SSL"
 
 
 class SsefilterPropertiesSupported(RedfishModel):

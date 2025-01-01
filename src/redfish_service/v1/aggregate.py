@@ -31,7 +31,7 @@ class Aggregate(RedfishResource):
     description: str | None = None
     elements: list[IdRef]
     elements_odata_count: int | None = Field(alias="Elements@odata.count", default=None)
-    elements_count: str | None = None
+    elements_count: int | None = None
     oem: dict[str, Any] | None = None
 
 

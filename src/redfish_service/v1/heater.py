@@ -21,10 +21,10 @@ class Heater(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     description: str | None = None
-    hot_pluggable: str | None = None
+    hot_pluggable: bool | None = None
     links: Links | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     manufacturer: str | None = None
     metrics: IdRef | None = None
     model: str | None = None

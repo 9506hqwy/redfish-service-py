@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -31,7 +32,7 @@ class MediaController(RedfishResource):
     environment_metrics: IdRef | None = None
     links: Links | None = None
     manufacturer: str | None = None
-    media_controller_type: str | None = None
+    media_controller_type: MediaControllerType | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
@@ -39,6 +40,10 @@ class MediaController(RedfishResource):
     serial_number: str | None = None
     status: Status | None = None
     uuid: str | None = Field(alias="UUID", default=None)
+
+
+class MediaControllerType(StrEnum):
+    MEMORY = "Memory"
 
 
 class Reset(RedfishModel):

@@ -25,6 +25,6 @@ class NvmeFirmwareImage(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     firmware_version: str | None = None
-    nvme_device_type: str | None = Field(alias="NVMeDeviceType", default=None)
+    nvme_device_type: NvmeDeviceType | None = Field(alias="NVMeDeviceType", default=None)
     oem: dict[str, Any] | None = None
     vendor: str | None = None

@@ -24,9 +24,9 @@ class ContainerImage(RedfishResource):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     programmatic_id: str | None = None
-    size_bytes: str | None = None
+    size_bytes: int | None = None
     status: Status | None = None
-    type: str | None = None
+    type: ImageTypes | None = None
     version: str | None = None
 
 

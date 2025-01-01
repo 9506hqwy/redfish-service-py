@@ -27,7 +27,7 @@ class TaskService(RedfishResource):
     description: str | None = None
     life_cycle_event_on_task_state_change: bool | None = None
     oem: dict[str, Any] | None = None
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     status: Status | None = None
     task_auto_delete_timeout_minutes: int | None = None
     tasks: IdRef | None = None

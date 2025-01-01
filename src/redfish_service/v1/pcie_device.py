@@ -10,11 +10,55 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import Location, Status
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
+
+
+class Cxldevice(RedfishModel):
+    device_type: CxldeviceType | None = None
+    dynamic_capacity: CxldynamicCapacity | None = None
+    egress_port_congestion_support: bool | None = None
+    max_number_logical_devices: int | None = None
+    temporary_throughput_reduction_enabled: bool | None = None
+    temporary_throughput_reduction_supported: bool | None = None
+    throughput_reduction_support: bool | None = None
+    timestamp: str | None = None
+
+
+class CxldeviceType(StrEnum):
+    TYPE1 = "Type1"
+    TYPE2 = "Type2"
+    TYPE3 = "Type3"
+
+
+class CxldynamicCapacity(RedfishModel):
+    add_capacity_policies_supported: list[CxldynamicCapacityPolicies] | None = None
+    max_dynamic_capacity_regions: int | None = None
+    max_hosts: int | None = None
+    memory_block_sizes_supported: list[CxlregionBlockSizes] | None = None
+    release_capacity_policies_supported: list[CxldynamicCapacityPolicies] | None = None
+    sanitization_on_release_support: list[CxlregionSanitization] | None = None
+    total_dynamic_capacity_mi_b: int | None = None
+
+
+class CxldynamicCapacityPolicies(StrEnum):
+    FREE = "Free"
+    CONTIGUOUS = "Contiguous"
+    PRESCRIPTIVE = "Prescriptive"
+    TAG_BASED = "TagBased"
+
+
+class CxlregionBlockSizes(RedfishModel):
+    block_size_mi_b: list[int] | None = None
+    region_number: int | None = None
+
+
+class CxlregionSanitization(RedfishModel):
+    region_number: int | None = None
+    sanitization_on_release_supported: bool | None = None
 
 
 class DeviceType(StrEnum):
@@ -22,6 +66,12 @@ class DeviceType(StrEnum):
     MULTI_FUNCTION = "MultiFunction"
     SIMULATED = "Simulated"
     RETIMER = "Retimer"
+
+
+class LaneSplittingType(StrEnum):
+    NONE = "None"
+    BRIDGED = "Bridged"
+    BIFURCATED = "Bifurcated"
 
 
 class Links(RedfishModel):
@@ -32,31 +82,31 @@ class Links(RedfishModel):
     pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
     processors: list[IdRef] | None = None
     processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
-    switch: str | None = None
+    switch: IdRef | None = None
 
 
 class PcieDevice(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
-    cxldevice: str | None = Field(alias="CXLDevice", default=None)
+    cxldevice: Cxldevice | None = Field(alias="CXLDevice", default=None)
     cxllogical_devices: IdRef | None = Field(alias="CXLLogicalDevices", default=None)
     description: str | None = None
     device_type: DeviceType | None = None
     environment_metrics: IdRef | None = None
     firmware_version: str | None = None
     links: Links | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     manufacturer: str | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
     pcie_functions: IdRef | None = Field(alias="PCIeFunctions", default=None)
     pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
     part_number: str | None = None
-    ready_to_remove: str | None = None
+    ready_to_remove: bool | None = None
     sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
-    slot: str | None = None
+    slot: Slot | None = None
     spare_part_number: str | None = None
     staged_version: str | None = None
     status: Status | None = None
@@ -64,25 +114,25 @@ class PcieDevice(RedfishResource):
 
 
 class PcieErrors(RedfishModel):
-    bad_dllpcount: str | None = Field(alias="BadDLLPCount", default=None)
-    bad_tlpcount: str | None = Field(alias="BadTLPCount", default=None)
-    correctable_error_count: str | None = None
-    fatal_error_count: str | None = None
-    l0_to_recovery_count: str | None = None
-    nakreceived_count: str | None = Field(alias="NAKReceivedCount", default=None)
-    naksent_count: str | None = Field(alias="NAKSentCount", default=None)
-    non_fatal_error_count: str | None = None
-    replay_count: str | None = None
-    replay_rollover_count: str | None = None
-    unsupported_request_count: str | None = None
+    bad_dllpcount: int | None = Field(alias="BadDLLPCount", default=None)
+    bad_tlpcount: int | None = Field(alias="BadTLPCount", default=None)
+    correctable_error_count: int | None = None
+    fatal_error_count: int | None = None
+    l0_to_recovery_count: int | None = None
+    nakreceived_count: int | None = Field(alias="NAKReceivedCount", default=None)
+    naksent_count: int | None = Field(alias="NAKSentCount", default=None)
+    non_fatal_error_count: int | None = None
+    replay_count: int | None = None
+    replay_rollover_count: int | None = None
+    unsupported_request_count: int | None = None
 
 
 class PcieInterface(RedfishModel):
-    lanes_in_use: str | None = None
-    max_lanes: str | None = None
-    max_pcie_type: str | None = Field(alias="MaxPCIeType", default=None)
+    lanes_in_use: int | None = None
+    max_lanes: int | None = None
+    max_pcie_type: PcieTypes | None = Field(alias="MaxPCIeType", default=None)
     oem: dict[str, Any] | None = None
-    pcie_type: str | None = Field(alias="PCIeType", default=None)
+    pcie_type: PcieTypes | None = Field(alias="PCIeType", default=None)
 
 
 class PcieTypes(StrEnum):
@@ -92,3 +142,24 @@ class PcieTypes(StrEnum):
     GEN4 = "Gen4"
     GEN5 = "Gen5"
     GEN6 = "Gen6"
+
+
+class Slot(RedfishModel):
+    hot_pluggable: bool | None = None
+    lane_splitting: LaneSplittingType | None = None
+    lanes: int | None = None
+    location: Location | None = None
+    pcie_type: PcieTypes | None = Field(alias="PCIeType", default=None)
+    slot_type: SlotType | None = None
+
+
+class SlotType(StrEnum):
+    FULL_LENGTH = "FullLength"
+    HALF_LENGTH = "HalfLength"
+    LOW_PROFILE = "LowProfile"
+    MINI = "Mini"
+    M2 = "M2"
+    OEM = "OEM"
+    OCP3_SMALL = "OCP3Small"
+    OCP3_LARGE = "OCP3Large"
+    U2 = "U2"

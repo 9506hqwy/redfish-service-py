@@ -24,7 +24,7 @@ class Bios(RedfishResource):
     description: str | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    reset_bios_to_defaults_pending: str | None = None
+    reset_bios_to_defaults_pending: bool | None = None
 
 
 class ChangePassword(RedfishModel):

@@ -11,6 +11,7 @@ from ..base import (
 )
 from ..odata_v4 import IdRef
 from ..resource import Identifier
+from ..swordfish.data_protection_lo_scapabilities import RecoveryAccessScope
 
 
 class Actions(RedfishModel):
@@ -21,16 +22,16 @@ class DataStorageLoScapabilities(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     identifier: Identifier | None = None
-    maximum_recoverable_capacity_source_count: str | None = None
+    maximum_recoverable_capacity_source_count: int | None = None
     oem: dict[str, Any] | None = None
-    supported_access_capabilities: list[str] | None = None
+    supported_access_capabilities: list[StorageAccessCapability] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
         alias="SupportedLinesOfService@odata.count", default=None
     )
-    supported_provisioning_policies: list[str] | None = None
-    supported_recovery_time_objectives: list[str] | None = None
-    supports_space_efficiency: str | None = None
+    supported_provisioning_policies: list[ProvisioningPolicy] | None = None
+    supported_recovery_time_objectives: list[RecoveryAccessScope] | None = None
+    supports_space_efficiency: bool | None = None
 
 
 class ProvisioningPolicy(StrEnum):

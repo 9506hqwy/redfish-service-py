@@ -5,6 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
+from .account_service import Mfabypass
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -62,7 +63,7 @@ class Links(RedfishModel):
 
 class ManagerAccount(RedfishResource):
     account_expiration: str | None = None
-    account_types: list[str]
+    account_types: list[AccountTypes]
     actions: Actions | None = None
     certificates: IdRef | None = None
     description: str | None = None
@@ -72,19 +73,46 @@ class ManagerAccount(RedfishResource):
     keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
-    mfabypass: str | None = Field(alias="MFABypass", default=None)
+    mfabypass: Mfabypass | None = Field(alias="MFABypass", default=None)
     oemaccount_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None
     password: str | None = None
-    password_change_required: str | None = None
+    password_change_required: bool | None = None
     password_expiration: str | None = None
     phone_number: str | None = None
     role_id: str | None = None
-    snmp: str | None = Field(alias="SNMP", default=None)
+    snmp: SnmpuserInfo | None = Field(alias="SNMP", default=None)
     secret_key_set: bool | None = None
-    strict_account_types: str | None = None
+    strict_account_types: bool | None = None
     user_name: str | None = None
+
+
+class SnmpauthenticationProtocols(StrEnum):
+    NONE = "None"
+    HMAC__MD5 = "HMAC_MD5"
+    HMAC__SHA96 = "HMAC_SHA96"
+    HMAC128__SHA224 = "HMAC128_SHA224"
+    HMAC192__SHA256 = "HMAC192_SHA256"
+    HMAC256__SHA384 = "HMAC256_SHA384"
+    HMAC384__SHA512 = "HMAC384_SHA512"
+
+
+class SnmpencryptionProtocols(StrEnum):
+    NONE = "None"
+    CBC__DES = "CBC_DES"
+    CFB128__AES128 = "CFB128_AES128"
+    CFB128__AES192 = "CFB128_AES192"
+    CFB128__AES256 = "CFB128_AES256"
+
+
+class SnmpuserInfo(RedfishModel):
+    authentication_key: str | None = None
+    authentication_key_set: bool | None = None
+    authentication_protocol: SnmpauthenticationProtocols | None = None
+    encryption_key: str | None = None
+    encryption_key_set: bool | None = None
+    encryption_protocol: SnmpencryptionProtocols | None = None
 
 
 class VerifyTimeBasedOneTimePassword(RedfishModel):

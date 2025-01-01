@@ -21,13 +21,13 @@ class Cable(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
-    cable_class: str | None = None
+    cable_class: CableClass | None = None
     cable_status: CableStatus | None = None
     cable_type: str | None = None
     description: str | None = None
     downstream_connector_types: list[ConnectorType] | None = None
     downstream_name: str | None = None
-    length_meters: str | None = None
+    length_meters: float | None = None
     links: Links | None = None
     location: Location | None = None
     manufacturer: str | None = None
@@ -42,6 +42,19 @@ class Cable(RedfishResource):
     user_description: str | None = None
     user_label: str | None = None
     vendor: str | None = None
+
+
+class CableClass(StrEnum):
+    POWER = "Power"
+    NETWORK = "Network"
+    STORAGE = "Storage"
+    FAN = "Fan"
+    PCIE = "PCIe"
+    USB = "USB"
+    VIDEO = "Video"
+    FABRIC = "Fabric"
+    SERIAL = "Serial"
+    GENERAL = "General"
 
 
 class CableStatus(StrEnum):

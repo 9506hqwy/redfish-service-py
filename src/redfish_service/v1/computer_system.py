@@ -10,7 +10,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import PowerState, Status
 from .software_inventory import MeasurementBlock
 
 
@@ -34,23 +34,56 @@ class AddResourceBlock(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class AutomaticRetryConfig(StrEnum):
+    DISABLED = "Disabled"
+    RETRY_ATTEMPTS = "RetryAttempts"
+    RETRY_ALWAYS = "RetryAlways"
+
+
 class Boot(RedfishModel):
-    alias_boot_order: list[str] | None = None
-    automatic_retry_attempts: str | None = None
-    automatic_retry_config: str | None = None
+    alias_boot_order: list[BootSource] | None = None
+    automatic_retry_attempts: int | None = None
+    automatic_retry_config: AutomaticRetryConfig | None = None
     boot_next: str | None = None
     boot_options: IdRef | None = None
     boot_order: list[str] | None = None
-    boot_order_property_selection: str | None = None
-    boot_source_override_enabled: str | None = None
-    boot_source_override_mode: str | None = None
-    boot_source_override_target: str | None = None
+    boot_order_property_selection: BootOrderTypes | None = None
+    boot_source_override_enabled: BootSourceOverrideEnabled | None = None
+    boot_source_override_mode: BootSourceOverrideMode | None = None
+    boot_source_override_target: BootSource | None = None
     certificates: IdRef | None = None
     http_boot_uri: str | None = None
-    remaining_automatic_retry_attempts: str | None = None
-    stop_boot_on_fault: str | None = None
-    trusted_module_required_to_boot: str | None = None
+    remaining_automatic_retry_attempts: int | None = None
+    stop_boot_on_fault: StopBootOnFault | None = None
+    trusted_module_required_to_boot: TrustedModuleRequiredToBoot | None = None
     uefi_target_boot_source_override: str | None = None
+
+
+class BootOrderTypes(StrEnum):
+    BOOT_ORDER = "BootOrder"
+    ALIAS_BOOT_ORDER = "AliasBootOrder"
+
+
+class BootProgress(RedfishModel):
+    last_boot_time_seconds: float | None = None
+    last_state: BootProgressTypes | None = None
+    last_state_time: str | None = None
+    oem: dict[str, Any] | None = None
+    oem_last_state: str | None = None
+
+
+class BootProgressTypes(StrEnum):
+    NONE = "None"
+    PRIMARY_PROCESSOR_INITIALIZATION_STARTED = "PrimaryProcessorInitializationStarted"
+    BUS_INITIALIZATION_STARTED = "BusInitializationStarted"
+    MEMORY_INITIALIZATION_STARTED = "MemoryInitializationStarted"
+    SECONDARY_PROCESSOR_INITIALIZATION_STARTED = "SecondaryProcessorInitializationStarted"
+    PCIRESOURCE_CONFIG_STARTED = "PCIResourceConfigStarted"
+    SYSTEM_HARDWARE_INITIALIZATION_COMPLETE = "SystemHardwareInitializationComplete"
+    SETUP_ENTERED = "SetupEntered"
+    OSBOOT_STARTED = "OSBootStarted"
+    OSRUNNING = "OSRunning"
+    OEM = "OEM"
 
 
 class BootSource(StrEnum):
@@ -72,15 +105,35 @@ class BootSource(StrEnum):
     RECOVERY = "Recovery"
 
 
+class BootSourceOverrideEnabled(StrEnum):
+    DISABLED = "Disabled"
+    ONCE = "Once"
+    CONTINUOUS = "Continuous"
+
+
+class BootSourceOverrideMode(StrEnum):
+    LEGACY = "Legacy"
+    UEFI = "UEFI"
+
+
+class Composition(RedfishModel):
+    use_cases: list[CompositionUseCase] | None = None
+
+
+class CompositionUseCase(StrEnum):
+    RESOURCE_BLOCK_CAPABLE = "ResourceBlockCapable"
+    EXPANDABLE_SYSTEM = "ExpandableSystem"
+
+
 class ComputerSystem(RedfishResource):
     actions: Actions | None = None
     asset_tag: str | None = None
     bios: IdRef | None = None
     bios_version: str | None = None
     boot: Boot | None = None
-    boot_progress: str | None = None
+    boot_progress: BootProgress | None = None
     certificates: IdRef | None = None
-    composition: str | None = None
+    composition: Composition | None = None
     description: str | None = None
     ethernet_interfaces: IdRef | None = None
     fabric_adapters: IdRef | None = None
@@ -90,16 +143,16 @@ class ComputerSystem(RedfishResource):
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
     hosting_roles: list[HostingRole] | None = None
-    idle_power_saver: str | None = None
-    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
-    key_management: str | None = None
+    idle_power_saver: IdlePowerSaver | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    key_management: KeyManagement | None = None
     last_reset_cause: LastResetCauses | None = None
     last_reset_time: str | None = None
     links: Links | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     log_services: IdRef | None = None
     manufacturer: str | None = None
-    manufacturing_mode: str | None = None
+    manufacturing_mode: bool | None = None
     measurements: list[MeasurementBlock] | None = None
     memory: IdRef | None = None
     memory_domains: IdRef | None = None
@@ -113,12 +166,12 @@ class ComputerSystem(RedfishResource):
     pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
     pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
     part_number: str | None = None
-    power_cycle_delay_seconds: str | None = None
-    power_mode: str | None = None
-    power_off_delay_seconds: str | None = None
-    power_on_delay_seconds: str | None = None
+    power_cycle_delay_seconds: float | None = None
+    power_mode: PowerMode | None = None
+    power_off_delay_seconds: float | None = None
+    power_on_delay_seconds: float | None = None
     power_restore_policy: PowerRestorePolicyTypes | None = None
-    power_state: str | None = None
+    power_state: PowerState | None = None
     processor_summary: ProcessorSummary | None = None
     processors: IdRef | None = None
     redundancy: list[IdRef] | None = None
@@ -152,7 +205,7 @@ class GraphicalConnectTypesSupported(StrEnum):
 class HostGraphicalConsole(RedfishModel):
     connect_types_supported: list[GraphicalConnectTypesSupported] | None = None
     max_concurrent_sessions: int | None = None
-    port: str | None = None
+    port: int | None = None
     service_enabled: bool | None = None
 
 
@@ -176,6 +229,53 @@ class HostingRole(StrEnum):
     BARE_METAL_SERVER = "BareMetalServer"
     VIRTUAL_MACHINE_SERVER = "VirtualMachineServer"
     CONTAINER_SERVER = "ContainerServer"
+
+
+class IdlePowerSaver(RedfishModel):
+    enabled: bool | None = None
+    enter_dwell_time_seconds: int | None = None
+    enter_utilization_percent: float | None = None
+    exit_dwell_time_seconds: int | None = None
+    exit_utilization_percent: float | None = None
+
+
+class IndicatorLed(StrEnum):
+    UNKNOWN = "Unknown"
+    LIT = "Lit"
+    BLINKING = "Blinking"
+    OFF = "Off"
+
+
+class InterfaceType(StrEnum):
+    TPM1_2 = "TPM1_2"
+    TPM2_0 = "TPM2_0"
+    TCM1_0 = "TCM1_0"
+
+
+class InterfaceTypeSelection(StrEnum):
+    NONE = "None"
+    FIRMWARE_UPDATE = "FirmwareUpdate"
+    BIOS_SETTING = "BiosSetting"
+    OEM_METHOD = "OemMethod"
+
+
+class KmipcachePolicy(StrEnum):
+    NONE = "None"
+    AFTER_FIRST_USE = "AfterFirstUse"
+
+
+class Kmipserver(RedfishModel):
+    address: str | None = None
+    cache_duration: str | None = None
+    cache_policy: KmipcachePolicy | None = None
+    password: str | None = None
+    port: int | None = None
+    username: str | None = None
+
+
+class KeyManagement(RedfishModel):
+    kmipcertificates: IdRef | None = Field(alias="KMIPCertificates", default=None)
+    kmipservers: list[Kmipserver] | None = Field(alias="KMIPServers", default=None)
 
 
 class LastResetCauses(StrEnum):
@@ -202,7 +302,7 @@ class Links(RedfishModel):
     cooled_by_odata_count: int | None = Field(alias="CooledBy@odata.count", default=None)
     endpoints: list[IdRef] | None = None
     endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
-    hosting_computer_system: str | None = None
+    hosting_computer_system: IdRef | None = None
     managed_by: list[IdRef] | None = None
     managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
     oem: dict[str, Any] | None = None
@@ -230,12 +330,30 @@ class Links(RedfishModel):
     )
 
 
+class MemoryMirroring(StrEnum):
+    SYSTEM = "System"
+    DIMM = "DIMM"
+    HYBRID = "Hybrid"
+    NONE = "None"
+
+
 class MemorySummary(RedfishModel):
-    memory_mirroring: str | None = None
+    memory_mirroring: MemoryMirroring | None = None
     metrics: IdRef | None = None
     status: Status | None = None
-    total_system_memory_gi_b: str | None = None
-    total_system_persistent_memory_gi_b: str | None = None
+    total_system_memory_gi_b: float | None = None
+    total_system_persistent_memory_gi_b: float | None = None
+
+
+class PowerMode(StrEnum):
+    MAXIMUM_PERFORMANCE = "MaximumPerformance"
+    BALANCED_PERFORMANCE = "BalancedPerformance"
+    POWER_SAVING = "PowerSaving"
+    STATIC = "Static"
+    OSCONTROLLED = "OSControlled"
+    OEM = "OEM"
+    EFFICIENCY_FAVOR_POWER = "EfficiencyFavorPower"
+    EFFICIENCY_FAVOR_PERFORMANCE = "EfficiencyFavorPerformance"
 
 
 class PowerRestorePolicyTypes(StrEnum):
@@ -245,9 +363,9 @@ class PowerRestorePolicyTypes(StrEnum):
 
 
 class ProcessorSummary(RedfishModel):
-    core_count: str | None = None
-    count: str | None = None
-    logical_processor_count: str | None = None
+    core_count: int | None = None
+    count: int | None = None
+    logical_processor_count: int | None = None
     metrics: IdRef | None = None
     model: str | None = None
     status: Status | None = None
@@ -267,7 +385,7 @@ class Reset(RedfishModel):
 class SerialConsoleProtocol(RedfishModel):
     console_entry_command: str | None = None
     hot_key_sequence_display: str | None = None
-    port: str | None = None
+    port: int | None = None
     service_enabled: bool | None = None
     shared_with_manager_cli: bool | None = Field(alias="SharedWithManagerCLI", default=None)
 
@@ -275,6 +393,11 @@ class SerialConsoleProtocol(RedfishModel):
 class SetDefaultBootOrder(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class StopBootOnFault(StrEnum):
+    NEVER = "Never"
+    ANY_FAULT = "AnyFault"
 
 
 class SystemType(StrEnum):
@@ -287,23 +410,45 @@ class SystemType(StrEnum):
     DPU = "DPU"
 
 
+class TrustedModuleRequiredToBoot(StrEnum):
+    DISABLED = "Disabled"
+    REQUIRED = "Required"
+
+
 class TrustedModules(RedfishModel):
     firmware_version: str | None = None
     firmware_version2: str | None = None
-    interface_type: str | None = None
-    interface_type_selection: str | None = None
+    interface_type: InterfaceType | None = None
+    interface_type_selection: InterfaceTypeSelection | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
 
 
 class VirtualMediaConfig(RedfishModel):
-    port: str | None = None
+    port: int | None = None
     service_enabled: bool | None = None
 
 
+class WatchdogTimeoutActions(StrEnum):
+    NONE = "None"
+    RESET_SYSTEM = "ResetSystem"
+    POWER_CYCLE = "PowerCycle"
+    POWER_DOWN = "PowerDown"
+    OEM = "OEM"
+
+
 class WatchdogTimer(RedfishModel):
-    function_enabled: str
+    function_enabled: bool | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
-    timeout_action: str
-    warning_action: str | None = None
+    timeout_action: WatchdogTimeoutActions | None = None
+    warning_action: WatchdogWarningActions | None = None
+
+
+class WatchdogWarningActions(StrEnum):
+    NONE = "None"
+    DIAGNOSTIC_INTERRUPT = "DiagnosticInterrupt"
+    SMI = "SMI"
+    MESSAGING_INTERRUPT = "MessagingInterrupt"
+    SCI = "SCI"
+    OEM = "OEM"

@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -9,8 +10,10 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Identifier, Location, Status
+from .protocol import Protocol
+from .resource import Identifier, IndicatorLed, Location, Status
 from .software_inventory import MeasurementBlock
+from .swordfish.volume import OperationType
 
 
 class Actions(RedfishModel):
@@ -22,56 +25,116 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class ConfigLockOptions(StrEnum):
+    UNLOCKED = "Unlocked"
+    LOCKED = "Locked"
+    LOCKDOWN_UNSUPPORTED = "LockdownUnsupported"
+    COMMAND_UNSUPPORTED = "CommandUnsupported"
+
+
+class ConfigurationLock(StrEnum):
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+    PARTIAL = "Partial"
+
+
 class Drive(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
-    block_security_idenabled: str | None = Field(alias="BlockSecurityIDEnabled", default=None)
-    block_size_bytes: str | None = None
-    capable_speed_gbs: str | None = None
-    capacity_bytes: str | None = None
+    block_security_idenabled: bool | None = Field(alias="BlockSecurityIDEnabled", default=None)
+    block_size_bytes: int | None = None
+    capable_speed_gbs: float | None = None
+    capacity_bytes: int | None = None
     certificates: IdRef | None = None
-    configuration_lock: str | None = None
+    configuration_lock: ConfigurationLock | None = None
     description: str | None = None
-    drive_form_factor: str | None = None
-    encryption_ability: str | None = None
-    encryption_status: str | None = None
+    drive_form_factor: FormFactor | None = None
+    encryption_ability: EncryptionAbility | None = None
+    encryption_status: EncryptionStatus | None = None
     environment_metrics: IdRef | None = None
-    failure_predicted: str | None = None
+    failure_predicted: bool | None = None
     firmware_version: str | None = None
-    hotspare_replacement_mode: str | None = None
-    hotspare_type: str | None = None
+    hotspare_replacement_mode: HotspareReplacementModeType | None = None
+    hotspare_type: HotspareType | None = None
     identifiers: list[Identifier] | None = None
-    indicator_led: str | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: list[Location] | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
-    media_type: str | None = None
-    metrics: str | None = None
+    media_type: MediaType | None = None
+    metrics: IdRef | None = None
     model: str | None = None
-    multipath: str | None = None
-    nvme: str | None = Field(alias="NVMe", default=None)
-    negotiated_speed_gbs: str | None = None
+    multipath: bool | None = None
+    nvme: Nvme | None = Field(alias="NVMe", default=None)
+    negotiated_speed_gbs: float | None = None
     oem: dict[str, Any] | None = None
     operations: list[Operations] | None = None
     part_number: str | None = None
     physical_location: Location | None = None
-    predicted_media_life_left_percent: str | None = None
-    protocol: str | None = None
-    ready_to_remove: str | None = None
+    predicted_media_life_left_percent: float | None = None
+    protocol: Protocol | None = None
+    ready_to_remove: bool | None = None
     revision: str | None = None
-    rotation_speed_rpm: str | None = Field(alias="RotationSpeedRPM", default=None)
+    rotation_speed_rpm: float | None = Field(alias="RotationSpeedRPM", default=None)
     sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
-    slot_capable_protocols: list[str] | None = None
-    slot_form_factor: str | None = None
+    slot_capable_protocols: list[Protocol] | None = None
+    slot_form_factor: FormFactor | None = None
     spare_part_number: str | None = None
     status: Status | None = None
-    status_indicator: str | None = None
-    target_configuration_lock_level: str | None = None
-    write_cache_enabled: str | None = None
+    status_indicator: StatusIndicator | None = None
+    target_configuration_lock_level: TargetConfigurationLockLevel | None = None
+    write_cache_enabled: bool | None = None
+
+
+class EncryptionAbility(StrEnum):
+    NONE = "None"
+    SELF_ENCRYPTING_DRIVE = "SelfEncryptingDrive"
+    OTHER = "Other"
+
+
+class EncryptionStatus(StrEnum):
+    UNECRYPTED = "Unecrypted"
+    UNLOCKED = "Unlocked"
+    LOCKED = "Locked"
+    FOREIGN = "Foreign"
+    UNENCRYPTED = "Unencrypted"
+
+
+class FormFactor(StrEnum):
+    DRIVE3_5 = "Drive3_5"
+    DRIVE2_5 = "Drive2_5"
+    EDSFF = "EDSFF"
+    EDSFF_1_U__LONG = "EDSFF_1U_Long"
+    EDSFF_1_U__SHORT = "EDSFF_1U_Short"
+    EDSFF__E3__SHORT = "EDSFF_E3_Short"
+    EDSFF__E3__LONG = "EDSFF_E3_Long"
+    M2 = "M2"
+    M2_2230 = "M2_2230"
+    M2_2242 = "M2_2242"
+    M2_2260 = "M2_2260"
+    M2_2280 = "M2_2280"
+    M2_22110 = "M2_22110"
+    U2 = "U2"
+    PCIE_SLOT_FULL_LENGTH = "PCIeSlotFullLength"
+    PCIE_SLOT_LOW_PROFILE = "PCIeSlotLowProfile"
+    PCIE_HALF_LENGTH = "PCIeHalfLength"
+    OEM = "OEM"
+
+
+class HotspareReplacementModeType(StrEnum):
+    REVERTIBLE = "Revertible"
+    NON_REVERTIBLE = "NonRevertible"
+
+
+class HotspareType(StrEnum):
+    NONE = "None"
+    GLOBAL = "Global"
+    CHASSIS = "Chassis"
+    DEDICATED = "Dedicated"
 
 
 class Links(RedfishModel):
@@ -97,11 +160,29 @@ class Links(RedfishModel):
     volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
 
 
+class MediaType(StrEnum):
+    HDD = "HDD"
+    SSD = "SSD"
+    SMR = "SMR"
+
+
+class Nvme(RedfishModel):
+    configuration_lock_state: NvmeConfigurationLockState | None = None
+
+
+class NvmeConfigurationLockState(RedfishModel):
+    firmware_commit: ConfigLockOptions | None = None
+    firmware_image_download: ConfigLockOptions | None = None
+    lockdown: ConfigLockOptions | None = None
+    security_send: ConfigLockOptions | None = None
+    vpdwrite: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
+
+
 class Operations(RedfishModel):
     associated_task: IdRef | None = None
-    operation: str | None = None
+    operation: OperationType | None = None
     operation_name: str | None = None
-    percentage_complete: str | None = None
+    percentage_complete: int | None = None
 
 
 class Reset(RedfishModel):
@@ -117,3 +198,17 @@ class RevertToOriginalFactoryState(RedfishModel):
 class SecureErase(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class StatusIndicator(StrEnum):
+    OK = "OK"
+    FAIL = "Fail"
+    REBUILD = "Rebuild"
+    PREDICTIVE_FAILURE_ANALYSIS = "PredictiveFailureAnalysis"
+    HOTSPARE = "Hotspare"
+    IN_ACRITICAL_ARRAY = "InACriticalArray"
+    IN_AFAILED_ARRAY = "InAFailedArray"
+
+
+class TargetConfigurationLockLevel(StrEnum):
+    BASELINE = "Baseline"

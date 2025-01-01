@@ -8,7 +8,13 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .sensor import SensorFanArrayExcerpt
+from .control import ControlSingleExcerpt
+from .sensor import (
+    SensorEnergykWhExcerpt,
+    SensorExcerpt,
+    SensorFanArrayExcerpt,
+    SensorPowerExcerpt,
+)
 
 
 class Actions(RedfishModel):
@@ -22,22 +28,22 @@ class Actions(RedfishModel):
 
 
 class EnvironmentMetrics(RedfishResource):
-    absolute_humidity: str | None = None
+    absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
     description: str | None = None
-    dew_point_celsius: str | None = None
-    energy_joules: str | None = None
-    energyk_wh: str | None = None
+    dew_point_celsius: SensorExcerpt | None = None
+    energy_joules: SensorExcerpt | None = None
+    energyk_wh: SensorEnergykWhExcerpt | None = None
     fan_speeds_percent: list[SensorFanArrayExcerpt] | None = None
     fan_speeds_percent_odata_count: int | None = Field(
         alias="FanSpeedsPercent@odata.count", default=None
     )
-    humidity_percent: str | None = None
+    humidity_percent: SensorExcerpt | None = None
     oem: dict[str, Any] | None = None
-    power_limit_watts: str | None = None
-    power_load_percent: str | None = None
-    power_watts: str | None = None
-    temperature_celsius: str | None = None
+    power_limit_watts: ControlSingleExcerpt | None = None
+    power_load_percent: SensorExcerpt | None = None
+    power_watts: SensorPowerExcerpt | None = None
+    temperature_celsius: SensorExcerpt | None = None
 
 
 class ResetMetrics(RedfishModel):

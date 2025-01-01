@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -25,7 +26,19 @@ class SecureBoot(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
-    secure_boot_current_boot: str | None = None
+    secure_boot_current_boot: SecureBootCurrentBootType | None = None
     secure_boot_databases: IdRef | None = None
-    secure_boot_enable: str | None = None
-    secure_boot_mode: str | None = None
+    secure_boot_enable: bool | None = None
+    secure_boot_mode: SecureBootModeType | None = None
+
+
+class SecureBootCurrentBootType(StrEnum):
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class SecureBootModeType(StrEnum):
+    SETUP_MODE = "SetupMode"
+    USER_MODE = "UserMode"
+    AUDIT_MODE = "AuditMode"
+    DEPLOYED_MODE = "DeployedMode"

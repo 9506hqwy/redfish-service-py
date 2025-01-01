@@ -32,7 +32,7 @@ class SpareResourceSet(RedfishResource):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     on_hand_location: Location | None = None
-    on_line: str | None = None
+    on_line: bool | None = None
     resource_type: str | None = None
     time_to_provision: str | None = None
     time_to_replenish: str | None = None

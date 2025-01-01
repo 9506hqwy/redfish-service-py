@@ -43,7 +43,7 @@ class Task(RedfishResource):
     messages: list[Message] | None = None
     oem: dict[str, Any] | None = None
     payload: Payload | None = None
-    percent_complete: str | None = None
+    percent_complete: int | None = None
     start_time: str | None = None
     sub_tasks: IdRef | None = None
     task_monitor: str | None = None

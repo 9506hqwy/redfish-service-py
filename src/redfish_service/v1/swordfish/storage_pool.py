@@ -12,7 +12,9 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
+from ..swordfish.data_storage_lo_scapabilities import ProvisioningPolicy
 from ..swordfish.iostatistics import Iostatistics
+from ..swordfish.volume import Raidtype
 
 
 class Actions(RedfishModel):
@@ -35,6 +37,18 @@ class AddDrives(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class EndGrpLifetime(RedfishModel):
+    data_units_read: int | None = None
+    data_units_written: int | None = None
+    endurance_estimate: int | None = None
+    error_information_log_entry_count: int | None = None
+    host_read_command_count: int | None = None
+    host_write_command_count: int | None = None
+    media_and_data_integrity_error_count: int | None = None
+    media_units_written: int | None = None
+    percent_used: int | None = None
+
+
 class Links(RedfishModel):
     dedicated_spare_drives: list[IdRef] | None = None
     dedicated_spare_drives_odata_count: int | None = Field(
@@ -49,9 +63,28 @@ class Links(RedfishModel):
     )
 
 
+class NvmeEnduranceGroupProperties(RedfishModel):
+    end_grp_lifetime: EndGrpLifetime | None = None
+    predicted_media_life_left_percent: float | None = None
+
+
 class NvmePoolType(StrEnum):
     ENDURANCE_GROUP = "EnduranceGroup"
     NVMSET = "NVMSet"
+
+
+class NvmeProperties(RedfishModel):
+    nvme_pool_type: NvmePoolType | None = Field(alias="NVMePoolType", default=None)
+
+
+class NvmeSetProperties(RedfishModel):
+    endurance_group_identifier: str | None = None
+    optimal_write_size_bytes: int | None = None
+    random4k_read_typical_nano_seconds: int | None = None
+    set_identifier: str | None = None
+    unallocated_nvmnamespace_capacity_bytes: int | None = Field(
+        alias="UnallocatedNVMNamespaceCapacityBytes", default=None
+    )
 
 
 class PoolType(StrEnum):
@@ -85,41 +118,41 @@ class StoragePool(RedfishResource):
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
     allocated_volumes: IdRef | None = None
-    block_size_bytes: str | None = None
+    block_size_bytes: int | None = None
     capacity: Capacity | None = None
     capacity_sources: list[IdRef] | None = None
     capacity_sources_odata_count: int | None = Field(
         alias="CapacitySources@odata.count", default=None
     )
     classes_of_service: IdRef | None = None
-    compressed: str | None = None
-    compression_enabled: str | None = None
-    deduplicated: str | None = None
-    deduplication_enabled: str | None = None
+    compressed: bool | None = None
+    compression_enabled: bool | None = None
+    deduplicated: bool | None = None
+    deduplication_enabled: bool | None = None
     default_class_of_service: IdRef | None = None
-    default_compression_behavior: str | None = None
-    default_deduplication_behavior: str | None = None
-    default_encryption_behavior: str | None = None
+    default_compression_behavior: bool | None = None
+    default_deduplication_behavior: bool | None = None
+    default_encryption_behavior: bool | None = None
     description: str | None = None
-    encrypted: str | None = None
-    encryption_enabled: str | None = None
+    encrypted: bool | None = None
+    encryption_enabled: bool | None = None
     iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
     identifier: Identifier | None = None
     links: Links | None = None
-    low_space_warning_threshold_percents: list[str] | None = None
-    max_block_size_bytes: str | None = None
-    metrics: str | None = None
-    nvme_endurance_group_properties: str | None = Field(
+    low_space_warning_threshold_percents: list[int] | None = None
+    max_block_size_bytes: int | None = None
+    metrics: IdRef | None = None
+    nvme_endurance_group_properties: NvmeEnduranceGroupProperties | None = Field(
         alias="NVMeEnduranceGroupProperties", default=None
     )
-    nvme_properties: str | None = Field(alias="NVMeProperties", default=None)
-    nvme_set_properties: str | None = Field(alias="NVMeSetProperties", default=None)
+    nvme_properties: NvmeProperties | None = Field(alias="NVMeProperties", default=None)
+    nvme_set_properties: NvmeSetProperties | None = Field(alias="NVMeSetProperties", default=None)
     oem: dict[str, Any] | None = None
-    pool_type: list[str] | None = None
-    recoverable_capacity_source_count: str | None = None
-    remaining_capacity_percent: str | None = None
-    replication_enabled: str | None = None
+    pool_type: list[PoolType] | None = None
+    recoverable_capacity_source_count: int | None = None
+    remaining_capacity_percent: int | None = None
+    replication_enabled: bool | None = None
     status: Status | None = None
-    supported_pool_types: list[str] | None = None
-    supported_provisioning_policies: list[str] | None = None
-    supported_raidtypes: list[str] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_pool_types: list[PoolType] | None = None
+    supported_provisioning_policies: list[ProvisioningPolicy] | None = None
+    supported_raidtypes: list[Raidtype] | None = Field(alias="SupportedRAIDTypes", default=None)

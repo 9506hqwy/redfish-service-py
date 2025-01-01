@@ -20,6 +20,12 @@ class ClientType(StrEnum):
     CONFIGURE = "Configure"
 
 
+class ManagedResource(RedfishModel):
+    includes_subordinates: bool | None = None
+    managed_resource_uri: str | None = Field(alias="ManagedResourceURI", default=None)
+    prefer_exclusive: bool | None = None
+
+
 class RegisteredClient(RedfishResource):
     actions: Actions | None = None
     client_type: ClientType
@@ -28,6 +34,6 @@ class RegisteredClient(RedfishResource):
     created_date: str | None = None
     description: str | None = None
     expiration_date: str | None = None
-    managed_resources: list[str] | None = None
+    managed_resources: list[ManagedResource] | None = None
     oem: dict[str, Any] | None = None
     sub_context: str | None = None

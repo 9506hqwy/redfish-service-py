@@ -23,7 +23,7 @@ class Container(RedfishResource):
     ethernet_interfaces: IdRef | None = None
     limits: Limits | None = None
     links: Links | None = None
-    mount_points: list[str] | None = None
+    mount_points: list[MountPoint] | None = None
     oem: dict[str, Any] | None = None
     programmatic_id: str | None = None
     start_time: str | None = None
@@ -31,13 +31,18 @@ class Container(RedfishResource):
 
 
 class Limits(RedfishModel):
-    cpucount: str | None = Field(alias="CPUCount", default=None)
-    memory_bytes: str | None = None
+    cpucount: float | None = Field(alias="CPUCount", default=None)
+    memory_bytes: int | None = None
 
 
 class Links(RedfishModel):
     container_image: IdRef | None = None
     oem: dict[str, Any] | None = None
+
+
+class MountPoint(RedfishModel):
+    destination: str | None = None
+    source: str | None = None
 
 
 class Reset(RedfishModel):

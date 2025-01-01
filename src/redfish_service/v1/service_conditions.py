@@ -6,7 +6,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .resource import Health
+from .resource import Condition, Health
 
 
 class Actions(RedfishModel):
@@ -15,7 +15,7 @@ class Actions(RedfishModel):
 
 class ServiceConditions(RedfishResource):
     actions: Actions | None = None
-    conditions: list[str] | None = None
+    conditions: list[Condition] | None = None
     description: str | None = None
     health_rollup: Health | None = None
     oem: dict[str, Any] | None = None

@@ -32,7 +32,7 @@ class Links(RedfishModel):
     )
     integrated_into: IdRef | None = None
     oem: dict[str, Any] | None = None
-    owner: str | None = None
+    owner: IdRef | None = None
     software_images: list[IdRef] | None = None
     software_images_odata_count: int | None = Field(
         alias="SoftwareImages@odata.count", default=None

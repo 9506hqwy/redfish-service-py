@@ -54,10 +54,10 @@ class AssignReplicaTarget(RedfishModel):
 
 class ConsistencyGroup(RedfishResource):
     actions: Actions | None = None
-    consistency_method: str | None = None
-    consistency_type: str | None = None
+    consistency_method: ApplicationConsistencyMethod | None = None
+    consistency_type: ConsistencyType | None = None
     description: str | None = None
-    is_consistent: str | None = None
+    is_consistent: bool | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
     remote_replica_targets: list[str] | None = None

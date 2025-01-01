@@ -22,11 +22,11 @@ class JobService(RedfishResource):
     log: IdRef | None = None
     oem: dict[str, Any] | None = None
     service_capabilities: JobServiceCapabilities | None = None
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     status: Status | None = None
 
 
 class JobServiceCapabilities(RedfishModel):
-    max_jobs: str | None = None
-    max_steps: str | None = None
-    scheduling: str | None = None
+    max_jobs: int | None = None
+    max_steps: int | None = None
+    scheduling: bool | None = None

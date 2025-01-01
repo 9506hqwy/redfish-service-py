@@ -10,7 +10,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import Health, Status
 
 
 class Actions(RedfishModel):
@@ -20,8 +20,13 @@ class Actions(RedfishModel):
 class DiscreteTrigger(RedfishModel):
     dwell_time: str | None = None
     name: str | None = None
-    severity: str | None = None
+    severity: Health | None = None
     value: str | None = None
+
+
+class DiscreteTriggerConditionEnum(StrEnum):
+    SPECIFIED = "Specified"
+    CHANGED = "Changed"
 
 
 class Links(RedfishModel):
@@ -32,10 +37,22 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class MetricTypeEnum(StrEnum):
+    NUMERIC = "Numeric"
+    DISCRETE = "Discrete"
+
+
 class Threshold(RedfishModel):
-    activation: str | None = None
+    activation: ThresholdActivation | None = None
     dwell_time: str | None = None
-    reading: str | None = None
+    reading: float | None = None
+
+
+class ThresholdActivation(StrEnum):
+    INCREASING = "Increasing"
+    DECREASING = "Decreasing"
+    EITHER = "Either"
+    DISABLED = "Disabled"
 
 
 class Thresholds(RedfishModel):
@@ -51,24 +68,30 @@ class TriggerActionEnum(StrEnum):
     REDFISH_METRIC_REPORT = "RedfishMetricReport"
 
 
+class TriggerActionMessage(StrEnum):
+    TELEMETRY = "Telemetry"
+    DRIVE_MEDIA_LIFE = "DriveMediaLife"
+    CONNECTION_SPEED = "ConnectionSpeed"
+
+
 class Triggers(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    discrete_trigger_condition: str | None = None
+    discrete_trigger_condition: DiscreteTriggerConditionEnum | None = None
     discrete_triggers: list[DiscreteTrigger] | None = None
     event_triggers: list[str] | None = None
     hysteresis_duration: str | None = None
-    hysteresis_reading: str | None = None
+    hysteresis_reading: float | None = None
     links: Links | None = None
     metric_ids: list[str] | None = None
     metric_properties: list[str] | None = None
-    metric_type: str | None = None
+    metric_type: MetricTypeEnum | None = None
     numeric_thresholds: Thresholds | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
-    trigger_action_message: str | None = None
+    trigger_action_message: TriggerActionMessage | None = None
     trigger_actions: list[TriggerActionEnum] | None = None
-    trigger_enabled: str | None = None
+    trigger_enabled: bool | None = None
     wildcards: list[Wildcard] | None = None
 
 

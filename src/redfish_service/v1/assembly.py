@@ -32,7 +32,7 @@ class AssemblyData(RedfishObjectId):
     engineering_change_level: str | None = None
     isocountry_code_of_origin: str | None = Field(alias="ISOCountryCodeOfOrigin", default=None)
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     member_id: str
     model: str | None = None
     name: str | None = None
@@ -41,7 +41,7 @@ class AssemblyData(RedfishObjectId):
     physical_context: PhysicalContext | None = None
     producer: str | None = None
     production_date: str | None = None
-    replaceable: str | None = None
+    replaceable: bool | None = None
     sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
     spare_part_number: str | None = None

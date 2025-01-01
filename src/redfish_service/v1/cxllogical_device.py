@@ -53,10 +53,10 @@ class Links(RedfishModel):
 
 
 class QoS(RedfishModel):
-    allocated_bandwidth: str | None = None
-    limit_percent: str | None = None
+    allocated_bandwidth: int | None = None
+    limit_percent: int | None = None
 
 
 class QoStelemetryCapabilities(RedfishModel):
-    egress_port_backpressure_supported: str | None = None
-    temporary_throughput_reduction_supported: str | None = None
+    egress_port_backpressure_supported: bool | None = None
+    temporary_throughput_reduction_supported: bool | None = None

@@ -10,7 +10,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
-from .resource import Location, Status
+from .resource import Location, PowerState, Status
 from .software_inventory import AdditionalVersions, MeasurementBlock
 
 
@@ -84,7 +84,7 @@ class Links(RedfishModel):
     )
     manager_in_chassis: IdRef | None = None
     oem: dict[str, Any] | None = None
-    selected_network_port: str | None = None
+    selected_network_port: IdRef | None = None
     software_images: list[IdRef] | None = None
     software_images_odata_count: int | None = Field(
         alias="SoftwareImages@odata.count", default=None
@@ -109,9 +109,9 @@ class Manager(RedfishResource):
     last_reset_time: str | None = None
     links: Links | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     log_services: IdRef | None = None
-    manager_diagnostic_data: str | None = None
+    manager_diagnostic_data: IdRef | None = None
     manager_type: ManagerType | None = None
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
@@ -119,12 +119,12 @@ class Manager(RedfishResource):
     network_protocol: IdRef | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    power_state: str | None = None
+    power_state: PowerState | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     remote_account_service: IdRef | None = None
     remote_redfish_service_uri: str | None = None
-    security_policy: str | None = None
+    security_policy: IdRef | None = None
     serial_console: SerialConsole | None = None
     serial_interfaces: IdRef | None = None
     serial_number: str | None = None

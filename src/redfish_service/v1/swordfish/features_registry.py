@@ -16,12 +16,12 @@ class Actions(RedfishModel):
 
 
 class FeatureMap(RedfishModel):
-    corresponding_profile_definition: str
-    description: str
-    feature_name: str
+    corresponding_profile_definition: str | None = None
+    description: str | None = None
+    feature_name: str | None = None
     resources: list[IdRef] | None = None
     resources_odata_count: int | None = Field(alias="Resources@odata.count", default=None)
-    version: str
+    version: str | None = None
 
 
 class FeaturesRegistry(RedfishResource):
@@ -39,7 +39,7 @@ class FeaturesRegistry(RedfishResource):
 
 
 class SupportedFeature(RedfishModel):
-    corresponding_profile_definition: str
-    description: str
-    feature_name: str
-    version: str
+    corresponding_profile_definition: str | None = None
+    description: str | None = None
+    feature_name: str | None = None
+    version: str | None = None

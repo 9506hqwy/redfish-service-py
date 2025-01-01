@@ -15,16 +15,16 @@ class Actions(RedfishModel):
 
 class Capacity(RedfishModel):
     data: CapacityInfo | None = None
-    is_thin_provisioned: str | None = None
+    is_thin_provisioned: bool | None = None
     metadata: CapacityInfo | None = None
     snapshot: CapacityInfo | None = None
 
 
 class CapacityInfo(RedfishModel):
-    allocated_bytes: str | None = None
-    consumed_bytes: str | None = None
-    guaranteed_bytes: str | None = None
-    provisioned_bytes: str | None = None
+    allocated_bytes: int | None = None
+    consumed_bytes: int | None = None
+    guaranteed_bytes: int | None = None
+    provisioned_bytes: int | None = None
 
 
 class CapacitySource(RedfishResource):

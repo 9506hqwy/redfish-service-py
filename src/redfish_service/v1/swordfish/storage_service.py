@@ -80,7 +80,7 @@ class StorageService(RedfishResource):
         alias="LinesOfService@odata.count", default=None
     )
     links: Links | None = None
-    metrics: str | None = None
+    metrics: IdRef | None = None
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)

@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -23,6 +24,15 @@ class Cper(RedfishModel):
     section_type: str | None = None
 
 
+class DiagnosticDataTypes(StrEnum):
+    MANAGER = "Manager"
+    PRE_OS = "PreOS"
+    OS = "OS"
+    OEM = "OEM"
+    CPER = "CPER"
+    CPERSECTION = "CPERSection"
+
+
 class Event(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_type: str = Field(alias="@odata.type")
@@ -38,12 +48,12 @@ class Event(RedfishModel):
 
 class EventRecord(RedfishModel):
     actions: EventRecordActions | None = None
-    additional_data_size_bytes: str | None = None
+    additional_data_size_bytes: int | None = None
     additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
     cper: Cper | None = Field(alias="CPER", default=None)
     context: str | None = None
     diagnostic_data: str | None = None
-    diagnostic_data_type: str | None = None
+    diagnostic_data_type: DiagnosticDataTypes | None = None
     event_group_id: int | None = None
     event_id: str | None = None
     event_timestamp: str | None = None

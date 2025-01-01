@@ -15,7 +15,7 @@ class Actions(RedfishModel):
 
 
 class Device(RedfishModel):
-    capacity_bytes: str | None = None
+    capacity_bytes: int | None = None
     manufacturer: str | None = None
     model: str | None = None
     name: str

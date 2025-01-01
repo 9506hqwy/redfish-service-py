@@ -8,7 +8,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .sensor import SensorArrayExcerpt
+from .sensor import SensorArrayExcerpt, SensorPowerExcerpt
 
 
 class Actions(RedfishModel):
@@ -20,9 +20,9 @@ class HeaterMetrics(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
-    power_watts: str | None = None
-    pre_power_on_heating_time_seconds: str | None = None
-    runtime_heating_time_seconds: str | None = None
+    power_watts: SensorPowerExcerpt | None = None
+    pre_power_on_heating_time_seconds: int | None = None
+    runtime_heating_time_seconds: int | None = None
     temperature_readings_celsius: list[SensorArrayExcerpt] | None = None
     temperature_readings_celsius_odata_count: int | None = Field(
         alias="TemperatureReadingsCelsius@odata.count", default=None

@@ -26,8 +26,8 @@ class ControllerCapabilities(RedfishModel):
     data_center_bridging: DataCenterBridging | None = None
     npar: NicPartitioning | None = Field(alias="NPAR", default=None)
     npiv: Npiv | None = Field(alias="NPIV", default=None)
-    network_device_function_count: str | None = None
-    network_port_count: str | None = None
+    network_device_function_count: int | None = None
+    network_port_count: int | None = None
     virtualization_offload: VirtualizationOffload | None = None
 
 
@@ -60,12 +60,12 @@ class Controllers(RedfishModel):
 
 
 class DataCenterBridging(RedfishModel):
-    capable: str | None = None
+    capable: bool | None = None
 
 
 class Npiv(RedfishModel):
-    max_device_logins: str | None = None
-    max_port_logins: str | None = None
+    max_device_logins: int | None = None
+    max_port_logins: int | None = None
 
 
 class NetworkAdapter(RedfishResource):
@@ -80,7 +80,7 @@ class NetworkAdapter(RedfishResource):
     location: Location | None = None
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
-    metrics: str | None = None
+    metrics: IdRef | None = None
     model: str | None = None
     network_device_functions: IdRef | None = None
     network_ports: IdRef | None = None
@@ -94,8 +94,8 @@ class NetworkAdapter(RedfishResource):
 
 
 class NicPartitioning(RedfishModel):
-    npar_capable: str | None = None
-    npar_enabled: str | None = None
+    npar_capable: bool | None = None
+    npar_enabled: bool | None = None
 
 
 class Reset(RedfishModel):
@@ -109,13 +109,13 @@ class ResetSettingsToDefault(RedfishModel):
 
 
 class Sriov(RedfishModel):
-    sriovvepacapable: str | None = Field(alias="SRIOVVEPACapable", default=None)
+    sriovvepacapable: bool | None = Field(alias="SRIOVVEPACapable", default=None)
 
 
 class VirtualFunction(RedfishModel):
-    device_max_count: str | None = None
-    min_assignment_group_size: str | None = None
-    network_port_max_count: str | None = None
+    device_max_count: int | None = None
+    min_assignment_group_size: int | None = None
+    network_port_max_count: int | None = None
 
 
 class VirtualizationOffload(RedfishModel):

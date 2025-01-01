@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -8,39 +9,82 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .physical_context import LogicalContext
+from .physical_context import LogicalContext, PhysicalContext
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class Calculable(StrEnum):
+    NON_CALCULATABLE = "NonCalculatable"
+    SUMMABLE = "Summable"
+    NON_SUMMABLE = "NonSummable"
+
+
+class CalculationAlgorithmEnum(StrEnum):
+    AVERAGE = "Average"
+    MAXIMUM = "Maximum"
+    MINIMUM = "Minimum"
+    OEM = "OEM"
+
+
+class CalculationParamsType(RedfishModel):
+    result_metric: str | None = None
+    source_metric: str | None = None
+
+
+class ImplementationType(StrEnum):
+    PHYSICAL_SENSOR = "PhysicalSensor"
+    CALCULATED = "Calculated"
+    SYNTHESIZED = "Synthesized"
+    DIGITAL_METER = "DigitalMeter"
+
+
+class MetricDataType(StrEnum):
+    BOOLEAN = "Boolean"
+    DATE_TIME = "DateTime"
+    DECIMAL = "Decimal"
+    INTEGER = "Integer"
+    STRING = "String"
+    ENUMERATION = "Enumeration"
+
+
 class MetricDefinition(RedfishResource):
-    accuracy: str | None = None
+    accuracy: float | None = None
     actions: Actions | None = None
-    calculable: str | None = None
-    calculation_algorithm: str | None = None
-    calculation_parameters: list[str] | None = None
+    calculable: Calculable | None = None
+    calculation_algorithm: CalculationAlgorithmEnum | None = None
+    calculation_parameters: list[CalculationParamsType] | None = None
     calculation_time_interval: str | None = None
-    calibration: str | None = None
+    calibration: float | None = None
     description: str | None = None
     discrete_values: list[str] | None = None
-    implementation: str | None = None
-    is_linear: str | None = None
+    implementation: ImplementationType | None = None
+    is_linear: bool | None = None
     logical_contexts: list[LogicalContext] | None = None
-    max_reading_range: str | None = None
-    metric_data_type: str | None = None
+    max_reading_range: float | None = None
+    metric_data_type: MetricDataType | None = None
     metric_properties: list[str] | None = None
-    metric_type: str | None = None
-    min_reading_range: str | None = None
+    metric_type: MetricType | None = None
+    min_reading_range: float | None = None
     oemcalculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
     oem: dict[str, Any] | None = None
-    physical_context: str | None = None
-    precision: str | None = None
+    physical_context: PhysicalContext | None = None
+    precision: int | None = None
     sensing_interval: str | None = None
     timestamp_accuracy: str | None = None
     units: str | None = None
     wildcards: list[Wildcard] | None = None
+
+
+class MetricType(StrEnum):
+    NUMERIC = "Numeric"
+    DISCRETE = "Discrete"
+    GAUGE = "Gauge"
+    COUNTER = "Counter"
+    COUNTDOWN = "Countdown"
+    STRING = "String"
 
 
 class Wildcard(RedfishModel):

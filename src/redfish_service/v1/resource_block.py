@@ -17,13 +17,22 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class CompositionState(StrEnum):
+    COMPOSING = "Composing"
+    COMPOSED_AND_AVAILABLE = "ComposedAndAvailable"
+    COMPOSED = "Composed"
+    UNUSED = "Unused"
+    FAILED = "Failed"
+    UNAVAILABLE = "Unavailable"
+
+
 class CompositionStatus(RedfishModel):
-    composition_state: str
-    max_compositions: str | None = None
-    number_of_compositions: str | None = None
-    reserved: str | None = None
-    sharing_capable: str | None = None
-    sharing_enabled: str | None = None
+    composition_state: CompositionState | None = None
+    max_compositions: int | None = None
+    number_of_compositions: int | None = None
+    reserved: bool | None = None
+    sharing_capable: bool | None = None
+    sharing_enabled: bool | None = None
 
 
 class Links(RedfishModel):
@@ -44,6 +53,12 @@ class Links(RedfishModel):
     )
     zones: list[IdRef] | None = None
     zones_odata_count: int | None = Field(alias="Zones@odata.count", default=None)
+
+
+class PoolType(StrEnum):
+    FREE = "Free"
+    ACTIVE = "Active"
+    UNASSIGNED = "Unassigned"
 
 
 class ResourceBlock(RedfishResource):
@@ -69,7 +84,7 @@ class ResourceBlock(RedfishResource):
         alias="NetworkInterfaces@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
-    pool: str | None = None
+    pool: PoolType | None = None
     processors: list[IdRef] | None = None
     processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
     resource_block_type: list[ResourceBlockType]
@@ -81,20 +96,20 @@ class ResourceBlock(RedfishResource):
 
 
 class ResourceBlockLimits(RedfishModel):
-    max_compute: str | None = None
-    max_computer_system: str | None = None
-    max_expansion: str | None = None
-    max_memory: str | None = None
-    max_network: str | None = None
-    max_processor: str | None = None
-    max_storage: str | None = None
-    min_compute: str | None = None
-    min_computer_system: str | None = None
-    min_expansion: str | None = None
-    min_memory: str | None = None
-    min_network: str | None = None
-    min_processor: str | None = None
-    min_storage: str | None = None
+    max_compute: int | None = None
+    max_computer_system: int | None = None
+    max_expansion: int | None = None
+    max_memory: int | None = None
+    max_network: int | None = None
+    max_processor: int | None = None
+    max_storage: int | None = None
+    min_compute: int | None = None
+    min_computer_system: int | None = None
+    min_expansion: int | None = None
+    min_memory: int | None = None
+    min_network: int | None = None
+    min_processor: int | None = None
+    min_storage: int | None = None
 
 
 class ResourceBlockType(StrEnum):

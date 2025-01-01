@@ -18,6 +18,19 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class CalculationAlgorithmEnum(StrEnum):
+    AVERAGE = "Average"
+    MAXIMUM = "Maximum"
+    MINIMUM = "Minimum"
+    SUMMATION = "Summation"
+
+
+class CollectionTimeScope(StrEnum):
+    POINT = "Point"
+    INTERVAL = "Interval"
+    STARTUP_INTERVAL = "StartupInterval"
+
+
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     triggers: list[IdRef] | None = None
@@ -26,8 +39,8 @@ class Links(RedfishModel):
 
 class Metric(RedfishModel):
     collection_duration: str | None = None
-    collection_function: str | None = None
-    collection_time_scope: str | None = None
+    collection_function: CalculationAlgorithmEnum | None = None
+    collection_time_scope: CollectionTimeScope | None = None
     metric_id: str | None = None
     metric_properties: list[str] | None = None
     oem: dict[str, Any] | None = None
@@ -40,8 +53,8 @@ class MetricReportDefinition(RedfishResource):
     links: Links | None = None
     metric_properties: list[str] | None = None
     metric_report: IdRef | None = None
-    metric_report_definition_enabled: str | None = None
-    metric_report_definition_type: str | None = None
+    metric_report_definition_enabled: bool | None = None
+    metric_report_definition_type: MetricReportDefinitionType | None = None
     metric_report_heartbeat_interval: str | None = None
     metrics: list[Metric] | None = None
     oem: dict[str, Any] | None = None
@@ -50,8 +63,14 @@ class MetricReportDefinition(RedfishResource):
     report_updates: ReportUpdatesEnum | None = None
     schedule: Schedule | None = None
     status: Status | None = None
-    suppress_repeated_metric_value: str | None = None
+    suppress_repeated_metric_value: bool | None = None
     wildcards: list[Wildcard] | None = None
+
+
+class MetricReportDefinitionType(StrEnum):
+    PERIODIC = "Periodic"
+    ON_CHANGE = "OnChange"
+    ON_REQUEST = "OnRequest"
 
 
 class ReportActionsEnum(StrEnum):

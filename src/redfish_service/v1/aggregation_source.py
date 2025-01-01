@@ -61,13 +61,32 @@ class RemoveSshidentityKeyPair(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SnmpauthenticationProtocols(StrEnum):
+    NONE = "None"
+    COMMUNITY_STRING = "CommunityString"
+    HMAC__MD5 = "HMAC_MD5"
+    HMAC__SHA96 = "HMAC_SHA96"
+    HMAC128__SHA224 = "HMAC128_SHA224"
+    HMAC192__SHA256 = "HMAC192_SHA256"
+    HMAC256__SHA384 = "HMAC256_SHA384"
+    HMAC384__SHA512 = "HMAC384_SHA512"
+
+
+class SnmpencryptionProtocols(StrEnum):
+    NONE = "None"
+    CBC__DES = "CBC_DES"
+    CFB128__AES128 = "CFB128_AES128"
+    CFB128__AES192 = "CFB128_AES192"
+    CFB128__AES256 = "CFB128_AES256"
+
+
 class Snmpsettings(RedfishModel):
     authentication_key: str | None = None
     authentication_key_set: bool | None = None
-    authentication_protocol: str | None = None
+    authentication_protocol: SnmpauthenticationProtocols | None = None
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
-    encryption_protocol: str | None = None
+    encryption_protocol: SnmpencryptionProtocols | None = None
     trap_community: str | None = None
 
 
@@ -76,4 +95,9 @@ class SshsettingsType(RedfishModel):
     presented_public_host_key_timestamp: str | None = None
     public_identity_key: IdRef | None = None
     trusted_public_host_keys: IdRef | None = None
-    user_authentication_method: str | None = None
+    user_authentication_method: UserAuthenticationMethod | None = None
+
+
+class UserAuthenticationMethod(StrEnum):
+    PUBLIC_KEY = "PublicKey"
+    PASSWORD = "Password"  # noqa: S105

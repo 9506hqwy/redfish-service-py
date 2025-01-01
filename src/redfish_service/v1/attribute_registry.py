@@ -46,29 +46,29 @@ class Attributes(RedfishModel):
     current_value: str | None = None
     default_value: str | None = None
     display_name: str | None = None
-    display_order: str | None = None
-    gray_out: str | None = None
+    display_order: int | None = None
+    gray_out: bool | None = None
     help_text: str | None = None
-    hidden: str | None = None
-    immutable: str | None = None
-    is_system_unique_property: str | None = None
-    lower_bound: str | None = None
-    max_length: str | None = None
+    hidden: bool | None = None
+    immutable: bool | None = None
+    is_system_unique_property: bool | None = None
+    lower_bound: int | None = None
+    max_length: int | None = None
     menu_path: str | None = None
-    min_length: str | None = None
+    min_length: int | None = None
     oem: dict[str, Any] | None = None
-    read_only: str | None = None
-    reset_required: str | None = None
-    scalar_increment: str | None = None
+    read_only: bool | None = None
+    reset_required: bool | None = None
+    scalar_increment: int | None = None
     type: AttributeType | None = None
     uefi_device_path: str | None = None
     uefi_keyword_name: str | None = None
     uefi_namespace_id: str | None = None
-    upper_bound: str | None = None
+    upper_bound: int | None = None
     value: list[AttributeValue] | None = None
     value_expression: str | None = None
     warning_text: str | None = None
-    write_only: str | None = None
+    write_only: bool | None = None
 
 
 class Dependencies(RedfishModel):
@@ -146,13 +146,13 @@ class MapToProperty(StrEnum):
 
 class Menus(RedfishModel):
     display_name: str | None = None
-    display_order: str | None = None
-    gray_out: str | None = None
-    hidden: str | None = None
+    display_order: int | None = None
+    gray_out: bool | None = None
+    hidden: bool | None = None
     menu_name: str | None = None
     menu_path: str | None = None
     oem: dict[str, Any] | None = None
-    read_only: str | None = None
+    read_only: bool | None = None
 
 
 class RegistryEntries(RedfishModel):

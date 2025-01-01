@@ -12,12 +12,24 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..swordfish.capacity import Capacity
+from ..swordfish.data_storage_lo_scapabilities import StorageAccessCapability
 from ..swordfish.iostatistics import Iostatistics
 from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
+
+
+class CharacterCodeSet(StrEnum):
+    ASCII = "ASCII"
+    UNICODE = "Unicode"
+    ISO2022 = "ISO2022"
+    ISO8859_1 = "ISO8859_1"
+    EXTENDED_UNIXCODE = "ExtendedUNIXCode"
+    UTF_8 = "UTF_8"
+    UTF_16 = "UTF_16"
+    UCS_2 = "UCS_2"
 
 
 class FileProtocol(StrEnum):
@@ -32,37 +44,37 @@ class FileProtocol(StrEnum):
 
 
 class FileSystem(RedfishResource):
-    access_capabilities: list[str] | None = None
+    access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
-    block_size_bytes: str | None = None
+    block_size_bytes: int | None = None
     capacity: Capacity | None = None
     capacity_sources: list[IdRef] | None = None
     capacity_sources_odata_count: int | None = Field(
         alias="CapacitySources@odata.count", default=None
     )
-    case_preserved: str | None = None
-    case_sensitive: str | None = None
-    character_code_set: list[str] | None = None
-    cluster_size_bytes: str | None = None
+    case_preserved: bool | None = None
+    case_sensitive: bool | None = None
+    character_code_set: list[CharacterCodeSet] | None = None
+    cluster_size_bytes: int | None = None
     description: str | None = None
     exported_shares: IdRef | None = None
     iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
     identifiers: list[Identifier] | None = None
     imported_shares: list[dict[str, Any]] | None = None
     links: Links | None = None
-    low_space_warning_threshold_percents: list[str] | None = None
-    max_file_name_length_bytes: str | None = None
-    metrics: str | None = None
+    low_space_warning_threshold_percents: list[int] | None = None
+    max_file_name_length_bytes: int | None = None
+    metrics: IdRef | None = None
     oem: dict[str, Any] | None = None
-    recoverable_capacity_source_count: str | None = None
+    recoverable_capacity_source_count: int | None = None
     remaining_capacity: Capacity | None = None
-    remaining_capacity_percent: str | None = None
+    remaining_capacity_percent: int | None = None
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
     replica_targets_odata_count: int | None = Field(
         alias="ReplicaTargets@odata.count", default=None
     )
-    replication_enabled: str | None = None
+    replication_enabled: bool | None = None
 
 
 class Links(RedfishModel):

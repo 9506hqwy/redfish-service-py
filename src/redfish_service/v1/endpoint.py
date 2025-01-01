@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -21,21 +22,21 @@ class Actions(RedfishModel):
 class ConnectedEntity(RedfishModel):
     entity_link: IdRef | None = None
     entity_pci_id: PciId | None = None
-    entity_role: str | None = None
-    entity_type: str | None = None
+    entity_role: EntityRole | None = None
+    entity_type: EntityType | None = None
     gen_z: GenZ | None = None
     identifiers: list[Identifier] | None = None
     oem: dict[str, Any] | None = None
     pci_class_code: str | None = None
-    pci_function_number: str | None = None
+    pci_function_number: int | None = None
 
 
 class Endpoint(RedfishResource):
     actions: Actions | None = None
     connected_entities: list[ConnectedEntity] | None = None
     description: str | None = None
-    endpoint_protocol: str | None = None
-    host_reservation_memory_bytes: str | None = None
+    endpoint_protocol: Protocol | None = None
+    host_reservation_memory_bytes: int | None = None
     iptransport_details: list[IptransportDetails] | None = Field(
         alias="IPTransportDetails", default=None
     )
@@ -48,9 +49,41 @@ class Endpoint(RedfishResource):
     status: Status | None = None
 
 
+class EntityRole(StrEnum):
+    INITIATOR = "Initiator"
+    TARGET = "Target"
+    BOTH = "Both"
+
+
+class EntityType(StrEnum):
+    STORAGE_INITIATOR = "StorageInitiator"
+    ROOT_COMPLEX = "RootComplex"
+    NETWORK_CONTROLLER = "NetworkController"
+    DRIVE = "Drive"
+    STORAGE_EXPANDER = "StorageExpander"
+    DISPLAY_CONTROLLER = "DisplayController"
+    BRIDGE = "Bridge"
+    PROCESSOR = "Processor"
+    VOLUME = "Volume"
+    ACCELERATION_FUNCTION = "AccelerationFunction"
+    MEDIA_CONTROLLER = "MediaController"
+    MEMORY_CHUNK = "MemoryChunk"
+    SWITCH = "Switch"
+    FABRIC_BRIDGE = "FabricBridge"
+    MANAGER = "Manager"
+    STORAGE_SUBSYSTEM = "StorageSubsystem"
+    MEMORY = "Memory"
+    CXLDEVICE = "CXLDevice"
+
+
+class Gcid(RedfishModel):
+    cid: str | None = Field(alias="CID", default=None)
+    sid: str | None = Field(alias="SID", default=None)
+
+
 class GenZ(RedfishModel):
     access_key: str | None = None
-    gcid: str | None = Field(alias="GCID", default=None)
+    gcid: Gcid | None = Field(alias="GCID", default=None)
     region_key: str | None = None
 
 
@@ -90,7 +123,7 @@ class Links(RedfishModel):
 class PciId(RedfishModel):
     class_code: str | None = None
     device_id: str | None = None
-    function_number: str | None = None
+    function_number: int | None = None
     subsystem_id: str | None = None
     subsystem_vendor_id: str | None = None
     vendor_id: str | None = None

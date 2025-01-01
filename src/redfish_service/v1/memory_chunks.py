@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -16,12 +17,18 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class AddressRangeType(StrEnum):
+    VOLATILE = "Volatile"
+    PMEM = "PMEM"
+    BLOCK = "Block"
+
+
 class InterleaveSet(RedfishModel):
     memory: IdRef | None = None
-    memory_level: str | None = None
-    offset_mi_b: str | None = None
+    memory_level: int | None = None
+    offset_mi_b: int | None = None
     region_id: str | None = None
-    size_mi_b: str | None = None
+    size_mi_b: int | None = None
 
 
 class Links(RedfishModel):
@@ -36,18 +43,29 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class MediaLocation(StrEnum):
+    LOCAL = "Local"
+    REMOTE = "Remote"
+    MIXED = "Mixed"
+
+
 class MemoryChunks(RedfishResource):
     actions: Actions | None = None
-    address_range_offset_mi_b: str | None = None
-    address_range_type: str
+    address_range_offset_mi_b: int | None = None
+    address_range_type: AddressRangeType | None = None
     description: str | None = None
     display_name: str | None = None
     interleave_sets: list[InterleaveSet] | None = None
-    is_mirror_enabled: str | None = None
-    is_spare: str | None = None
+    is_mirror_enabled: bool | None = None
+    is_spare: bool | None = None
     links: Links | None = None
-    media_location: str | None = None
-    memory_chunk_size_mi_b: str | None = None
+    media_location: MediaLocation | None = None
+    memory_chunk_size_mi_b: int | None = None
     oem: dict[str, Any] | None = None
-    requested_operational_state: str | None = None
+    requested_operational_state: OperationalState | None = None
     status: Status | None = None
+
+
+class OperationalState(StrEnum):
+    ONLINE = "Online"
+    OFFLINE = "Offline"

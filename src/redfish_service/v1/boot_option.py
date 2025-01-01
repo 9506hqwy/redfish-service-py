@@ -8,6 +8,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
+from .computer_system import BootSource
 from .odata_v4 import IdRef
 
 
@@ -17,9 +18,9 @@ class Actions(RedfishModel):
 
 class BootOption(RedfishResource):
     actions: Actions | None = None
-    alias: str | None = None
-    boot_option_enabled: str | None = None
-    boot_option_reference: str
+    alias: BootSource | None = None
+    boot_option_enabled: bool | None = None
+    boot_option_reference: str | None = None
     description: str | None = None
     display_name: str | None = None
     oem: dict[str, Any] | None = None

@@ -65,6 +65,15 @@ class StartUpdate(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SupportedUpdateImageFormatType(StrEnum):
+    PLDMV1_0 = "PLDMv1_0"
+    PLDMV1_1 = "PLDMv1_1"
+    PLDMV1_2 = "PLDMv1_2"
+    PLDMV1_3 = "PLDMv1_3"
+    UEFICAPSULE = "UEFICapsule"
+    VENDOR_DEFINED = "VendorDefined"
+
+
 class UpdateParameters(RedfishModel):
     force_update: bool | None = None
     oem: dict[str, Any] | None = None
@@ -78,18 +87,20 @@ class UpdateService(RedfishResource):
     firmware_inventory: IdRef | None = None
     http_push_uri: str | None = None
     http_push_uri_options: HttpPushUriOptions | None = None
-    http_push_uri_options_busy: str | None = None
+    http_push_uri_options_busy: bool | None = None
     http_push_uri_targets: list[str] | None = None
-    http_push_uri_targets_busy: str | None = None
-    max_image_size_bytes: str | None = None
+    http_push_uri_targets_busy: bool | None = None
+    max_image_size_bytes: int | None = None
     multipart_http_push_uri: str | None = None
     oem: dict[str, Any] | None = None
     public_identity_sshkey: IdRef | None = Field(alias="PublicIdentitySSHKey", default=None)
     remote_server_certificates: IdRef | None = None
     remote_server_sshkeys: IdRef | None = Field(alias="RemoteServerSSHKeys", default=None)
-    service_enabled: str | None = None
+    service_enabled: bool | None = None
     software_inventory: IdRef | None = None
     status: Status | None = None
-    supported_update_image_formats: list[str] | None = None
-    verify_remote_server_certificate: str | None = None
-    verify_remote_server_sshkey: str | None = Field(alias="VerifyRemoteServerSSHKey", default=None)
+    supported_update_image_formats: list[SupportedUpdateImageFormatType] | None = None
+    verify_remote_server_certificate: bool | None = None
+    verify_remote_server_sshkey: bool | None = Field(
+        alias="VerifyRemoteServerSSHKey", default=None
+    )

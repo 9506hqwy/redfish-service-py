@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -14,6 +15,7 @@ from .pcie_device import PcieInterface
 from .protocol import Protocol
 from .resource import Identifier, Location, Status
 from .software_inventory import MeasurementBlock
+from .swordfish.volume import Raidtype
 
 
 class Actions(RedfishModel):
@@ -32,10 +34,45 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class AutoVolumeCreate(StrEnum):
+    DISABLED = "Disabled"
+    NON_RAID = "NonRAID"
+    RAID0 = "RAID0"
+    RAID1 = "RAID1"
+
+
 class CacheSummary(RedfishModel):
-    persistent_cache_size_mi_b: str | None = None
+    persistent_cache_size_mi_b: int | None = None
     status: Status | None = None
-    total_cache_size_mi_b: str
+    total_cache_size_mi_b: int | None = None
+
+
+class ConfigLockOptions(StrEnum):
+    UNLOCKED = "Unlocked"
+    LOCKED = "Locked"
+    LOCKDOWN_UNSUPPORTED = "LockdownUnsupported"
+    COMMAND_UNSUPPORTED = "CommandUnsupported"
+
+
+class ConfigurationLock(StrEnum):
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+    PARTIAL = "Partial"
+
+
+class EncryptionMode(StrEnum):
+    DISABLED = "Disabled"
+    USE_EXTERNAL_KEY = "UseExternalKey"
+    USE_LOCAL_KEY = "UseLocalKey"
+    PASSWORD_ONLY = "PasswordOnly"  # noqa: S105
+    PASSWORD_WITH_EXTERNAL_KEY = "PasswordWithExternalKey"  # noqa: S105
+    PASSWORD_WITH_LOCAL_KEY = "PasswordWithLocalKey"  # noqa: S105
+
+
+class HotspareActivationPolicy(StrEnum):
+    ON_DRIVE_FAILURE = "OnDriveFailure"
+    ON_DRIVE_PREDICTED_FAILURE = "OnDrivePredictedFailure"
+    OEM = "OEM"
 
 
 class Links(RedfishModel):
@@ -59,10 +96,24 @@ class Links(RedfishModel):
     )
 
 
+class NvmeConfigurationLockState(RedfishModel):
+    firmware_commit: ConfigLockOptions | None = None
+    firmware_image_download: ConfigLockOptions | None = None
+    lockdown: ConfigLockOptions | None = None
+    security_send: ConfigLockOptions | None = None
+    vpdwrite: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
+
+
+class NvmeSubsystemProperties(RedfishModel):
+    configuration_lock_state: NvmeConfigurationLockState | None = None
+    max_namespaces_supported: float | None = None
+    shared_namespace_controller_attachment_supported: bool | None = None
+
+
 class Rates(RedfishModel):
-    consistency_check_rate_percent: str | None = None
-    rebuild_rate_percent: str | None = None
-    transformation_rate_percent: str | None = None
+    consistency_check_rate_percent: int | None = None
+    rebuild_rate_percent: int | None = None
+    transformation_rate_percent: int | None = None
 
 
 class RekeyExternalKey(RedfishModel):
@@ -87,22 +138,24 @@ class SetEncryptionKey(RedfishModel):
 
 class Storage(RedfishResource):
     actions: Actions | None = None
-    auto_volume_create: str | None = None
-    configuration_lock: str | None = None
+    auto_volume_create: AutoVolumeCreate | None = None
+    configuration_lock: ConfigurationLock | None = None
     connections: IdRef | None = None
     consistency_groups: IdRef | None = None
     controllers: IdRef | None = None
     description: str | None = None
     drives: list[IdRef] | None = None
     drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
-    encryption_mode: str | None = None
+    encryption_mode: EncryptionMode | None = None
     endpoint_groups: IdRef | None = None
     file_systems: IdRef | None = None
-    hotspare_activation_policy: str | None = None
+    hotspare_activation_policy: HotspareActivationPolicy | None = None
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     local_encryption_key_identifier: str | None = None
-    nvme_subsystem_properties: str | None = Field(alias="NVMeSubsystemProperties", default=None)
+    nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
+        alias="NVMeSubsystemProperties", default=None
+    )
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
@@ -113,7 +166,7 @@ class Storage(RedfishResource):
     )
     storage_groups: IdRef | None = None
     storage_pools: IdRef | None = None
-    target_configuration_lock_level: str | None = None
+    target_configuration_lock_level: TargetConfigurationLockLevel | None = None
     volumes: IdRef | None = None
 
 
@@ -139,11 +192,11 @@ class StorageController(RedfishObjectId):
     ports: IdRef | None = None
     sku: str | None = Field(alias="SKU", default=None)
     serial_number: str | None = None
-    speed_gbps: str | None = None
+    speed_gbps: float | None = None
     status: Status | None = None
     supported_controller_protocols: list[Protocol] | None = None
     supported_device_protocols: list[Protocol] | None = None
-    supported_raidtypes: list[str] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raidtypes: list[Raidtype] | None = Field(alias="SupportedRAIDTypes", default=None)
 
 
 class StorageControllerActions(RedfishModel):
@@ -160,3 +213,7 @@ class StorageControllerLinks(RedfishModel):
     storage_services_odata_count: int | None = Field(
         alias="StorageServices@odata.count", default=None
     )
+
+
+class TargetConfigurationLockLevel(StrEnum):
+    BASELINE = "Baseline"

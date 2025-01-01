@@ -43,13 +43,18 @@ class DeviceClass(StrEnum):
     OTHER = "Other"
 
 
+class FunctionProtocol(StrEnum):
+    PCIE = "PCIe"
+    CXL = "CXL"
+
+
 class FunctionType(StrEnum):
     PHYSICAL = "Physical"
     VIRTUAL = "Virtual"
 
 
 class Links(RedfishModel):
-    cxllogical_device: str | None = Field(alias="CXLLogicalDevice", default=None)
+    cxllogical_device: IdRef | None = Field(alias="CXLLogicalDevice", default=None)
     drives: list[IdRef] | None = None
     drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
     ethernet_interfaces: list[IdRef] | None = None
@@ -64,7 +69,7 @@ class Links(RedfishModel):
     )
     oem: dict[str, Any] | None = None
     pcie_device: IdRef | None = Field(alias="PCIeDevice", default=None)
-    processor: str | None = None
+    processor: IdRef | None = None
     storage_controllers: list[IdRef] | None = None
     storage_controllers_odata_count: int | None = Field(
         alias="StorageControllers@odata.count", default=None
@@ -80,9 +85,9 @@ class PcieFunction(RedfishResource):
     device_id: str | None = None
     device_number: str | None = None
     enabled: bool | None = None
-    function_id: str | None = None
+    function_id: int | None = None
     function_number: str | None = None
-    function_protocol: str | None = None
+    function_protocol: FunctionProtocol | None = None
     function_type: FunctionType | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None

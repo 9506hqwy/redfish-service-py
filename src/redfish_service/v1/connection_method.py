@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -17,12 +18,21 @@ class Actions(RedfishModel):
 
 class ConnectionMethod(RedfishResource):
     actions: Actions | None = None
-    connection_method_type: str | None = None
+    connection_method_type: ConnectionMethodType | None = None
     connection_method_variant: str | None = None
     description: str | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    tunneling_protocol: str | None = None
+    tunneling_protocol: TunnelingProtocolType | None = None
+
+
+class ConnectionMethodType(StrEnum):
+    REDFISH = "Redfish"
+    SNMP = "SNMP"
+    IPMI15 = "IPMI15"
+    IPMI20 = "IPMI20"
+    NETCONF = "NETCONF"
+    OEM = "OEM"
 
 
 class Links(RedfishModel):
@@ -31,3 +41,8 @@ class Links(RedfishModel):
         alias="AggregationSources@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
+
+
+class TunnelingProtocolType(StrEnum):
+    SSH = "SSH"
+    OEM = "OEM"

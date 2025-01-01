@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -8,7 +9,8 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .resource import Location, Status
+from .physical_context import PhysicalContext, PhysicalSubContext
+from .resource import Health, Location, Status
 
 
 class Actions(RedfishModel):
@@ -18,17 +20,17 @@ class Actions(RedfishModel):
 class LeakDetector(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    detector_state: str | None = None
-    leak_detector_type: str | None = None
+    detector_state: Health | None = None
+    leak_detector_type: LeakDetectorType | None = None
     location: Location | None = None
     manufacturer: str | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    physical_context: str | None = None
-    physical_sub_context: str | None = None
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
     sku: str | None = Field(alias="SKU", default=None)
-    sensing_frequency: str | None = None
+    sensing_frequency: float | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
@@ -37,12 +39,17 @@ class LeakDetector(RedfishResource):
 
 class LeakDetectorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    detector_state: str | None = None
+    detector_state: Health | None = None
     device_name: str | None = None
-    physical_context: str | None = None
-    physical_sub_context: str | None = None
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
 
 
 class LeakDetectorExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    detector_state: str | None = None
+    detector_state: Health | None = None
+
+
+class LeakDetectorType(StrEnum):
+    MOISTURE = "Moisture"
+    FLOAT_SWITCH = "FloatSwitch"

@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -9,6 +10,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
+from .pcie_device import PcieTypes
 from .resource import Location, Status
 
 
@@ -25,14 +27,14 @@ class PcieLinks(RedfishModel):
 
 
 class PcieSlot(RedfishModel):
-    hot_pluggable: str | None = None
-    lanes: str | None = None
+    hot_pluggable: bool | None = None
+    lanes: int | None = None
     links: PcieLinks | None = None
     location: Location | None = None
-    location_indicator_active: str | None = None
+    location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
-    pcie_type: str | None = Field(alias="PCIeType", default=None)
-    slot_type: str | None = None
+    pcie_type: PcieTypes | None = Field(alias="PCIeType", default=None)
+    slot_type: SlotTypes | None = None
     status: Status | None = None
 
 
@@ -41,3 +43,15 @@ class PcieSlots(RedfishResource):
     description: str | None = None
     oem: dict[str, Any] | None = None
     slots: list[PcieSlot] | None = None
+
+
+class SlotTypes(StrEnum):
+    FULL_LENGTH = "FullLength"
+    HALF_LENGTH = "HalfLength"
+    LOW_PROFILE = "LowProfile"
+    MINI = "Mini"
+    M2 = "M2"
+    OEM = "OEM"
+    OCP3_SMALL = "OCP3Small"
+    OCP3_LARGE = "OCP3Large"
+    U2 = "U2"

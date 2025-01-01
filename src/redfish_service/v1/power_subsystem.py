@@ -16,15 +16,15 @@ class Actions(RedfishModel):
 
 
 class PowerAllocation(RedfishModel):
-    allocated_watts: str | None = None
-    requested_watts: str | None = None
+    allocated_watts: float | None = None
+    requested_watts: float | None = None
 
 
 class PowerSubsystem(RedfishResource):
     actions: Actions | None = None
     allocation: PowerAllocation | None = None
     batteries: IdRef | None = None
-    capacity_watts: str | None = None
+    capacity_watts: float | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
     power_supplies: IdRef | None = None
