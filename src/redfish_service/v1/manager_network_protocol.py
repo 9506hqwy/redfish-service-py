@@ -28,6 +28,8 @@ class ManagerNetworkProtocol(RedfishResource):
     dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)
     description: str | None = None
     fqdn: str | None = Field(alias="FQDN", default=None)
+    ftp: Protocol | None = Field(alias="FTP", default=None)
+    ftps: Protocol | None = Field(alias="FTPS", default=None)
     http: Protocol | None = Field(alias="HTTP", default=None)
     https: Httpsprotocol | None = Field(alias="HTTPS", default=None)
     host_name: str | None = None
@@ -38,6 +40,7 @@ class ManagerNetworkProtocol(RedfishResource):
     proxy: ProxyConfiguration | None = None
     rdp: Protocol | None = Field(alias="RDP", default=None)
     rfb: Protocol | None = Field(alias="RFB", default=None)
+    sftp: Protocol | None = Field(alias="SFTP", default=None)
     snmp: Snmpprotocol | None = Field(alias="SNMP", default=None)
     ssdp: Ssdprotocol | None = Field(alias="SSDP", default=None)
     ssh: Protocol | None = Field(alias="SSH", default=None)
@@ -80,6 +83,7 @@ class Snmpprotocol(RedfishModel):
     hide_community_strings: str | None = None
     port: str | None = None
     protocol_enabled: str | None = None
+    trap_port: str | None = None
 
 
 class Ssdprotocol(RedfishModel):

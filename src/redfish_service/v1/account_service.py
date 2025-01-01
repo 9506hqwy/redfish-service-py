@@ -26,13 +26,18 @@ class AccountService(RedfishResource):
     additional_external_account_providers: IdRef | None = None
     auth_failure_logging_threshold: int | None = None
     description: str | None = None
+    httpbasic_auth: str | None = Field(alias="HTTPBasicAuth", default=None)
     ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
     local_account_auth: LocalAccountAuth | None = None
     max_password_length: int | None = None
     min_password_length: int | None = None
+    multi_factor_auth: str | None = None
+    oauth2: str | None = Field(alias="OAuth2", default=None)
     oem: dict[str, Any] | None = None
+    outbound_connections: str | None = None
     password_expiration_days: str | None = None
     privilege_map: IdRef | None = None
+    require_change_password_action: str | None = None
     restricted_oem_privileges: list[str] | None = None
     restricted_privileges: list[PrivilegeType] | None = None
     roles: IdRef | None = None
@@ -65,18 +70,23 @@ class ExternalAccountProvider(RedfishModel):
     authentication: Authentication | None = None
     certificates: IdRef | None = None
     ldapservice: Ldapservice | None = Field(alias="LDAPService", default=None)
+    oauth2_service: str | None = Field(alias="OAuth2Service", default=None)
     password_set: bool | None = None
     priority: str | None = None
     remote_role_mapping: list[str] | None = None
+    retries: str | None = None
     service_addresses: list[str] | None = None
     service_enabled: str | None = None
     tacacsplus_service: str | None = Field(alias="TACACSplusService", default=None)
+    timeout_seconds: str | None = None
 
 
 class LdapsearchSettings(RedfishModel):
     base_distinguished_names: list[str] | None = None
+    email_attribute: str | None = None
     group_name_attribute: str | None = None
     groups_attribute: str | None = None
+    sshkey_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
     username_attribute: str | None = None
 
 

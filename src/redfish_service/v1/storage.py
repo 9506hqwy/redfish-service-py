@@ -13,9 +13,19 @@ from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
 from .resource import Identifier, Location, Status
+from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
+    rekey_external_key: RekeyExternalKey | None = Field(
+        alias="#Storage.RekeyExternalKey", default=None
+    )
+    reset_to_defaults: ResetToDefaults | None = Field(
+        alias="#Storage.ResetToDefaults", default=None
+    )
+    set_controller_password: SetControllerPassword | None = Field(
+        alias="#Storage.SetControllerPassword", default=None
+    )
     set_encryption_key: SetEncryptionKey | None = Field(
         alias="#Storage.SetEncryptionKey", default=None
     )
@@ -31,6 +41,16 @@ class CacheSummary(RedfishModel):
 class Links(RedfishModel):
     enclosures: list[IdRef] | None = None
     enclosures_odata_count: int | None = Field(alias="Enclosures@odata.count", default=None)
+    hosting_storage_systems: list[IdRef] | None = None
+    hosting_storage_systems_odata_count: int | None = Field(
+        alias="HostingStorageSystems@odata.count", default=None
+    )
+    nvmeo_fdiscovery_subsystems: list[IdRef] | None = Field(
+        alias="NVMeoFDiscoverySubsystems", default=None
+    )
+    nvmeo_fdiscovery_subsystems_odata_count: int | None = Field(
+        alias="NVMeoFDiscoverySubsystems@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     simple_storage: IdRef | None = None
     storage_services: list[IdRef] | None = None
@@ -45,6 +65,21 @@ class Rates(RedfishModel):
     transformation_rate_percent: str | None = None
 
 
+class RekeyExternalKey(RedfishModel):
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
+
+
+class ResetToDefaults(RedfishModel):
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
+
+
+class SetControllerPassword(RedfishModel):
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
+
+
 class SetEncryptionKey(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
@@ -52,15 +87,22 @@ class SetEncryptionKey(RedfishModel):
 
 class Storage(RedfishResource):
     actions: Actions | None = None
+    auto_volume_create: str | None = None
+    configuration_lock: str | None = None
+    connections: IdRef | None = None
     consistency_groups: IdRef | None = None
     controllers: IdRef | None = None
     description: str | None = None
     drives: list[IdRef] | None = None
     drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    encryption_mode: str | None = None
     endpoint_groups: IdRef | None = None
     file_systems: IdRef | None = None
+    hotspare_activation_policy: str | None = None
     identifiers: list[Identifier] | None = None
     links: Links | None = None
+    local_encryption_key_identifier: str | None = None
+    nvme_subsystem_properties: str | None = Field(alias="NVMeSubsystemProperties", default=None)
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
@@ -71,6 +113,7 @@ class Storage(RedfishResource):
     )
     storage_groups: IdRef | None = None
     storage_pools: IdRef | None = None
+    target_configuration_lock_level: str | None = None
     volumes: IdRef | None = None
 
 
@@ -79,12 +122,14 @@ class StorageController(RedfishObjectId):
     assembly: IdRef | None = None
     asset_tag: str | None = None
     cache_summary: CacheSummary | None = None
+    certificates: IdRef | None = None
     controller_rates: Rates | None = None
     firmware_version: str | None = None
     identifiers: list[Identifier] | None = None
     links: StorageControllerLinks | None = None
     location: Location | None = None
     manufacturer: str | None = None
+    measurements: list[MeasurementBlock] | None = None
     member_id: str
     model: str | None = None
     name: str | None = None

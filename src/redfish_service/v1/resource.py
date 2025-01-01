@@ -59,6 +59,8 @@ class Location(RedfishModel):
     longitude: str | None = None
     oem: dict[str, Any] | None = None
     part_location: PartLocation | None = None
+    part_location_context: str | None = None
+    physical_address: PhysicalAddress | None = None
     placement: Placement | None = None
     postal_address: PostalAddress | None = None
 
@@ -69,6 +71,16 @@ class PartLocation(RedfishModel):
     orientation: str | None = None
     reference: str | None = None
     service_label: str | None = None
+
+
+class PhysicalAddress(RedfishModel):
+    city: str | None = None
+    country: str | None = None
+    isocountry_code: str | None = Field(alias="ISOCountryCode", default=None)
+    isosubdivision_code: str | None = Field(alias="ISOSubdivisionCode", default=None)
+    postal_code: str | None = None
+    state_or_province: str | None = None
+    street_address: str | None = None
 
 
 class Placement(RedfishModel):

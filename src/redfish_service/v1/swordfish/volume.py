@@ -149,6 +149,7 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     owning_storage_resource: IdRef | None = None
     owning_storage_service: IdRef | None = None
+    providing_storage_pool: str | None = None
     server_endpoints: list[IdRef] | None = None
     server_endpoints_odata_count: int | None = Field(
         alias="ServerEndpoints@odata.count", default=None
@@ -244,6 +245,7 @@ class SuspendReplication(RedfishModel):
 
 
 class Volume(RedfishResource):
+    alua: str | None = Field(alias="ALUA", default=None)
     access_capabilities: list[str] | None = None
     actions: Actions | None = None
     allocated_pools: IdRef | None = None

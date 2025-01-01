@@ -15,6 +15,7 @@ from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
+    reset: Reset | None = Field(alias="#NetworkAdapter.Reset", default=None)
     reset_settings_to_default: ResetSettingsToDefault | None = Field(
         alias="#NetworkAdapter.ResetSettingsToDefault", default=None
     )
@@ -31,6 +32,7 @@ class ControllerCapabilities(RedfishModel):
 
 
 class ControllerLinks(RedfishModel):
+    active_software_image: IdRef | None = None
     network_device_functions: list[IdRef] | None = None
     network_device_functions_odata_count: int | None = Field(
         alias="NetworkDeviceFunctions@odata.count", default=None
@@ -42,6 +44,10 @@ class ControllerLinks(RedfishModel):
     pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
     ports: list[IdRef] | None = None
     ports_odata_count: int | None = Field(alias="Ports@odata.count", default=None)
+    software_images: list[IdRef] | None = None
+    software_images_odata_count: int | None = Field(
+        alias="SoftwareImages@odata.count", default=None
+    )
 
 
 class Controllers(RedfishModel):
@@ -90,6 +96,11 @@ class NetworkAdapter(RedfishResource):
 class NicPartitioning(RedfishModel):
     npar_capable: str | None = None
     npar_enabled: str | None = None
+
+
+class Reset(RedfishModel):
+    target: str | None = Field(alias="target", default=None)
+    title: str | None = Field(alias="title", default=None)
 
 
 class ResetSettingsToDefault(RedfishModel):

@@ -8,6 +8,7 @@ from .base import (
     RedfishModel,
 )
 from .odata_v4 import IdRef
+from .resolution_step import ResolutionStep
 from .resource import Health
 from .values import EventType
 
@@ -57,8 +58,11 @@ class EventRecord(RedfishModel):
     oem: dict[str, Any] | None = None
     origin_of_condition: IdRef | None = None
     resolution: str | None = None
+    resolution_steps: list[ResolutionStep] | None = None
     severity: str | None = None
     specific_event_exists_in_group: bool | None = None
+    user_authentication_source: str | None = None
+    username: str | None = None
 
 
 class EventRecordActions(RedfishModel):

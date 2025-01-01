@@ -9,6 +9,7 @@ from .base import (
     RedfishResource,
 )
 from .odata_v4 import IdRef
+from .physical_context import PhysicalContext
 from .resource import Status
 
 
@@ -34,6 +35,7 @@ class MeasurementBlock(RedfishModel):
 class SoftwareInventory(RedfishResource):
     actions: Actions | None = None
     additional_versions: AdditionalVersions | None = None
+    associated_physical_context: PhysicalContext | None = None
     description: str | None = None
     lowest_supported_version: str | None = None
     manufacturer: str | None = None
@@ -42,6 +44,7 @@ class SoftwareInventory(RedfishResource):
     related_item: list[IdRef] | None = None
     related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     release_date: str | None = None
+    release_type: str | None = None
     software_id: str | None = None
     status: Status | None = None
     uefi_device_paths: list[str] | None = None

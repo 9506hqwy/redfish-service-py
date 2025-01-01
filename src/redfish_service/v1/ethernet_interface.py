@@ -53,6 +53,7 @@ class EthernetInterface(RedfishResource):
     )
     ipv6_addresses: list[Ipv6Address] | None = Field(alias="IPv6Addresses", default=None)
     ipv6_default_gateway: str | None = Field(alias="IPv6DefaultGateway", default=None)
+    ipv6_enabled: str | None = Field(alias="IPv6Enabled", default=None)
     ipv6_static_addresses: list[str] | None = Field(alias="IPv6StaticAddresses", default=None)
     ipv6_static_default_gateways: list[str] | None = Field(
         alias="IPv6StaticDefaultGateways", default=None
@@ -66,6 +67,7 @@ class EthernetInterface(RedfishResource):
     name_servers: list[str] | None = None
     oem: dict[str, Any] | None = None
     permanent_macaddress: str | None = Field(alias="PermanentMACAddress", default=None)
+    routing_scope: str | None = None
     speed_mbps: str | None = None
     stateless_address_auto_config: StatelessAddressAutoConfiguration | None = None
     static_name_servers: list[str] | None = None
@@ -77,6 +79,10 @@ class EthernetInterface(RedfishResource):
 
 
 class Links(RedfishModel):
+    affiliated_interfaces: list[IdRef] | None = None
+    affiliated_interfaces_odata_count: int | None = Field(
+        alias="AffiliatedInterfaces@odata.count", default=None
+    )
     chassis: IdRef | None = None
     endpoints: list[IdRef] | None = None
     endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)

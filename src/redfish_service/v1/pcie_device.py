@@ -21,6 +21,7 @@ class DeviceType(StrEnum):
     SINGLE_FUNCTION = "SingleFunction"
     MULTI_FUNCTION = "MultiFunction"
     SIMULATED = "Simulated"
+    RETIMER = "Retimer"
 
 
 class Links(RedfishModel):
@@ -29,17 +30,23 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
     pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    processors: list[IdRef] | None = None
+    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    switch: str | None = None
 
 
 class PcieDevice(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
+    cxldevice: str | None = Field(alias="CXLDevice", default=None)
+    cxllogical_devices: IdRef | None = Field(alias="CXLLogicalDevices", default=None)
     description: str | None = None
     device_type: DeviceType | None = None
     environment_metrics: IdRef | None = None
     firmware_version: str | None = None
     links: Links | None = None
+    location_indicator_active: str | None = None
     manufacturer: str | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
@@ -51,11 +58,14 @@ class PcieDevice(RedfishResource):
     serial_number: str | None = None
     slot: str | None = None
     spare_part_number: str | None = None
+    staged_version: str | None = None
     status: Status | None = None
     uuid: str | None = Field(alias="UUID", default=None)
 
 
 class PcieErrors(RedfishModel):
+    bad_dllpcount: str | None = Field(alias="BadDLLPCount", default=None)
+    bad_tlpcount: str | None = Field(alias="BadTLPCount", default=None)
     correctable_error_count: str | None = None
     fatal_error_count: str | None = None
     l0_to_recovery_count: str | None = None
@@ -64,6 +74,7 @@ class PcieErrors(RedfishModel):
     non_fatal_error_count: str | None = None
     replay_count: str | None = None
     replay_rollover_count: str | None = None
+    unsupported_request_count: str | None = None
 
 
 class PcieInterface(RedfishModel):

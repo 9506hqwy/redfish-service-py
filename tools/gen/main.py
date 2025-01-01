@@ -578,12 +578,18 @@ def select_definition(definitions: list[dict[str, Any]]) -> str | dict[str, Any]
             return None
 
     refs: list[str] = [d["$ref"] for d in definitions if not d["$ref"].endswith("/idRef")]
-    # TODO:
-    sorted_refs = sorted(refs, reverse=True)
+
+    versions: list[tuple[tuple[int, int, int], str]] = []
+    for ref in refs:
+        if m := re.match(r".+\.v(\d+)_(\d+)_(\d+)\..+", ref):
+            v = (int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            versions.append((v, ref))
+
+    sorted_refs = sorted(versions, key=lambda v: v[0], reverse=True)
     if len(sorted_refs) == 0:
         return None
 
-    return sorted_refs[0]
+    return sorted_refs[0][1]
 
 
 def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:

@@ -75,6 +75,7 @@ class Sensor(RedfishResource):
     crest_factor: str | None = None
     description: str | None = None
     electrical_context: str | None = None
+    enabled: str | None = None
     implementation: str | None = None
     lifetime_reading: str | None = None
     lifetime_start_date_time: str | None = None
