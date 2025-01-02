@@ -10,9 +10,6 @@ from typing import Any, Callable, Generator, TypeGuard
 from urllib.parse import urlparse
 from warnings import warn
 
-# TODO
-COMMON_VALUES: list[str] = ["EventType"]
-
 # pydantic.BaseModel properties.
 BASE_MODEL_PROPERTIES: list[str] = ["schema"]
 
@@ -675,7 +672,6 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
         if domain_name == "swordfish":
             out_file = out_path / "swordfish"
 
-        values: list[EnumInfo] = []
         modules = sorted(list(modules_iter), key=lambda m: m.module)
         for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
             if module_name.find(".") > -1:
@@ -703,29 +699,12 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                         warn(f"Exist newer version '{c}'")
                         continue
 
-                    if isinstance(c, EnumInfo) and c.name in COMMON_VALUES:
-                        values.append(c)
-                        continue
-
                     count += 1
                     print(f"{count}: {c} to {module_path}")
 
                     w.write("\n")
                     w.write("\n")
                     c.write_to(w)
-
-        if len(values) > 0:
-            module_path = out_file / "values.py"
-            with module_path.open("w") as w:
-                write_imports_to(domain_name, classes, "values", w)
-
-                for v in values:
-                    count += 1
-                    print(f"{count}: {c} to {module_path}")
-
-                    w.write("\n")
-                    w.write("\n")
-                    v.write_to(w)
 
 
 def write_imports_to(
@@ -765,9 +744,7 @@ def write_imports_to(
                     imports.add(p.type)
 
     for i in sorted(imports, key=lambda i: i.module):
-        if i.name in COMMON_VALUES:
-            w.write(f"from {parent}values import {i.cls_name}\n")
-        elif i.module != module:
+        if i.module != module:
             w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
 
 

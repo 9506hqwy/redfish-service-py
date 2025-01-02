@@ -9,10 +9,10 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
+from .event import EventType
 from .event_destination import EventFormatType
 from .odata_v4 import IdRef
 from .resource import Health, Status
-from .values import EventType
 
 
 class Actions(RedfishModel):
