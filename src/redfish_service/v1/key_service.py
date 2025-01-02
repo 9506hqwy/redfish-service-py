@@ -18,6 +18,6 @@ class Actions(RedfishModel):
 class KeyService(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    nvmeo_fkey_policies: IdRef | None = Field(alias="NVMeoFKeyPolicies", default=None)
-    nvmeo_fsecrets: IdRef | None = Field(alias="NVMeoFSecrets", default=None)
+    nvme_of_key_policies: IdRef | None = Field(alias="NVMeoFKeyPolicies", default=None)
+    nvme_of_secrets: IdRef | None = Field(alias="NVMeoFSecrets", default=None)
     oem: dict[str, Any] | None = None

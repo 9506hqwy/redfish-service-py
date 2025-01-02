@@ -10,7 +10,7 @@ from ..base import (
 )
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
-from ..swordfish.iostatistics import Iostatistics
+from ..swordfish.io_statistics import IoStatistics
 
 
 class Actions(RedfishModel):
@@ -21,21 +21,21 @@ class Actions(RedfishModel):
 
 
 class Links(RedfishModel):
-    data_protection_lo_scapabilities: IdRef | None = Field(
+    data_protection_los_capabilities: IdRef | None = Field(
         alias="DataProtectionLoSCapabilities", default=None
     )
-    data_security_lo_scapabilities: IdRef | None = Field(
+    data_security_los_capabilities: IdRef | None = Field(
         alias="DataSecurityLoSCapabilities", default=None
     )
-    data_storage_lo_scapabilities: IdRef | None = Field(
+    data_storage_los_capabilities: IdRef | None = Field(
         alias="DataStorageLoSCapabilities", default=None
     )
     default_class_of_service: IdRef | None = None
     hosting_system: IdRef | None = None
-    ioconnectivity_lo_scapabilities: IdRef | None = Field(
+    io_connectivity_los_capabilities: IdRef | None = Field(
         alias="IOConnectivityLoSCapabilities", default=None
     )
-    ioperformance_lo_scapabilities: IdRef | None = Field(
+    io_performance_los_capabilities: IdRef | None = Field(
         alias="IOPerformanceLoSCapabilities", default=None
     )
     oem: dict[str, Any] | None = None
@@ -52,13 +52,13 @@ class StorageService(RedfishResource):
     client_endpoint_groups: IdRef | None = None
     connections: IdRef | None = None
     consistency_groups: IdRef | None = None
-    data_protection_lo_scapabilities: IdRef | None = Field(
+    data_protection_los_capabilities: IdRef | None = Field(
         alias="DataProtectionLoSCapabilities", default=None
     )
-    data_security_lo_scapabilities: IdRef | None = Field(
+    data_security_los_capabilities: IdRef | None = Field(
         alias="DataSecurityLoSCapabilities", default=None
     )
-    data_storage_lo_scapabilities: IdRef | None = Field(
+    data_storage_los_capabilities: IdRef | None = Field(
         alias="DataStorageLoSCapabilities", default=None
     )
     default_class_of_service: IdRef | None = None
@@ -67,13 +67,13 @@ class StorageService(RedfishResource):
     endpoint_groups: IdRef | None = None
     endpoints: IdRef | None = None
     file_systems: IdRef | None = None
-    ioconnectivity_lo_scapabilities: IdRef | None = Field(
+    io_connectivity_los_capabilities: IdRef | None = Field(
         alias="IOConnectivityLoSCapabilities", default=None
     )
-    ioperformance_lo_scapabilities: IdRef | None = Field(
+    io_performance_los_capabilities: IdRef | None = Field(
         alias="IOPerformanceLoSCapabilities", default=None
     )
-    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
     identifier: Identifier | None = None
     lines_of_service: list[IdRef] | None = None
     lines_of_service_odata_count: int | None = Field(

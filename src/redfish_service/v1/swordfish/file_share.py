@@ -11,7 +11,7 @@ from ..base import (
 )
 from ..odata_v4 import IdRef
 from ..resource import Status
-from ..swordfish.data_storage_lo_scapabilities import StorageAccessCapability
+from ..swordfish.data_storage_los_capabilities import StorageAccessCapability
 from ..swordfish.file_system import FileProtocol
 from ..swordfish.storage_replica_info import ReplicaUpdateMode
 
@@ -22,7 +22,7 @@ class Actions(RedfishModel):
 
 class FileShare(RedfishResource):
     actions: Actions | None = None
-    casupported: bool | None = Field(alias="CASupported", default=None)
+    ca_supported: bool | None = Field(alias="CASupported", default=None)
     default_access_capabilities: list[StorageAccessCapability] | None = None
     description: str | None = None
     ethernet_interfaces: IdRef | None = None

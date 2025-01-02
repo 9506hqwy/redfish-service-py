@@ -19,7 +19,7 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class CstateResidency(RedfishModel):
+class CStateResidency(RedfishModel):
     level: str | None = None
     residency_percent: float | None = None
 
@@ -44,12 +44,12 @@ class ClearCurrentPeriod(RedfishModel):
 
 
 class CoreMetrics(RedfishModel):
-    cstate_residency: list[CstateResidency] | None = Field(alias="CStateResidency", default=None)
+    c_state_residency: list[CStateResidency] | None = None
     core_cache: list[CacheMetrics] | None = None
     core_id: str | None = None
     correctable_core_error_count: int | None = None
     correctable_other_error_count: int | None = None
-    iostall_count: float | None = Field(alias="IOStallCount", default=None)
+    io_stall_count: float | None = Field(alias="IOStallCount", default=None)
     instructions_per_cycle: float | None = None
     memory_stall_count: float | None = None
     uncorrectable_core_error_count: int | None = None
@@ -58,15 +58,15 @@ class CoreMetrics(RedfishModel):
 
 
 class CurrentPeriod(RedfishModel):
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
-    uncorrectable_eccerror_count: int | None = Field(
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 
 
 class LifeTime(RedfishModel):
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
-    uncorrectable_eccerror_count: int | None = Field(
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 

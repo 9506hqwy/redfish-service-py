@@ -17,8 +17,8 @@ class Actions(RedfishModel):
 
 
 class Links(RedfishModel):
-    cxllogical_devices: list[IdRef] | None = Field(alias="CXLLogicalDevices", default=None)
-    cxllogical_devices_odata_count: int | None = Field(
+    cxl_logical_devices: list[IdRef] | None = Field(alias="CXLLogicalDevices", default=None)
+    cxl_logical_devices_odata_count: int | None = Field(
         alias="CXLLogicalDevices@odata.count", default=None
     )
     fabric_adapters: list[IdRef] | None = None
@@ -43,10 +43,10 @@ class MemoryDomain(RedfishResource):
     description: str | None = None
     interleavable_memory_sets: list[MemorySet] | None = None
     links: Links | None = None
-    memory_chunk_increment_mi_b: int | None = None
+    memory_chunk_increment_mib: int | None = Field(alias="MemoryChunkIncrementMiB", default=None)
     memory_chunks: IdRef | None = None
-    memory_size_mi_b: int | None = None
-    min_memory_chunk_size_mi_b: int | None = None
+    memory_size_mib: int | None = Field(alias="MemorySizeMiB", default=None)
+    min_memory_chunk_size_mib: int | None = Field(alias="MinMemoryChunkSizeMiB", default=None)
     oem: dict[str, Any] | None = None
     status: Status | None = None
 

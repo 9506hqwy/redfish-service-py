@@ -30,7 +30,7 @@ class DiagnosticDataTypes(StrEnum):
     OS = "OS"
     OEM = "OEM"
     CPER = "CPER"
-    CPERSECTION = "CPERSection"
+    CPER_SECTION = "CPERSection"
 
 
 class Event(RedfishModel):
@@ -64,7 +64,7 @@ class EventRecord(RedfishModel):
     message_args: list[str] | None = None
     message_id: str
     message_severity: Health | None = None
-    oemdiagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
     oem: dict[str, Any] | None = None
     origin_of_condition: IdRef | None = None
     resolution: str | None = None

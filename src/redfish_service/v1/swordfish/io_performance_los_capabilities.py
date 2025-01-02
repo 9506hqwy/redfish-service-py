@@ -18,7 +18,7 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class IoaccessPattern(StrEnum):
+class IoAccessPattern(StrEnum):
     READ_WRITE = "ReadWrite"
     SEQUENTIAL_READ = "SequentialRead"
     SEQUENTIAL_WRITE = "SequentialWrite"
@@ -26,16 +26,16 @@ class IoaccessPattern(StrEnum):
     RANDOM_READ_AGAIN = "RandomReadAgain"
 
 
-class IoperformanceLoScapabilities(RedfishResource):
+class IoPerformanceLosCapabilities(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    iolimiting_is_supported: bool | None = Field(alias="IOLimitingIsSupported", default=None)
+    io_limiting_is_supported: bool | None = Field(alias="IOLimitingIsSupported", default=None)
     identifier: Identifier | None = None
     max_sample_period: str | None = None
     min_sample_period: str | None = None
     min_supported_io_operation_latency_microseconds: int | None = None
     oem: dict[str, Any] | None = None
-    supported_ioworkloads: list[Ioworkload] | None = Field(
+    supported_io_workloads: list[IoWorkload] | None = Field(
         alias="SupportedIOWorkloads", default=None
     )
     supported_lines_of_service: list[IdRef] | None = None
@@ -44,15 +44,15 @@ class IoperformanceLoScapabilities(RedfishResource):
     )
 
 
-class Ioworkload(RedfishModel):
-    components: list[IoworkloadComponent] | None = None
+class IoWorkload(RedfishModel):
+    components: list[IoWorkloadComponent] | None = None
     name: str | None = None
 
 
-class IoworkloadComponent(RedfishModel):
-    average_iobytes: int | None = Field(alias="AverageIOBytes", default=None)
+class IoWorkloadComponent(RedfishModel):
+    average_io_bytes: int | None = Field(alias="AverageIOBytes", default=None)
     duration: str | None = None
-    ioaccess_pattern: IoaccessPattern | None = Field(alias="IOAccessPattern", default=None)
+    io_access_pattern: IoAccessPattern | None = Field(alias="IOAccessPattern", default=None)
     percent_of_data: int | None = None
     percent_of_iops: int | None = Field(alias="PercentOfIOPS", default=None)
     schedule: Schedule | None = None

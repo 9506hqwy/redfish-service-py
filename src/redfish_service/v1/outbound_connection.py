@@ -39,7 +39,7 @@ class OutboundConnection(RedfishResource):
     endpoint_uri: str | None = Field(alias="EndpointURI", default=None)
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    pre_upgrade_httpheaders: dict[str, Any] | None = Field(
+    pre_upgrade_http_headers: dict[str, Any] | None = Field(
         alias="PreUpgradeHTTPHeaders", default=None
     )
     retry_policy: RetryPolicyType | None = None

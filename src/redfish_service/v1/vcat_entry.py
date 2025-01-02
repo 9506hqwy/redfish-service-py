@@ -14,14 +14,14 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Vcatentry(RedfishResource):
+class VcatEntry(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     oem: dict[str, Any] | None = None
     raw_entry_hex: str | None = None
-    vcentries: list[VcatableEntry] | None = Field(alias="VCEntries", default=None)
+    vc_entries: list[VcaTableEntry] | None = Field(alias="VCEntries", default=None)
 
 
-class VcatableEntry(RedfishModel):
+class VcaTableEntry(RedfishModel):
     threshold: str | None = None
-    vcmask: str | None = Field(alias="VCMask", default=None)
+    vc_mask: str | None = Field(alias="VCMask", default=None)

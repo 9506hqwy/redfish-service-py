@@ -67,9 +67,9 @@ class CableStatus(StrEnum):
 
 
 class ConnectorType(StrEnum):
-    ACPOWER = "ACPower"
+    AC_POWER = "ACPower"
     DB9 = "DB9"
-    DCPOWER = "DCPower"
+    DC_POWER = "DCPower"
     DISPLAY_PORT = "DisplayPort"
     HDMI = "HDMI"
     ICI = "ICI"
@@ -81,7 +81,7 @@ class ConnectorType(StrEnum):
     SCSI = "SCSI"
     SLIM_SAS = "SlimSAS"
     SFP = "SFP"
-    SFPPLUS = "SFPPlus"
+    SFP_PLUS = "SFPPlus"
     USBA = "USBA"
     USBC = "USBC"
     QSFP = "QSFP"

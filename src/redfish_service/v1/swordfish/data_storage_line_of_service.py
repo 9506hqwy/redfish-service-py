@@ -6,8 +6,8 @@ from ..base import (
     RedfishModel,
     RedfishResource,
 )
-from ..swordfish.data_protection_lo_scapabilities import RecoveryAccessScope
-from ..swordfish.data_storage_lo_scapabilities import ProvisioningPolicy, StorageAccessCapability
+from ..swordfish.data_protection_los_capabilities import RecoveryAccessScope
+from ..swordfish.data_storage_los_capabilities import ProvisioningPolicy, StorageAccessCapability
 
 
 class Actions(RedfishModel):

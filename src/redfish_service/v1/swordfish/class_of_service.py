@@ -32,16 +32,16 @@ class ClassOfService(RedfishResource):
         alias="DataStorageLinesOfService@odata.count", default=None
     )
     description: str | None = None
-    ioconnectivity_lines_of_service: list[IdRef] | None = Field(
+    io_connectivity_lines_of_service: list[IdRef] | None = Field(
         alias="IOConnectivityLinesOfService", default=None
     )
-    ioconnectivity_lines_of_service_odata_count: int | None = Field(
+    io_connectivity_lines_of_service_odata_count: int | None = Field(
         alias="IOConnectivityLinesOfService@odata.count", default=None
     )
-    ioperformance_lines_of_service: list[IdRef] | None = Field(
+    io_performance_lines_of_service: list[IdRef] | None = Field(
         alias="IOPerformanceLinesOfService", default=None
     )
-    ioperformance_lines_of_service_odata_count: int | None = Field(
+    io_performance_lines_of_service_odata_count: int | None = Field(
         alias="IOPerformanceLinesOfService@odata.count", default=None
     )
     identifier: Identifier | None = None

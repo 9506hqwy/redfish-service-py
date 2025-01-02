@@ -12,20 +12,20 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
-from ..swordfish.data_storage_lo_scapabilities import ProvisioningPolicy, StorageAccessCapability
-from ..swordfish.iostatistics import Iostatistics
+from ..swordfish.data_storage_los_capabilities import ProvisioningPolicy, StorageAccessCapability
+from ..swordfish.io_statistics import IoStatistics
 from ..swordfish.storage_replica_info import ReplicaInfo
 
 
 class Alua(RedfishModel):
-    anagroup_id: float | None = Field(alias="ANAGroupId", default=None)
+    ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
 
 
 class Actions(RedfishModel):
     assign_replica_target: AssignReplicaTarget | None = Field(
         alias="#Volume.AssignReplicaTarget", default=None
     )
-    change_raidlayout: ChangeRaidlayout | None = Field(
+    change_raid_layout: ChangeRaidLayout | None = Field(
         alias="#Volume.ChangeRAIDLayout", default=None
     )
     check_consistency: CheckConsistency | None = Field(
@@ -59,7 +59,7 @@ class AssignReplicaTarget(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class ChangeRaidlayout(RedfishModel):
+class ChangeRaidLayout(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
@@ -96,33 +96,33 @@ class InitializeMethod(StrEnum):
     FOREGROUND = "Foreground"
 
 
-class Lbaformat(RedfishModel):
-    lbadata_size_bytes: int | None = Field(alias="LBADataSizeBytes", default=None)
-    lbaformat_type: LbaformatType | None = Field(alias="LBAFormatType", default=None)
-    lbametadata_size_bytes: int | None = Field(alias="LBAMetadataSizeBytes", default=None)
-    relative_performance: LbarelativePerformanceType | None = None
+class LbaFormat(RedfishModel):
+    lba_data_size_bytes: int | None = Field(alias="LBADataSizeBytes", default=None)
+    lba_format_type: LbaFormatType | None = Field(alias="LBAFormatType", default=None)
+    lba_metadata_size_bytes: int | None = Field(alias="LBAMetadataSizeBytes", default=None)
+    relative_performance: LbaRelativePerformanceType | None = None
 
 
-class LbaformatType(StrEnum):
-    LBAFORMAT0 = "LBAFormat0"
-    LBAFORMAT1 = "LBAFormat1"
-    LBAFORMAT2 = "LBAFormat2"
-    LBAFORMAT3 = "LBAFormat3"
-    LBAFORMAT4 = "LBAFormat4"
-    LBAFORMAT5 = "LBAFormat5"
-    LBAFORMAT6 = "LBAFormat6"
-    LBAFORMAT7 = "LBAFormat7"
-    LBAFORMAT8 = "LBAFormat8"
-    LBAFORMAT9 = "LBAFormat9"
-    LBAFORMAT10 = "LBAFormat10"
-    LBAFORMAT11 = "LBAFormat11"
-    LBAFORMAT12 = "LBAFormat12"
-    LBAFORMAT13 = "LBAFormat13"
-    LBAFORMAT14 = "LBAFormat14"
-    LBAFORMAT15 = "LBAFormat15"
+class LbaFormatType(StrEnum):
+    LBA_FORMAT0 = "LBAFormat0"
+    LBA_FORMAT1 = "LBAFormat1"
+    LBA_FORMAT2 = "LBAFormat2"
+    LBA_FORMAT3 = "LBAFormat3"
+    LBA_FORMAT4 = "LBAFormat4"
+    LBA_FORMAT5 = "LBAFormat5"
+    LBA_FORMAT6 = "LBAFormat6"
+    LBA_FORMAT7 = "LBAFormat7"
+    LBA_FORMAT8 = "LBAFormat8"
+    LBA_FORMAT9 = "LBAFormat9"
+    LBA_FORMAT10 = "LBAFormat10"
+    LBA_FORMAT11 = "LBAFormat11"
+    LBA_FORMAT12 = "LBAFormat12"
+    LBA_FORMAT13 = "LBAFormat13"
+    LBA_FORMAT14 = "LBAFormat14"
+    LBA_FORMAT15 = "LBAFormat15"
 
 
-class LbarelativePerformanceType(StrEnum):
+class LbaRelativePerformanceType(StrEnum):
     BEST = "Best"
     BETTER = "Better"
     GOOD = "Good"
@@ -170,11 +170,11 @@ class Links(RedfishModel):
 
 
 class NvmeNamespaceProperties(RedfishModel):
-    formatted_lbasize: str | None = Field(alias="FormattedLBASize", default=None)
+    formatted_lba_size: str | None = Field(alias="FormattedLBASize", default=None)
     is_shareable: bool | None = None
-    lbaformat: Lbaformat | None = Field(alias="LBAFormat", default=None)
-    lbaformats: list[Lbaformat] | None = Field(alias="LBAFormats", default=None)
-    lbaformats_supported: list[LbaformatType] | None = Field(
+    lba_format: LbaFormat | None = Field(alias="LBAFormat", default=None)
+    lba_formats: list[LbaFormat] | None = Field(alias="LBAFormats", default=None)
+    lba_formats_supported: list[LbaFormatType] | None = Field(
         alias="LBAFormatsSupported", default=None
     )
     metadata_transferred_at_end_of_data_lba: bool | None = Field(
@@ -184,8 +184,8 @@ class NvmeNamespaceProperties(RedfishModel):
     namespace_features: NamespaceFeatures | None = None
     namespace_id: str | None = None
     namespace_type: NamespaceType | None = None
-    number_lbaformats: int | None = Field(alias="NumberLBAFormats", default=None)
-    supports_ioperformance_hints: bool | None = Field(
+    number_lba_formats: int | None = Field(alias="NumberLBAFormats", default=None)
+    supports_io_performance_hints: bool | None = Field(
         alias="SupportsIOPerformanceHints", default=None
     )
     supports_multiple_namespace_attachments: bool | None = None
@@ -194,13 +194,13 @@ class NvmeNamespaceProperties(RedfishModel):
 
 class NamespaceFeatures(RedfishModel):
     supports_atomic_transaction_size: bool | None = None
-    supports_deallocated_or_unwritten_lberror: bool | None = Field(
+    supports_deallocated_or_unwritten_lb_error: bool | None = Field(
         alias="SupportsDeallocatedOrUnwrittenLBError", default=None
     )
-    supports_ioperformance_hints: bool | None = Field(
+    supports_io_performance_hints: bool | None = Field(
         alias="SupportsIOPerformanceHints", default=None
     )
-    supports_nguidreuse: bool | None = Field(alias="SupportsNGUIDReuse", default=None)
+    supports_nguid_reuse: bool | None = Field(alias="SupportsNGUIDReuse", default=None)
     supports_thin_provisioning: bool | None = None
 
 
@@ -224,7 +224,7 @@ class OperationType(StrEnum):
     INITIALIZE = "Initialize"
     REPLICATE = "Replicate"
     DELETE = "Delete"
-    CHANGE_RAIDTYPE = "ChangeRAIDType"
+    CHANGE_RAID_TYPE = "ChangeRAIDType"
     REBUILD = "Rebuild"
     ENCRYPT = "Encrypt"
     DECRYPT = "Decrypt"
@@ -235,7 +235,7 @@ class OperationType(StrEnum):
     CHANGE_STRIP_SIZE = "ChangeStripSize"
 
 
-class Raidtype(StrEnum):
+class RaidType(StrEnum):
     RAID0 = "RAID0"
     RAID1 = "RAID1"
     RAID3 = "RAID3"
@@ -306,8 +306,8 @@ class Volume(RedfishResource):
     display_name: str | None = None
     encrypted: bool | None = None
     encryption_types: list[EncryptionTypes] | None = None
-    ioperf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
-    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
+    io_perf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
+    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
     identifiers: list[Identifier] | None = None
     initialize_method: InitializeMethod | None = None
     is_boot_capable: bool | None = None
@@ -324,9 +324,9 @@ class Volume(RedfishResource):
     )
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None
-    optimum_iosize_bytes: int | None = Field(alias="OptimumIOSizeBytes", default=None)
+    optimum_io_size_bytes: int | None = Field(alias="OptimumIOSizeBytes", default=None)
     provisioning_policy: ProvisioningPolicy | None = None
-    raidtype: Raidtype | None = Field(alias="RAIDType", default=None)
+    raid_type: RaidType | None = Field(alias="RAIDType", default=None)
     read_cache_policy: ReadCachePolicyType | None = None
     recoverable_capacity_source_count: int | None = None
     remaining_capacity_percent: int | None = None

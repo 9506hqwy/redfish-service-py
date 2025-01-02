@@ -14,10 +14,10 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    generate_sshidentity_key_pair: GenerateSshidentityKeyPair | None = Field(
+    generate_ssh_identity_key_pair: GenerateSshIdentityKeyPair | None = Field(
         alias="#UpdateService.GenerateSSHIdentityKeyPair", default=None
     )
-    remove_sshidentity_key_pair: RemoveSshidentityKeyPair | None = Field(
+    remove_ssh_identity_key_pair: RemoveSshIdentityKeyPair | None = Field(
         alias="#UpdateService.RemoveSSHIdentityKeyPair", default=None
     )
     simple_update: SimpleUpdate | None = Field(alias="#UpdateService.SimpleUpdate", default=None)
@@ -34,7 +34,7 @@ class ApplyTime(StrEnum):
     ON_TARGET_RESET = "OnTargetReset"
 
 
-class GenerateSshidentityKeyPair(RedfishModel):
+class GenerateSshIdentityKeyPair(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
@@ -50,7 +50,7 @@ class HttpPushUriOptions(RedfishModel):
     http_push_uri_apply_time: HttpPushUriApplyTime | None = None
 
 
-class RemoveSshidentityKeyPair(RedfishModel):
+class RemoveSshIdentityKeyPair(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
@@ -66,11 +66,11 @@ class StartUpdate(RedfishModel):
 
 
 class SupportedUpdateImageFormatType(StrEnum):
-    PLDMV1_0 = "PLDMv1_0"
-    PLDMV1_1 = "PLDMv1_1"
-    PLDMV1_2 = "PLDMv1_2"
-    PLDMV1_3 = "PLDMv1_3"
-    UEFICAPSULE = "UEFICapsule"
+    PLDM_V1_0 = "PLDMv1_0"
+    PLDM_V1_1 = "PLDMv1_1"
+    PLDM_V1_2 = "PLDMv1_2"
+    PLDM_V1_3 = "PLDMv1_3"
+    UEFI_CAPSULE = "UEFICapsule"
     VENDOR_DEFINED = "VendorDefined"
 
 
@@ -93,14 +93,14 @@ class UpdateService(RedfishResource):
     max_image_size_bytes: int | None = None
     multipart_http_push_uri: str | None = None
     oem: dict[str, Any] | None = None
-    public_identity_sshkey: IdRef | None = Field(alias="PublicIdentitySSHKey", default=None)
+    public_identity_ssh_key: IdRef | None = Field(alias="PublicIdentitySSHKey", default=None)
     remote_server_certificates: IdRef | None = None
-    remote_server_sshkeys: IdRef | None = Field(alias="RemoteServerSSHKeys", default=None)
+    remote_server_ssh_keys: IdRef | None = Field(alias="RemoteServerSSHKeys", default=None)
     service_enabled: bool | None = None
     software_inventory: IdRef | None = None
     status: Status | None = None
     supported_update_image_formats: list[SupportedUpdateImageFormatType] | None = None
     verify_remote_server_certificate: bool | None = None
-    verify_remote_server_sshkey: bool | None = Field(
+    verify_remote_server_ssh_key: bool | None = Field(
         alias="VerifyRemoteServerSSHKey", default=None
     )

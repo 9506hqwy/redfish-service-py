@@ -26,11 +26,11 @@ class PowerEquipment(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     electrical_buses: IdRef | None = None
-    floor_pdus: IdRef | None = Field(alias="FloorPDUs", default=None)
+    floor_pd_us: IdRef | None = Field(alias="FloorPDUs", default=None)
     links: Links | None = None
     oem: dict[str, Any] | None = None
     power_shelves: IdRef | None = None
-    rack_pdus: IdRef | None = Field(alias="RackPDUs", default=None)
+    rack_pd_us: IdRef | None = Field(alias="RackPDUs", default=None)
     status: Status | None = None
     switchgear: IdRef | None = None
     transfer_switches: IdRef | None = None

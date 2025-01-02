@@ -26,14 +26,14 @@ class AddressRangeType(StrEnum):
 class InterleaveSet(RedfishModel):
     memory: IdRef | None = None
     memory_level: int | None = None
-    offset_mi_b: int | None = None
+    offset_mib: int | None = Field(alias="OffsetMiB", default=None)
     region_id: str | None = None
-    size_mi_b: int | None = None
+    size_mib: int | None = Field(alias="SizeMiB", default=None)
 
 
 class Links(RedfishModel):
-    cxllogical_devices: list[IdRef] | None = Field(alias="CXLLogicalDevices", default=None)
-    cxllogical_devices_odata_count: int | None = Field(
+    cxl_logical_devices: list[IdRef] | None = Field(alias="CXLLogicalDevices", default=None)
+    cxl_logical_devices_odata_count: int | None = Field(
         alias="CXLLogicalDevices@odata.count", default=None
     )
     endpoints: list[IdRef] | None = None
@@ -51,7 +51,7 @@ class MediaLocation(StrEnum):
 
 class MemoryChunks(RedfishResource):
     actions: Actions | None = None
-    address_range_offset_mi_b: int | None = None
+    address_range_offset_mib: int | None = Field(alias="AddressRangeOffsetMiB", default=None)
     address_range_type: AddressRangeType | None = None
     description: str | None = None
     display_name: str | None = None
@@ -60,7 +60,7 @@ class MemoryChunks(RedfishResource):
     is_spare: bool | None = None
     links: Links | None = None
     media_location: MediaLocation | None = None
-    memory_chunk_size_mi_b: int | None = None
+    memory_chunk_size_mib: int | None = Field(alias="MemoryChunkSizeMiB", default=None)
     oem: dict[str, Any] | None = None
     requested_operational_state: OperationalState | None = None
     status: Status | None = None

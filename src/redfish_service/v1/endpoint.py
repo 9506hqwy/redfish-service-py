@@ -9,7 +9,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .ipaddresses import Ipv4Address, Ipv6Address
+from .ip_addresses import Ipv4Address, Ipv6Address
 from .odata_v4 import IdRef
 from .protocol import Protocol
 from .resource import Identifier, Status
@@ -37,7 +37,7 @@ class Endpoint(RedfishResource):
     description: str | None = None
     endpoint_protocol: Protocol | None = None
     host_reservation_memory_bytes: int | None = None
-    iptransport_details: list[IptransportDetails] | None = Field(
+    ip_transport_details: list[IpTransportDetails] | None = Field(
         alias="IPTransportDetails", default=None
     )
     identifiers: list[Identifier] | None = None
@@ -73,7 +73,7 @@ class EntityType(StrEnum):
     MANAGER = "Manager"
     STORAGE_SUBSYSTEM = "StorageSubsystem"
     MEMORY = "Memory"
-    CXLDEVICE = "CXLDevice"
+    CXL_DEVICE = "CXLDevice"
 
 
 class Gcid(RedfishModel):
@@ -87,7 +87,7 @@ class GenZ(RedfishModel):
     region_key: str | None = None
 
 
-class IptransportDetails(RedfishModel):
+class IpTransportDetails(RedfishModel):
     ipv4_address: Ipv4Address | None = Field(alias="IPv4Address", default=None)
     ipv6_address: Ipv6Address | None = Field(alias="IPv6Address", default=None)
     port: int | None = None

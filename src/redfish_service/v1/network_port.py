@@ -21,7 +21,7 @@ class FlowControl(StrEnum):
     NONE = "None"
     TX = "TX"
     RX = "RX"
-    TX__RX = "TX_RX"
+    T_X_RX = "TX_RX"
 
 
 class LinkNetworkTechnology(StrEnum):
@@ -37,13 +37,13 @@ class LinkStatus(StrEnum):
     TRAINING = "Training"
 
 
-class NetDevFuncMaxBwalloc(RedfishModel):
-    max_bwalloc_percent: int | None = Field(alias="MaxBWAllocPercent", default=None)
+class NetDevFuncMaxBwAlloc(RedfishModel):
+    max_bw_alloc_percent: int | None = Field(alias="MaxBWAllocPercent", default=None)
     network_device_function: IdRef | None = None
 
 
-class NetDevFuncMinBwalloc(RedfishModel):
-    min_bwalloc_percent: int | None = Field(alias="MinBWAllocPercent", default=None)
+class NetDevFuncMinBwAlloc(RedfishModel):
+    min_bw_alloc_percent: int | None = Field(alias="MinBWAllocPercent", default=None)
     network_device_function: IdRef | None = None
 
 
@@ -53,19 +53,19 @@ class NetworkPort(RedfishResource):
     associated_network_addresses: list[str] | None = None
     current_link_speed_mbps: int | None = None
     description: str | None = None
-    eeeenabled: bool | None = Field(alias="EEEEnabled", default=None)
-    fcfabric_name: str | None = Field(alias="FCFabricName", default=None)
-    fcport_connection_type: PortConnectionType | None = Field(
+    eee_enabled: bool | None = Field(alias="EEEEnabled", default=None)
+    fc_fabric_name: str | None = Field(alias="FCFabricName", default=None)
+    fc_port_connection_type: PortConnectionType | None = Field(
         alias="FCPortConnectionType", default=None
     )
     flow_control_configuration: FlowControl | None = None
     flow_control_status: FlowControl | None = None
     link_status: LinkStatus | None = None
     max_frame_size: int | None = None
-    net_dev_func_max_bwalloc: list[NetDevFuncMaxBwalloc] | None = Field(
+    net_dev_func_max_bw_alloc: list[NetDevFuncMaxBwAlloc] | None = Field(
         alias="NetDevFuncMaxBWAlloc", default=None
     )
-    net_dev_func_min_bwalloc: list[NetDevFuncMinBwalloc] | None = Field(
+    net_dev_func_min_bw_alloc: list[NetDevFuncMinBwAlloc] | None = Field(
         alias="NetDevFuncMinBWAlloc", default=None
     )
     number_discovered_remote_ports: int | None = None
@@ -77,12 +77,12 @@ class NetworkPort(RedfishResource):
     supported_ethernet_capabilities: list[SupportedEthernetCapabilities] | None = None
     supported_link_capabilities: list[SupportedLinkCapabilities] | None = None
     vendor_id: str | None = None
-    wake_on_lanenabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
+    wake_on_lan_enabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
 
 
 class PortConnectionType(StrEnum):
     NOT_CONNECTED = "NotConnected"
-    NPORT = "NPort"
+    N_PORT = "NPort"
     POINT_TO_POINT = "PointToPoint"
     PRIVATE_LOOP = "PrivateLoop"
     PUBLIC_LOOP = "PublicLoop"

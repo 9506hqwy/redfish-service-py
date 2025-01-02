@@ -47,7 +47,7 @@ class InsertMedia(RedfishModel):
 class MediaType(StrEnum):
     CD = "CD"
     FLOPPY = "Floppy"
-    USBSTICK = "USBStick"
+    USB_STICK = "USBStick"
     DVD = "DVD"
 
 

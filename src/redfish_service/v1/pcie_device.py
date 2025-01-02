@@ -17,9 +17,9 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Cxldevice(RedfishModel):
-    device_type: CxldeviceType | None = None
-    dynamic_capacity: CxldynamicCapacity | None = None
+class CxlDevice(RedfishModel):
+    device_type: CxlDeviceType | None = None
+    dynamic_capacity: CxlDynamicCapacity | None = None
     egress_port_congestion_support: bool | None = None
     max_number_logical_devices: int | None = None
     temporary_throughput_reduction_enabled: bool | None = None
@@ -28,35 +28,35 @@ class Cxldevice(RedfishModel):
     timestamp: str | None = None
 
 
-class CxldeviceType(StrEnum):
+class CxlDeviceType(StrEnum):
     TYPE1 = "Type1"
     TYPE2 = "Type2"
     TYPE3 = "Type3"
 
 
-class CxldynamicCapacity(RedfishModel):
-    add_capacity_policies_supported: list[CxldynamicCapacityPolicies] | None = None
+class CxlDynamicCapacity(RedfishModel):
+    add_capacity_policies_supported: list[CxlDynamicCapacityPolicies] | None = None
     max_dynamic_capacity_regions: int | None = None
     max_hosts: int | None = None
-    memory_block_sizes_supported: list[CxlregionBlockSizes] | None = None
-    release_capacity_policies_supported: list[CxldynamicCapacityPolicies] | None = None
-    sanitization_on_release_support: list[CxlregionSanitization] | None = None
-    total_dynamic_capacity_mi_b: int | None = None
+    memory_block_sizes_supported: list[CxlRegionBlockSizes] | None = None
+    release_capacity_policies_supported: list[CxlDynamicCapacityPolicies] | None = None
+    sanitization_on_release_support: list[CxlRegionSanitization] | None = None
+    total_dynamic_capacity_mib: int | None = Field(alias="TotalDynamicCapacityMiB", default=None)
 
 
-class CxldynamicCapacityPolicies(StrEnum):
+class CxlDynamicCapacityPolicies(StrEnum):
     FREE = "Free"
     CONTIGUOUS = "Contiguous"
     PRESCRIPTIVE = "Prescriptive"
     TAG_BASED = "TagBased"
 
 
-class CxlregionBlockSizes(RedfishModel):
-    block_size_mi_b: list[int] | None = None
+class CxlRegionBlockSizes(RedfishModel):
+    block_size_mib: list[int] | None = Field(alias="BlockSizeMiB", default=None)
     region_number: int | None = None
 
 
-class CxlregionSanitization(RedfishModel):
+class CxlRegionSanitization(RedfishModel):
     region_number: int | None = None
     sanitization_on_release_supported: bool | None = None
 
@@ -89,8 +89,8 @@ class PcieDevice(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
-    cxldevice: Cxldevice | None = Field(alias="CXLDevice", default=None)
-    cxllogical_devices: IdRef | None = Field(alias="CXLLogicalDevices", default=None)
+    cxl_device: CxlDevice | None = Field(alias="CXLDevice", default=None)
+    cxl_logical_devices: IdRef | None = Field(alias="CXLLogicalDevices", default=None)
     description: str | None = None
     device_type: DeviceType | None = None
     environment_metrics: IdRef | None = None
@@ -114,13 +114,13 @@ class PcieDevice(RedfishResource):
 
 
 class PcieErrors(RedfishModel):
-    bad_dllpcount: int | None = Field(alias="BadDLLPCount", default=None)
-    bad_tlpcount: int | None = Field(alias="BadTLPCount", default=None)
+    bad_dllp_count: int | None = Field(alias="BadDLLPCount", default=None)
+    bad_tlp_count: int | None = Field(alias="BadTLPCount", default=None)
     correctable_error_count: int | None = None
     fatal_error_count: int | None = None
     l0_to_recovery_count: int | None = None
-    nakreceived_count: int | None = Field(alias="NAKReceivedCount", default=None)
-    naksent_count: int | None = Field(alias="NAKSentCount", default=None)
+    nak_received_count: int | None = Field(alias="NAKReceivedCount", default=None)
+    nak_sent_count: int | None = Field(alias="NAKSentCount", default=None)
     non_fatal_error_count: int | None = None
     replay_count: int | None = None
     replay_rollover_count: int | None = None

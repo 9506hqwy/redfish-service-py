@@ -76,7 +76,7 @@ class NetworkAdapter(RedfishResource):
     description: str | None = None
     environment_metrics: IdRef | None = None
     identifiers: list[Identifier] | None = None
-    lldpenabled: bool | None = Field(alias="LLDPEnabled", default=None)
+    lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
     location: Location | None = None
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
@@ -109,7 +109,7 @@ class ResetSettingsToDefault(RedfishModel):
 
 
 class Sriov(RedfishModel):
-    sriovvepacapable: bool | None = Field(alias="SRIOVVEPACapable", default=None)
+    sriovvepa_capable: bool | None = Field(alias="SRIOVVEPACapable", default=None)
 
 
 class VirtualFunction(RedfishModel):

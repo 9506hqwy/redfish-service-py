@@ -68,7 +68,7 @@ class MetricDefinition(RedfishResource):
     metric_properties: list[str] | None = None
     metric_type: MetricType | None = None
     min_reading_range: float | None = None
-    oemcalculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
+    oem_calculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
     oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     precision: int | None = None

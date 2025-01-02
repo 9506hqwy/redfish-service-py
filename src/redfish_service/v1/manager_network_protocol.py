@@ -23,7 +23,7 @@ class EngineId(RedfishModel):
     private_enterprise_id: str | None = None
 
 
-class Httpsprotocol(RedfishModel):
+class HttpsProtocol(RedfishModel):
     certificates: IdRef | None = None
     port: int | None = None
     protocol_enabled: bool | None = None
@@ -38,26 +38,26 @@ class ManagerNetworkProtocol(RedfishResource):
     ftp: Protocol | None = Field(alias="FTP", default=None)
     ftps: Protocol | None = Field(alias="FTPS", default=None)
     http: Protocol | None = Field(alias="HTTP", default=None)
-    https: Httpsprotocol | None = Field(alias="HTTPS", default=None)
+    https: HttpsProtocol | None = Field(alias="HTTPS", default=None)
     host_name: str | None = None
     ipmi: Protocol | None = Field(alias="IPMI", default=None)
     kvmip: Protocol | None = Field(alias="KVMIP", default=None)
-    ntp: Ntpprotocol | None = Field(alias="NTP", default=None)
+    ntp: NtpProtocol | None = Field(alias="NTP", default=None)
     oem: dict[str, Any] | None = None
     proxy: ProxyConfiguration | None = None
     rdp: Protocol | None = Field(alias="RDP", default=None)
     rfb: Protocol | None = Field(alias="RFB", default=None)
     sftp: Protocol | None = Field(alias="SFTP", default=None)
-    snmp: Snmpprotocol | None = Field(alias="SNMP", default=None)
-    ssdp: Ssdprotocol | None = Field(alias="SSDP", default=None)
+    snmp: SnmpProtocol | None = Field(alias="SNMP", default=None)
+    ssdp: SsdProtocol | None = Field(alias="SSDP", default=None)
     ssh: Protocol | None = Field(alias="SSH", default=None)
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
 
 
-class Ntpprotocol(RedfishModel):
-    ntpservers: list[str] | None = Field(alias="NTPServers", default=None)
+class NtpProtocol(RedfishModel):
+    ntp_servers: list[str] | None = Field(alias="NTPServers", default=None)
     network_supplied_servers: list[str] | None = None
     port: int | None = None
     protocol_enabled: bool | None = None
@@ -84,19 +84,19 @@ class ProxyConfiguration(RedfishModel):
     username: str | None = None
 
 
-class SnmpauthenticationProtocols(StrEnum):
+class SnmpAuthenticationProtocols(StrEnum):
     ACCOUNT = "Account"
     COMMUNITY_STRING = "CommunityString"
-    HMAC__MD5 = "HMAC_MD5"
-    HMAC__SHA96 = "HMAC_SHA96"
-    HMAC128__SHA224 = "HMAC128_SHA224"
-    HMAC192__SHA256 = "HMAC192_SHA256"
-    HMAC256__SHA384 = "HMAC256_SHA384"
-    HMAC384__SHA512 = "HMAC384_SHA512"
+    HMA_C_MD5 = "HMAC_MD5"
+    HMA_C_SHA96 = "HMAC_SHA96"
+    HMA_C128_SHA224 = "HMAC128_SHA224"
+    HMA_C192_SHA256 = "HMAC192_SHA256"
+    HMA_C256_SHA384 = "HMAC256_SHA384"
+    HMA_C384_SHA512 = "HMAC384_SHA512"
 
 
-class Snmpcommunity(RedfishModel):
-    access_mode: SnmpcommunityAccessMode | None = None
+class SnmpCommunity(RedfishModel):
+    access_mode: SnmpCommunityAccessMode | None = None
     community_string: str | None = None
     ipv4_address_range_lower: str | None = Field(alias="IPv4AddressRangeLower", default=None)
     ipv4_address_range_upper: str | None = Field(alias="IPv4AddressRangeUpper", default=None)
@@ -106,28 +106,28 @@ class Snmpcommunity(RedfishModel):
     )
 
 
-class SnmpcommunityAccessMode(StrEnum):
+class SnmpCommunityAccessMode(StrEnum):
     FULL = "Full"
     LIMITED = "Limited"
 
 
-class SnmpencryptionProtocols(StrEnum):
+class SnmpEncryptionProtocols(StrEnum):
     NONE = "None"
     ACCOUNT = "Account"
-    CBC__DES = "CBC_DES"
-    CFB128__AES128 = "CFB128_AES128"
-    CFB128__AES192 = "CFB128_AES192"
-    CFB128__AES256 = "CFB128_AES256"
+    CB_C_DES = "CBC_DES"
+    CF_B128_AES128 = "CFB128_AES128"
+    CF_B128_AES192 = "CFB128_AES192"
+    CF_B128_AES256 = "CFB128_AES256"
 
 
-class Snmpprotocol(RedfishModel):
-    authentication_protocol: SnmpauthenticationProtocols | None = None
-    community_access_mode: SnmpcommunityAccessMode | None = None
-    community_strings: list[Snmpcommunity] | None = None
+class SnmpProtocol(RedfishModel):
+    authentication_protocol: SnmpAuthenticationProtocols | None = None
+    community_access_mode: SnmpCommunityAccessMode | None = None
+    community_strings: list[SnmpCommunity] | None = None
     enable_snmpv1: bool | None = Field(alias="EnableSNMPv1", default=None)
     enable_snmpv2c: bool | None = Field(alias="EnableSNMPv2c", default=None)
     enable_snmpv3: bool | None = Field(alias="EnableSNMPv3", default=None)
-    encryption_protocol: SnmpencryptionProtocols | None = None
+    encryption_protocol: SnmpEncryptionProtocols | None = None
     engine_id: EngineId | None = None
     hide_community_strings: bool | None = None
     port: int | None = None
@@ -135,7 +135,7 @@ class Snmpprotocol(RedfishModel):
     trap_port: int | None = None
 
 
-class Ssdprotocol(RedfishModel):
+class SsdProtocol(RedfishModel):
     notify_ipv6_scope: NotifyIpv6Scope | None = Field(alias="NotifyIPv6Scope", default=None)
     notify_multicast_interval_seconds: int | None = None
     notify_ttl: int | None = Field(alias="NotifyTTL", default=None)

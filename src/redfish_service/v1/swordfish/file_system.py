@@ -12,8 +12,8 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..swordfish.capacity import Capacity
-from ..swordfish.data_storage_lo_scapabilities import StorageAccessCapability
-from ..swordfish.iostatistics import Iostatistics
+from ..swordfish.data_storage_los_capabilities import StorageAccessCapability
+from ..swordfish.io_statistics import IoStatistics
 from ..swordfish.storage_replica_info import ReplicaInfo
 
 
@@ -25,22 +25,22 @@ class CharacterCodeSet(StrEnum):
     ASCII = "ASCII"
     UNICODE = "Unicode"
     ISO2022 = "ISO2022"
-    ISO8859_1 = "ISO8859_1"
-    EXTENDED_UNIXCODE = "ExtendedUNIXCode"
-    UTF_8 = "UTF_8"
-    UTF_16 = "UTF_16"
-    UCS_2 = "UCS_2"
+    IS_O8859_1 = "ISO8859_1"
+    EXTENDED_UNIX_CODE = "ExtendedUNIXCode"
+    UT_F_8 = "UTF_8"
+    UT_F_16 = "UTF_16"
+    UC_S_2 = "UCS_2"
 
 
 class FileProtocol(StrEnum):
-    NFSV3 = "NFSv3"
-    NFSV4_0 = "NFSv4_0"
-    NFSV4_1 = "NFSv4_1"
-    SMBV2_0 = "SMBv2_0"
-    SMBV2_1 = "SMBv2_1"
-    SMBV3_0 = "SMBv3_0"
-    SMBV3_0_2 = "SMBv3_0_2"
-    SMBV3_1_1 = "SMBv3_1_1"
+    NF_SV3 = "NFSv3"
+    NF_SV4_0 = "NFSv4_0"
+    NF_SV4_1 = "NFSv4_1"
+    SM_BV2_0 = "SMBv2_0"
+    SM_BV2_1 = "SMBv2_1"
+    SM_BV3_0 = "SMBv3_0"
+    SM_BV3_0_2 = "SMBv3_0_2"
+    SM_BV3_1_1 = "SMBv3_1_1"
 
 
 class FileSystem(RedfishResource):
@@ -58,7 +58,7 @@ class FileSystem(RedfishResource):
     cluster_size_bytes: int | None = None
     description: str | None = None
     exported_shares: IdRef | None = None
-    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
     identifiers: list[Identifier] | None = None
     imported_shares: list[dict[str, Any]] | None = None
     links: Links | None = None

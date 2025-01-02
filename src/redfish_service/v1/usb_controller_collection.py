@@ -5,5 +5,5 @@ from .base import (
 )
 
 
-class CxllogicalDeviceCollection(RedfishResourceCollection):
+class UsbControllerCollection(RedfishResourceCollection):
     pass

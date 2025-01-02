@@ -25,10 +25,10 @@ class BootTimeStatistics(RedfishModel):
     user_space_time_seconds: float | None = None
 
 
-class I2CbusStatistics(RedfishModel):
+class I2cBusStatistics(RedfishModel):
     bus_error_count: int | None = None
-    i2_cbus_name: str | None = Field(alias="I2CBusName", default=None)
-    nackcount: int | None = Field(alias="NACKCount", default=None)
+    i2c_bus_name: str | None = Field(alias="I2CBusName", default=None)
+    nack_count: int | None = Field(alias="NACKCount", default=None)
     total_transaction_count: int | None = None
 
 
@@ -36,9 +36,9 @@ class ManagerDiagnosticData(RedfishResource):
     actions: Actions | None = None
     boot_time_statistics: BootTimeStatistics | None = None
     description: str | None = None
-    free_storage_space_ki_b: int | None = None
-    i2_cbuses: list[I2CbusStatistics] | None = Field(alias="I2CBuses", default=None)
-    memory_eccstatistics: MemoryEccstatistics | None = Field(
+    free_storage_space_kib: int | None = Field(alias="FreeStorageSpaceKiB", default=None)
+    i2c_buses: list[I2cBusStatistics] | None = Field(alias="I2CBuses", default=None)
+    memory_ecc_statistics: MemoryEccStatistics | None = Field(
         alias="MemoryECCStatistics", default=None
     )
     memory_statistics: MemoryStatistics | None = None
@@ -48,9 +48,9 @@ class ManagerDiagnosticData(RedfishResource):
     top_processes: list[ProcessStatistics] | None = None
 
 
-class MemoryEccstatistics(RedfishModel):
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
-    uncorrectable_eccerror_count: int | None = Field(
+class MemoryEccStatistics(RedfishModel):
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 

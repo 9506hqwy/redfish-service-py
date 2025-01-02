@@ -26,10 +26,10 @@ class Cxl(RedfishModel):
     connected_device_type: ConnectedDeviceType | None = None
     current_port_configuration_state: CurrentPortConfigurationState | None = None
     max_logical_device_count: int | None = None
-    qo_stelemetry_capabilities: QoStelemetryCapabilities | None = Field(
+    qos_telemetry_capabilities: QosTelemetryCapabilities | None = Field(
         alias="QoSTelemetryCapabilities", default=None
     )
-    supported_cxlmodes: list[ConnectedDeviceMode] | None = Field(
+    supported_cxl_modes: list[ConnectedDeviceMode] | None = Field(
         alias="SupportedCXLModes", default=None
     )
     temporary_throughput_reduction_enabled: bool | None = None
@@ -52,9 +52,9 @@ class Congestion(RedfishModel):
 class ConnectedDeviceMode(StrEnum):
     DISCONNECTED = "Disconnected"
     RCD = "RCD"
-    CXL68_BFLIT_AND_VH = "CXL68BFlitAndVH"
-    STANDARD256_BFLIT = "Standard256BFlit"
-    CXLLATENCY_OPTIMIZED256_BFLIT = "CXLLatencyOptimized256BFlit"
+    CXL68B_FLIT_AND_VH = "CXL68BFlitAndVH"
+    STANDARD256_B_FLIT = "Standard256BFlit"
+    CXL_LATENCY_OPTIMIZED256_B_FLIT = "CXLLatencyOptimized256BFlit"
     PBR = "PBR"
 
 
@@ -78,15 +78,17 @@ class CurrentPortConfigurationState(StrEnum):
 
 
 class EthernetProperties(RedfishModel):
-    associated_macaddresses: list[str] | None = Field(alias="AssociatedMACAddresses", default=None)
-    eeeenabled: bool | None = Field(alias="EEEEnabled", default=None)
+    associated_mac_addresses: list[str] | None = Field(
+        alias="AssociatedMACAddresses", default=None
+    )
+    eee_enabled: bool | None = Field(alias="EEEEnabled", default=None)
     flow_control_configuration: FlowControl | None = None
     flow_control_status: FlowControl | None = None
-    lldpenabled: bool | None = Field(alias="LLDPEnabled", default=None)
-    lldpreceive: Lldpreceive | None = Field(alias="LLDPReceive", default=None)
-    lldptransmit: Lldptransmit | None = Field(alias="LLDPTransmit", default=None)
+    lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
+    lldp_receive: LldpReceive | None = Field(alias="LLDPReceive", default=None)
+    lldp_transmit: LldpTransmit | None = Field(alias="LLDPTransmit", default=None)
     supported_ethernet_capabilities: list[SupportedEthernetCapabilities] | None = None
-    wake_on_lanenabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
+    wake_on_lan_enabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
 
 
 class FiberConnectionType(StrEnum):
@@ -105,7 +107,7 @@ class FlowControl(StrEnum):
     NONE = "None"
     TX = "TX"
     RX = "RX"
-    TX__RX = "TX_RX"
+    T_X_RX = "TX_RX"
 
 
 class FunctionMaxBandwidth(RedfishModel):
@@ -142,7 +144,7 @@ class InfiniBandProperties(RedfishModel):
     associated_system_guids: list[str] | None = Field(alias="AssociatedSystemGUIDs", default=None)
 
 
-class Lldpreceive(RedfishModel):
+class LldpReceive(RedfishModel):
     chassis_id: str | None = None
     chassis_id_subtype: Ieee802IdSubtype | None = None
     management_address_ipv4: str | None = Field(alias="ManagementAddressIPv4", default=None)
@@ -151,24 +153,24 @@ class Lldpreceive(RedfishModel):
     management_vlan_id: int | None = None
     port_id: str | None = None
     port_id_subtype: Ieee802IdSubtype | None = None
-    system_capabilities: list[LldpsystemCapabilities] | None = None
+    system_capabilities: list[LldpSystemCapabilities] | None = None
     system_description: str | None = None
     system_name: str | None = None
 
 
-class LldpsystemCapabilities(StrEnum):
+class LldpSystemCapabilities(StrEnum):
     NONE = "None"
     BRIDGE = "Bridge"
-    DOCSISCABLE_DEVICE = "DOCSISCableDevice"
+    DOCSIS_CABLE_DEVICE = "DOCSISCableDevice"
     OTHER = "Other"
     REPEATER = "Repeater"
     ROUTER = "Router"
     STATION = "Station"
     TELEPHONE = "Telephone"
-    WLANACCESS_POINT = "WLANAccessPoint"
+    WLAN_ACCESS_POINT = "WLANAccessPoint"
 
 
-class Lldptransmit(RedfishModel):
+class LldpTransmit(RedfishModel):
     chassis_id: str | None = None
     chassis_id_subtype: Ieee802IdSubtype | None = None
     management_address_ipv4: str | None = Field(alias="ManagementAddressIPv4", default=None)
@@ -177,7 +179,7 @@ class Lldptransmit(RedfishModel):
     management_vlan_id: int | None = None
     port_id: str | None = None
     port_id_subtype: Ieee802IdSubtype | None = None
-    system_capabilities: list[LldpsystemCapabilities] | None = None
+    system_capabilities: list[LldpSystemCapabilities] | None = None
     system_description: str | None = None
     system_name: str | None = None
 
@@ -283,22 +285,22 @@ class Port(RedfishResource):
 
 class PortConnectionType(StrEnum):
     NOT_CONNECTED = "NotConnected"
-    NPORT = "NPort"
+    N_PORT = "NPort"
     POINT_TO_POINT = "PointToPoint"
     PRIVATE_LOOP = "PrivateLoop"
     PUBLIC_LOOP = "PublicLoop"
     GENERIC = "Generic"
     EXTENDER_FABRIC = "ExtenderFabric"
-    FPORT = "FPort"
-    EPORT = "EPort"
-    TEPORT = "TEPort"
-    NPPORT = "NPPort"
-    GPORT = "GPort"
-    NLPORT = "NLPort"
-    FLPORT = "FLPort"
-    EXPORT = "EXPort"
-    UPORT = "UPort"
-    DPORT = "DPort"
+    F_PORT = "FPort"
+    E_PORT = "EPort"
+    TE_PORT = "TEPort"
+    NP_PORT = "NPPort"
+    G_PORT = "GPort"
+    NL_PORT = "NLPort"
+    FL_PORT = "FLPort"
+    EX_PORT = "EXPort"
+    U_PORT = "UPort"
+    D_PORT = "DPort"
 
 
 class PortMedium(StrEnum):
@@ -315,7 +317,7 @@ class PortType(StrEnum):
     UNCONFIGURED_PORT = "UnconfiguredPort"
 
 
-class QoStelemetryCapabilities(RedfishModel):
+class QosTelemetryCapabilities(RedfishModel):
     egress_port_backpressure_supported: bool | None = None
     temporary_throughput_reduction_supported: bool | None = None
 
@@ -338,20 +340,20 @@ class Sfp(RedfishModel):
     part_number: str | None = None
     serial_number: str | None = None
     status: Status | None = None
-    supported_sfptypes: list[Sfptype] | None = Field(alias="SupportedSFPTypes", default=None)
-    type: Sfptype | None = None
+    supported_sfp_types: list[SfpType] | None = Field(alias="SupportedSFPTypes", default=None)
+    type: SfpType | None = None
     vendor_oui: str | None = Field(alias="VendorOUI", default=None)
     version: str | None = None
 
 
-class Sfptype(StrEnum):
+class SfpType(StrEnum):
     SFP = "SFP"
-    SFPPLUS = "SFPPlus"
+    SFP_PLUS = "SFPPlus"
     SFP28 = "SFP28"
     CSFP = "cSFP"
     SFPDD = "SFPDD"
     QSFP = "QSFP"
-    QSFPPLUS = "QSFPPlus"
+    QSFP_PLUS = "QSFPPlus"
     QSFP14 = "QSFP14"
     QSFP28 = "QSFP28"
     QSFP56 = "QSFP56"

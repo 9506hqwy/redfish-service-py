@@ -6,7 +6,7 @@ from ..base import (
     RedfishModel,
     RedfishResource,
 )
-from ..swordfish.data_security_lo_scapabilities import (
+from ..swordfish.data_security_los_capabilities import (
     AntiVirusScanTrigger,
     AuthenticationType,
     DataSanitizationPolicy,

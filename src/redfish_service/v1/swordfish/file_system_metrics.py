@@ -8,7 +8,7 @@ from ..base import (
     RedfishModel,
     RedfishResource,
 )
-from ..swordfish.iostatistics import Iostatistics
+from ..swordfish.io_statistics import IoStatistics
 
 
 class Actions(RedfishModel):
@@ -18,5 +18,5 @@ class Actions(RedfishModel):
 class FileSystemMetrics(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
     oem: dict[str, Any] | None = None

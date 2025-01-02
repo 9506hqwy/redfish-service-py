@@ -38,7 +38,7 @@ class DataSanitizationPolicy(StrEnum):
     CRYPTOGRAPHIC_ERASE = "CryptographicErase"
 
 
-class DataSecurityLoScapabilities(RedfishResource):
+class DataSecurityLosCapabilities(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     identifier: Identifier | None = None
@@ -68,5 +68,5 @@ class KeySize(StrEnum):
 class SecureChannelProtocol(StrEnum):
     NONE = "None"
     TLS = "TLS"
-    IPSEC = "IPsec"
-    RPCSEC__GSS = "RPCSEC_GSS"
+    I_PSEC = "IPsec"
+    RPCSE_C_GSS = "RPCSEC_GSS"

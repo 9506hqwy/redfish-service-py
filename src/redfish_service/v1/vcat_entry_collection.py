@@ -5,5 +5,5 @@ from .base import (
 )
 
 
-class VcatentryCollection(RedfishResourceCollection):
+class VcatEntryCollection(RedfishResourceCollection):
     pass

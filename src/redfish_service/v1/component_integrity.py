@@ -14,10 +14,10 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    spdmget_signed_measurements: SpdmgetSignedMeasurements | None = Field(
+    spdm_get_signed_measurements: SpdmGetSignedMeasurements | None = Field(
         alias="#ComponentIntegrity.SPDMGetSignedMeasurements", default=None
     )
-    tpmget_signed_measurements: TpmgetSignedMeasurements | None = Field(
+    tpm_get_signed_measurements: TpmGetSignedMeasurements | None = Field(
         alias="#ComponentIntegrity.TPMGetSignedMeasurements", default=None
     )
     oem: dict[str, Any] | None = None
@@ -32,9 +32,9 @@ class ComponentIntegrity(RedfishResource):
     last_updated: str | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    spdm: Spdminfo | None = Field(alias="SPDM", default=None)
+    spdm: SpdMinfo | None = Field(alias="SPDM", default=None)
     status: Status | None = None
-    tpm: Tpminfo | None = Field(alias="TPM", default=None)
+    tpm: TpMinfo | None = Field(alias="TPM", default=None)
     target_component_uri: str = Field(alias="TargetComponentURI")
 
 
@@ -46,7 +46,7 @@ class ComponentIntegrityType(StrEnum):
     OEM = "OEM"
 
 
-class DmtfmeasurementTypes(StrEnum):
+class DmtFmeasurementTypes(StrEnum):
     IMMUTABLE_ROM = "ImmutableROM"
     MUTABLE_FIRMWARE = "MutableFirmware"
     HARDWARE_CONFIGURATION = "HardwareConfiguration"
@@ -68,56 +68,56 @@ class MeasurementSpecification(StrEnum):
     DMTF = "DMTF"
 
 
-class SpdmgetSignedMeasurements(RedfishModel):
+class SpdmGetSignedMeasurements(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
-class Spdmcommunication(RedfishModel):
+class SpdMcommunication(RedfishModel):
     sessions: list[SingleSessionInfo] | None = None
 
 
-class Spdmidentity(RedfishModel):
-    requester_authentication: SpdmrequesterAuth | None = None
-    responder_authentication: SpdmresponderAuth | None = None
+class SpdMidentity(RedfishModel):
+    requester_authentication: SpdMrequesterAuth | None = None
+    responder_authentication: SpdMresponderAuth | None = None
 
 
-class Spdminfo(RedfishModel):
-    component_communication: Spdmcommunication | None = None
-    identity_authentication: Spdmidentity | None = None
-    measurement_set: SpdmmeasurementSet | None = None
+class SpdMinfo(RedfishModel):
+    component_communication: SpdMcommunication | None = None
+    identity_authentication: SpdMidentity | None = None
+    measurement_set: SpdMmeasurementSet | None = None
     requester: IdRef
 
 
-class SpdmmeasurementSet(RedfishModel):
+class SpdMmeasurementSet(RedfishModel):
     measurement_specification: MeasurementSpecification | None = None
     measurement_summary: str | None = None
     measurement_summary_hash_algorithm: str | None = None
-    measurement_summary_type: SpdmmeasurementSummaryType | None = None
-    measurements: list[SpdmsingleMeasurement] | None = None
+    measurement_summary_type: SpdMmeasurementSummaryType | None = None
+    measurements: list[SpdMsingleMeasurement] | None = None
     oem: dict[str, Any] | None = None
 
 
-class SpdmmeasurementSummaryType(StrEnum):
+class SpdMmeasurementSummaryType(StrEnum):
     TCB = "TCB"
     ALL = "All"
 
 
-class SpdmrequesterAuth(RedfishModel):
+class SpdMrequesterAuth(RedfishModel):
     provided_certificate: IdRef | None = None
 
 
-class SpdmresponderAuth(RedfishModel):
+class SpdMresponderAuth(RedfishModel):
     component_certificate: IdRef | None = None
     verification_status: VerificationStatus | None = None
 
 
-class SpdmsingleMeasurement(RedfishModel):
+class SpdMsingleMeasurement(RedfishModel):
     last_updated: str | None = None
     measurement: str | None = None
     measurement_hash_algorithm: str | None = None
     measurement_index: int | None = None
-    measurement_type: DmtfmeasurementTypes | None = None
+    measurement_type: DmtFmeasurementTypes | None = None
     oem: dict[str, Any] | None = None
     partof_summary_hash: bool | None = None
     security_version_number: str | None = None
@@ -134,32 +134,32 @@ class SingleSessionInfo(RedfishModel):
     session_type: SecureSessionType | None = None
 
 
-class TpmgetSignedMeasurements(RedfishModel):
+class TpmGetSignedMeasurements(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
-class Tpmauth(RedfishModel):
+class TpMauth(RedfishModel):
     component_certificate: IdRef | None = None
     verification_status: VerificationStatus | None = None
 
 
-class Tpmcommunication(RedfishModel):
+class TpMcommunication(RedfishModel):
     sessions: list[SingleSessionInfo] | None = None
 
 
-class Tpminfo(RedfishModel):
-    component_communication: Tpmcommunication | None = None
-    identity_authentication: Tpmauth | None = None
-    measurement_set: TpmmeasurementSet | None = None
+class TpMinfo(RedfishModel):
+    component_communication: TpMcommunication | None = None
+    identity_authentication: TpMauth | None = None
+    measurement_set: TpMmeasurementSet | None = None
     nonce_size_bytes_maximum: int | None = None
 
 
-class TpmmeasurementSet(RedfishModel):
-    measurements: list[TpmsingleMeasurement] | None = None
+class TpMmeasurementSet(RedfishModel):
+    measurements: list[TpMsingleMeasurement] | None = None
 
 
-class TpmsingleMeasurement(RedfishModel):
+class TpMsingleMeasurement(RedfishModel):
     last_updated: str | None = None
     measurement: str | None = None
     measurement_hash_algorithm: str | None = None

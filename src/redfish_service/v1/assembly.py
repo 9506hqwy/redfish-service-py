@@ -30,7 +30,7 @@ class AssemblyData(RedfishObjectId):
     binary_data_uri: str | None = Field(alias="BinaryDataURI", default=None)
     description: str | None = None
     engineering_change_level: str | None = None
-    isocountry_code_of_origin: str | None = Field(alias="ISOCountryCodeOfOrigin", default=None)
+    iso_country_code_of_origin: str | None = Field(alias="ISOCountryCodeOfOrigin", default=None)
     location: Location | None = None
     location_indicator_active: bool | None = None
     member_id: str

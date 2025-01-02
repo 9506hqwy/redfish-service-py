@@ -30,12 +30,12 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class ChapconnectionKey(RedfishModel):
-    chappassword: str | None = Field(alias="CHAPPassword", default=None)
-    chapusername: str | None = Field(alias="CHAPUsername", default=None)
-    initiator_chappassword: str | None = Field(alias="InitiatorCHAPPassword", default=None)
-    initiator_chapusername: str | None = Field(alias="InitiatorCHAPUsername", default=None)
-    target_chappassword: str | None = Field(alias="TargetCHAPPassword", default=None)
+class ChapConnectionKey(RedfishModel):
+    chap_password: str | None = Field(alias="CHAPPassword", default=None)
+    chap_username: str | None = Field(alias="CHAPUsername", default=None)
+    initiator_chap_password: str | None = Field(alias="InitiatorCHAPPassword", default=None)
+    initiator_chap_username: str | None = Field(alias="InitiatorCHAPUsername", default=None)
+    target_chap_password: str | None = Field(alias="TargetCHAPPassword", default=None)
 
 
 class Connection(RedfishResource):
@@ -52,9 +52,9 @@ class Connection(RedfishResource):
 
 
 class ConnectionKey(RedfishModel):
-    chap: ChapconnectionKey | None = Field(alias="CHAP", default=None)
-    dhchap: Dhchapkey | None = Field(alias="DHCHAP", default=None)
-    gen_z: GenZconnectionKey | None = None
+    chap: ChapConnectionKey | None = Field(alias="CHAP", default=None)
+    dhchap: DhchapKey | None = Field(alias="DHCHAP", default=None)
+    gen_z: GenZConnectionKey | None = None
 
 
 class ConnectionType(StrEnum):
@@ -62,18 +62,16 @@ class ConnectionType(StrEnum):
     MEMORY = "Memory"
 
 
-class Dhchapkey(RedfishModel):
-    local_dhchapauth_secret: str | None = Field(alias="LocalDHCHAPAuthSecret", default=None)
-    peer_dhchapauth_secret: str | None = Field(alias="PeerDHCHAPAuthSecret", default=None)
+class DhchapKey(RedfishModel):
+    local_dhchap_auth_secret: str | None = Field(alias="LocalDHCHAPAuthSecret", default=None)
+    peer_dhchap_auth_secret: str | None = Field(alias="PeerDHCHAPAuthSecret", default=None)
 
 
-class GenZconnectionKey(RedfishModel):
+class GenZConnectionKey(RedfishModel):
     access_key: str | None = None
-    rkey_domain_checking_enabled: bool | None = Field(
-        alias="RKeyDomainCheckingEnabled", default=None
-    )
-    rkey_read_only_key: str | None = Field(alias="RKeyReadOnlyKey", default=None)
-    rkey_read_write_key: str | None = Field(alias="RKeyReadWriteKey", default=None)
+    r_key_domain_checking_enabled: bool | None = None
+    r_key_read_only_key: str | None = None
+    r_key_read_write_key: str | None = None
 
 
 class Links(RedfishModel):

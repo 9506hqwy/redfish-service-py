@@ -19,17 +19,17 @@ class Actions(RedfishModel):
 
 class AlarmTrips(RedfishModel):
     address_parity_error: bool | None = None
-    correctable_eccerror: bool | None = Field(alias="CorrectableECCError", default=None)
+    correctable_ecc_error: bool | None = Field(alias="CorrectableECCError", default=None)
     spare_block: bool | None = None
     temperature: bool | None = None
-    uncorrectable_eccerror: bool | None = Field(alias="UncorrectableECCError", default=None)
+    uncorrectable_ecc_error: bool | None = Field(alias="UncorrectableECCError", default=None)
 
 
 class AlertCapabilities(RedfishModel):
-    correctable_eccerror: bool | None = Field(alias="CorrectableECCError", default=None)
+    correctable_ecc_error: bool | None = Field(alias="CorrectableECCError", default=None)
     spare_block: bool | None = None
     temperature: bool | None = None
-    uncorrectable_eccerror: bool | None = Field(alias="UncorrectableECCError", default=None)
+    uncorrectable_ecc_error: bool | None = Field(alias="UncorrectableECCError", default=None)
 
 
 class Cxl(RedfishModel):
@@ -44,10 +44,10 @@ class ClearCurrentPeriod(RedfishModel):
 class CurrentPeriod(RedfishModel):
     blocks_read: int | None = None
     blocks_written: int | None = None
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
     indeterminate_correctable_error_count: int | None = None
     indeterminate_uncorrectable_error_count: int | None = None
-    uncorrectable_eccerror_count: int | None = Field(
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 
@@ -64,10 +64,10 @@ class HealthData(RedfishModel):
 class LifeTime(RedfishModel):
     blocks_read: int | None = None
     blocks_written: int | None = None
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
     indeterminate_correctable_error_count: int | None = None
     indeterminate_uncorrectable_error_count: int | None = None
-    uncorrectable_eccerror_count: int | None = Field(
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 

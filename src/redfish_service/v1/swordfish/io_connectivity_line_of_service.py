@@ -15,7 +15,7 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class IoconnectivityLineOfService(RedfishResource):
+class IoConnectivityLineOfService(RedfishResource):
     access_protocols: list[Protocol] | None = None
     actions: Actions | None = None
     description: str | None = None

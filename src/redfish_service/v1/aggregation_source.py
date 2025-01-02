@@ -14,10 +14,10 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    generate_sshidentity_key_pair: GenerateSshidentityKeyPair | None = Field(
+    generate_ssh_identity_key_pair: GenerateSshIdentityKeyPair | None = Field(
         alias="#AggregationSource.GenerateSSHIdentityKeyPair", default=None
     )
-    remove_sshidentity_key_pair: RemoveSshidentityKeyPair | None = Field(
+    remove_ssh_identity_key_pair: RemoveSshIdentityKeyPair | None = Field(
         alias="#AggregationSource.RemoveSSHIdentityKeyPair", default=None
     )
     oem: dict[str, Any] | None = None
@@ -31,8 +31,8 @@ class AggregationSource(RedfishResource):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
-    snmp: Snmpsettings | None = Field(alias="SNMP", default=None)
-    sshsettings: SshsettingsType | None = Field(alias="SSHSettings", default=None)
+    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
+    ssh_settings: SshSettingsType | None = Field(alias="SSHSettings", default=None)
     status: Status | None = None
     user_name: str | None = None
 
@@ -42,7 +42,7 @@ class AggregationType(StrEnum):
     FULL = "Full"
 
 
-class GenerateSshidentityKeyPair(RedfishModel):
+class GenerateSshIdentityKeyPair(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
@@ -56,41 +56,41 @@ class Links(RedfishModel):
     )
 
 
-class RemoveSshidentityKeyPair(RedfishModel):
+class RemoveSshIdentityKeyPair(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
-class SnmpauthenticationProtocols(StrEnum):
+class SnmpAuthenticationProtocols(StrEnum):
     NONE = "None"
     COMMUNITY_STRING = "CommunityString"
-    HMAC__MD5 = "HMAC_MD5"
-    HMAC__SHA96 = "HMAC_SHA96"
-    HMAC128__SHA224 = "HMAC128_SHA224"
-    HMAC192__SHA256 = "HMAC192_SHA256"
-    HMAC256__SHA384 = "HMAC256_SHA384"
-    HMAC384__SHA512 = "HMAC384_SHA512"
+    HMA_C_MD5 = "HMAC_MD5"
+    HMA_C_SHA96 = "HMAC_SHA96"
+    HMA_C128_SHA224 = "HMAC128_SHA224"
+    HMA_C192_SHA256 = "HMAC192_SHA256"
+    HMA_C256_SHA384 = "HMAC256_SHA384"
+    HMA_C384_SHA512 = "HMAC384_SHA512"
 
 
-class SnmpencryptionProtocols(StrEnum):
+class SnmpEncryptionProtocols(StrEnum):
     NONE = "None"
-    CBC__DES = "CBC_DES"
-    CFB128__AES128 = "CFB128_AES128"
-    CFB128__AES192 = "CFB128_AES192"
-    CFB128__AES256 = "CFB128_AES256"
+    CB_C_DES = "CBC_DES"
+    CF_B128_AES128 = "CFB128_AES128"
+    CF_B128_AES192 = "CFB128_AES192"
+    CF_B128_AES256 = "CFB128_AES256"
 
 
-class Snmpsettings(RedfishModel):
+class SnmpSettings(RedfishModel):
     authentication_key: str | None = None
     authentication_key_set: bool | None = None
-    authentication_protocol: SnmpauthenticationProtocols | None = None
+    authentication_protocol: SnmpAuthenticationProtocols | None = None
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
-    encryption_protocol: SnmpencryptionProtocols | None = None
+    encryption_protocol: SnmpEncryptionProtocols | None = None
     trap_community: str | None = None
 
 
-class SshsettingsType(RedfishModel):
+class SshSettingsType(RedfishModel):
     presented_public_host_key: IdRef | None = None
     presented_public_host_key_timestamp: str | None = None
     public_identity_key: IdRef | None = None

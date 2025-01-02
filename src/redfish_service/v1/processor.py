@@ -64,9 +64,9 @@ class FpgaType(StrEnum):
 class InstructionSet(StrEnum):
     X86 = "x86"
     X86_64 = "x86-64"
-    IA_64 = "IA-64"
-    ARM__A32 = "ARM-A32"
-    ARM__A64 = "ARM-A64"
+    I_A_64 = "IA-64"
+    AR_M_A32 = "ARM-A32"
+    AR_M_A64 = "ARM-A64"
     MIPS32 = "MIPS32"
     MIPS64 = "MIPS64"
     POWER_ISA = "PowerISA"
@@ -101,10 +101,10 @@ class Links(RedfishModel):
 
 
 class MemorySummary(RedfishModel):
-    eccmode_enabled: bool | None = Field(alias="ECCModeEnabled", default=None)
+    ecc_mode_enabled: bool | None = Field(alias="ECCModeEnabled", default=None)
     metrics: IdRef | None = None
-    total_cache_size_mi_b: int | None = None
-    total_memory_size_mi_b: int | None = None
+    total_cache_size_mib: int | None = Field(alias="TotalCacheSizeMiB", default=None)
+    total_memory_size_mib: int | None = Field(alias="TotalMemorySizeMiB", default=None)
 
 
 class Processor(RedfishResource):
@@ -130,7 +130,7 @@ class Processor(RedfishResource):
     location_indicator_active: bool | None = None
     manufacturer: str | None = None
     max_speed_mhz: int | None = Field(alias="MaxSpeedMHz", default=None)
-    max_tdpwatts: int | None = Field(alias="MaxTDPWatts", default=None)
+    max_tdp_watts: int | None = Field(alias="MaxTDPWatts", default=None)
     measurements: list[MeasurementBlock] | None = None
     memory_summary: MemorySummary | None = None
     metrics: IdRef | None = None
@@ -159,7 +159,7 @@ class Processor(RedfishResource):
     status: Status | None = None
     sub_processors: IdRef | None = None
     system_interface: ProcessorInterface | None = None
-    tdpwatts: int | None = Field(alias="TDPWatts", default=None)
+    tdp_watts: int | None = Field(alias="TDPWatts", default=None)
     throttle_causes: list[ThrottleCause] | None = None
     throttled: bool | None = None
     total_cores: int | None = None
@@ -172,11 +172,11 @@ class Processor(RedfishResource):
 
 class ProcessorArchitecture(StrEnum):
     X86 = "x86"
-    IA_64 = "IA-64"
+    I_A_64 = "IA-64"
     ARM = "ARM"
     MIPS = "MIPS"
     POWER = "Power"
-    RISC__V = "RISC-V"
+    RIS_C_V = "RISC-V"
     OEM = "OEM"
 
 
@@ -197,7 +197,7 @@ class ProcessorInterface(RedfishModel):
 
 
 class ProcessorMemory(RedfishModel):
-    capacity_mi_b: int | None = None
+    capacity_mib: int | None = Field(alias="CapacityMiB", default=None)
     integrated_memory: bool | None = None
     memory_type: ProcessorMemoryType | None = None
     speed_mhz: int | None = Field(alias="SpeedMHz", default=None)

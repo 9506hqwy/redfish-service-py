@@ -78,11 +78,11 @@ class BootProgressTypes(StrEnum):
     BUS_INITIALIZATION_STARTED = "BusInitializationStarted"
     MEMORY_INITIALIZATION_STARTED = "MemoryInitializationStarted"
     SECONDARY_PROCESSOR_INITIALIZATION_STARTED = "SecondaryProcessorInitializationStarted"
-    PCIRESOURCE_CONFIG_STARTED = "PCIResourceConfigStarted"
+    PCI_RESOURCE_CONFIG_STARTED = "PCIResourceConfigStarted"
     SYSTEM_HARDWARE_INITIALIZATION_COMPLETE = "SystemHardwareInitializationComplete"
     SETUP_ENTERED = "SetupEntered"
-    OSBOOT_STARTED = "OSBootStarted"
-    OSRUNNING = "OSRunning"
+    OS_BOOT_STARTED = "OSBootStarted"
+    OS_RUNNING = "OSRunning"
     OEM = "OEM"
 
 
@@ -98,7 +98,7 @@ class BootSource(StrEnum):
     DIAGS = "Diags"
     UEFI_SHELL = "UefiShell"
     UEFI_TARGET = "UefiTarget"
-    SDCARD = "SDCard"
+    SD_CARD = "SDCard"
     UEFI_HTTP = "UefiHttp"
     REMOTE_DRIVE = "RemoteDrive"
     UEFI_BOOT_NEXT = "UefiBootNext"
@@ -186,7 +186,7 @@ class ComputerSystem(RedfishResource):
     sub_model: str | None = None
     system_type: SystemType | None = None
     trusted_modules: list[TrustedModules] | None = None
-    usbcontrollers: IdRef | None = Field(alias="USBControllers", default=None)
+    usb_controllers: IdRef | None = Field(alias="USBControllers", default=None)
     uuid: str | None = Field(alias="UUID", default=None)
     virtual_media: IdRef | None = None
     virtual_media_config: VirtualMediaConfig | None = None
@@ -247,9 +247,9 @@ class IndicatorLed(StrEnum):
 
 
 class InterfaceType(StrEnum):
-    TPM1_2 = "TPM1_2"
-    TPM2_0 = "TPM2_0"
-    TCM1_0 = "TCM1_0"
+    TP_M1_2 = "TPM1_2"
+    TP_M2_0 = "TPM2_0"
+    TC_M1_0 = "TCM1_0"
 
 
 class InterfaceTypeSelection(StrEnum):
@@ -259,32 +259,32 @@ class InterfaceTypeSelection(StrEnum):
     OEM_METHOD = "OemMethod"
 
 
-class KmipcachePolicy(StrEnum):
+class KmipCachePolicy(StrEnum):
     NONE = "None"
     AFTER_FIRST_USE = "AfterFirstUse"
 
 
-class Kmipserver(RedfishModel):
+class KmipServer(RedfishModel):
     address: str | None = None
     cache_duration: str | None = None
-    cache_policy: KmipcachePolicy | None = None
+    cache_policy: KmipCachePolicy | None = None
     password: str | None = None
     port: int | None = None
     username: str | None = None
 
 
 class KeyManagement(RedfishModel):
-    kmipcertificates: IdRef | None = Field(alias="KMIPCertificates", default=None)
-    kmipservers: list[Kmipserver] | None = Field(alias="KMIPServers", default=None)
+    kmip_certificates: IdRef | None = Field(alias="KMIPCertificates", default=None)
+    kmip_servers: list[KmipServer] | None = Field(alias="KMIPServers", default=None)
 
 
 class LastResetCauses(StrEnum):
     POWER_BUTTON_PRESS = "PowerButtonPress"
     MANAGEMENT_COMMAND = "ManagementCommand"
     POWER_RESTORE_POLICY = "PowerRestorePolicy"
-    RTCWAKEUP = "RTCWakeup"
+    RTC_WAKEUP = "RTCWakeup"
     WATCHDOG_EXPIRATION = "WatchdogExpiration"
-    OSSOFT_RESTART = "OSSoftRestart"
+    OS_SOFT_RESTART = "OSSoftRestart"
     SYSTEM_CRASH = "SystemCrash"
     THERMAL_EVENT = "ThermalEvent"
     POWER_EVENT = "PowerEvent"
@@ -341,8 +341,10 @@ class MemorySummary(RedfishModel):
     memory_mirroring: MemoryMirroring | None = None
     metrics: IdRef | None = None
     status: Status | None = None
-    total_system_memory_gi_b: float | None = None
-    total_system_persistent_memory_gi_b: float | None = None
+    total_system_memory_gib: float | None = Field(alias="TotalSystemMemoryGiB", default=None)
+    total_system_persistent_memory_gib: float | None = Field(
+        alias="TotalSystemPersistentMemoryGiB", default=None
+    )
 
 
 class PowerMode(StrEnum):
@@ -350,7 +352,7 @@ class PowerMode(StrEnum):
     BALANCED_PERFORMANCE = "BalancedPerformance"
     POWER_SAVING = "PowerSaving"
     STATIC = "Static"
-    OSCONTROLLED = "OSControlled"
+    OS_CONTROLLED = "OSControlled"
     OEM = "OEM"
     EFFICIENCY_FAVOR_POWER = "EfficiencyFavorPower"
     EFFICIENCY_FAVOR_PERFORMANCE = "EfficiencyFavorPerformance"

@@ -8,24 +8,24 @@ from ..base import (
     RedfishModel,
     RedfishResource,
 )
-from ..swordfish.ioperformance_lo_scapabilities import Ioworkload
+from ..swordfish.io_performance_los_capabilities import IoWorkload
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class IoperformanceLineOfService(RedfishResource):
+class IoPerformanceLineOfService(RedfishResource):
     actions: Actions | None = None
-    average_iooperation_latency_microseconds: int | None = Field(
+    average_io_operation_latency_microseconds: int | None = Field(
         alias="AverageIOOperationLatencyMicroseconds", default=None
     )
     description: str | None = None
-    iooperations_per_second_is_limited: bool | None = Field(
+    io_operations_per_second_is_limited: bool | None = Field(
         alias="IOOperationsPerSecondIsLimited", default=None
     )
-    ioworkload: Ioworkload | None = Field(alias="IOWorkload", default=None)
-    max_iooperations_per_second_per_terabyte: int | None = Field(
+    io_workload: IoWorkload | None = Field(alias="IOWorkload", default=None)
+    max_io_operations_per_second_per_terabyte: int | None = Field(
         alias="MaxIOOperationsPerSecondPerTerabyte", default=None
     )
     oem: dict[str, Any] | None = None

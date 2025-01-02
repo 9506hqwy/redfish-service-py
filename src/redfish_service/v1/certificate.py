@@ -41,7 +41,7 @@ class Certificate(RedfishResource):
 
 class CertificateType(StrEnum):
     PEM = "PEM"
-    PEMCHAIN = "PEMchain"
+    PE_MCHAIN = "PEMchain"
     PKCS7 = "PKCS7"
 
 
@@ -52,8 +52,8 @@ class CertificateUsageType(StrEnum):
     DEVICE = "Device"
     PLATFORM = "Platform"
     BIOS = "BIOS"
-    IDEV_ID = "IDevID"
-    LDEV_ID = "LDevID"
+    I_DEV_ID = "IDevID"
+    L_DEV_ID = "LDevID"
     IAK = "IAK"
     LAK = "LAK"
     EK = "EK"
@@ -81,7 +81,7 @@ class KeyUsage(StrEnum):
     DATA_ENCIPHERMENT = "DataEncipherment"
     KEY_AGREEMENT = "KeyAgreement"
     KEY_CERT_SIGN = "KeyCertSign"
-    CRLSIGNING = "CRLSigning"
+    CRL_SIGNING = "CRLSigning"
     ENCIPHER_ONLY = "EncipherOnly"
     DECIPHER_ONLY = "DecipherOnly"
     SERVER_AUTHENTICATION = "ServerAuthentication"
@@ -89,7 +89,7 @@ class KeyUsage(StrEnum):
     CODE_SIGNING = "CodeSigning"
     EMAIL_PROTECTION = "EmailProtection"
     TIMESTAMPING = "Timestamping"
-    OCSPSIGNING = "OCSPSigning"
+    OCSP_SIGNING = "OCSPSigning"
 
 
 class Links(RedfishModel):

@@ -24,8 +24,8 @@ class ClearCurrentPeriod(RedfishModel):
 
 
 class CurrentPeriod(RedfishModel):
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
-    uncorrectable_eccerror_count: int | None = Field(
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 
@@ -36,8 +36,8 @@ class InternalMemoryMetrics(RedfishModel):
 
 
 class LifeTime(RedfishModel):
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
-    uncorrectable_eccerror_count: int | None = Field(
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
 

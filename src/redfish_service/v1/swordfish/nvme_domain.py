@@ -32,7 +32,7 @@ class Links(RedfishModel):
 
 
 class NvmeDomain(RedfishResource):
-    anagroup_id: float | None = Field(alias="ANAGroupId", default=None)
+    ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
     actions: Actions | None = None
     available_firmware_images: list[IdRef] | None = None
     available_firmware_images_odata_count: int | None = Field(

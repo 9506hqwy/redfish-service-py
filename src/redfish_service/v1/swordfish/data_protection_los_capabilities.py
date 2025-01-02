@@ -18,7 +18,7 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class DataProtectionLoScapabilities(RedfishResource):
+class DataProtectionLosCapabilities(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     identifier: Identifier | None = None

@@ -20,5 +20,5 @@ class RouteSetEntry(RedfishResource):
     egress_identifier: int | None = None
     hop_count: int | None = None
     oem: dict[str, Any] | None = None
-    vcaction: int | None = Field(alias="VCAction", default=None)
+    vc_action: int | None = Field(alias="VCAction", default=None)
     valid: bool | None = None

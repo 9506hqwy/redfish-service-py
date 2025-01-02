@@ -16,21 +16,21 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class SpdmalgorithmSet(RedfishModel):
+class SpdmAlgorithmSet(RedfishModel):
     aead: list[str] | None = Field(alias="AEAD", default=None)
     base_asym: list[str] | None = None
     base_hash: list[str] | None = None
 
 
-class SpdmparameterSet(RedfishModel):
-    algorithms: SpdmalgorithmSet | None = None
+class SpdmParameterSet(RedfishModel):
+    algorithms: SpdmAlgorithmSet | None = None
     versions: list[str] | None = None
 
 
-class Spdmpolicy(RedfishModel):
+class SpdmPolicy(RedfishModel):
     allow_extended_algorithms: bool | None = None
-    allowed: SpdmparameterSet | None = None
-    denied: SpdmparameterSet | None = None
+    allowed: SpdmParameterSet | None = None
+    denied: SpdmParameterSet | None = None
     enabled: bool | None = None
     revoked_certificates: IdRef | None = None
     secure_session_enabled: bool | None = None
@@ -43,29 +43,29 @@ class SecurityPolicy(RedfishResource):
     description: str | None = None
     oem: dict[str, Any] | None = None
     override_parent_manager: bool | None = None
-    spdm: Spdmpolicy | None = Field(alias="SPDM", default=None)
+    spdm: SpdmPolicy | None = Field(alias="SPDM", default=None)
     status: Status | None = None
-    tls: Tlscommunication | None = Field(alias="TLS", default=None)
+    tls: TlsCommunication | None = Field(alias="TLS", default=None)
 
 
-class TlsalgorithmSet(RedfishModel):
+class TlsAlgorithmSet(RedfishModel):
     cipher_suites: list[str] | None = None
     signature_algorithms: list[str] | None = None
 
 
-class Tlscommunication(RedfishModel):
-    client: Tlspolicy | None = None
-    server: Tlspolicy | None = None
+class TlsCommunication(RedfishModel):
+    client: TlsPolicy | None = None
+    server: TlsPolicy | None = None
 
 
-class TlsparameterSet(RedfishModel):
-    algorithms: TlsalgorithmSet | None = None
+class TlsParameterSet(RedfishModel):
+    algorithms: TlsAlgorithmSet | None = None
     versions: list[str] | None = None
 
 
-class Tlspolicy(RedfishModel):
-    allowed: TlsparameterSet | None = None
-    denied: TlsparameterSet | None = None
+class TlsPolicy(RedfishModel):
+    allowed: TlsParameterSet | None = None
+    denied: TlsParameterSet | None = None
     revoked_certificates: IdRef | None = None
     trusted_certificates: IdRef | None = None
     verify_certificate: bool | None = None

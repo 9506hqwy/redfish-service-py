@@ -17,27 +17,27 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class CxllogicalDevice(RedfishResource):
+class CxlLogicalDevice(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     log: IdRef | None = None
     memory_regions: IdRef | None = None
-    memory_size_mi_b: int | None = None
+    memory_size_mib: int | None = Field(alias="MemorySizeMiB", default=None)
     oem: dict[str, Any] | None = None
-    qo_s: QoS | None = None
-    qo_stelemetry_capabilities: QoStelemetryCapabilities | None = Field(
+    qos: Qos | None = Field(alias="QoS", default=None)
+    qos_telemetry_capabilities: QosTelemetryCapabilities | None = Field(
         alias="QoSTelemetryCapabilities", default=None
     )
-    semantics_supported: list[Cxlsemantic] | None = None
+    semantics_supported: list[CxlSemantic] | None = None
     status: Status | None = None
 
 
-class Cxlsemantic(StrEnum):
-    CXLIO = "CXLio"
-    CXLCACHE = "CXLcache"
-    CXLMEM = "CXLmem"
+class CxlSemantic(StrEnum):
+    CX_LIO = "CXLio"
+    CX_LCACHE = "CXLcache"
+    CX_LMEM = "CXLmem"
 
 
 class Links(RedfishModel):
@@ -52,11 +52,11 @@ class Links(RedfishModel):
     pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
 
 
-class QoS(RedfishModel):
+class Qos(RedfishModel):
     allocated_bandwidth: int | None = None
     limit_percent: int | None = None
 
 
-class QoStelemetryCapabilities(RedfishModel):
+class QosTelemetryCapabilities(RedfishModel):
     egress_port_backpressure_supported: bool | None = None
     temporary_throughput_reduction_supported: bool | None = None

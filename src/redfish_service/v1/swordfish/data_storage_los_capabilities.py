@@ -11,14 +11,14 @@ from ..base import (
 )
 from ..odata_v4 import IdRef
 from ..resource import Identifier
-from ..swordfish.data_protection_lo_scapabilities import RecoveryAccessScope
+from ..swordfish.data_protection_los_capabilities import RecoveryAccessScope
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class DataStorageLoScapabilities(RedfishResource):
+class DataStorageLosCapabilities(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     identifier: Identifier | None = None

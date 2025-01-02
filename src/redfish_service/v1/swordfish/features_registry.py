@@ -31,7 +31,7 @@ class FeaturesRegistry(RedfishResource):
     features: list[SupportedFeature] | None = None
     features_used: list[str]
     language: str
-    oemfeatures_used: list[str] | None = Field(alias="OEMFeaturesUsed", default=None)
+    oem_features_used: list[str] | None = Field(alias="OEMFeaturesUsed", default=None)
     oem: dict[str, Any] | None = None
     owning_entity: str
     registry_prefix: str

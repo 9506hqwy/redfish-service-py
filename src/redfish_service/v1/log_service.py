@@ -45,7 +45,7 @@ class DiagnosticDataDetails(RedfishModel):
     diagnostic_data_type: LogDiagnosticDataTypes | None = None
     estimated_duration: str | None = None
     estimated_size_bytes: int | None = None
-    oemdiagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
 
 
 class LogDiagnosticDataTypes(StrEnum):
@@ -75,7 +75,7 @@ class LogPurpose(StrEnum):
 class LogService(RedfishResource):
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None
-    auto_dstenabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
+    auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
     date_time: str | None = None
     date_time_local_offset: str | None = None
     description: str | None = None
@@ -84,7 +84,7 @@ class LogService(RedfishResource):
     log_entry_type: LogEntryTypes | None = None
     log_purposes: list[LogPurpose] | None = None
     max_number_of_records: int | None = None
-    oemlog_purpose: str | None = Field(alias="OEMLogPurpose", default=None)
+    oem_log_purpose: str | None = Field(alias="OEMLogPurpose", default=None)
     oem: dict[str, Any] | None = None
     over_write_policy: OverWritePolicy | None = None
     overflow: bool | None = None

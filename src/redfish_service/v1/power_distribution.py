@@ -94,12 +94,12 @@ class TransferControl(RedfishModel):
 
 class TransferCriteria(RedfishModel):
     over_nominal_frequency_hz: float | None = None
-    over_voltage_rmspercentage: float | None = Field(
+    over_voltage_rms_percentage: float | None = Field(
         alias="OverVoltageRMSPercentage", default=None
     )
     transfer_sensitivity: TransferSensitivityType | None = None
     under_nominal_frequency_hz: float | None = None
-    under_voltage_rmspercentage: float | None = Field(
+    under_voltage_rms_percentage: float | None = Field(
         alias="UnderVoltageRMSPercentage", default=None
     )
 

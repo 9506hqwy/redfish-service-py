@@ -38,7 +38,7 @@ class ProtocolFeaturesSupported(RedfishModel):
     filter_query: bool | None = None
     filter_query_comparison_operations: bool | None = None
     filter_query_compound_operations: bool | None = None
-    multiple_httprequests: bool | None = Field(alias="MultipleHTTPRequests", default=None)
+    multiple_http_requests: bool | None = Field(alias="MultipleHTTPRequests", default=None)
     only_member_query: bool | None = None
     select_query: bool | None = None
     top_skip_query: bool | None = None

@@ -23,7 +23,7 @@ class Links(RedfishModel):
     processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
 
 
-class Usbcontroller(RedfishResource):
+class UsbController(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
     links: Links | None = None

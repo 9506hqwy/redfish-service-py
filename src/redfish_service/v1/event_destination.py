@@ -52,8 +52,8 @@ class EventDestination(RedfishResource):
     metric_report_definitions_odata_count: int | None = Field(
         alias="MetricReportDefinitions@odata.count", default=None
     )
-    oemprotocol: str | None = Field(alias="OEMProtocol", default=None)
-    oemsubscription_type: str | None = Field(alias="OEMSubscriptionType", default=None)
+    oem_protocol: str | None = Field(alias="OEMProtocol", default=None)
+    oem_subscription_type: str | None = Field(alias="OEMSubscriptionType", default=None)
     oem: dict[str, Any] | None = None
     origin_resources: list[IdRef] | None = None
     origin_resources_odata_count: int | None = Field(
@@ -62,7 +62,7 @@ class EventDestination(RedfishResource):
     protocol: EventDestinationProtocol | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
-    snmp: Snmpsettings | None = Field(alias="SNMP", default=None)
+    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
     send_heartbeat: bool | None = None
     severities: list[Health] | None = None
     status: Status | None = None
@@ -96,40 +96,40 @@ class ResumeSubscription(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class SnmpauthenticationProtocols(StrEnum):
+class SnmpAuthenticationProtocols(StrEnum):
     NONE = "None"
     COMMUNITY_STRING = "CommunityString"
-    HMAC__MD5 = "HMAC_MD5"
-    HMAC__SHA96 = "HMAC_SHA96"
-    HMAC128__SHA224 = "HMAC128_SHA224"
-    HMAC192__SHA256 = "HMAC192_SHA256"
-    HMAC256__SHA384 = "HMAC256_SHA384"
-    HMAC384__SHA512 = "HMAC384_SHA512"
+    HMA_C_MD5 = "HMAC_MD5"
+    HMA_C_SHA96 = "HMAC_SHA96"
+    HMA_C128_SHA224 = "HMAC128_SHA224"
+    HMA_C192_SHA256 = "HMAC192_SHA256"
+    HMA_C256_SHA384 = "HMAC256_SHA384"
+    HMA_C384_SHA512 = "HMAC384_SHA512"
 
 
-class SnmpencryptionProtocols(StrEnum):
+class SnmpEncryptionProtocols(StrEnum):
     NONE = "None"
-    CBC__DES = "CBC_DES"
-    CFB128__AES128 = "CFB128_AES128"
-    CFB128__AES192 = "CFB128_AES192"
-    CFB128__AES256 = "CFB128_AES256"
+    CB_C_DES = "CBC_DES"
+    CF_B128_AES128 = "CFB128_AES128"
+    CF_B128_AES192 = "CFB128_AES192"
+    CF_B128_AES256 = "CFB128_AES256"
 
 
-class Snmpsettings(RedfishModel):
+class SnmpSettings(RedfishModel):
     authentication_key: str | None = None
     authentication_key_set: bool | None = None
-    authentication_protocol: SnmpauthenticationProtocols | None = None
+    authentication_protocol: SnmpAuthenticationProtocols | None = None
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
-    encryption_protocol: SnmpencryptionProtocols | None = None
+    encryption_protocol: SnmpEncryptionProtocols | None = None
     trap_community: str | None = None
 
 
 class SubscriptionType(StrEnum):
     REDFISH_EVENT = "RedfishEvent"
     SSE = "SSE"
-    SNMPTRAP = "SNMPTrap"
-    SNMPINFORM = "SNMPInform"
+    SNMP_TRAP = "SNMPTrap"
+    SNMP_INFORM = "SNMPInform"
     SYSLOG = "Syslog"
     OEM = "OEM"
 

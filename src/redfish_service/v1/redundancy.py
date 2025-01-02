@@ -41,7 +41,7 @@ class RedundancyMode(StrEnum):
 
 class RedundancyType(StrEnum):
     FAILOVER = "Failover"
-    NPLUS_M = "NPlusM"
+    N_PLUS_M = "NPlusM"
     SHARING = "Sharing"
     SPARING = "Sparing"
     NOT_REDUNDANT = "NotRedundant"

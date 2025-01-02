@@ -20,9 +20,9 @@ class Actions(RedfishModel):
 class Application(RedfishResource):
     actions: Actions | None = None
     description: str | None = None
-    destination_uris: list[str] | None = Field(alias="DestinationURIs", default=None)
+    destination_ur_is: list[str] | None = Field(alias="DestinationURIs", default=None)
     links: Links | None = None
-    metrics_uris: list[str] | None = Field(alias="MetricsURIs", default=None)
+    metrics_ur_is: list[str] | None = Field(alias="MetricsURIs", default=None)
     oem: dict[str, Any] | None = None
     start_time: str | None = None
     status: Status | None = None

@@ -31,7 +31,7 @@ class Container(RedfishResource):
 
 
 class Limits(RedfishModel):
-    cpucount: float | None = Field(alias="CPUCount", default=None)
+    cpu_count: float | None = Field(alias="CPUCount", default=None)
     memory_bytes: int | None = None
 
 

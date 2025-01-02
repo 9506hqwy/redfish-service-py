@@ -38,13 +38,13 @@ class ContactInfo(RedfishModel):
 class DurableNameFormat(StrEnum):
     NAA = "NAA"
     IQN = "iQN"
-    FC__WWN = "FC_WWN"
+    F_C_WWN = "FC_WWN"
     UUID = "UUID"
     EUI = "EUI"
     NQN = "NQN"
     NSID = "NSID"
     NGUID = "NGUID"
-    MACADDRESS = "MACAddress"
+    MAC_ADDRESS = "MACAddress"
     GCXLID = "GCXLID"
 
 
@@ -113,8 +113,8 @@ class PartLocation(RedfishModel):
 class PhysicalAddress(RedfishModel):
     city: str | None = None
     country: str | None = None
-    isocountry_code: str | None = Field(alias="ISOCountryCode", default=None)
-    isosubdivision_code: str | None = Field(alias="ISOSubdivisionCode", default=None)
+    iso_country_code: str | None = Field(alias="ISOCountryCode", default=None)
+    iso_subdivision_code: str | None = Field(alias="ISOSubdivisionCode", default=None)
     postal_code: str | None = None
     state_or_province: str | None = None
     street_address: str | None = None
@@ -138,7 +138,7 @@ class PostalAddress(RedfishModel):
     district: str | None = None
     division: str | None = None
     floor: str | None = None
-    gpscoords: str | None = Field(alias="GPSCoords", default=None)
+    gps_coords: str | None = Field(alias="GPSCoords", default=None)
     house_number: int | None = None
     house_number_suffix: str | None = None
     landmark: str | None = None
@@ -146,7 +146,7 @@ class PostalAddress(RedfishModel):
     location: str | None = None
     name: str | None = None
     neighborhood: str | None = None
-    pobox: str | None = Field(alias="POBox", default=None)
+    po_box: str | None = Field(alias="POBox", default=None)
     place_type: str | None = None
     postal_code: str | None = None
     road: str | None = None
@@ -174,7 +174,7 @@ class PowerState(StrEnum):
 
 class RackUnits(StrEnum):
     OPEN_U = "OpenU"
-    EIA_310 = "EIA_310"
+    EI_A_310 = "EIA_310"
 
 
 class Reference(StrEnum):

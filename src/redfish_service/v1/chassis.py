@@ -30,7 +30,7 @@ class Chassis(RedfishResource):
     description: str | None = None
     doors: Doors | None = None
     drives: IdRef | None = None
-    electrical_source_manager_uris: list[str] | None = Field(
+    electrical_source_manager_ur_is: list[str] | None = Field(
         alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
@@ -38,7 +38,7 @@ class Chassis(RedfishResource):
     environmental_class: EnvironmentalClass | None = None
     fabric_adapters: IdRef | None = None
     heating_cooling_equipment_names: list[str] | None = None
-    heating_cooling_manager_uris: list[str] | None = Field(
+    heating_cooling_manager_ur_is: list[str] | None = Field(
         alias="HeatingCoolingManagerURIs", default=None
     )
     height_mm: float | None = None
@@ -102,7 +102,7 @@ class ChassisType(StrEnum):
     DRAWER = "Drawer"
     MODULE = "Module"
     COMPONENT = "Component"
-    IPBASED_DRIVE = "IPBasedDrive"
+    IP_BASED_DRIVE = "IPBasedDrive"
     RACK_GROUP = "RackGroup"
     STORAGE_ENCLOSURE = "StorageEnclosure"
     IMMERSION_TANK = "ImmersionTank"

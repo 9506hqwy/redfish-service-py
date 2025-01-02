@@ -11,7 +11,7 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Location
 from ..schedule import Schedule
-from ..swordfish.data_protection_lo_scapabilities import FailureDomainScope, RecoveryAccessScope
+from ..swordfish.data_protection_los_capabilities import FailureDomainScope, RecoveryAccessScope
 from ..swordfish.storage_replica_info import ReplicaType
 
 

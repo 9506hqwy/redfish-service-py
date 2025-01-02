@@ -28,7 +28,7 @@ class OperatingConfig(RedfishResource):
     max_junction_temperature_celsius: int | None = None
     max_speed_mhz: int | None = Field(alias="MaxSpeedMHz", default=None)
     oem: dict[str, Any] | None = None
-    tdpwatts: int | None = Field(alias="TDPWatts", default=None)
+    tdp_watts: int | None = Field(alias="TDPWatts", default=None)
     total_available_core_count: int | None = None
     turbo_profile: list[TurboProfileDatapoint] | None = None
 

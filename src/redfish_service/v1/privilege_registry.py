@@ -18,7 +18,7 @@ class Mapping(RedfishModel):
     entity: str | None = None
     operation_map: OperationMap | None = None
     property_overrides: list[TargetPrivilegeMap] | None = None
-    resource_urioverrides: list[TargetPrivilegeMap] | None = Field(
+    resource_uri_overrides: list[TargetPrivilegeMap] | None = Field(
         alias="ResourceURIOverrides", default=None
     )
     subordinate_overrides: list[TargetPrivilegeMap] | None = None
@@ -44,7 +44,7 @@ class PrivilegeRegistry(RedfishModel):
     id: str
     mappings: list[Mapping] | None = None
     name: str
-    oemprivileges_used: list[str] | None = Field(alias="OEMPrivilegesUsed", default=None)
+    oem_privileges_used: list[str] | None = Field(alias="OEMPrivilegesUsed", default=None)
     oem: dict[str, Any] | None = None
     privileges_used: list[PrivilegeType] | None = None
 

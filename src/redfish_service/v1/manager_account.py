@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .account_service import Mfabypass
+from .account_service import MfaBypass
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -73,8 +73,8 @@ class ManagerAccount(RedfishResource):
     keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
-    mfabypass: Mfabypass | None = Field(alias="MFABypass", default=None)
-    oemaccount_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
+    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
+    oem_account_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None
     password: str | None = None
@@ -82,37 +82,37 @@ class ManagerAccount(RedfishResource):
     password_expiration: str | None = None
     phone_number: str | None = None
     role_id: str | None = None
-    snmp: SnmpuserInfo | None = Field(alias="SNMP", default=None)
+    snmp: SnmpUserInfo | None = Field(alias="SNMP", default=None)
     secret_key_set: bool | None = None
     strict_account_types: bool | None = None
     user_name: str | None = None
 
 
-class SnmpauthenticationProtocols(StrEnum):
+class SnmpAuthenticationProtocols(StrEnum):
     NONE = "None"
-    HMAC__MD5 = "HMAC_MD5"
-    HMAC__SHA96 = "HMAC_SHA96"
-    HMAC128__SHA224 = "HMAC128_SHA224"
-    HMAC192__SHA256 = "HMAC192_SHA256"
-    HMAC256__SHA384 = "HMAC256_SHA384"
-    HMAC384__SHA512 = "HMAC384_SHA512"
+    HMA_C_MD5 = "HMAC_MD5"
+    HMA_C_SHA96 = "HMAC_SHA96"
+    HMA_C128_SHA224 = "HMAC128_SHA224"
+    HMA_C192_SHA256 = "HMAC192_SHA256"
+    HMA_C256_SHA384 = "HMAC256_SHA384"
+    HMA_C384_SHA512 = "HMAC384_SHA512"
 
 
-class SnmpencryptionProtocols(StrEnum):
+class SnmpEncryptionProtocols(StrEnum):
     NONE = "None"
-    CBC__DES = "CBC_DES"
-    CFB128__AES128 = "CFB128_AES128"
-    CFB128__AES192 = "CFB128_AES192"
-    CFB128__AES256 = "CFB128_AES256"
+    CB_C_DES = "CBC_DES"
+    CF_B128_AES128 = "CFB128_AES128"
+    CF_B128_AES192 = "CFB128_AES192"
+    CF_B128_AES256 = "CFB128_AES256"
 
 
-class SnmpuserInfo(RedfishModel):
+class SnmpUserInfo(RedfishModel):
     authentication_key: str | None = None
     authentication_key_set: bool | None = None
-    authentication_protocol: SnmpauthenticationProtocols | None = None
+    authentication_protocol: SnmpAuthenticationProtocols | None = None
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
-    encryption_protocol: SnmpencryptionProtocols | None = None
+    encryption_protocol: SnmpEncryptionProtocols | None = None
 
 
 class VerifyTimeBasedOneTimePassword(RedfishModel):

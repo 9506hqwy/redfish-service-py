@@ -235,11 +235,7 @@ class PropetyInfo:
 
     @property
     def property_name(self) -> str:
-        name = escape_name(self.name)
-        name = get_snake_case(name)
-        if name in BASE_MODEL_PROPERTIES:
-            name = f"{name}_value"
-        return name
+        return get_property_name(self.name)
 
     @property
     def type_name(self) -> str:
@@ -267,12 +263,13 @@ def escape_name(name: str) -> str:
     if name.startswith("#"):
         # Actions property is omit schema name.
         name = name.split(".", 1)[-1]
-    words = re.split("[^A-Za-z0-9_]", name)
-    return "_".join([w for w in words if w])
+    words = [w for w in re.split("[^A-Za-z0-9]", name) if w]
+    return "_".join(words)
 
 
 def get_class_name(name: str) -> str:
-    words = get_snake_case(name).split("_")
+    name = escape_name(name)
+    words = [w for w in get_snake_case(name).split("_") if w]
     return "".join([w.capitalize() for w in words])
 
 
@@ -283,8 +280,55 @@ def get_module_name(path: Path) -> str:
 
 
 def get_snake_case(name: str) -> str:
-    words = [w.lower() for w in re.split(r"([A-Z]+[^A-Z]+)", name) if w]
-    return "_".join(words).replace(" ", "_")
+    name = (
+        name.replace("CDUs", "Cdus")
+        .replace("CRCs", "Crcs")
+        .replace("DHCPv4", "Dhcpv4")
+        .replace("DHCPv6", "Dhcpv6")
+        .replace("ETag", "Etag")
+        .replace("FCoE", "FcOe")
+        .replace("GiB", "Gib")
+        .replace("GUIDs", "Guids")
+        .replace("I2C", "I2c")
+        .replace("IDs", "Ids")
+        .replace("IPv4", "Ipv4")
+        .replace("IPv6", "Ipv6")
+        .replace("KiB", "Kib")
+        .replace("kVAh", "Kvah")
+        .replace("kVARh", "Kvarh")
+        .replace("LoS", "Los")
+        .replace("MiB", "Mib")
+        .replace("MHz", "Mhz")
+        .replace("NVMe", "Nvme")
+        .replace("NvmeoF", "Nvme_Of")
+        .replace("OAuth", "Oauth")
+        .replace("PCIe", "Pcie")
+        .replace("PLDMv", "PldmV")
+        .replace("QoS", "Qos")
+        .replace("SNMPv", "Snmpv")
+        .replace("TACACS", "Tacacs_")
+        .replace("VLAN", "Vlan")
+        .replace("VLan", "Vlan")
+    )
+    words = []
+    for w in [w for w in re.split(r"([A-Z][A-Z0-9]*[^A-Z]+)", name) if w]:
+        if re.match(r"^[A-Z0-9]+$", w):
+            words.append(w.lower())
+        elif m := re.match(r"([A-Z][A-Z0-9]*)([A-Z][^A-Z]+)", w):
+            words.append(m.group(1).lower())
+            words.append(m.group(2).lower())
+        else:
+            words.append(w.lower())
+    return "_".join(words)
+
+
+def get_property_name(name: str) -> str:
+    name = escape_name(name)
+    name = get_snake_case(name)
+    name = name.replace("__", "_")
+    if name in BASE_MODEL_PROPERTIES:
+        name = f"{name}_value"
+    return name
 
 
 def get_primitive_type_name(definition: dict[str, Any]) -> str | None:
@@ -306,10 +350,11 @@ def get_primitive_type_name(definition: dict[str, Any]) -> str | None:
 
 def get_variant_name(name: str) -> str:
     name = escape_name(name)
-    v = get_snake_case(name).upper()
-    if re.match(r"^\d", v):
-        v = f"N{v}"
-    return v
+    name = get_snake_case(name).upper()
+    name = name.replace("__", "_")
+    if re.match(r"^\d", name):
+        name = f"N{name}"
+    return name
 
 
 def has_base_object(definition: dict[str, Any]) -> bool:

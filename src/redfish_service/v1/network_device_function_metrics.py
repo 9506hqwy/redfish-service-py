@@ -26,18 +26,18 @@ class FibreChannel(RedfishModel):
     port_login_accepts: int | None = None
     port_login_rejects: int | None = None
     port_login_requests: int | None = None
-    rxcongestion_fpins: int | None = Field(alias="RXCongestionFPINs", default=None)
-    rxdelivery_fpins: int | None = Field(alias="RXDeliveryFPINs", default=None)
-    rxexchanges: int | None = Field(alias="RXExchanges", default=None)
-    rxlink_integrity_fpins: int | None = Field(alias="RXLinkIntegrityFPINs", default=None)
-    rxpeer_congestion_fpins: int | None = Field(alias="RXPeerCongestionFPINs", default=None)
-    rxsequences: int | None = Field(alias="RXSequences", default=None)
-    txcongestion_fpins: int | None = Field(alias="TXCongestionFPINs", default=None)
-    txdelivery_fpins: int | None = Field(alias="TXDeliveryFPINs", default=None)
-    txexchanges: int | None = Field(alias="TXExchanges", default=None)
-    txlink_integrity_fpins: int | None = Field(alias="TXLinkIntegrityFPINs", default=None)
-    txpeer_congestion_fpins: int | None = Field(alias="TXPeerCongestionFPINs", default=None)
-    txsequences: int | None = Field(alias="TXSequences", default=None)
+    rx_congestion_fpi_ns: int | None = Field(alias="RXCongestionFPINs", default=None)
+    rx_delivery_fpi_ns: int | None = Field(alias="RXDeliveryFPINs", default=None)
+    rx_exchanges: int | None = Field(alias="RXExchanges", default=None)
+    rx_link_integrity_fpi_ns: int | None = Field(alias="RXLinkIntegrityFPINs", default=None)
+    rx_peer_congestion_fpi_ns: int | None = Field(alias="RXPeerCongestionFPINs", default=None)
+    rx_sequences: int | None = Field(alias="RXSequences", default=None)
+    tx_congestion_fpi_ns: int | None = Field(alias="TXCongestionFPINs", default=None)
+    tx_delivery_fpi_ns: int | None = Field(alias="TXDeliveryFPINs", default=None)
+    tx_exchanges: int | None = Field(alias="TXExchanges", default=None)
+    tx_link_integrity_fpi_ns: int | None = Field(alias="TXLinkIntegrityFPINs", default=None)
+    tx_peer_congestion_fpi_ns: int | None = Field(alias="TXPeerCongestionFPINs", default=None)
+    tx_sequences: int | None = Field(alias="TXSequences", default=None)
 
 
 class NetworkDeviceFunctionMetrics(RedfishResource):
@@ -46,20 +46,20 @@ class NetworkDeviceFunctionMetrics(RedfishResource):
     ethernet: Ethernet | None = None
     fibre_channel: FibreChannel | None = None
     oem: dict[str, Any] | None = None
-    rxavg_queue_depth_percent: float | None = Field(alias="RXAvgQueueDepthPercent", default=None)
-    rxbytes: int | None = Field(alias="RXBytes", default=None)
-    rxframes: int | None = Field(alias="RXFrames", default=None)
-    rxmulticast_frames: int | None = Field(alias="RXMulticastFrames", default=None)
-    rxqueues_empty: bool | None = Field(alias="RXQueuesEmpty", default=None)
-    rxqueues_full: int | None = Field(alias="RXQueuesFull", default=None)
-    rxunicast_frames: int | None = Field(alias="RXUnicastFrames", default=None)
-    txavg_queue_depth_percent: float | None = Field(alias="TXAvgQueueDepthPercent", default=None)
-    txbytes: int | None = Field(alias="TXBytes", default=None)
-    txframes: int | None = Field(alias="TXFrames", default=None)
-    txmulticast_frames: int | None = Field(alias="TXMulticastFrames", default=None)
-    txqueues_empty: bool | None = Field(alias="TXQueuesEmpty", default=None)
-    txqueues_full: int | None = Field(alias="TXQueuesFull", default=None)
-    txunicast_frames: int | None = Field(alias="TXUnicastFrames", default=None)
+    rx_avg_queue_depth_percent: float | None = Field(alias="RXAvgQueueDepthPercent", default=None)
+    rx_bytes: int | None = Field(alias="RXBytes", default=None)
+    rx_frames: int | None = Field(alias="RXFrames", default=None)
+    rx_multicast_frames: int | None = Field(alias="RXMulticastFrames", default=None)
+    rx_queues_empty: bool | None = Field(alias="RXQueuesEmpty", default=None)
+    rx_queues_full: int | None = Field(alias="RXQueuesFull", default=None)
+    rx_unicast_frames: int | None = Field(alias="RXUnicastFrames", default=None)
+    tx_avg_queue_depth_percent: float | None = Field(alias="TXAvgQueueDepthPercent", default=None)
+    tx_bytes: int | None = Field(alias="TXBytes", default=None)
+    tx_frames: int | None = Field(alias="TXFrames", default=None)
+    tx_multicast_frames: int | None = Field(alias="TXMulticastFrames", default=None)
+    tx_queues_empty: bool | None = Field(alias="TXQueuesEmpty", default=None)
+    tx_queues_full: int | None = Field(alias="TXQueuesFull", default=None)
+    tx_unicast_frames: int | None = Field(alias="TXUnicastFrames", default=None)
 
 
 class ResetMetrics(RedfishModel):

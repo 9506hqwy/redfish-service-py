@@ -18,9 +18,9 @@ from .resource import Status
 class AccountProviderTypes(StrEnum):
     REDFISH_SERVICE = "RedfishService"
     ACTIVE_DIRECTORY_SERVICE = "ActiveDirectoryService"
-    LDAPSERVICE = "LDAPService"
+    LDAP_SERVICE = "LDAPService"
     OEM = "OEM"
-    TACACSPLUS = "TACACSplus"
+    TACACS_PLUS = "TACACSplus"
     OAUTH2 = "OAuth2"
 
 
@@ -35,7 +35,7 @@ class AccountService(RedfishResource):
     additional_external_account_providers: IdRef | None = None
     auth_failure_logging_threshold: int | None = None
     description: str | None = None
-    httpbasic_auth: BasicAuthState | None = Field(alias="HTTPBasicAuth", default=None)
+    http_basic_auth: BasicAuthState | None = Field(alias="HTTPBasicAuth", default=None)
     ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
     local_account_auth: LocalAccountAuth | None = None
     max_password_length: int | None = None
@@ -53,10 +53,10 @@ class AccountService(RedfishResource):
     service_enabled: bool | None = None
     status: Status | None = None
     supported_account_types: list[AccountTypes] | None = None
-    supported_oemaccount_types: list[str] | None = Field(
+    supported_oem_account_types: list[str] | None = Field(
         alias="SupportedOEMAccountTypes", default=None
     )
-    tacacsplus: ExternalAccountProvider | None = Field(alias="TACACSplus", default=None)
+    tacacs_plus: ExternalAccountProvider | None = Field(alias="TACACSplus", default=None)
 
 
 class Actions(RedfishModel):
@@ -104,7 +104,7 @@ class ExternalAccountProvider(RedfishModel):
     account_provider_type: AccountProviderTypes | None = None
     authentication: Authentication | None = None
     certificates: IdRef | None = None
-    ldapservice: Ldapservice | None = Field(alias="LDAPService", default=None)
+    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
     oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
     password_set: bool | None = None
     priority: int | None = None
@@ -112,7 +112,7 @@ class ExternalAccountProvider(RedfishModel):
     retries: int | None = None
     service_addresses: list[str] | None = None
     service_enabled: bool | None = None
-    tacacsplus_service: TacacsplusService | None = Field(alias="TACACSplusService", default=None)
+    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
     timeout_seconds: int | None = None
 
 
@@ -122,18 +122,18 @@ class GoogleAuthenticator(RedfishModel):
     secret_key_set: bool | None = None
 
 
-class LdapsearchSettings(RedfishModel):
+class LdapSearchSettings(RedfishModel):
     base_distinguished_names: list[str] | None = None
     email_attribute: str | None = None
     group_name_attribute: str | None = None
     groups_attribute: str | None = None
-    sshkey_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
+    ssh_key_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
     username_attribute: str | None = None
 
 
-class Ldapservice(RedfishModel):
+class LdapService(RedfishModel):
     oem: dict[str, Any] | None = None
-    search_settings: LdapsearchSettings | None = None
+    search_settings: LdapSearchSettings | None = None
 
 
 class LocalAccountAuth(StrEnum):
@@ -143,11 +143,11 @@ class LocalAccountAuth(StrEnum):
     LOCAL_FIRST = "LocalFirst"
 
 
-class Mfabypass(RedfishModel):
-    bypass_types: list[MfabypassType] | None = None
+class MfaBypass(RedfishModel):
+    bypass_types: list[MfaBypassType] | None = None
 
 
-class MfabypassType(StrEnum):
+class MfaBypassType(StrEnum):
     ALL = "All"
     SECUR_ID = "SecurID"
     GOOGLE_AUTHENTICATOR = "GoogleAuthenticator"
@@ -192,9 +192,9 @@ class OneTimePasscode(RedfishModel):
 
 class RoleMapping(RedfishModel):
     local_account_types: list[AccountTypes] | None = None
-    local_oemaccount_types: list[str] | None = Field(alias="LocalOEMAccountTypes", default=None)
+    local_oem_account_types: list[str] | None = Field(alias="LocalOEMAccountTypes", default=None)
     local_role: str | None = None
-    mfabypass: Mfabypass | None = Field(alias="MFABypass", default=None)
+    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
     oem: dict[str, Any] | None = None
     remote_group: str | None = None
     remote_user: str | None = None
@@ -209,18 +209,18 @@ class SecurId(RedfishModel):
     server_uri: str | None = Field(alias="ServerURI", default=None)
 
 
-class TacacsplusPasswordExchangeProtocol(StrEnum):
+class TacacsPlusPasswordExchangeProtocol(StrEnum):
     ASCII = "ASCII"
     PAP = "PAP"
     CHAP = "CHAP"
-    MSCHAPV1 = "MSCHAPv1"
-    MSCHAPV2 = "MSCHAPv2"
+    MSCHA_PV1 = "MSCHAPv1"
+    MSCHA_PV2 = "MSCHAPv2"
 
 
-class TacacsplusService(RedfishModel):
+class TacacsPlusService(RedfishModel):
     authorization_service: str | None = None
     oem: dict[str, Any] | None = None
-    password_exchange_protocols: list[TacacsplusPasswordExchangeProtocol] | None = None
+    password_exchange_protocols: list[TacacsPlusPasswordExchangeProtocol] | None = None
     privilege_level_argument: str | None = None
 
 

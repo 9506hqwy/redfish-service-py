@@ -14,7 +14,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    tpmget_event_log: TpmgetEventLog | None = Field(
+    tpm_get_event_log: TpmGetEventLog | None = Field(
         alias="#TrustedComponent.TPMGetEventLog", default=None
     )
     oem: dict[str, Any] | None = None
@@ -46,7 +46,7 @@ class Tpm(RedfishModel):
     )
 
 
-class TpmgetEventLog(RedfishModel):
+class TpmGetEventLog(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 

@@ -19,9 +19,9 @@ class Actions(RedfishModel):
 
 
 class FabricAdapter(RedfishResource):
-    asicmanufacturer: str | None = Field(alias="ASICManufacturer", default=None)
-    asicpart_number: str | None = Field(alias="ASICPartNumber", default=None)
-    asicrevision_identifier: str | None = Field(alias="ASICRevisionIdentifier", default=None)
+    asic_manufacturer: str | None = Field(alias="ASICManufacturer", default=None)
+    asic_part_number: str | None = Field(alias="ASICPartNumber", default=None)
+    asic_revision_identifier: str | None = Field(alias="ASICRevisionIdentifier", default=None)
     actions: Actions | None = None
     description: str | None = None
     fabric_type: Protocol | None = None
@@ -47,7 +47,7 @@ class FabricAdapter(RedfishResource):
 class GenZ(RedfishModel):
     msdt: IdRef | None = Field(alias="MSDT", default=None)
     pidt: list[str] | None = Field(alias="PIDT", default=None)
-    ritable: list[str] | None = Field(alias="RITable", default=None)
+    ri_table: list[str] | None = Field(alias="RITable", default=None)
     requestor_vcat: IdRef | None = Field(alias="RequestorVCAT", default=None)
     responder_vcat: IdRef | None = Field(alias="ResponderVCAT", default=None)
     ssdt: IdRef | None = Field(alias="SSDT", default=None)

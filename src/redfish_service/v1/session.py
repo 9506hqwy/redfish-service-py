@@ -23,7 +23,7 @@ class Links(RedfishModel):
 
 class Session(RedfishResource):
     actions: Actions | None = None
-    client_origin_ipaddress: str | None = Field(alias="ClientOriginIPAddress", default=None)
+    client_origin_ip_address: str | None = Field(alias="ClientOriginIPAddress", default=None)
     context: str | None = None
     created_time: str | None = None
     description: str | None = None

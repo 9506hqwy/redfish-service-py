@@ -42,7 +42,7 @@ class Drive(RedfishResource):
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
-    block_security_idenabled: bool | None = Field(alias="BlockSecurityIDEnabled", default=None)
+    block_security_id_enabled: bool | None = Field(alias="BlockSecurityIDEnabled", default=None)
     block_size_bytes: int | None = None
     capable_speed_gbs: float | None = None
     capacity_bytes: int | None = None
@@ -108,10 +108,10 @@ class FormFactor(StrEnum):
     DRIVE3_5 = "Drive3_5"
     DRIVE2_5 = "Drive2_5"
     EDSFF = "EDSFF"
-    EDSFF_1_U__LONG = "EDSFF_1U_Long"
-    EDSFF_1_U__SHORT = "EDSFF_1U_Short"
-    EDSFF__E3__SHORT = "EDSFF_E3_Short"
-    EDSFF__E3__LONG = "EDSFF_E3_Long"
+    EDSF_F_1_U_LONG = "EDSFF_1U_Long"
+    EDSF_F_1_U_SHORT = "EDSFF_1U_Short"
+    EDSF_F_E3_SHORT = "EDSFF_E3_Short"
+    EDSF_F_E3_LONG = "EDSFF_E3_Long"
     M2 = "M2"
     M2_2230 = "M2_2230"
     M2_2242 = "M2_2242"
@@ -175,7 +175,7 @@ class NvmeConfigurationLockState(RedfishModel):
     firmware_image_download: ConfigLockOptions | None = None
     lockdown: ConfigLockOptions | None = None
     security_send: ConfigLockOptions | None = None
-    vpdwrite: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
+    vpd_write: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
 
 
 class Operations(RedfishModel):
@@ -206,8 +206,8 @@ class StatusIndicator(StrEnum):
     REBUILD = "Rebuild"
     PREDICTIVE_FAILURE_ANALYSIS = "PredictiveFailureAnalysis"
     HOTSPARE = "Hotspare"
-    IN_ACRITICAL_ARRAY = "InACriticalArray"
-    IN_AFAILED_ARRAY = "InAFailedArray"
+    IN_A_CRITICAL_ARRAY = "InACriticalArray"
+    IN_A_FAILED_ARRAY = "InAFailedArray"
 
 
 class TargetConfigurationLockLevel(StrEnum):

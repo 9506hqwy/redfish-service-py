@@ -48,21 +48,23 @@ class Actions(RedfishModel):
 class BaseModuleType(StrEnum):
     RDIMM = "RDIMM"
     UDIMM = "UDIMM"
-    SO__DIMM = "SO_DIMM"
+    S_O_DIMM = "SO_DIMM"
     LRDIMM = "LRDIMM"
-    MINI__RDIMM = "Mini_RDIMM"
-    MINI__UDIMM = "Mini_UDIMM"
-    SO__RDIMM_72B = "SO_RDIMM_72b"
-    SO__UDIMM_72B = "SO_UDIMM_72b"
-    SO__DIMM_16B = "SO_DIMM_16b"
-    SO__DIMM_32B = "SO_DIMM_32b"
+    MINI_RDIMM = "Mini_RDIMM"
+    MINI_UDIMM = "Mini_UDIMM"
+    S_O_RDIM_M_72B = "SO_RDIMM_72b"
+    S_O_UDIM_M_72B = "SO_UDIMM_72b"
+    S_O_DIM_M_16B = "SO_DIMM_16b"
+    S_O_DIM_M_32B = "SO_DIMM_32b"
     DIE = "Die"
 
 
 class Cxl(RedfishModel):
     label_storage_size_bytes: int | None = None
-    staged_non_volatile_size_mi_b: int | None = None
-    staged_volatile_size_mi_b: int | None = None
+    staged_non_volatile_size_mib: int | None = Field(
+        alias="StagedNonVolatileSizeMiB", default=None
+    )
+    staged_volatile_size_mib: int | None = Field(alias="StagedVolatileSizeMiB", default=None)
 
 
 class DisableMasterPassphrase(RedfishModel):
@@ -117,16 +119,16 @@ class Links(RedfishModel):
 
 class Memory(RedfishResource):
     actions: Actions | None = None
-    allocation_alignment_mi_b: int | None = None
-    allocation_increment_mi_b: int | None = None
+    allocation_alignment_mib: int | None = Field(alias="AllocationAlignmentMiB", default=None)
+    allocation_increment_mib: int | None = Field(alias="AllocationIncrementMiB", default=None)
     allowed_speeds_mhz: list[int] | None = Field(alias="AllowedSpeedsMHz", default=None)
     assembly: IdRef | None = None
     base_module_type: BaseModuleType | None = None
     bus_width_bits: int | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
     cache_level: int | None = None
-    cache_size_mi_b: int | None = None
-    capacity_mi_b: int | None = None
+    cache_size_mib: int | None = Field(alias="CacheSizeMiB", default=None)
+    capacity_mib: int | None = Field(alias="CapacityMiB", default=None)
     certificates: IdRef | None = None
     configuration_locked: bool | None = None
     data_width_bits: int | None = None
@@ -146,9 +148,9 @@ class Memory(RedfishResource):
     location: Location | None = None
     location_indicator_active: bool | None = None
     log: IdRef | None = None
-    logical_size_mi_b: int | None = None
+    logical_size_mib: int | None = Field(alias="LogicalSizeMiB", default=None)
     manufacturer: str | None = None
-    max_tdpmilli_watts: list[int] | None = Field(alias="MaxTDPMilliWatts", default=None)
+    max_tdp_milli_watts: list[int] | None = Field(alias="MaxTDPMilliWatts", default=None)
     measurements: list[MeasurementBlock] | None = None
     memory_device_type: MemoryDeviceType | None = None
     memory_location: MemoryLocation | None = None
@@ -164,8 +166,8 @@ class Memory(RedfishResource):
     model: str | None = None
     module_manufacturer_id: str | None = Field(alias="ModuleManufacturerID", default=None)
     module_product_id: str | None = Field(alias="ModuleProductID", default=None)
-    non_volatile_size_limit_mi_b: int | None = None
-    non_volatile_size_mi_b: int | None = None
+    non_volatile_size_limit_mib: int | None = Field(alias="NonVolatileSizeLimitMiB", default=None)
+    non_volatile_size_mib: int | None = Field(alias="NonVolatileSizeMiB", default=None)
     oem: dict[str, Any] | None = None
     operating_memory_modes: list[OperatingMemoryModes] | None = None
     operating_speed_mhz: int | None = None
@@ -174,13 +176,17 @@ class Memory(RedfishResource):
     )
     part_number: str | None = None
     persistent_region_number_limit: int | None = None
-    persistent_region_size_limit_mi_b: int | None = None
-    persistent_region_size_max_mi_b: int | None = None
+    persistent_region_size_limit_mib: int | None = Field(
+        alias="PersistentRegionSizeLimitMiB", default=None
+    )
+    persistent_region_size_max_mib: int | None = Field(
+        alias="PersistentRegionSizeMaxMiB", default=None
+    )
     poison_list_max_media_error_records: int | None = None
-    power_management_icmanufacturer_id: str | None = Field(
+    power_management_ic_manufacturer_id: str | None = Field(
         alias="PowerManagementICManufacturerID", default=None
     )
-    power_management_icrevision_id: str | None = Field(
+    power_management_ic_revision_id: str | None = Field(
         alias="PowerManagementICRevisionID", default=None
     )
     power_management_policy: PowerManagementPolicy | None = None
@@ -197,10 +203,14 @@ class Memory(RedfishResource):
     subsystem_vendor_id: str | None = Field(alias="SubsystemVendorID", default=None)
     vendor_id: str | None = Field(alias="VendorID", default=None)
     volatile_region_number_limit: int | None = None
-    volatile_region_size_limit_mi_b: int | None = None
-    volatile_region_size_max_mi_b: int | None = None
-    volatile_size_limit_mi_b: int | None = None
-    volatile_size_mi_b: int | None = None
+    volatile_region_size_limit_mib: int | None = Field(
+        alias="VolatileRegionSizeLimitMiB", default=None
+    )
+    volatile_region_size_max_mib: int | None = Field(
+        alias="VolatileRegionSizeMaxMiB", default=None
+    )
+    volatile_size_limit_mib: int | None = Field(alias="VolatileSizeLimitMiB", default=None)
+    volatile_size_mib: int | None = Field(alias="VolatileSizeMiB", default=None)
 
 
 class MemoryClassification(StrEnum):
@@ -214,16 +224,16 @@ class MemoryDeviceType(StrEnum):
     DDR2 = "DDR2"
     DDR3 = "DDR3"
     DDR4 = "DDR4"
-    DDR4__SDRAM = "DDR4_SDRAM"
-    DDR4_E__SDRAM = "DDR4E_SDRAM"
-    LPDDR4__SDRAM = "LPDDR4_SDRAM"
-    DDR3__SDRAM = "DDR3_SDRAM"
-    LPDDR3__SDRAM = "LPDDR3_SDRAM"
-    DDR2__SDRAM = "DDR2_SDRAM"
-    DDR2__SDRAM__FB__DIMM = "DDR2_SDRAM_FB_DIMM"
-    DDR2__SDRAM__FB__DIMM__PROBE = "DDR2_SDRAM_FB_DIMM_PROBE"
-    DDR__SGRAM = "DDR_SGRAM"
-    DDR__SDRAM = "DDR_SDRAM"
+    DD_R4_SDRAM = "DDR4_SDRAM"
+    DDR4_E_SDRAM = "DDR4E_SDRAM"
+    LPDD_R4_SDRAM = "LPDDR4_SDRAM"
+    DD_R3_SDRAM = "DDR3_SDRAM"
+    LPDD_R3_SDRAM = "LPDDR3_SDRAM"
+    DD_R2_SDRAM = "DDR2_SDRAM"
+    DD_R2_SDRA_M_F_B_DIMM = "DDR2_SDRAM_FB_DIMM"
+    DD_R2_SDRA_M_F_B_DIM_M_PROBE = "DDR2_SDRAM_FB_DIMM_PROBE"
+    DD_R_SGRAM = "DDR_SGRAM"
+    DD_R_SDRAM = "DDR_SDRAM"
     ROM = "ROM"
     SDRAM = "SDRAM"
     EDO = "EDO"
@@ -243,7 +253,7 @@ class MemoryDeviceType(StrEnum):
     GDDR6 = "GDDR6"
     DDR5 = "DDR5"
     OEM = "OEM"
-    LPDDR5__SDRAM = "LPDDR5_SDRAM"
+    LPDD_R5_SDRAM = "LPDDR5_SDRAM"
 
 
 class MemoryLocation(RedfishModel):
@@ -256,15 +266,15 @@ class MemoryLocation(RedfishModel):
 class MemoryMedia(StrEnum):
     DRAM = "DRAM"
     NAND = "NAND"
-    INTEL3_DXPOINT = "Intel3DXPoint"
+    INTEL3_DX_POINT = "Intel3DXPoint"
     PROPRIETARY = "Proprietary"
 
 
 class MemoryType(StrEnum):
     DRAM = "DRAM"
-    NVDIMM__N = "NVDIMM_N"
-    NVDIMM__F = "NVDIMM_F"
-    NVDIMM__P = "NVDIMM_P"
+    NVDIM_M_N = "NVDIMM_N"
+    NVDIM_M_F = "NVDIMM_F"
+    NVDIM_M_P = "NVDIMM_P"
     INTEL_OPTANE = "IntelOptane"
     CACHE = "Cache"
 
@@ -282,7 +292,7 @@ class OverwriteUnit(RedfishModel):
 
 class PowerManagementPolicy(RedfishModel):
     average_power_budget_milli_watts: int | None = None
-    max_tdpmilli_watts: int | None = Field(alias="MaxTDPMilliWatts", default=None)
+    max_tdp_milli_watts: int | None = Field(alias="MaxTDPMilliWatts", default=None)
     peak_power_budget_milli_watts: int | None = None
     policy_enabled: bool | None = None
 
@@ -290,11 +300,11 @@ class PowerManagementPolicy(RedfishModel):
 class RegionSet(RedfishModel):
     master_passphrase_enabled: bool | None = None
     memory_classification: MemoryClassification | None = None
-    offset_mi_b: int | None = None
+    offset_mib: int | None = Field(alias="OffsetMiB", default=None)
     passphrase_enabled: bool | None = None
     passphrase_state: bool | None = None
     region_id: str | None = None
-    size_mi_b: int | None = None
+    size_mib: int | None = Field(alias="SizeMiB", default=None)
 
 
 class Reset(RedfishModel):

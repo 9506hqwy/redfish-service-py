@@ -15,7 +15,7 @@ from .pcie_device import PcieInterface
 from .protocol import Protocol
 from .resource import Identifier, Location, Status
 from .software_inventory import MeasurementBlock
-from .swordfish.volume import Raidtype
+from .swordfish.volume import RaidType
 
 
 class Actions(RedfishModel):
@@ -42,9 +42,9 @@ class AutoVolumeCreate(StrEnum):
 
 
 class CacheSummary(RedfishModel):
-    persistent_cache_size_mi_b: int | None = None
+    persistent_cache_size_mib: int | None = Field(alias="PersistentCacheSizeMiB", default=None)
     status: Status | None = None
-    total_cache_size_mi_b: int | None = None
+    total_cache_size_mib: int | None = Field(alias="TotalCacheSizeMiB", default=None)
 
 
 class ConfigLockOptions(StrEnum):
@@ -82,10 +82,10 @@ class Links(RedfishModel):
     hosting_storage_systems_odata_count: int | None = Field(
         alias="HostingStorageSystems@odata.count", default=None
     )
-    nvmeo_fdiscovery_subsystems: list[IdRef] | None = Field(
+    nvme_of_discovery_subsystems: list[IdRef] | None = Field(
         alias="NVMeoFDiscoverySubsystems", default=None
     )
-    nvmeo_fdiscovery_subsystems_odata_count: int | None = Field(
+    nvme_of_discovery_subsystems_odata_count: int | None = Field(
         alias="NVMeoFDiscoverySubsystems@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
@@ -101,7 +101,7 @@ class NvmeConfigurationLockState(RedfishModel):
     firmware_image_download: ConfigLockOptions | None = None
     lockdown: ConfigLockOptions | None = None
     security_send: ConfigLockOptions | None = None
-    vpdwrite: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
+    vpd_write: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
 
 
 class NvmeSubsystemProperties(RedfishModel):
@@ -196,7 +196,7 @@ class StorageController(RedfishObjectId):
     status: Status | None = None
     supported_controller_protocols: list[Protocol] | None = None
     supported_device_protocols: list[Protocol] | None = None
-    supported_raidtypes: list[Raidtype] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
 
 
 class StorageControllerActions(RedfishModel):

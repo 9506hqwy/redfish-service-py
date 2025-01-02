@@ -22,7 +22,7 @@ class AdditionalVersions(RedfishModel):
     bootloader: str | None = None
     kernel: str | None = None
     microcode: str | None = None
-    osdistribution: str | None = Field(alias="OSDistribution", default=None)
+    os_distribution: str | None = Field(alias="OSDistribution", default=None)
     oem: dict[str, Any] | None = None
 
 

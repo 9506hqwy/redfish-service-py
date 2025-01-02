@@ -20,33 +20,33 @@ class KeyPolicy(RedfishResource):
     description: str | None = None
     is_default: bool | None = None
     key_policy_type: KeyPolicyType | None = None
-    nvmeo_f: NvmeoF | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
     oem: dict[str, Any] | None = None
 
 
 class KeyPolicyType(StrEnum):
-    NVMEO_F = "NVMeoF"
+    NVME_OF = "NVMeoF"
 
 
-class NvmeoF(RedfishModel):
-    cipher_suite_allow_list: list[NvmeoFcipherSuiteType] | None = None
-    dhgroup_allow_list: list[NvmeoFdhgroupType] | None = Field(
+class NvmeOf(RedfishModel):
+    cipher_suite_allow_list: list[NvmeOfCipherSuiteType] | None = None
+    dh_group_allow_list: list[NvmeOfDhGroupType] | None = Field(
         alias="DHGroupAllowList", default=None
     )
-    oemsecurity_protocol_allow_list: list[str] | None = Field(
+    oem_security_protocol_allow_list: list[str] | None = Field(
         alias="OEMSecurityProtocolAllowList", default=None
     )
-    secure_hash_allow_list: list[NvmeoFsecureHashType] | None = None
-    security_protocol_allow_list: list[NvmeoFsecurityProtocolType] | None = None
-    security_transport_allow_list: list[NvmeoFsecurityTransportType] | None = None
+    secure_hash_allow_list: list[NvmeOfSecureHashType] | None = None
+    security_protocol_allow_list: list[NvmeOfSecurityProtocolType] | None = None
+    security_transport_allow_list: list[NvmeOfSecurityTransportType] | None = None
 
 
-class NvmeoFcipherSuiteType(StrEnum):
-    TLS__AES_128__GCM__SHA256 = "TLS_AES_128_GCM_SHA256"
-    TLS__AES_256__GCM__SHA384 = "TLS_AES_256_GCM_SHA384"
+class NvmeOfCipherSuiteType(StrEnum):
+    TL_S_AE_S_128_GC_M_SHA256 = "TLS_AES_128_GCM_SHA256"
+    TL_S_AE_S_256_GC_M_SHA384 = "TLS_AES_256_GCM_SHA384"
 
 
-class NvmeoFdhgroupType(StrEnum):
+class NvmeOfDhGroupType(StrEnum):
     FFDHE2048 = "FFDHE2048"
     FFDHE3072 = "FFDHE3072"
     FFDHE4096 = "FFDHE4096"
@@ -54,18 +54,18 @@ class NvmeoFdhgroupType(StrEnum):
     FFDHE8192 = "FFDHE8192"
 
 
-class NvmeoFsecureHashType(StrEnum):
+class NvmeOfSecureHashType(StrEnum):
     SHA256 = "SHA256"
     SHA384 = "SHA384"
     SHA512 = "SHA512"
 
 
-class NvmeoFsecurityProtocolType(StrEnum):
+class NvmeOfSecurityProtocolType(StrEnum):
     DHHC = "DHHC"
-    TLS__PSK = "TLS_PSK"
+    TL_S_PSK = "TLS_PSK"
     OEM = "OEM"
 
 
-class NvmeoFsecurityTransportType(StrEnum):
-    TLSV2 = "TLSv2"
-    TLSV3 = "TLSv3"
+class NvmeOfSecurityTransportType(StrEnum):
+    TL_SV2 = "TLSv2"
+    TL_SV3 = "TLSv3"

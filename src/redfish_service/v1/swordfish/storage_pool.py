@@ -12,9 +12,9 @@ from ..base import (
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
-from ..swordfish.data_storage_lo_scapabilities import ProvisioningPolicy
-from ..swordfish.iostatistics import Iostatistics
-from ..swordfish.volume import Raidtype
+from ..swordfish.data_storage_los_capabilities import ProvisioningPolicy
+from ..swordfish.io_statistics import IoStatistics
+from ..swordfish.volume import RaidType
 
 
 class Actions(RedfishModel):
@@ -70,7 +70,7 @@ class NvmeEnduranceGroupProperties(RedfishModel):
 
 class NvmePoolType(StrEnum):
     ENDURANCE_GROUP = "EnduranceGroup"
-    NVMSET = "NVMSet"
+    NVM_SET = "NVMSet"
 
 
 class NvmeProperties(RedfishModel):
@@ -82,7 +82,7 @@ class NvmeSetProperties(RedfishModel):
     optimal_write_size_bytes: int | None = None
     random4k_read_typical_nano_seconds: int | None = None
     set_identifier: str | None = None
-    unallocated_nvmnamespace_capacity_bytes: int | None = Field(
+    unallocated_nvm_namespace_capacity_bytes: int | None = Field(
         alias="UnallocatedNVMNamespaceCapacityBytes", default=None
     )
 
@@ -136,7 +136,7 @@ class StoragePool(RedfishResource):
     description: str | None = None
     encrypted: bool | None = None
     encryption_enabled: bool | None = None
-    iostatistics: Iostatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
     identifier: Identifier | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
@@ -155,4 +155,4 @@ class StoragePool(RedfishResource):
     status: Status | None = None
     supported_pool_types: list[PoolType] | None = None
     supported_provisioning_policies: list[ProvisioningPolicy] | None = None
-    supported_raidtypes: list[Raidtype] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)

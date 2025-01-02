@@ -58,7 +58,7 @@ class PowerSupply(RedfishResource):
     certificates: IdRef | None = None
     description: str | None = None
     efficiency_ratings: list[EfficiencyRating] | None = None
-    electrical_source_manager_uris: list[str] | None = Field(
+    electrical_source_manager_ur_is: list[str] | None = Field(
         alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
@@ -92,8 +92,8 @@ class PowerSupply(RedfishResource):
 class PowerSupplyType(StrEnum):
     AC = "AC"
     DC = "DC"
-    ACOR_DC = "ACorDC"
-    DCREGULATOR = "DCRegulator"
+    A_COR_DC = "ACorDC"
+    DC_REGULATOR = "DCRegulator"
 
 
 class Reset(RedfishModel):

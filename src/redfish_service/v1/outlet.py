@@ -90,19 +90,19 @@ class PowerControl(RedfishModel):
 
 
 class ReceptacleType(StrEnum):
-    NEMA_5_15_R = "NEMA_5_15R"
-    NEMA_5_20_R = "NEMA_5_20R"
-    NEMA__L5_20_R = "NEMA_L5_20R"
-    NEMA__L5_30_R = "NEMA_L5_30R"
-    NEMA__L6_20_R = "NEMA_L6_20R"
-    NEMA__L6_30_R = "NEMA_L6_30R"
-    IEC_60320__C13 = "IEC_60320_C13"
-    IEC_60320__C19 = "IEC_60320_C19"
-    CEE_7__TYPE__E = "CEE_7_Type_E"
-    CEE_7__TYPE__F = "CEE_7_Type_F"
-    SEV_1011__TYPE_12 = "SEV_1011_TYPE_12"
-    SEV_1011__TYPE_23 = "SEV_1011_TYPE_23"
-    BS_1363__TYPE__G = "BS_1363_Type_G"
+    NEM_A_5_15_R = "NEMA_5_15R"
+    NEM_A_5_20_R = "NEMA_5_20R"
+    NEM_A_L5_20_R = "NEMA_L5_20R"
+    NEM_A_L5_30_R = "NEMA_L5_30R"
+    NEM_A_L6_20_R = "NEMA_L6_20R"
+    NEM_A_L6_30_R = "NEMA_L6_30R"
+    IE_C_60320_C13 = "IEC_60320_C13"
+    IE_C_60320_C19 = "IEC_60320_C19"
+    CE_E_7_TYPE_E = "CEE_7_Type_E"
+    CE_E_7_TYPE_F = "CEE_7_Type_F"
+    SE_V_1011_TYP_E_12 = "SEV_1011_TYPE_12"
+    SE_V_1011_TYP_E_23 = "SEV_1011_TYPE_23"
+    B_S_1363_TYPE_G = "BS_1363_Type_G"
     BUS_CONNECTION = "BusConnection"
 
 

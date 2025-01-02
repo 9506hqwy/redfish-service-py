@@ -20,9 +20,9 @@ class Actions(RedfishModel):
 
 
 class Cxl(RedfishModel):
-    max_vcss_supported: int | None = Field(alias="MaxVCSsSupported", default=None)
-    total_numberv_ppbs: int | None = Field(alias="TotalNumbervPPBs", default=None)
-    vcs: Vcsswitch | None = Field(alias="VCS", default=None)
+    max_vc_ss_supported: int | None = Field(alias="MaxVCSsSupported", default=None)
+    total_numberv_pp_bs: int | None = Field(alias="TotalNumbervPPBs", default=None)
+    vcs: VcsSwitch | None = Field(alias="VCS", default=None)
 
 
 class Links(RedfishModel):
@@ -77,5 +77,5 @@ class Switch(RedfishResource):
     uuid: str | None = Field(alias="UUID", default=None)
 
 
-class Vcsswitch(RedfishModel):
-    hdmdecoders: int | None = Field(alias="HDMDecoders", default=None)
+class VcsSwitch(RedfishModel):
+    hdm_decoders: int | None = Field(alias="HDMDecoders", default=None)

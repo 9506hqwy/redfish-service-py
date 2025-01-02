@@ -94,7 +94,7 @@ class Links(RedfishModel):
 class Manager(RedfishResource):
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
-    auto_dstenabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
+    auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
     certificates: IdRef | None = None
     command_shell: CommandShell | None = None
     date_time: str | None = None
@@ -134,7 +134,7 @@ class Manager(RedfishResource):
     spare_part_number: str | None = None
     status: Status | None = None
     time_zone_name: str | None = None
-    usbports: IdRef | None = Field(alias="USBPorts", default=None)
+    usb_ports: IdRef | None = Field(alias="USBPorts", default=None)
     uuid: str | None = Field(alias="UUID", default=None)
     version: str | None = None
     virtual_media: IdRef | None = None

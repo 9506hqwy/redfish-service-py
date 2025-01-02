@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .account_service import Mfabypass
+from .account_service import MfaBypass
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -17,9 +17,9 @@ from .odata_v4 import IdRef
 class AccountProviderTypes(StrEnum):
     REDFISH_SERVICE = "RedfishService"
     ACTIVE_DIRECTORY_SERVICE = "ActiveDirectoryService"
-    LDAPSERVICE = "LDAPService"
+    LDAP_SERVICE = "LDAPService"
     OEM = "OEM"
-    TACACSPLUS = "TACACSplus"
+    TACACS_PLUS = "TACACSplus"
     OAUTH2 = "OAuth2"
 
 
@@ -51,7 +51,7 @@ class ExternalAccountProvider(RedfishResource):
     authentication: Authentication | None = None
     certificates: IdRef | None = None
     description: str | None = None
-    ldapservice: Ldapservice | None = Field(alias="LDAPService", default=None)
+    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
     links: Links | None = None
     oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
     oem: dict[str, Any] | None = None
@@ -60,22 +60,22 @@ class ExternalAccountProvider(RedfishResource):
     retries: int | None = None
     service_addresses: list[str] | None = None
     service_enabled: bool | None = None
-    tacacsplus_service: TacacsplusService | None = Field(alias="TACACSplusService", default=None)
+    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
     timeout_seconds: int | None = None
 
 
-class LdapsearchSettings(RedfishModel):
+class LdapSearchSettings(RedfishModel):
     base_distinguished_names: list[str] | None = None
     email_attribute: str | None = None
     group_name_attribute: str | None = None
     groups_attribute: str | None = None
-    sshkey_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
+    ssh_key_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
     username_attribute: str | None = None
 
 
-class Ldapservice(RedfishModel):
+class LdapService(RedfishModel):
     oem: dict[str, Any] | None = None
-    search_settings: LdapsearchSettings | None = None
+    search_settings: LdapSearchSettings | None = None
 
 
 class Links(RedfishModel):
@@ -97,24 +97,24 @@ class Oauth2Service(RedfishModel):
 
 class RoleMapping(RedfishModel):
     local_account_types: list[AccountTypes] | None = None
-    local_oemaccount_types: list[str] | None = Field(alias="LocalOEMAccountTypes", default=None)
+    local_oem_account_types: list[str] | None = Field(alias="LocalOEMAccountTypes", default=None)
     local_role: str | None = None
-    mfabypass: Mfabypass | None = Field(alias="MFABypass", default=None)
+    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
     oem: dict[str, Any] | None = None
     remote_group: str | None = None
     remote_user: str | None = None
 
 
-class TacacsplusPasswordExchangeProtocol(StrEnum):
+class TacacsPlusPasswordExchangeProtocol(StrEnum):
     ASCII = "ASCII"
     PAP = "PAP"
     CHAP = "CHAP"
-    MSCHAPV1 = "MSCHAPv1"
-    MSCHAPV2 = "MSCHAPv2"
+    MSCHA_PV1 = "MSCHAPv1"
+    MSCHA_PV2 = "MSCHAPv2"
 
 
-class TacacsplusService(RedfishModel):
+class TacacsPlusService(RedfishModel):
     authorization_service: str | None = None
     oem: dict[str, Any] | None = None
-    password_exchange_protocols: list[TacacsplusPasswordExchangeProtocol] | None = None
+    password_exchange_protocols: list[TacacsPlusPasswordExchangeProtocol] | None = None
     privilege_level_argument: str | None = None

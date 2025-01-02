@@ -39,16 +39,16 @@ class InputType(StrEnum):
 
 class LineInputVoltageType(StrEnum):
     UNKNOWN = "Unknown"
-    ACLOW_LINE = "ACLowLine"
-    ACMID_LINE = "ACMidLine"
-    ACHIGH_LINE = "ACHighLine"
-    DCNEG48_V = "DCNeg48V"
+    AC_LOW_LINE = "ACLowLine"
+    AC_MID_LINE = "ACMidLine"
+    AC_HIGH_LINE = "ACHighLine"
+    DC_NEG48_V = "DCNeg48V"
     DC380_V = "DC380V"
     AC120_V = "AC120V"
     AC240_V = "AC240V"
     AC277_V = "AC277V"
-    ACAND_DCWIDE_RANGE = "ACandDCWideRange"
-    ACWIDE_RANGE = "ACWideRange"
+    A_CAND_DC_WIDE_RANGE = "ACandDCWideRange"
+    AC_WIDE_RANGE = "ACWideRange"
     DC240_V = "DC240V"
 
 
@@ -152,7 +152,7 @@ class PowerSupplyType(StrEnum):
     UNKNOWN = "Unknown"
     AC = "AC"
     DC = "DC"
-    ACOR_DC = "ACorDC"
+    A_COR_DC = "ACorDC"
 
 
 class Voltage(RedfishObjectId):

@@ -3,6 +3,8 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
+from pydantic import Field
+
 from .base import (
     RedfishModel,
     RedfishResource,
@@ -17,19 +19,19 @@ class Actions(RedfishModel):
 
 class MemoryChunk(RedfishModel):
     chunk_link: IdRef | None = None
-    chunk_offset_mi_b: int | None = None
+    chunk_offset_mib: int | None = Field(alias="ChunkOffsetMiB", default=None)
 
 
 class MemoryExtent(RedfishModel):
-    extent_offset_mi_b: int | None = None
-    extent_size_mi_b: int | None = None
+    extent_offset_mib: int | None = Field(alias="ExtentOffsetMiB", default=None)
+    extent_size_mib: int | None = Field(alias="ExtentSizeMiB", default=None)
     sequence_number: int | None = None
     tag: str | None = None
 
 
 class MemoryRegion(RedfishResource):
     actions: Actions | None = None
-    block_size_mi_b: int | None = None
+    block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
     description: str | None = None
     extents_count: int | None = None
     hardware_managed_coherency_region: bool | None = None
@@ -37,9 +39,9 @@ class MemoryRegion(RedfishResource):
     memory_extents: list[MemoryExtent] | None = None
     non_volatile_region: bool | None = None
     oem: dict[str, Any] | None = None
-    region_base_offset_mi_b: int | None = None
+    region_base_offset_mib: int | None = Field(alias="RegionBaseOffsetMiB", default=None)
     region_number: int | None = None
-    region_size_mi_b: int | None = None
+    region_size_mib: int | None = Field(alias="RegionSizeMiB", default=None)
     region_type: RegionType
     sanitize_on_release: bool | None = None
     shareable_region: bool | None = None

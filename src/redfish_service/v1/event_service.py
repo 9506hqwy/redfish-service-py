@@ -39,7 +39,7 @@ class EventService(RedfishResource):
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
     smtp: Smtp | None = Field(alias="SMTP", default=None)
-    ssefilter_properties_supported: SsefilterPropertiesSupported | None = Field(
+    sse_filter_properties_supported: SseFilterPropertiesSupported | None = Field(
         alias="SSEFilterPropertiesSupported", default=None
     )
     server_sent_event_uri: str | None = None
@@ -51,8 +51,8 @@ class EventService(RedfishResource):
 
 
 class Smtp(RedfishModel):
-    authentication: SmtpauthenticationMethods | None = None
-    connection_protocol: SmtpconnectionProtocol | None = None
+    authentication: SmtpAuthenticationMethods | None = None
+    connection_protocol: SmtpConnectionProtocol | None = None
     from_address: str | None = None
     password: str | None = None
     password_set: bool | None = None
@@ -62,22 +62,22 @@ class Smtp(RedfishModel):
     username: str | None = None
 
 
-class SmtpauthenticationMethods(StrEnum):
+class SmtpAuthenticationMethods(StrEnum):
     NONE = "None"
     AUTO_DETECT = "AutoDetect"
     PLAIN = "Plain"
     LOGIN = "Login"
-    CRAM__MD5 = "CRAM_MD5"
+    CRA_M_MD5 = "CRAM_MD5"
 
 
-class SmtpconnectionProtocol(StrEnum):
+class SmtpConnectionProtocol(StrEnum):
     NONE = "None"
     AUTO_DETECT = "AutoDetect"
     START_TLS = "StartTLS"
-    TLS__SSL = "TLS_SSL"
+    TL_S_SSL = "TLS_SSL"
 
 
-class SsefilterPropertiesSupported(RedfishModel):
+class SseFilterPropertiesSupported(RedfishModel):
     event_format_type: bool | None = None
     event_type: bool | None = None
     message_id: bool | None = None

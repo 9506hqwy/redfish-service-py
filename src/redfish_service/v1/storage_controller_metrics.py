@@ -8,29 +8,29 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .storage_controller import NvmeSmartcriticalWarnings
+from .storage_controller import NvmeSmartCriticalWarnings
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class EgcriticalWarningSummary(RedfishModel):
+class EgCriticalWarningSummary(RedfishModel):
     namespaces_in_read_only_mode: bool | None = None
     reliability_degraded: bool | None = None
     spare_capacity_under_threshold: bool | None = None
 
 
-class NvmeSmartmetrics(RedfishModel):
+class NvmeSmartMetrics(RedfishModel):
     available_spare_percent: float | None = None
     available_spare_threshold_percent: float | None = None
     composite_temperature_celsius: float | None = None
     controller_busy_time_minutes: int | None = None
     critical_composite_temp_time_minutes: int | None = None
-    critical_warnings: NvmeSmartcriticalWarnings | None = None
+    critical_warnings: NvmeSmartCriticalWarnings | None = None
     data_units_read: int | None = None
     data_units_written: int | None = None
-    egcritical_warning_summary: EgcriticalWarningSummary | None = Field(
+    eg_critical_warning_summary: EgCriticalWarningSummary | None = Field(
         alias="EGCriticalWarningSummary", default=None
     )
     host_read_commands: int | None = None
@@ -51,13 +51,13 @@ class NvmeSmartmetrics(RedfishModel):
 
 class StorageControllerMetrics(RedfishResource):
     actions: Actions | None = None
-    correctable_eccerror_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
     correctable_parity_error_count: int | None = None
     description: str | None = None
-    nvme_smart: NvmeSmartmetrics | None = Field(alias="NVMeSMART", default=None)
+    nvme_smart: NvmeSmartMetrics | None = Field(alias="NVMeSMART", default=None)
     oem: dict[str, Any] | None = None
     state_change_count: int | None = None
-    uncorrectable_eccerror_count: int | None = Field(
+    uncorrectable_ecc_error_count: int | None = Field(
         alias="UncorrectableECCErrorCount", default=None
     )
     uncorrectable_parity_error_count: int | None = None

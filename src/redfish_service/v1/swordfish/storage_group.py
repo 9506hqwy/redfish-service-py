@@ -33,19 +33,19 @@ class AuthenticationMethod(StrEnum):
     DHCHAP = "DHCHAP"
 
 
-class Chapinformation(RedfishModel):
-    chappassword: str | None = Field(alias="CHAPPassword", default=None)
-    chapuser: str | None = Field(alias="CHAPUser", default=None)
-    initiator_chappassword: str | None = Field(alias="InitiatorCHAPPassword", default=None)
-    initiator_chapuser: str | None = Field(alias="InitiatorCHAPUser", default=None)
-    target_chappassword: str | None = Field(alias="TargetCHAPPassword", default=None)
-    target_chapuser: str | None = Field(alias="TargetCHAPUser", default=None)
+class ChapInformation(RedfishModel):
+    chap_password: str | None = Field(alias="CHAPPassword", default=None)
+    chap_user: str | None = Field(alias="CHAPUser", default=None)
+    initiator_chap_password: str | None = Field(alias="InitiatorCHAPPassword", default=None)
+    initiator_chap_user: str | None = Field(alias="InitiatorCHAPUser", default=None)
+    target_chap_password: str | None = Field(alias="TargetCHAPPassword", default=None)
+    target_chap_user: str | None = Field(alias="TargetCHAPUser", default=None)
     target_password: str | None = None
 
 
-class Dhchapinformation(RedfishModel):
-    local_dhchapauth_secret: str | None = Field(alias="LocalDHCHAPAuthSecret", default=None)
-    peer_dhchapauth_secret: str | None = Field(alias="PeerDHCHAPAuthSecret", default=None)
+class DhchapInformation(RedfishModel):
+    local_dhchap_auth_secret: str | None = Field(alias="LocalDHCHAPAuthSecret", default=None)
+    peer_dhchap_auth_secret: str | None = Field(alias="PeerDHCHAPAuthSecret", default=None)
 
 
 class ExposeVolumes(RedfishModel):
@@ -81,12 +81,12 @@ class StorageGroup(RedfishResource):
     access_state: AccessState | None = None
     actions: Actions | None = None
     authentication_method: AuthenticationMethod | None = None
-    chap_info: list[Chapinformation] | None = None
+    chap_info: list[ChapInformation] | None = None
     client_endpoint_groups: list[IdRef] | None = None
     client_endpoint_groups_odata_count: int | None = Field(
         alias="ClientEndpointGroups@odata.count", default=None
     )
-    dhchap_info: list[Dhchapinformation] | None = Field(alias="DHChapInfo", default=None)
+    dh_chap_info: list[DhchapInformation] | None = Field(alias="DHChapInfo", default=None)
     description: str | None = None
     identifier: Identifier | None = None
     links: Links | None = None

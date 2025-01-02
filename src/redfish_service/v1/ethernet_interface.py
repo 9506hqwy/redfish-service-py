@@ -9,7 +9,7 @@ from .base import (
     RedfishModel,
     RedfishResource,
 )
-from .ipaddresses import Ipv4Address, Ipv6Address, Ipv6GatewayStaticAddress, Ipv6StaticAddress
+from .ip_addresses import Ipv4Address, Ipv6Address, Ipv6GatewayStaticAddress, Ipv6StaticAddress
 from .odata_v4 import IdRef
 from .resource import Status
 from .vlan_network_interface import Vlan
@@ -19,27 +19,27 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Dhcpfallback(StrEnum):
+class DhcpFallback(StrEnum):
     STATIC = "Static"
     AUTO_CONFIG = "AutoConfig"
     NONE = "None"
 
 
 class Dhcpv4Configuration(RedfishModel):
-    dhcpenabled: bool | None = Field(alias="DHCPEnabled", default=None)
-    fallback_address: Dhcpfallback | None = None
-    use_dnsservers: bool | None = Field(alias="UseDNSServers", default=None)
+    dhcp_enabled: bool | None = Field(alias="DHCPEnabled", default=None)
+    fallback_address: DhcpFallback | None = None
+    use_dns_servers: bool | None = Field(alias="UseDNSServers", default=None)
     use_domain_name: bool | None = None
     use_gateway: bool | None = None
-    use_ntpservers: bool | None = Field(alias="UseNTPServers", default=None)
+    use_ntp_servers: bool | None = Field(alias="UseNTPServers", default=None)
     use_static_routes: bool | None = None
 
 
 class Dhcpv6Configuration(RedfishModel):
     operating_mode: Dhcpv6OperatingMode | None = None
-    use_dnsservers: bool | None = Field(alias="UseDNSServers", default=None)
+    use_dns_servers: bool | None = Field(alias="UseDNSServers", default=None)
     use_domain_name: bool | None = None
-    use_ntpservers: bool | None = Field(alias="UseNTPServers", default=None)
+    use_ntp_servers: bool | None = Field(alias="UseNTPServers", default=None)
     use_rapid_commit: bool | None = None
 
 
@@ -84,12 +84,12 @@ class EthernetInterface(RedfishResource):
     interface_enabled: bool | None = None
     link_status: LinkStatus | None = None
     links: Links | None = None
-    macaddress: str | None = Field(alias="MACAddress", default=None)
-    mtusize: int | None = Field(alias="MTUSize", default=None)
+    mac_address: str | None = Field(alias="MACAddress", default=None)
+    mtu_size: int | None = Field(alias="MTUSize", default=None)
     max_ipv6_static_addresses: int | None = Field(alias="MaxIPv6StaticAddresses", default=None)
     name_servers: list[str] | None = None
     oem: dict[str, Any] | None = None
-    permanent_macaddress: str | None = Field(alias="PermanentMACAddress", default=None)
+    permanent_mac_address: str | None = Field(alias="PermanentMACAddress", default=None)
     routing_scope: RoutingScope | None = None
     speed_mbps: int | None = None
     stateless_address_auto_config: StatelessAddressAutoConfiguration | None = None
@@ -154,6 +154,6 @@ class TeamMode(StrEnum):
     ACTIVE_BACKUP = "ActiveBackup"
     XOR = "XOR"
     BROADCAST = "Broadcast"
-    IEEE802_3AD = "IEEE802_3ad"
+    IEE_E802_3AD = "IEEE802_3ad"
     ADAPTIVE_TRANSMIT_LOAD_BALANCING = "AdaptiveTransmitLoadBalancing"
     ADAPTIVE_LOAD_BALANCING = "AdaptiveLoadBalancing"

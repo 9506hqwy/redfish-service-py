@@ -54,7 +54,7 @@ class FunctionType(StrEnum):
 
 
 class Links(RedfishModel):
-    cxllogical_device: IdRef | None = Field(alias="CXLLogicalDevice", default=None)
+    cxl_logical_device: IdRef | None = Field(alias="CXLLogicalDevice", default=None)
     drives: list[IdRef] | None = None
     drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
     ethernet_interfaces: list[IdRef] | None = None

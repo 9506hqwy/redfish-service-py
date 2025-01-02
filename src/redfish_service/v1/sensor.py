@@ -36,10 +36,10 @@ class ElectricalContext(StrEnum):
     LINE1_TO_NEUTRAL = "Line1ToNeutral"
     LINE2_TO_NEUTRAL = "Line2ToNeutral"
     LINE3_TO_NEUTRAL = "Line3ToNeutral"
-    LINE1_TO_NEUTRAL_AND_L1_L2 = "Line1ToNeutralAndL1L2"
-    LINE2_TO_NEUTRAL_AND_L1_L2 = "Line2ToNeutralAndL1L2"
-    LINE2_TO_NEUTRAL_AND_L2_L3 = "Line2ToNeutralAndL2L3"
-    LINE3_TO_NEUTRAL_AND_L3_L1 = "Line3ToNeutralAndL3L1"
+    LINE1_TO_NEUTRAL_AND_L1L2 = "Line1ToNeutralAndL1L2"
+    LINE2_TO_NEUTRAL_AND_L1L2 = "Line2ToNeutralAndL1L2"
+    LINE2_TO_NEUTRAL_AND_L2L3 = "Line2ToNeutralAndL2L3"
+    LINE3_TO_NEUTRAL_AND_L3L1 = "Line3ToNeutralAndL3L1"
     TOTAL = "Total"
 
 
@@ -106,7 +106,7 @@ class Sensor(RedfishResource):
     adjusted_max_allowable_operating_value: float | None = None
     adjusted_min_allowable_operating_value: float | None = None
     apparent_va: float | None = Field(alias="ApparentVA", default=None)
-    apparentk_vah: float | None = Field(alias="ApparentkVAh", default=None)
+    apparent_kvah: float | None = Field(alias="ApparentkVAh", default=None)
     average_reading: float | None = None
     averaging_interval: str | None = None
     averaging_interval_achieved: bool | None = None
@@ -138,7 +138,7 @@ class Sensor(RedfishResource):
     power_factor: float | None = None
     precision: float | None = None
     reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
-    reactivek_varh: float | None = Field(alias="ReactivekVARh", default=None)
+    reactive_kvarh: float | None = Field(alias="ReactivekVARh", default=None)
     reading: float | None = None
     reading_accuracy: float | None = None
     reading_basis: ReadingBasisType | None = None
@@ -158,7 +158,7 @@ class Sensor(RedfishResource):
     spare_part_number: str | None = None
     speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
     status: Status | None = None
-    thdpercent: float | None = Field(alias="THDPercent", default=None)
+    thd_percent: float | None = Field(alias="THDPercent", default=None)
     thresholds: Thresholds | None = None
     user_label: str | None = None
     voltage_type: VoltageType | None = None
@@ -176,14 +176,14 @@ class SensorCurrentExcerpt(RedfishModel):
     crest_factor: float | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    thdpercent: float | None = Field(alias="THDPercent", default=None)
+    thd_percent: float | None = Field(alias="THDPercent", default=None)
 
 
 class SensorEnergykWhExcerpt(RedfishModel):
-    apparentk_vah: float | None = Field(alias="ApparentkVAh", default=None)
+    apparent_kvah: float | None = Field(alias="ApparentkVAh", default=None)
     data_source_uri: str | None = None
     lifetime_reading: float | None = None
-    reactivek_varh: float | None = Field(alias="ReactivekVARh", default=None)
+    reactive_kvarh: float | None = Field(alias="ReactivekVARh", default=None)
     reading: float | None = None
     sensor_reset_time: str | None = None
 
@@ -238,7 +238,7 @@ class SensorVoltageExcerpt(RedfishModel):
     crest_factor: float | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    thdpercent: float | None = Field(alias="THDPercent", default=None)
+    thd_percent: float | None = Field(alias="THDPercent", default=None)
 
 
 class Threshold(RedfishModel):

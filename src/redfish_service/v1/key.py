@@ -20,38 +20,38 @@ class Key(RedfishResource):
     description: str | None = None
     key_string: str | None = None
     key_type: KeyType | None = None
-    nvmeo_f: NvmeoF | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
     oem: dict[str, Any] | None = None
-    ssh: Sshtype | None = Field(alias="SSH", default=None)
+    ssh: SshType | None = Field(alias="SSH", default=None)
     user_description: str | None = None
 
 
 class KeyType(StrEnum):
-    NVMEO_F = "NVMeoF"
+    NVME_OF = "NVMeoF"
     SSH = "SSH"
 
 
-class NvmeoF(RedfishModel):
+class NvmeOf(RedfishModel):
     host_key_id: str | None = None
     nqn: str | None = Field(alias="NQN", default=None)
-    oemsecurity_protocol_type: str | None = Field(alias="OEMSecurityProtocolType", default=None)
-    secure_hash_allow_list: list[NvmeoFsecureHashType] | None = None
-    security_protocol_type: NvmeoFsecurityProtocolType | None = None
+    oem_security_protocol_type: str | None = Field(alias="OEMSecurityProtocolType", default=None)
+    secure_hash_allow_list: list[NvmeOfSecureHashType] | None = None
+    security_protocol_type: NvmeOfSecurityProtocolType | None = None
 
 
-class NvmeoFsecureHashType(StrEnum):
+class NvmeOfSecureHashType(StrEnum):
     SHA256 = "SHA256"
     SHA384 = "SHA384"
     SHA512 = "SHA512"
 
 
-class NvmeoFsecurityProtocolType(StrEnum):
+class NvmeOfSecurityProtocolType(StrEnum):
     DHHC = "DHHC"
-    TLS__PSK = "TLS_PSK"
+    TL_S_PSK = "TLS_PSK"
     OEM = "OEM"
 
 
-class Sshtype(RedfishModel):
+class SshType(RedfishModel):
     comment: str | None = None
     fingerprint: str | None = None
     remote_server_host_name: str | None = None

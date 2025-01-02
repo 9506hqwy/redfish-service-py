@@ -14,18 +14,18 @@ from .pcie_device import PcieInterface
 from .protocol import Protocol
 from .resource import Identifier, Location, Status
 from .software_inventory import MeasurementBlock
-from .swordfish.volume import Raidtype
+from .swordfish.volume import RaidType
 
 
-class AnaaccessState(StrEnum):
+class AnaAccessState(StrEnum):
     OPTIMIZED = "Optimized"
     NON_OPTIMIZED = "NonOptimized"
     INACCESSIBLE = "Inaccessible"
     PERSISTENT_LOSS = "PersistentLoss"
 
 
-class Anacharacteristics(RedfishModel):
-    access_state: AnaaccessState | None = None
+class AnaCharacteristics(RedfishModel):
+    access_state: AnaAccessState | None = None
     volume: IdRef | None = None
 
 
@@ -51,9 +51,9 @@ class AttachNamespaces(RedfishModel):
 
 
 class CacheSummary(RedfishModel):
-    persistent_cache_size_mi_b: int | None = None
+    persistent_cache_size_mib: int | None = Field(alias="PersistentCacheSizeMiB", default=None)
     status: Status | None = None
-    total_cache_size_mi_b: int | None = None
+    total_cache_size_mib: int | None = Field(alias="TotalCacheSizeMiB", default=None)
 
 
 class DetachNamespaces(RedfishModel):
@@ -87,20 +87,20 @@ class Links(RedfishModel):
 
 class NvmeControllerAttributes(RedfishModel):
     reports_namespace_granularity: bool | None = None
-    reports_uuidlist: bool | None = Field(alias="ReportsUUIDList", default=None)
+    reports_uuid_list: bool | None = Field(alias="ReportsUUIDList", default=None)
     supports128_bit_host_id: bool | None = None
     supports_endurance_groups: bool | None = None
     supports_exceeding_power_of_non_operational_state: bool | None = None
-    supports_nvmsets: bool | None = Field(alias="SupportsNVMSets", default=None)
+    supports_nvm_sets: bool | None = Field(alias="SupportsNVMSets", default=None)
     supports_predictable_latency_mode: bool | None = None
     supports_read_recovery_levels: bool | None = None
     supports_reservations: bool | None = None
-    supports_sqassociations: bool | None = Field(alias="SupportsSQAssociations", default=None)
+    supports_sq_associations: bool | None = Field(alias="SupportsSQAssociations", default=None)
     supports_traffic_based_keep_alive: bool | None = None
 
 
 class NvmeControllerProperties(RedfishModel):
-    anacharacteristics: list[Anacharacteristics] | None = Field(
+    ana_characteristics: list[AnaCharacteristics] | None = Field(
         alias="ANACharacteristics", default=None
     )
     allocated_completion_queues: int | None = None
@@ -111,7 +111,7 @@ class NvmeControllerProperties(RedfishModel):
     nvme_controller_attributes: NvmeControllerAttributes | None = Field(
         alias="NVMeControllerAttributes", default=None
     )
-    nvme_smartcritical_warnings: NvmeSmartcriticalWarnings | None = Field(
+    nvme_smart_critical_warnings: NvmeSmartCriticalWarnings | None = Field(
         alias="NVMeSMARTCriticalWarnings", default=None
     )
     nvme_version: str | None = Field(alias="NVMeVersion", default=None)
@@ -123,10 +123,10 @@ class NvmeControllerType(StrEnum):
     IO = "IO"
 
 
-class NvmeSmartcriticalWarnings(RedfishModel):
+class NvmeSmartCriticalWarnings(RedfishModel):
     media_in_read_only: bool | None = None
     overall_subsystem_degraded: bool | None = None
-    pmrunreliable: bool | None = Field(alias="PMRUnreliable", default=None)
+    pmr_unreliable: bool | None = Field(alias="PMRUnreliable", default=None)
     power_backup_failed: bool | None = None
     spare_capacity_worn_out: bool | None = None
 
@@ -177,4 +177,4 @@ class StorageController(RedfishResource):
     status: Status | None = None
     supported_controller_protocols: list[Protocol] | None = None
     supported_device_protocols: list[Protocol] | None = None
-    supported_raidtypes: list[Raidtype] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)

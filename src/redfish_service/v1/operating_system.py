@@ -19,7 +19,7 @@ class Actions(RedfishModel):
 
 
 class ContainerEngine(RedfishModel):
-    management_uris: list[str] | None = Field(alias="ManagementURIs", default=None)
+    management_ur_is: list[str] | None = Field(alias="ManagementURIs", default=None)
     supported_image_types: list[ImageTypes] | None = None
     type: ContainerEngineTypes | None = None
     version: str | None = None
@@ -67,19 +67,19 @@ class OperatingSystemTypes(StrEnum):
     AIX = "AIX"
     BSD = "BSD"
     MACOS = "macOS"
-    IBMI = "IBMi"
+    IB_MI = "IBMi"
     HYPERVISOR = "Hypervisor"
 
 
 class VirtualMachineEngine(RedfishModel):
-    management_uris: list[str] | None = Field(alias="ManagementURIs", default=None)
+    management_ur_is: list[str] | None = Field(alias="ManagementURIs", default=None)
     supported_image_types: list[VirtualMachineImageTypes] | None = None
     type: VirtualMachineEngineTypes | None = None
     version: str | None = None
 
 
 class VirtualMachineEngineTypes(StrEnum):
-    VMWARE_ESX = "VMwareESX"
+    V_MWARE_ESX = "VMwareESX"
     HYPER_V = "HyperV"
     XEN = "Xen"
     KVM = "KVM"
