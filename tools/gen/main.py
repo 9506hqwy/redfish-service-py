@@ -61,7 +61,7 @@ class ClassInfo:
     def id_ref(self) -> bool:
         if (any_of := self.definition.get("anyOf", None)) is not None:
             ids: list[str] = [d["$ref"] for d in any_of if "$ref" in d]
-            return any(filter(lambda r: r.endswith("/idRef"), ids))
+            return any((i for i in ids if i.endswith("/idRef")))
         return False
 
     @property
@@ -576,7 +576,7 @@ def resolve_ref(
 
     definition = url.fragment.rsplit("/", 1)[-1]
 
-    r = next(filter(func_match_domain(domain, file_name, definition), classes), None)
+    r = next((c for c in classes if func_match_domain(domain, file_name, definition)(c)), None)
     if r is None:
         raise Exception(f"Could not found '{ref}'.")
 
@@ -596,9 +596,7 @@ def resolve_property_type(
         info = resolve_ref(classes, source, ref)
         if info.id_ref:
             info = next(
-                filter(
-                    lambda c: c.schema_path.name == "odata-v4.json" and c.name == "idRef", classes
-                )
+                (c for c in classes if c.schema_path.name == "odata-v4.json" and c.name == "idRef")
             )
             info.reachable = True
 
@@ -695,7 +693,7 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                     if isinstance(c, ClassInfo) and c.raw:
                         continue
 
-                    if c.versioned and any(filter(func_match_newer(c), classes)):
+                    if c.versioned and any((i for i in classes if func_match_newer(c)(i))):
                         warn(f"Exist newer version '{c}'")
                         continue
 
@@ -763,24 +761,24 @@ def main() -> int:
 
     classall = load_classes(redfish_path, swordfish_path)
 
-    for c in filter(lambda c: not c.versioned, classall):
+    for c in (c for c in classall if not c.versioned):
         if isinstance(c, ClassInfo):
             c.reachable = True
 
     old_reachable = 0
-    new_reachable = len(list(filter(lambda c: c.reachable, classall)))
+    new_reachable = len([c for c in classall if c.reachable])
 
     while old_reachable != new_reachable:
         print(f"reachable: {new_reachable}")
         old_reachable = new_reachable
         load_properties(classall, classall)
-        new_reachable = len(list(filter(lambda c: c.reachable, classall)))
+        new_reachable = len([c for c in classall if c.reachable])
 
     for c in classall:
         if c.loaded and c.versioned:
             c.set_module(c.module.split(".", 1)[0])
 
-    loaded = len(list(filter(lambda c: c.loaded, classall)))
+    loaded = len([c for c in classall if c.loaded])
     print(f"loaded: {loaded}")
 
     write_classes(out_path, classall)
