@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 
 
 class Actions(RedfishModel):
@@ -72,7 +69,11 @@ class LifeTime(RedfishModel):
     )
 
 
-class MemoryMetrics(RedfishResource):
+class MemoryMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     bandwidth_percent: float | None = None
     block_size_bytes: int | None = None
@@ -84,6 +85,8 @@ class MemoryMetrics(RedfishResource):
     description: str | None = None
     dirty_shutdown_count: int | None = None
     health_data: HealthData | None = None
+    id: str
     life_time: LifeTime | None = None
+    name: str
     oem: dict[str, Any] | None = None
     operating_speed_mhz: int | None = Field(alias="OperatingSpeedMHz", default=None)

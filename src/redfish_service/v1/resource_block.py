@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -61,7 +58,11 @@ class PoolType(StrEnum):
     UNASSIGNED = "Unassigned"
 
 
-class ResourceBlock(RedfishResource):
+class ResourceBlock(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     client: str | None = None
     composition_status: CompositionStatus
@@ -76,9 +77,11 @@ class ResourceBlock(RedfishResource):
     ethernet_interfaces_odata_count: int | None = Field(
         alias="EthernetInterfaces@odata.count", default=None
     )
+    id: str
     links: Links | None = None
     memory: list[IdRef] | None = None
     memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    name: str
     network_interfaces: list[IdRef] | None = None
     network_interfaces_odata_count: int | None = Field(
         alias="NetworkInterfaces@odata.count", default=None

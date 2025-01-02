@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import IndicatorLed, PowerState, Status
 from .sensor import (
@@ -39,7 +36,11 @@ class BreakerStates(StrEnum):
     OFF = "Off"
 
 
-class Circuit(RedfishResource):
+class Circuit(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     breaker_state: BreakerStates | None = None
     circuit_type: CircuitType | None = None
@@ -55,9 +56,11 @@ class Circuit(RedfishResource):
     electrical_source_name: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     frequency_hz: SensorExcerpt | None = None
+    id: str
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location_indicator_active: bool | None = None
+    name: str
     nominal_frequency_hz: float | None = None
     nominal_voltage: NominalVoltageType | None = None
     oem: dict[str, Any] | None = None

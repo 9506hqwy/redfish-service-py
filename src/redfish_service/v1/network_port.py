@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -47,7 +44,11 @@ class NetDevFuncMinBwAlloc(RedfishModel):
     network_device_function: IdRef | None = None
 
 
-class NetworkPort(RedfishResource):
+class NetworkPort(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     active_link_technology: LinkNetworkTechnology | None = None
     associated_network_addresses: list[str] | None = None
@@ -60,8 +61,10 @@ class NetworkPort(RedfishResource):
     )
     flow_control_configuration: FlowControl | None = None
     flow_control_status: FlowControl | None = None
+    id: str
     link_status: LinkStatus | None = None
     max_frame_size: int | None = None
+    name: str
     net_dev_func_max_bw_alloc: list[NetDevFuncMaxBwAlloc] | None = Field(
         alias="NetDevFuncMaxBWAlloc", default=None
     )

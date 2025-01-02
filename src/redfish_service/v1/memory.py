@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .control import ControlRangeExcerpt
 from .odata_v4 import IdRef
 from .resource import Location, Status
@@ -117,7 +114,11 @@ class Links(RedfishModel):
     processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
 
 
-class Memory(RedfishResource):
+class Memory(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     allocation_alignment_mib: int | None = Field(alias="AllocationAlignmentMiB", default=None)
     allocation_increment_mib: int | None = Field(alias="AllocationIncrementMiB", default=None)
@@ -142,6 +143,7 @@ class Memory(RedfishResource):
     firmware_revision: str | None = None
     function_classes: list[str] | None = None
     health_data: HealthData | None = None
+    id: str
     is_rank_spare_enabled: bool | None = None
     is_spare_device_enabled: bool | None = None
     links: Links | None = None
@@ -166,6 +168,7 @@ class Memory(RedfishResource):
     model: str | None = None
     module_manufacturer_id: str | None = Field(alias="ModuleManufacturerID", default=None)
     module_product_id: str | None = Field(alias="ModuleProductID", default=None)
+    name: str
     non_volatile_size_limit_mib: int | None = Field(alias="NonVolatileSizeLimitMiB", default=None)
     non_volatile_size_mib: int | None = Field(alias="NonVolatileSizeMiB", default=None)
     oem: dict[str, Any] | None = None

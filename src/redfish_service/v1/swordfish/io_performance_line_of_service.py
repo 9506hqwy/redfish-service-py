@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..swordfish.io_performance_los_capabilities import IoWorkload
 
 
@@ -15,7 +12,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class IoPerformanceLineOfService(RedfishResource):
+class IoPerformanceLineOfService(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     average_io_operation_latency_microseconds: int | None = Field(
         alias="AverageIOOperationLatencyMicroseconds", default=None
@@ -25,8 +26,10 @@ class IoPerformanceLineOfService(RedfishResource):
         alias="IOOperationsPerSecondIsLimited", default=None
     )
     io_workload: IoWorkload | None = Field(alias="IOWorkload", default=None)
+    id: str
     max_io_operations_per_second_per_terabyte: int | None = Field(
         alias="MaxIOOperationsPerSecondPerTerabyte", default=None
     )
+    name: str
     oem: dict[str, Any] | None = None
     sample_period: str | None = None

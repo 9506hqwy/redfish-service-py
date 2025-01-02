@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
@@ -85,7 +82,11 @@ class Links(RedfishModel):
     switch: IdRef | None = None
 
 
-class PcieDevice(RedfishResource):
+class PcieDevice(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -95,10 +96,12 @@ class PcieDevice(RedfishResource):
     device_type: DeviceType | None = None
     environment_metrics: IdRef | None = None
     firmware_version: str | None = None
+    id: str
     links: Links | None = None
     location_indicator_active: bool | None = None
     manufacturer: str | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     pcie_functions: IdRef | None = Field(alias="PCIeFunctions", default=None)
     pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)

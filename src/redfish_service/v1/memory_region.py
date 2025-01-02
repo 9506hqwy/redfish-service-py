@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -29,14 +26,20 @@ class MemoryExtent(RedfishModel):
     tag: str | None = None
 
 
-class MemoryRegion(RedfishResource):
+class MemoryRegion(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
     description: str | None = None
     extents_count: int | None = None
     hardware_managed_coherency_region: bool | None = None
+    id: str
     memory_chunks: list[MemoryChunk] | None = None
     memory_extents: list[MemoryExtent] | None = None
+    name: str
     non_volatile_region: bool | None = None
     oem: dict[str, Any] | None = None
     region_base_offset_mib: int | None = Field(alias="RegionBaseOffsetMiB", default=None)

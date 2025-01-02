@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -23,14 +20,20 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class ComponentIntegrity(RedfishResource):
+class ComponentIntegrity(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     component_integrity_enabled: bool | None = None
     component_integrity_type: ComponentIntegrityType
     component_integrity_type_version: str
     description: str | None = None
+    id: str
     last_updated: str | None = None
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     spdm: SpdMinfo | None = Field(alias="SPDM", default=None)
     status: Status | None = None

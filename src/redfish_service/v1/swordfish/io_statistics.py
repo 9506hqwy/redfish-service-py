@@ -2,9 +2,7 @@ from __future__ import annotations  # PEP563 Forward References
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-)
+from ..base import RedfishModel
 
 
 class IoStatistics(RedfishModel):

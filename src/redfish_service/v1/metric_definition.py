@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .physical_context import LogicalContext, PhysicalContext
 
 
@@ -50,7 +47,11 @@ class MetricDataType(StrEnum):
     ENUMERATION = "Enumeration"
 
 
-class MetricDefinition(RedfishResource):
+class MetricDefinition(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     accuracy: float | None = None
     actions: Actions | None = None
     calculable: Calculable | None = None
@@ -60,6 +61,7 @@ class MetricDefinition(RedfishResource):
     calibration: float | None = None
     description: str | None = None
     discrete_values: list[str] | None = None
+    id: str
     implementation: ImplementationType | None = None
     is_linear: bool | None = None
     logical_contexts: list[LogicalContext] | None = None
@@ -68,6 +70,7 @@ class MetricDefinition(RedfishResource):
     metric_properties: list[str] | None = None
     metric_type: MetricType | None = None
     min_reading_range: float | None = None
+    name: str
     oem_calculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
     oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None

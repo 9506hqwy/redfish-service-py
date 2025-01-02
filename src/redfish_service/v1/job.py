@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .message import Message
 from .odata_v4 import IdRef
 from .resource import Health
@@ -19,18 +16,24 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Job(RedfishResource):
+class Job(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     created_by: str | None = None
     description: str | None = None
     end_time: str | None = None
     estimated_duration: str | None = None
     hide_payload: bool | None = None
+    id: str
     job_state: JobState | None = None
     job_status: Health | None = None
     links: Links | None = None
     max_execution_time: str | None = None
     messages: list[Message] | None = None
+    name: str
     oem: dict[str, Any] | None = None
     payload: Payload | None = None
     percent_complete: int | None = None

@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -29,7 +26,11 @@ class HttpsProtocol(RedfishModel):
     protocol_enabled: bool | None = None
 
 
-class ManagerNetworkProtocol(RedfishResource):
+class ManagerNetworkProtocol(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     dhcp: Protocol | None = Field(alias="DHCP", default=None)
     dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)
@@ -41,8 +42,10 @@ class ManagerNetworkProtocol(RedfishResource):
     https: HttpsProtocol | None = Field(alias="HTTPS", default=None)
     host_name: str | None = None
     ipmi: Protocol | None = Field(alias="IPMI", default=None)
+    id: str
     kvmip: Protocol | None = Field(alias="KVMIP", default=None)
     ntp: NtpProtocol | None = Field(alias="NTP", default=None)
+    name: str
     oem: dict[str, Any] | None = None
     proxy: ProxyConfiguration | None = None
     rdp: Protocol | None = Field(alias="RDP", default=None)

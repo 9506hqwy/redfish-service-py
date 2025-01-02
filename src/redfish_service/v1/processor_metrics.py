@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .pcie_device import PcieErrors
 from .sensor import SensorVoltageExcerpt
 
@@ -71,7 +68,11 @@ class LifeTime(RedfishModel):
     )
 
 
-class ProcessorMetrics(RedfishResource):
+class ProcessorMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     average_frequency_mhz: float | None = Field(alias="AverageFrequencyMHz", default=None)
     bandwidth_percent: float | None = None
@@ -84,8 +85,10 @@ class ProcessorMetrics(RedfishResource):
     correctable_other_error_count: int | None = None
     description: str | None = None
     frequency_ratio: float | None = None
+    id: str
     kernel_percent: float | None = None
     local_memory_bandwidth_bytes: int | None = None
+    name: str
     oem: dict[str, Any] | None = None
     operating_speed_mhz: int | None = Field(alias="OperatingSpeedMHz", default=None)
     pcie_errors: PcieErrors | None = Field(alias="PCIeErrors", default=None)

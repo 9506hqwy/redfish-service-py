@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
@@ -147,7 +144,11 @@ class SecuritySend(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class StorageController(RedfishResource):
+class StorageController(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -157,6 +158,7 @@ class StorageController(RedfishResource):
     description: str | None = None
     environment_metrics: IdRef | None = None
     firmware_version: str | None = None
+    id: str
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     location: Location | None = None
@@ -167,6 +169,7 @@ class StorageController(RedfishResource):
     nvme_controller_properties: NvmeControllerProperties | None = Field(
         alias="NVMeControllerProperties", default=None
     )
+    name: str
     oem: dict[str, Any] | None = None
     pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
     part_number: str | None = None

@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 from .vlan_network_interface import Vlan
@@ -115,7 +112,11 @@ class Links(RedfishModel):
     physical_port_assignment: IdRef | None = None
 
 
-class NetworkDeviceFunction(RedfishResource):
+class NetworkDeviceFunction(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     allow_deny: IdRef | None = None
     assignable_physical_network_ports: list[IdRef] | None = None
@@ -132,11 +133,13 @@ class NetworkDeviceFunction(RedfishResource):
     ethernet: Ethernet | None = None
     fibre_channel: FibreChannel | None = None
     http_boot: HttpBoot | None = Field(alias="HTTPBoot", default=None)
+    id: str
     infini_band: InfiniBand | None = None
     limits: list[Limit] | None = None
     links: Links | None = None
     max_virtual_functions: int | None = None
     metrics: IdRef | None = None
+    name: str
     net_dev_func_capabilities: list[NetworkDeviceTechnology] | None = None
     net_dev_func_type: NetworkDeviceTechnology | None = None
     oem: dict[str, Any] | None = None

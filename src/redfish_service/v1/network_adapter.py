@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .resource import Identifier, Location, Status
@@ -68,13 +65,18 @@ class Npiv(RedfishModel):
     max_port_logins: int | None = None
 
 
-class NetworkAdapter(RedfishResource):
+class NetworkAdapter(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     certificates: IdRef | None = None
     controllers: list[Controllers] | None = None
     description: str | None = None
     environment_metrics: IdRef | None = None
+    id: str
     identifiers: list[Identifier] | None = None
     lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
     location: Location | None = None
@@ -82,6 +84,7 @@ class NetworkAdapter(RedfishResource):
     measurements: list[MeasurementBlock] | None = None
     metrics: IdRef | None = None
     model: str | None = None
+    name: str
     network_device_functions: IdRef | None = None
     network_ports: IdRef | None = None
     oem: dict[str, Any] | None = None

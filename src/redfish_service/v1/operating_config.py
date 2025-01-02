@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 
 
 class Actions(RedfishModel):
@@ -20,13 +17,19 @@ class BaseSpeedPrioritySettings(RedfishModel):
     core_ids: list[int] | None = Field(alias="CoreIDs", default=None)
 
 
-class OperatingConfig(RedfishResource):
+class OperatingConfig(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     base_speed_mhz: int | None = Field(alias="BaseSpeedMHz", default=None)
     base_speed_priority_settings: list[BaseSpeedPrioritySettings] | None = None
     description: str | None = None
+    id: str
     max_junction_temperature_celsius: int | None = None
     max_speed_mhz: int | None = Field(alias="MaxSpeedMHz", default=None)
+    name: str
     oem: dict[str, Any] | None = None
     tdp_watts: int | None = Field(alias="TDPWatts", default=None)
     total_available_core_count: int | None = None

@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext, PhysicalSubContext
 from .resource import Location, Status
@@ -22,7 +19,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Control(RedfishResource):
+class Control(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None
@@ -39,9 +40,11 @@ class Control(RedfishResource):
     dead_band: float | None = None
     default_set_point: float | None = None
     description: str | None = None
+    id: str
     implementation: ImplementationType | None = None
     increment: float | None = None
     location: Location | None = None
+    name: str
     oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None

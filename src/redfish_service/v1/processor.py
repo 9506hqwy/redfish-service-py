@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .control import ControlRangeExcerpt
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
@@ -107,7 +104,11 @@ class MemorySummary(RedfishModel):
     total_memory_size_mib: int | None = Field(alias="TotalMemorySizeMiB", default=None)
 
 
-class Processor(RedfishResource):
+class Processor(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     acceleration_functions: IdRef | None = None
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
@@ -124,6 +125,7 @@ class Processor(RedfishResource):
     family: str | None = None
     firmware_version: str | None = None
     high_speed_core_ids: list[int] | None = Field(alias="HighSpeedCoreIDs", default=None)
+    id: str
     instruction_set: InstructionSet | None = None
     links: Links | None = None
     location: Location | None = None
@@ -136,6 +138,7 @@ class Processor(RedfishResource):
     metrics: IdRef | None = None
     min_speed_mhz: int | None = Field(alias="MinSpeedMHz", default=None)
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     operating_configs: IdRef | None = None
     operating_speed_mhz: int | None = Field(alias="OperatingSpeedMHz", default=None)

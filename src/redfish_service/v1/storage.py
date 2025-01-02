@@ -5,11 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishObjectId,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
@@ -136,7 +132,11 @@ class SetEncryptionKey(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class Storage(RedfishResource):
+class Storage(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     configuration_lock: ConfigurationLock | None = None
@@ -150,12 +150,14 @@ class Storage(RedfishResource):
     endpoint_groups: IdRef | None = None
     file_systems: IdRef | None = None
     hotspare_activation_policy: HotspareActivationPolicy | None = None
+    id: str
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     local_encryption_key_identifier: str | None = None
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
         alias="NVMeSubsystemProperties", default=None
     )
+    name: str
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
@@ -170,7 +172,8 @@ class Storage(RedfishResource):
     volumes: IdRef | None = None
 
 
-class StorageController(RedfishObjectId):
+class StorageController(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     actions: StorageControllerActions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None

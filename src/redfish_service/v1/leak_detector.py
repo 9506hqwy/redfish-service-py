@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .physical_context import PhysicalContext, PhysicalSubContext
 from .resource import Health, Location, Status
 
@@ -17,14 +14,20 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class LeakDetector(RedfishResource):
+class LeakDetector(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     detector_state: Health | None = None
+    id: str
     leak_detector_type: LeakDetectorType | None = None
     location: Location | None = None
     manufacturer: str | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     physical_context: PhysicalContext | None = None

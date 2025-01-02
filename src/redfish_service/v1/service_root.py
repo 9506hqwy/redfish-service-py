@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 
 
@@ -44,7 +41,11 @@ class ProtocolFeaturesSupported(RedfishModel):
     top_skip_query: bool | None = None
 
 
-class ServiceRoot(RedfishResource):
+class ServiceRoot(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None
     cables: IdRef | None = None
@@ -56,6 +57,7 @@ class ServiceRoot(RedfishResource):
     event_service: IdRef | None = None
     fabrics: IdRef | None = None
     facilities: IdRef | None = None
+    id: str
     job_service: IdRef | None = None
     json_schemas: IdRef | None = None
     key_service: IdRef | None = None
@@ -63,6 +65,7 @@ class ServiceRoot(RedfishResource):
     links: Links
     managers: IdRef | None = None
     nvme_domains: IdRef | None = Field(alias="NVMeDomains", default=None)
+    name: str
     oem: dict[str, Any] | None = None
     power_equipment: IdRef | None = None
     product: str | None = None

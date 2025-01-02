@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .event import EventType
 from .event_destination import EventFormatType
 from .odata_v4 import IdRef
@@ -25,7 +22,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class EventService(RedfishResource):
+class EventService(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     delivery_retry_attempts: int | None = None
     delivery_retry_interval_seconds: int | None = None
@@ -34,7 +35,9 @@ class EventService(RedfishResource):
     event_types_for_subscription: list[EventType] | None = None
     exclude_message_id: bool | None = None
     exclude_registry_prefix: bool | None = None
+    id: str
     include_origin_of_condition_supported: bool | None = None
+    name: str
     oem: dict[str, Any] | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None

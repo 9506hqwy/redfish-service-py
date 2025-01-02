@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..endpoint_group import AccessState
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
@@ -77,7 +74,11 @@ class MappedVolume(RedfishModel):
     volume: IdRef | None = None
 
 
-class StorageGroup(RedfishResource):
+class StorageGroup(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     access_state: AccessState | None = None
     actions: Actions | None = None
     authentication_method: AuthenticationMethod | None = None
@@ -88,10 +89,12 @@ class StorageGroup(RedfishResource):
     )
     dh_chap_info: list[DhchapInformation] | None = Field(alias="DHChapInfo", default=None)
     description: str | None = None
+    id: str
     identifier: Identifier | None = None
     links: Links | None = None
     mapped_volumes: list[MappedVolume] | None = None
     members_are_consistent: bool | None = None
+    name: str
     oem: dict[str, Any] | None = None
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None

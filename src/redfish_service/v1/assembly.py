@@ -4,11 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishObjectId,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .physical_context import PhysicalContext
 from .resource import Location, Status
 
@@ -17,15 +13,22 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Assembly(RedfishResource):
+class Assembly(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assemblies: list[AssemblyData] | None = None
     assemblies_odata_count: int | None = Field(alias="Assemblies@odata.count", default=None)
     description: str | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
 
 
-class AssemblyData(RedfishObjectId):
+class AssemblyData(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     actions: AssemblyDataActions | None = None
     binary_data_uri: str | None = Field(alias="BinaryDataURI", default=None)
     description: str | None = None

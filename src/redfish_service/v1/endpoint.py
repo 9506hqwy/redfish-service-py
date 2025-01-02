@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .ip_addresses import Ipv4Address, Ipv6Address
 from .odata_v4 import IdRef
 from .protocol import Protocol
@@ -31,7 +28,11 @@ class ConnectedEntity(RedfishModel):
     pci_function_number: int | None = None
 
 
-class Endpoint(RedfishResource):
+class Endpoint(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     connected_entities: list[ConnectedEntity] | None = None
     description: str | None = None
@@ -40,8 +41,10 @@ class Endpoint(RedfishResource):
     ip_transport_details: list[IpTransportDetails] | None = Field(
         alias="IPTransportDetails", default=None
     )
+    id: str
     identifiers: list[Identifier] | None = None
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     pci_id: PciId | None = None
     redundancy: list[IdRef] | None = None

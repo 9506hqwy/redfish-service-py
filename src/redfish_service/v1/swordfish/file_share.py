@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Status
 from ..swordfish.data_storage_los_capabilities import StorageAccessCapability
@@ -20,7 +17,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class FileShare(RedfishResource):
+class FileShare(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     ca_supported: bool | None = Field(alias="CASupported", default=None)
     default_access_capabilities: list[StorageAccessCapability] | None = None
@@ -32,8 +33,10 @@ class FileShare(RedfishResource):
     file_share_remaining_quota_bytes: int | None = None
     file_share_total_quota_bytes: int | None = None
     file_sharing_protocols: list[FileProtocol] | None = None
+    id: str
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
+    name: str
     oem: dict[str, Any] | None = None
     remaining_capacity_percent: int | None = None
     replication_enabled: bool | None = None

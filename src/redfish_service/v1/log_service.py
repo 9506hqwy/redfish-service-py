@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -72,7 +69,11 @@ class LogPurpose(StrEnum):
     OEM = "OEM"
 
 
-class LogService(RedfishResource):
+class LogService(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None
     auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
@@ -81,9 +82,11 @@ class LogService(RedfishResource):
     description: str | None = None
     diagnostic_data_details: list[DiagnosticDataDetails] | None = None
     entries: IdRef | None = None
+    id: str
     log_entry_type: LogEntryTypes | None = None
     log_purposes: list[LogPurpose] | None = None
     max_number_of_records: int | None = None
+    name: str
     oem_log_purpose: str | None = Field(alias="OEMLogPurpose", default=None)
     oem: dict[str, Any] | None = None
     over_write_policy: OverWritePolicy | None = None

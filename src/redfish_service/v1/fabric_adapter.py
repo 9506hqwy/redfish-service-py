@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
@@ -18,7 +15,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class FabricAdapter(RedfishResource):
+class FabricAdapter(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     asic_manufacturer: str | None = Field(alias="ASICManufacturer", default=None)
     asic_part_number: str | None = Field(alias="ASICPartNumber", default=None)
     asic_revision_identifier: str | None = Field(alias="ASICRevisionIdentifier", default=None)
@@ -28,11 +29,13 @@ class FabricAdapter(RedfishResource):
     fabric_type_capabilities: list[Protocol] | None = None
     firmware_version: str | None = None
     gen_z: GenZ | None = None
+    id: str
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
     manufacturer: str | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
     part_number: str | None = None

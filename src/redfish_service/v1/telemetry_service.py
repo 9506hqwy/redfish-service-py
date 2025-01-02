@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -56,15 +53,21 @@ class SubmitTestMetricReport(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class TelemetryService(RedfishResource):
+class TelemetryService(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
     log_service: IdRef | None = None
     max_reports: int | None = None
     metric_definitions: IdRef | None = None
     metric_report_definitions: IdRef | None = None
     metric_reports: IdRef | None = None
     min_collection_interval: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     service_enabled: bool | None = None
     status: Status | None = None

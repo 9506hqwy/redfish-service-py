@@ -2,9 +2,7 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import (
-    RedfishModel,
-)
+from .base import RedfishModel
 from .resolution_step import ResolutionStep
 from .resource import Health
 

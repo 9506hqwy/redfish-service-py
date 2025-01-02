@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -30,7 +27,11 @@ class CredentialBootstrapping(RedfishModel):
     role_id: str | None = None
 
 
-class HostInterface(RedfishResource):
+class HostInterface(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     auth_none_role_id: str | None = None
     authentication_modes: list[AuthenticationMode] | None = None
@@ -41,11 +42,13 @@ class HostInterface(RedfishResource):
     firmware_auth_role_id: str | None = None
     host_ethernet_interfaces: IdRef | None = None
     host_interface_type: HostInterfaceType | None = None
+    id: str
     interface_enabled: bool | None = None
     kernel_auth_enabled: bool | None = None
     kernel_auth_role_id: str | None = None
     links: Links | None = None
     manager_ethernet_interface: IdRef | None = None
+    name: str
     network_protocol: IdRef | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None

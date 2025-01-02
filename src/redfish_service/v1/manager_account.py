@@ -6,10 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from .account_service import MfaBypass
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 
 
@@ -61,7 +58,11 @@ class Links(RedfishModel):
     role: IdRef | None = None
 
 
-class ManagerAccount(RedfishResource):
+class ManagerAccount(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     account_expiration: str | None = None
     account_types: list[AccountTypes]
     actions: Actions | None = None
@@ -70,10 +71,12 @@ class ManagerAccount(RedfishResource):
     email_address: str | None = None
     enabled: bool | None = None
     host_bootstrap_account: bool | None = None
+    id: str
     keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
     mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
+    name: str
     oem_account_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None

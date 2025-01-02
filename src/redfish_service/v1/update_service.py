@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -80,7 +77,11 @@ class UpdateParameters(RedfishModel):
     targets: list[str] | None = None
 
 
-class UpdateService(RedfishResource):
+class UpdateService(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     client_certificates: IdRef | None = None
     description: str | None = None
@@ -90,8 +91,10 @@ class UpdateService(RedfishResource):
     http_push_uri_options_busy: bool | None = None
     http_push_uri_targets: list[str] | None = None
     http_push_uri_targets_busy: bool | None = None
+    id: str
     max_image_size_bytes: int | None = None
     multipart_http_push_uri: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     public_identity_ssh_key: IdRef | None = Field(alias="PublicIdentitySSHKey", default=None)
     remote_server_certificates: IdRef | None = None

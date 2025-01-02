@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
@@ -286,7 +283,11 @@ class SuspendReplication(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class Volume(RedfishResource):
+class Volume(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     alua: Alua | None = Field(alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
@@ -308,6 +309,7 @@ class Volume(RedfishResource):
     encryption_types: list[EncryptionTypes] | None = None
     io_perf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
     io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    id: str
     identifiers: list[Identifier] | None = None
     initialize_method: InitializeMethod | None = None
     is_boot_capable: bool | None = None
@@ -322,6 +324,7 @@ class Volume(RedfishResource):
     nvme_namespace_properties: NvmeNamespaceProperties | None = Field(
         alias="NVMeNamespaceProperties", default=None
     )
+    name: str
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None
     optimum_io_size_bytes: int | None = Field(alias="OptimumIOSizeBytes", default=None)

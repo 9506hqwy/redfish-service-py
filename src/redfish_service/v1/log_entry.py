@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .event import EventType
 from .odata_v4 import IdRef
 from .resolution_step import ResolutionStep
@@ -58,7 +55,11 @@ class LogDiagnosticDataTypes(StrEnum):
     CPER_SECTION = "CPERSection"
 
 
-class LogEntry(RedfishResource):
+class LogEntry(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
     additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
@@ -76,12 +77,14 @@ class LogEntry(RedfishResource):
     event_type: EventType | None = None
     first_overflow_timestamp: str | None = None
     generator_id: str | None = None
+    id: str
     last_overflow_timestamp: str | None = None
     links: Links | None = None
     message: str | None = None
     message_args: list[str] | None = None
     message_id: str | None = None
     modified: str | None = None
+    name: str
     oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
     oem: dict[str, Any] | None = None
     oem_log_entry_code: str | None = None

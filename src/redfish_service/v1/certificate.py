@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 
 
@@ -18,7 +15,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Certificate(RedfishResource):
+class Certificate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     certificate_string: str | None = None
     certificate_type: CertificateType | None = None
@@ -26,9 +27,11 @@ class Certificate(RedfishResource):
     description: str | None = None
     fingerprint: str | None = None
     fingerprint_hash_algorithm: str | None = None
+    id: str
     issuer: Identifier | None = None
     key_usage: list[KeyUsage] | None = None
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     spdm: Spdm | None = Field(alias="SPDM", default=None)
     serial_number: str | None = None

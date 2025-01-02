@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext, PhysicalSubContext
 from .redundancy import RedundantGroup
@@ -100,7 +97,11 @@ class ResetToDefaults(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class Sensor(RedfishResource):
+class Sensor(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     accuracy: float | None = None
     actions: Actions | None = None
     adjusted_max_allowable_operating_value: float | None = None
@@ -116,6 +117,7 @@ class Sensor(RedfishResource):
     description: str | None = None
     electrical_context: ElectricalContext | None = None
     enabled: bool | None = None
+    id: str
     implementation: ImplementationType | None = None
     lifetime_reading: float | None = None
     lifetime_start_date_time: str | None = None
@@ -128,6 +130,7 @@ class Sensor(RedfishResource):
     max_allowable_operating_value: float | None = None
     min_allowable_operating_value: float | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     peak_reading: float | None = None

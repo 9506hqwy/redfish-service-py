@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .resource import Status
 from .sensor import SensorCurrentExcerpt, SensorExcerpt, SensorVoltageExcerpt
 
@@ -16,15 +13,21 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class BatteryMetrics(RedfishResource):
+class BatteryMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     cell_voltages: list[SensorVoltageExcerpt] | None = None
     cell_voltages_odata_count: int | None = Field(alias="CellVoltages@odata.count", default=None)
     charge_percent: SensorExcerpt | None = None
     description: str | None = None
     discharge_cycles: float | None = None
+    id: str
     input_current_amps: SensorCurrentExcerpt | None = None
     input_voltage: SensorVoltageExcerpt | None = None
+    name: str
     oem: dict[str, Any] | None = None
     output_current_amps: list[SensorCurrentExcerpt] | None = None
     output_current_amps_odata_count: int | None = Field(

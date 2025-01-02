@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .manager_account import AccountTypes
 from .odata_v4 import IdRef
 from .privileges import PrivilegeType
@@ -24,7 +21,11 @@ class AccountProviderTypes(StrEnum):
     OAUTH2 = "OAuth2"
 
 
-class AccountService(RedfishResource):
+class AccountService(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     account_lockout_counter_reset_after: int | None = None
     account_lockout_counter_reset_enabled: bool | None = None
     account_lockout_duration: int | None = None
@@ -36,11 +37,13 @@ class AccountService(RedfishResource):
     auth_failure_logging_threshold: int | None = None
     description: str | None = None
     http_basic_auth: BasicAuthState | None = Field(alias="HTTPBasicAuth", default=None)
+    id: str
     ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
     local_account_auth: LocalAccountAuth | None = None
     max_password_length: int | None = None
     min_password_length: int | None = None
     multi_factor_auth: MultiFactorAuth | None = None
+    name: str
     oauth2: ExternalAccountProvider | None = Field(alias="OAuth2", default=None)
     oem: dict[str, Any] | None = None
     outbound_connections: IdRef | None = None

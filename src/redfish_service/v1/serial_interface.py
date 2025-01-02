@@ -3,10 +3,9 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from pydantic import Field
+
+from .base import RedfishModel
 
 
 class Actions(RedfishModel):
@@ -68,15 +67,21 @@ class PinOut(StrEnum):
     DIGI = "Digi"
 
 
-class SerialInterface(RedfishResource):
+class SerialInterface(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     bit_rate: BitRate | None = None
     connector_type: ConnectorType | None = None
     data_bits: DataBits | None = None
     description: str | None = None
     flow_control: FlowControl | None = None
+    id: str
     interface_enabled: bool | None = None
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     parity: Parity | None = None
     pin_out: PinOut | None = None

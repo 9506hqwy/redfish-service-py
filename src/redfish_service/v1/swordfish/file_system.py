@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..swordfish.capacity import Capacity
@@ -43,7 +40,11 @@ class FileProtocol(StrEnum):
     SM_BV3_1_1 = "SMBv3_1_1"
 
 
-class FileSystem(RedfishResource):
+class FileSystem(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
     block_size_bytes: int | None = None
@@ -59,12 +60,14 @@ class FileSystem(RedfishResource):
     description: str | None = None
     exported_shares: IdRef | None = None
     io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    id: str
     identifiers: list[Identifier] | None = None
     imported_shares: list[dict[str, Any]] | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
     max_file_name_length_bytes: int | None = None
     metrics: IdRef | None = None
+    name: str
     oem: dict[str, Any] | None = None
     recoverable_capacity_source_count: int | None = None
     remaining_capacity: Capacity | None = None

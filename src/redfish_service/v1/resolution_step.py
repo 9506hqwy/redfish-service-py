@@ -6,9 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from .action_info import Parameters
-from .base import (
-    RedfishModel,
-)
+from .base import RedfishModel
 
 
 class ResolutionStep(RedfishModel):

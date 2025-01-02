@@ -4,9 +4,7 @@ from enum import StrEnum
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-)
+from .base import RedfishModel
 from .message import Message
 from .odata_v4 import IdRef
 

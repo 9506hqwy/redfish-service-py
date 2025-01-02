@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .pcie_device import PcieErrors
 
 
@@ -91,12 +88,18 @@ class Networking(RedfishModel):
     tx_unicast_frames: int | None = Field(alias="TXUnicastFrames", default=None)
 
 
-class PortMetrics(RedfishResource):
+class PortMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
     description: str | None = None
     fibre_channel: FibreChannel | None = None
     gen_z: GenZ | None = None
+    id: str
+    name: str
     networking: Networking | None = None
     oem: dict[str, Any] | None = None
     pcie_errors: PcieErrors | None = Field(alias="PCIeErrors", default=None)

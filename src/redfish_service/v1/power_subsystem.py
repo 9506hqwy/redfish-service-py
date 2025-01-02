@@ -2,10 +2,9 @@ from __future__ import annotations  # PEP563 Forward References
 
 from typing import Any
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from pydantic import Field
+
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .redundancy import RedundantGroup
 from .resource import Status
@@ -20,12 +19,18 @@ class PowerAllocation(RedfishModel):
     requested_watts: float | None = None
 
 
-class PowerSubsystem(RedfishResource):
+class PowerSubsystem(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     allocation: PowerAllocation | None = None
     batteries: IdRef | None = None
     capacity_watts: float | None = None
     description: str | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
     power_supplies: IdRef | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None

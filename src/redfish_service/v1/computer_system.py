@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import PowerState, Status
 from .software_inventory import MeasurementBlock
@@ -125,7 +122,11 @@ class CompositionUseCase(StrEnum):
     EXPANDABLE_SYSTEM = "ExpandableSystem"
 
 
-class ComputerSystem(RedfishResource):
+class ComputerSystem(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     asset_tag: str | None = None
     bios: IdRef | None = None
@@ -143,6 +144,7 @@ class ComputerSystem(RedfishResource):
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
     hosting_roles: list[HostingRole] | None = None
+    id: str
     idle_power_saver: IdlePowerSaver | None = None
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     key_management: KeyManagement | None = None
@@ -158,6 +160,7 @@ class ComputerSystem(RedfishResource):
     memory_domains: IdRef | None = None
     memory_summary: MemorySummary | None = None
     model: str | None = None
+    name: str
     network_interfaces: IdRef | None = None
     oem: dict[str, Any] | None = None
     operating_system: IdRef | None = None

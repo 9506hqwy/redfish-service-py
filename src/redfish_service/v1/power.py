@@ -5,11 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishObjectId,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import IndicatorLed, Location, Status
@@ -52,9 +48,15 @@ class LineInputVoltageType(StrEnum):
     DC240_V = "DC240V"
 
 
-class Power(RedfishResource):
+class Power(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
     power_control: list[PowerControl] | None = None
     power_control_odata_count: int | None = Field(alias="PowerControl@odata.count", default=None)
@@ -66,7 +68,8 @@ class Power(RedfishResource):
     voltages_odata_count: int | None = Field(alias="Voltages@odata.count", default=None)
 
 
-class PowerControl(RedfishObjectId):
+class PowerControl(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     actions: PowerControlActions | None = None
     member_id: str
     name: str | None = None
@@ -108,7 +111,8 @@ class PowerMetric(RedfishModel):
     min_consumed_watts: float | None = None
 
 
-class PowerSupply(RedfishObjectId):
+class PowerSupply(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     actions: PowerSupplyActions | None = None
     assembly: IdRef | None = None
     efficiency_percent: float | None = None
@@ -155,7 +159,8 @@ class PowerSupplyType(StrEnum):
     A_COR_DC = "ACorDC"
 
 
-class Voltage(RedfishObjectId):
+class Voltage(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     actions: VoltageActions | None = None
     lower_threshold_critical: float | None = None
     lower_threshold_fatal: float | None = None

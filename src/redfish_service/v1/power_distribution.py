@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .redundancy import RedundantGroup
 from .resource import Location, Status
@@ -30,7 +27,11 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class PowerDistribution(RedfishResource):
+class PowerDistribution(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     asset_tag: str | None = None
     branches: IdRef | None = None
@@ -38,6 +39,7 @@ class PowerDistribution(RedfishResource):
     equipment_type: PowerEquipmentType
     feeders: IdRef | None = None
     firmware_version: str | None = None
+    id: str
     links: Links | None = None
     location: Location | None = None
     mains: IdRef | None = None
@@ -45,6 +47,7 @@ class PowerDistribution(RedfishResource):
     manufacturer: str | None = None
     metrics: IdRef | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     outlet_groups: IdRef | None = None
     outlets: IdRef | None = None

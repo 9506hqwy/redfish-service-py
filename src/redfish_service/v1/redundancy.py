@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishObjectId,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -17,7 +14,8 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Redundancy(RedfishObjectId):
+class Redundancy(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     actions: Actions | None = None
     max_num_supported: int | None = None
     member_id: str

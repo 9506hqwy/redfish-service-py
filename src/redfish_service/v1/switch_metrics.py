@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .pcie_device import PcieErrors
 
 
@@ -42,9 +39,15 @@ class LifeTime(RedfishModel):
     )
 
 
-class SwitchMetrics(RedfishResource):
+class SwitchMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
     internal_memory_metrics: InternalMemoryMetrics | None = None
+    name: str
     oem: dict[str, Any] | None = None
     pcie_errors: PcieErrors | None = Field(alias="PCIeErrors", default=None)

@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
@@ -114,7 +111,11 @@ class SetEncryptionState(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class StoragePool(RedfishResource):
+class StoragePool(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
     allocated_volumes: IdRef | None = None
@@ -137,6 +138,7 @@ class StoragePool(RedfishResource):
     encrypted: bool | None = None
     encryption_enabled: bool | None = None
     io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    id: str
     identifier: Identifier | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
@@ -147,6 +149,7 @@ class StoragePool(RedfishResource):
     )
     nvme_properties: NvmeProperties | None = Field(alias="NVMeProperties", default=None)
     nvme_set_properties: NvmeSetProperties | None = Field(alias="NVMeSetProperties", default=None)
+    name: str
     oem: dict[str, Any] | None = None
     pool_type: list[PoolType] | None = None
     recoverable_capacity_source_count: int | None = None

@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -76,7 +73,11 @@ class Links(RedfishModel):
     )
 
 
-class PcieFunction(RedfishResource):
+class PcieFunction(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     bus_number: str | None = None
     class_code: str | None = None
@@ -89,7 +90,9 @@ class PcieFunction(RedfishResource):
     function_number: str | None = None
     function_protocol: FunctionProtocol | None = None
     function_type: FunctionType | None = None
+    id: str
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     revision_id: str | None = None
     segment_number: str | None = None

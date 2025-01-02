@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Health, Status
 
@@ -74,7 +71,11 @@ class TriggerActionMessage(StrEnum):
     CONNECTION_SPEED = "ConnectionSpeed"
 
 
-class Triggers(RedfishResource):
+class Triggers(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     discrete_trigger_condition: DiscreteTriggerConditionEnum | None = None
@@ -82,10 +83,12 @@ class Triggers(RedfishResource):
     event_triggers: list[str] | None = None
     hysteresis_duration: str | None = None
     hysteresis_reading: float | None = None
+    id: str
     links: Links | None = None
     metric_ids: list[str] | None = None
     metric_properties: list[str] | None = None
     metric_type: MetricTypeEnum | None = None
+    name: str
     numeric_thresholds: Thresholds | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None

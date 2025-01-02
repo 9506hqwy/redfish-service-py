@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .event import EventType
 from .odata_v4 import IdRef
 from .resource import Health, Status
@@ -31,7 +28,11 @@ class DeliveryRetryPolicy(StrEnum):
     RETRY_FOREVER_WITH_BACKOFF = "RetryForeverWithBackoff"
 
 
-class EventDestination(RedfishResource):
+class EventDestination(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     backup_destinations: list[str] | None = None
     certificates: IdRef | None = None
@@ -46,12 +47,14 @@ class EventDestination(RedfishResource):
     exclude_registry_prefixes: list[str] | None = None
     heartbeat_interval_minutes: int | None = None
     http_headers: list[dict[str, Any]] | None = None
+    id: str
     include_origin_of_condition: bool | None = None
     message_ids: list[str] | None = None
     metric_report_definitions: list[IdRef] | None = None
     metric_report_definitions_odata_count: int | None = Field(
         alias="MetricReportDefinitions@odata.count", default=None
     )
+    name: str
     oem_protocol: str | None = Field(alias="OEMProtocol", default=None)
     oem_subscription_type: str | None = Field(alias="OEMSubscriptionType", default=None)
     oem: dict[str, Any] | None = None

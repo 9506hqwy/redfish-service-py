@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .sensor import SensorArrayExcerpt, SensorEnergykWhExcerpt, SensorExcerpt, SensorPowerExcerpt
 
 
@@ -33,13 +30,19 @@ class TemperatureSummary(RedfishModel):
     internal: SensorExcerpt | None = None
 
 
-class ThermalMetrics(RedfishResource):
+class ThermalMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     air_flow_cubic_meters_per_minute: SensorExcerpt | None = None
     delta_pressurek_pa: SensorExcerpt | None = None
     description: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     heater_summary: HeaterSummary | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
     power_watts: SensorPowerExcerpt | None = None
     temperature_readings_celsius: list[SensorArrayExcerpt] | None = None

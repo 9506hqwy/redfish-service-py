@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .protocol import Protocol
 from .resource import Identifier, IndicatorLed, Location, Status
@@ -38,7 +35,11 @@ class ConfigurationLock(StrEnum):
     PARTIAL = "Partial"
 
 
-class Drive(RedfishResource):
+class Drive(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -57,6 +58,7 @@ class Drive(RedfishResource):
     firmware_version: str | None = None
     hotspare_replacement_mode: HotspareReplacementModeType | None = None
     hotspare_type: HotspareType | None = None
+    id: str
     identifiers: list[Identifier] | None = None
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
@@ -69,6 +71,7 @@ class Drive(RedfishResource):
     model: str | None = None
     multipath: bool | None = None
     nvme: Nvme | None = Field(alias="NVMe", default=None)
+    name: str
     negotiated_speed_gbs: float | None = None
     oem: dict[str, Any] | None = None
     operations: list[Operations] | None = None

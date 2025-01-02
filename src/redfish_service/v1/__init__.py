@@ -1,10 +1,4 @@
-from .base import (
-    RedfishModel,
-    RedfishObject,
-    RedfishObjectId,
-    RedfishResource,
-    RedfishResourceCollection,
-)
+from .base import RedfishModel
 from .message import Message
 from .redfish_error import RedfishError, RedfishErrorContents
 from .resource import Health
@@ -18,10 +12,6 @@ __all__ = [
     "RedfishError",
     "RedfishErrorContents",
     "RedfishModel",
-    "RedfishObject",
-    "RedfishObjectId",
-    "RedfishResource",
-    "RedfishResourceCollection",
     "ServiceRoot",
     "ServiceRootLinks",
     "SessionCollection",

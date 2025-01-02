@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Location, PowerState, Status
 from .software_inventory import MeasurementBlock
@@ -19,7 +16,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Chassis(RedfishResource):
+class Chassis(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -43,6 +44,7 @@ class Chassis(RedfishResource):
     )
     height_mm: float | None = None
     hot_pluggable: bool | None = None
+    id: str
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
@@ -56,6 +58,7 @@ class Chassis(RedfishResource):
     memory_domains: IdRef | None = None
     min_power_watts: float | None = None
     model: str | None = None
+    name: str
     network_adapters: IdRef | None = None
     oem: dict[str, Any] | None = None
     pcie_devices: IdRef | None = Field(alias="PCIeDevices", default=None)

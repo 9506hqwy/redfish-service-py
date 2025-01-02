@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 
@@ -38,10 +35,16 @@ class DataSanitizationPolicy(StrEnum):
     CRYPTOGRAPHIC_ERASE = "CryptographicErase"
 
 
-class DataSecurityLosCapabilities(RedfishResource):
+class DataSecurityLosCapabilities(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
     identifier: Identifier | None = None
+    name: str
     oem: dict[str, Any] | None = None
     supported_antivirus_engine_providers: list[str] | None = None
     supported_antivirus_scan_policies: list[AntiVirusScanTrigger] | None = None

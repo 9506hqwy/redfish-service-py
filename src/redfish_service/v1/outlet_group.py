@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .circuit import PowerRestorePolicyTypes
 from .odata_v4 import IdRef
 from .resource import PowerState, Status
@@ -29,13 +26,19 @@ class Links(RedfishModel):
     outlets_odata_count: int | None = Field(alias="Outlets@odata.count", default=None)
 
 
-class OutletGroup(RedfishResource):
+class OutletGroup(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     configuration_locked: bool | None = None
     created_by: str | None = None
     description: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
+    id: str
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     outlet_group_type: OutletGroupType | None = None
     power_control_locked: bool | None = None

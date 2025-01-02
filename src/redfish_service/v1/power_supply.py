@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .circuit import NominalVoltageType, PhaseWiringType, PlugType
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
@@ -52,7 +49,11 @@ class OutputRail(RedfishModel):
     physical_context: PhysicalContext | None = None
 
 
-class PowerSupply(RedfishResource):
+class PowerSupply(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     certificates: IdRef | None = None
@@ -64,6 +65,7 @@ class PowerSupply(RedfishResource):
     electrical_source_names: list[str] | None = None
     firmware_version: str | None = None
     hot_pluggable: bool | None = None
+    id: str
     input_nominal_voltage_type: NominalVoltageType | None = None
     input_ranges: list[InputRange] | None = None
     line_input_status: LineStatus | None = None
@@ -73,6 +75,7 @@ class PowerSupply(RedfishResource):
     manufacturer: str | None = None
     metrics: IdRef | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     output_nominal_voltage_type: NominalVoltageType | None = None
     output_rails: list[OutputRail] | None = None

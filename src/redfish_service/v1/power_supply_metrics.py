@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .resource import Status
 from .sensor import (
     SensorCurrentExcerpt,
@@ -27,7 +24,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class PowerSupplyMetrics(RedfishResource):
+class PowerSupplyMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
@@ -37,9 +38,11 @@ class PowerSupplyMetrics(RedfishResource):
         alias="FanSpeedsPercent@odata.count", default=None
     )
     frequency_hz: SensorExcerpt | None = None
+    id: str
     input_current_amps: SensorCurrentExcerpt | None = None
     input_power_watts: SensorPowerExcerpt | None = None
     input_voltage: SensorVoltageExcerpt | None = None
+    name: str
     oem: dict[str, Any] | None = None
     output_power_watts: SensorPowerExcerpt | None = None
     rail_current_amps: list[SensorCurrentExcerpt] | None = None

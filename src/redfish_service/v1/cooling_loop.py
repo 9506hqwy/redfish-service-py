@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Health, Status
 from .sensor import SensorExcerpt
@@ -36,7 +33,11 @@ class CoolantType(StrEnum):
     DIELECTRIC = "Dielectric"
 
 
-class CoolingLoop(RedfishResource):
+class CoolingLoop(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None
@@ -45,8 +46,10 @@ class CoolingLoop(RedfishResource):
     coolant_quality: Health | None = None
     cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
     description: str | None = None
+    id: str
     links: Links | None = None
     location_indicator_active: bool | None = None
+    name: str
     oem: dict[str, Any] | None = None
     primary_coolant_connectors: IdRef | None = None
     rated_flow_liters_per_minute: float | None = None

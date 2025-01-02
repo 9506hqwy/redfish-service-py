@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -38,9 +35,15 @@ class SpdmPolicy(RedfishModel):
     verify_certificate: bool | None = None
 
 
-class SecurityPolicy(RedfishResource):
+class SecurityPolicy(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
     override_parent_manager: bool | None = None
     spdm: SpdmPolicy | None = Field(alias="SPDM", default=None)

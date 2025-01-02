@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
@@ -17,7 +14,11 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class Cable(RedfishResource):
+class Cable(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -27,11 +28,13 @@ class Cable(RedfishResource):
     description: str | None = None
     downstream_connector_types: list[ConnectorType] | None = None
     downstream_name: str | None = None
+    id: str
     length_meters: float | None = None
     links: Links | None = None
     location: Location | None = None
     manufacturer: str | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     sku: str | None = Field(alias="SKU", default=None)

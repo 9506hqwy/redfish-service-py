@@ -5,9 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resolution_step import ResolutionStep
 from .resource import Health

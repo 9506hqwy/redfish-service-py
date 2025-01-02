@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .leak_detector import LeakDetectorArrayExcerpt
 from .odata_v4 import IdRef
 from .resource import Status
@@ -18,11 +15,17 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class LeakDetection(RedfishResource):
+class LeakDetection(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
     leak_detector_groups: list[LeakDetectorGroup] | None = None
     leak_detectors: IdRef | None = None
+    name: str
     oem: dict[str, Any] | None = None
     status: Status | None = None
 

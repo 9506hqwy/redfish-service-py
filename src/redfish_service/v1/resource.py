@@ -5,12 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishObject,
-    RedfishObjectId,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resolution_step import ResolutionStep
 
@@ -187,17 +182,28 @@ class Reference(StrEnum):
     MIDDLE = "Middle"
 
 
-class ReferenceableMember(RedfishObjectId):
+class ReferenceableMember(RedfishModel):
+    odata_id: str = Field(alias="@odata.id")
     member_id: str
     oem: dict[str, Any] | None = None
 
 
-class Resource(RedfishResource):
+class Resource(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     description: str | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
 
 
-class ResourceCollection(RedfishObject):
+class ResourceCollection(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     description: str | None = None
     name: str
     oem: dict[str, Any] | None = None

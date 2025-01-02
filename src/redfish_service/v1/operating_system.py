@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .container_image import ImageTypes
 from .odata_v4 import IdRef
 from .resource import Status
@@ -43,15 +40,21 @@ class Links(RedfishModel):
     software_image: IdRef | None = None
 
 
-class OperatingSystem(RedfishResource):
+class OperatingSystem(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     applications: IdRef | None = None
     container_engines: list[ContainerEngine] | None = None
     container_images: IdRef | None = None
     containers: IdRef | None = None
     description: str | None = None
+    id: str
     kernel: Kernel | None = None
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     status: Status | None = None
     type: OperatingSystemTypes | None = None

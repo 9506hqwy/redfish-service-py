@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Location, PowerState, Status
 from .software_inventory import AdditionalVersions, MeasurementBlock
@@ -91,7 +88,11 @@ class Links(RedfishModel):
     )
 
 
-class Manager(RedfishResource):
+class Manager(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
@@ -106,6 +107,7 @@ class Manager(RedfishResource):
     firmware_version: str | None = None
     graphical_console: GraphicalConsole | None = None
     host_interfaces: IdRef | None = None
+    id: str
     last_reset_time: str | None = None
     links: Links | None = None
     location: Location | None = None
@@ -116,6 +118,7 @@ class Manager(RedfishResource):
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
     model: str | None = None
+    name: str
     network_protocol: IdRef | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None

@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .storage_controller import NvmeSmartCriticalWarnings
 
 
@@ -49,12 +46,18 @@ class NvmeSmartMetrics(RedfishModel):
     warning_composite_temp_time_minutes: int | None = None
 
 
-class StorageControllerMetrics(RedfishResource):
+class StorageControllerMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
     correctable_parity_error_count: int | None = None
     description: str | None = None
+    id: str
     nvme_smart: NvmeSmartMetrics | None = Field(alias="NVMeSMART", default=None)
+    name: str
     oem: dict[str, Any] | None = None
     state_change_count: int | None = None
     uncorrectable_ecc_error_count: int | None = Field(

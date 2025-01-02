@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 
 
 class Actions(RedfishModel):
@@ -40,11 +37,17 @@ class FibreChannel(RedfishModel):
     tx_sequences: int | None = Field(alias="TXSequences", default=None)
 
 
-class NetworkDeviceFunctionMetrics(RedfishResource):
+class NetworkDeviceFunctionMetrics(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     ethernet: Ethernet | None = None
     fibre_channel: FibreChannel | None = None
+    id: str
+    name: str
     oem: dict[str, Any] | None = None
     rx_avg_queue_depth_percent: float | None = Field(alias="RXAvgQueueDepthPercent", default=None)
     rx_bytes: int | None = Field(alias="RXBytes", default=None)

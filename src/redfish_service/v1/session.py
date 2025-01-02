@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 
 
@@ -21,13 +18,19 @@ class Links(RedfishModel):
     outbound_connection: IdRef | None = None
 
 
-class Session(RedfishResource):
+class Session(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     client_origin_ip_address: str | None = Field(alias="ClientOriginIPAddress", default=None)
     context: str | None = None
     created_time: str | None = None
     description: str | None = None
+    id: str
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     oem_session_type: str | None = None
     password: str | None = None

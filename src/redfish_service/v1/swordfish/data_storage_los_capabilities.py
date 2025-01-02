@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..swordfish.data_protection_los_capabilities import RecoveryAccessScope
@@ -18,11 +15,17 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class DataStorageLosCapabilities(RedfishResource):
+class DataStorageLosCapabilities(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
+    id: str
     identifier: Identifier | None = None
     maximum_recoverable_capacity_source_count: int | None = None
+    name: str
     oem: dict[str, Any] | None = None
     supported_access_capabilities: list[StorageAccessCapability] | None = None
     supported_lines_of_service: list[IdRef] | None = None

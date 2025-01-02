@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .protocol import Protocol
 from .resource import Location, Status
@@ -243,7 +240,11 @@ class MediumType(StrEnum):
     FIBER_OPTIC = "FiberOptic"
 
 
-class Port(RedfishResource):
+class Port(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     active_width: int | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
@@ -258,6 +259,7 @@ class Port(RedfishResource):
     function_max_bandwidth: list[FunctionMaxBandwidth] | None = None
     function_min_bandwidth: list[FunctionMinBandwidth] | None = None
     gen_z: GenZ | None = None
+    id: str
     infini_band: InfiniBandProperties | None = None
     interface_enabled: bool | None = None
     link_configuration: list[LinkConfiguration] | None = None
@@ -271,6 +273,7 @@ class Port(RedfishResource):
     max_frame_size: int | None = None
     max_speed_gbps: float | None = None
     metrics: IdRef | None = None
+    name: str
     oem: dict[str, Any] | None = None
     port_id: str | None = None
     port_medium: PortMedium | None = None

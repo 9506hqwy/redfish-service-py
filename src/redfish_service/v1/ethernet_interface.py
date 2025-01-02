@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .ip_addresses import Ipv4Address, Ipv6Address, Ipv6GatewayStaticAddress, Ipv6StaticAddress
 from .odata_v4 import IdRef
 from .resource import Status
@@ -55,7 +52,11 @@ class EthernetDeviceType(StrEnum):
     VIRTUAL = "Virtual"
 
 
-class EthernetInterface(RedfishResource):
+class EthernetInterface(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     auto_neg: bool | None = None
     dhcpv4: Dhcpv4Configuration | None = Field(alias="DHCPv4", default=None)
@@ -81,12 +82,14 @@ class EthernetInterface(RedfishResource):
     ipv6_static_default_gateways: list[Ipv6GatewayStaticAddress] | None = Field(
         alias="IPv6StaticDefaultGateways", default=None
     )
+    id: str
     interface_enabled: bool | None = None
     link_status: LinkStatus | None = None
     links: Links | None = None
     mac_address: str | None = Field(alias="MACAddress", default=None)
     mtu_size: int | None = Field(alias="MTUSize", default=None)
     max_ipv6_static_addresses: int | None = Field(alias="MaxIPv6StaticAddresses", default=None)
+    name: str
     name_servers: list[str] | None = None
     oem: dict[str, Any] | None = None
     permanent_mac_address: str | None = Field(alias="PermanentMACAddress", default=None)

@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -29,7 +26,11 @@ class ContactInfo(RedfishModel):
     phone_number: str | None = None
 
 
-class License(RedfishResource):
+class License(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     authorization_scope: AuthorizationScope | None = None
     contact: ContactInfo | None = None
@@ -38,6 +39,7 @@ class License(RedfishResource):
     entitlement_id: str | None = None
     expiration_date: str | None = None
     grace_period_days: int | None = None
+    id: str
     install_date: str | None = None
     license_info_uri: str | None = Field(alias="LicenseInfoURI", default=None)
     license_origin: LicenseOrigin | None = None
@@ -46,6 +48,7 @@ class License(RedfishResource):
     links: Links | None = None
     manufacturer: str | None = None
     max_authorized_devices: int | None = None
+    name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     remaining_duration: str | None = None

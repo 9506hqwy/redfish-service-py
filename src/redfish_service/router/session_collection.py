@@ -9,7 +9,7 @@ sessions_info = {
     "odata_id": PATH_SESSION_COLLECTION,
     "odata_type": "#SessionCollection.SessionCollection",
     "members": [],
-    "members_count": 0,
+    "members_odata_count": 0,
     "name": "Session Collection",
 }
 

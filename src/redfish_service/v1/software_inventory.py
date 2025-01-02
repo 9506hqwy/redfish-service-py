@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Status
@@ -39,14 +36,20 @@ class ReleaseType(StrEnum):
     OTHER = "Other"
 
 
-class SoftwareInventory(RedfishResource):
+class SoftwareInventory(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     additional_versions: AdditionalVersions | None = None
     associated_physical_context: PhysicalContext | None = None
     description: str | None = None
+    id: str
     lowest_supported_version: str | None = None
     manufacturer: str | None = None
     measurement: MeasurementBlock | None = None
+    name: str
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
     related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)

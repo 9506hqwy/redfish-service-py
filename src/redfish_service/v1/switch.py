@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .protocol import Protocol
 from .resource import IndicatorLed, Location, PowerState, Status
@@ -40,7 +37,11 @@ class Reset(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
-class Switch(RedfishResource):
+class Switch(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     asset_tag: str | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
@@ -51,6 +52,7 @@ class Switch(RedfishResource):
     enabled: bool | None = None
     environment_metrics: IdRef | None = None
     firmware_version: str | None = None
+    id: str
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     is_managed: bool | None = None
     links: Links | None = None
@@ -62,6 +64,7 @@ class Switch(RedfishResource):
     measurements: list[MeasurementBlock] | None = None
     metrics: IdRef | None = None
     model: str | None = None
+    name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     ports: IdRef | None = None

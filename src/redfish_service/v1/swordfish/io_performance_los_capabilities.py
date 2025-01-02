@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..schedule import Schedule
@@ -26,14 +23,20 @@ class IoAccessPattern(StrEnum):
     RANDOM_READ_AGAIN = "RandomReadAgain"
 
 
-class IoPerformanceLosCapabilities(RedfishResource):
+class IoPerformanceLosCapabilities(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     io_limiting_is_supported: bool | None = Field(alias="IOLimitingIsSupported", default=None)
+    id: str
     identifier: Identifier | None = None
     max_sample_period: str | None = None
     min_sample_period: str | None = None
     min_supported_io_operation_latency_microseconds: int | None = None
+    name: str
     oem: dict[str, Any] | None = None
     supported_io_workloads: list[IoWorkload] | None = Field(
         alias="SupportedIOWorkloads", default=None

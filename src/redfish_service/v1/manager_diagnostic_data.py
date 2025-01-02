@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 
 
 class Actions(RedfishModel):
@@ -32,16 +29,22 @@ class I2cBusStatistics(RedfishModel):
     total_transaction_count: int | None = None
 
 
-class ManagerDiagnosticData(RedfishResource):
+class ManagerDiagnosticData(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     boot_time_statistics: BootTimeStatistics | None = None
     description: str | None = None
     free_storage_space_kib: int | None = Field(alias="FreeStorageSpaceKiB", default=None)
     i2c_buses: list[I2cBusStatistics] | None = Field(alias="I2CBuses", default=None)
+    id: str
     memory_ecc_statistics: MemoryEccStatistics | None = Field(
         alias="MemoryECCStatistics", default=None
     )
     memory_statistics: MemoryStatistics | None = None
+    name: str
     oem: dict[str, Any] | None = None
     processor_statistics: ProcessorStatistics | None = None
     service_root_uptime_seconds: float | None = None

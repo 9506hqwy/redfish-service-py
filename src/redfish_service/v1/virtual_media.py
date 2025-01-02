@@ -5,10 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -68,7 +65,11 @@ class TransferProtocolType(StrEnum):
     OEM = "OEM"
 
 
-class VirtualMedia(RedfishResource):
+class VirtualMedia(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     certificates: IdRef | None = None
     client_certificates: IdRef | None = None
@@ -76,10 +77,12 @@ class VirtualMedia(RedfishResource):
     description: str | None = None
     eject_policy: EjectPolicy | None = None
     eject_timeout: str | None = None
+    id: str
     image: str | None = None
     image_name: str | None = None
     inserted: bool | None = None
     media_types: list[MediaType] | None = None
+    name: str
     oem: dict[str, Any] | None = None
     password: str | None = None
     status: Status | None = None

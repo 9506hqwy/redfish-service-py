@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import (
-    RedfishModel,
-    RedfishResource,
-)
+from .base import RedfishModel
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -22,12 +19,18 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class PowerEquipment(RedfishResource):
+class PowerEquipment(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     actions: Actions | None = None
     description: str | None = None
     electrical_buses: IdRef | None = None
     floor_pd_us: IdRef | None = Field(alias="FloorPDUs", default=None)
+    id: str
     links: Links | None = None
+    name: str
     oem: dict[str, Any] | None = None
     power_shelves: IdRef | None = None
     rack_pd_us: IdRef | None = Field(alias="RackPDUs", default=None)

@@ -4,10 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import (
-    RedfishModel,
-    RedfishResource,
-)
+from ..base import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Status
 
@@ -31,7 +28,11 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class NvmeDomain(RedfishResource):
+class NvmeDomain(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str = Field(alias="@odata.id")
+    odata_type: str = Field(alias="@odata.type")
     ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
     actions: Actions | None = None
     available_firmware_images: list[IdRef] | None = None
@@ -46,9 +47,11 @@ class NvmeDomain(RedfishResource):
     firmware_images_odata_count: int | None = Field(
         alias="FirmwareImages@odata.count", default=None
     )
+    id: str
     links: Links | None = None
     max_namespaces_supported_per_controller: float | None = None
     maximum_capacity_per_endurance_group_bytes: int | None = None
+    name: str
     oem: dict[str, Any] | None = None
     status: Status | None = None
     total_domain_capacity_bytes: int | None = None
