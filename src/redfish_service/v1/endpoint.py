@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 from .ip_addresses import Ipv4Address, Ipv6Address
 from .odata_v4 import IdRef
 from .protocol import Protocol

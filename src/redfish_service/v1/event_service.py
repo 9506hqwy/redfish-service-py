@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 from .event import EventType
 from .event_destination import EventFormatType
 from .odata_v4 import IdRef

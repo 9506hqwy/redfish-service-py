@@ -570,6 +570,32 @@ def select_definition(definitions: list[dict[str, Any]]) -> str | dict[str, Any]
     return sorted_refs[0][1]
 
 
+def write_base_classes(out_path: Path) -> None:
+    if not out_path.exists():
+        out_path.mkdir()
+
+    out_file = out_path / "__init__.py"
+    with out_file.open("w") as w:
+        w.writelines(
+            [
+                "from pydantic import BaseModel, ConfigDict\n",
+                "from pydantic.alias_generators import to_pascal\n",
+                "\n",
+                "\n",
+                "class RedfishModel(BaseModel):\n",
+                "    model_config = ConfigDict(alias_generator=to_pascal, populate_by_name=True)\n",  # noqa: E501
+            ]
+        )
+
+    out_dir = out_path / "swordfish"
+    if not out_dir.exists():
+        out_dir.mkdir()
+
+    out_file = out_dir / "__init__.py"
+    with out_file.open("w") as w:
+        pass
+
+
 def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
     count = 0
     for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
@@ -629,7 +655,7 @@ def write_imports_to(
     if domaon == "swordfish":
         parent = ".."
 
-    w.write(f"from {parent}base import RedfishModel\n")
+    w.write(f"from {parent} import RedfishModel\n")
 
     imports: set[ClassInfo | EnumInfo] = set([])
     for c in classall:
@@ -659,7 +685,7 @@ def main() -> int:
         raise Exception(f"'{swordfish_path}' is not directory.")
 
     out_path = Path(sys.argv[3])
-    if not out_path.is_dir():
+    if out_path.is_file():
         raise Exception(f"'{out_path}' is not directory.")
 
     classall = load_classes(redfish_path, swordfish_path)
@@ -688,6 +714,7 @@ def main() -> int:
     loaded = len([c for c in classall if c.loaded])
     print(f"loaded: {loaded}")
 
+    write_base_classes(out_path)
     write_classes(out_path, classall)
 
     return 0

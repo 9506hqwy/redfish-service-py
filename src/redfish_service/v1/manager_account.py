@@ -5,8 +5,8 @@ from typing import Any
 
 from pydantic import Field
 
+from . import RedfishModel
 from .account_service import MfaBypass
-from .base import RedfishModel
 from .odata_v4 import IdRef
 
 

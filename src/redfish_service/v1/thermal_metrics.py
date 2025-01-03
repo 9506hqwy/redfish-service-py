@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 from .sensor import SensorArrayExcerpt, SensorEnergykWhExcerpt, SensorExcerpt, SensorPowerExcerpt
 
 

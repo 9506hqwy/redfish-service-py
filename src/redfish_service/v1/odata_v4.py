@@ -2,7 +2,7 @@ from __future__ import annotations  # PEP563 Forward References
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 
 
 class IdRef(RedfishModel):

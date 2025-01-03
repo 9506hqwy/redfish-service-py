@@ -1,18 +1,6 @@
-from .base import RedfishModel
-from .message import Message
-from .redfish_error import RedfishError, RedfishErrorContents
-from .resource import Health
-from .service_root import Links as ServiceRootLinks
-from .service_root import ServiceRoot
-from .session_collection import SessionCollection
+from pydantic import BaseModel, ConfigDict
+from pydantic.alias_generators import to_pascal
 
-__all__ = [
-    "Health",
-    "Message",
-    "RedfishError",
-    "RedfishErrorContents",
-    "RedfishModel",
-    "ServiceRoot",
-    "ServiceRootLinks",
-    "SessionCollection",
-]
+
+class RedfishModel(BaseModel):
+    model_config = ConfigDict(alias_generator=to_pascal, populate_by_name=True)

@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 from .container_image import ImageTypes
 from .odata_v4 import IdRef
 from .resource import Status

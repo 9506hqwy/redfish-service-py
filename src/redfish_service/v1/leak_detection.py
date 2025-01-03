@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 from .leak_detector import LeakDetectorArrayExcerpt
 from .odata_v4 import IdRef
 from .resource import Status

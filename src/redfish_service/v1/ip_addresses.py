@@ -3,7 +3,7 @@ from __future__ import annotations  # PEP563 Forward References
 from enum import StrEnum
 from typing import Any
 
-from .base import RedfishModel
+from . import RedfishModel
 
 
 class AddressState(StrEnum):

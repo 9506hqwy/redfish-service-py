@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from ..v1 import SessionCollection
+from ..v1.session_collection import SessionCollection
 from . import PATH_SESSION_COLLECTION, authenticate
 
 router = APIRouter()

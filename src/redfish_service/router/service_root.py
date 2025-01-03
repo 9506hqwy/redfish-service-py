@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from ..v1 import ServiceRoot
+from ..v1.service_root import ServiceRoot
 from . import PATH_SERVICE_ROOT, PATH_SESSION_COLLECTION, authenticate
 
 root_info = {

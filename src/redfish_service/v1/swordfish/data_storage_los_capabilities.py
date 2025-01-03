@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from ..base import RedfishModel
+from .. import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Identifier
 from ..swordfish.data_protection_los_capabilities import RecoveryAccessScope

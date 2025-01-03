@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .base import RedfishModel
+from . import RedfishModel
 from .control import ControlSingleLoopExcerpt
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
