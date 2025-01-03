@@ -1,4 +1,4 @@
-from redfish_service.v1.session_collection import SessionCollection
+from redfish_service.model.session_collection import SessionCollection
 
 
 def test_session_collection_min() -> None:

@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from .v1.redfish_error import RedfishError as Error
+from .model.redfish_error import RedfishError as Error
 
 
 class RedfishError(Exception):

@@ -1,7 +1,7 @@
-from redfish_service.v1.service_root import (
+from redfish_service.model.service_root import (
     Links as ServiceRootLinks,
 )
-from redfish_service.v1.service_root import (
+from redfish_service.model.service_root import (
     ServiceRoot,
 )
 
