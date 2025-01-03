@@ -1,13 +1,18 @@
-from pydantic import BaseModel, Field
+from __future__ import annotations  # PEP563 Forward References
 
+from pydantic import Field
+
+from .base import RedfishModel
 from .message import Message
 
 
-class RedfishErrorContents(BaseModel):
-    code: str
-    message: str
-    message_extended_info: Message | None = Field(alias="@Message.ExtendedInfo", default=None)
+class RedfishError(RedfishModel):
+    error: RedfishErrorContents = Field(alias="error")
 
 
-class RedfishError(BaseModel):
-    error: RedfishErrorContents
+class RedfishErrorContents(RedfishModel):
+    code: str = Field(alias="code")
+    message: str = Field(alias="message")
+    message_extended_info: list[Message] | None = Field(
+        alias="@Message.ExtendedInfo", default=None
+    )

@@ -13,6 +13,9 @@ from warnings import warn
 # pydantic.BaseModel properties.
 BASE_MODEL_PROPERTIES: list[str] = ["schema"]
 
+# enable versioned only schema.
+VERSIONED_ONLY: list[str] = ["redfish-error.v1_0_2.json"]
+
 
 @dataclass
 class ClassInfo:
@@ -662,6 +665,10 @@ def main() -> int:
     classall = load_classes(redfish_path, swordfish_path)
 
     for c in (c for c in classall if not c.versioned):
+        if isinstance(c, ClassInfo):
+            c.reachable = True
+
+    for c in (c for c in classall if c.schema_path.name in VERSIONED_ONLY):
         if isinstance(c, ClassInfo):
             c.reachable = True
 
