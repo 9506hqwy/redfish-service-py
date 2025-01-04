@@ -7,9 +7,6 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from ..exception import ResourceAtUriUnauthorizedError
 
-PATH_SERVICE_ROOT = "/redfish/v1"
-PATH_SESSION_COLLECTION = "/redfish/v1/SessionService/Sessions"
-
 basic_auth = HTTPBasic()
 
 

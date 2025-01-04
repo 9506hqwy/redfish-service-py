@@ -1,20 +1,16 @@
+from typing import cast
+
 from fastapi import APIRouter
 
 from ..model.session_collection import SessionCollection
-from . import PATH_SESSION_COLLECTION, authenticate
+from ..service import find_service
+from . import authenticate
 
 router = APIRouter()
-
-sessions_info = {
-    "odata_id": PATH_SESSION_COLLECTION,
-    "odata_type": "#SessionCollection.SessionCollection",
-    "members": [],
-    "members_odata_count": 0,
-    "name": "Session Collection",
-}
 
 
 @router.get("", response_model_exclude_none=True)
 @authenticate
 async def root() -> SessionCollection:
-    return SessionCollection.model_validate(sessions_info)
+    s = find_service(SessionCollection)
+    return cast(SessionCollection, s.get())

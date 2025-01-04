@@ -4,7 +4,8 @@ from argparse import ArgumentParser, Namespace
 
 import uvicorn
 
-from .service import app
+from .repository import init_instances
+from .server import app
 
 
 def parse_args() -> Namespace:
@@ -21,6 +22,7 @@ def parse_args() -> Namespace:
 def main() -> None:
     args = parse_args()
     log_level = logging.DEBUG if args.debug else logging.INFO
+    init_instances()
     uvicorn.run(app, host=args.bind, port=args.port, log_level=log_level)
 
 

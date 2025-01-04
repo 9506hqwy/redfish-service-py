@@ -4,7 +4,7 @@ from unittest import mock
 import uvicorn
 
 from redfish_service import cli
-from redfish_service.service import app
+from redfish_service.server import app
 
 
 def test_default() -> None:

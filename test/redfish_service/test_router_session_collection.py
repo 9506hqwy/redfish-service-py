@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from redfish_service.service import app
+from redfish_service.server import app
 
 client = TestClient(app)
 

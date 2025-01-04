@@ -34,6 +34,18 @@ class InternalErrorError(RedfishError):
         super().__init__(status_code, error)
 
 
+class OperationNotAllowedError(RedfishError):
+    def __init__(self) -> None:
+        info = {
+            "error": {
+                "code": "Base.1.19.0.OperationNotAllowed",
+                "message": "The HTTP method is not allowed on this resource.",
+            }
+        }
+        error = Error.model_validate(info)
+        super().__init__(HTTPStatus.METHOD_NOT_ALLOWED, error)
+
+
 class ResourceAtUriUnauthorizedError(RedfishError):
     def __init__(self, uri: str, message: str):
         info = {
@@ -45,3 +57,15 @@ class ResourceAtUriUnauthorizedError(RedfishError):
         }
         error = Error.model_validate(info)
         super().__init__(HTTPStatus.UNAUTHORIZED, error)
+
+
+class ResourceNotFoundError(RedfishError):
+    def __init__(self, type: str, id: str):
+        info = {
+            "error": {
+                "code": "Base.1.19.0.ResourceNotFound",
+                "message": f"The requested resource of type {type} named {id} was not found.",
+            }
+        }
+        error = Error.model_validate(info)
+        super().__init__(HTTPStatus.NOT_FOUND, error)
