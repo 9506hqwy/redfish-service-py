@@ -7,8 +7,8 @@ from pydantic import Field
 
 from . import RedfishModel
 from .account_service import MfaBypass
-from .manager_account import AccountTypes
 from .odata_v4 import IdRef
+from .values import AccountTypes
 
 
 class AccountProviderTypes(StrEnum):

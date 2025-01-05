@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.cxl_logical_device_collection import CxlLogicalDeviceCollection
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 

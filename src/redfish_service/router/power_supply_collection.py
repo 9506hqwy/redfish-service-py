@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.power_supply_collection import PowerSupplyCollection
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 

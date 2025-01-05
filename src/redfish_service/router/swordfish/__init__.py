@@ -1,0 +1,83 @@
+from fastapi import FastAPI
+
+from . import (
+    capacity,
+    capacity_source_collection,
+    class_of_service,
+    class_of_service_collection,
+    consistency_group,
+    consistency_group_collection,
+    data_protection_line_of_service,
+    data_protection_los_capabilities,
+    data_security_line_of_service,
+    data_security_los_capabilities,
+    data_storage_line_of_service,
+    data_storage_los_capabilities,
+    file_share,
+    file_share_collection,
+    file_system,
+    file_system_collection,
+    file_system_metrics,
+    hosted_storage_services,
+    io_connectivity_line_of_service,
+    io_connectivity_los_capabilities,
+    io_performance_line_of_service,
+    io_performance_los_capabilities,
+    line_of_service_collection,
+    nvme_domain,
+    nvme_domain_collection,
+    nvme_firmware_image,
+    storage_group,
+    storage_group_collection,
+    storage_pool,
+    storage_pool_collection,
+    storage_pool_metrics,
+    storage_service,
+    storage_service_collection,
+    storage_service_metrics,
+    storage_system_collection,
+    volume,
+    volume_collection,
+    volume_metrics,
+)
+
+
+def include_router(app: FastAPI) -> None:
+    app.include_router(capacity.router)
+    app.include_router(capacity_source_collection.router)
+    app.include_router(class_of_service.router)
+    app.include_router(class_of_service_collection.router)
+    app.include_router(consistency_group.router)
+    app.include_router(consistency_group_collection.router)
+    app.include_router(data_protection_line_of_service.router)
+    app.include_router(data_protection_los_capabilities.router)
+    app.include_router(data_security_line_of_service.router)
+    app.include_router(data_security_los_capabilities.router)
+    app.include_router(data_storage_line_of_service.router)
+    app.include_router(data_storage_los_capabilities.router)
+    app.include_router(file_share.router)
+    app.include_router(file_share_collection.router)
+    app.include_router(file_system.router)
+    app.include_router(file_system_collection.router)
+    app.include_router(file_system_metrics.router)
+    app.include_router(hosted_storage_services.router)
+    app.include_router(io_connectivity_line_of_service.router)
+    app.include_router(io_connectivity_los_capabilities.router)
+    app.include_router(io_performance_line_of_service.router)
+    app.include_router(io_performance_los_capabilities.router)
+    app.include_router(line_of_service_collection.router)
+    app.include_router(nvme_domain.router)
+    app.include_router(nvme_domain_collection.router)
+    app.include_router(nvme_firmware_image.router)
+    app.include_router(storage_group.router)
+    app.include_router(storage_group_collection.router)
+    app.include_router(storage_pool.router)
+    app.include_router(storage_pool_collection.router)
+    app.include_router(storage_pool_metrics.router)
+    app.include_router(storage_service.router)
+    app.include_router(storage_service_collection.router)
+    app.include_router(storage_service_metrics.router)
+    app.include_router(storage_system_collection.router)
+    app.include_router(volume.router)
+    app.include_router(volume_collection.router)
+    app.include_router(volume_metrics.router)

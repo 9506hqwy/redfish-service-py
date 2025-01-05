@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.message_registry_file_collection import MessageRegistryFileCollection
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 

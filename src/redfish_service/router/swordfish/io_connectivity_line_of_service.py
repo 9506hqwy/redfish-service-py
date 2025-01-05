@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ...authenticate import authenticate
 from ...model.swordfish.io_connectivity_line_of_service import IoConnectivityLineOfService
 from ...service import Service, find_service
-from .. import authenticate
 
 router = APIRouter()
 

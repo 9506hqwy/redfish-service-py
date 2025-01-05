@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.media_controller import MediaController
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 

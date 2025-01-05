@@ -13,6 +13,9 @@ from warnings import warn
 # pydantic.BaseModel properties.
 BASE_MODEL_PROPERTIES: list[str] = ["schema"]
 
+# define common values because of avoiding circular reference.
+CIRCULAR_REFERENCE_VALUES: list[str] = ["AccountTypes"]
+
 # enable versioned only schema.
 VERSIONED_ONLY: list[str] = ["redfish-error.v1_0_2.json"]
 
@@ -609,6 +612,7 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
         if domain_name == "swordfish":
             out_file = out_path / "swordfish"
 
+        values: list[EnumInfo] = []
         modules = sorted(list(modules_iter), key=lambda m: m.module)
         for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
             if module_name.find(".") > -1:
@@ -636,12 +640,29 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                         warn(f"Exist newer version '{c}'")
                         continue
 
+                    if isinstance(c, EnumInfo) and c.name in CIRCULAR_REFERENCE_VALUES:
+                        values.append(c)
+                        continue
+
                     count += 1
                     print(f"{count}: {c} to {module_path}")
 
                     w.write("\n")
                     w.write("\n")
                     c.write_to(w)
+
+        if len(values) > 0:
+            module_path = out_file / "values.py"
+            with module_path.open("w") as w:
+                write_imports_to(domain_name, classes, "values", w)
+
+                for v in values:
+                    count += 1
+                    print(f"{count}: {v} to {module_path}")
+
+                    w.write("\n")
+                    w.write("\n")
+                    v.write_to(w)
 
 
 def write_imports_to(
@@ -677,7 +698,9 @@ def write_imports_to(
                     imports.add(p.type)
 
     for i in sorted(imports, key=lambda i: i.module):
-        if i.module != module:
+        if i.name in CIRCULAR_REFERENCE_VALUES:
+            w.write(f"from {parent}values import {i.cls_name}\n")
+        elif i.module != module:
             w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
 
 
@@ -703,24 +726,22 @@ def write_imports_router_to(
             w.write(f"from {parent}model.{c.module_path} import {c.cls_name}\n")
 
     w.write(f"from {parent}service import Service, find_service\n")
-
-    parent = "."
-    if domaon == "swordfish":
-        parent = ".."
-
-    w.write(f"from {parent} import authenticate\n")
+    w.write(f"from {parent}authenticate import authenticate\n")
     w.write("\n")
 
     w.write("router = APIRouter()\n")
 
 
-def write_routers(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
+def write_routers(
+    out_path: Path, classall: list[ClassInfo | EnumInfo]
+) -> list[ClassInfo | EnumInfo]:
     out_path = out_path / "router"
 
     if not out_path.exists():
         out_path.mkdir()
 
     urls: list[str] = []
+    routing: list[ClassInfo | EnumInfo] = []
     for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
         out_dir = out_path
         if domain_name == "swordfish":
@@ -781,6 +802,43 @@ def write_routers(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                         urls.append(url)
                         print(f"{len(urls)}: {url} to {module_path}")
 
+                    routing.append(c)
+
+    return routing
+
+
+def write_routers_init(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
+    out_path = out_path / "router"
+
+    redfish_file = out_path / "__init__.py"
+    swordfish_file = out_path / "swordfish" / "__init__.py"
+    with redfish_file.open("w") as redfish, swordfish_file.open("w") as swordfish:
+        redfish.write("from fastapi import FastAPI\n")
+        redfish.write("\n")
+
+        swordfish.write("from fastapi import FastAPI\n")
+        swordfish.write("\n")
+
+        for c in classall:
+            if c.domain == "swordfish":
+                swordfish.write(f"from . import {c.module}\n")
+            else:
+                redfish.write(f"from . import {c.module}\n")
+
+        redfish.write("\n")
+        redfish.write("\n")
+        redfish.write("def include_router(app: FastAPI) -> None:\n")
+
+        swordfish.write("\n")
+        swordfish.write("\n")
+        swordfish.write("def include_router(app: FastAPI) -> None:\n")
+
+        for c in classall:
+            if c.domain == "swordfish":
+                swordfish.write(f"    app.include_router({c.module}.router)\n")
+            else:
+                redfish.write(f"    app.include_router({c.module}.router)\n")
+
 
 def main() -> int:
     redfish_path = Path(sys.argv[1])
@@ -824,7 +882,8 @@ def main() -> int:
     write_base_classes(out_path)
     write_classes(out_path, classall)
 
-    write_routers(out_path, classall)
+    routing = write_routers(out_path, classall)
+    write_routers_init(out_path, routing)
 
     return 0
 

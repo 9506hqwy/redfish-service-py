@@ -6,10 +6,10 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
-from .manager_account import AccountTypes
 from .odata_v4 import IdRef
 from .privileges import PrivilegeType
 from .resource import Status
+from .values import AccountTypes
 
 
 class AccountProviderTypes(StrEnum):

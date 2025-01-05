@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.thermal_subsystem import ThermalSubsystem
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 

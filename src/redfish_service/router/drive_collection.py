@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.drive_collection import DriveCollection
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 

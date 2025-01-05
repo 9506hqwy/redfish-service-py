@@ -8,18 +8,7 @@ from pydantic import Field
 from . import RedfishModel
 from .account_service import MfaBypass
 from .odata_v4 import IdRef
-
-
-class AccountTypes(StrEnum):
-    REDFISH = "Redfish"
-    SNMP = "SNMP"
-    OEM = "OEM"
-    HOST_CONSOLE = "HostConsole"
-    MANAGER_CONSOLE = "ManagerConsole"
-    IPMI = "IPMI"
-    KVMIP = "KVMIP"
-    VIRTUAL_MEDIA = "VirtualMedia"
-    WEB_UI = "WebUI"
+from .values import AccountTypes
 
 
 class Actions(RedfishModel):

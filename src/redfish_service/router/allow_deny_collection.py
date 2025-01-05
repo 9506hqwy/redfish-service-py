@@ -2,9 +2,9 @@ from typing import Any, cast
 
 from fastapi import APIRouter
 
+from ..authenticate import authenticate
 from ..model.allow_deny_collection import AllowDenyCollection
 from ..service import Service, find_service
-from . import authenticate
 
 router = APIRouter()
 
