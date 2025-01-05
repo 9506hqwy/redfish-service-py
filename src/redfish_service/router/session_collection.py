@@ -1,16 +1,17 @@
-from typing import cast
+from typing import Any, cast
 
 from fastapi import APIRouter
 
 from ..model.session_collection import SessionCollection
-from ..service import find_service
+from ..service import Service, find_service
 from . import authenticate
 
 router = APIRouter()
 
 
-@router.get("", response_model_exclude_none=True)
+@router.get("/redfish/v1/SessionService/Sessions", response_model_exclude_none=True)
 @authenticate
-async def root() -> SessionCollection:
-    s = find_service(SessionCollection)
-    return cast(SessionCollection, s.get())
+async def get1() -> SessionCollection:
+    s: Service = find_service(SessionCollection)
+    b: dict[str, Any] = {}
+    return cast(SessionCollection, s.get(**b))

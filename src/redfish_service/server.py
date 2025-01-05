@@ -8,15 +8,15 @@ from starlette.responses import JSONResponse
 from . import service_impl  # noqa: F401
 from .exception import InternalErrorError, InvalidURIError
 from .exception import RedfishError as RedfishException
-from .repository import PATH_SERVICE_ROOT, PATH_SESSION_COLLECTION
+from .repository import PATH_SERVICE_ROOT
 from .router import service_root, session_collection
 
 ## TODO: 7 Service requests
 ## TODO: 8 Service responses
 
 app = FastAPI()
-app.include_router(service_root.router, prefix=PATH_SERVICE_ROOT)
-app.include_router(session_collection.router, prefix=PATH_SESSION_COLLECTION)
+app.include_router(service_root.router)
+app.include_router(session_collection.router)
 
 
 @app.exception_handler(StarletteHTTPException)

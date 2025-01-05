@@ -1,16 +1,17 @@
-from typing import cast
+from typing import Any, cast
 
 from fastapi import APIRouter
 
 from ..model.service_root import ServiceRoot
-from ..service import find_service
+from ..service import Service, find_service
 from . import authenticate
 
 router = APIRouter()
 
 
-@router.get("/", response_model_exclude_none=True)
+@router.get("/redfish/v1/", response_model_exclude_none=True)
 @authenticate
-async def root() -> ServiceRoot:
-    s = find_service(ServiceRoot)
-    return cast(ServiceRoot, s.get())
+async def get1() -> ServiceRoot:
+    s: Service = find_service(ServiceRoot)
+    b: dict[str, Any] = {}
+    return cast(ServiceRoot, s.get(**b))

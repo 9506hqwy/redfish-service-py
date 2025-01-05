@@ -27,6 +27,7 @@ class ClassInfo:
     reachable: bool = False
     loaded: bool = False
     raw: bool = False
+    impl_info: ClassInfo | None = None
     _module: str | None = None
 
     @property
@@ -420,6 +421,7 @@ def load_properties(
                 if isinstance(temp, EnumInfo):
                     temp.loaded = True
                 else:
+                    target.impl_info = temp
                     # Disable source definition.
                     target.reachable = False
                     target.loaded = False
@@ -571,6 +573,8 @@ def select_definition(definitions: list[dict[str, Any]]) -> str | dict[str, Any]
 
 
 def write_base_classes(out_path: Path) -> None:
+    out_path = out_path / "model"
+
     if not out_path.exists():
         out_path.mkdir()
 
@@ -597,6 +601,8 @@ def write_base_classes(out_path: Path) -> None:
 
 
 def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
+    out_path = out_path / "model"
+
     count = 0
     for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
         out_file = out_path
@@ -675,6 +681,107 @@ def write_imports_to(
             w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
 
 
+def write_imports_router_to(
+    domaon: str, classall: list[ClassInfo | EnumInfo], module: str, w: Any
+) -> None:
+    w.write("from typing import Any, cast\n")
+    w.write("\n")
+
+    w.write("from fastapi import APIRouter\n")
+    w.write("\n")
+
+    parent = ".."
+    if domaon == "swordfish":
+        parent = "..."
+
+    for c in classall:
+        if isinstance(c, ClassInfo) and c.impl_info:
+            w.write(
+                f"from {parent}model.{c.impl_info.module_path} import {c.impl_info.cls_name}\n"
+            )
+        else:
+            w.write(f"from {parent}model.{c.module_path} import {c.cls_name}\n")
+
+    w.write(f"from {parent}service import Service, find_service\n")
+
+    parent = "."
+    if domaon == "swordfish":
+        parent = ".."
+
+    w.write(f"from {parent} import authenticate\n")
+    w.write("\n")
+
+    w.write("router = APIRouter()\n")
+
+
+def write_routers(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
+    out_path = out_path / "router"
+
+    if not out_path.exists():
+        out_path.mkdir()
+
+    urls: list[str] = []
+    for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
+        out_dir = out_path
+        if domain_name == "swordfish":
+            out_dir = out_path / "swordfish"
+
+        if not out_dir.exists():
+            out_dir.mkdir()
+
+        modules = sorted(list(modules_iter), key=lambda m: m.module)
+        for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
+            if module_name.find(".") > -1:
+                continue
+
+            classes = sorted(
+                [c for c in classes_iter if "uris" in c.definition], key=lambda c: c.name
+            )
+            if len(classes) == 0:
+                continue
+
+            module_path = out_dir / f"{module_name}.py"
+            with module_path.open("w") as w:
+                write_imports_router_to(domain_name, classes, module_name, w)
+
+                for c in classes:
+                    index = 0
+                    for url in c.definition["uris"]:
+                        if url == "/redfish/v1":
+                            # redirect to /redfish/v1/
+                            continue
+
+                        if url in urls:
+                            warn(f"{c} {url} is duplicated.")
+                            continue
+
+                        params: list[str] = []
+                        for p in re.findall(r"{[^}]+}", url):
+                            name = get_snake_case(p.strip("{}"))
+                            params.append(name)
+                            url = url.replace(p, f"{{{name}}}")
+
+                        args = ",".join([f"{p}: str" for p in params])
+                        body = ",".join([f'"{p}": {p}' for p in params])
+
+                        index += 1
+                        w.writelines(
+                            [
+                                "\n",
+                                "\n",
+                                f'@router.get("{url}", response_model_exclude_none=True)\n',
+                                "@authenticate\n",
+                                f"async def get{index}({args}) -> {c.cls_name}:\n",
+                                f"    s: Service = find_service({c.cls_name})\n",
+                                f"    b: dict[str, Any] = {{{body}}}\n",
+                                f"    return cast({c.cls_name}, s.get(**b))\n",
+                            ]
+                        )
+
+                        urls.append(url)
+                        print(f"{len(urls)}: {url} to {module_path}")
+
+
 def main() -> int:
     redfish_path = Path(sys.argv[1])
     if not redfish_path.is_dir():
@@ -716,6 +823,8 @@ def main() -> int:
 
     write_base_classes(out_path)
     write_classes(out_path, classall)
+
+    write_routers(out_path, classall)
 
     return 0
 
