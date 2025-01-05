@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.fan import Fan
@@ -14,7 +14,15 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, fan_id: str) -> Fan:
+async def get1(chassis_id: str, fan_id: str, request: Request, response: Response) -> Fan:
     s: Service = find_service(Fan)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "fan_id": fan_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fan_id": fan_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Fan, s.get(**b))

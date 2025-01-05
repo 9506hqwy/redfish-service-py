@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.outlet_group import OutletGroup
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
+async def get1(
+    power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
+) -> OutletGroup:
     s: Service = find_service(OutletGroup)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(OutletGroup, s.get(**b))
 
 
@@ -28,12 +35,19 @@ async def get1(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
+async def get2(
+    power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
+) -> OutletGroup:
     s: Service = find_service(OutletGroup)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(OutletGroup, s.get(**b))
 
 
@@ -42,12 +56,19 @@ async def get2(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
+async def get3(
+    power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
+) -> OutletGroup:
     s: Service = find_service(OutletGroup)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(OutletGroup, s.get(**b))
 
 
@@ -56,10 +77,17 @@ async def get3(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(power_distribution_id: str, outlet_group_id: str) -> OutletGroup:
+async def get4(
+    power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
+) -> OutletGroup:
     s: Service = find_service(OutletGroup)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(OutletGroup, s.get(**b))

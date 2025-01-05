@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.container import Container
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, container_id: str) -> Container:
+async def get1(
+    computer_system_id: str, container_id: str, request: Request, response: Response
+) -> Container:
     s: Service = find_service(Container)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "container_id": container_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "container_id": container_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Container, s.get(**b))
 
 
@@ -25,13 +35,24 @@ async def get1(computer_system_id: str, container_id: str) -> Container:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(resource_block_id: str, computer_system_id: str, container_id: str) -> Container:
+async def get2(
+    resource_block_id: str,
+    computer_system_id: str,
+    container_id: str,
+    request: Request,
+    response: Response,
+) -> Container:
     s: Service = find_service(Container)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "container_id": container_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Container, s.get(**b))
 
 
@@ -40,11 +61,22 @@ async def get2(resource_block_id: str, computer_system_id: str, container_id: st
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(resource_block_id: str, computer_system_id: str, container_id: str) -> Container:
+async def get3(
+    resource_block_id: str,
+    computer_system_id: str,
+    container_id: str,
+    request: Request,
+    response: Response,
+) -> Container:
     s: Service = find_service(Container)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "container_id": container_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Container, s.get(**b))

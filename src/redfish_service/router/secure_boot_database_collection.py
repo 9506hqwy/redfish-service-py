@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.secure_boot_database_collection import SecureBootDatabaseCollection
@@ -14,9 +14,18 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str) -> SecureBootDatabaseCollection:
+async def get1(
+    computer_system_id: str, request: Request, response: Response
+) -> SecureBootDatabaseCollection:
     s: Service = find_service(SecureBootDatabaseCollection)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(SecureBootDatabaseCollection, s.get(**b))
 
 
@@ -25,12 +34,19 @@ async def get1(computer_system_id: str) -> SecureBootDatabaseCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(resource_block_id: str, computer_system_id: str) -> SecureBootDatabaseCollection:
+async def get2(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> SecureBootDatabaseCollection:
     s: Service = find_service(SecureBootDatabaseCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(SecureBootDatabaseCollection, s.get(**b))
 
 
@@ -39,10 +55,17 @@ async def get2(resource_block_id: str, computer_system_id: str) -> SecureBootDat
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(resource_block_id: str, computer_system_id: str) -> SecureBootDatabaseCollection:
+async def get3(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> SecureBootDatabaseCollection:
     s: Service = find_service(SecureBootDatabaseCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(SecureBootDatabaseCollection, s.get(**b))

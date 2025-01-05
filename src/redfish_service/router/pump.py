@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.pump import Pump
@@ -14,9 +14,17 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(cooling_unit_id: str, pump_id: str) -> Pump:
+async def get1(cooling_unit_id: str, pump_id: str, request: Request, response: Response) -> Pump:
     s: Service = find_service(Pump)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Pump, s.get(**b))
 
 
@@ -25,9 +33,17 @@ async def get1(cooling_unit_id: str, pump_id: str) -> Pump:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(cooling_unit_id: str, pump_id: str) -> Pump:
+async def get2(cooling_unit_id: str, pump_id: str, request: Request, response: Response) -> Pump:
     s: Service = find_service(Pump)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Pump, s.get(**b))
 
 
@@ -36,9 +52,17 @@ async def get2(cooling_unit_id: str, pump_id: str) -> Pump:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(cooling_unit_id: str, pump_id: str) -> Pump:
+async def get3(cooling_unit_id: str, pump_id: str, request: Request, response: Response) -> Pump:
     s: Service = find_service(Pump)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Pump, s.get(**b))
 
 
@@ -47,7 +71,15 @@ async def get3(cooling_unit_id: str, pump_id: str) -> Pump:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(chassis_id: str, pump_id: str) -> Pump:
+async def get4(chassis_id: str, pump_id: str, request: Request, response: Response) -> Pump:
     s: Service = find_service(Pump)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Pump, s.get(**b))

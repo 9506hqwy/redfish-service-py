@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.filter_collection import FilterCollection
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, pump_id: str) -> FilterCollection:
+async def get1(
+    chassis_id: str, pump_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -24,9 +34,16 @@ async def get1(chassis_id: str, pump_id: str) -> FilterCollection:
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters", response_model_exclude_none=True
 )
 @authenticate
-async def get2(cooling_unit_id: str) -> FilterCollection:
+async def get2(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -35,9 +52,19 @@ async def get2(cooling_unit_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(cooling_unit_id: str, reservoir_id: str) -> FilterCollection:
+async def get3(
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "reservoir_id": reservoir_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -46,9 +73,19 @@ async def get3(cooling_unit_id: str, reservoir_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(cooling_unit_id: str, pump_id: str) -> FilterCollection:
+async def get4(
+    cooling_unit_id: str, pump_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -57,9 +94,16 @@ async def get4(cooling_unit_id: str, pump_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(cooling_unit_id: str) -> FilterCollection:
+async def get5(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -68,9 +112,19 @@ async def get5(cooling_unit_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(cooling_unit_id: str, reservoir_id: str) -> FilterCollection:
+async def get6(
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "reservoir_id": reservoir_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -79,9 +133,19 @@ async def get6(cooling_unit_id: str, reservoir_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(cooling_unit_id: str, pump_id: str) -> FilterCollection:
+async def get7(
+    cooling_unit_id: str, pump_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -90,9 +154,16 @@ async def get7(cooling_unit_id: str, pump_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(cooling_unit_id: str) -> FilterCollection:
+async def get8(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -101,9 +172,19 @@ async def get8(cooling_unit_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get9(cooling_unit_id: str, reservoir_id: str) -> FilterCollection:
+async def get9(
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "reservoir_id": reservoir_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))
 
 
@@ -112,7 +193,17 @@ async def get9(cooling_unit_id: str, reservoir_id: str) -> FilterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get10(cooling_unit_id: str, pump_id: str) -> FilterCollection:
+async def get10(
+    cooling_unit_id: str, pump_id: str, request: Request, response: Response
+) -> FilterCollection:
     s: Service = find_service(FilterCollection)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "pump_id": pump_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FilterCollection, s.get(**b))

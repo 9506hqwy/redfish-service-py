@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.ethernet_interface import EthernetInterface
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(manager_id: str, ethernet_interface_id: str) -> EthernetInterface:
+async def get1(
+    manager_id: str, ethernet_interface_id: str, request: Request, response: Response
+) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
-    b: dict[str, Any] = {"manager_id": manager_id, "ethernet_interface_id": ethernet_interface_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -25,12 +35,19 @@ async def get1(manager_id: str, ethernet_interface_id: str) -> EthernetInterface
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, ethernet_interface_id: str) -> EthernetInterface:
+async def get2(
+    computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
+) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -39,12 +56,19 @@ async def get2(computer_system_id: str, ethernet_interface_id: str) -> EthernetI
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(resource_block_id: str, ethernet_interface_id: str) -> EthernetInterface:
+async def get3(
+    resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
+) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -54,14 +78,23 @@ async def get3(resource_block_id: str, ethernet_interface_id: str) -> EthernetIn
 )
 @authenticate
 async def get4(
-    resource_block_id: str, computer_system_id: str, ethernet_interface_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    ethernet_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -70,12 +103,19 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(resource_block_id: str, ethernet_interface_id: str) -> EthernetInterface:
+async def get5(
+    resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
+) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -85,14 +125,23 @@ async def get5(resource_block_id: str, ethernet_interface_id: str) -> EthernetIn
 )
 @authenticate
 async def get6(
-    resource_block_id: str, computer_system_id: str, ethernet_interface_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    ethernet_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -101,12 +150,19 @@ async def get6(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(computer_system_id: str, ethernet_interface_id: str) -> EthernetInterface:
+async def get7(
+    computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
+) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -116,14 +172,23 @@ async def get7(computer_system_id: str, ethernet_interface_id: str) -> EthernetI
 )
 @authenticate
 async def get8(
-    resource_block_id: str, computer_system_id: str, ethernet_interface_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    ethernet_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -133,14 +198,23 @@ async def get8(
 )
 @authenticate
 async def get9(
-    resource_block_id: str, computer_system_id: str, ethernet_interface_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    ethernet_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))
 
 
@@ -154,6 +228,8 @@ async def get10(
     network_adapter_id: str,
     network_device_function_id: str,
     ethernet_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> EthernetInterface:
     s: Service = find_service(EthernetInterface)
     b: dict[str, Any] = {
@@ -161,5 +237,10 @@ async def get10(
         "network_adapter_id": network_adapter_id,
         "network_device_function_id": network_device_function_id,
         "ethernet_interface_id": ethernet_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EthernetInterface, s.get(**b))

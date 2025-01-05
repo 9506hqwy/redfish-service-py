@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.trusted_component import TrustedComponent
@@ -14,7 +14,17 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, trusted_component_id: str) -> TrustedComponent:
+async def get1(
+    chassis_id: str, trusted_component_id: str, request: Request, response: Response
+) -> TrustedComponent:
     s: Service = find_service(TrustedComponent)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "trusted_component_id": trusted_component_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "trusted_component_id": trusted_component_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(TrustedComponent, s.get(**b))

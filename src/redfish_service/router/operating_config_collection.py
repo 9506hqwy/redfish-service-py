@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.operating_config_collection import OperatingConfigCollection
@@ -14,7 +14,17 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, processor_id: str) -> OperatingConfigCollection:
+async def get1(
+    computer_system_id: str, processor_id: str, request: Request, response: Response
+) -> OperatingConfigCollection:
     s: Service = find_service(OperatingConfigCollection)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(OperatingConfigCollection, s.get(**b))

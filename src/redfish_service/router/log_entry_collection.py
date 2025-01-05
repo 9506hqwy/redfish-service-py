@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.log_entry_collection import LogEntryCollection
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(manager_id: str, log_service_id: str) -> LogEntryCollection:
+async def get1(
+    manager_id: str, log_service_id: str, request: Request, response: Response
+) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
-    b: dict[str, Any] = {"manager_id": manager_id, "log_service_id": log_service_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "log_service_id": log_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -25,12 +35,19 @@ async def get1(manager_id: str, log_service_id: str) -> LogEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, log_service_id: str) -> LogEntryCollection:
+async def get2(
+    computer_system_id: str, log_service_id: str, request: Request, response: Response
+) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "log_service_id": log_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -40,14 +57,23 @@ async def get2(computer_system_id: str, log_service_id: str) -> LogEntryCollecti
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, log_service_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    log_service_id: str,
+    request: Request,
+    response: Response,
 ) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "log_service_id": log_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -57,14 +83,23 @@ async def get3(
 )
 @authenticate
 async def get4(
-    resource_block_id: str, computer_system_id: str, log_service_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    log_service_id: str,
+    request: Request,
+    response: Response,
 ) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "log_service_id": log_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -73,25 +108,41 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(chassis_id: str, log_service_id: str) -> LogEntryCollection:
+async def get5(
+    chassis_id: str, log_service_id: str, request: Request, response: Response
+) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "log_service_id": log_service_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "log_service_id": log_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
 @router.get("/redfish/v1/JobService/Log/Entries", response_model_exclude_none=True)
 @authenticate
-async def get6() -> LogEntryCollection:
+async def get6(request: Request, response: Response) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
-    b: dict[str, Any] = {}
+    b: dict[str, Any] = {"request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
 @router.get("/redfish/v1/TelemetryService/LogService/Entries", response_model_exclude_none=True)
 @authenticate
-async def get7() -> LogEntryCollection:
+async def get7(request: Request, response: Response) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
-    b: dict[str, Any] = {}
+    b: dict[str, Any] = {"request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -100,9 +151,19 @@ async def get7() -> LogEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(computer_system_id: str, memory_id: str) -> LogEntryCollection:
+async def get8(
+    computer_system_id: str, memory_id: str, request: Request, response: Response
+) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -112,12 +173,21 @@ async def get8(computer_system_id: str, memory_id: str) -> LogEntryCollection:
 )
 @authenticate
 async def get9(
-    chassis_id: str, pcie_device_id: str, cxl_logical_device_id: str
+    chassis_id: str,
+    pcie_device_id: str,
+    cxl_logical_device_id: str,
+    request: Request,
+    response: Response,
 ) -> LogEntryCollection:
     s: Service = find_service(LogEntryCollection)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
         "cxl_logical_device_id": cxl_logical_device_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogEntryCollection, s.get(**b))

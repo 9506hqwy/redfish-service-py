@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.line_of_service_collection import LineOfServiceCollection
@@ -14,9 +14,18 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_service_id: str) -> LineOfServiceCollection:
+async def get1(
+    storage_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -25,9 +34,18 @@ async def get1(storage_service_id: str) -> LineOfServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(storage_service_id: str) -> LineOfServiceCollection:
+async def get2(
+    storage_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -36,9 +54,18 @@ async def get2(storage_service_id: str) -> LineOfServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(storage_service_id: str) -> LineOfServiceCollection:
+async def get3(
+    storage_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -47,9 +74,18 @@ async def get3(storage_service_id: str) -> LineOfServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(storage_service_id: str) -> LineOfServiceCollection:
+async def get4(
+    storage_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -58,9 +94,18 @@ async def get4(storage_service_id: str) -> LineOfServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(storage_service_id: str) -> LineOfServiceCollection:
+async def get5(
+    storage_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -69,9 +114,18 @@ async def get5(storage_service_id: str) -> LineOfServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(storage_service_id: str) -> LineOfServiceCollection:
+async def get6(
+    storage_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -80,12 +134,19 @@ async def get6(storage_service_id: str) -> LineOfServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(storage_service_id: str, class_of_service_id: str) -> LineOfServiceCollection:
+async def get7(
+    storage_service_id: str, class_of_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -94,12 +155,19 @@ async def get7(storage_service_id: str, class_of_service_id: str) -> LineOfServi
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(storage_service_id: str, class_of_service_id: str) -> LineOfServiceCollection:
+async def get8(
+    storage_service_id: str, class_of_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -108,12 +176,19 @@ async def get8(storage_service_id: str, class_of_service_id: str) -> LineOfServi
     response_model_exclude_none=True,
 )
 @authenticate
-async def get9(storage_service_id: str, class_of_service_id: str) -> LineOfServiceCollection:
+async def get9(
+    storage_service_id: str, class_of_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -122,12 +197,19 @@ async def get9(storage_service_id: str, class_of_service_id: str) -> LineOfServi
     response_model_exclude_none=True,
 )
 @authenticate
-async def get10(storage_service_id: str, class_of_service_id: str) -> LineOfServiceCollection:
+async def get10(
+    storage_service_id: str, class_of_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -136,10 +218,17 @@ async def get10(storage_service_id: str, class_of_service_id: str) -> LineOfServ
     response_model_exclude_none=True,
 )
 @authenticate
-async def get11(storage_service_id: str, class_of_service_id: str) -> LineOfServiceCollection:
+async def get11(
+    storage_service_id: str, class_of_service_id: str, request: Request, response: Response
+) -> LineOfServiceCollection:
     s: Service = find_service(LineOfServiceCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LineOfServiceCollection, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.certificate_service import CertificateService
@@ -11,7 +11,10 @@ router = APIRouter()
 
 @router.get("/redfish/v1/CertificateService", response_model_exclude_none=True)
 @authenticate
-async def get1() -> CertificateService:
+async def get1(request: Request, response: Response) -> CertificateService:
     s: Service = find_service(CertificateService)
-    b: dict[str, Any] = {}
+    b: dict[str, Any] = {"request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CertificateService, s.get(**b))

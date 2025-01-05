@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.environment_metrics import EnvironmentMetrics
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, processor_id: str) -> EnvironmentMetrics:
+async def get1(
+    computer_system_id: str, processor_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -25,9 +35,19 @@ async def get1(computer_system_id: str, processor_id: str) -> EnvironmentMetrics
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, memory_id: str) -> EnvironmentMetrics:
+async def get2(
+    computer_system_id: str, memory_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -36,13 +56,20 @@ async def get2(computer_system_id: str, memory_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(computer_system_id: str, storage_id: str, drive_id: str) -> EnvironmentMetrics:
+async def get3(
+    computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "drive_id": drive_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -51,12 +78,19 @@ async def get3(computer_system_id: str, storage_id: str, drive_id: str) -> Envir
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(computer_system_id: str, pcie_device_id: str) -> EnvironmentMetrics:
+async def get4(
+    computer_system_id: str, pcie_device_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -65,13 +99,24 @@ async def get4(computer_system_id: str, pcie_device_id: str) -> EnvironmentMetri
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(computer_system_id: str, storage_id: str, controller_id: str) -> EnvironmentMetrics:
+async def get5(
+    computer_system_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -80,9 +125,19 @@ async def get5(computer_system_id: str, storage_id: str, controller_id: str) -> 
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(resource_block_id: str, processor_id: str) -> EnvironmentMetrics:
+async def get6(
+    resource_block_id: str, processor_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -91,9 +146,19 @@ async def get6(resource_block_id: str, processor_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(resource_block_id: str, memory_id: str) -> EnvironmentMetrics:
+async def get7(
+    resource_block_id: str, memory_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -102,13 +167,20 @@ async def get7(resource_block_id: str, memory_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(resource_block_id: str, storage_id: str, drive_id: str) -> EnvironmentMetrics:
+async def get8(
+    resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
         "drive_id": drive_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -117,9 +189,19 @@ async def get8(resource_block_id: str, storage_id: str, drive_id: str) -> Enviro
     response_model_exclude_none=True,
 )
 @authenticate
-async def get9(resource_block_id: str, drive_id: str) -> EnvironmentMetrics:
+async def get9(
+    resource_block_id: str, drive_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "drive_id": drive_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -129,14 +211,23 @@ async def get9(resource_block_id: str, drive_id: str) -> EnvironmentMetrics:
 )
 @authenticate
 async def get10(
-    resource_block_id: str, computer_system_id: str, processor_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -146,14 +237,23 @@ async def get10(
 )
 @authenticate
 async def get11(
-    resource_block_id: str, computer_system_id: str, memory_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -163,14 +263,23 @@ async def get11(
 )
 @authenticate
 async def get12(
-    resource_block_id: str, computer_system_id: str, pcie_device_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -180,7 +289,12 @@ async def get12(
 )
 @authenticate
 async def get13(
-    resource_block_id: str, computer_system_id: str, storage_id: str, drive_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -188,7 +302,12 @@ async def get13(
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "drive_id": drive_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -198,7 +317,12 @@ async def get13(
 )
 @authenticate
 async def get14(
-    resource_block_id: str, computer_system_id: str, storage_id: str, controller_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -206,7 +330,12 @@ async def get14(
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -215,13 +344,24 @@ async def get14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get15(resource_block_id: str, storage_id: str, controller_id: str) -> EnvironmentMetrics:
+async def get15(
+    resource_block_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -230,9 +370,19 @@ async def get15(resource_block_id: str, storage_id: str, controller_id: str) -> 
     response_model_exclude_none=True,
 )
 @authenticate
-async def get16(resource_block_id: str, processor_id: str) -> EnvironmentMetrics:
+async def get16(
+    resource_block_id: str, processor_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -241,9 +391,19 @@ async def get16(resource_block_id: str, processor_id: str) -> EnvironmentMetrics
     response_model_exclude_none=True,
 )
 @authenticate
-async def get17(resource_block_id: str, memory_id: str) -> EnvironmentMetrics:
+async def get17(
+    resource_block_id: str, memory_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -252,13 +412,20 @@ async def get17(resource_block_id: str, memory_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get18(resource_block_id: str, storage_id: str, drive_id: str) -> EnvironmentMetrics:
+async def get18(
+    resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
         "drive_id": drive_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -267,13 +434,24 @@ async def get18(resource_block_id: str, storage_id: str, drive_id: str) -> Envir
     response_model_exclude_none=True,
 )
 @authenticate
-async def get19(resource_block_id: str, storage_id: str, controller_id: str) -> EnvironmentMetrics:
+async def get19(
+    resource_block_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -282,9 +460,19 @@ async def get19(resource_block_id: str, storage_id: str, controller_id: str) -> 
     response_model_exclude_none=True,
 )
 @authenticate
-async def get20(resource_block_id: str, drive_id: str) -> EnvironmentMetrics:
+async def get20(
+    resource_block_id: str, drive_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "drive_id": drive_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -294,14 +482,23 @@ async def get20(resource_block_id: str, drive_id: str) -> EnvironmentMetrics:
 )
 @authenticate
 async def get21(
-    resource_block_id: str, computer_system_id: str, processor_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -311,14 +508,23 @@ async def get21(
 )
 @authenticate
 async def get22(
-    resource_block_id: str, computer_system_id: str, memory_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -328,14 +534,23 @@ async def get22(
 )
 @authenticate
 async def get23(
-    resource_block_id: str, computer_system_id: str, pcie_device_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -345,7 +560,12 @@ async def get23(
 )
 @authenticate
 async def get24(
-    resource_block_id: str, computer_system_id: str, storage_id: str, drive_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -353,7 +573,12 @@ async def get24(
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "drive_id": drive_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -363,7 +588,12 @@ async def get24(
 )
 @authenticate
 async def get25(
-    resource_block_id: str, computer_system_id: str, storage_id: str, controller_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -371,7 +601,12 @@ async def get25(
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -380,9 +615,19 @@ async def get25(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get26(chassis_id: str, memory_id: str) -> EnvironmentMetrics:
+async def get26(
+    chassis_id: str, memory_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -391,9 +636,19 @@ async def get26(chassis_id: str, memory_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get27(chassis_id: str, drive_id: str) -> EnvironmentMetrics:
+async def get27(
+    chassis_id: str, drive_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "drive_id": drive_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -401,9 +656,12 @@ async def get27(chassis_id: str, drive_id: str) -> EnvironmentMetrics:
     "/redfish/v1/Chassis/{chassis_id}/EnvironmentMetrics", response_model_exclude_none=True
 )
 @authenticate
-async def get28(chassis_id: str) -> EnvironmentMetrics:
+async def get28(chassis_id: str, request: Request, response: Response) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -412,9 +670,19 @@ async def get28(chassis_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get29(chassis_id: str, pcie_device_id: str) -> EnvironmentMetrics:
+async def get29(
+    chassis_id: str, pcie_device_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "pcie_device_id": pcie_device_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -423,9 +691,19 @@ async def get29(chassis_id: str, pcie_device_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get30(chassis_id: str, network_adapter_id: str) -> EnvironmentMetrics:
+async def get30(
+    chassis_id: str, network_adapter_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "network_adapter_id": network_adapter_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -434,9 +712,19 @@ async def get30(chassis_id: str, network_adapter_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get31(chassis_id: str, media_controller_id: str) -> EnvironmentMetrics:
+async def get31(
+    chassis_id: str, media_controller_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "media_controller_id": media_controller_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "media_controller_id": media_controller_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -444,9 +732,12 @@ async def get31(chassis_id: str, media_controller_id: str) -> EnvironmentMetrics
     "/redfish/v1/Facilities/{facility_id}/EnvironmentMetrics", response_model_exclude_none=True
 )
 @authenticate
-async def get32(facility_id: str) -> EnvironmentMetrics:
+async def get32(facility_id: str, request: Request, response: Response) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"facility_id": facility_id}
+    b: dict[str, Any] = {"facility_id": facility_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -454,9 +745,12 @@ async def get32(facility_id: str) -> EnvironmentMetrics:
     "/redfish/v1/Facilities/{facility_id}/AmbientMetrics", response_model_exclude_none=True
 )
 @authenticate
-async def get33(facility_id: str) -> EnvironmentMetrics:
+async def get33(facility_id: str, request: Request, response: Response) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"facility_id": facility_id}
+    b: dict[str, Any] = {"facility_id": facility_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -465,9 +759,19 @@ async def get33(facility_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get34(fabric_id: str, switch_id: str) -> EnvironmentMetrics:
+async def get34(
+    fabric_id: str, switch_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"fabric_id": fabric_id, "switch_id": switch_id}
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -476,9 +780,19 @@ async def get34(fabric_id: str, switch_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get35(storage_id: str, controller_id: str) -> EnvironmentMetrics:
+async def get35(
+    storage_id: str, controller_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"storage_id": storage_id, "controller_id": controller_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "controller_id": controller_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -487,9 +801,20 @@ async def get35(storage_id: str, controller_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get36(fabric_id: str, switch_id: str, port_id: str) -> EnvironmentMetrics:
+async def get36(
+    fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"fabric_id": fabric_id, "switch_id": switch_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -499,7 +824,12 @@ async def get36(fabric_id: str, switch_id: str, port_id: str) -> EnvironmentMetr
 )
 @authenticate
 async def get37(
-    computer_system_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -507,7 +837,12 @@ async def get37(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -517,7 +852,12 @@ async def get37(
 )
 @authenticate
 async def get38(
-    computer_system_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -525,7 +865,12 @@ async def get38(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -535,14 +880,23 @@ async def get38(
 )
 @authenticate
 async def get39(
-    computer_system_id: str, fabric_adapter_id: str, port_id: str
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -551,13 +905,20 @@ async def get39(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get40(computer_system_id: str, controller_id: str, port_id: str) -> EnvironmentMetrics:
+async def get40(
+    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -566,13 +927,20 @@ async def get40(computer_system_id: str, controller_id: str, port_id: str) -> En
     response_model_exclude_none=True,
 )
 @authenticate
-async def get41(computer_system_id: str, controller_id: str, port_id: str) -> EnvironmentMetrics:
+async def get41(
+    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -581,13 +949,20 @@ async def get41(computer_system_id: str, controller_id: str, port_id: str) -> En
     response_model_exclude_none=True,
 )
 @authenticate
-async def get42(computer_system_id: str, processor_id: str, port_id: str) -> EnvironmentMetrics:
+async def get42(
+    computer_system_id: str, processor_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -596,13 +971,20 @@ async def get42(computer_system_id: str, processor_id: str, port_id: str) -> Env
     response_model_exclude_none=True,
 )
 @authenticate
-async def get43(chassis_id: str, media_controller_id: str, port_id: str) -> EnvironmentMetrics:
+async def get43(
+    chassis_id: str, media_controller_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -611,13 +993,20 @@ async def get43(chassis_id: str, media_controller_id: str, port_id: str) -> Envi
     response_model_exclude_none=True,
 )
 @authenticate
-async def get44(chassis_id: str, fabric_adapter_id: str, port_id: str) -> EnvironmentMetrics:
+async def get44(
+    chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -626,13 +1015,20 @@ async def get44(chassis_id: str, fabric_adapter_id: str, port_id: str) -> Enviro
     response_model_exclude_none=True,
 )
 @authenticate
-async def get45(chassis_id: str, network_adapter_id: str, port_id: str) -> EnvironmentMetrics:
+async def get45(
+    chassis_id: str, network_adapter_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -642,7 +1038,12 @@ async def get45(chassis_id: str, network_adapter_id: str, port_id: str) -> Envir
 )
 @authenticate
 async def get46(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -650,7 +1051,12 @@ async def get46(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -660,7 +1066,12 @@ async def get46(
 )
 @authenticate
 async def get47(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -668,7 +1079,12 @@ async def get47(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -677,13 +1093,20 @@ async def get47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get48(resource_block_id: str, processor_id: str, port_id: str) -> EnvironmentMetrics:
+async def get48(
+    resource_block_id: str, processor_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -698,6 +1121,8 @@ async def get49(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -706,7 +1131,12 @@ async def get49(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -721,6 +1151,8 @@ async def get50(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -729,7 +1161,12 @@ async def get50(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -739,7 +1176,12 @@ async def get50(
 )
 @authenticate
 async def get51(
-    resource_block_id: str, computer_system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -747,7 +1189,12 @@ async def get51(
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -757,7 +1204,12 @@ async def get51(
 )
 @authenticate
 async def get52(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -765,7 +1217,12 @@ async def get52(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -775,7 +1232,12 @@ async def get52(
 )
 @authenticate
 async def get53(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -783,7 +1245,12 @@ async def get53(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -793,7 +1260,12 @@ async def get53(
 )
 @authenticate
 async def get54(
-    resource_block_id: str, computer_system_id: str, processor_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -801,7 +1273,12 @@ async def get54(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -811,7 +1288,12 @@ async def get54(
 )
 @authenticate
 async def get55(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -819,7 +1301,12 @@ async def get55(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -829,7 +1316,12 @@ async def get55(
 )
 @authenticate
 async def get56(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -837,7 +1329,12 @@ async def get56(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -846,13 +1343,20 @@ async def get56(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get57(resource_block_id: str, processor_id: str, port_id: str) -> EnvironmentMetrics:
+async def get57(
+    resource_block_id: str, processor_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -867,6 +1371,8 @@ async def get58(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -875,7 +1381,12 @@ async def get58(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -890,6 +1401,8 @@ async def get59(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -898,7 +1411,12 @@ async def get59(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -908,7 +1426,12 @@ async def get59(
 )
 @authenticate
 async def get60(
-    resource_block_id: str, computer_system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -916,7 +1439,12 @@ async def get60(
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -926,7 +1454,12 @@ async def get60(
 )
 @authenticate
 async def get61(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -934,7 +1467,12 @@ async def get61(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -944,7 +1482,12 @@ async def get61(
 )
 @authenticate
 async def get62(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -952,7 +1495,12 @@ async def get62(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -962,7 +1510,12 @@ async def get62(
 )
 @authenticate
 async def get63(
-    resource_block_id: str, computer_system_id: str, processor_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
@@ -970,7 +1523,12 @@ async def get63(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -979,13 +1537,20 @@ async def get63(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get64(storage_id: str, storage_controller_id: str, port_id: str) -> EnvironmentMetrics:
+async def get64(
+    storage_id: str, storage_controller_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -994,13 +1559,20 @@ async def get64(storage_id: str, storage_controller_id: str, port_id: str) -> En
     response_model_exclude_none=True,
 )
 @authenticate
-async def get65(storage_id: str, storage_controller_id: str, port_id: str) -> EnvironmentMetrics:
+async def get65(
+    storage_id: str, storage_controller_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -1009,9 +1581,19 @@ async def get65(storage_id: str, storage_controller_id: str, port_id: str) -> En
     response_model_exclude_none=True,
 )
 @authenticate
-async def get66(manager_id: str, port_id: str) -> EnvironmentMetrics:
+async def get66(
+    manager_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"manager_id": manager_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -1020,9 +1602,19 @@ async def get66(manager_id: str, port_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get67(manager_id: str, port_id: str) -> EnvironmentMetrics:
+async def get67(
+    manager_id: str, port_id: str, request: Request, response: Response
+) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"manager_id": manager_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -1031,9 +1623,16 @@ async def get67(manager_id: str, port_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get68(cooling_unit_id: str) -> EnvironmentMetrics:
+async def get68(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -1042,9 +1641,16 @@ async def get68(cooling_unit_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get69(cooling_unit_id: str) -> EnvironmentMetrics:
+async def get69(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))
 
 
@@ -1053,7 +1659,14 @@ async def get69(cooling_unit_id: str) -> EnvironmentMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get70(cooling_unit_id: str) -> EnvironmentMetrics:
+async def get70(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
     s: Service = find_service(EnvironmentMetrics)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EnvironmentMetrics, s.get(**b))

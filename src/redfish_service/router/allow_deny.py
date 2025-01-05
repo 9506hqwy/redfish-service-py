@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.allow_deny import AllowDeny
@@ -15,7 +15,12 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    chassis_id: str, network_adapter_id: str, network_device_function_id: str, allow_deny_id: str
+    chassis_id: str,
+    network_adapter_id: str,
+    network_device_function_id: str,
+    allow_deny_id: str,
+    request: Request,
+    response: Response,
 ) -> AllowDeny:
     s: Service = find_service(AllowDeny)
     b: dict[str, Any] = {
@@ -23,7 +28,12 @@ async def get1(
         "network_adapter_id": network_adapter_id,
         "network_device_function_id": network_device_function_id,
         "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AllowDeny, s.get(**b))
 
 
@@ -37,6 +47,8 @@ async def get2(
     network_interface_id: str,
     network_device_function_id: str,
     allow_deny_id: str,
+    request: Request,
+    response: Response,
 ) -> AllowDeny:
     s: Service = find_service(AllowDeny)
     b: dict[str, Any] = {
@@ -44,7 +56,12 @@ async def get2(
         "network_interface_id": network_interface_id,
         "network_device_function_id": network_device_function_id,
         "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AllowDeny, s.get(**b))
 
 
@@ -58,6 +75,8 @@ async def get3(
     network_interface_id: str,
     network_device_function_id: str,
     allow_deny_id: str,
+    request: Request,
+    response: Response,
 ) -> AllowDeny:
     s: Service = find_service(AllowDeny)
     b: dict[str, Any] = {
@@ -65,7 +84,12 @@ async def get3(
         "network_interface_id": network_interface_id,
         "network_device_function_id": network_device_function_id,
         "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AllowDeny, s.get(**b))
 
 
@@ -80,6 +104,8 @@ async def get4(
     network_interface_id: str,
     network_device_function_id: str,
     allow_deny_id: str,
+    request: Request,
+    response: Response,
 ) -> AllowDeny:
     s: Service = find_service(AllowDeny)
     b: dict[str, Any] = {
@@ -88,7 +114,12 @@ async def get4(
         "network_interface_id": network_interface_id,
         "network_device_function_id": network_device_function_id,
         "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AllowDeny, s.get(**b))
 
 
@@ -102,6 +133,8 @@ async def get5(
     network_interface_id: str,
     network_device_function_id: str,
     allow_deny_id: str,
+    request: Request,
+    response: Response,
 ) -> AllowDeny:
     s: Service = find_service(AllowDeny)
     b: dict[str, Any] = {
@@ -109,7 +142,12 @@ async def get5(
         "network_interface_id": network_interface_id,
         "network_device_function_id": network_device_function_id,
         "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AllowDeny, s.get(**b))
 
 
@@ -124,6 +162,8 @@ async def get6(
     network_interface_id: str,
     network_device_function_id: str,
     allow_deny_id: str,
+    request: Request,
+    response: Response,
 ) -> AllowDeny:
     s: Service = find_service(AllowDeny)
     b: dict[str, Any] = {
@@ -132,5 +172,10 @@ async def get6(
         "network_interface_id": network_interface_id,
         "network_device_function_id": network_device_function_id,
         "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AllowDeny, s.get(**b))

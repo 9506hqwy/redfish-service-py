@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.log_service_collection import LogServiceCollection
@@ -11,9 +11,12 @@ router = APIRouter()
 
 @router.get("/redfish/v1/Managers/{manager_id}/LogServices", response_model_exclude_none=True)
 @authenticate
-async def get1(manager_id: str) -> LogServiceCollection:
+async def get1(manager_id: str, request: Request, response: Response) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)
-    b: dict[str, Any] = {"manager_id": manager_id}
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogServiceCollection, s.get(**b))
 
 
@@ -21,9 +24,18 @@ async def get1(manager_id: str) -> LogServiceCollection:
     "/redfish/v1/Systems/{computer_system_id}/LogServices", response_model_exclude_none=True
 )
 @authenticate
-async def get2(computer_system_id: str) -> LogServiceCollection:
+async def get2(
+    computer_system_id: str, request: Request, response: Response
+) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogServiceCollection, s.get(**b))
 
 
@@ -32,12 +44,19 @@ async def get2(computer_system_id: str) -> LogServiceCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(resource_block_id: str, computer_system_id: str) -> LogServiceCollection:
+async def get3(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogServiceCollection, s.get(**b))
 
 
@@ -46,18 +65,28 @@ async def get3(resource_block_id: str, computer_system_id: str) -> LogServiceCol
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(resource_block_id: str, computer_system_id: str) -> LogServiceCollection:
+async def get4(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogServiceCollection, s.get(**b))
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/LogServices", response_model_exclude_none=True)
 @authenticate
-async def get5(chassis_id: str) -> LogServiceCollection:
+async def get5(chassis_id: str, request: Request, response: Response) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(LogServiceCollection, s.get(**b))

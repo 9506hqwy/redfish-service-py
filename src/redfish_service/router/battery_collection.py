@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.battery_collection import BatteryCollection
@@ -13,7 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/Batteries", response_model_exclude_none=True
 )
 @authenticate
-async def get1(chassis_id: str) -> BatteryCollection:
+async def get1(chassis_id: str, request: Request, response: Response) -> BatteryCollection:
     s: Service = find_service(BatteryCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(BatteryCollection, s.get(**b))

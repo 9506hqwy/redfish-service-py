@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.key import Key
@@ -11,9 +11,12 @@ router = APIRouter()
 
 @router.get("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
 @authenticate
-async def get1(key_id: str) -> Key:
+async def get1(key_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"key_id": key_id}
+    b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -21,9 +24,12 @@ async def get1(key_id: str) -> Key:
     "/redfish/v1/UpdateService/RemoteServerSSHKeys/{key_id}", response_model_exclude_none=True
 )
 @authenticate
-async def get2(key_id: str) -> Key:
+async def get2(key_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"key_id": key_id}
+    b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -31,9 +37,12 @@ async def get2(key_id: str) -> Key:
     "/redfish/v1/UpdateService/PublicIdentitySSHKey/{key_id}", response_model_exclude_none=True
 )
 @authenticate
-async def get3(key_id: str) -> Key:
+async def get3(key_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"key_id": key_id}
+    b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -42,9 +51,17 @@ async def get3(key_id: str) -> Key:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(manager_account_id: str, key_id: str) -> Key:
+async def get4(manager_account_id: str, key_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"manager_account_id": manager_account_id, "key_id": key_id}
+    b: dict[str, Any] = {
+        "manager_account_id": manager_account_id,
+        "key_id": key_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -53,13 +70,20 @@ async def get4(manager_account_id: str, key_id: str) -> Key:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(manager_id: str, manager_account_id: str, key_id: str) -> Key:
+async def get5(
+    manager_id: str, manager_account_id: str, key_id: str, request: Request, response: Response
+) -> Key:
     s: Service = find_service(Key)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
         "key_id": key_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -68,9 +92,19 @@ async def get5(manager_id: str, manager_account_id: str, key_id: str) -> Key:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(aggregation_source_id: str, key_id: str) -> Key:
+async def get6(
+    aggregation_source_id: str, key_id: str, request: Request, response: Response
+) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"aggregation_source_id": aggregation_source_id, "key_id": key_id}
+    b: dict[str, Any] = {
+        "aggregation_source_id": aggregation_source_id,
+        "key_id": key_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -79,9 +113,16 @@ async def get6(aggregation_source_id: str, key_id: str) -> Key:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(aggregation_source_id: str) -> Key:
+async def get7(aggregation_source_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"aggregation_source_id": aggregation_source_id}
+    b: dict[str, Any] = {
+        "aggregation_source_id": aggregation_source_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))
 
 
@@ -90,7 +131,14 @@ async def get7(aggregation_source_id: str) -> Key:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(aggregation_source_id: str) -> Key:
+async def get8(aggregation_source_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
-    b: dict[str, Any] = {"aggregation_source_id": aggregation_source_id}
+    b: dict[str, Any] = {
+        "aggregation_source_id": aggregation_source_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Key, s.get(**b))

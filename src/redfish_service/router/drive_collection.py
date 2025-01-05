@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.drive_collection import DriveCollection
@@ -11,9 +11,12 @@ router = APIRouter()
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Drives", response_model_exclude_none=True)
 @authenticate
-async def get1(chassis_id: str) -> DriveCollection:
+async def get1(chassis_id: str, request: Request, response: Response) -> DriveCollection:
     s: Service = find_service(DriveCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -22,13 +25,24 @@ async def get1(chassis_id: str) -> DriveCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(storage_id: str, file_system_id: str, capacity_source_id: str) -> DriveCollection:
+async def get2(
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -37,13 +51,24 @@ async def get2(storage_id: str, file_system_id: str, capacity_source_id: str) ->
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(storage_id: str, storage_pool_id: str, capacity_source_id: str) -> DriveCollection:
+async def get3(
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -52,13 +77,20 @@ async def get3(storage_id: str, storage_pool_id: str, capacity_source_id: str) -
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(storage_id: str, volume_id: str, capacity_source_id: str) -> DriveCollection:
+async def get4(
+    storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
+) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -68,7 +100,12 @@ async def get4(storage_id: str, volume_id: str, capacity_source_id: str) -> Driv
 )
 @authenticate
 async def get5(
-    computer_system_id: str, storage_id: str, file_system_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
@@ -76,7 +113,12 @@ async def get5(
         "storage_id": storage_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -86,7 +128,12 @@ async def get5(
 )
 @authenticate
 async def get6(
-    computer_system_id: str, storage_id: str, storage_pool_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
@@ -94,7 +141,12 @@ async def get6(
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -104,7 +156,12 @@ async def get6(
 )
 @authenticate
 async def get7(
-    computer_system_id: str, storage_id: str, volume_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
@@ -112,7 +169,12 @@ async def get7(
         "storage_id": storage_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -120,9 +182,16 @@ async def get7(
     "/redfish/v1/StorageServices/{storage_service_id}/Drives", response_model_exclude_none=True
 )
 @authenticate
-async def get8(storage_service_id: str) -> DriveCollection:
+async def get8(storage_service_id: str, request: Request, response: Response) -> DriveCollection:
     s: Service = find_service(DriveCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -132,14 +201,23 @@ async def get8(storage_service_id: str) -> DriveCollection:
 )
 @authenticate
 async def get9(
-    storage_service_id: str, file_system_id: str, capacity_source_id: str
+    storage_service_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -149,14 +227,23 @@ async def get9(
 )
 @authenticate
 async def get10(
-    storage_service_id: str, storage_pool_id: str, capacity_source_id: str
+    storage_service_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))
 
 
@@ -166,12 +253,21 @@ async def get10(
 )
 @authenticate
 async def get11(
-    storage_service_id: str, volume_id: str, capacity_source_id: str
+    storage_service_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(DriveCollection, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.aggregate import Aggregate
@@ -13,7 +13,10 @@ router = APIRouter()
     "/redfish/v1/AggregationService/Aggregates/{aggregate_id}", response_model_exclude_none=True
 )
 @authenticate
-async def get1(aggregate_id: str) -> Aggregate:
+async def get1(aggregate_id: str, request: Request, response: Response) -> Aggregate:
     s: Service = find_service(Aggregate)
-    b: dict[str, Any] = {"aggregate_id": aggregate_id}
+    b: dict[str, Any] = {"aggregate_id": aggregate_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Aggregate, s.get(**b))

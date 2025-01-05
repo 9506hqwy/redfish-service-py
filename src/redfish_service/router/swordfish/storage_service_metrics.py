@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.storage_service_metrics import StorageServiceMetrics
@@ -13,9 +13,18 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/Metrics", response_model_exclude_none=True
 )
 @authenticate
-async def get1(storage_service_id: str) -> StorageServiceMetrics:
+async def get1(
+    storage_service_id: str, request: Request, response: Response
+) -> StorageServiceMetrics:
     s: Service = find_service(StorageServiceMetrics)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageServiceMetrics, s.get(**b))
 
 
@@ -24,10 +33,17 @@ async def get1(storage_service_id: str) -> StorageServiceMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, storage_service_id: str) -> StorageServiceMetrics:
+async def get2(
+    computer_system_id: str, storage_service_id: str, request: Request, response: Response
+) -> StorageServiceMetrics:
     s: Service = find_service(StorageServiceMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageServiceMetrics, s.get(**b))

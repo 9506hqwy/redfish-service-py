@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.file_share import FileShare
@@ -14,13 +14,24 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_id: str, file_systems_id: str, exported_file_shares_id: str) -> FileShare:
+async def get1(
+    storage_id: str,
+    file_systems_id: str,
+    exported_file_shares_id: str,
+    request: Request,
+    response: Response,
+) -> FileShare:
     s: Service = find_service(FileShare)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
         "exported_file_shares_id": exported_file_shares_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileShare, s.get(**b))
 
 
@@ -30,7 +41,12 @@ async def get1(storage_id: str, file_systems_id: str, exported_file_shares_id: s
 )
 @authenticate
 async def get2(
-    computer_systems_id: str, storage_id: str, file_systems_id: str, exported_file_shares_id: str
+    computer_systems_id: str,
+    storage_id: str,
+    file_systems_id: str,
+    exported_file_shares_id: str,
+    request: Request,
+    response: Response,
 ) -> FileShare:
     s: Service = find_service(FileShare)
     b: dict[str, Any] = {
@@ -38,7 +54,12 @@ async def get2(
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
         "exported_file_shares_id": exported_file_shares_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileShare, s.get(**b))
 
 
@@ -48,12 +69,21 @@ async def get2(
 )
 @authenticate
 async def get3(
-    storage_service_id: str, file_systems_id: str, exported_file_shares_id: str
+    storage_service_id: str,
+    file_systems_id: str,
+    exported_file_shares_id: str,
+    request: Request,
+    response: Response,
 ) -> FileShare:
     s: Service = find_service(FileShare)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,
         "exported_file_shares_id": exported_file_shares_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileShare, s.get(**b))

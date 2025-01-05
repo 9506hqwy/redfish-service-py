@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.outbound_connection import OutboundConnection
@@ -14,7 +14,16 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(outbound_connection_id: str) -> OutboundConnection:
+async def get1(
+    outbound_connection_id: str, request: Request, response: Response
+) -> OutboundConnection:
     s: Service = find_service(OutboundConnection)
-    b: dict[str, Any] = {"outbound_connection_id": outbound_connection_id}
+    b: dict[str, Any] = {
+        "outbound_connection_id": outbound_connection_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(OutboundConnection, s.get(**b))

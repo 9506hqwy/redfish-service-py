@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.trusted_component_collection import TrustedComponentCollection
@@ -11,7 +11,12 @@ router = APIRouter()
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/TrustedComponents", response_model_exclude_none=True)
 @authenticate
-async def get1(chassis_id: str) -> TrustedComponentCollection:
+async def get1(
+    chassis_id: str, request: Request, response: Response
+) -> TrustedComponentCollection:
     s: Service = find_service(TrustedComponentCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(TrustedComponentCollection, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.network_interface import NetworkInterface
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, network_interface_id: str) -> NetworkInterface:
+async def get1(
+    computer_system_id: str, network_interface_id: str, request: Request, response: Response
+) -> NetworkInterface:
     s: Service = find_service(NetworkInterface)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(NetworkInterface, s.get(**b))
 
 
@@ -28,12 +35,19 @@ async def get1(computer_system_id: str, network_interface_id: str) -> NetworkInt
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(resource_block_id: str, network_interface_id: str) -> NetworkInterface:
+async def get2(
+    resource_block_id: str, network_interface_id: str, request: Request, response: Response
+) -> NetworkInterface:
     s: Service = find_service(NetworkInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(NetworkInterface, s.get(**b))
 
 
@@ -43,14 +57,23 @@ async def get2(resource_block_id: str, network_interface_id: str) -> NetworkInte
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, network_interface_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> NetworkInterface:
     s: Service = find_service(NetworkInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(NetworkInterface, s.get(**b))
 
 
@@ -59,12 +82,19 @@ async def get3(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(resource_block_id: str, network_interface_id: str) -> NetworkInterface:
+async def get4(
+    resource_block_id: str, network_interface_id: str, request: Request, response: Response
+) -> NetworkInterface:
     s: Service = find_service(NetworkInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(NetworkInterface, s.get(**b))
 
 
@@ -74,12 +104,21 @@ async def get4(resource_block_id: str, network_interface_id: str) -> NetworkInte
 )
 @authenticate
 async def get5(
-    resource_block_id: str, computer_system_id: str, network_interface_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> NetworkInterface:
     s: Service = find_service(NetworkInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(NetworkInterface, s.get(**b))

@@ -2,14 +2,13 @@ from ..model.service_root import ServiceRoot
 from ..model.session_collection import SessionCollection
 from .instance import instances
 
-PATH_SERVICE_ROOT = "/redfish/v1"
 PATH_SESSION_COLLECTION = "/redfish/v1/SessionService/Sessions"
 
 
 def init_instances() -> None:
     service_root = ServiceRoot.model_validate(
         {
-            "odata_id": f"{PATH_SERVICE_ROOT}/",
+            "odata_id": "",
             "id": "ServiceRoot",
             "name": "Service Root",
             "links": {
@@ -23,7 +22,7 @@ def init_instances() -> None:
 
     session_collection = SessionCollection.model_validate(
         {
-            "odata_id": PATH_SESSION_COLLECTION,
+            "odata_id": "",
             "members": [],
             "members_odata_count": 0,
             "name": "Session Collection",

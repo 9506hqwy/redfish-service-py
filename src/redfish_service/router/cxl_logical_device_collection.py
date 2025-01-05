@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.cxl_logical_device_collection import CxlLogicalDeviceCollection
@@ -14,7 +14,17 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, pcie_device_id: str) -> CxlLogicalDeviceCollection:
+async def get1(
+    chassis_id: str, pcie_device_id: str, request: Request, response: Response
+) -> CxlLogicalDeviceCollection:
     s: Service = find_service(CxlLogicalDeviceCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "pcie_device_id": pcie_device_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CxlLogicalDeviceCollection, s.get(**b))

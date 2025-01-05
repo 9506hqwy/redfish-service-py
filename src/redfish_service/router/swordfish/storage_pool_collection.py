@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.storage_pool_collection import StoragePoolCollection
@@ -14,9 +14,18 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_service_id: str) -> StoragePoolCollection:
+async def get1(
+    storage_service_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -25,12 +34,19 @@ async def get1(storage_service_id: str) -> StoragePoolCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(storage_service_id: str, storage_pool_id: str) -> StoragePoolCollection:
+async def get2(
+    storage_service_id: str, storage_pool_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -40,14 +56,23 @@ async def get2(storage_service_id: str, storage_pool_id: str) -> StoragePoolColl
 )
 @authenticate
 async def get3(
-    storage_service_id: str, storage_pool_id: str, capacity_source_id: str
+    storage_service_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -57,14 +82,23 @@ async def get3(
 )
 @authenticate
 async def get4(
-    storage_service_id: str, volume_id: str, capacity_source_id: str
+    storage_service_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -73,9 +107,19 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(storage_service_id: str, volume_id: str) -> StoragePoolCollection:
+async def get5(
+    storage_service_id: str, volume_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
-    b: dict[str, Any] = {"storage_service_id": storage_service_id, "volume_id": volume_id}
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "volume_id": volume_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -85,22 +129,34 @@ async def get5(storage_service_id: str, volume_id: str) -> StoragePoolCollection
 )
 @authenticate
 async def get6(
-    storage_service_id: str, file_system_id: str, capacity_source_id: str
+    storage_service_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
 @router.get("/redfish/v1/Storage/{storage_id}/StoragePools", response_model_exclude_none=True)
 @authenticate
-async def get7(storage_id: str) -> StoragePoolCollection:
+async def get7(storage_id: str, request: Request, response: Response) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
-    b: dict[str, Any] = {"storage_id": storage_id}
+    b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -109,9 +165,19 @@ async def get7(storage_id: str) -> StoragePoolCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(storage_id: str, storage_pool_id: str) -> StoragePoolCollection:
+async def get8(
+    storage_id: str, storage_pool_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
-    b: dict[str, Any] = {"storage_id": storage_id, "storage_pool_id": storage_pool_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -121,14 +187,23 @@ async def get8(storage_id: str, storage_pool_id: str) -> StoragePoolCollection:
 )
 @authenticate
 async def get9(
-    storage_id: str, storage_pool_id: str, capacity_source_id: str
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -137,13 +212,20 @@ async def get9(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get10(storage_id: str, volume_id: str, capacity_source_id: str) -> StoragePoolCollection:
+async def get10(
+    storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -152,9 +234,19 @@ async def get10(storage_id: str, volume_id: str, capacity_source_id: str) -> Sto
     response_model_exclude_none=True,
 )
 @authenticate
-async def get11(storage_id: str, volume_id: str) -> StoragePoolCollection:
+async def get11(
+    storage_id: str, volume_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
-    b: dict[str, Any] = {"storage_id": storage_id, "volume_id": volume_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "volume_id": volume_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -164,14 +256,23 @@ async def get11(storage_id: str, volume_id: str) -> StoragePoolCollection:
 )
 @authenticate
 async def get12(
-    storage_id: str, file_system_id: str, capacity_source_id: str
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -180,9 +281,19 @@ async def get12(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get13(computer_system_id: str, storage_id: str) -> StoragePoolCollection:
+async def get13(
+    computer_system_id: str, storage_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "storage_id": storage_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -192,14 +303,23 @@ async def get13(computer_system_id: str, storage_id: str) -> StoragePoolCollecti
 )
 @authenticate
 async def get14(
-    computer_system_id: str, storage_id: str, storage_pool_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -209,7 +329,12 @@ async def get14(
 )
 @authenticate
 async def get15(
-    computer_system_id: str, storage_id: str, storage_pool_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
@@ -217,7 +342,12 @@ async def get15(
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -227,7 +357,12 @@ async def get15(
 )
 @authenticate
 async def get16(
-    computer_system_id: str, storage_id: str, volume_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
@@ -235,7 +370,12 @@ async def get16(
         "storage_id": storage_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -244,13 +384,20 @@ async def get16(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get17(computer_system_id: str, storage_id: str, volume_id: str) -> StoragePoolCollection:
+async def get17(
+    computer_system_id: str, storage_id: str, volume_id: str, request: Request, response: Response
+) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "volume_id": volume_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))
 
 
@@ -260,7 +407,12 @@ async def get17(computer_system_id: str, storage_id: str, volume_id: str) -> Sto
 )
 @authenticate
 async def get18(
-    computer_system_id: str, storage_id: str, file_system_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> StoragePoolCollection:
     s: Service = find_service(StoragePoolCollection)
     b: dict[str, Any] = {
@@ -268,5 +420,10 @@ async def get18(
         "storage_id": storage_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StoragePoolCollection, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.software_inventory import SoftwareInventory
@@ -14,9 +14,18 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(software_inventory_id: str) -> SoftwareInventory:
+async def get1(
+    software_inventory_id: str, request: Request, response: Response
+) -> SoftwareInventory:
     s: Service = find_service(SoftwareInventory)
-    b: dict[str, Any] = {"software_inventory_id": software_inventory_id}
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(SoftwareInventory, s.get(**b))
 
 
@@ -25,7 +34,16 @@ async def get1(software_inventory_id: str) -> SoftwareInventory:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(software_inventory_id: str) -> SoftwareInventory:
+async def get2(
+    software_inventory_id: str, request: Request, response: Response
+) -> SoftwareInventory:
     s: Service = find_service(SoftwareInventory)
-    b: dict[str, Any] = {"software_inventory_id": software_inventory_id}
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(SoftwareInventory, s.get(**b))

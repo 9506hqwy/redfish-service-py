@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.capacity import CapacitySource
@@ -15,14 +15,23 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    storage_service_id: str, storage_pool_id: str, capacity_source_id: str
+    storage_service_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -31,13 +40,24 @@ async def get1(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(storage_service_id: str, volume_id: str, capacity_source_id: str) -> CapacitySource:
+async def get2(
+    storage_service_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -47,14 +67,23 @@ async def get2(storage_service_id: str, volume_id: str, capacity_source_id: str)
 )
 @authenticate
 async def get3(
-    storage_service_id: str, file_system_id: str, capacity_source_id: str
+    storage_service_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -63,13 +92,24 @@ async def get3(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(storage_id: str, storage_pool_id: str, capacity_source_id: str) -> CapacitySource:
+async def get4(
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -79,7 +119,12 @@ async def get4(storage_id: str, storage_pool_id: str, capacity_source_id: str) -
 )
 @authenticate
 async def get5(
-    storage_id: str, storage_pool_id: str, volume_id: str, capacity_source_id: str
+    storage_id: str,
+    storage_pool_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
@@ -87,7 +132,12 @@ async def get5(
         "storage_pool_id": storage_pool_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -96,13 +146,20 @@ async def get5(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(storage_id: str, volume_id: str, capacity_source_id: str) -> CapacitySource:
+async def get6(
+    storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
+) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -111,13 +168,24 @@ async def get6(storage_id: str, volume_id: str, capacity_source_id: str) -> Capa
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(storage_id: str, file_system_id: str, capacity_source_id: str) -> CapacitySource:
+async def get7(
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -127,7 +195,12 @@ async def get7(storage_id: str, file_system_id: str, capacity_source_id: str) ->
 )
 @authenticate
 async def get8(
-    computer_system_id: str, storage_id: str, storage_pool_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
@@ -135,7 +208,12 @@ async def get8(
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -145,7 +223,12 @@ async def get8(
 )
 @authenticate
 async def get9(
-    computer_system_id: str, storage_id: str, volume_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
@@ -153,7 +236,12 @@ async def get9(
         "storage_id": storage_id,
         "volume_id": volume_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))
 
 
@@ -163,7 +251,12 @@ async def get9(
 )
 @authenticate
 async def get10(
-    computer_system_id: str, storage_id: str, file_system_id: str, capacity_source_id: str
+    computer_system_id: str,
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
 ) -> CapacitySource:
     s: Service = find_service(CapacitySource)
     b: dict[str, Any] = {
@@ -171,5 +264,10 @@ async def get10(
         "storage_id": storage_id,
         "file_system_id": file_system_id,
         "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CapacitySource, s.get(**b))

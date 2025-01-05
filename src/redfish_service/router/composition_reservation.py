@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.composition_reservation import CompositionReservation
@@ -14,7 +14,16 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(composition_reservation_id: str) -> CompositionReservation:
+async def get1(
+    composition_reservation_id: str, request: Request, response: Response
+) -> CompositionReservation:
     s: Service = find_service(CompositionReservation)
-    b: dict[str, Any] = {"composition_reservation_id": composition_reservation_id}
+    b: dict[str, Any] = {
+        "composition_reservation_id": composition_reservation_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CompositionReservation, s.get(**b))

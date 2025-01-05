@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.acceleration_function import AccelerationFunction
@@ -15,14 +15,23 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    computer_system_id: str, processor_id: str, acceleration_function_id: str
+    computer_system_id: str,
+    processor_id: str,
+    acceleration_function_id: str,
+    request: Request,
+    response: Response,
 ) -> AccelerationFunction:
     s: Service = find_service(AccelerationFunction)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "acceleration_function_id": acceleration_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -32,14 +41,23 @@ async def get1(
 )
 @authenticate
 async def get2(
-    resource_block_id: str, processor_id: str, acceleration_function_id: str
+    resource_block_id: str,
+    processor_id: str,
+    acceleration_function_id: str,
+    request: Request,
+    response: Response,
 ) -> AccelerationFunction:
     s: Service = find_service(AccelerationFunction)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "acceleration_function_id": acceleration_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -53,6 +71,8 @@ async def get3(
     computer_system_id: str,
     processor_id: str,
     acceleration_function_id: str,
+    request: Request,
+    response: Response,
 ) -> AccelerationFunction:
     s: Service = find_service(AccelerationFunction)
     b: dict[str, Any] = {
@@ -60,7 +80,12 @@ async def get3(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "acceleration_function_id": acceleration_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -70,14 +95,23 @@ async def get3(
 )
 @authenticate
 async def get4(
-    resource_block_id: str, processor_id: str, acceleration_function_id: str
+    resource_block_id: str,
+    processor_id: str,
+    acceleration_function_id: str,
+    request: Request,
+    response: Response,
 ) -> AccelerationFunction:
     s: Service = find_service(AccelerationFunction)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "acceleration_function_id": acceleration_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -91,6 +125,8 @@ async def get5(
     computer_system_id: str,
     processor_id: str,
     acceleration_function_id: str,
+    request: Request,
+    response: Response,
 ) -> AccelerationFunction:
     s: Service = find_service(AccelerationFunction)
     b: dict[str, Any] = {
@@ -98,5 +134,10 @@ async def get5(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "acceleration_function_id": acceleration_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(AccelerationFunction, s.get(**b))

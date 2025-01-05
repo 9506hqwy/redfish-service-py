@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.port import Port
@@ -14,9 +14,20 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(fabric_id: str, switch_id: str, port_id: str) -> Port:
+async def get1(
+    fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
-    b: dict[str, Any] = {"fabric_id": fabric_id, "switch_id": switch_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -26,7 +37,12 @@ async def get1(fabric_id: str, switch_id: str, port_id: str) -> Port:
 )
 @authenticate
 async def get2(
-    computer_system_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -34,7 +50,12 @@ async def get2(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -44,7 +65,12 @@ async def get2(
 )
 @authenticate
 async def get3(
-    computer_system_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -52,7 +78,12 @@ async def get3(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -61,13 +92,24 @@ async def get3(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(computer_system_id: str, fabric_adapter_id: str, port_id: str) -> Port:
+async def get4(
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -76,13 +118,20 @@ async def get4(computer_system_id: str, fabric_adapter_id: str, port_id: str) ->
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(computer_system_id: str, controller_id: str, port_id: str) -> Port:
+async def get5(
+    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -91,13 +140,20 @@ async def get5(computer_system_id: str, controller_id: str, port_id: str) -> Por
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(computer_system_id: str, controller_id: str, port_id: str) -> Port:
+async def get6(
+    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -106,13 +162,20 @@ async def get6(computer_system_id: str, controller_id: str, port_id: str) -> Por
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(computer_system_id: str, processor_id: str, port_id: str) -> Port:
+async def get7(
+    computer_system_id: str, processor_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -121,13 +184,20 @@ async def get7(computer_system_id: str, processor_id: str, port_id: str) -> Port
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(chassis_id: str, media_controller_id: str, port_id: str) -> Port:
+async def get8(
+    chassis_id: str, media_controller_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -136,13 +206,20 @@ async def get8(chassis_id: str, media_controller_id: str, port_id: str) -> Port:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get9(chassis_id: str, fabric_adapter_id: str, port_id: str) -> Port:
+async def get9(
+    chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -151,13 +228,20 @@ async def get9(chassis_id: str, fabric_adapter_id: str, port_id: str) -> Port:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get10(chassis_id: str, network_adapter_id: str, port_id: str) -> Port:
+async def get10(
+    chassis_id: str, network_adapter_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -167,7 +251,12 @@ async def get10(chassis_id: str, network_adapter_id: str, port_id: str) -> Port:
 )
 @authenticate
 async def get11(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -175,7 +264,12 @@ async def get11(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -185,7 +279,12 @@ async def get11(
 )
 @authenticate
 async def get12(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -193,7 +292,12 @@ async def get12(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -202,13 +306,20 @@ async def get12(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get13(resource_block_id: str, processor_id: str, port_id: str) -> Port:
+async def get13(
+    resource_block_id: str, processor_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -223,6 +334,8 @@ async def get14(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -231,7 +344,12 @@ async def get14(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -246,6 +364,8 @@ async def get15(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -254,7 +374,12 @@ async def get15(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -264,7 +389,12 @@ async def get15(
 )
 @authenticate
 async def get16(
-    resource_block_id: str, computer_system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -272,7 +402,12 @@ async def get16(
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -282,7 +417,12 @@ async def get16(
 )
 @authenticate
 async def get17(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -290,7 +430,12 @@ async def get17(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -300,7 +445,12 @@ async def get17(
 )
 @authenticate
 async def get18(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -308,7 +458,12 @@ async def get18(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -318,7 +473,12 @@ async def get18(
 )
 @authenticate
 async def get19(
-    resource_block_id: str, computer_system_id: str, processor_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -326,7 +486,12 @@ async def get19(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -336,7 +501,12 @@ async def get19(
 )
 @authenticate
 async def get20(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -344,7 +514,12 @@ async def get20(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -354,7 +529,12 @@ async def get20(
 )
 @authenticate
 async def get21(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, port_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -362,7 +542,12 @@ async def get21(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -371,13 +556,20 @@ async def get21(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get22(resource_block_id: str, processor_id: str, port_id: str) -> Port:
+async def get22(
+    resource_block_id: str, processor_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -392,6 +584,8 @@ async def get23(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -400,7 +594,12 @@ async def get23(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -415,6 +614,8 @@ async def get24(
     storage_id: str,
     storage_controller_id: str,
     port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -423,7 +624,12 @@ async def get24(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -433,7 +639,12 @@ async def get24(
 )
 @authenticate
 async def get25(
-    resource_block_id: str, computer_system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -441,7 +652,12 @@ async def get25(
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -451,7 +667,12 @@ async def get25(
 )
 @authenticate
 async def get26(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -459,7 +680,12 @@ async def get26(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -469,7 +695,12 @@ async def get26(
 )
 @authenticate
 async def get27(
-    resource_block_id: str, computer_system_id: str, controller_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -477,7 +708,12 @@ async def get27(
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -487,7 +723,12 @@ async def get27(
 )
 @authenticate
 async def get28(
-    resource_block_id: str, computer_system_id: str, processor_id: str, port_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
@@ -495,7 +736,12 @@ async def get28(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -504,13 +750,20 @@ async def get28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get29(storage_id: str, storage_controller_id: str, port_id: str) -> Port:
+async def get29(
+    storage_id: str, storage_controller_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -519,13 +772,20 @@ async def get29(storage_id: str, storage_controller_id: str, port_id: str) -> Po
     response_model_exclude_none=True,
 )
 @authenticate
-async def get30(storage_id: str, storage_controller_id: str, port_id: str) -> Port:
+async def get30(
+    storage_id: str, storage_controller_id: str, port_id: str, request: Request, response: Response
+) -> Port:
     s: Service = find_service(Port)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -533,9 +793,17 @@ async def get30(storage_id: str, storage_controller_id: str, port_id: str) -> Po
     "/redfish/v1/Managers/{manager_id}/USBPorts/{port_id}", response_model_exclude_none=True
 )
 @authenticate
-async def get31(manager_id: str, port_id: str) -> Port:
+async def get31(manager_id: str, port_id: str, request: Request, response: Response) -> Port:
     s: Service = find_service(Port)
-    b: dict[str, Any] = {"manager_id": manager_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))
 
 
@@ -544,7 +812,15 @@ async def get31(manager_id: str, port_id: str) -> Port:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get32(manager_id: str, port_id: str) -> Port:
+async def get32(manager_id: str, port_id: str, request: Request, response: Response) -> Port:
     s: Service = find_service(Port)
-    b: dict[str, Any] = {"manager_id": manager_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Port, s.get(**b))

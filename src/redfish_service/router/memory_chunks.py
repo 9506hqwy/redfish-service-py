@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.memory_chunks import MemoryChunks
@@ -15,14 +15,23 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    computer_system_id: str, memory_domain_id: str, memory_chunks_id: str
+    computer_system_id: str,
+    memory_domain_id: str,
+    memory_chunks_id: str,
+    request: Request,
+    response: Response,
 ) -> MemoryChunks:
     s: Service = find_service(MemoryChunks)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
         "memory_chunks_id": memory_chunks_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryChunks, s.get(**b))
 
 
@@ -31,13 +40,24 @@ async def get1(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(chassis_id: str, memory_domain_id: str, memory_chunks_id: str) -> MemoryChunks:
+async def get2(
+    chassis_id: str,
+    memory_domain_id: str,
+    memory_chunks_id: str,
+    request: Request,
+    response: Response,
+) -> MemoryChunks:
     s: Service = find_service(MemoryChunks)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_domain_id": memory_domain_id,
         "memory_chunks_id": memory_chunks_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryChunks, s.get(**b))
 
 
@@ -47,7 +67,12 @@ async def get2(chassis_id: str, memory_domain_id: str, memory_chunks_id: str) ->
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, memory_domain_id: str, memory_chunks_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_domain_id: str,
+    memory_chunks_id: str,
+    request: Request,
+    response: Response,
 ) -> MemoryChunks:
     s: Service = find_service(MemoryChunks)
     b: dict[str, Any] = {
@@ -55,7 +80,12 @@ async def get3(
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
         "memory_chunks_id": memory_chunks_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryChunks, s.get(**b))
 
 
@@ -65,7 +95,12 @@ async def get3(
 )
 @authenticate
 async def get4(
-    resource_block_id: str, computer_system_id: str, memory_domain_id: str, memory_chunks_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_domain_id: str,
+    memory_chunks_id: str,
+    request: Request,
+    response: Response,
 ) -> MemoryChunks:
     s: Service = find_service(MemoryChunks)
     b: dict[str, Any] = {
@@ -73,5 +108,10 @@ async def get4(
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
         "memory_chunks_id": memory_chunks_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryChunks, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.file_system import FileSystem
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_service_id: str, file_system_id: str) -> FileSystem:
+async def get1(
+    storage_service_id: str, file_system_id: str, request: Request, response: Response
+) -> FileSystem:
     s: Service = find_service(FileSystem)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileSystem, s.get(**b))
 
 
@@ -28,7 +35,17 @@ async def get1(storage_service_id: str, file_system_id: str) -> FileSystem:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(storage_id: str, file_system_id: str) -> FileSystem:
+async def get2(
+    storage_id: str, file_system_id: str, request: Request, response: Response
+) -> FileSystem:
     s: Service = find_service(FileSystem)
-    b: dict[str, Any] = {"storage_id": storage_id, "file_system_id": file_system_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "file_system_id": file_system_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileSystem, s.get(**b))

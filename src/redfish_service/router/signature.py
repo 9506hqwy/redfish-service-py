@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.signature import Signature
@@ -14,13 +14,24 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, database_id: str, signature_id: str) -> Signature:
+async def get1(
+    computer_system_id: str,
+    database_id: str,
+    signature_id: str,
+    request: Request,
+    response: Response,
+) -> Signature:
     s: Service = find_service(Signature)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "signature_id": signature_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Signature, s.get(**b))
 
 
@@ -30,7 +41,12 @@ async def get1(computer_system_id: str, database_id: str, signature_id: str) -> 
 )
 @authenticate
 async def get2(
-    resource_block_id: str, computer_system_id: str, database_id: str, signature_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    signature_id: str,
+    request: Request,
+    response: Response,
 ) -> Signature:
     s: Service = find_service(Signature)
     b: dict[str, Any] = {
@@ -38,7 +54,12 @@ async def get2(
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "signature_id": signature_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Signature, s.get(**b))
 
 
@@ -48,7 +69,12 @@ async def get2(
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, database_id: str, signature_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    signature_id: str,
+    request: Request,
+    response: Response,
 ) -> Signature:
     s: Service = find_service(Signature)
     b: dict[str, Any] = {
@@ -56,5 +82,10 @@ async def get3(
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "signature_id": signature_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Signature, s.get(**b))

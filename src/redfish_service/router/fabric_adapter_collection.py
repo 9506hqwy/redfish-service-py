@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.fabric_adapter_collection import FabricAdapterCollection
@@ -13,9 +13,18 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters", response_model_exclude_none=True
 )
 @authenticate
-async def get1(computer_system_id: str) -> FabricAdapterCollection:
+async def get1(
+    computer_system_id: str, request: Request, response: Response
+) -> FabricAdapterCollection:
     s: Service = find_service(FabricAdapterCollection)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapterCollection, s.get(**b))
 
 
@@ -24,12 +33,19 @@ async def get1(computer_system_id: str) -> FabricAdapterCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(resource_block_id: str, computer_system_id: str) -> FabricAdapterCollection:
+async def get2(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> FabricAdapterCollection:
     s: Service = find_service(FabricAdapterCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapterCollection, s.get(**b))
 
 
@@ -38,18 +54,28 @@ async def get2(resource_block_id: str, computer_system_id: str) -> FabricAdapter
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(resource_block_id: str, computer_system_id: str) -> FabricAdapterCollection:
+async def get3(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> FabricAdapterCollection:
     s: Service = find_service(FabricAdapterCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapterCollection, s.get(**b))
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/FabricAdapters", response_model_exclude_none=True)
 @authenticate
-async def get4(chassis_id: str) -> FabricAdapterCollection:
+async def get4(chassis_id: str, request: Request, response: Response) -> FabricAdapterCollection:
     s: Service = find_service(FabricAdapterCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapterCollection, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.virtual_media import VirtualMedia
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(manager_id: str, virtual_media_id: str) -> VirtualMedia:
+async def get1(
+    manager_id: str, virtual_media_id: str, request: Request, response: Response
+) -> VirtualMedia:
     s: Service = find_service(VirtualMedia)
-    b: dict[str, Any] = {"manager_id": manager_id, "virtual_media_id": virtual_media_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "virtual_media_id": virtual_media_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VirtualMedia, s.get(**b))
 
 
@@ -25,12 +35,19 @@ async def get1(manager_id: str, virtual_media_id: str) -> VirtualMedia:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, virtual_media_id: str) -> VirtualMedia:
+async def get2(
+    computer_system_id: str, virtual_media_id: str, request: Request, response: Response
+) -> VirtualMedia:
     s: Service = find_service(VirtualMedia)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VirtualMedia, s.get(**b))
 
 
@@ -40,14 +57,23 @@ async def get2(computer_system_id: str, virtual_media_id: str) -> VirtualMedia:
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, virtual_media_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    request: Request,
+    response: Response,
 ) -> VirtualMedia:
     s: Service = find_service(VirtualMedia)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VirtualMedia, s.get(**b))
 
 
@@ -57,12 +83,21 @@ async def get3(
 )
 @authenticate
 async def get4(
-    resource_block_id: str, computer_system_id: str, virtual_media_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    request: Request,
+    response: Response,
 ) -> VirtualMedia:
     s: Service = find_service(VirtualMedia)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VirtualMedia, s.get(**b))

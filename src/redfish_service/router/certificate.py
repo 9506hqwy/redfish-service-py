@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.certificate import Certificate
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(manager_account_id: str, certificate_id: str) -> Certificate:
+async def get1(
+    manager_account_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -28,9 +35,16 @@ async def get1(manager_account_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(certificate_id: str) -> Certificate:
+async def get2(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -39,9 +53,16 @@ async def get2(certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(certificate_id: str) -> Certificate:
+async def get3(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -50,12 +71,19 @@ async def get3(certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(external_account_provider_id: str, certificate_id: str) -> Certificate:
+async def get4(
+    external_account_provider_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -64,9 +92,16 @@ async def get4(external_account_provider_id: str, certificate_id: str) -> Certif
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(certificate_id: str) -> Certificate:
+async def get5(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -75,9 +110,16 @@ async def get5(certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(certificate_id: str) -> Certificate:
+async def get6(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -86,13 +128,24 @@ async def get6(certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(manager_id: str, manager_account_id: str, certificate_id: str) -> Certificate:
+async def get7(
+    manager_id: str,
+    manager_account_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -101,9 +154,19 @@ async def get7(manager_id: str, manager_account_id: str, certificate_id: str) ->
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(manager_id: str, certificate_id: str) -> Certificate:
+async def get8(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -112,9 +175,19 @@ async def get8(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get9(manager_id: str, certificate_id: str) -> Certificate:
+async def get9(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -124,14 +197,23 @@ async def get9(manager_id: str, certificate_id: str) -> Certificate:
 )
 @authenticate
 async def get10(
-    manager_id: str, external_account_provider_id: str, certificate_id: str
+    manager_id: str,
+    external_account_provider_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -140,9 +222,19 @@ async def get10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get11(manager_id: str, certificate_id: str) -> Certificate:
+async def get11(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -151,9 +243,19 @@ async def get11(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get12(manager_id: str, certificate_id: str) -> Certificate:
+async def get12(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -162,9 +264,19 @@ async def get12(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get13(manager_id: str, certificate_id: str) -> Certificate:
+async def get13(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -173,12 +285,19 @@ async def get13(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get14(computer_system_id: str, certificate_id: str) -> Certificate:
+async def get14(
+    computer_system_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -188,14 +307,23 @@ async def get14(computer_system_id: str, certificate_id: str) -> Certificate:
 )
 @authenticate
 async def get15(
-    resource_block_id: str, computer_system_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -205,14 +333,23 @@ async def get15(
 )
 @authenticate
 async def get16(
-    resource_block_id: str, computer_system_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -221,13 +358,24 @@ async def get16(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get17(computer_system_id: str, database_id: str, certificate_id: str) -> Certificate:
+async def get17(
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -237,7 +385,12 @@ async def get17(computer_system_id: str, database_id: str, certificate_id: str) 
 )
 @authenticate
 async def get18(
-    resource_block_id: str, computer_system_id: str, database_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -245,7 +398,12 @@ async def get18(
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -255,7 +413,12 @@ async def get18(
 )
 @authenticate
 async def get19(
-    resource_block_id: str, computer_system_id: str, database_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -263,7 +426,12 @@ async def get19(
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -272,12 +440,19 @@ async def get19(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get20(event_destination_id: str, certificate_id: str) -> Certificate:
+async def get20(
+    event_destination_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -286,12 +461,19 @@ async def get20(event_destination_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get21(event_destination_id: str, certificate_id: str) -> Certificate:
+async def get21(
+    event_destination_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -300,12 +482,19 @@ async def get21(event_destination_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get22(computer_system_id: str, certificate_id: str) -> Certificate:
+async def get22(
+    computer_system_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -315,14 +504,23 @@ async def get22(computer_system_id: str, certificate_id: str) -> Certificate:
 )
 @authenticate
 async def get23(
-    resource_block_id: str, computer_system_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -332,14 +530,23 @@ async def get23(
 )
 @authenticate
 async def get24(
-    resource_block_id: str, computer_system_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -348,13 +555,24 @@ async def get24(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get25(computer_system_id: str, memory_id: str, certificate_id: str) -> Certificate:
+async def get25(
+    computer_system_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -363,13 +581,20 @@ async def get25(computer_system_id: str, memory_id: str, certificate_id: str) ->
     response_model_exclude_none=True,
 )
 @authenticate
-async def get26(chassis_id: str, memory_id: str, certificate_id: str) -> Certificate:
+async def get26(
+    chassis_id: str, memory_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -378,13 +603,24 @@ async def get26(chassis_id: str, memory_id: str, certificate_id: str) -> Certifi
     response_model_exclude_none=True,
 )
 @authenticate
-async def get27(resource_block_id: str, memory_id: str, certificate_id: str) -> Certificate:
+async def get27(
+    resource_block_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -394,7 +630,12 @@ async def get27(resource_block_id: str, memory_id: str, certificate_id: str) -> 
 )
 @authenticate
 async def get28(
-    resource_block_id: str, computer_system_id: str, memory_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -402,7 +643,12 @@ async def get28(
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -411,13 +657,24 @@ async def get28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get29(resource_block_id: str, memory_id: str, certificate_id: str) -> Certificate:
+async def get29(
+    resource_block_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -427,7 +684,12 @@ async def get29(resource_block_id: str, memory_id: str, certificate_id: str) -> 
 )
 @authenticate
 async def get30(
-    resource_block_id: str, computer_system_id: str, memory_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -435,7 +697,12 @@ async def get30(
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -444,13 +711,24 @@ async def get30(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get31(computer_system_id: str, processor_id: str, certificate_id: str) -> Certificate:
+async def get31(
+    computer_system_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -459,13 +737,24 @@ async def get31(computer_system_id: str, processor_id: str, certificate_id: str)
     response_model_exclude_none=True,
 )
 @authenticate
-async def get32(resource_block_id: str, processor_id: str, certificate_id: str) -> Certificate:
+async def get32(
+    resource_block_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -475,7 +764,12 @@ async def get32(resource_block_id: str, processor_id: str, certificate_id: str) 
 )
 @authenticate
 async def get33(
-    resource_block_id: str, computer_system_id: str, processor_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -483,7 +777,12 @@ async def get33(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -492,13 +791,24 @@ async def get33(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get34(resource_block_id: str, processor_id: str, certificate_id: str) -> Certificate:
+async def get34(
+    resource_block_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -508,7 +818,12 @@ async def get34(resource_block_id: str, processor_id: str, certificate_id: str) 
 )
 @authenticate
 async def get35(
-    resource_block_id: str, computer_system_id: str, processor_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -516,7 +831,12 @@ async def get35(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -525,13 +845,24 @@ async def get35(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get36(storage_id: str, storage_controller_id: str, certificate_id: str) -> Certificate:
+async def get36(
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -541,7 +872,12 @@ async def get36(storage_id: str, storage_controller_id: str, certificate_id: str
 )
 @authenticate
 async def get37(
-    computer_system_id: str, storage_id: str, storage_controller_id: str, certificate_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -549,7 +885,12 @@ async def get37(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -559,7 +900,12 @@ async def get37(
 )
 @authenticate
 async def get38(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, certificate_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -567,7 +913,12 @@ async def get38(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -582,6 +933,8 @@ async def get39(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -590,7 +943,12 @@ async def get39(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -600,7 +958,12 @@ async def get39(
 )
 @authenticate
 async def get40(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, certificate_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -608,7 +971,12 @@ async def get40(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -623,6 +991,8 @@ async def get41(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -631,7 +1001,12 @@ async def get41(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -640,13 +1015,24 @@ async def get41(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get42(storage_id: str, storage_controller_id: str, certificate_id: str) -> Certificate:
+async def get42(
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -656,7 +1042,12 @@ async def get42(storage_id: str, storage_controller_id: str, certificate_id: str
 )
 @authenticate
 async def get43(
-    computer_system_id: str, storage_id: str, storage_controller_id: str, certificate_id: str
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -664,7 +1055,12 @@ async def get43(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -674,7 +1070,12 @@ async def get43(
 )
 @authenticate
 async def get44(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, certificate_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -682,7 +1083,12 @@ async def get44(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -697,6 +1103,8 @@ async def get45(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -705,7 +1113,12 @@ async def get45(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -715,7 +1128,12 @@ async def get45(
 )
 @authenticate
 async def get46(
-    resource_block_id: str, storage_id: str, storage_controller_id: str, certificate_id: str
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -723,7 +1141,12 @@ async def get46(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -738,6 +1161,8 @@ async def get47(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -746,7 +1171,12 @@ async def get47(
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -755,13 +1185,20 @@ async def get47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get48(fabric_id: str, switch_id: str, certificate_id: str) -> Certificate:
+async def get48(
+    fabric_id: str, switch_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -770,9 +1207,19 @@ async def get48(fabric_id: str, switch_id: str, certificate_id: str) -> Certific
     response_model_exclude_none=True,
 )
 @authenticate
-async def get49(chassis_id: str, certificate_id: str) -> Certificate:
+async def get49(
+    chassis_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -782,7 +1229,12 @@ async def get49(chassis_id: str, certificate_id: str) -> Certificate:
 )
 @authenticate
 async def get50(
-    computer_system_id: str, storage_id: str, drive_id: str, certificate_id: str
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -790,7 +1242,12 @@ async def get50(
         "storage_id": storage_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -799,13 +1256,20 @@ async def get50(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get51(chassis_id: str, drive_id: str, certificate_id: str) -> Certificate:
+async def get51(
+    chassis_id: str, drive_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -815,7 +1279,12 @@ async def get51(chassis_id: str, drive_id: str, certificate_id: str) -> Certific
 )
 @authenticate
 async def get52(
-    resource_block_id: str, storage_id: str, drive_id: str, certificate_id: str
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -823,7 +1292,12 @@ async def get52(
         "storage_id": storage_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -832,13 +1306,24 @@ async def get52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get53(resource_block_id: str, drive_id: str, certificate_id: str) -> Certificate:
+async def get53(
+    resource_block_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -853,6 +1338,8 @@ async def get54(
     storage_id: str,
     drive_id: str,
     certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -861,7 +1348,12 @@ async def get54(
         "storage_id": storage_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -871,7 +1363,12 @@ async def get54(
 )
 @authenticate
 async def get55(
-    resource_block_id: str, storage_id: str, drive_id: str, certificate_id: str
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -879,7 +1376,12 @@ async def get55(
         "storage_id": storage_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -888,13 +1390,24 @@ async def get55(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get56(resource_block_id: str, drive_id: str, certificate_id: str) -> Certificate:
+async def get56(
+    resource_block_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -909,6 +1422,8 @@ async def get57(
     storage_id: str,
     drive_id: str,
     certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -917,7 +1432,12 @@ async def get57(
         "storage_id": storage_id,
         "drive_id": drive_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -926,13 +1446,24 @@ async def get57(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get58(chassis_id: str, network_adapter_id: str, certificate_id: str) -> Certificate:
+async def get58(
+    chassis_id: str,
+    network_adapter_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -942,14 +1473,23 @@ async def get58(chassis_id: str, network_adapter_id: str, certificate_id: str) -
 )
 @authenticate
 async def get59(
-    computer_system_id: str, virtual_media_id: str, certificate_id: str
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -959,14 +1499,23 @@ async def get59(
 )
 @authenticate
 async def get60(
-    computer_system_id: str, virtual_media_id: str, certificate_id: str
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -976,7 +1525,12 @@ async def get60(
 )
 @authenticate
 async def get61(
-    resource_block_id: str, computer_system_id: str, virtual_media_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -984,7 +1538,12 @@ async def get61(
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -994,7 +1553,12 @@ async def get61(
 )
 @authenticate
 async def get62(
-    resource_block_id: str, computer_system_id: str, virtual_media_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -1002,7 +1566,12 @@ async def get62(
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1012,7 +1581,12 @@ async def get62(
 )
 @authenticate
 async def get63(
-    resource_block_id: str, computer_system_id: str, virtual_media_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -1020,7 +1594,12 @@ async def get63(
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1030,7 +1609,12 @@ async def get63(
 )
 @authenticate
 async def get64(
-    resource_block_id: str, computer_system_id: str, virtual_media_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
@@ -1038,7 +1622,12 @@ async def get64(
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1047,9 +1636,16 @@ async def get64(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get65(certificate_id: str) -> Certificate:
+async def get65(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1058,9 +1654,16 @@ async def get65(certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get66(certificate_id: str) -> Certificate:
+async def get66(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1069,9 +1672,19 @@ async def get66(certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get67(manager_id: str, certificate_id: str) -> Certificate:
+async def get67(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1080,12 +1693,19 @@ async def get67(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get68(computer_system_id: str, certificate_id: str) -> Certificate:
+async def get68(
+    computer_system_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1095,14 +1715,23 @@ async def get68(computer_system_id: str, certificate_id: str) -> Certificate:
 )
 @authenticate
 async def get69(
-    resource_block_id: str, computer_system_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1112,14 +1741,23 @@ async def get69(
 )
 @authenticate
 async def get70(
-    resource_block_id: str, computer_system_id: str, certificate_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1128,9 +1766,19 @@ async def get70(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get71(manager_id: str, certificate_id: str) -> Certificate:
+async def get71(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1139,9 +1787,19 @@ async def get71(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get72(manager_id: str, certificate_id: str) -> Certificate:
+async def get72(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1150,9 +1808,19 @@ async def get72(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get73(manager_id: str, certificate_id: str) -> Certificate:
+async def get73(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1161,9 +1829,19 @@ async def get73(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get74(manager_id: str, certificate_id: str) -> Certificate:
+async def get74(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1172,9 +1850,19 @@ async def get74(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get75(manager_id: str, certificate_id: str) -> Certificate:
+async def get75(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1183,9 +1871,19 @@ async def get75(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get76(manager_id: str, certificate_id: str) -> Certificate:
+async def get76(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
-    b: dict[str, Any] = {"manager_id": manager_id, "certificate_id": certificate_id}
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1194,13 +1892,24 @@ async def get76(manager_id: str, certificate_id: str) -> Certificate:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get77(chassis_id: str, trusted_component_id: str, certificate_id: str) -> Certificate:
+async def get77(
+    chassis_id: str,
+    trusted_component_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1209,12 +1918,19 @@ async def get77(chassis_id: str, trusted_component_id: str, certificate_id: str)
     response_model_exclude_none=True,
 )
 @authenticate
-async def get78(outbound_connection_id: str, certificate_id: str) -> Certificate:
+async def get78(
+    outbound_connection_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1223,12 +1939,19 @@ async def get78(outbound_connection_id: str, certificate_id: str) -> Certificate
     response_model_exclude_none=True,
 )
 @authenticate
-async def get79(outbound_connection_id: str, certificate_id: str) -> Certificate:
+async def get79(
+    outbound_connection_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))
 
 
@@ -1237,11 +1960,22 @@ async def get79(outbound_connection_id: str, certificate_id: str) -> Certificate
     response_model_exclude_none=True,
 )
 @authenticate
-async def get80(chassis_id: str, power_supply_id: str, certificate_id: str) -> Certificate:
+async def get80(
+    chassis_id: str,
+    power_supply_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = find_service(Certificate)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
         "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Certificate, s.get(**b))

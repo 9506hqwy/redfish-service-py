@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.memory_metrics import MemoryMetrics
@@ -14,9 +14,16 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str) -> MemoryMetrics:
+async def get1(computer_system_id: str, request: Request, response: Response) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -25,9 +32,19 @@ async def get1(computer_system_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, memory_id: str) -> MemoryMetrics:
+async def get2(
+    computer_system_id: str, memory_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -36,13 +53,24 @@ async def get2(computer_system_id: str, memory_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(computer_system_id: str, processor_id: str, memory_id: str) -> MemoryMetrics:
+async def get3(
+    computer_system_id: str,
+    processor_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "memory_id": memory_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -51,9 +79,19 @@ async def get3(computer_system_id: str, processor_id: str, memory_id: str) -> Me
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(computer_system_id: str, processor_id: str) -> MemoryMetrics:
+async def get4(
+    computer_system_id: str, processor_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -62,9 +100,19 @@ async def get4(computer_system_id: str, processor_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(resource_block_id: str, memory_id: str) -> MemoryMetrics:
+async def get5(
+    resource_block_id: str, memory_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -73,9 +121,19 @@ async def get5(resource_block_id: str, memory_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(resource_block_id: str, processor_id: str) -> MemoryMetrics:
+async def get6(
+    resource_block_id: str, processor_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -84,13 +142,24 @@ async def get6(resource_block_id: str, processor_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(resource_block_id: str, computer_system_id: str, memory_id: str) -> MemoryMetrics:
+async def get7(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -99,12 +168,19 @@ async def get7(resource_block_id: str, computer_system_id: str, memory_id: str) 
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(resource_block_id: str, computer_system_id: str) -> MemoryMetrics:
+async def get8(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -114,14 +190,23 @@ async def get8(resource_block_id: str, computer_system_id: str) -> MemoryMetrics
 )
 @authenticate
 async def get9(
-    resource_block_id: str, computer_system_id: str, processor_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
 ) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -130,9 +215,19 @@ async def get9(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get10(resource_block_id: str, memory_id: str) -> MemoryMetrics:
+async def get10(
+    resource_block_id: str, memory_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -141,9 +236,19 @@ async def get10(resource_block_id: str, memory_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get11(resource_block_id: str, processor_id: str) -> MemoryMetrics:
+async def get11(
+    resource_block_id: str, processor_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -152,13 +257,24 @@ async def get11(resource_block_id: str, processor_id: str) -> MemoryMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get12(resource_block_id: str, computer_system_id: str, memory_id: str) -> MemoryMetrics:
+async def get12(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -167,12 +283,19 @@ async def get12(resource_block_id: str, computer_system_id: str, memory_id: str)
     response_model_exclude_none=True,
 )
 @authenticate
-async def get13(resource_block_id: str, computer_system_id: str) -> MemoryMetrics:
+async def get13(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -182,14 +305,23 @@ async def get13(resource_block_id: str, computer_system_id: str) -> MemoryMetric
 )
 @authenticate
 async def get14(
-    resource_block_id: str, computer_system_id: str, processor_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
 ) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))
 
 
@@ -198,7 +330,17 @@ async def get14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get15(chassis_id: str, memory_id: str) -> MemoryMetrics:
+async def get15(
+    chassis_id: str, memory_id: str, request: Request, response: Response
+) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "memory_id": memory_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryMetrics, s.get(**b))

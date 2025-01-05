@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.vlan_network_interface import VlanNetworkInterface
@@ -19,6 +19,8 @@ async def get1(
     network_adapter_id: str,
     network_device_function_id: str,
     vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
@@ -26,7 +28,12 @@ async def get1(
         "network_adapter_id": network_adapter_id,
         "network_device_function_id": network_device_function_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))
 
 
@@ -36,14 +43,23 @@ async def get1(
 )
 @authenticate
 async def get2(
-    manager_id: str, ethernet_interface_id: str, vlan_network_interface_id: str
+    manager_id: str,
+    ethernet_interface_id: str,
+    vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "ethernet_interface_id": ethernet_interface_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))
 
 
@@ -53,14 +69,23 @@ async def get2(
 )
 @authenticate
 async def get3(
-    computer_system_id: str, ethernet_interface_id: str, vlan_network_interface_id: str
+    computer_system_id: str,
+    ethernet_interface_id: str,
+    vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))
 
 
@@ -70,14 +95,23 @@ async def get3(
 )
 @authenticate
 async def get4(
-    resource_block_id: str, ethernet_interface_id: str, vlan_network_interface_id: str
+    resource_block_id: str,
+    ethernet_interface_id: str,
+    vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))
 
 
@@ -91,6 +125,8 @@ async def get5(
     computer_system_id: str,
     ethernet_interface_id: str,
     vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
@@ -98,7 +134,12 @@ async def get5(
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))
 
 
@@ -108,14 +149,23 @@ async def get5(
 )
 @authenticate
 async def get6(
-    resource_block_id: str, ethernet_interface_id: str, vlan_network_interface_id: str
+    resource_block_id: str,
+    ethernet_interface_id: str,
+    vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))
 
 
@@ -129,6 +179,8 @@ async def get7(
     computer_system_id: str,
     ethernet_interface_id: str,
     vlan_network_interface_id: str,
+    request: Request,
+    response: Response,
 ) -> VlanNetworkInterface:
     s: Service = find_service(VlanNetworkInterface)
     b: dict[str, Any] = {
@@ -136,5 +188,10 @@ async def get7(
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
         "vlan_network_interface_id": vlan_network_interface_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VlanNetworkInterface, s.get(**b))

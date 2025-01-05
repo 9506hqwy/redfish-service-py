@@ -9,7 +9,6 @@ from . import router as redfish
 from . import service_impl  # noqa: F401
 from .exception import InternalErrorError, InvalidURIError
 from .exception import RedfishError as RedfishException
-from .repository import PATH_SERVICE_ROOT
 from .router import swordfish
 
 ## TODO: 7 Service requests
@@ -38,7 +37,7 @@ async def redfish_exception_handler(req: Request, exc: RedfishException) -> JSON
 
 @app.get("/redfish", response_model_exclude_none=True)
 async def root() -> dict[str, str]:
-    return {"v1": f"{PATH_SERVICE_ROOT}/"}
+    return {"v1": "/redfish/v1/"}
 
 
 @app.get("/redfish/v1/odata", response_model_exclude_none=True)

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.component_integrity_collection import ComponentIntegrityCollection
@@ -11,7 +11,10 @@ router = APIRouter()
 
 @router.get("/redfish/v1/ComponentIntegrity", response_model_exclude_none=True)
 @authenticate
-async def get1() -> ComponentIntegrityCollection:
+async def get1(request: Request, response: Response) -> ComponentIntegrityCollection:
     s: Service = find_service(ComponentIntegrityCollection)
-    b: dict[str, Any] = {}
+    b: dict[str, Any] = {"request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ComponentIntegrityCollection, s.get(**b))

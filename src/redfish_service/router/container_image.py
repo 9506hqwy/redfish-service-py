@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.container_image import ContainerImage
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, container_image_id: str) -> ContainerImage:
+async def get1(
+    computer_system_id: str, container_image_id: str, request: Request, response: Response
+) -> ContainerImage:
     s: Service = find_service(ContainerImage)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "container_image_id": container_image_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ContainerImage, s.get(**b))
 
 
@@ -29,14 +36,23 @@ async def get1(computer_system_id: str, container_image_id: str) -> ContainerIma
 )
 @authenticate
 async def get2(
-    resource_block_id: str, computer_system_id: str, container_image_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    container_image_id: str,
+    request: Request,
+    response: Response,
 ) -> ContainerImage:
     s: Service = find_service(ContainerImage)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "container_image_id": container_image_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ContainerImage, s.get(**b))
 
 
@@ -46,12 +62,21 @@ async def get2(
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, container_image_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    container_image_id: str,
+    request: Request,
+    response: Response,
 ) -> ContainerImage:
     s: Service = find_service(ContainerImage)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "container_image_id": container_image_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ContainerImage, s.get(**b))

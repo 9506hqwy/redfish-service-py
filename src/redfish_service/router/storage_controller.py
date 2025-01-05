@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.storage_controller import StorageController
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_id: str, controller_id: str) -> StorageController:
+async def get1(
+    storage_id: str, controller_id: str, request: Request, response: Response
+) -> StorageController:
     s: Service = find_service(StorageController)
-    b: dict[str, Any] = {"storage_id": storage_id, "controller_id": controller_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "controller_id": controller_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageController, s.get(**b))
 
 
@@ -25,13 +35,24 @@ async def get1(storage_id: str, controller_id: str) -> StorageController:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, storage_id: str, controller_id: str) -> StorageController:
+async def get2(
+    computer_system_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
+) -> StorageController:
     s: Service = find_service(StorageController)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageController, s.get(**b))
 
 
@@ -40,13 +61,24 @@ async def get2(computer_system_id: str, storage_id: str, controller_id: str) -> 
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(resource_block_id: str, storage_id: str, controller_id: str) -> StorageController:
+async def get3(
+    resource_block_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
+) -> StorageController:
     s: Service = find_service(StorageController)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageController, s.get(**b))
 
 
@@ -56,7 +88,12 @@ async def get3(resource_block_id: str, storage_id: str, controller_id: str) -> S
 )
 @authenticate
 async def get4(
-    resource_block_id: str, computer_system_id: str, storage_id: str, controller_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
 ) -> StorageController:
     s: Service = find_service(StorageController)
     b: dict[str, Any] = {
@@ -64,7 +101,12 @@ async def get4(
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageController, s.get(**b))
 
 
@@ -73,13 +115,24 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(resource_block_id: str, storage_id: str, controller_id: str) -> StorageController:
+async def get5(
+    resource_block_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
+) -> StorageController:
     s: Service = find_service(StorageController)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageController, s.get(**b))
 
 
@@ -89,7 +142,12 @@ async def get5(resource_block_id: str, storage_id: str, controller_id: str) -> S
 )
 @authenticate
 async def get6(
-    resource_block_id: str, computer_system_id: str, storage_id: str, controller_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    controller_id: str,
+    request: Request,
+    response: Response,
 ) -> StorageController:
     s: Service = find_service(StorageController)
     b: dict[str, Any] = {
@@ -97,5 +155,10 @@ async def get6(
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "controller_id": controller_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(StorageController, s.get(**b))

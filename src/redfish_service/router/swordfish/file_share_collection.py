@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.file_share_collection import FileShareCollection
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_id: str, file_systems_id: str) -> FileShareCollection:
+async def get1(
+    storage_id: str, file_systems_id: str, request: Request, response: Response
+) -> FileShareCollection:
     s: Service = find_service(FileShareCollection)
-    b: dict[str, Any] = {"storage_id": storage_id, "file_systems_id": file_systems_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "file_systems_id": file_systems_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileShareCollection, s.get(**b))
 
 
@@ -25,10 +35,17 @@ async def get1(storage_id: str, file_systems_id: str) -> FileShareCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(storage_service_id: str, file_systems_id: str) -> FileShareCollection:
+async def get2(
+    storage_service_id: str, file_systems_id: str, request: Request, response: Response
+) -> FileShareCollection:
     s: Service = find_service(FileShareCollection)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FileShareCollection, s.get(**b))

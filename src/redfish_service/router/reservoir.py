@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.reservoir import Reservoir
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(cooling_unit_id: str, reservoir_id: str) -> Reservoir:
+async def get1(
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
+) -> Reservoir:
     s: Service = find_service(Reservoir)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "reservoir_id": reservoir_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Reservoir, s.get(**b))
 
 
@@ -25,9 +35,19 @@ async def get1(cooling_unit_id: str, reservoir_id: str) -> Reservoir:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(cooling_unit_id: str, reservoir_id: str) -> Reservoir:
+async def get2(
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
+) -> Reservoir:
     s: Service = find_service(Reservoir)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "reservoir_id": reservoir_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Reservoir, s.get(**b))
 
 
@@ -36,7 +56,17 @@ async def get2(cooling_unit_id: str, reservoir_id: str) -> Reservoir:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(cooling_unit_id: str, reservoir_id: str) -> Reservoir:
+async def get3(
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
+) -> Reservoir:
     s: Service = find_service(Reservoir)
-    b: dict[str, Any] = {"cooling_unit_id": cooling_unit_id, "reservoir_id": reservoir_id}
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Reservoir, s.get(**b))

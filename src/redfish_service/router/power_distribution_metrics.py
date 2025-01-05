@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.power_distribution_metrics import PowerDistributionMetrics
@@ -14,9 +14,18 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(power_distribution_id: str) -> PowerDistributionMetrics:
+async def get1(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerDistributionMetrics:
     s: Service = find_service(PowerDistributionMetrics)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerDistributionMetrics, s.get(**b))
 
 
@@ -25,9 +34,18 @@ async def get1(power_distribution_id: str) -> PowerDistributionMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(power_distribution_id: str) -> PowerDistributionMetrics:
+async def get2(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerDistributionMetrics:
     s: Service = find_service(PowerDistributionMetrics)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerDistributionMetrics, s.get(**b))
 
 
@@ -36,9 +54,18 @@ async def get2(power_distribution_id: str) -> PowerDistributionMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(power_distribution_id: str) -> PowerDistributionMetrics:
+async def get3(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerDistributionMetrics:
     s: Service = find_service(PowerDistributionMetrics)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerDistributionMetrics, s.get(**b))
 
 
@@ -47,9 +74,18 @@ async def get3(power_distribution_id: str) -> PowerDistributionMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(power_distribution_id: str) -> PowerDistributionMetrics:
+async def get4(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerDistributionMetrics:
     s: Service = find_service(PowerDistributionMetrics)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerDistributionMetrics, s.get(**b))
 
 
@@ -58,9 +94,18 @@ async def get4(power_distribution_id: str) -> PowerDistributionMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(power_distribution_id: str) -> PowerDistributionMetrics:
+async def get5(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerDistributionMetrics:
     s: Service = find_service(PowerDistributionMetrics)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerDistributionMetrics, s.get(**b))
 
 
@@ -69,7 +114,16 @@ async def get5(power_distribution_id: str) -> PowerDistributionMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(power_distribution_id: str) -> PowerDistributionMetrics:
+async def get6(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerDistributionMetrics:
     s: Service = find_service(PowerDistributionMetrics)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerDistributionMetrics, s.get(**b))

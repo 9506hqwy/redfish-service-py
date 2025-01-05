@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.battery import Battery
@@ -14,7 +14,15 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, battery_id: str) -> Battery:
+async def get1(chassis_id: str, battery_id: str, request: Request, response: Response) -> Battery:
     s: Service = find_service(Battery)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "battery_id": battery_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "battery_id": battery_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(Battery, s.get(**b))

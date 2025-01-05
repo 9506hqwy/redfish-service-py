@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.metric_definition import MetricDefinition
@@ -14,7 +14,16 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(metric_definition_id: str) -> MetricDefinition:
+async def get1(
+    metric_definition_id: str, request: Request, response: Response
+) -> MetricDefinition:
     s: Service = find_service(MetricDefinition)
-    b: dict[str, Any] = {"metric_definition_id": metric_definition_id}
+    b: dict[str, Any] = {
+        "metric_definition_id": metric_definition_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MetricDefinition, s.get(**b))

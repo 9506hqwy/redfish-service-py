@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.power_supply_collection import PowerSupplyCollection
@@ -14,9 +14,12 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str) -> PowerSupplyCollection:
+async def get1(chassis_id: str, request: Request, response: Response) -> PowerSupplyCollection:
     s: Service = find_service(PowerSupplyCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id}
+    b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerSupplyCollection, s.get(**b))
 
 
@@ -25,7 +28,16 @@ async def get1(chassis_id: str) -> PowerSupplyCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(power_distribution_id: str) -> PowerSupplyCollection:
+async def get2(
+    power_distribution_id: str, request: Request, response: Response
+) -> PowerSupplyCollection:
     s: Service = find_service(PowerSupplyCollection)
-    b: dict[str, Any] = {"power_distribution_id": power_distribution_id}
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PowerSupplyCollection, s.get(**b))

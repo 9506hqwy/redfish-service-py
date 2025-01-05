@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.fabric_adapter import FabricAdapter
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str, fabric_adapter_id: str) -> FabricAdapter:
+async def get1(
+    computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> FabricAdapter:
     s: Service = find_service(FabricAdapter)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapter, s.get(**b))
 
 
@@ -29,14 +36,23 @@ async def get1(computer_system_id: str, fabric_adapter_id: str) -> FabricAdapter
 )
 @authenticate
 async def get2(
-    resource_block_id: str, computer_system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> FabricAdapter:
     s: Service = find_service(FabricAdapter)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapter, s.get(**b))
 
 
@@ -46,14 +62,23 @@ async def get2(
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> FabricAdapter:
     s: Service = find_service(FabricAdapter)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapter, s.get(**b))
 
 
@@ -62,7 +87,17 @@ async def get3(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(chassis_id: str, fabric_adapter_id: str) -> FabricAdapter:
+async def get4(
+    chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> FabricAdapter:
     s: Service = find_service(FabricAdapter)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(FabricAdapter, s.get(**b))

@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.processor_metrics import ProcessorMetrics
@@ -14,9 +14,16 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(computer_system_id: str) -> ProcessorMetrics:
+async def get1(computer_system_id: str, request: Request, response: Response) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -25,9 +32,19 @@ async def get1(computer_system_id: str) -> ProcessorMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, processor_id: str) -> ProcessorMetrics:
+async def get2(
+    computer_system_id: str, processor_id: str, request: Request, response: Response
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
-    b: dict[str, Any] = {"computer_system_id": computer_system_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -36,13 +53,24 @@ async def get2(computer_system_id: str, processor_id: str) -> ProcessorMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(computer_system_id: str, processor_id: str, processor_id2: str) -> ProcessorMetrics:
+async def get3(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -52,7 +80,12 @@ async def get3(computer_system_id: str, processor_id: str, processor_id2: str) -
 )
 @authenticate
 async def get4(
-    computer_system_id: str, processor_id: str, processor_id2: str, processor_id3: str
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -60,7 +93,12 @@ async def get4(
         "processor_id": processor_id,
         "processor_id2": processor_id2,
         "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -69,9 +107,19 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(resource_block_id: str, processor_id: str) -> ProcessorMetrics:
+async def get5(
+    resource_block_id: str, processor_id: str, request: Request, response: Response
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -80,13 +128,24 @@ async def get5(resource_block_id: str, processor_id: str) -> ProcessorMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(resource_block_id: str, processor_id: str, processor_id2: str) -> ProcessorMetrics:
+async def get6(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -96,7 +155,12 @@ async def get6(resource_block_id: str, processor_id: str, processor_id2: str) ->
 )
 @authenticate
 async def get7(
-    resource_block_id: str, processor_id: str, processor_id2: str, processor_id3: str
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -104,7 +168,12 @@ async def get7(
         "processor_id": processor_id,
         "processor_id2": processor_id2,
         "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -113,12 +182,19 @@ async def get7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(resource_block_id: str, computer_system_id: str) -> ProcessorMetrics:
+async def get8(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -128,14 +204,23 @@ async def get8(resource_block_id: str, computer_system_id: str) -> ProcessorMetr
 )
 @authenticate
 async def get9(
-    resource_block_id: str, computer_system_id: str, processor_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -145,7 +230,12 @@ async def get9(
 )
 @authenticate
 async def get10(
-    resource_block_id: str, computer_system_id: str, processor_id: str, processor_id2: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -153,7 +243,12 @@ async def get10(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -168,6 +263,8 @@ async def get11(
     processor_id: str,
     processor_id2: str,
     processor_id3: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -176,7 +273,12 @@ async def get11(
         "processor_id": processor_id,
         "processor_id2": processor_id2,
         "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -185,9 +287,19 @@ async def get11(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get12(resource_block_id: str, processor_id: str) -> ProcessorMetrics:
+async def get12(
+    resource_block_id: str, processor_id: str, request: Request, response: Response
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
-    b: dict[str, Any] = {"resource_block_id": resource_block_id, "processor_id": processor_id}
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -196,13 +308,24 @@ async def get12(resource_block_id: str, processor_id: str) -> ProcessorMetrics:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get13(resource_block_id: str, processor_id: str, processor_id2: str) -> ProcessorMetrics:
+async def get13(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -212,7 +335,12 @@ async def get13(resource_block_id: str, processor_id: str, processor_id2: str) -
 )
 @authenticate
 async def get14(
-    resource_block_id: str, processor_id: str, processor_id2: str, processor_id3: str
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -220,7 +348,12 @@ async def get14(
         "processor_id": processor_id,
         "processor_id2": processor_id2,
         "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -229,12 +362,19 @@ async def get14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get15(resource_block_id: str, computer_system_id: str) -> ProcessorMetrics:
+async def get15(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -244,14 +384,23 @@ async def get15(resource_block_id: str, computer_system_id: str) -> ProcessorMet
 )
 @authenticate
 async def get16(
-    resource_block_id: str, computer_system_id: str, processor_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -261,7 +410,12 @@ async def get16(
 )
 @authenticate
 async def get17(
-    resource_block_id: str, computer_system_id: str, processor_id: str, processor_id2: str
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -269,7 +423,12 @@ async def get17(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -284,6 +443,8 @@ async def get18(
     processor_id: str,
     processor_id2: str,
     processor_id3: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -292,7 +453,12 @@ async def get18(
         "processor_id": processor_id,
         "processor_id2": processor_id2,
         "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -301,13 +467,24 @@ async def get18(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get19(chassis_id: str, network_adapter_id: str, processor_id: str) -> ProcessorMetrics:
+async def get19(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
         "processor_id": processor_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -317,7 +494,12 @@ async def get19(chassis_id: str, network_adapter_id: str, processor_id: str) -> 
 )
 @authenticate
 async def get20(
-    chassis_id: str, network_adapter_id: str, processor_id: str, processor_id2: str
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -325,7 +507,12 @@ async def get20(
         "network_adapter_id": network_adapter_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))
 
 
@@ -340,6 +527,8 @@ async def get21(
     processor_id: str,
     processor_id2: str,
     processor_id3: str,
+    request: Request,
+    response: Response,
 ) -> ProcessorMetrics:
     s: Service = find_service(ProcessorMetrics)
     b: dict[str, Any] = {
@@ -348,5 +537,10 @@ async def get21(
         "processor_id": processor_id,
         "processor_id2": processor_id2,
         "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ProcessorMetrics, s.get(**b))

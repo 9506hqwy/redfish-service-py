@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.class_of_service import ClassOfService
@@ -14,12 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_service_id: str, class_of_service_id: str) -> ClassOfService:
+async def get1(
+    storage_service_id: str, class_of_service_id: str, request: Request, response: Response
+) -> ClassOfService:
     s: Service = find_service(ClassOfService)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ClassOfService, s.get(**b))
 
 
@@ -29,12 +36,21 @@ async def get1(storage_service_id: str, class_of_service_id: str) -> ClassOfServ
 )
 @authenticate
 async def get2(
-    storage_service_id: str, storage_pool_id: str, class_of_service_id: str
+    storage_service_id: str,
+    storage_pool_id: str,
+    class_of_service_id: str,
+    request: Request,
+    response: Response,
 ) -> ClassOfService:
     s: Service = find_service(ClassOfService)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
         "class_of_service_id": class_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ClassOfService, s.get(**b))

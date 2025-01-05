@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.vcat_entry_collection import VcatEntryCollection
@@ -14,9 +14,20 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(fabric_id: str, switch_id: str, port_id: str) -> VcatEntryCollection:
+async def get1(
+    fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"fabric_id": fabric_id, "switch_id": switch_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -25,13 +36,20 @@ async def get1(fabric_id: str, switch_id: str, port_id: str) -> VcatEntryCollect
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(system_id: str, fabric_adapter_id: str, port_id: str) -> VcatEntryCollection:
+async def get2(
+    system_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -40,9 +58,19 @@ async def get2(system_id: str, fabric_adapter_id: str, port_id: str) -> VcatEntr
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get3(
+    system_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"system_id": system_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -51,9 +79,19 @@ async def get3(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get4(
+    system_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"system_id": system_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -63,7 +101,12 @@ async def get4(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
 )
 @authenticate
 async def get5(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
@@ -71,7 +114,12 @@ async def get5(
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -81,14 +129,23 @@ async def get5(
 )
 @authenticate
 async def get6(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -98,14 +155,23 @@ async def get6(
 )
 @authenticate
 async def get7(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -115,7 +181,12 @@ async def get7(
 )
 @authenticate
 async def get8(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
@@ -123,7 +194,12 @@ async def get8(
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -133,14 +209,23 @@ async def get8(
 )
 @authenticate
 async def get9(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -150,14 +235,23 @@ async def get9(
 )
 @authenticate
 async def get10(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -166,13 +260,20 @@ async def get10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get11(chassis_id: str, fabric_adapter_id: str, port_id: str) -> VcatEntryCollection:
+async def get11(
+    chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -181,9 +282,19 @@ async def get11(chassis_id: str, fabric_adapter_id: str, port_id: str) -> VcatEn
     response_model_exclude_none=True,
 )
 @authenticate
-async def get12(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get12(
+    chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -192,9 +303,19 @@ async def get12(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get13(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get13(
+    chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -203,9 +324,20 @@ async def get13(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get14(fabric_id: str, switch_id: str, port_id: str) -> VcatEntryCollection:
+async def get14(
+    fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"fabric_id": fabric_id, "switch_id": switch_id, "port_id": port_id}
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -214,13 +346,20 @@ async def get14(fabric_id: str, switch_id: str, port_id: str) -> VcatEntryCollec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get15(system_id: str, fabric_adapter_id: str, port_id: str) -> VcatEntryCollection:
+async def get15(
+    system_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -229,9 +368,19 @@ async def get15(system_id: str, fabric_adapter_id: str, port_id: str) -> VcatEnt
     response_model_exclude_none=True,
 )
 @authenticate
-async def get16(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get16(
+    system_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"system_id": system_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -240,9 +389,19 @@ async def get16(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get17(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get17(
+    system_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"system_id": system_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -252,7 +411,12 @@ async def get17(system_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
 )
 @authenticate
 async def get18(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
@@ -260,7 +424,12 @@ async def get18(
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -270,14 +439,23 @@ async def get18(
 )
 @authenticate
 async def get19(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -287,14 +465,23 @@ async def get19(
 )
 @authenticate
 async def get20(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -304,7 +491,12 @@ async def get20(
 )
 @authenticate
 async def get21(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str, port_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
@@ -312,7 +504,12 @@ async def get21(
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -322,14 +519,23 @@ async def get21(
 )
 @authenticate
 async def get22(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -339,14 +545,23 @@ async def get22(
 )
 @authenticate
 async def get23(
-    resource_block_id: str, system_id: str, fabric_adapter_id: str
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    request: Request,
+    response: Response,
 ) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -355,13 +570,20 @@ async def get23(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get24(chassis_id: str, fabric_adapter_id: str, port_id: str) -> VcatEntryCollection:
+async def get24(
+    chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
         "port_id": port_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -370,9 +592,19 @@ async def get24(chassis_id: str, fabric_adapter_id: str, port_id: str) -> VcatEn
     response_model_exclude_none=True,
 )
 @authenticate
-async def get25(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get25(
+    chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))
 
 
@@ -381,7 +613,17 @@ async def get25(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get26(chassis_id: str, fabric_adapter_id: str) -> VcatEntryCollection:
+async def get26(
+    chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
+) -> VcatEntryCollection:
     s: Service = find_service(VcatEntryCollection)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "fabric_adapter_id": fabric_adapter_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(VcatEntryCollection, s.get(**b))

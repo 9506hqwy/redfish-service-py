@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.io_connectivity_line_of_service import IoConnectivityLineOfService
@@ -15,13 +15,21 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    storage_service_id: str, io_connectivity_line_of_service_id: str
+    storage_service_id: str,
+    io_connectivity_line_of_service_id: str,
+    request: Request,
+    response: Response,
 ) -> IoConnectivityLineOfService:
     s: Service = find_service(IoConnectivityLineOfService)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "io_connectivity_line_of_service_id": io_connectivity_line_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(IoConnectivityLineOfService, s.get(**b))
 
 
@@ -31,12 +39,21 @@ async def get1(
 )
 @authenticate
 async def get2(
-    storage_service_id: str, class_of_service_id: str, io_connectivity_line_of_service_id: str
+    storage_service_id: str,
+    class_of_service_id: str,
+    io_connectivity_line_of_service_id: str,
+    request: Request,
+    response: Response,
 ) -> IoConnectivityLineOfService:
     s: Service = find_service(IoConnectivityLineOfService)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
         "io_connectivity_line_of_service_id": io_connectivity_line_of_service_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(IoConnectivityLineOfService, s.get(**b))

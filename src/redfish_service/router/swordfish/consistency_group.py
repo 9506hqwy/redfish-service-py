@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.consistency_group import ConsistencyGroup
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_id: str, consistency_group_id: str) -> ConsistencyGroup:
+async def get1(
+    storage_id: str, consistency_group_id: str, request: Request, response: Response
+) -> ConsistencyGroup:
     s: Service = find_service(ConsistencyGroup)
-    b: dict[str, Any] = {"storage_id": storage_id, "consistency_group_id": consistency_group_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "consistency_group_id": consistency_group_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ConsistencyGroup, s.get(**b))
 
 
@@ -26,14 +36,23 @@ async def get1(storage_id: str, consistency_group_id: str) -> ConsistencyGroup:
 )
 @authenticate
 async def get2(
-    computer_system_id: str, storage_id: str, consistency_group_id: str
+    computer_system_id: str,
+    storage_id: str,
+    consistency_group_id: str,
+    request: Request,
+    response: Response,
 ) -> ConsistencyGroup:
     s: Service = find_service(ConsistencyGroup)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "consistency_group_id": consistency_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ConsistencyGroup, s.get(**b))
 
 
@@ -42,12 +61,19 @@ async def get2(
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(storage_service_id: str, consistency_group_id: str) -> ConsistencyGroup:
+async def get3(
+    storage_service_id: str, consistency_group_id: str, request: Request, response: Response
+) -> ConsistencyGroup:
     s: Service = find_service(ConsistencyGroup)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "consistency_group_id": consistency_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ConsistencyGroup, s.get(**b))
 
 
@@ -57,12 +83,21 @@ async def get3(storage_service_id: str, consistency_group_id: str) -> Consistenc
 )
 @authenticate
 async def get4(
-    storage_service_id: str, volume_id: str, consistency_group_id: str
+    storage_service_id: str,
+    volume_id: str,
+    consistency_group_id: str,
+    request: Request,
+    response: Response,
 ) -> ConsistencyGroup:
     s: Service = find_service(ConsistencyGroup)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
         "consistency_group_id": consistency_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(ConsistencyGroup, s.get(**b))

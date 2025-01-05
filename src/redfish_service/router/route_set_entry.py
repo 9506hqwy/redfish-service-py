@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.route_set_entry import RouteSetEntry
@@ -15,7 +15,13 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    fabric_id: str, switch_id: str, port_id: str, lprt_id: str, route_id: str
+    fabric_id: str,
+    switch_id: str,
+    port_id: str,
+    lprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -24,7 +30,12 @@ async def get1(
         "port_id": port_id,
         "lprt_id": lprt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -34,7 +45,13 @@ async def get1(
 )
 @authenticate
 async def get2(
-    fabric_id: str, switch_id: str, port_id: str, mprt_id: str, route_id: str
+    fabric_id: str,
+    switch_id: str,
+    port_id: str,
+    mprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -43,7 +60,12 @@ async def get2(
         "port_id": port_id,
         "mprt_id": mprt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -53,7 +75,13 @@ async def get2(
 )
 @authenticate
 async def get3(
-    chassis_id: str, fabric_adapter_id: str, port_id: str, mprt_id: str, route_id: str
+    chassis_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    mprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -62,7 +90,12 @@ async def get3(
         "port_id": port_id,
         "mprt_id": mprt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -72,7 +105,13 @@ async def get3(
 )
 @authenticate
 async def get4(
-    chassis_id: str, fabric_adapter_id: str, port_id: str, lprt_id: str, route_id: str
+    chassis_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    lprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -81,7 +120,12 @@ async def get4(
         "port_id": port_id,
         "lprt_id": lprt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -91,7 +135,12 @@ async def get4(
 )
 @authenticate
 async def get5(
-    chassis_id: str, fabric_adapter_id: str, msdt_id: str, route_id: str
+    chassis_id: str,
+    fabric_adapter_id: str,
+    msdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -99,7 +148,12 @@ async def get5(
         "fabric_adapter_id": fabric_adapter_id,
         "msdt_id": msdt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -109,7 +163,12 @@ async def get5(
 )
 @authenticate
 async def get6(
-    chassis_id: str, fabric_adapter_id: str, ssdt_id: str, route_id: str
+    chassis_id: str,
+    fabric_adapter_id: str,
+    ssdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -117,7 +176,12 @@ async def get6(
         "fabric_adapter_id": fabric_adapter_id,
         "ssdt_id": ssdt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -127,7 +191,12 @@ async def get6(
 )
 @authenticate
 async def get7(
-    computer_system_id: str, fabric_adapter_id: str, msdt_id: str, route_id: str
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    msdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -135,7 +204,12 @@ async def get7(
         "fabric_adapter_id": fabric_adapter_id,
         "msdt_id": msdt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -145,7 +219,12 @@ async def get7(
 )
 @authenticate
 async def get8(
-    computer_system_id: str, fabric_adapter_id: str, ssdt_id: str, route_id: str
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    ssdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -153,7 +232,12 @@ async def get8(
         "fabric_adapter_id": fabric_adapter_id,
         "ssdt_id": ssdt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -163,7 +247,13 @@ async def get8(
 )
 @authenticate
 async def get9(
-    computer_system_id: str, fabric_adapter_id: str, port_id: str, lprt_id: str, route_id: str
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    lprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -172,7 +262,12 @@ async def get9(
         "port_id": port_id,
         "lprt_id": lprt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))
 
 
@@ -182,7 +277,13 @@ async def get9(
 )
 @authenticate
 async def get10(
-    computer_system_id: str, fabric_adapter_id: str, port_id: str, mprt_id: str, route_id: str
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    mprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
 ) -> RouteSetEntry:
     s: Service = find_service(RouteSetEntry)
     b: dict[str, Any] = {
@@ -191,5 +292,10 @@ async def get10(
         "port_id": port_id,
         "mprt_id": mprt_id,
         "route_id": route_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(RouteSetEntry, s.get(**b))

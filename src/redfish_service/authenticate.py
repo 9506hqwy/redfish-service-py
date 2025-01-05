@@ -18,7 +18,7 @@ def check_basic_auth(username: str, password: str) -> bool:
 def authenticate(f: Callable) -> Callable:
     @wraps(f)
     async def wrapper(*args: list[Any], **kwds: dict[str, Any]) -> Any:
-        req: Request = kwds.pop("req")  # type: ignore
+        req: Request = kwds.get("request")  # type: ignore
         auth: HTTPBasicCredentials = kwds.pop("auth")  # type: ignore
         if not check_basic_auth(auth.username, auth.password):
             uri = req.url.path
@@ -26,12 +26,6 @@ def authenticate(f: Callable) -> Callable:
 
         # TODO: session management
         return await f(*args, **kwds)
-
-    req = Parameter(
-        "req",
-        Parameter.POSITIONAL_OR_KEYWORD,
-        annotation=Request,
-    )
 
     auth = Parameter(
         "auth",
@@ -42,7 +36,7 @@ def authenticate(f: Callable) -> Callable:
 
     sig = signature(wrapper)
     wrapper.__signature__ = Signature(  # type: ignore
-        parameters=[*sig.parameters.values(), req, auth], return_annotation=sig.return_annotation
+        parameters=[*sig.parameters.values(), auth], return_annotation=sig.return_annotation
     )
 
     return wrapper

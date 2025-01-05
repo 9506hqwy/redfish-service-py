@@ -717,7 +717,7 @@ def write_imports_router_to(
     w.write("from typing import Any, cast\n")
     w.write("\n")
 
-    w.write("from fastapi import APIRouter\n")
+    w.write("from fastapi import APIRouter, Request, Response\n")
     w.write("\n")
 
     parent = ".."
@@ -789,8 +789,11 @@ def write_routers(
                             params.append(name)
                             url = url.replace(p, f"{{{name}}}")
 
-                        args = ",".join([f"{p}: str" for p in params])
-                        body = ",".join([f'"{p}": {p}' for p in params])
+                        args_list = [f"{p}: str" for p in params]
+                        body_list = [f'"{p}": {p}' for p in params]
+
+                        args = ",".join([*args_list, "request: Request", "response: Response"])
+                        body = ",".join([*body_list, '"request": request', '"response": response'])
 
                         index += 1
                         w.writelines(
@@ -802,6 +805,9 @@ def write_routers(
                                 f"async def get{index}({args}) -> {c.cls_name}:\n",
                                 f"    s: Service = find_service({c.cls_name})\n",
                                 f"    b: dict[str, Any] = {{{body}}}\n",
+                                "\n",
+                                '    response.headers["OData-Version"] = "4.0"\n',
+                                "\n",
                                 f"    return cast({c.cls_name}, s.get(**b))\n",
                             ]
                         )

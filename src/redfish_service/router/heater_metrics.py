@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.heater_metrics import HeaterMetrics
@@ -14,7 +14,17 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, header_id: str) -> HeaterMetrics:
+async def get1(
+    chassis_id: str, header_id: str, request: Request, response: Response
+) -> HeaterMetrics:
     s: Service = find_service(HeaterMetrics)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "header_id": header_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "header_id": header_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(HeaterMetrics, s.get(**b))

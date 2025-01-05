@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.endpoint_group import EndpointGroup
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(storage_id: str, endpoint_group_id: str) -> EndpointGroup:
+async def get1(
+    storage_id: str, endpoint_group_id: str, request: Request, response: Response
+) -> EndpointGroup:
     s: Service = find_service(EndpointGroup)
-    b: dict[str, Any] = {"storage_id": storage_id, "endpoint_group_id": endpoint_group_id}
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "endpoint_group_id": endpoint_group_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EndpointGroup, s.get(**b))
 
 
@@ -25,13 +35,24 @@ async def get1(storage_id: str, endpoint_group_id: str) -> EndpointGroup:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(computer_system_id: str, storage_id: str, endpoint_group_id: str) -> EndpointGroup:
+async def get2(
+    computer_system_id: str,
+    storage_id: str,
+    endpoint_group_id: str,
+    request: Request,
+    response: Response,
+) -> EndpointGroup:
     s: Service = find_service(EndpointGroup)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "endpoint_group_id": endpoint_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EndpointGroup, s.get(**b))
 
 
@@ -40,12 +61,19 @@ async def get2(computer_system_id: str, storage_id: str, endpoint_group_id: str)
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(storage_service_id: str, endpoint_group_id: str) -> EndpointGroup:
+async def get3(
+    storage_service_id: str, endpoint_group_id: str, request: Request, response: Response
+) -> EndpointGroup:
     s: Service = find_service(EndpointGroup)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "endpoint_group_id": endpoint_group_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EndpointGroup, s.get(**b))
 
 
@@ -54,7 +82,17 @@ async def get3(storage_service_id: str, endpoint_group_id: str) -> EndpointGroup
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(fabric_id: str, endpoint_group_id: str) -> EndpointGroup:
+async def get4(
+    fabric_id: str, endpoint_group_id: str, request: Request, response: Response
+) -> EndpointGroup:
     s: Service = find_service(EndpointGroup)
-    b: dict[str, Any] = {"fabric_id": fabric_id, "endpoint_group_id": endpoint_group_id}
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "endpoint_group_id": endpoint_group_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(EndpointGroup, s.get(**b))

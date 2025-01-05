@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.memory_region import MemoryRegion
@@ -15,7 +15,12 @@ router = APIRouter()
 )
 @authenticate
 async def get1(
-    chassis_id: str, pcie_device_id: str, cxl_logical_device_id: str, memory_region_id: str
+    chassis_id: str,
+    pcie_device_id: str,
+    cxl_logical_device_id: str,
+    memory_region_id: str,
+    request: Request,
+    response: Response,
 ) -> MemoryRegion:
     s: Service = find_service(MemoryRegion)
     b: dict[str, Any] = {
@@ -23,5 +28,10 @@ async def get1(
         "pcie_device_id": pcie_device_id,
         "cxl_logical_device_id": cxl_logical_device_id,
         "memory_region_id": memory_region_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(MemoryRegion, s.get(**b))

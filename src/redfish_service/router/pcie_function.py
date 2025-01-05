@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.pcie_function import PcieFunction
@@ -14,13 +14,24 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, pcie_device_id: str, pcie_function_id: str) -> PcieFunction:
+async def get1(
+    chassis_id: str,
+    pcie_device_id: str,
+    pcie_function_id: str,
+    request: Request,
+    response: Response,
+) -> PcieFunction:
     s: Service = find_service(PcieFunction)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
         "pcie_function_id": pcie_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PcieFunction, s.get(**b))
 
 
@@ -30,14 +41,23 @@ async def get1(chassis_id: str, pcie_device_id: str, pcie_function_id: str) -> P
 )
 @authenticate
 async def get2(
-    computer_system_id: str, pcie_device_id: str, pcie_function_id: str
+    computer_system_id: str,
+    pcie_device_id: str,
+    pcie_function_id: str,
+    request: Request,
+    response: Response,
 ) -> PcieFunction:
     s: Service = find_service(PcieFunction)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
         "pcie_function_id": pcie_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PcieFunction, s.get(**b))
 
 
@@ -47,7 +67,12 @@ async def get2(
 )
 @authenticate
 async def get3(
-    resource_block_id: str, computer_system_id: str, pcie_device_id: str, pcie_function_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    pcie_function_id: str,
+    request: Request,
+    response: Response,
 ) -> PcieFunction:
     s: Service = find_service(PcieFunction)
     b: dict[str, Any] = {
@@ -55,7 +80,12 @@ async def get3(
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
         "pcie_function_id": pcie_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PcieFunction, s.get(**b))
 
 
@@ -65,7 +95,12 @@ async def get3(
 )
 @authenticate
 async def get4(
-    resource_block_id: str, computer_system_id: str, pcie_device_id: str, pcie_function_id: str
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    pcie_function_id: str,
+    request: Request,
+    response: Response,
 ) -> PcieFunction:
     s: Service = find_service(PcieFunction)
     b: dict[str, Any] = {
@@ -73,5 +108,10 @@ async def get4(
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
         "pcie_function_id": pcie_function_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(PcieFunction, s.get(**b))

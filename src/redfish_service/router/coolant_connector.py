@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.coolant_connector import CoolantConnector
@@ -14,9 +14,19 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 @authenticate
-async def get1(chassis_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get1(
+    chassis_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
-    b: dict[str, Any] = {"chassis_id": chassis_id, "coolant_connector_id": coolant_connector_id}
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -25,12 +35,19 @@ async def get1(chassis_id: str, coolant_connector_id: str) -> CoolantConnector:
     response_model_exclude_none=True,
 )
 @authenticate
-async def get2(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get2(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -39,12 +56,19 @@ async def get2(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get3(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get3(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -53,12 +77,19 @@ async def get3(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get4(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get4(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -67,12 +98,19 @@ async def get4(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get5(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get5(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -81,12 +119,19 @@ async def get5(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get6(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get6(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -95,12 +140,19 @@ async def get6(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get7(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get7(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -109,12 +161,19 @@ async def get7(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get8(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get8(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
 
 
@@ -123,10 +182,17 @@ async def get8(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnec
     response_model_exclude_none=True,
 )
 @authenticate
-async def get9(cooling_unit_id: str, coolant_connector_id: str) -> CoolantConnector:
+async def get9(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
     s: Service = find_service(CoolantConnector)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
     }
+
+    response.headers["OData-Version"] = "4.0"
+
     return cast(CoolantConnector, s.get(**b))
