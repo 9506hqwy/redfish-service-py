@@ -24,7 +24,9 @@ class AggregationSource(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
+    )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
     description: str | None = None

@@ -35,7 +35,7 @@ class MemoryDomain(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#MemoryDomain.v1_5_1.MemoryDomain")
     actions: Actions | None = None
     allows_block_provisioning: bool | None = None
     allows_memory_chunk_creation: bool | None = None

@@ -50,7 +50,9 @@ class StorageControllerMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#StorageControllerMetrics.v1_0_3.StorageControllerMetrics"
+    )
     actions: Actions | None = None
     correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
     correctable_parity_error_count: int | None = None

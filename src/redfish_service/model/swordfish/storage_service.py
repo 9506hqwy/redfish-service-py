@@ -47,7 +47,7 @@ class StorageService(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#StorageService.v1_7_0.StorageService")
     actions: Actions | None = None
     classes_of_service: IdRef | None = None
     client_endpoint_groups: IdRef | None = None

@@ -50,7 +50,7 @@ class MemoryChunks(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#MemoryChunks.v1_6_2.MemoryChunks")
     actions: Actions | None = None
     address_range_offset_mib: int | None = Field(alias="AddressRangeOffsetMiB", default=None)
     address_range_type: AddressRangeType | None = None

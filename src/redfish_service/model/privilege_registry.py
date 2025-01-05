@@ -36,7 +36,9 @@ class OperationPrivilege(RedfishModel):
 
 
 class PrivilegeRegistry(RedfishModel):
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#PrivilegeRegistry.v1_1_5.PrivilegeRegistry"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str

@@ -51,7 +51,7 @@ class ManagerAccount(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount")
     account_expiration: str | None = None
     account_types: list[AccountTypes]
     actions: Actions | None = None

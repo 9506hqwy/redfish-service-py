@@ -72,7 +72,9 @@ class ProcessorMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ProcessorMetrics.v1_6_4.ProcessorMetrics"
+    )
     actions: Actions | None = None
     average_frequency_mhz: float | None = Field(alias="AverageFrequencyMHz", default=None)
     bandwidth_percent: float | None = None

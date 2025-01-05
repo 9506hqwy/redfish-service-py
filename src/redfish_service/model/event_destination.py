@@ -32,7 +32,9 @@ class EventDestination(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#EventDestination.v1_15_0.EventDestination"
+    )
     actions: Actions | None = None
     backup_destinations: list[str] | None = None
     certificates: IdRef | None = None

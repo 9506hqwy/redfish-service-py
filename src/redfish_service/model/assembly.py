@@ -17,7 +17,7 @@ class Assembly(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Assembly.v1_5_1.Assembly")
     actions: Actions | None = None
     assemblies: list[AssemblyData] | None = None
     assemblies_odata_count: int | None = Field(alias="Assemblies@odata.count", default=None)

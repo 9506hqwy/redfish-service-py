@@ -22,7 +22,7 @@ class Session(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Session.v1_7_2.Session")
     actions: Actions | None = None
     client_origin_ip_address: str | None = Field(alias="ClientOriginIPAddress", default=None)
     context: str | None = None

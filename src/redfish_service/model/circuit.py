@@ -40,7 +40,7 @@ class Circuit(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Circuit.v1_8_1.Circuit")
     actions: Actions | None = None
     breaker_state: BreakerStates | None = None
     circuit_type: CircuitType | None = None

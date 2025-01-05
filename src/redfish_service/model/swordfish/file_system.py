@@ -44,7 +44,7 @@ class FileSystem(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#FileSystem.v1_4_1.FileSystem")
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
     block_size_bytes: int | None = None

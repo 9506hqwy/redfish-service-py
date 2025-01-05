@@ -18,7 +18,9 @@ class ThermalSubsystem(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ThermalSubsystem.v1_3_2.ThermalSubsystem"
+    )
     actions: Actions | None = None
     coolant_connector_redundancy: list[RedundantGroup] | None = None
     coolant_connectors: IdRef | None = None

@@ -23,7 +23,7 @@ class SecureBoot(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#SecureBoot.v1_1_2.SecureBoot")
     actions: Actions | None = None
     description: str | None = None
     id: str

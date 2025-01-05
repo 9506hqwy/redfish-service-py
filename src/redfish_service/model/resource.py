@@ -192,7 +192,7 @@ class Resource(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Resource.v1_20_0.Resource")
     description: str | None = None
     id: str
     name: str
@@ -203,7 +203,9 @@ class ResourceCollection(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ResourceCollection.v1_20_0.ResourceCollection"
+    )
     description: str | None = None
     name: str
     oem: dict[str, Any] | None = None

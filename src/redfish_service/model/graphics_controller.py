@@ -17,7 +17,9 @@ class GraphicsController(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#GraphicsController.v1_0_2.GraphicsController"
+    )
     actions: Actions | None = None
     asset_tag: str | None = None
     bios_version: str | None = None

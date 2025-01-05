@@ -69,7 +69,7 @@ class VirtualMedia(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#VirtualMedia.v1_6_4.VirtualMedia")
     actions: Actions | None = None
     certificates: IdRef | None = None
     client_certificates: IdRef | None = None

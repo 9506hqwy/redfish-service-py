@@ -34,7 +34,7 @@ class ThermalMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#ThermalMetrics.v1_3_2.ThermalMetrics")
     actions: Actions | None = None
     air_flow_cubic_meters_per_minute: SensorExcerpt | None = None
     delta_pressurek_pa: SensorExcerpt | None = None

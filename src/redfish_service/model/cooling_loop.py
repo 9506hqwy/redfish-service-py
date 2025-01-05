@@ -37,7 +37,7 @@ class CoolingLoop(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#CoolingLoop.v1_0_3.CoolingLoop")
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None

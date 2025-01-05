@@ -19,7 +19,7 @@ class Certificate(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Certificate.v1_9_0.Certificate")
     actions: Actions | None = None
     certificate_string: str | None = None
     certificate_type: CertificateType | None = None

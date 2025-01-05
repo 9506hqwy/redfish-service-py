@@ -10,7 +10,6 @@ def init_instances() -> None:
     service_root = ServiceRoot.model_validate(
         {
             "odata_id": f"{PATH_SERVICE_ROOT}/",
-            "odata_type": "#ServiceRoot.v1_17_0.ServiceRoot",
             "id": "ServiceRoot",
             "name": "Service Root",
             "links": {
@@ -25,7 +24,6 @@ def init_instances() -> None:
     session_collection = SessionCollection.model_validate(
         {
             "odata_id": PATH_SESSION_COLLECTION,
-            "odata_type": "#SessionCollection.SessionCollection",
             "members": [],
             "members_odata_count": 0,
             "name": "Session Collection",

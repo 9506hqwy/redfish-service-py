@@ -92,7 +92,7 @@ class PortMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#PortMetrics.v1_7_0.PortMetrics")
     actions: Actions | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
     description: str | None = None

@@ -16,7 +16,9 @@ class StoragePoolMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#StoragePoolMetrics.v1_0_1.StoragePoolMetrics"
+    )
     actions: Actions | None = None
     consistency_check_error_count: float | None = None
     correctable_io_read_error_count: int | None = Field(

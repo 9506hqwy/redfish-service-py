@@ -21,7 +21,7 @@ class OperatingConfig(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#OperatingConfig.v1_0_4.OperatingConfig")
     actions: Actions | None = None
     base_speed_mhz: int | None = Field(alias="BaseSpeedMHz", default=None)
     base_speed_priority_settings: list[BaseSpeedPrioritySettings] | None = None

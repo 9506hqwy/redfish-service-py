@@ -59,7 +59,7 @@ class LogEntry(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry")
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
     additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)

@@ -17,7 +17,9 @@ class ConnectionMethod(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ConnectionMethod.v1_1_1.ConnectionMethod"
+    )
     actions: Actions | None = None
     connection_method_type: ConnectionMethodType | None = None
     connection_method_variant: str | None = None

@@ -25,7 +25,7 @@ class AccountService(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#AccountService.v1_16_0.AccountService")
     account_lockout_counter_reset_after: int | None = None
     account_lockout_counter_reset_enabled: bool | None = None
     account_lockout_duration: int | None = None

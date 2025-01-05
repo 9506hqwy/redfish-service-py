@@ -62,7 +62,7 @@ class ResourceBlock(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#ResourceBlock.v1_4_3.ResourceBlock")
     actions: Actions | None = None
     client: str | None = None
     composition_status: CompositionStatus

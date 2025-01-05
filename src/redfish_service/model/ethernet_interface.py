@@ -56,7 +56,9 @@ class EthernetInterface(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#EthernetInterface.v1_12_2.EthernetInterface"
+    )
     actions: Actions | None = None
     auto_neg: bool | None = None
     dhcpv4: Dhcpv4Configuration | None = Field(alias="DHCPv4", default=None)

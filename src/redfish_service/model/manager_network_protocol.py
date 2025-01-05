@@ -30,7 +30,9 @@ class ManagerNetworkProtocol(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ManagerNetworkProtocol.v1_10_1.ManagerNetworkProtocol"
+    )
     actions: Actions | None = None
     dhcp: Protocol | None = Field(alias="DHCP", default=None)
     dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)

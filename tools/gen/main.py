@@ -108,7 +108,7 @@ class ClassInfo:
     def write_to(self, w: Any) -> None:
         w.write(f"class {self.cls_name}({self.base_name}):\n")
         for p in self.properties:
-            p.write_to(w)
+            p.write_to(w, self)
         if len(self.properties) == 0:
             w.write("    pass\n")
 
@@ -212,14 +212,21 @@ class PropetyInfo:
         ty = self.type if isinstance(self.type, str) else self.type.type_name
         return f"list[{ty}]" if self.array else ty
 
-    def write_to(self, w: Any) -> None:
+    def write_to(self, w: Any, owner: ClassInfo) -> None:
         w.write(f"    {self.property_name}: {self.type_name}")
         if self.nonable:
             w.write(" | None")
 
         if self.name != get_class_name(self.property_name):
             w.write(" \\\n")
-            if self.nonable:
+            if self.property_name == "odata_type":
+                if version := owner.version:
+                    (x, y, z) = version
+                    ty = f"#{owner.name}.v{x}_{y}_{z}.{owner.name}"
+                else:
+                    ty = f"#{owner.name}.{owner.name}"
+                w.write(f'        = Field(alias="{self.name}", default="{ty}")')
+            elif self.nonable:
                 w.write(f'        = Field(alias="{self.name}", default=None)')
             else:
                 w.write(f'        = Field(alias="{self.name}")')

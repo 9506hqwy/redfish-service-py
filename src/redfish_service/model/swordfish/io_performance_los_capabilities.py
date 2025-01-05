@@ -27,7 +27,10 @@ class IoPerformanceLosCapabilities(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type",
+        default="#IOPerformanceLoSCapabilities.v1_3_0.IOPerformanceLoSCapabilities",
+    )
     actions: Actions | None = None
     description: str | None = None
     io_limiting_is_supported: bool | None = Field(alias="IOLimitingIsSupported", default=None)

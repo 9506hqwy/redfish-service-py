@@ -16,7 +16,6 @@ def test_service_root_min() -> None:
         },
         "name": "c",
         "odata_id": "d",
-        "odata_type": "e",
     }
     ServiceRoot.model_validate(obj_info)
 

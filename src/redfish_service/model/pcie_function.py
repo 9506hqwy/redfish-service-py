@@ -77,7 +77,7 @@ class PcieFunction(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#PCIeFunction.v1_6_0.PCIeFunction")
     actions: Actions | None = None
     bus_number: str | None = None
     class_code: str | None = None

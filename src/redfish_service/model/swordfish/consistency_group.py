@@ -53,7 +53,9 @@ class ConsistencyGroup(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ConsistencyGroup.v1_1_1.ConsistencyGroup"
+    )
     actions: Actions | None = None
     consistency_method: ApplicationConsistencyMethod | None = None
     consistency_type: ConsistencyType | None = None

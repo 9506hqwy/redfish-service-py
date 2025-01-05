@@ -18,7 +18,9 @@ class NetworkAdapterMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#NetworkAdapterMetrics.v1_1_0.NetworkAdapterMetrics"
+    )
     actions: Actions | None = None
     cpu_core_percent: float | None = Field(alias="CPUCorePercent", default=None)
     description: str | None = None

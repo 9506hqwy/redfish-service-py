@@ -21,7 +21,7 @@ class FileShare(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#FileShare.v1_3_0.FileShare")
     actions: Actions | None = None
     ca_supported: bool | None = Field(alias="CASupported", default=None)
     default_access_capabilities: list[StorageAccessCapability] | None = None

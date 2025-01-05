@@ -30,7 +30,7 @@ class MemoryRegion(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion")
     actions: Actions | None = None
     block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
     description: str | None = None

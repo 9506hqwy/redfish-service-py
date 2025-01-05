@@ -41,7 +41,7 @@ class Switch(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Switch.v1_9_3.Switch")
     actions: Actions | None = None
     asset_tag: str | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)

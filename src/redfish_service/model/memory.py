@@ -118,7 +118,7 @@ class Memory(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Memory.v1_20_0.Memory")
     actions: Actions | None = None
     allocation_alignment_mib: int | None = Field(alias="AllocationAlignmentMiB", default=None)
     allocation_increment_mib: int | None = Field(alias="AllocationIncrementMiB", default=None)

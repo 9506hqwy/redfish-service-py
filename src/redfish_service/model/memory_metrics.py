@@ -73,7 +73,7 @@ class MemoryMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#MemoryMetrics.v1_7_3.MemoryMetrics")
     actions: Actions | None = None
     bandwidth_percent: float | None = None
     block_size_bytes: int | None = None

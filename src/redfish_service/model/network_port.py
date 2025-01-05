@@ -48,7 +48,7 @@ class NetworkPort(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#NetworkPort.v1_4_3.NetworkPort")
     actions: Actions | None = None
     active_link_technology: LinkNetworkTechnology | None = None
     associated_network_addresses: list[str] | None = None

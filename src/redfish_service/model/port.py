@@ -244,7 +244,7 @@ class Port(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Port.v1_14_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)

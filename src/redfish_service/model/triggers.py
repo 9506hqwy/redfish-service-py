@@ -75,7 +75,7 @@ class Triggers(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Triggers.v1_4_0.Triggers")
     actions: Actions | None = None
     description: str | None = None
     discrete_trigger_condition: DiscreteTriggerConditionEnum | None = None

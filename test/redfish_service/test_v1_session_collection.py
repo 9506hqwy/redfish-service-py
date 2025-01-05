@@ -8,6 +8,5 @@ def test_session_collection_min() -> None:
         "members_odata_count": 0,
         "name": "c",
         "odata_id": "d",
-        "odata_type": "e",
     }
     SessionCollection.model_validate(obj_info)

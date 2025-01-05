@@ -16,7 +16,7 @@ class VolumeMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#VolumeMetrics.v1_1_1.VolumeMetrics")
     actions: Actions | None = None
     consistency_check_count: float | None = None
     consistency_check_error_count: float | None = None

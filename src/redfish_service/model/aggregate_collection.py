@@ -12,7 +12,9 @@ class AggregateCollection(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#AggregateCollection.AggregateCollection"
+    )
     description: str | None = None
     members: list[IdRef]
     members_odata_count: int = Field(alias="Members@odata.count")

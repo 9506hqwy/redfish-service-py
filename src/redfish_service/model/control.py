@@ -23,7 +23,7 @@ class Control(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Control.v1_5_2.Control")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None

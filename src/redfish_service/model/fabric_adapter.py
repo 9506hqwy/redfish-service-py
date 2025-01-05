@@ -19,7 +19,7 @@ class FabricAdapter(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#FabricAdapter.v1_5_3.FabricAdapter")
     asic_manufacturer: str | None = Field(alias="ASICManufacturer", default=None)
     asic_part_number: str | None = Field(alias="ASICPartNumber", default=None)
     asic_revision_identifier: str | None = Field(alias="ASICRevisionIdentifier", default=None)

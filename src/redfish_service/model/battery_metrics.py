@@ -17,7 +17,7 @@ class BatteryMetrics(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#BatteryMetrics.v1_0_4.BatteryMetrics")
     actions: Actions | None = None
     cell_voltages: list[SensorVoltageExcerpt] | None = None
     cell_voltages_odata_count: int | None = Field(alias="CellVoltages@odata.count", default=None)

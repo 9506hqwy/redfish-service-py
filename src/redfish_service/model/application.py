@@ -18,7 +18,7 @@ class Application(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Application.v1_0_1.Application")
     actions: Actions | None = None
     description: str | None = None
     destination_ur_is: list[str] | None = Field(alias="DestinationURIs", default=None)

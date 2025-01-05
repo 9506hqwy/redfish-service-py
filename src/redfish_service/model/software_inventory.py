@@ -40,7 +40,9 @@ class SoftwareInventory(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#SoftwareInventory.v1_10_2.SoftwareInventory"
+    )
     actions: Actions | None = None
     additional_versions: AdditionalVersions | None = None
     associated_physical_context: PhysicalContext | None = None

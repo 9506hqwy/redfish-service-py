@@ -24,7 +24,9 @@ class ComponentIntegrity(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(
+        alias="@odata.type", default="#ComponentIntegrity.v1_3_0.ComponentIntegrity"
+    )
     actions: Actions | None = None
     component_integrity_enabled: bool | None = None
     component_integrity_type: ComponentIntegrityType

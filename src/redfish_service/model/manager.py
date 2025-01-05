@@ -92,7 +92,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#Manager.v1_19_2.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)

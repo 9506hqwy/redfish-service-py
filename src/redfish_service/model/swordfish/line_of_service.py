@@ -11,7 +11,7 @@ class LineOfService(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
     odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type")
+    odata_type: str = Field(alias="@odata.type", default="#LineOfService.v1_1_0.LineOfService")
     description: str | None = None
     id: str
     name: str
