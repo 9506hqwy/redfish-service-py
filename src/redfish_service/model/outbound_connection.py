@@ -53,6 +53,33 @@ class OutboundConnection(RedfishModel):
     web_socket_ping_interval_minutes: int | None = None
 
 
+class OutboundConnectionOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#OutboundConnection.v1_0_2.OutboundConnection"
+    )
+    actions: Actions | None = None
+    authentication: AuthenticationType | None = None
+    certificates: IdRef | None = None
+    client_certificates: IdRef | None = None
+    connection_enabled: bool | None = None
+    description: str | None = None
+    endpoint_uri: str | None = Field(alias="EndpointURI", default=None)
+    id: str | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    pre_upgrade_http_headers: dict[str, Any] | None = Field(
+        alias="PreUpgradeHTTPHeaders", default=None
+    )
+    retry_policy: RetryPolicyType | None = None
+    roles: list[str] | None = None
+    status: Status | None = None
+    web_socket_ping_interval_minutes: int | None = None
+
+
 class OutboundConnectionRetryPolicyType(StrEnum):
     NONE = "None"
     RETRY_FOREVER = "RetryForever"

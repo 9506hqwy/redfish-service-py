@@ -106,6 +106,57 @@ class LogEntry(RedfishModel):
     username: str | None = None
 
 
+class LogEntryOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry")
+    actions: Actions | None = None
+    additional_data_size_bytes: int | None = None
+    additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
+    cper: Cper | None = Field(alias="CPER", default=None)
+    cxl_entry_type: CxlEntryType | None = Field(alias="CXLEntryType", default=None)
+    created: str | None = None
+    description: str | None = None
+    diagnostic_data: str | None = None
+    diagnostic_data_type: LogDiagnosticDataTypes | None = None
+    entry_code: LogEntryCode | None = None
+    entry_type: LogEntryType
+    event_group_id: int | None = None
+    event_id: str | None = None
+    event_timestamp: str | None = None
+    event_type: EventType | None = None
+    first_overflow_timestamp: str | None = None
+    generator_id: str | None = None
+    id: str | None = None
+    last_overflow_timestamp: str | None = None
+    links: Links | None = None
+    message: str | None = None
+    message_args: list[str] | None = None
+    message_id: str | None = None
+    modified: str | None = None
+    name: str | None = None
+    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem: dict[str, Any] | None = None
+    oem_log_entry_code: str | None = None
+    oem_record_format: str | None = None
+    oem_sensor_type: str | None = None
+    originator: str | None = None
+    originator_type: OriginatorTypes | None = None
+    overflow_error_count: int | None = None
+    persistency: bool | None = None
+    resolution: str | None = None
+    resolution_steps: list[ResolutionStep] | None = None
+    resolved: bool | None = None
+    sensor_number: int | None = None
+    sensor_type: SensorType | None = None
+    service_provider_notified: bool | None = None
+    severity: EventSeverity | None = None
+    specific_event_exists_in_group: bool | None = None
+    user_authentication_source: str | None = None
+    username: str | None = None
+
+
 class LogEntryCode(StrEnum):
     ASSERT = "Assert"
     DEASSERT = "Deassert"

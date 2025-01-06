@@ -31,6 +31,8 @@ class ClassInfo:
     loaded: bool = False
     raw: bool = False
     impl_info: ClassInfo | None = None
+    item_info: ClassInfo | None = None
+    creatable: bool = False
     _module: str | None = None
 
     @property
@@ -99,8 +101,11 @@ class ClassInfo:
     ) -> None:
         if (properties := definition.get("properties", None)) is not None:
             required = definition.get("required", [])
+            required_on_create = definition.get("requiredOnCreate", [])
             for prop_name, prop_definition in properties.items():
-                self._load_property(classall, prop_name, prop_definition, required)
+                self._load_property(
+                    classall, prop_name, prop_definition, required, required_on_create
+                )
 
     def set_module(self, module: str) -> None:
         self._module = module
@@ -112,16 +117,30 @@ class ClassInfo:
         if len(self.properties) == 0:
             w.write("    pass\n")
 
+        if not self.creatable:
+            return
+
+        w.write("\n")
+        w.write("\n")
+
+        w.write(f"class {self.cls_name}OnCreate({self.base_name}):\n")
+        for p in self.properties:
+            p.write_on_create_to(w, self)
+        if len(self.properties) == 0:
+            w.write("    pass\n")
+
     def _load_property(
         self,
         classall: list[ClassInfo | EnumInfo],
         name: str,
         definition: dict[str, Any],
         required: list[str],
+        required_on_create: list[str],
     ) -> None:
-        type, array, nonable = resolve_property_type(classall, self, definition)
+        type, array, nonable = resolve_property_type(classall, self, definition, True)
         nonable = nonable or (name not in required)
-        info = PropetyInfo(name, type, array, nonable)
+        nonable_on_create = nonable or (name not in required_on_create)
+        info = PropetyInfo(definition, name, type, array, nonable, nonable_on_create)
         self.properties.append(info)
 
     def __hash__(self) -> int:
@@ -198,10 +217,12 @@ class EnumInfo:
 
 @dataclass
 class PropetyInfo:
+    definition: dict[str, Any]
     name: str
     type: str | ClassInfo | EnumInfo
     array: bool
     nonable: bool
+    nonable_on_create: bool
 
     @property
     def property_name(self) -> str:
@@ -213,8 +234,14 @@ class PropetyInfo:
         return f"list[{ty}]" if self.array else ty
 
     def write_to(self, w: Any, owner: ClassInfo) -> None:
+        return self._write_to(w, owner, self.nonable)
+
+    def write_on_create_to(self, w: Any, owner: ClassInfo) -> None:
+        return self._write_to(w, owner, self.nonable_on_create)
+
+    def _write_to(self, w: Any, owner: ClassInfo, nonable: bool) -> None:
         w.write(f"    {self.property_name}: {self.type_name}")
-        if self.nonable:
+        if nonable:
             w.write(" | None")
 
         if self.name != get_class_name(self.property_name):
@@ -226,11 +253,11 @@ class PropetyInfo:
                 else:
                     ty = f"#{owner.name}.{owner.name}"
                 w.write(f'        = Field(alias="{self.name}", default="{ty}")')
-            elif self.nonable:
+            elif nonable:
                 w.write(f'        = Field(alias="{self.name}", default=None)')
             else:
                 w.write(f'        = Field(alias="{self.name}")')
-        elif self.nonable:
+        elif nonable:
             w.write(" = None")
 
         w.write("\n")
@@ -447,6 +474,36 @@ def load_properties(
 
         target.loaded = True
 
+    for target in targets:
+        if not target.loaded:
+            continue
+
+        if not target.reachable:
+            continue
+
+        if not isinstance(target, ClassInfo):
+            continue
+
+        if target.item_info:
+            continue
+
+        members = next((p for p in target.properties if p.name == "Members"), None)
+
+        if not members:
+            continue
+
+        if not isinstance(members.type, ClassInfo):
+            continue
+
+        item_type, _, _ = resolve_property_type(classall, target, members.definition, False)
+
+        if not isinstance(item_type, ClassInfo):
+            continue
+
+        target.item_info = item_type
+        if target.definition.get("insertable", False):
+            target.item_info.creatable = True
+
 
 def func_match_domain(
     domain: str, file_name: str, name: str
@@ -504,7 +561,10 @@ def resolve_ref(
 
 
 def resolve_property_type(
-    classes: list[ClassInfo | EnumInfo], source: ClassInfo, definition: dict[str, Any]
+    classes: list[ClassInfo | EnumInfo],
+    source: ClassInfo,
+    definition: dict[str, Any],
+    prefer_idref: bool,
 ) -> tuple[str | ClassInfo | EnumInfo, bool, bool]:
     def has_null(d: dict[str, Any]) -> bool:
         if t := d.get("type", ""):
@@ -513,7 +573,7 @@ def resolve_property_type(
 
     def get_from_ref(ref: str, noneable: bool) -> tuple[ClassInfo | EnumInfo, bool, bool]:
         info = resolve_ref(classes, source, ref)
-        if info.id_ref:
+        if prefer_idref and info.id_ref:
             info = next(
                 (c for c in classes if c.schema_path.name == "odata-v4.json" and c.name == "idRef")
             )
@@ -549,7 +609,9 @@ def resolve_property_type(
                 return ("str", False, False)
 
             case "array":
-                item_type = resolve_property_type(classes, source, definition["items"])
+                item_type = resolve_property_type(
+                    classes, source, definition["items"], prefer_idref
+                )
                 return (item_type[0], True, False)
             case _:
                 if name := get_primitive_type_name(definition):
@@ -889,6 +951,18 @@ def main() -> int:
     for c in classall:
         if c.loaded and c.versioned:
             c.set_module(c.module.split(".", 1)[0])
+
+    for c in classall:
+        if isinstance(c, ClassInfo) and c.creatable:
+            m = next(
+                (
+                    i
+                    for i in classall
+                    if i.loaded and c.module_path == i.module_path and c.name == i.name
+                )
+            )
+            if isinstance(m, ClassInfo):
+                m.creatable = c.creatable
 
     loaded = len([c for c in classall if c.loaded])
     print(f"loaded: {loaded}")

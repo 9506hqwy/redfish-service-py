@@ -52,6 +52,30 @@ class Endpoint(RedfishModel):
     status: Status | None = None
 
 
+class EndpointOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Endpoint.v1_8_2.Endpoint")
+    actions: Actions | None = None
+    connected_entities: list[ConnectedEntity] | None = None
+    description: str | None = None
+    endpoint_protocol: Protocol | None = None
+    host_reservation_memory_bytes: int | None = None
+    ip_transport_details: list[IpTransportDetails] | None = Field(
+        alias="IPTransportDetails", default=None
+    )
+    id: str | None = None
+    identifiers: list[Identifier] | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    pci_id: PciId | None = None
+    redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    status: Status | None = None
+
+
 class EntityRole(StrEnum):
     INITIATOR = "Initiator"
     TARGET = "Target"

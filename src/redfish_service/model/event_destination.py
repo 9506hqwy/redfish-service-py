@@ -77,6 +77,55 @@ class EventDestination(RedfishModel):
     verify_certificate: bool | None = None
 
 
+class EventDestinationOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#EventDestination.v1_15_0.EventDestination"
+    )
+    actions: Actions | None = None
+    backup_destinations: list[str] | None = None
+    certificates: IdRef | None = None
+    client_certificates: IdRef | None = None
+    context: str | None = None
+    delivery_retry_policy: DeliveryRetryPolicy | None = None
+    description: str | None = None
+    destination: str | None = None
+    event_format_type: EventFormatType | None = None
+    event_types: list[EventType] | None = None
+    exclude_message_ids: list[str] | None = None
+    exclude_registry_prefixes: list[str] | None = None
+    heartbeat_interval_minutes: int | None = None
+    http_headers: list[dict[str, Any]] | None = None
+    id: str | None = None
+    include_origin_of_condition: bool | None = None
+    message_ids: list[str] | None = None
+    metric_report_definitions: list[IdRef] | None = None
+    metric_report_definitions_odata_count: int | None = Field(
+        alias="MetricReportDefinitions@odata.count", default=None
+    )
+    name: str | None = None
+    oem_protocol: str | None = Field(alias="OEMProtocol", default=None)
+    oem_subscription_type: str | None = Field(alias="OEMSubscriptionType", default=None)
+    oem: dict[str, Any] | None = None
+    origin_resources: list[IdRef] | None = None
+    origin_resources_odata_count: int | None = Field(
+        alias="OriginResources@odata.count", default=None
+    )
+    protocol: EventDestinationProtocol | None = None
+    registry_prefixes: list[str] | None = None
+    resource_types: list[str] | None = None
+    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
+    send_heartbeat: bool | None = None
+    severities: list[Health] | None = None
+    status: Status | None = None
+    subordinate_resources: bool | None = None
+    subscription_type: SubscriptionType | None = None
+    syslog_filters: list[SyslogFilter] | None = None
+    verify_certificate: bool | None = None
+
+
 class EventDestinationProtocol(StrEnum):
     REDFISH = "Redfish"
     KAFKA = "Kafka"

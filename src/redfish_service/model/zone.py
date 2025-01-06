@@ -73,6 +73,24 @@ class Zone(RedfishModel):
     zone_type: ZoneType | None = None
 
 
+class ZoneOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Zone.v1_6_3.Zone")
+    actions: Actions | None = None
+    default_routing_enabled: bool | None = None
+    description: str | None = None
+    external_accessibility: ExternalAccessibility | None = None
+    id: str | None = None
+    identifiers: list[Identifier] | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+    zone_type: ZoneType | None = None
+
+
 class ZoneType(StrEnum):
     DEFAULT = "Default"
     ZONE_OF_ENDPOINTS = "ZoneOfEndpoints"

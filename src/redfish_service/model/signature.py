@@ -28,5 +28,21 @@ class Signature(RedfishModel):
     uefi_signature_owner: str | None = None
 
 
+class SignatureOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Signature.v1_0_3.Signature")
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    signature_string: str | None = None
+    signature_type: str | None = None
+    signature_type_registry: SignatureTypeRegistry | None = None
+    uefi_signature_owner: str | None = None
+
+
 class SignatureTypeRegistry(StrEnum):
     UEFI = "UEFI"

@@ -47,6 +47,39 @@ class Cable(RedfishModel):
     vendor: str | None = None
 
 
+class CableOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Cable.v1_2_3.Cable")
+    actions: Actions | None = None
+    assembly: IdRef | None = None
+    asset_tag: str | None = None
+    cable_class: CableClass | None = None
+    cable_status: CableStatus | None = None
+    cable_type: str | None = None
+    description: str | None = None
+    downstream_connector_types: list[ConnectorType] | None = None
+    downstream_name: str | None = None
+    id: str | None = None
+    length_meters: float | None = None
+    links: Links | None = None
+    location: Location | None = None
+    manufacturer: str | None = None
+    model: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    part_number: str | None = None
+    sku: str | None = Field(alias="SKU", default=None)
+    serial_number: str | None = None
+    status: Status | None = None
+    upstream_connector_types: list[ConnectorType] | None = None
+    upstream_name: str | None = None
+    user_description: str | None = None
+    user_label: str | None = None
+    vendor: str | None = None
+
+
 class CableClass(StrEnum):
     POWER = "Power"
     NETWORK = "Network"

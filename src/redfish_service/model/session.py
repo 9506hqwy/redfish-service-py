@@ -40,6 +40,28 @@ class Session(RedfishModel):
     user_name: str | None = None
 
 
+class SessionOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Session.v1_7_2.Session")
+    actions: Actions | None = None
+    client_origin_ip_address: str | None = Field(alias="ClientOriginIPAddress", default=None)
+    context: str | None = None
+    created_time: str | None = None
+    description: str | None = None
+    id: str | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    oem_session_type: str | None = None
+    password: str | None = None
+    roles: list[str] | None = None
+    session_type: SessionTypes | None = None
+    token: str | None = None
+    user_name: str | None = None
+
+
 class SessionTypes(StrEnum):
     HOST_CONSOLE = "HostConsole"
     MANAGER_CONSOLE = "ManagerConsole"

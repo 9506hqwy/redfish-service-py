@@ -80,6 +80,46 @@ class FileSystem(RedfishModel):
     replication_enabled: bool | None = None
 
 
+class FileSystemOnCreate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#FileSystem.v1_4_1.FileSystem")
+    access_capabilities: list[StorageAccessCapability] | None = None
+    actions: Actions | None = None
+    block_size_bytes: int | None = None
+    capacity: Capacity | None = None
+    capacity_sources: list[IdRef] | None = None
+    capacity_sources_odata_count: int | None = Field(
+        alias="CapacitySources@odata.count", default=None
+    )
+    case_preserved: bool | None = None
+    case_sensitive: bool | None = None
+    character_code_set: list[CharacterCodeSet] | None = None
+    cluster_size_bytes: int | None = None
+    description: str | None = None
+    exported_shares: IdRef | None = None
+    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    id: str | None = None
+    identifiers: list[Identifier] | None = None
+    imported_shares: list[dict[str, Any]] | None = None
+    links: Links | None = None
+    low_space_warning_threshold_percents: list[int] | None = None
+    max_file_name_length_bytes: int | None = None
+    metrics: IdRef | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    recoverable_capacity_source_count: int | None = None
+    remaining_capacity: Capacity | None = None
+    remaining_capacity_percent: int | None = None
+    replica_info: ReplicaInfo | None = None
+    replica_targets: list[IdRef] | None = None
+    replica_targets_odata_count: int | None = Field(
+        alias="ReplicaTargets@odata.count", default=None
+    )
+    replication_enabled: bool | None = None
+
+
 class Links(RedfishModel):
     class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
