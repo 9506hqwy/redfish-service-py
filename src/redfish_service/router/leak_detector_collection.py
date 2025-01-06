@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/LeakDetection/LeakDetectors",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/LeakDetection/LeakDetectors",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(chassis_id: str, request: Request, response: Response) -> LeakDetectorCollection:
     s: Service = find_service(LeakDetectorCollection)
@@ -24,6 +28,10 @@ async def get1(chassis_id: str, request: Request, response: Response) -> LeakDet
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/LeakDetection/LeakDetectors",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/LeakDetection/LeakDetectors",
     response_model_exclude_none=True,
 )
@@ -47,6 +55,10 @@ async def get2(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/LeakDetection/LeakDetectors",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/LeakDetection/LeakDetectors",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     cooling_unit_id: str, request: Request, response: Response
@@ -64,6 +76,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/LeakDetection/LeakDetectors/",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/LeakDetection/LeakDetectors/",
     response_model_exclude_none=True,
 )

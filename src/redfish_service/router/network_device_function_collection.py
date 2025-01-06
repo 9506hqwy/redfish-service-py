@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
@@ -31,6 +35,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
     response_model_exclude_none=True,
 )
@@ -55,6 +63,10 @@ async def get2(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
@@ -73,6 +85,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
     response_model_exclude_none=True,
 )
@@ -102,6 +118,10 @@ async def get4(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
@@ -120,6 +140,10 @@ async def get5(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/NetworkInterfaces/{network_interface_id}/NetworkDeviceFunctions",
     response_model_exclude_none=True,
 )

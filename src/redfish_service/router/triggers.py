@@ -12,6 +12,9 @@ router = APIRouter()
 @router.get(
     "/redfish/v1/TelemetryService/Triggers/{triggers_id}", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/TelemetryService/Triggers/{triggers_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get1(triggers_id: str, request: Request, response: Response) -> Triggers:
     s: Service = find_service(Triggers)

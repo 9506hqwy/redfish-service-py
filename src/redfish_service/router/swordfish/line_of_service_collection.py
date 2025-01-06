@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
@@ -30,6 +34,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataProtectionLinesOfService",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataProtectionLinesOfService",
     response_model_exclude_none=True,
 )
@@ -53,6 +61,10 @@ async def get2(
     "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataSecurityLinesOfService",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataSecurityLinesOfService",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     storage_service_id: str, request: Request, response: Response
@@ -70,6 +82,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataStorageLinesOfService",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataStorageLinesOfService",
     response_model_exclude_none=True,
 )
@@ -93,6 +109,10 @@ async def get4(
     "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/IOConnectivityLinesOfService",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/IOConnectivityLinesOfService",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     storage_service_id: str, request: Request, response: Response
@@ -113,6 +133,10 @@ async def get5(
     "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/IOPerformanceLinesOfService",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/IOPerformanceLinesOfService",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     storage_service_id: str, request: Request, response: Response
@@ -130,6 +154,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataProtectionLinesOfService",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataProtectionLinesOfService",
     response_model_exclude_none=True,
 )
@@ -154,6 +182,10 @@ async def get7(
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataSecurityLinesOfService",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataSecurityLinesOfService",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get8(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
@@ -172,6 +204,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataStorageLinesOfService",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataStorageLinesOfService",
     response_model_exclude_none=True,
 )
@@ -196,6 +232,10 @@ async def get9(
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/IOConnectivityLinesOfService",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/IOConnectivityLinesOfService",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get10(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
@@ -214,6 +254,10 @@ async def get10(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/IOPerformanceLinesOfService",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/IOPerformanceLinesOfService",
     response_model_exclude_none=True,
 )

@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str,
@@ -38,6 +42,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
@@ -69,6 +77,10 @@ async def get2(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
@@ -91,6 +103,10 @@ async def get3(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
@@ -110,6 +126,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -141,6 +161,10 @@ async def get5(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     fabric_id: str,
@@ -166,6 +190,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
@@ -195,6 +223,10 @@ async def get7(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get8(
     computer_system_id: str,
@@ -218,6 +250,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -249,6 +285,10 @@ async def get9(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get10(
     computer_system_id: str,
@@ -274,6 +314,10 @@ async def get10(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
@@ -305,6 +349,10 @@ async def get11(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get12(
     resource_block_id: str,
@@ -330,6 +378,10 @@ async def get12(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -363,6 +415,10 @@ async def get13(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get14(
     resource_block_id: str,
@@ -390,6 +446,10 @@ async def get14(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
@@ -421,6 +481,10 @@ async def get15(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get16(
     resource_block_id: str,
@@ -446,6 +510,10 @@ async def get16(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -479,6 +547,10 @@ async def get17(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get18(
     resource_block_id: str,
@@ -506,6 +578,10 @@ async def get18(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -537,6 +613,10 @@ async def get19(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get20(
     chassis_id: str,
@@ -565,6 +645,10 @@ async def get20(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get21(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
@@ -587,6 +671,10 @@ async def get21(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get22(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
@@ -606,6 +694,10 @@ async def get22(
 
 
 @router.get(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -637,6 +729,10 @@ async def get23(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get24(
     fabric_id: str,
@@ -662,6 +758,10 @@ async def get24(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
@@ -691,6 +791,10 @@ async def get25(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get26(
     computer_system_id: str,
@@ -714,6 +818,10 @@ async def get26(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -745,6 +853,10 @@ async def get27(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get28(
     computer_system_id: str,
@@ -770,6 +882,10 @@ async def get28(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
@@ -801,6 +917,10 @@ async def get29(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get30(
     resource_block_id: str,
@@ -826,6 +946,10 @@ async def get30(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -859,6 +983,10 @@ async def get31(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get32(
     resource_block_id: str,
@@ -886,6 +1014,10 @@ async def get32(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/MSDT/{msdt_id}",
     response_model_exclude_none=True,
 )
@@ -917,6 +1049,10 @@ async def get33(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/SSDT/{ssdt_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get34(
     resource_block_id: str,
@@ -942,6 +1078,10 @@ async def get34(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/LPRT/{lprt_id}",
     response_model_exclude_none=True,
 )
@@ -972,6 +1112,10 @@ async def get35(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/MPRT/{mprt_id}",
     response_model_exclude_none=True,
 )

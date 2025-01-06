@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Fabrics/{fabric_id}/Zones/{zone_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/Fabrics/{fabric_id}/Zones/{zone_id}", response_model_exclude_none=True)
 @authenticate
 async def get1(fabric_id: str, zone_id: str, request: Request, response: Response) -> Zone:
     s: Service = find_service(Zone)
@@ -26,6 +27,9 @@ async def get1(fabric_id: str, zone_id: str, request: Request, response: Respons
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceZones/{zone_id}", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceZones/{zone_id}", response_model_exclude_none=True
 )
 @authenticate

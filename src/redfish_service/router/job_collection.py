@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/JobService/Jobs", response_model_exclude_none=True)
+@router.head("/redfish/v1/JobService/Jobs", response_model_exclude_none=True)
 @authenticate
 async def get1(request: Request, response: Response) -> JobCollection:
     s: Service = find_service(JobCollection)
@@ -21,6 +22,7 @@ async def get1(request: Request, response: Response) -> JobCollection:
 
 
 @router.get("/redfish/v1/JobService/Jobs/{job_id}/Steps", response_model_exclude_none=True)
+@router.head("/redfish/v1/JobService/Jobs/{job_id}/Steps", response_model_exclude_none=True)
 @authenticate
 async def get2(job_id: str, request: Request, response: Response) -> JobCollection:
     s: Service = find_service(JobCollection)

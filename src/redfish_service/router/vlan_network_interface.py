@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions/{network_device_function_id}/Ethernet/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions/{network_device_function_id}/Ethernet/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str,
@@ -38,6 +42,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Managers/{manager_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )
@@ -67,6 +75,10 @@ async def get2(
     "/redfish/v1/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     computer_system_id: str,
@@ -93,6 +105,10 @@ async def get3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     resource_block_id: str,
@@ -116,6 +132,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )
@@ -147,6 +167,10 @@ async def get5(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     resource_block_id: str,
@@ -170,6 +194,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs/{vlan_network_interface_id}",
     response_model_exclude_none=True,
 )

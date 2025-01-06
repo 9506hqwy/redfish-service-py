@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
 @authenticate
 async def get1(key_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
@@ -21,6 +22,9 @@ async def get1(key_id: str, request: Request, response: Response) -> Key:
 
 
 @router.get(
+    "/redfish/v1/UpdateService/RemoteServerSSHKeys/{key_id}", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/UpdateService/RemoteServerSSHKeys/{key_id}", response_model_exclude_none=True
 )
 @authenticate
@@ -36,6 +40,9 @@ async def get2(key_id: str, request: Request, response: Response) -> Key:
 @router.get(
     "/redfish/v1/UpdateService/PublicIdentitySSHKey/{key_id}", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/UpdateService/PublicIdentitySSHKey/{key_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get3(key_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
@@ -47,6 +54,10 @@ async def get3(key_id: str, request: Request, response: Response) -> Key:
 
 
 @router.get(
+    "/redfish/v1/AccountService/Accounts/{manager_account_id}/Keys/{key_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/AccountService/Accounts/{manager_account_id}/Keys/{key_id}",
     response_model_exclude_none=True,
 )
@@ -66,6 +77,10 @@ async def get4(manager_account_id: str, key_id: str, request: Request, response:
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Keys/{key_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Keys/{key_id}",
     response_model_exclude_none=True,
 )
@@ -91,6 +106,10 @@ async def get5(
     "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/TrustedPublicHostKeys/{key_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/TrustedPublicHostKeys/{key_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     aggregation_source_id: str, key_id: str, request: Request, response: Response
@@ -112,6 +131,10 @@ async def get6(
     "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/PresentedPublicHostKey",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/PresentedPublicHostKey",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(aggregation_source_id: str, request: Request, response: Response) -> Key:
     s: Service = find_service(Key)
@@ -127,6 +150,10 @@ async def get7(aggregation_source_id: str, request: Request, response: Response)
 
 
 @router.get(
+    "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/PublicIdentityKey",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/PublicIdentityKey",
     response_model_exclude_none=True,
 )

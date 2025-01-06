@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/CertificateService", response_model_exclude_none=True)
+@router.head("/redfish/v1/CertificateService", response_model_exclude_none=True)
 @authenticate
 async def get1(request: Request, response: Response) -> CertificateService:
     s: Service = find_service(CertificateService)

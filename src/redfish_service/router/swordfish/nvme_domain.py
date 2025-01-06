@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/NVMeDomains/{nvme_domain_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/NVMeDomains/{nvme_domain_id}", response_model_exclude_none=True)
 @authenticate
 async def get1(nvme_domain_id: str, request: Request, response: Response) -> NvmeDomain:
     s: Service = find_service(NvmeDomain)

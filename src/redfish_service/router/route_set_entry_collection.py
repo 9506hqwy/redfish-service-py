@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     fabric_id: str,
@@ -38,6 +42,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet",
     response_model_exclude_none=True,
 )
@@ -69,6 +77,10 @@ async def get2(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     chassis_id: str,
@@ -94,6 +106,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet",
     response_model_exclude_none=True,
 )
@@ -125,6 +141,10 @@ async def get4(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
@@ -147,6 +167,10 @@ async def get5(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
@@ -166,6 +190,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet",
     response_model_exclude_none=True,
 )
@@ -195,6 +223,10 @@ async def get7(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get8(
     computer_system_id: str,
@@ -218,6 +250,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet",
     response_model_exclude_none=True,
 )
@@ -246,6 +282,10 @@ async def get9(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet",
     response_model_exclude_none=True,
 )

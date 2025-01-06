@@ -12,6 +12,9 @@ router = APIRouter()
 @router.get(
     "/redfish/v1/Managers/{manager_id}/EthernetInterfaces", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/EthernetInterfaces", response_model_exclude_none=True
+)
 @authenticate
 async def get1(
     manager_id: str, request: Request, response: Response
@@ -25,6 +28,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/HostInterfaces/{host_interface_id}/HostEthernetInterfaces",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Managers/{manager_id}/HostInterfaces/{host_interface_id}/HostEthernetInterfaces",
     response_model_exclude_none=True,
 )
@@ -48,6 +55,9 @@ async def get2(
 @router.get(
     "/redfish/v1/Systems/{computer_system_id}/EthernetInterfaces", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/EthernetInterfaces", response_model_exclude_none=True
+)
 @authenticate
 async def get3(
     computer_system_id: str, request: Request, response: Response
@@ -65,6 +75,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces",
     response_model_exclude_none=True,
 )
@@ -89,6 +103,10 @@ async def get4(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
@@ -110,6 +128,10 @@ async def get5(
     "/redfish/v1/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     computer_system_id: str, request: Request, response: Response
@@ -127,6 +149,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces",
     response_model_exclude_none=True,
 )
@@ -151,6 +177,10 @@ async def get7(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get8(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
@@ -169,6 +199,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions/{network_device_function_id}/EthernetInterfaces",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions/{network_device_function_id}/EthernetInterfaces",
     response_model_exclude_none=True,
 )

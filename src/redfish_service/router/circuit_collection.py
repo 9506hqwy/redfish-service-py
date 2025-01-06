@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Mains",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Mains",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     power_distribution_id: str, request: Request, response: Response
@@ -30,6 +34,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Branches",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Branches",
     response_model_exclude_none=True,
 )
@@ -53,6 +61,10 @@ async def get2(
     "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Mains",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Mains",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     power_distribution_id: str, request: Request, response: Response
@@ -70,6 +82,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Branches",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Branches",
     response_model_exclude_none=True,
 )
@@ -93,6 +109,10 @@ async def get4(
     "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Subfeeds",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Subfeeds",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     power_distribution_id: str, request: Request, response: Response
@@ -110,6 +130,10 @@ async def get5(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Mains",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Mains",
     response_model_exclude_none=True,
 )
@@ -133,6 +157,10 @@ async def get6(
     "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Branches",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Branches",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     power_distribution_id: str, request: Request, response: Response
@@ -150,6 +178,10 @@ async def get7(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Feeders",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Feeders",
     response_model_exclude_none=True,
 )
@@ -173,6 +205,10 @@ async def get8(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Mains",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Mains",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get9(
     power_distribution_id: str, request: Request, response: Response
@@ -190,6 +226,10 @@ async def get9(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Branches",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Branches",
     response_model_exclude_none=True,
 )
@@ -213,6 +253,10 @@ async def get10(
     "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Mains",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Mains",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get11(
     power_distribution_id: str, request: Request, response: Response
@@ -230,6 +274,10 @@ async def get11(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Subfeeds",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Subfeeds",
     response_model_exclude_none=True,
 )
@@ -253,6 +301,10 @@ async def get12(
     "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Feeders",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Feeders",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get13(
     power_distribution_id: str, request: Request, response: Response
@@ -270,6 +322,10 @@ async def get13(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Branches",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Branches",
     response_model_exclude_none=True,
 )
@@ -293,6 +349,10 @@ async def get14(
     "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Mains",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Mains",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get15(
     power_distribution_id: str, request: Request, response: Response
@@ -310,6 +370,10 @@ async def get15(
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Branches",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Branches",
     response_model_exclude_none=True,
 )

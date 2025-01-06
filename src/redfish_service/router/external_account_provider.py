@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     external_account_provider_id: str, request: Request, response: Response
@@ -30,6 +34,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}",
     response_model_exclude_none=True,
 )

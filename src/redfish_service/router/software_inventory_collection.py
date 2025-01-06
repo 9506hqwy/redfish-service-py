@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/UpdateService/SoftwareInventory", response_model_exclude_none=True)
+@router.head("/redfish/v1/UpdateService/SoftwareInventory", response_model_exclude_none=True)
 @authenticate
 async def get1(request: Request, response: Response) -> SoftwareInventoryCollection:
     s: Service = find_service(SoftwareInventoryCollection)
@@ -21,6 +22,7 @@ async def get1(request: Request, response: Response) -> SoftwareInventoryCollect
 
 
 @router.get("/redfish/v1/UpdateService/FirmwareInventory", response_model_exclude_none=True)
+@router.head("/redfish/v1/UpdateService/FirmwareInventory", response_model_exclude_none=True)
 @authenticate
 async def get2(request: Request, response: Response) -> SoftwareInventoryCollection:
     s: Service = find_service(SoftwareInventoryCollection)

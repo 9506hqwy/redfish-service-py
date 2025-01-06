@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     storage_service_id: str,
@@ -36,6 +40,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
@@ -65,6 +73,10 @@ async def get2(
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     storage_service_id: str,
@@ -91,6 +103,10 @@ async def get3(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     storage_id: str,
@@ -114,6 +130,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/AllocatedVolumes/{volume_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/AllocatedVolumes/{volume_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
@@ -145,6 +165,10 @@ async def get5(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
@@ -164,6 +188,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
@@ -190,6 +218,10 @@ async def get7(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
@@ -221,6 +253,10 @@ async def get8(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get9(
     computer_system_id: str,
@@ -246,6 +282,10 @@ async def get9(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}",
     response_model_exclude_none=True,
 )

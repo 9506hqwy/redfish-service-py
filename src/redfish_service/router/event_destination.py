@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/EventService/Subscriptions/{event_destination_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     event_destination_id: str, request: Request, response: Response

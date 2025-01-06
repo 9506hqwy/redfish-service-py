@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str, pump_id: str, request: Request, response: Response
@@ -33,6 +37,9 @@ async def get1(
 @router.get(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters", response_model_exclude_none=True
+)
 @authenticate
 async def get2(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
@@ -48,6 +55,10 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Fi
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
     response_model_exclude_none=True,
 )
@@ -72,6 +83,10 @@ async def get3(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
@@ -93,6 +108,10 @@ async def get4(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
@@ -108,6 +127,10 @@ async def get5(cooling_unit_id: str, request: Request, response: Response) -> Fi
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
     response_model_exclude_none=True,
 )
@@ -132,6 +155,10 @@ async def get6(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
@@ -153,6 +180,10 @@ async def get7(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get8(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
@@ -168,6 +199,10 @@ async def get8(cooling_unit_id: str, request: Request, response: Response) -> Fi
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
     response_model_exclude_none=True,
 )
@@ -189,6 +224,10 @@ async def get9(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )

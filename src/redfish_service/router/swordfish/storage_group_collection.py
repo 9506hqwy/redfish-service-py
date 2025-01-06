@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/StorageGroups",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/StorageGroups",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
@@ -30,6 +34,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/StorageGroups",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/StorageGroups",
     response_model_exclude_none=True,
 )
@@ -51,6 +59,7 @@ async def get2(
 
 
 @router.get("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
+@router.head("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
 @authenticate
 async def get3(storage_id: str, request: Request, response: Response) -> StorageGroupCollection:
     s: Service = find_service(StorageGroupCollection)
@@ -62,6 +71,10 @@ async def get3(storage_id: str, request: Request, response: Response) -> Storage
 
 
 @router.get(
+    "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/StorageGroups",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/StorageGroups",
     response_model_exclude_none=True,
 )

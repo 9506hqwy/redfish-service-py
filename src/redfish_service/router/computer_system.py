@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Systems/{computer_system_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/Systems/{computer_system_id}", response_model_exclude_none=True)
 @authenticate
 async def get1(computer_system_id: str, request: Request, response: Response) -> ComputerSystem:
     s: Service = find_service(ComputerSystem)
@@ -25,6 +26,10 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}",
     response_model_exclude_none=True,
 )
@@ -46,6 +51,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}",
     response_model_exclude_none=True,
 )

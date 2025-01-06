@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
@@ -32,6 +36,9 @@ async def get1(
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}", response_model_exclude_none=True)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get2(chassis_id: str, drive_id: str, request: Request, response: Response) -> Drive:
     s: Service = find_service(Drive)
@@ -48,6 +55,10 @@ async def get2(chassis_id: str, drive_id: str, request: Request, response: Respo
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )
@@ -73,6 +84,10 @@ async def get3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     resource_block_id: str, drive_id: str, request: Request, response: Response
@@ -91,6 +106,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )
@@ -122,6 +141,10 @@ async def get5(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
@@ -144,6 +167,10 @@ async def get6(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     resource_block_id: str, drive_id: str, request: Request, response: Response
@@ -162,6 +189,10 @@ async def get7(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
 )

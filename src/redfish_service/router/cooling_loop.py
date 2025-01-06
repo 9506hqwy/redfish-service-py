@@ -12,6 +12,9 @@ router = APIRouter()
 @router.get(
     "/redfish/v1/ThermalEquipment/CoolingLoops/{cooling_loop_id}", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CoolingLoops/{cooling_loop_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get1(cooling_loop_id: str, request: Request, response: Response) -> CoolingLoop:
     s: Service = find_service(CoolingLoop)

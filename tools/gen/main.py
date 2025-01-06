@@ -801,6 +801,7 @@ def write_routers(
                                 "\n",
                                 "\n",
                                 f'@router.get("{url}", response_model_exclude_none=True)\n',
+                                f'@router.head("{url}", response_model_exclude_none=True)\n',
                                 "@authenticate\n",
                                 f"async def get{index}({args}) -> {c.cls_name}:\n",
                                 f"    s: Service = find_service({c.cls_name})\n",

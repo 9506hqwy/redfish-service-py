@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Facilities/{facility_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/Facilities/{facility_id}", response_model_exclude_none=True)
 @authenticate
 async def get1(facility_id: str, request: Request, response: Response) -> Facility:
     s: Service = find_service(Facility)

@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Storage", response_model_exclude_none=True)
+@router.head("/redfish/v1/Storage", response_model_exclude_none=True)
 @authenticate
 async def get1(request: Request, response: Response) -> StorageCollection:
     s: Service = find_service(StorageCollection)
@@ -21,6 +22,7 @@ async def get1(request: Request, response: Response) -> StorageCollection:
 
 
 @router.get("/redfish/v1/Systems/{computer_system_id}/Storage", response_model_exclude_none=True)
+@router.head("/redfish/v1/Systems/{computer_system_id}/Storage", response_model_exclude_none=True)
 @authenticate
 async def get2(computer_system_id: str, request: Request, response: Response) -> StorageCollection:
     s: Service = find_service(StorageCollection)
@@ -39,6 +41,10 @@ async def get2(computer_system_id: str, request: Request, response: Response) ->
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(resource_block_id: str, request: Request, response: Response) -> StorageCollection:
     s: Service = find_service(StorageCollection)
@@ -54,6 +60,10 @@ async def get3(resource_block_id: str, request: Request, response: Response) -> 
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage",
     response_model_exclude_none=True,
 )
@@ -77,6 +87,9 @@ async def get4(
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage", response_model_exclude_none=True
+)
 @authenticate
 async def get5(resource_block_id: str, request: Request, response: Response) -> StorageCollection:
     s: Service = find_service(StorageCollection)
@@ -92,6 +105,10 @@ async def get5(resource_block_id: str, request: Request, response: Response) -> 
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage",
     response_model_exclude_none=True,
 )

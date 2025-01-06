@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str, pcie_device_id: str, request: Request, response: Response
@@ -34,6 +38,10 @@ async def get1(
     "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get2(
     computer_system_id: str, pcie_device_id: str, request: Request, response: Response
@@ -52,6 +60,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
     response_model_exclude_none=True,
 )
@@ -78,6 +90,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/PCIeFunctions",
     response_model_exclude_none=True,
 )

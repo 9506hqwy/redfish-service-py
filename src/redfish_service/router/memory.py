@@ -12,6 +12,9 @@ router = APIRouter()
 @router.get(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get1(
     computer_system_id: str, memory_id: str, request: Request, response: Response
@@ -30,6 +33,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/CacheMemory/{memory_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/CacheMemory/{memory_id}",
     response_model_exclude_none=True,
 )
@@ -58,6 +65,9 @@ async def get2(
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get3(chassis_id: str, memory_id: str, request: Request, response: Response) -> Memory:
     s: Service = find_service(Memory)
@@ -74,6 +84,10 @@ async def get3(chassis_id: str, memory_id: str, request: Request, response: Resp
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
@@ -95,6 +109,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
@@ -124,6 +142,10 @@ async def get5(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     resource_block_id: str, memory_id: str, request: Request, response: Response
@@ -142,6 +164,10 @@ async def get6(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )

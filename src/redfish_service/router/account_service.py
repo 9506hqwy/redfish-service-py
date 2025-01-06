@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/AccountService", response_model_exclude_none=True)
+@router.head("/redfish/v1/AccountService", response_model_exclude_none=True)
 @authenticate
 async def get1(request: Request, response: Response) -> AccountService:
     s: Service = find_service(AccountService)
@@ -21,6 +22,9 @@ async def get1(request: Request, response: Response) -> AccountService:
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService", response_model_exclude_none=True
 )
 @authenticate

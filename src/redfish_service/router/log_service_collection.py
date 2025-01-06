@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Managers/{manager_id}/LogServices", response_model_exclude_none=True)
+@router.head("/redfish/v1/Managers/{manager_id}/LogServices", response_model_exclude_none=True)
 @authenticate
 async def get1(manager_id: str, request: Request, response: Response) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)
@@ -21,6 +22,9 @@ async def get1(manager_id: str, request: Request, response: Response) -> LogServ
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/LogServices", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/LogServices", response_model_exclude_none=True
 )
 @authenticate
@@ -40,6 +44,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices",
     response_model_exclude_none=True,
 )
@@ -64,6 +72,10 @@ async def get3(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
@@ -82,6 +94,7 @@ async def get4(
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/LogServices", response_model_exclude_none=True)
+@router.head("/redfish/v1/Chassis/{chassis_id}/LogServices", response_model_exclude_none=True)
 @authenticate
 async def get5(chassis_id: str, request: Request, response: Response) -> LogServiceCollection:
     s: Service = find_service(LogServiceCollection)

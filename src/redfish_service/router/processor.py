@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     computer_system_id: str, processor_id: str, request: Request, response: Response
@@ -31,6 +35,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -57,6 +65,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )
@@ -88,6 +100,10 @@ async def get3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     resource_block_id: str, processor_id: str, request: Request, response: Response
@@ -106,6 +122,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -132,6 +152,10 @@ async def get5(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )
@@ -163,6 +187,10 @@ async def get6(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     resource_block_id: str,
@@ -186,6 +214,10 @@ async def get7(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -214,6 +246,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )
@@ -247,6 +283,10 @@ async def get9(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get10(
     resource_block_id: str, processor_id: str, request: Request, response: Response
@@ -265,6 +305,10 @@ async def get10(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -291,6 +335,10 @@ async def get11(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )
@@ -322,6 +370,10 @@ async def get12(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get13(
     resource_block_id: str,
@@ -345,6 +397,10 @@ async def get13(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -373,6 +429,10 @@ async def get14(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )
@@ -406,6 +466,10 @@ async def get15(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get16(
     chassis_id: str,
@@ -429,6 +493,10 @@ async def get16(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -457,6 +525,10 @@ async def get17(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )
@@ -489,6 +561,9 @@ async def get18(
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}", response_model_exclude_none=True
+)
 @authenticate
 async def get19(
     chassis_id: str, processor_id: str, request: Request, response: Response
@@ -507,6 +582,10 @@ async def get19(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
 )
@@ -529,6 +608,10 @@ async def get20(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
     response_model_exclude_none=True,
 )

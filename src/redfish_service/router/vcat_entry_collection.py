@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
@@ -32,6 +36,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
     response_model_exclude_none=True,
 )
@@ -57,6 +65,10 @@ async def get2(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
@@ -78,6 +90,10 @@ async def get3(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
@@ -96,6 +112,10 @@ async def get4(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
     response_model_exclude_none=True,
 )
@@ -127,6 +147,10 @@ async def get5(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get6(
     resource_block_id: str,
@@ -153,6 +177,10 @@ async def get6(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     resource_block_id: str,
@@ -176,6 +204,10 @@ async def get7(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
     response_model_exclude_none=True,
 )
@@ -207,6 +239,10 @@ async def get8(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get9(
     resource_block_id: str,
@@ -230,6 +266,10 @@ async def get9(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
     response_model_exclude_none=True,
 )
@@ -259,6 +299,10 @@ async def get10(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get11(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
@@ -278,6 +322,10 @@ async def get11(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT",
     response_model_exclude_none=True,
 )
@@ -302,6 +350,10 @@ async def get12(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get13(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
@@ -320,6 +372,10 @@ async def get13(
 
 
 @router.get(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/VCAT",
     response_model_exclude_none=True,
 )
@@ -345,6 +401,10 @@ async def get14(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get15(
     system_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
@@ -364,6 +424,10 @@ async def get15(
 
 
 @router.get(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
     response_model_exclude_none=True,
 )
@@ -388,6 +452,10 @@ async def get16(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get17(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
@@ -406,6 +474,10 @@ async def get17(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
     response_model_exclude_none=True,
 )
@@ -437,6 +509,10 @@ async def get18(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get19(
     resource_block_id: str,
@@ -463,6 +539,10 @@ async def get19(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get20(
     resource_block_id: str,
@@ -486,6 +566,10 @@ async def get20(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
     response_model_exclude_none=True,
 )
@@ -517,6 +601,10 @@ async def get21(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get22(
     resource_block_id: str,
@@ -540,6 +628,10 @@ async def get22(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
     response_model_exclude_none=True,
 )
@@ -569,6 +661,10 @@ async def get23(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get24(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
@@ -591,6 +687,10 @@ async def get24(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get25(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
@@ -609,6 +709,10 @@ async def get25(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT",
     response_model_exclude_none=True,
 )

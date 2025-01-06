@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     aggregation_source_id: str, request: Request, response: Response

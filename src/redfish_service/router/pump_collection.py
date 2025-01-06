@@ -12,6 +12,9 @@ router = APIRouter()
 @router.get(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps", response_model_exclude_none=True
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps", response_model_exclude_none=True
+)
 @authenticate
 async def get1(cooling_unit_id: str, request: Request, response: Response) -> PumpCollection:
     s: Service = find_service(PumpCollection)
@@ -27,6 +30,10 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Pu
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps",
     response_model_exclude_none=True,
 )
@@ -48,6 +55,10 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Pu
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(cooling_unit_id: str, request: Request, response: Response) -> PumpCollection:
     s: Service = find_service(PumpCollection)
@@ -63,6 +74,9 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Pu
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps", response_model_exclude_none=True
 )
 @authenticate

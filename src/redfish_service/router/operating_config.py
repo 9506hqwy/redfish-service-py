@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/OperatingConfigs/{operating_config_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/OperatingConfigs/{operating_config_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     computer_system_id: str,

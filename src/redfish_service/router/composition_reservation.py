@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/CompositionService/CompositionReservations/{composition_reservation_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/CompositionReservations/{composition_reservation_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     composition_reservation_id: str, request: Request, response: Response

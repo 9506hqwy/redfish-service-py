@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Managers/{manager_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     manager_id: str, log_service_id: str, log_entry_id: str, request: Request, response: Response
@@ -32,6 +36,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
@@ -58,6 +66,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
@@ -89,6 +101,10 @@ async def get3(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     resource_block_id: str,
@@ -117,6 +133,10 @@ async def get4(
     "/redfish/v1/Chassis/{chassis_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/LogServices/{log_service_id}/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     chassis_id: str, log_service_id: str, log_entry_id: str, request: Request, response: Response
@@ -136,6 +156,7 @@ async def get5(
 
 
 @router.get("/redfish/v1/JobService/Log/Entries/{log_entry_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/JobService/Log/Entries/{log_entry_id}", response_model_exclude_none=True)
 @authenticate
 async def get6(log_entry_id: str, request: Request, response: Response) -> LogEntry:
     s: Service = find_service(LogEntry)
@@ -150,6 +171,10 @@ async def get6(log_entry_id: str, request: Request, response: Response) -> LogEn
     "/redfish/v1/TelemetryService/LogService/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/TelemetryService/LogService/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(log_entry_id: str, request: Request, response: Response) -> LogEntry:
     s: Service = find_service(LogEntry)
@@ -161,6 +186,10 @@ async def get7(log_entry_id: str, request: Request, response: Response) -> LogEn
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/DeviceLog/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/DeviceLog/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )
@@ -187,6 +216,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/CXLLogicalDevices/{cxl_logical_device_id}/DeviceLog/Entries/{log_entry_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/CXLLogicalDevices/{cxl_logical_device_id}/DeviceLog/Entries/{log_entry_id}",
     response_model_exclude_none=True,
 )

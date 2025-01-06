@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/UpdateService/SoftwareInventory/{software_inventory_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/UpdateService/SoftwareInventory/{software_inventory_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     software_inventory_id: str, request: Request, response: Response
@@ -30,6 +34,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}",
     response_model_exclude_none=True,
 )

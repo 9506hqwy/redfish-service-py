@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str, pump_id: str, filter_id: str, request: Request, response: Response
@@ -35,6 +39,10 @@ async def get1(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get2(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
@@ -53,6 +61,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
@@ -78,6 +90,10 @@ async def get3(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get4(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
@@ -100,6 +116,10 @@ async def get4(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
@@ -118,6 +138,10 @@ async def get5(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
@@ -143,6 +167,10 @@ async def get6(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
@@ -162,6 +190,10 @@ async def get7(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
@@ -186,6 +218,10 @@ async def get8(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get9(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
@@ -205,6 +241,10 @@ async def get9(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )

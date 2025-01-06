@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     storage_id: str,
@@ -36,6 +40,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_systems_id}/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_systems_id}/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
     response_model_exclude_none=True,
 )
@@ -64,6 +72,10 @@ async def get2(
 
 
 @router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
     response_model_exclude_none=True,
 )

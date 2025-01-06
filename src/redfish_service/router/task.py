@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/TaskService/Tasks/{task_id}", response_model_exclude_none=True)
+@router.head("/redfish/v1/TaskService/Tasks/{task_id}", response_model_exclude_none=True)
 @authenticate
 async def get1(task_id: str, request: Request, response: Response) -> Task:
     s: Service = find_service(Task)
@@ -21,6 +22,9 @@ async def get1(task_id: str, request: Request, response: Response) -> Task:
 
 
 @router.get(
+    "/redfish/v1/TaskService/Tasks/{task_id}/SubTasks/{task_id2}", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/TaskService/Tasks/{task_id}/SubTasks/{task_id2}", response_model_exclude_none=True
 )
 @authenticate

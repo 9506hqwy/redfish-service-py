@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Managers/{manager_id}/VirtualMedia", response_model_exclude_none=True)
+@router.head("/redfish/v1/Managers/{manager_id}/VirtualMedia", response_model_exclude_none=True)
 @authenticate
 async def get1(manager_id: str, request: Request, response: Response) -> VirtualMediaCollection:
     s: Service = find_service(VirtualMediaCollection)
@@ -21,6 +22,9 @@ async def get1(manager_id: str, request: Request, response: Response) -> Virtual
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia", response_model_exclude_none=True
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/VirtualMedia", response_model_exclude_none=True
 )
 @authenticate
@@ -43,6 +47,10 @@ async def get2(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
@@ -61,6 +69,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia",
     response_model_exclude_none=True,
 )

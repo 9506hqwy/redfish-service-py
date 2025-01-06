@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(chassis_id: str, request: Request, response: Response) -> PowerSupplyCollection:
     s: Service = find_service(PowerSupplyCollection)
@@ -24,6 +28,10 @@ async def get1(chassis_id: str, request: Request, response: Response) -> PowerSu
 
 
 @router.get(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/PowerSupplies",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/PowerSupplies",
     response_model_exclude_none=True,
 )

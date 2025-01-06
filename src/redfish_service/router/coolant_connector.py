@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/CoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/CoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     chassis_id: str, coolant_connector_id: str, request: Request, response: Response
@@ -31,6 +35,10 @@ async def get1(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/CoolingLoops/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/CoolingLoops/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
@@ -55,6 +63,10 @@ async def get2(
     "/redfish/v1/ThermalEquipment/CoolingLoops/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CoolingLoops/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
@@ -73,6 +85,10 @@ async def get3(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
@@ -97,6 +113,10 @@ async def get4(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get5(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
@@ -115,6 +135,10 @@ async def get5(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
@@ -139,6 +163,10 @@ async def get6(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get7(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
@@ -160,6 +188,10 @@ async def get7(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get8(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
@@ -178,6 +210,10 @@ async def get8(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/SecondaryCoolantConnectors/{coolant_connector_id}",
     response_model_exclude_none=True,
 )

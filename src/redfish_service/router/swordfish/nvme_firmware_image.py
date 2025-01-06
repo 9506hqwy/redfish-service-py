@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/NVMeDomains/{domain_id}/AvailableFirmwareImages/{firmware_image_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/NVMeDomains/{domain_id}/AvailableFirmwareImages/{firmware_image_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     domain_id: str, firmware_image_id: str, request: Request, response: Response

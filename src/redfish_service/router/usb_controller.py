@@ -13,6 +13,10 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get1(
     computer_system_id: str, controller_id: str, request: Request, response: Response

@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/PowerEquipment/FloorPDUs", response_model_exclude_none=True)
+@router.head("/redfish/v1/PowerEquipment/FloorPDUs", response_model_exclude_none=True)
 @authenticate
 async def get1(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = find_service(PowerDistributionCollection)
@@ -21,6 +22,7 @@ async def get1(request: Request, response: Response) -> PowerDistributionCollect
 
 
 @router.get("/redfish/v1/PowerEquipment/RackPDUs", response_model_exclude_none=True)
+@router.head("/redfish/v1/PowerEquipment/RackPDUs", response_model_exclude_none=True)
 @authenticate
 async def get2(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = find_service(PowerDistributionCollection)
@@ -32,6 +34,7 @@ async def get2(request: Request, response: Response) -> PowerDistributionCollect
 
 
 @router.get("/redfish/v1/PowerEquipment/Switchgear", response_model_exclude_none=True)
+@router.head("/redfish/v1/PowerEquipment/Switchgear", response_model_exclude_none=True)
 @authenticate
 async def get3(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = find_service(PowerDistributionCollection)
@@ -43,6 +46,7 @@ async def get3(request: Request, response: Response) -> PowerDistributionCollect
 
 
 @router.get("/redfish/v1/PowerEquipment/TransferSwitches", response_model_exclude_none=True)
+@router.head("/redfish/v1/PowerEquipment/TransferSwitches", response_model_exclude_none=True)
 @authenticate
 async def get4(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = find_service(PowerDistributionCollection)
@@ -54,6 +58,7 @@ async def get4(request: Request, response: Response) -> PowerDistributionCollect
 
 
 @router.get("/redfish/v1/PowerEquipment/PowerShelves", response_model_exclude_none=True)
+@router.head("/redfish/v1/PowerEquipment/PowerShelves", response_model_exclude_none=True)
 @authenticate
 async def get5(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = find_service(PowerDistributionCollection)
@@ -65,6 +70,7 @@ async def get5(request: Request, response: Response) -> PowerDistributionCollect
 
 
 @router.get("/redfish/v1/PowerEquipment/ElectricalBuses", response_model_exclude_none=True)
+@router.head("/redfish/v1/PowerEquipment/ElectricalBuses", response_model_exclude_none=True)
 @authenticate
 async def get6(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = find_service(PowerDistributionCollection)

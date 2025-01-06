@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Storage/{storage_id}/EndpointGroups", response_model_exclude_none=True)
+@router.head("/redfish/v1/Storage/{storage_id}/EndpointGroups", response_model_exclude_none=True)
 @authenticate
 async def get1(storage_id: str, request: Request, response: Response) -> EndpointGroupCollection:
     s: Service = find_service(EndpointGroupCollection)
@@ -21,6 +22,10 @@ async def get1(storage_id: str, request: Request, response: Response) -> Endpoin
 
 
 @router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/EndpointGroups",
+    response_model_exclude_none=True,
+)
+@router.head(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/EndpointGroups",
     response_model_exclude_none=True,
 )
@@ -45,6 +50,10 @@ async def get2(
     "/redfish/v1/StorageServices/{storage_service_id}/EndpointGroups",
     response_model_exclude_none=True,
 )
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/EndpointGroups",
+    response_model_exclude_none=True,
+)
 @authenticate
 async def get3(
     storage_service_id: str, request: Request, response: Response
@@ -62,6 +71,7 @@ async def get3(
 
 
 @router.get("/redfish/v1/Fabrics/{fabric_id}/EndpointGroups", response_model_exclude_none=True)
+@router.head("/redfish/v1/Fabrics/{fabric_id}/EndpointGroups", response_model_exclude_none=True)
 @authenticate
 async def get4(fabric_id: str, request: Request, response: Response) -> EndpointGroupCollection:
     s: Service = find_service(EndpointGroupCollection)

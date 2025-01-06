@@ -10,6 +10,7 @@ router = APIRouter()
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Thermal", response_model_exclude_none=True)
+@router.head("/redfish/v1/Chassis/{chassis_id}/Thermal", response_model_exclude_none=True)
 @authenticate
 async def get1(chassis_id: str, request: Request, response: Response) -> Thermal:
     s: Service = find_service(Thermal)
