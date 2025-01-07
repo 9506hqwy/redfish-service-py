@@ -1,6 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
-from typing import Any, Protocol
+from typing import Any, Protocol, cast
 
 from .exception import OperationNotAllowedError
 from .model import RedfishModel
@@ -12,6 +12,14 @@ def find_service[T: RedfishModel](ty: type[T]) -> Service:
     for s in services:
         if s.respond(ty):
             return s
+
+    raise OperationNotAllowedError
+
+
+def find_service_collection[T: RedfishModel](ty: type[T]) -> ServiceCollection:
+    for s in services:
+        if s.respond(ty):
+            return cast(ServiceCollection, s)
 
     raise OperationNotAllowedError
 
@@ -29,11 +37,10 @@ class Service[T: RedfishModel](Protocol):
     def get(self, **kwargs: dict[str, Any]) -> T:
         raise OperationNotAllowedError
 
-    def insert(self, **kwargs: dict[str, Any]) -> T:
+    def patch(self, **kwargs: dict[str, Any]) -> T:
         raise OperationNotAllowedError
 
-    def list(self, **kwargs: dict[str, Any]) -> list[T]:
-        raise OperationNotAllowedError
 
-    def update(self, **kwargs: dict[str, Any]) -> T:
+class ServiceCollection[T: RedfishModel, I: RedfishModel](Service[T], Protocol):
+    def post(self, **kwargs: dict[str, Any]) -> I:
         raise OperationNotAllowedError

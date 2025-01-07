@@ -794,7 +794,17 @@ def write_imports_router_to(
         else:
             w.write(f"from {parent}model.{c.module_path} import {c.cls_name}\n")
 
-    w.write(f"from {parent}service import Service, find_service\n")
+        if isinstance(c, ClassInfo) and c.item_info:
+            w.writelines(
+                [
+                    f"from {parent}model.{c.item_info.module_path} import {c.item_info.cls_name}\n",  # noqa E501
+                    f"from {parent}model.{c.item_info.module_path} import {c.item_info.cls_name}OnCreate\n",  # noqa E501
+                ]
+            )
+
+    w.write(
+        f"from {parent}service import Service, ServiceCollection, find_service, find_service_collection\n"  # noqa E501
+    )
     w.write(f"from {parent}authenticate import authenticate\n")
     w.write("\n")
 
@@ -875,6 +885,31 @@ def write_routers(
                             ]
                         )
 
+                        if (
+                            isinstance(c, ClassInfo)
+                            and c.definition.get("insertable", False)
+                            and c.item_info
+                        ):
+                            args += f",body: {c.item_info.cls_name}OnCreate"
+                            body += ',"body": body'
+
+                            w.writelines(
+                                [
+                                    "\n",
+                                    "\n",
+                                    f'@router.post("{url}", response_model_exclude_none=True)\n',
+                                    f'@router.post("{url}/Members", response_model_exclude_none=True)\n',  # noqa E501
+                                    "@authenticate\n",
+                                    f"async def post{index}({args}) -> {c.item_info.cls_name}:\n",
+                                    f"    s: ServiceCollection = find_service_collection({c.cls_name})\n",  # noqa E501
+                                    f"    b: dict[str, Any] = {{{body}}}\n",
+                                    "\n",
+                                    '    response.headers["OData-Version"] = "4.0"\n',
+                                    "\n",
+                                    f"    return cast({c.item_info.cls_name}, s.post(**b))\n",
+                                ]
+                            )
+
                         urls.append(url)
                         print(f"{len(urls)}: {url} to {module_path}")
 
@@ -954,15 +989,13 @@ def main() -> int:
 
     for c in classall:
         if isinstance(c, ClassInfo) and c.creatable:
-            m = next(
-                (
-                    i
-                    for i in classall
-                    if i.loaded and c.module_path == i.module_path and c.name == i.name
-                )
-            )
-            if isinstance(m, ClassInfo):
-                m.creatable = c.creatable
+            for m in (
+                i
+                for i in classall
+                if i.loaded and c.module_path == i.module_path and c.name == i.name
+            ):
+                if isinstance(m, ClassInfo):
+                    m.creatable = c.creatable
 
     loaded = len([c for c in classall if c.loaded])
     print(f"loaded: {loaded}")

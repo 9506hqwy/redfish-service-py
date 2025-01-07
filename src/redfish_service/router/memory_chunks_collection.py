@@ -3,8 +3,9 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
+from ..model.memory_chunks import MemoryChunks, MemoryChunksOnCreate
 from ..model.memory_chunks_collection import MemoryChunksCollection
-from ..service import Service, find_service
+from ..service import Service, ServiceCollection, find_service, find_service_collection
 
 router = APIRouter()
 
@@ -34,6 +35,36 @@ async def get1(
     return cast(MemoryChunksCollection, s.get(**b))
 
 
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post1(
+    computer_system_id: str,
+    memory_domain_id: str,
+    request: Request,
+    response: Response,
+    body: MemoryChunksOnCreate,
+) -> MemoryChunks:
+    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "memory_domain_id": memory_domain_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(MemoryChunks, s.post(**b))
+
+
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
     response_model_exclude_none=True,
@@ -57,6 +88,36 @@ async def get2(
     response.headers["OData-Version"] = "4.0"
 
     return cast(MemoryChunksCollection, s.get(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/MemoryDomains/{memory_domain_id}/MemoryChunks/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post2(
+    chassis_id: str,
+    memory_domain_id: str,
+    request: Request,
+    response: Response,
+    body: MemoryChunksOnCreate,
+) -> MemoryChunks:
+    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "memory_domain_id": memory_domain_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(MemoryChunks, s.post(**b))
 
 
 @router.get(
@@ -89,6 +150,38 @@ async def get3(
     return cast(MemoryChunksCollection, s.get(**b))
 
 
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post3(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_domain_id: str,
+    request: Request,
+    response: Response,
+    body: MemoryChunksOnCreate,
+) -> MemoryChunks:
+    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "memory_domain_id": memory_domain_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(MemoryChunks, s.post(**b))
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
     response_model_exclude_none=True,
@@ -117,3 +210,35 @@ async def get4(
     response.headers["OData-Version"] = "4.0"
 
     return cast(MemoryChunksCollection, s.get(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post4(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_domain_id: str,
+    request: Request,
+    response: Response,
+    body: MemoryChunksOnCreate,
+) -> MemoryChunks:
+    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "memory_domain_id": memory_domain_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(MemoryChunks, s.post(**b))
