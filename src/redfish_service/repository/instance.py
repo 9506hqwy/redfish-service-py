@@ -1,3 +1,5 @@
+from typing import Generator
+
 from ..model import RedfishModel
 
 
@@ -8,10 +10,14 @@ class Instances(object):
     def add(self, instance: RedfishModel) -> None:
         self.instances.append(instance)
 
-    def find_by_type[T: RedfishModel](self, ty: type[T]) -> T | None:
+    def enum_by_type[T: RedfishModel](self, ty: type[T]) -> Generator[T, None, None]:
         for i in self.instances:
             if isinstance(i, ty):
-                return i
+                yield i
+
+    def find_by_type[T: RedfishModel](self, ty: type[T]) -> T | None:
+        for i in self.enum_by_type(ty):
+            return i
 
         return None
 
