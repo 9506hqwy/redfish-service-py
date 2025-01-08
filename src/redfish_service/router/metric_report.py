@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.metric_report import MetricReport
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/TelemetryService/MetricReports/{metric_report_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(metric_report_id: str, request: Request, response: Response) -> MetricReport:
     s: Service = find_service(MetricReport)
     b: dict[str, Any] = {

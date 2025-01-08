@@ -16,6 +16,9 @@ BASE_MODEL_PROPERTIES: list[str] = ["schema"]
 # define common values because of avoiding circular reference.
 CIRCULAR_REFERENCE_VALUES: list[str] = ["AccountTypes"]
 
+# permit without authentication.
+NO_AUTHENTICATE_URI: list[str] = ["/redfish/v1/SessionService/Sessions"]
+
 # enable versioned only schema.
 VERSIONED_ONLY: list[str] = ["redfish-error.v1_0_2.json"]
 
@@ -874,7 +877,6 @@ def write_routers(
                                 "\n",
                                 f'@router.get("{url}", response_model_exclude_none=True)\n',
                                 f'@router.head("{url}", response_model_exclude_none=True)\n',
-                                "@authenticate\n",
                                 f"async def get{index}({args}) -> {c.cls_name}:\n",
                                 f"    s: Service = find_service({c.cls_name})\n",
                                 f"    b: dict[str, Any] = {{{body}}}\n",
@@ -899,7 +901,14 @@ def write_routers(
                                     "\n",
                                     f'@router.post("{url}", response_model_exclude_none=True)\n',
                                     f'@router.post("{url}/Members", response_model_exclude_none=True)\n',  # noqa E501
-                                    "@authenticate\n",
+                                ]
+                            )
+
+                            if url not in NO_AUTHENTICATE_URI:
+                                w.write("@authenticate\n")
+
+                            w.writelines(
+                                [
                                     f"async def post{index}({args}) -> {c.item_info.cls_name}:\n",
                                     f"    s: ServiceCollection = find_service_collection({c.cls_name})\n",  # noqa E501
                                     f"    b: dict[str, Any] = {{{body}}}\n",

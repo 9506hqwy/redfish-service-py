@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_id: str, file_systems_id: str, request: Request, response: Response
 ) -> FileShareCollection:
@@ -73,7 +72,6 @@ async def post1(
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_systems_id}/ExportedFileShares",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     storage_service_id: str, file_systems_id: str, request: Request, response: Response
 ) -> FileShareCollection:

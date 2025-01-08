@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.route_set_entry import RouteSetEntry
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     fabric_id: str,
     switch_id: str,
@@ -51,7 +49,6 @@ async def get1(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     fabric_id: str,
     switch_id: str,
@@ -85,7 +82,6 @@ async def get2(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     chassis_id: str,
     fabric_adapter_id: str,
@@ -119,7 +115,6 @@ async def get3(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     chassis_id: str,
     fabric_adapter_id: str,
@@ -153,7 +148,6 @@ async def get4(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     chassis_id: str,
     fabric_adapter_id: str,
@@ -185,7 +179,6 @@ async def get5(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     chassis_id: str,
     fabric_adapter_id: str,
@@ -217,7 +210,6 @@ async def get6(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     computer_system_id: str,
     fabric_adapter_id: str,
@@ -249,7 +241,6 @@ async def get7(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     computer_system_id: str,
     fabric_adapter_id: str,
@@ -281,7 +272,6 @@ async def get8(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     computer_system_id: str,
     fabric_adapter_id: str,
@@ -315,7 +305,6 @@ async def get9(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     computer_system_id: str,
     fabric_adapter_id: str,

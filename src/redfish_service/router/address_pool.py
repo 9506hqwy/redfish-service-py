@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.address_pool import AddressPool
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Fabrics/{fabric_id}/AddressPools/{address_pool_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     fabric_id: str, address_pool_id: str, request: Request, response: Response
 ) -> AddressPool:

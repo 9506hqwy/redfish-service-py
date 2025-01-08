@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> ClassOfServiceCollection:
@@ -67,7 +66,6 @@ async def post1(
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/ClassesOfService",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> ClassOfServiceCollection:

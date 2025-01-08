@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.drive_collection import DriveCollection
 from ..service import Service, find_service
 
@@ -11,7 +10,6 @@ router = APIRouter()
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Drives", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Drives", response_model_exclude_none=True)
-@authenticate
 async def get1(chassis_id: str, request: Request, response: Response) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
@@ -29,7 +27,6 @@ async def get1(chassis_id: str, request: Request, response: Response) -> DriveCo
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     storage_id: str,
     file_system_id: str,
@@ -59,7 +56,6 @@ async def get2(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     storage_id: str,
     storage_pool_id: str,
@@ -89,7 +85,6 @@ async def get3(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
 ) -> DriveCollection:
@@ -115,7 +110,6 @@ async def get4(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     computer_system_id: str,
     storage_id: str,
@@ -147,7 +141,6 @@ async def get5(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     computer_system_id: str,
     storage_id: str,
@@ -179,7 +172,6 @@ async def get6(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     computer_system_id: str,
     storage_id: str,
@@ -209,7 +201,6 @@ async def get7(
 @router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/Drives", response_model_exclude_none=True
 )
-@authenticate
 async def get8(storage_service_id: str, request: Request, response: Response) -> DriveCollection:
     s: Service = find_service(DriveCollection)
     b: dict[str, Any] = {
@@ -231,7 +222,6 @@ async def get8(storage_service_id: str, request: Request, response: Response) ->
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     storage_service_id: str,
     file_system_id: str,
@@ -261,7 +251,6 @@ async def get9(
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     storage_service_id: str,
     storage_pool_id: str,
@@ -291,7 +280,6 @@ async def get10(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingDrives",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get11(
     storage_service_id: str,
     volume_id: str,

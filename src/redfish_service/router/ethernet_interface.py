@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.ethernet_interface import EthernetInterface
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Managers/{manager_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     manager_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
@@ -42,7 +40,6 @@ async def get1(
     "/redfish/v1/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
@@ -67,7 +64,6 @@ async def get2(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
@@ -92,7 +88,6 @@ async def get3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     resource_block_id: str,
     computer_system_id: str,
@@ -122,7 +117,6 @@ async def get4(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
@@ -147,7 +141,6 @@ async def get5(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     resource_block_id: str,
     computer_system_id: str,
@@ -177,7 +170,6 @@ async def get6(
     "/redfish/v1/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
@@ -202,7 +194,6 @@ async def get7(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     resource_block_id: str,
     computer_system_id: str,
@@ -232,7 +223,6 @@ async def get8(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/OperatingSystem/Containers/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     resource_block_id: str,
     computer_system_id: str,
@@ -262,7 +252,6 @@ async def get9(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions/{network_device_function_id}/EthernetInterfaces/{ethernet_interface_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     chassis_id: str,
     network_adapter_id: str,

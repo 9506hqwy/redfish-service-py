@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/CXLLogicalDevices/{cxl_logical_device_id}/MemoryRegions",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     chassis_id: str,
     pcie_device_id: str,

@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.memory_metrics import MemoryMetrics
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(computer_system_id: str, request: Request, response: Response) -> MemoryMetrics:
     s: Service = find_service(MemoryMetrics)
     b: dict[str, Any] = {
@@ -39,7 +37,6 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -64,7 +61,6 @@ async def get2(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/CacheMemory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     computer_system_id: str,
     processor_id: str,
@@ -94,7 +90,6 @@ async def get3(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -119,7 +114,6 @@ async def get4(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -144,7 +138,6 @@ async def get5(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -169,7 +162,6 @@ async def get6(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     resource_block_id: str,
     computer_system_id: str,
@@ -199,7 +191,6 @@ async def get7(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -224,7 +215,6 @@ async def get8(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     resource_block_id: str,
     computer_system_id: str,
@@ -254,7 +244,6 @@ async def get9(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -279,7 +268,6 @@ async def get10(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get11(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -304,7 +292,6 @@ async def get11(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get12(
     resource_block_id: str,
     computer_system_id: str,
@@ -334,7 +321,6 @@ async def get12(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get13(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
@@ -359,7 +345,6 @@ async def get13(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/MemorySummary/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get14(
     resource_block_id: str,
     computer_system_id: str,
@@ -389,7 +374,6 @@ async def get14(
     "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}/MemoryMetrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get15(
     chassis_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:

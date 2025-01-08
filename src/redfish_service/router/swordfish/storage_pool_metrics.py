@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ...authenticate import authenticate
 from ...model.swordfish.storage_pool_metrics import StoragePoolMetrics
 from ...service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolMetrics:
@@ -42,7 +40,6 @@ async def get1(
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/AllocatedPools/{allocated_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     storage_service_id: str,
     storage_pool_id: str,
@@ -72,7 +69,6 @@ async def get2(
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{providing_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     storage_service_id: str,
     storage_pool_id: str,
@@ -104,7 +100,6 @@ async def get3(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     storage_service_id: str,
     volume_id: str,
@@ -136,7 +131,6 @@ async def get4(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     storage_service_id: str,
     volume_id: str,
@@ -166,7 +160,6 @@ async def get5(
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     storage_service_id: str,
     file_system_id: str,
@@ -198,7 +191,6 @@ async def get6(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     storage_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolMetrics:
@@ -223,7 +215,6 @@ async def get7(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/AllocatedPools/{allocated_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     storage_id: str,
     storage_pool_id: str,
@@ -253,7 +244,6 @@ async def get8(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{providing_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     storage_id: str,
     storage_pool_id: str,
@@ -285,7 +275,6 @@ async def get9(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     storage_id: str,
     volume_id: str,
@@ -317,7 +306,6 @@ async def get10(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get11(
     storage_id: str, volume_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolMetrics:
@@ -343,7 +331,6 @@ async def get11(
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get12(
     storage_id: str,
     file_system_id: str,
@@ -375,7 +362,6 @@ async def get12(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get13(
     computer_system_id: str,
     storage_id: str,
@@ -405,7 +391,6 @@ async def get13(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/AllocatedPools/{allocated_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get14(
     computer_system_id: str,
     storage_id: str,
@@ -437,7 +422,6 @@ async def get14(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{providing_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get15(
     computer_system_id: str,
     storage_id: str,
@@ -471,7 +455,6 @@ async def get15(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get16(
     computer_system_id: str,
     storage_id: str,
@@ -505,7 +488,6 @@ async def get16(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get17(
     computer_system_id: str,
     storage_id: str,
@@ -537,7 +519,6 @@ async def get17(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get18(
     computer_system_id: str,
     storage_id: str,

@@ -19,7 +19,6 @@ router = APIRouter()
 @router.head(
     "/redfish/v1/AccountService/ExternalAccountProviders", response_model_exclude_none=True
 )
-@authenticate
 async def get1(request: Request, response: Response) -> ExternalAccountProviderCollection:
     s: Service = find_service(ExternalAccountProviderCollection)
     b: dict[str, Any] = {"request": request, "response": response}
@@ -55,7 +54,6 @@ async def post1(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     manager_id: str, request: Request, response: Response
 ) -> ExternalAccountProviderCollection:

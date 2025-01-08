@@ -41,5 +41,5 @@ uv run redfish-service
 Validate service after running service.
 
 ```sh
-uv run rf_service_validator -u admin -p admin -r http://127.0.0.1:8000 --forceauth
+uv run rf_service_validator -u admin -p admin -r http://127.0.0.1:8000
 ```

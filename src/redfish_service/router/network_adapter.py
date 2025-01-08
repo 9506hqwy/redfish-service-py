@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.network_adapter import NetworkAdapter
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> NetworkAdapter:

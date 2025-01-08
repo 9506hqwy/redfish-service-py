@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> FileSystemCollection:
@@ -61,7 +60,6 @@ async def post1(
 
 @router.get("/redfish/v1/Storage/{storage_id}/FileSystems", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/FileSystems", response_model_exclude_none=True)
-@authenticate
 async def get2(storage_id: str, request: Request, response: Response) -> FileSystemCollection:
     s: Service = find_service(FileSystemCollection)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}

@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/StorageGroups",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> StorageGroupCollection:
@@ -67,7 +66,6 @@ async def post1(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/StorageGroups",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> StorageGroupCollection:
@@ -116,7 +114,6 @@ async def post2(
 
 @router.get("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
-@authenticate
 async def get3(storage_id: str, request: Request, response: Response) -> StorageGroupCollection:
     s: Service = find_service(StorageGroupCollection)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
@@ -155,7 +152,6 @@ async def post3(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/StorageGroups",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     storage_id: str, volume_id: str, request: Request, response: Response
 ) -> StorageGroupCollection:

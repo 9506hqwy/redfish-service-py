@@ -6,6 +6,5 @@ client = TestClient(app)
 
 
 def test_root() -> None:
-    auth = ("admin", "admin")
-    response = client.get("/redfish/v1/SessionService/Sessions", auth=auth)
+    response = client.get("/redfish/v1/SessionService/Sessions")
     assert response.status_code == 200

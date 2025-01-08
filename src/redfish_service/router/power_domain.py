@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.power_domain import PowerDomain
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Facilities/{facility_id}/PowerDomains/{power_domain_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     facility_id: str, power_domain_id: str, request: Request, response: Response
 ) -> PowerDomain:

@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.software_inventory import SoftwareInventory
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/UpdateService/SoftwareInventory/{software_inventory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     software_inventory_id: str, request: Request, response: Response
 ) -> SoftwareInventory:
@@ -41,7 +39,6 @@ async def get1(
     "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     software_inventory_id: str, request: Request, response: Response
 ) -> SoftwareInventory:

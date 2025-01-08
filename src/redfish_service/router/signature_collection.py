@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Signatures",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     computer_system_id: str, database_id: str, request: Request, response: Response
 ) -> SignatureCollection:
@@ -73,7 +72,6 @@ async def post1(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Signatures",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     resource_block_id: str,
     computer_system_id: str,
@@ -135,7 +133,6 @@ async def post2(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Signatures",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     resource_block_id: str,
     computer_system_id: str,

@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.outbound_connection import OutboundConnection
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     outbound_connection_id: str, request: Request, response: Response
 ) -> OutboundConnection:

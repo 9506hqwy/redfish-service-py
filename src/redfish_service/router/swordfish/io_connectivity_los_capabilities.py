@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ...authenticate import authenticate
 from ...model.swordfish.io_connectivity_los_capabilities import IoConnectivityLosCapabilities
 from ...service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/IOConnectivityLoSCapabilities",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> IoConnectivityLosCapabilities:

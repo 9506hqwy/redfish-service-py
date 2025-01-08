@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/NetworkDeviceFunctions/{network_device_function_id}/Ethernet/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     chassis_id: str,
     network_adapter_id: str,
@@ -80,7 +79,6 @@ async def post1(
     "/redfish/v1/Managers/{manager_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     manager_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
@@ -135,7 +133,6 @@ async def post2(
     "/redfish/v1/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
@@ -190,7 +187,6 @@ async def post3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
@@ -245,7 +241,6 @@ async def post4(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     resource_block_id: str,
     computer_system_id: str,
@@ -307,7 +302,6 @@ async def post5(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
@@ -362,7 +356,6 @@ async def post6(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/EthernetInterfaces/{ethernet_interface_id}/VLANs",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     resource_block_id: str,
     computer_system_id: str,

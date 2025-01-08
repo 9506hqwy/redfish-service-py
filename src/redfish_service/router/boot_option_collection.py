@@ -16,7 +16,6 @@ router = APIRouter()
 @router.head(
     "/redfish/v1/Systems/{computer_system_id}/BootOptions", response_model_exclude_none=True
 )
-@authenticate
 async def get1(
     computer_system_id: str, request: Request, response: Response
 ) -> BootOptionCollection:
@@ -64,7 +63,6 @@ async def post1(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/BootOptions",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> BootOptionCollection:
@@ -119,7 +117,6 @@ async def post2(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/BootOptions",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> BootOptionCollection:

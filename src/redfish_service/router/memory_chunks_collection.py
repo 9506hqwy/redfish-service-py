@@ -18,7 +18,6 @@ router = APIRouter()
     "/redfish/v1/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     computer_system_id: str, memory_domain_id: str, request: Request, response: Response
 ) -> MemoryChunksCollection:
@@ -73,7 +72,6 @@ async def post1(
     "/redfish/v1/Chassis/{chassis_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     chassis_id: str, memory_domain_id: str, request: Request, response: Response
 ) -> MemoryChunksCollection:
@@ -128,7 +126,6 @@ async def post2(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     resource_block_id: str,
     computer_system_id: str,
@@ -190,7 +187,6 @@ async def post3(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/MemoryDomains/{memory_domain_id}/MemoryChunks",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     resource_block_id: str,
     computer_system_id: str,

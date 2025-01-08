@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.get("/redfish/v1/EventService/Subscriptions", response_model_exclude_none=True)
 @router.head("/redfish/v1/EventService/Subscriptions", response_model_exclude_none=True)
-@authenticate
 async def get1(request: Request, response: Response) -> EventDestinationCollection:
     s: Service = find_service(EventDestinationCollection)
     b: dict[str, Any] = {"request": request, "response": response}

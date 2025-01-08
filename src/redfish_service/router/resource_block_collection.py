@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.get("/redfish/v1/CompositionService/ActivePool", response_model_exclude_none=True)
 @router.head("/redfish/v1/CompositionService/ActivePool", response_model_exclude_none=True)
-@authenticate
 async def get1(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = find_service(ResourceBlockCollection)
     b: dict[str, Any] = {"request": request, "response": response}
@@ -38,7 +37,6 @@ async def post1(
 
 @router.get("/redfish/v1/CompositionService/FreePool", response_model_exclude_none=True)
 @router.head("/redfish/v1/CompositionService/FreePool", response_model_exclude_none=True)
-@authenticate
 async def get2(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = find_service(ResourceBlockCollection)
     b: dict[str, Any] = {"request": request, "response": response}
@@ -64,7 +62,6 @@ async def post2(
 
 @router.get("/redfish/v1/CompositionService/ResourceBlocks", response_model_exclude_none=True)
 @router.head("/redfish/v1/CompositionService/ResourceBlocks", response_model_exclude_none=True)
-@authenticate
 async def get3(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = find_service(ResourceBlockCollection)
     b: dict[str, Any] = {"request": request, "response": response}
@@ -92,7 +89,6 @@ async def post3(
 
 @router.get("/redfish/v1/ResourceBlocks", response_model_exclude_none=True)
 @router.head("/redfish/v1/ResourceBlocks", response_model_exclude_none=True)
-@authenticate
 async def get4(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = find_service(ResourceBlockCollection)
     b: dict[str, Any] = {"request": request, "response": response}

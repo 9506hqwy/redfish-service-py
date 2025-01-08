@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.get("/redfish/v1/KeyService/NVMeoFSecrets", response_model_exclude_none=True)
 @router.head("/redfish/v1/KeyService/NVMeoFSecrets", response_model_exclude_none=True)
-@authenticate
 async def get1(request: Request, response: Response) -> KeyCollection:
     s: Service = find_service(KeyCollection)
     b: dict[str, Any] = {"request": request, "response": response}
@@ -36,7 +35,6 @@ async def post1(request: Request, response: Response, body: KeyOnCreate) -> Key:
 
 @router.get("/redfish/v1/UpdateService/RemoteServerSSHKeys", response_model_exclude_none=True)
 @router.head("/redfish/v1/UpdateService/RemoteServerSSHKeys", response_model_exclude_none=True)
-@authenticate
 async def get2(request: Request, response: Response) -> KeyCollection:
     s: Service = find_service(KeyCollection)
     b: dict[str, Any] = {"request": request, "response": response}
@@ -68,7 +66,6 @@ async def post2(request: Request, response: Response, body: KeyOnCreate) -> Key:
     "/redfish/v1/AccountService/Accounts/{manager_account_id}/Keys",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(manager_account_id: str, request: Request, response: Response) -> KeyCollection:
     s: Service = find_service(KeyCollection)
     b: dict[str, Any] = {
@@ -115,7 +112,6 @@ async def post3(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Keys",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     manager_id: str, manager_account_id: str, request: Request, response: Response
 ) -> KeyCollection:
@@ -170,7 +166,6 @@ async def post4(
     "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/TrustedPublicHostKeys",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(aggregation_source_id: str, request: Request, response: Response) -> KeyCollection:
     s: Service = find_service(KeyCollection)
     b: dict[str, Any] = {

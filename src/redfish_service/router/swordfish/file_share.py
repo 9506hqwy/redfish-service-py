@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ...authenticate import authenticate
 from ...model.swordfish.file_share import FileShare
 from ...service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_id: str,
     file_systems_id: str,
@@ -47,7 +45,6 @@ async def get1(
     "/redfish/v1/Systems/{computer_systems_id}/Storage/{storage_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_systems_id: str,
     storage_id: str,
@@ -79,7 +76,6 @@ async def get2(
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_systems_id}/ExportedFileShares/{exported_file_shares_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     storage_service_id: str,
     file_systems_id: str,

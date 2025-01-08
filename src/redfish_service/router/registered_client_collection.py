@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.get("/redfish/v1/RegisteredClients", response_model_exclude_none=True)
 @router.head("/redfish/v1/RegisteredClients", response_model_exclude_none=True)
-@authenticate
 async def get1(request: Request, response: Response) -> RegisteredClientCollection:
     s: Service = find_service(RegisteredClientCollection)
     b: dict[str, Any] = {"request": request, "response": response}

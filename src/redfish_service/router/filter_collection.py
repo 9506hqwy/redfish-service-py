@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.filter_collection import FilterCollection
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     chassis_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
@@ -40,7 +38,6 @@ async def get1(
 @router.head(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters", response_model_exclude_none=True
 )
-@authenticate
 async def get2(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
     b: dict[str, Any] = {
@@ -62,7 +59,6 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Fi
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> FilterCollection:
@@ -87,7 +83,6 @@ async def get3(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
@@ -112,7 +107,6 @@ async def get4(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
     b: dict[str, Any] = {
@@ -134,7 +128,6 @@ async def get5(cooling_unit_id: str, request: Request, response: Response) -> Fi
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> FilterCollection:
@@ -159,7 +152,6 @@ async def get6(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
@@ -184,7 +176,6 @@ async def get7(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
     s: Service = find_service(FilterCollection)
     b: dict[str, Any] = {
@@ -206,7 +197,6 @@ async def get8(cooling_unit_id: str, request: Request, response: Response) -> Fi
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> FilterCollection:
@@ -231,7 +221,6 @@ async def get9(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:

@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.assembly import Assembly
 from ..service import Service, find_service
 
@@ -11,7 +10,6 @@ router = APIRouter()
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
-@authenticate
 async def get1(chassis_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
@@ -29,7 +27,6 @@ async def get1(chassis_id: str, request: Request, response: Response) -> Assembl
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -53,7 +50,6 @@ async def get2(
 @router.head(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Assembly", response_model_exclude_none=True
 )
-@authenticate
 async def get3(chassis_id: str, drive_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -76,7 +72,6 @@ async def get3(chassis_id: str, drive_id: str, request: Request, response: Respo
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -102,7 +97,6 @@ async def get4(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -127,7 +121,6 @@ async def get5(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     resource_block_id: str,
     computer_system_id: str,
@@ -159,7 +152,6 @@ async def get6(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -185,7 +177,6 @@ async def get7(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -210,7 +201,6 @@ async def get8(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     resource_block_id: str,
     computer_system_id: str,
@@ -242,7 +232,6 @@ async def get9(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -267,7 +256,6 @@ async def get10(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get11(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -292,7 +280,6 @@ async def get11(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get12(
     resource_block_id: str,
     computer_system_id: str,
@@ -322,7 +309,6 @@ async def get12(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get13(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -347,7 +333,6 @@ async def get13(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get14(
     resource_block_id: str,
     computer_system_id: str,
@@ -377,7 +362,6 @@ async def get14(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get15(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -402,7 +386,6 @@ async def get15(
     "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get16(
     chassis_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -427,7 +410,6 @@ async def get16(
     "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get17(
     computer_system_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -452,7 +434,6 @@ async def get17(
     "/redfish/v1/Chassis/{chassis_id}/Power/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get18(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -477,7 +458,6 @@ async def get18(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get19(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -502,7 +482,6 @@ async def get19(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get20(
     computer_system_id: str,
     processor_id: str,
@@ -532,7 +511,6 @@ async def get20(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get21(
     computer_system_id: str,
     processor_id: str,
@@ -564,7 +542,6 @@ async def get21(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get22(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -589,7 +566,6 @@ async def get22(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get23(
     resource_block_id: str,
     processor_id: str,
@@ -619,7 +595,6 @@ async def get23(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get24(
     resource_block_id: str,
     processor_id: str,
@@ -651,7 +626,6 @@ async def get24(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get25(
     resource_block_id: str,
     computer_system_id: str,
@@ -681,7 +655,6 @@ async def get25(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get26(
     resource_block_id: str,
     computer_system_id: str,
@@ -713,7 +686,6 @@ async def get26(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get27(
     resource_block_id: str,
     computer_system_id: str,
@@ -747,7 +719,6 @@ async def get27(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get28(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -772,7 +743,6 @@ async def get28(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get29(
     resource_block_id: str,
     processor_id: str,
@@ -802,7 +772,6 @@ async def get29(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get30(
     resource_block_id: str,
     processor_id: str,
@@ -834,7 +803,6 @@ async def get30(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get31(
     resource_block_id: str,
     computer_system_id: str,
@@ -864,7 +832,6 @@ async def get31(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get32(
     resource_block_id: str,
     computer_system_id: str,
@@ -896,7 +863,6 @@ async def get32(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get33(
     resource_block_id: str,
     computer_system_id: str,
@@ -930,7 +896,6 @@ async def get33(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get34(
     chassis_id: str,
     network_adapter_id: str,
@@ -960,7 +925,6 @@ async def get34(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get35(
     chassis_id: str,
     network_adapter_id: str,
@@ -992,7 +956,6 @@ async def get35(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get36(
     chassis_id: str,
     network_adapter_id: str,
@@ -1026,7 +989,6 @@ async def get36(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get37(
     computer_system_id: str,
     storage_id: str,
@@ -1056,7 +1018,6 @@ async def get37(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get38(
     computer_system_id: str,
     storage_id: str,
@@ -1086,7 +1047,6 @@ async def get38(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get39(
     resource_block_id: str,
     storage_id: str,
@@ -1116,7 +1076,6 @@ async def get39(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get40(
     resource_block_id: str,
     storage_id: str,
@@ -1146,7 +1105,6 @@ async def get40(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get41(
     resource_block_id: str,
     computer_system_id: str,
@@ -1178,7 +1136,6 @@ async def get41(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get42(
     resource_block_id: str,
     computer_system_id: str,
@@ -1210,7 +1167,6 @@ async def get42(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get43(
     resource_block_id: str,
     storage_id: str,
@@ -1240,7 +1196,6 @@ async def get43(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get44(
     resource_block_id: str,
     storage_id: str,
@@ -1270,7 +1225,6 @@ async def get44(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get45(
     resource_block_id: str,
     computer_system_id: str,
@@ -1302,7 +1256,6 @@ async def get45(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get46(
     resource_block_id: str,
     computer_system_id: str,
@@ -1334,7 +1287,6 @@ async def get46(
     "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get47(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1359,7 +1311,6 @@ async def get47(
     "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get48(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1384,7 +1335,6 @@ async def get48(
     "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get49(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -1407,7 +1357,6 @@ async def get49(chassis_id: str, fan_id: str, request: Request, response: Respon
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get50(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -1430,7 +1379,6 @@ async def get50(chassis_id: str, fan_id: str, request: Request, response: Respon
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get51(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1455,7 +1403,6 @@ async def get51(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get52(
     power_distribution_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1480,7 +1427,6 @@ async def get52(
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/Batteries/{battery_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get53(
     chassis_id: str, battery_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1505,7 +1451,6 @@ async def get53(
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Heaters/{header_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get54(chassis_id: str, header_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -1528,7 +1473,6 @@ async def get54(chassis_id: str, header_id: str, request: Request, response: Res
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get55(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -1550,7 +1494,6 @@ async def get55(cooling_unit_id: str, request: Request, response: Response) -> A
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get56(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -1572,7 +1515,6 @@ async def get56(cooling_unit_id: str, request: Request, response: Response) -> A
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get57(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
     s: Service = find_service(Assembly)
     b: dict[str, Any] = {
@@ -1594,7 +1536,6 @@ async def get57(cooling_unit_id: str, request: Request, response: Response) -> A
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get58(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1619,7 +1560,6 @@ async def get58(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get59(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1644,7 +1584,6 @@ async def get59(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get60(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1669,7 +1608,6 @@ async def get60(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get61(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1694,7 +1632,6 @@ async def get61(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get62(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1719,7 +1656,6 @@ async def get62(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get63(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1744,7 +1680,6 @@ async def get63(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get64(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1769,7 +1704,6 @@ async def get64(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get65(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1795,7 +1729,6 @@ async def get65(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get66(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1821,7 +1754,6 @@ async def get66(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get67(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1846,7 +1778,6 @@ async def get67(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get68(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1872,7 +1803,6 @@ async def get68(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get69(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1898,7 +1828,6 @@ async def get69(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get70(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1923,7 +1852,6 @@ async def get70(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get71(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
@@ -1949,7 +1877,6 @@ async def get71(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get72(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:

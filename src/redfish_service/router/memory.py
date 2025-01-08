@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.memory import Memory
 from ..service import Service, find_service
 
@@ -15,7 +14,6 @@ router = APIRouter()
 @router.head(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}", response_model_exclude_none=True
 )
-@authenticate
 async def get1(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> Memory:
@@ -40,7 +38,6 @@ async def get1(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/CacheMemory/{memory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_system_id: str,
     processor_id: str,
@@ -68,7 +65,6 @@ async def get2(
 @router.head(
     "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}", response_model_exclude_none=True
 )
-@authenticate
 async def get3(chassis_id: str, memory_id: str, request: Request, response: Response) -> Memory:
     s: Service = find_service(Memory)
     b: dict[str, Any] = {
@@ -91,7 +87,6 @@ async def get3(chassis_id: str, memory_id: str, request: Request, response: Resp
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Memory:
@@ -116,7 +111,6 @@ async def get4(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     resource_block_id: str,
     computer_system_id: str,
@@ -146,7 +140,6 @@ async def get5(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Memory:
@@ -171,7 +164,6 @@ async def get6(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     resource_block_id: str,
     computer_system_id: str,

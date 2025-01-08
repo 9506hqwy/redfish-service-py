@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.leak_detector import LeakDetector
 from ..service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/LeakDetection/LeakDetectors/{leak_detector_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     chassis_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
@@ -42,7 +40,6 @@ async def get1(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/LeakDetection/LeakDetectors/{leak_detector_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     cooling_unit_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
@@ -67,7 +64,6 @@ async def get2(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/LeakDetection/LeakDetectors/{leak_detector_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     cooling_unit_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
@@ -92,7 +88,6 @@ async def get3(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/LeakDetection/LeakDetectors/{leak_detector_id}",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     cooling_unit_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:

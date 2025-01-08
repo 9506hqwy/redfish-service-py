@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..authenticate import authenticate
 from ..model.processor_collection import ProcessorCollection
 from ..service import Service, find_service
 
@@ -15,7 +14,6 @@ router = APIRouter()
 @router.head(
     "/redfish/v1/Systems/{computer_system_id}/Processors", response_model_exclude_none=True
 )
-@authenticate
 async def get1(
     computer_system_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -39,7 +37,6 @@ async def get1(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -64,7 +61,6 @@ async def get2(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     computer_system_id: str,
     processor_id: str,
@@ -94,7 +90,6 @@ async def get3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -119,7 +114,6 @@ async def get4(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     resource_block_id: str,
     processor_id: str,
@@ -149,7 +143,6 @@ async def get5(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -174,7 +167,6 @@ async def get6(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     resource_block_id: str,
     computer_system_id: str,
@@ -204,7 +196,6 @@ async def get7(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     resource_block_id: str,
     computer_system_id: str,
@@ -236,7 +227,6 @@ async def get8(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -261,7 +251,6 @@ async def get9(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get10(
     resource_block_id: str,
     processor_id: str,
@@ -291,7 +280,6 @@ async def get10(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get11(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -316,7 +304,6 @@ async def get11(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get12(
     resource_block_id: str,
     computer_system_id: str,
@@ -346,7 +333,6 @@ async def get12(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get13(
     resource_block_id: str,
     computer_system_id: str,
@@ -378,7 +364,6 @@ async def get13(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get14(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -403,7 +388,6 @@ async def get14(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get15(
     chassis_id: str,
     network_adapter_id: str,
@@ -433,7 +417,6 @@ async def get15(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get16(
     chassis_id: str,
     network_adapter_id: str,
@@ -459,7 +442,6 @@ async def get16(
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Processors", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Processors", response_model_exclude_none=True)
-@authenticate
 async def get17(chassis_id: str, request: Request, response: Response) -> ProcessorCollection:
     s: Service = find_service(ProcessorCollection)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
@@ -477,7 +459,6 @@ async def get17(chassis_id: str, request: Request, response: Response) -> Proces
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get18(
     chassis_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
@@ -502,7 +483,6 @@ async def get18(
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get19(
     chassis_id: str, processor_id: str, processor_id2: str, request: Request, response: Response
 ) -> ProcessorCollection:

@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ...authenticate import authenticate
 from ...model.swordfish.storage_service_metrics import StorageServiceMetrics
 from ...service import Service, find_service
 
@@ -15,7 +14,6 @@ router = APIRouter()
 @router.head(
     "/redfish/v1/StorageServices/{storage_service_id}/Metrics", response_model_exclude_none=True
 )
-@authenticate
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> StorageServiceMetrics:
@@ -39,7 +37,6 @@ async def get1(
     "/redfish/v1/Systems/{computer_system_id}/StorageServices/{storage_service_id}/Metrics",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     computer_system_id: str, storage_service_id: str, request: Request, response: Response
 ) -> StorageServiceMetrics:

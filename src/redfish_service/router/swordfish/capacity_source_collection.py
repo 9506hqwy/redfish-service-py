@@ -2,7 +2,6 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ...authenticate import authenticate
 from ...model.swordfish.capacity_source_collection import CapacitySourceCollection
 from ...service import Service, find_service
 
@@ -17,7 +16,6 @@ router = APIRouter()
     "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get1(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -42,7 +40,6 @@ async def get1(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get2(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -67,7 +64,6 @@ async def get2(
     "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_system_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get3(
     storage_service_id: str, file_system_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -92,7 +88,6 @@ async def get3(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get4(
     storage_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -117,7 +112,6 @@ async def get4(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get5(
     storage_id: str, volume_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -142,7 +136,6 @@ async def get5(
     "/redfish/v1/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get6(
     storage_id: str, file_system_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -167,7 +160,6 @@ async def get6(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get7(
     computer_system_id: str,
     storage_id: str,
@@ -197,7 +189,6 @@ async def get7(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get8(
     computer_system_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
@@ -223,7 +214,6 @@ async def get8(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources",
     response_model_exclude_none=True,
 )
-@authenticate
 async def get9(
     computer_system_id: str,
     storage_id: str,
