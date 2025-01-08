@@ -1,13 +1,14 @@
 from http import HTTPStatus
 
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from . import router as redfish
 from . import service_impl  # noqa: F401
-from .exception import InternalErrorError, InvalidURIError
+from .exception import InternalErrorError, InvalidURIError, MalformedJsonError
 from .exception import RedfishError as RedfishException
 from .router import swordfish
 
@@ -27,6 +28,14 @@ async def http_exception_handler(req: Request, exc: StarletteHTTPException) -> J
         case _:  # pragma: no cover
             error = InternalErrorError().error
     return JSONResponse(error.model_dump(exclude_none=True), status_code=exc.status_code)
+
+
+@app.exception_handler(RequestValidationError)
+async def request_validation_error_handler(
+    req: Request, exc: RequestValidationError
+) -> JSONResponse:
+    error = MalformedJsonError()
+    return JSONResponse(error.error.model_dump(exclude_none=True), status_code=error.status_code)
 
 
 @app.exception_handler(RedfishException)

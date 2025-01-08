@@ -34,6 +34,19 @@ class InternalErrorError(RedfishError):
         super().__init__(status_code, error)
 
 
+class MalformedJsonError(RedfishError):
+    def __init__(self, status_code: int = HTTPStatus.UNPROCESSABLE_ENTITY):
+        info = {
+            "error": {
+                "code": "Base.1.19.0.MalformedJSON",
+                "message": "The request body submitted was malformed JSON and"
+                + " could not be parsed by the receiving service.",
+            }
+        }
+        error = Error.model_validate(info)
+        super().__init__(status_code, error)
+
+
 class OperationNotAllowedError(RedfishError):
     def __init__(self) -> None:
         info = {
