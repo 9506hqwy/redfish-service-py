@@ -31,7 +31,7 @@ def registry_service(s: Service) -> None:
 class Service[T: RedfishModel](Protocol):
     def respond(self, ty: type[RedfishModel]) -> bool: ...
 
-    def delete(self, **kwargs: dict[str, Any]) -> T:
+    def delete(self, **kwargs: dict[str, Any]) -> None:
         raise OperationNotAllowedError
 
     def get(self, **kwargs: dict[str, Any]) -> T:

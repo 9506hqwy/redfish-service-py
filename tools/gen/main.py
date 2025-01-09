@@ -871,6 +871,33 @@ def write_routers(
                         body = ",".join([*body_list, '"request": request', '"response": response'])
 
                         index += 1
+
+                        # DELETE
+                        if isinstance(c, ClassInfo) and c.definition.get("deletable", False):
+                            w.writelines(
+                                [
+                                    "\n",
+                                    "\n",
+                                    f'@router.delete("{url}", response_model_exclude_none=True)\n',
+                                ]
+                            )
+
+                            if url not in NO_AUTHENTICATE_URI:
+                                w.write("@authenticate\n")
+
+                            w.writelines(
+                                [
+                                    f"async def delete{index}({args}) -> None:\n",
+                                    f"    s: Service = find_service({c.cls_name})\n",
+                                    f"    b: dict[str, Any] = {{{body}}}\n",
+                                    "\n",
+                                    '    response.headers["OData-Version"] = "4.0"\n',
+                                    "\n",
+                                    "    return s.delete(**b)\n",
+                                ]
+                            )
+
+                        # GET
                         w.writelines(
                             [
                                 "\n",
@@ -887,6 +914,7 @@ def write_routers(
                             ]
                         )
 
+                        # POST
                         if (
                             isinstance(c, ClassInfo)
                             and c.definition.get("insertable", False)

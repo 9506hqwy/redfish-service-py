@@ -2,10 +2,32 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
+from ...authenticate import authenticate
 from ...model.swordfish.storage_pool import StoragePool
 from ...service import Service, find_service
 
 router = APIRouter()
+
+
+@router.delete(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete1(
+    storage_service_id: str, storage_pool_id: str, request: Request, response: Response
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -30,6 +52,32 @@ async def get1(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/AllocatedPools/{allocated_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete2(
+    storage_service_id: str,
+    storage_pool_id: str,
+    allocated_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "storage_pool_id": storage_pool_id,
+        "allocated_pool_id": allocated_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -59,6 +107,34 @@ async def get2(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{providing_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete3(
+    storage_service_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    providing_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "storage_pool_id": storage_pool_id,
+        "capacity_source_id": capacity_source_id,
+        "providing_pool_id": providing_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -92,6 +168,34 @@ async def get3(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete4(
+    storage_service_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "volume_id": volume_id,
+        "capacity_source_id": capacity_source_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -123,6 +227,32 @@ async def get4(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete5(
+    storage_service_id: str,
+    volume_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "volume_id": volume_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -150,6 +280,34 @@ async def get5(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/StorageServices/{storage_service_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete6(
+    storage_service_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "file_system_id": file_system_id,
+        "capacity_source_id": capacity_source_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -183,6 +341,27 @@ async def get6(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete7(
+    storage_id: str, storage_pool_id: str, request: Request, response: Response
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -205,6 +384,32 @@ async def get7(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/AllocatedPools/{allocated_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete8(
+    storage_id: str,
+    storage_pool_id: str,
+    allocated_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "allocated_pool_id": allocated_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -234,6 +439,34 @@ async def get8(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{providing_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete9(
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    providing_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "capacity_source_id": capacity_source_id,
+        "providing_pool_id": providing_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -267,6 +500,34 @@ async def get9(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete10(
+    storage_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "volume_id": volume_id,
+        "capacity_source_id": capacity_source_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -298,6 +559,28 @@ async def get10(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete11(
+    storage_id: str, volume_id: str, storage_pool_id: str, request: Request, response: Response
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "volume_id": volume_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -321,6 +604,34 @@ async def get11(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete12(
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "file_system_id": file_system_id,
+        "capacity_source_id": capacity_source_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -354,6 +665,32 @@ async def get12(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete13(
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -381,6 +718,34 @@ async def get13(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/AllocatedPools/{allocated_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete14(
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    allocated_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "allocated_pool_id": allocated_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -412,6 +777,36 @@ async def get14(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StoragePools/{storage_pool_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{providing_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete15(
+    computer_system_id: str,
+    storage_id: str,
+    storage_pool_id: str,
+    capacity_source_id: str,
+    providing_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_pool_id": storage_pool_id,
+        "capacity_source_id": capacity_source_id,
+        "providing_pool_id": providing_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
@@ -447,6 +842,36 @@ async def get15(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete16(
+    computer_system_id: str,
+    storage_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "volume_id": volume_id,
+        "capacity_source_id": capacity_source_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -480,6 +905,34 @@ async def get16(
     return cast(StoragePool, s.get(**b))
 
 
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete17(
+    computer_system_id: str,
+    storage_id: str,
+    volume_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "volume_id": volume_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
+
+
 @router.get(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Volumes/{volume_id}/AllocatedPools/{storage_pool_id}",
     response_model_exclude_none=True,
@@ -509,6 +962,36 @@ async def get17(
     response.headers["OData-Version"] = "4.0"
 
     return cast(StoragePool, s.get(**b))
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/FileSystems/{file_system_id}/CapacitySources/{capacity_source_id}/ProvidingPools/{storage_pool_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete18(
+    computer_system_id: str,
+    storage_id: str,
+    file_system_id: str,
+    capacity_source_id: str,
+    storage_pool_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = find_service(StoragePool)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "file_system_id": file_system_id,
+        "capacity_source_id": capacity_source_id,
+        "storage_pool_id": storage_pool_id,
+        "request": request,
+        "response": response,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return s.delete(**b)
 
 
 @router.get(
