@@ -657,12 +657,16 @@ def write_base_classes(out_path: Path) -> None:
     with out_file.open("w") as w:
         w.writelines(
             [
-                "from pydantic import BaseModel, ConfigDict\n",
+                "from typing import Any\n",
+                "\n",
+                "from pydantic import BaseModel, ConfigDict, Field\n",
                 "from pydantic.alias_generators import to_pascal\n",
                 "\n",
                 "\n",
                 "class RedfishModel(BaseModel):\n",
                 '    model_config = ConfigDict(alias_generator=to_pascal, extra="forbid", populate_by_name=True, strict=True)\n',  # noqa: E501
+                "\n",
+                "    extra_fields: dict[str, Any] = Field(exclude=True, default={})\n",
             ]
         )
 

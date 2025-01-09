@@ -22,7 +22,9 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         if i is None:
             raise ResourceNotFoundError("SessionCollection", "SessionCollection")
 
-        i.members = [IdRef(**{"@odata.id": s.odata_id}) for s in instances.enum_by_type(Session)]
+        i.members = [
+            IdRef.model_validate({"odata_id": s.odata_id}) for s in instances.enum_by_type(Session)
+        ]
         i.members_odata_count = len(i.members)
 
         req: Request = cast(Request, kwargs["request"])
@@ -51,14 +53,14 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
                 "odata_id": f"{req.url.path}/{id}",
                 "id": str(id),
                 "name": str(id),
-                "token": str(token),
                 "user_name": body.user_name,
             }
         )
+        session.extra_fields["token"] = str(token)
         instances.add(session)
 
         res.headers["Location"] = session.odata_id
-        res.headers["X-Auth-Token"] = cast(str, session.token)
+        res.headers["X-Auth-Token"] = cast(str, session.extra_fields["token"])
         res.status_code = HTTPStatus.CREATED
 
         return session
