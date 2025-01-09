@@ -662,7 +662,7 @@ def write_base_classes(out_path: Path) -> None:
                 "\n",
                 "\n",
                 "class RedfishModel(BaseModel):\n",
-                '    model_config = ConfigDict(alias_generator=to_pascal, extra="forbid", populate_by_name=True)\n',  # noqa: E501
+                '    model_config = ConfigDict(alias_generator=to_pascal, extra="forbid", populate_by_name=True, strict=True)\n',  # noqa: E501
             ]
         )
 
