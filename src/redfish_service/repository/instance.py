@@ -21,5 +21,8 @@ class Instances(object):
 
         return None
 
+    def remove(self, item: RedfishModel) -> None:
+        self.instances.remove(item)
+
 
 instances = Instances()
