@@ -3,6 +3,8 @@ from typing import Any, cast
 from fastapi import Request
 
 from ..exception import ResourceNotFoundError
+from ..model.account_service import AccountService
+from ..model.odata_v4 import IdRef
 from ..model.service_root import ServiceRoot
 from ..repository import instances
 from ..service import Service
@@ -13,9 +15,14 @@ class ServiceRootService(Service[ServiceRoot]):
         return ty == ServiceRoot
 
     def get(self, **kwargs: dict[str, Any]) -> ServiceRoot:
+        account_service = instances.find_by_type(AccountService)
+
         i = instances.find_by_type(ServiceRoot)
         if i is None:
             raise ResourceNotFoundError("ServiceRoot", "ServiceRoot")
+
+        if account_service:
+            i.account_service = IdRef.model_validate({"odata_id": account_service.odata_id})
 
         req: Request = cast(Request, kwargs["request"])
         i.odata_id = req.url.path
