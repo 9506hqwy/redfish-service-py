@@ -3,7 +3,7 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.certificate import Certificate
+from ..model.certificate import Certificate, CertificateOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -54,6 +54,32 @@ async def get1(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/AccountService/Accounts/{manager_account_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    manager_account_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_account_id": manager_account_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/AccountService/ActiveDirectory/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -93,6 +119,27 @@ async def get2(certificate_id: str, request: Request, response: Response) -> Cer
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/AccountService/ActiveDirectory/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch2(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/AccountService/LDAP/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -130,6 +177,27 @@ async def get3(certificate_id: str, request: Request, response: Response) -> Cer
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/AccountService/LDAP/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch3(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -177,6 +245,32 @@ async def get4(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch4(
+    external_account_provider_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "external_account_provider_id": external_account_provider_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -216,6 +310,27 @@ async def get5(certificate_id: str, request: Request, response: Response) -> Cer
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch5(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -253,6 +368,27 @@ async def get6(certificate_id: str, request: Request, response: Response) -> Cer
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch6(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -310,6 +446,34 @@ async def get7(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch7(
+    manager_id: str,
+    manager_account_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "manager_account_id": manager_account_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -355,6 +519,32 @@ async def get8(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch8(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -398,6 +588,32 @@ async def get9(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch9(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -455,6 +671,34 @@ async def get10(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch10(
+    manager_id: str,
+    external_account_provider_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "external_account_provider_id": external_account_provider_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -498,6 +742,32 @@ async def get11(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch11(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -545,6 +815,32 @@ async def get12(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch12(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -590,6 +886,32 @@ async def get13(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch13(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -633,6 +955,32 @@ async def get14(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch14(
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -690,6 +1038,34 @@ async def get15(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch15(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -745,6 +1121,34 @@ async def get16(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch16(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -798,6 +1202,34 @@ async def get17(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch17(
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -859,6 +1291,36 @@ async def get18(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch18(
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -918,6 +1380,36 @@ async def get19(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch19(
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -961,6 +1453,32 @@ async def get20(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch20(
+    event_destination_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1008,6 +1526,32 @@ async def get21(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch21(
+    event_destination_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1051,6 +1595,32 @@ async def get22(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch22(
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1108,6 +1678,34 @@ async def get23(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch23(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1161,6 +1759,34 @@ async def get24(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch24(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1218,6 +1844,34 @@ async def get25(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch25(
+    computer_system_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1263,6 +1917,34 @@ async def get26(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch26(
+    chassis_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "memory_id": memory_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1318,6 +2000,34 @@ async def get27(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch27(
+    resource_block_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1379,6 +2089,36 @@ async def get28(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch28(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1432,6 +2172,34 @@ async def get29(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch29(
+    resource_block_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1493,6 +2261,36 @@ async def get30(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch30(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1548,6 +2346,34 @@ async def get31(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch31(
+    computer_system_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1601,6 +2427,34 @@ async def get32(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch32(
+    resource_block_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1662,6 +2516,36 @@ async def get33(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch33(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1715,6 +2599,34 @@ async def get34(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch34(
+    resource_block_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1776,6 +2688,36 @@ async def get35(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch35(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1829,6 +2771,34 @@ async def get36(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch36(
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -1890,6 +2860,36 @@ async def get37(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch37(
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -1947,6 +2947,36 @@ async def get38(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch38(
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2012,6 +3042,38 @@ async def get39(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch39(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2069,6 +3131,36 @@ async def get40(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch40(
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2134,6 +3226,38 @@ async def get41(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch41(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2187,6 +3311,34 @@ async def get42(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch42(
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2248,6 +3400,36 @@ async def get43(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch43(
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2305,6 +3487,36 @@ async def get44(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch44(
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2370,6 +3582,38 @@ async def get45(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch45(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2427,6 +3671,36 @@ async def get46(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch46(
+    resource_block_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2492,6 +3766,38 @@ async def get47(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch47(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2539,6 +3845,34 @@ async def get48(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch48(
+    fabric_id: str,
+    switch_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2582,6 +3916,32 @@ async def get49(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch49(
+    chassis_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2643,6 +4003,36 @@ async def get50(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch50(
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2688,6 +4078,34 @@ async def get51(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch51(
+    chassis_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2749,6 +4167,36 @@ async def get52(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch52(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2802,6 +4250,34 @@ async def get53(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch53(
+    resource_block_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -2867,6 +4343,38 @@ async def get54(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch54(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2926,6 +4434,36 @@ async def get55(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch55(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -2979,6 +4517,34 @@ async def get56(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch56(
+    resource_block_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3044,6 +4610,38 @@ async def get57(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch57(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3097,6 +4695,34 @@ async def get58(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch58(
+    chassis_id: str,
+    network_adapter_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3154,6 +4780,34 @@ async def get59(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch59(
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3207,6 +4861,34 @@ async def get60(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch60(
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3268,6 +4950,36 @@ async def get61(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch61(
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3325,6 +5037,36 @@ async def get62(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch62(
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3386,6 +5128,36 @@ async def get63(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch63(
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3445,6 +5217,36 @@ async def get64(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch64(
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3484,6 +5286,27 @@ async def get65(certificate_id: str, request: Request, response: Response) -> Ce
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch65(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3521,6 +5344,27 @@ async def get66(certificate_id: str, request: Request, response: Response) -> Ce
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch66(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3568,6 +5412,32 @@ async def get67(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch67(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3611,6 +5481,32 @@ async def get68(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch68(
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3668,6 +5564,34 @@ async def get69(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch69(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3723,6 +5647,34 @@ async def get70(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch70(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3766,6 +5718,32 @@ async def get71(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch71(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3813,6 +5791,32 @@ async def get72(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch72(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3856,6 +5860,32 @@ async def get73(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch73(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -3903,6 +5933,32 @@ async def get74(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch74(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3948,6 +6004,32 @@ async def get75(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch75(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -3991,6 +6073,32 @@ async def get76(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch76(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -4048,6 +6156,34 @@ async def get77(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/TrustedComponents/{trusted_component_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch77(
+    chassis_id: str,
+    trusted_component_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "trusted_component_id": trusted_component_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -4093,6 +6229,32 @@ async def get78(
     return cast(Certificate, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch78(
+    outbound_connection_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "outbound_connection_id": outbound_connection_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
@@ -4136,6 +6298,32 @@ async def get79(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch79(
+    outbound_connection_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "outbound_connection_id": outbound_connection_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))
 
 
 @router.delete(
@@ -4191,3 +6379,31 @@ async def get80(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Certificate, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies/{power_supply_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch80(
+    chassis_id: str,
+    power_supply_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = find_service(Certificate)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "power_supply_id": power_supply_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Certificate, s.patch(**b))

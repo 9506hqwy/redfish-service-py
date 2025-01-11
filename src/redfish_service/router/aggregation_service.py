@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.aggregation_service import AggregationService
+from ..authenticate import authenticate
+from ..model.aggregation_service import AggregationService, AggregationServiceOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -17,3 +18,16 @@ async def get1(request: Request, response: Response) -> AggregationService:
     response.headers["OData-Version"] = "4.0"
 
     return cast(AggregationService, s.get(**b))
+
+
+@router.patch("/redfish/v1/AggregationService", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    request: Request, response: Response, body: AggregationServiceOnUpdate
+) -> AggregationService:
+    s: Service = find_service(AggregationService)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body}
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(AggregationService, s.patch(**b))

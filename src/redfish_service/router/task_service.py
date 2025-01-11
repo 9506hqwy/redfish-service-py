@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.task_service import TaskService
+from ..authenticate import authenticate
+from ..model.task_service import TaskService, TaskServiceOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -17,3 +18,14 @@ async def get1(request: Request, response: Response) -> TaskService:
     response.headers["OData-Version"] = "4.0"
 
     return cast(TaskService, s.get(**b))
+
+
+@router.patch("/redfish/v1/TaskService", response_model_exclude_none=True)
+@authenticate
+async def patch1(request: Request, response: Response, body: TaskServiceOnUpdate) -> TaskService:
+    s: Service = find_service(TaskService)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body}
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(TaskService, s.patch(**b))

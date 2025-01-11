@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.serial_interface import SerialInterface
+from ..authenticate import authenticate
+from ..model.serial_interface import SerialInterface, SerialInterfaceOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -30,3 +31,29 @@ async def get1(
     response.headers["OData-Version"] = "4.0"
 
     return cast(SerialInterface, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SerialInterfaces/{serial_interface_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    manager_id: str,
+    serial_interface_id: str,
+    request: Request,
+    response: Response,
+    body: SerialInterfaceOnUpdate,
+) -> SerialInterface:
+    s: Service = find_service(SerialInterface)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "serial_interface_id": serial_interface_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(SerialInterface, s.patch(**b))

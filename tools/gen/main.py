@@ -813,6 +813,14 @@ def write_imports_router_to(
         else:
             w.write(f"from {parent}model.{c.module_path} import {c.cls_name}\n")
 
+        if isinstance(c, ClassInfo) and c.definition.get("updatable", False):
+            if isinstance(c, ClassInfo) and c.impl_info:
+                w.write(
+                    f"from {parent}model.{c.impl_info.module_path} import {c.impl_info.cls_name}OnUpdate\n"  # noqa E501
+                )
+            else:
+                w.write(f"from {parent}model.{c.module_path} import {c.cls_name}OnUpdate\n")
+
         if isinstance(c, ClassInfo) and c.item_info:
             w.writelines(
                 [
@@ -930,14 +938,42 @@ def write_routers(
                             ]
                         )
 
+                        # PATCH
+                        if isinstance(c, ClassInfo) and c.definition.get("updatable", False):
+                            uargs = args + f",body: {c.cls_name}OnUpdate"
+                            ubody = body + ',"body": body'
+
+                            w.writelines(
+                                [
+                                    "\n",
+                                    "\n",
+                                    f'@router.patch("{url}", response_model_exclude_none=True)\n',
+                                ]
+                            )
+
+                            if url not in NO_AUTHENTICATE_URI:
+                                w.write("@authenticate\n")
+
+                            w.writelines(
+                                [
+                                    f"async def patch{index}({uargs}) -> {c.cls_name}:\n",
+                                    f"    s: Service = find_service({c.cls_name})\n",
+                                    f"    b: dict[str, Any] = {{{ubody}}}\n",
+                                    "\n",
+                                    '    response.headers["OData-Version"] = "4.0"\n',
+                                    "\n",
+                                    f"    return cast({c.cls_name}, s.patch(**b))\n",
+                                ]
+                            )
+
                         # POST
                         if (
                             isinstance(c, ClassInfo)
                             and c.definition.get("insertable", False)
                             and c.item_info
                         ):
-                            args += f",body: {c.item_info.cls_name}OnCreate"
-                            body += ',"body": body'
+                            cargs = args + f",body: {c.item_info.cls_name}OnCreate"
+                            cbody = body + ',"body": body'
 
                             w.writelines(
                                 [
@@ -953,9 +989,9 @@ def write_routers(
 
                             w.writelines(
                                 [
-                                    f"async def post{index}({args}) -> {c.item_info.cls_name}:\n",
+                                    f"async def post{index}({cargs}) -> {c.item_info.cls_name}:\n",
                                     f"    s: ServiceCollection = find_service_collection({c.cls_name})\n",  # noqa E501
-                                    f"    b: dict[str, Any] = {{{body}}}\n",
+                                    f"    b: dict[str, Any] = {{{cbody}}}\n",
                                     "\n",
                                     '    response.headers["OData-Version"] = "4.0"\n',
                                     "\n",

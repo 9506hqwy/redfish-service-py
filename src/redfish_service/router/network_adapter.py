@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.network_adapter import NetworkAdapter
+from ..authenticate import authenticate
+from ..model.network_adapter import NetworkAdapter, NetworkAdapterOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -30,3 +31,29 @@ async def get1(
     response.headers["OData-Version"] = "4.0"
 
     return cast(NetworkAdapter, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    chassis_id: str,
+    network_adapter_id: str,
+    request: Request,
+    response: Response,
+    body: NetworkAdapterOnUpdate,
+) -> NetworkAdapter:
+    s: Service = find_service(NetworkAdapter)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(NetworkAdapter, s.patch(**b))

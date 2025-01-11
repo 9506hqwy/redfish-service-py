@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.security_policy import SecurityPolicy
+from ..authenticate import authenticate
+from ..model.security_policy import SecurityPolicy, SecurityPolicyOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -17,3 +18,21 @@ async def get1(manager_id: str, request: Request, response: Response) -> Securit
     response.headers["OData-Version"] = "4.0"
 
     return cast(SecurityPolicy, s.get(**b))
+
+
+@router.patch("/redfish/v1/Managers/{manager_id}/SecurityPolicy", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    manager_id: str, request: Request, response: Response, body: SecurityPolicyOnUpdate
+) -> SecurityPolicy:
+    s: Service = find_service(SecurityPolicy)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(SecurityPolicy, s.patch(**b))

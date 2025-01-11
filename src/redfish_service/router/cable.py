@@ -3,7 +3,7 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.cable import Cable
+from ..model.cable import Cable, CableOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -29,3 +29,21 @@ async def get1(cable_id: str, request: Request, response: Response) -> Cable:
     response.headers["OData-Version"] = "4.0"
 
     return cast(Cable, s.get(**b))
+
+
+@router.patch("/redfish/v1/Cables/{cable_id}", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    cable_id: str, request: Request, response: Response, body: CableOnUpdate
+) -> Cable:
+    s: Service = find_service(Cable)
+    b: dict[str, Any] = {
+        "cable_id": cable_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Cable, s.patch(**b))

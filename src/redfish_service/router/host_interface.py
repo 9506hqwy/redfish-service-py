@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.host_interface import HostInterface
+from ..authenticate import authenticate
+from ..model.host_interface import HostInterface, HostInterfaceOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -30,3 +31,29 @@ async def get1(
     response.headers["OData-Version"] = "4.0"
 
     return cast(HostInterface, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/HostInterfaces/{host_interface_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    manager_id: str,
+    host_interface_id: str,
+    request: Request,
+    response: Response,
+    body: HostInterfaceOnUpdate,
+) -> HostInterface:
+    s: Service = find_service(HostInterface)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "host_interface_id": host_interface_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(HostInterface, s.patch(**b))

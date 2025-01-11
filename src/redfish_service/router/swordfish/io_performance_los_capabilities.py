@@ -2,7 +2,11 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ...model.swordfish.io_performance_los_capabilities import IoPerformanceLosCapabilities
+from ...authenticate import authenticate
+from ...model.swordfish.io_performance_los_capabilities import (
+    IoPerformanceLosCapabilities,
+    IoPerformanceLosCapabilitiesOnUpdate,
+)
 from ...service import Service, find_service
 
 router = APIRouter()
@@ -29,3 +33,27 @@ async def get1(
     response.headers["OData-Version"] = "4.0"
 
     return cast(IoPerformanceLosCapabilities, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/StorageServices/{storage_service_id}/IOPerformanceLoSCapabilities",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    storage_service_id: str,
+    request: Request,
+    response: Response,
+    body: IoPerformanceLosCapabilitiesOnUpdate,
+) -> IoPerformanceLosCapabilities:
+    s: Service = find_service(IoPerformanceLosCapabilities)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(IoPerformanceLosCapabilities, s.patch(**b))

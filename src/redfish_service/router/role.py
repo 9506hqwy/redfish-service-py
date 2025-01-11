@@ -3,7 +3,7 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.role import Role
+from ..model.role import Role, RoleOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -29,6 +29,22 @@ async def get1(role_id: str, request: Request, response: Response) -> Role:
     response.headers["OData-Version"] = "4.0"
 
     return cast(Role, s.get(**b))
+
+
+@router.patch("/redfish/v1/AccountService/Roles/{role_id}", response_model_exclude_none=True)
+@authenticate
+async def patch1(role_id: str, request: Request, response: Response, body: RoleOnUpdate) -> Role:
+    s: Service = find_service(Role)
+    b: dict[str, Any] = {
+        "role_id": role_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Role, s.patch(**b))
 
 
 @router.delete(
@@ -70,3 +86,25 @@ async def get2(manager_id: str, role_id: str, request: Request, response: Respon
     response.headers["OData-Version"] = "4.0"
 
     return cast(Role, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Roles/{role_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch2(
+    manager_id: str, role_id: str, request: Request, response: Response, body: RoleOnUpdate
+) -> Role:
+    s: Service = find_service(Role)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "role_id": role_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Role, s.patch(**b))

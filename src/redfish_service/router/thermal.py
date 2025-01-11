@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.thermal import Thermal
+from ..authenticate import authenticate
+from ..model.thermal import Thermal, ThermalOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -17,3 +18,21 @@ async def get1(chassis_id: str, request: Request, response: Response) -> Thermal
     response.headers["OData-Version"] = "4.0"
 
     return cast(Thermal, s.get(**b))
+
+
+@router.patch("/redfish/v1/Chassis/{chassis_id}/Thermal", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    chassis_id: str, request: Request, response: Response, body: ThermalOnUpdate
+) -> Thermal:
+    s: Service = find_service(Thermal)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Thermal, s.patch(**b))

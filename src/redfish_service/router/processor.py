@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.processor import Processor
+from ..authenticate import authenticate
+from ..model.processor import Processor, ProcessorOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -32,6 +33,32 @@ async def get1(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
     response_model_exclude_none=True,
@@ -59,6 +86,34 @@ async def get2(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch2(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -92,6 +147,36 @@ async def get3(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch3(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -114,6 +199,32 @@ async def get4(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch4(
+    resource_block_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -143,6 +254,34 @@ async def get5(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch5(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -176,6 +315,36 @@ async def get6(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch6(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -203,6 +372,34 @@ async def get7(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch7(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -234,6 +431,36 @@ async def get8(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch8(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -269,6 +496,38 @@ async def get9(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch9(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -291,6 +550,32 @@ async def get10(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch10(
+    resource_block_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -320,6 +605,34 @@ async def get11(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch11(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -353,6 +666,36 @@ async def get12(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch12(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -380,6 +723,34 @@ async def get13(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch13(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -411,6 +782,36 @@ async def get14(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch14(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -446,6 +847,38 @@ async def get15(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch15(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -473,6 +906,34 @@ async def get16(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch16(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -504,6 +965,36 @@ async def get17(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch17(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -539,6 +1030,38 @@ async def get18(
     return cast(Processor, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch18(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
+
+
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}", response_model_exclude_none=True
 )
@@ -559,6 +1082,31 @@ async def get19(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}", response_model_exclude_none=True
+)
+@authenticate
+async def patch19(
+    chassis_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -584,6 +1132,34 @@ async def get20(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch20(
+    chassis_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))
 
 
 @router.get(
@@ -615,3 +1191,33 @@ async def get21(
     response.headers["OData-Version"] = "4.0"
 
     return cast(Processor, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch21(
+    chassis_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ProcessorOnUpdate,
+) -> Processor:
+    s: Service = find_service(Processor)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(Processor, s.patch(**b))

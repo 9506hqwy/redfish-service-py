@@ -3,7 +3,7 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.route_set_entry import RouteSetEntry
+from ..model.route_set_entry import RouteSetEntry, RouteSetEntryOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -72,6 +72,38 @@ async def get1(
     return cast(RouteSetEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    fabric_id: str,
+    switch_id: str,
+    port_id: str,
+    lprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "lprt_id": lprt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
@@ -133,6 +165,38 @@ async def get2(
     response.headers["OData-Version"] = "4.0"
 
     return cast(RouteSetEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch2(
+    fabric_id: str,
+    switch_id: str,
+    port_id: str,
+    mprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "mprt_id": mprt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
 
 
 @router.delete(
@@ -198,6 +262,38 @@ async def get3(
     return cast(RouteSetEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch3(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    mprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "mprt_id": mprt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
@@ -261,6 +357,38 @@ async def get4(
     return cast(RouteSetEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch4(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    lprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "lprt_id": lprt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
@@ -318,6 +446,36 @@ async def get5(
     response.headers["OData-Version"] = "4.0"
 
     return cast(RouteSetEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch5(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    msdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "msdt_id": msdt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
 
 
 @router.delete(
@@ -379,6 +537,36 @@ async def get6(
     return cast(RouteSetEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch6(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    ssdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "ssdt_id": ssdt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
@@ -438,6 +626,36 @@ async def get7(
     return cast(RouteSetEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/MSDT/{msdt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch7(
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    msdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "msdt_id": msdt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
@@ -495,6 +713,36 @@ async def get8(
     response.headers["OData-Version"] = "4.0"
 
     return cast(RouteSetEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/SSDT/{ssdt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch8(
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    ssdt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "ssdt_id": ssdt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
 
 
 @router.delete(
@@ -560,6 +808,38 @@ async def get9(
     return cast(RouteSetEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/LPRT/{lprt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch9(
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    lprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "lprt_id": lprt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
     response_model_exclude_none=True,
@@ -621,3 +901,35 @@ async def get10(
     response.headers["OData-Version"] = "4.0"
 
     return cast(RouteSetEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/MPRT/{mprt_id}/RouteSet/{route_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch10(
+    computer_system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    mprt_id: str,
+    route_id: str,
+    request: Request,
+    response: Response,
+    body: RouteSetEntryOnUpdate,
+) -> RouteSetEntry:
+    s: Service = find_service(RouteSetEntry)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "mprt_id": mprt_id,
+        "route_id": route_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(RouteSetEntry, s.patch(**b))

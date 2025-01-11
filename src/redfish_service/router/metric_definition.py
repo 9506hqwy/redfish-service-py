@@ -3,7 +3,7 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.metric_definition import MetricDefinition
+from ..model.metric_definition import MetricDefinition, MetricDefinitionOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -48,3 +48,24 @@ async def get1(
     response.headers["OData-Version"] = "4.0"
 
     return cast(MetricDefinition, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/TelemetryService/MetricDefinitions/{metric_definition_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    metric_definition_id: str, request: Request, response: Response, body: MetricDefinitionOnUpdate
+) -> MetricDefinition:
+    s: Service = find_service(MetricDefinition)
+    b: dict[str, Any] = {
+        "metric_definition_id": metric_definition_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(MetricDefinition, s.patch(**b))

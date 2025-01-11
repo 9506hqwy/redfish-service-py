@@ -3,7 +3,7 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.vcat_entry import VcatEntry
+from ..model.vcat_entry import VcatEntry, VcatEntryOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -68,6 +68,36 @@ async def get1(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    fabric_id: str,
+    switch_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -127,6 +157,36 @@ async def get2(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch2(
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -182,6 +242,34 @@ async def get3(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch3(
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -235,6 +323,34 @@ async def get4(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch4(
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -300,6 +416,38 @@ async def get5(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch5(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -359,6 +507,36 @@ async def get6(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch6(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -416,6 +594,36 @@ async def get7(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch7(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -481,6 +689,38 @@ async def get8(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch8(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -538,6 +778,36 @@ async def get9(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch9(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -599,6 +869,36 @@ async def get10(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch10(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -658,6 +958,36 @@ async def get11(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch11(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -713,6 +1043,34 @@ async def get12(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch12(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -766,6 +1124,34 @@ async def get13(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch13(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -827,6 +1213,36 @@ async def get14(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch14(
+    fabric_id: str,
+    switch_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "fabric_id": fabric_id,
+        "switch_id": switch_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -886,6 +1302,36 @@ async def get15(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch15(
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -941,6 +1387,34 @@ async def get16(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch16(
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -994,6 +1468,34 @@ async def get17(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch17(
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -1059,6 +1561,38 @@ async def get18(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch18(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -1118,6 +1652,36 @@ async def get19(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch19(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -1175,6 +1739,36 @@ async def get20(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch20(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -1240,6 +1834,38 @@ async def get21(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch21(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -1297,6 +1923,36 @@ async def get22(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch22(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
 
 
 @router.delete(
@@ -1358,6 +2014,36 @@ async def get23(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{system_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch23(
+    resource_block_id: str,
+    system_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "system_id": system_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -1417,6 +2103,36 @@ async def get24(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/Ports/{port_id}/GenZ/VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch24(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    port_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "port_id": port_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -1472,6 +2188,34 @@ async def get25(
     return cast(VcatEntry, s.get(**b))
 
 
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/REQ-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch25(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))
+
+
 @router.delete(
     "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
     response_model_exclude_none=True,
@@ -1525,3 +2269,31 @@ async def get26(
     response.headers["OData-Version"] = "4.0"
 
     return cast(VcatEntry, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/FabricAdapters/{fabric_adapter_id}/GenZ/RSP-VCAT/{vcat_entry_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch26(
+    chassis_id: str,
+    fabric_adapter_id: str,
+    vcat_entry_id: str,
+    request: Request,
+    response: Response,
+    body: VcatEntryOnUpdate,
+) -> VcatEntry:
+    s: Service = find_service(VcatEntry)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fabric_adapter_id": fabric_adapter_id,
+        "vcat_entry_id": vcat_entry_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(VcatEntry, s.patch(**b))

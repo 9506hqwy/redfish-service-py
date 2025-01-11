@@ -2,7 +2,8 @@ from typing import Any, cast
 
 from fastapi import APIRouter, Request, Response
 
-from ..model.telemetry_service import TelemetryService
+from ..authenticate import authenticate
+from ..model.telemetry_service import TelemetryService, TelemetryServiceOnUpdate
 from ..service import Service, find_service
 
 router = APIRouter()
@@ -17,3 +18,16 @@ async def get1(request: Request, response: Response) -> TelemetryService:
     response.headers["OData-Version"] = "4.0"
 
     return cast(TelemetryService, s.get(**b))
+
+
+@router.patch("/redfish/v1/TelemetryService", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    request: Request, response: Response, body: TelemetryServiceOnUpdate
+) -> TelemetryService:
+    s: Service = find_service(TelemetryService)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body}
+
+    response.headers["OData-Version"] = "4.0"
+
+    return cast(TelemetryService, s.patch(**b))
