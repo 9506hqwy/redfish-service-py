@@ -183,3 +183,44 @@ class StorageController(RedfishModel):
     supported_controller_protocols: list[Protocol] | None = None
     supported_device_protocols: list[Protocol] | None = None
     supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
+
+
+class StorageControllerOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#StorageController.v1_8_0.StorageController"
+    )
+    actions: Actions | None = None
+    assembly: IdRef | None = None
+    asset_tag: str | None = None
+    cache_summary: CacheSummary | None = None
+    certificates: IdRef | None = None
+    controller_rates: Rates | None = None
+    description: str | None = None
+    environment_metrics: IdRef | None = None
+    firmware_version: str | None = None
+    id: str | None = None
+    identifiers: list[Identifier] | None = None
+    links: Links | None = None
+    location: Location | None = None
+    manufacturer: str | None = None
+    measurements: list[MeasurementBlock] | None = None
+    metrics: IdRef | None = None
+    model: str | None = None
+    nvme_controller_properties: NvmeControllerProperties | None = Field(
+        alias="NVMeControllerProperties", default=None
+    )
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
+    part_number: str | None = None
+    ports: IdRef | None = None
+    sku: str | None = Field(alias="SKU", default=None)
+    serial_number: str | None = None
+    speed_gbps: float | None = None
+    status: Status | None = None
+    supported_controller_protocols: list[Protocol] | None = None
+    supported_device_protocols: list[Protocol] | None = None
+    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)

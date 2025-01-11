@@ -66,6 +66,36 @@ class SoftwareInventory(RedfishModel):
     write_protected: bool | None = None
 
 
+class SoftwareInventoryOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#SoftwareInventory.v1_10_2.SoftwareInventory"
+    )
+    actions: Actions | None = None
+    additional_versions: AdditionalVersions | None = None
+    associated_physical_context: PhysicalContext | None = None
+    description: str | None = None
+    id: str | None = None
+    lowest_supported_version: str | None = None
+    manufacturer: str | None = None
+    measurement: MeasurementBlock | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    related_item: list[IdRef] | None = None
+    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    release_date: str | None = None
+    release_type: ReleaseType | None = None
+    software_id: str | None = None
+    status: Status | None = None
+    uefi_device_paths: list[str] | None = None
+    updateable: bool | None = None
+    version: str | None = None
+    version_scheme: VersionScheme | None = None
+    write_protected: bool | None = None
+
+
 class VersionScheme(StrEnum):
     SEM_VER = "SemVer"
     DOT_INTEGER_NOTATION = "DotIntegerNotation"

@@ -69,6 +69,48 @@ class PowerDistribution(RedfishModel):
     version: str | None = None
 
 
+class PowerDistributionOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#PowerDistribution.v1_4_0.PowerDistribution"
+    )
+    actions: Actions | None = None
+    asset_tag: str | None = None
+    branches: IdRef | None = None
+    description: str | None = None
+    equipment_type: PowerEquipmentType | None = None
+    feeders: IdRef | None = None
+    firmware_version: str | None = None
+    id: str | None = None
+    links: Links | None = None
+    location: Location | None = None
+    mains: IdRef | None = None
+    mains_redundancy: RedundantGroup | None = None
+    manufacturer: str | None = None
+    metrics: IdRef | None = None
+    model: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    outlet_groups: IdRef | None = None
+    outlets: IdRef | None = None
+    part_number: str | None = None
+    power_capacity_va: int | None = Field(alias="PowerCapacityVA", default=None)
+    power_supplies: IdRef | None = None
+    power_supply_redundancy: list[RedundantGroup] | None = None
+    production_date: str | None = None
+    sensors: IdRef | None = None
+    serial_number: str | None = None
+    status: Status | None = None
+    subfeeds: IdRef | None = None
+    transfer_configuration: TransferConfiguration | None = None
+    transfer_criteria: TransferCriteria | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
+    user_label: str | None = None
+    version: str | None = None
+
+
 class PowerEquipmentType(StrEnum):
     RACK_PDU = "RackPDU"
     FLOOR_PDU = "FloorPDU"

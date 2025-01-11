@@ -63,6 +63,34 @@ class DataSecurityLosCapabilities(RedfishModel):
     supported_user_authentication_types: list[AuthenticationType] | None = None
 
 
+class DataSecurityLosCapabilitiesOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type",
+        default="#DataSecurityLoSCapabilities.v1_2_0.DataSecurityLoSCapabilities",
+    )
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    identifier: Identifier | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    supported_antivirus_engine_providers: list[str] | None = None
+    supported_antivirus_scan_policies: list[AntiVirusScanTrigger] | None = None
+    supported_channel_encryption_strengths: list[KeySize] | None = None
+    supported_data_sanitization_policies: list[DataSanitizationPolicy] | None = None
+    supported_host_authentication_types: list[AuthenticationType] | None = None
+    supported_lines_of_service: list[IdRef] | None = None
+    supported_lines_of_service_odata_count: int | None = Field(
+        alias="SupportedLinesOfService@odata.count", default=None
+    )
+    supported_media_encryption_strengths: list[KeySize] | None = None
+    supported_secure_channel_protocols: list[SecureChannelProtocol] | None = None
+    supported_user_authentication_types: list[AuthenticationType] | None = None
+
+
 class KeySize(StrEnum):
     BITS_0 = "Bits_0"
     BITS_112 = "Bits_112"

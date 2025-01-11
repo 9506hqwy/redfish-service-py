@@ -53,6 +53,39 @@ class EventService(RedfishModel):
     subscriptions: IdRef | None = None
 
 
+class EventServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#EventService.v1_10_2.EventService"
+    )
+    actions: Actions | None = None
+    delivery_retry_attempts: int | None = None
+    delivery_retry_interval_seconds: int | None = None
+    description: str | None = None
+    event_format_types: list[EventFormatType] | None = None
+    event_types_for_subscription: list[EventType] | None = None
+    exclude_message_id: bool | None = None
+    exclude_registry_prefix: bool | None = None
+    id: str | None = None
+    include_origin_of_condition_supported: bool | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    registry_prefixes: list[str] | None = None
+    resource_types: list[str] | None = None
+    smtp: Smtp | None = Field(alias="SMTP", default=None)
+    sse_filter_properties_supported: SseFilterPropertiesSupported | None = Field(
+        alias="SSEFilterPropertiesSupported", default=None
+    )
+    server_sent_event_uri: str | None = None
+    service_enabled: bool | None = None
+    severities: list[Health] | None = None
+    status: Status | None = None
+    subordinate_resources_supported: bool | None = None
+    subscriptions: IdRef | None = None
+
+
 class Smtp(RedfishModel):
     authentication: SmtpAuthenticationMethods | None = None
     connection_protocol: SmtpConnectionProtocol | None = None

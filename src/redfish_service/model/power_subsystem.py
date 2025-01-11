@@ -35,3 +35,23 @@ class PowerSubsystem(RedfishModel):
     power_supplies: IdRef | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     status: Status | None = None
+
+
+class PowerSubsystemOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#PowerSubsystem.v1_1_2.PowerSubsystem"
+    )
+    actions: Actions | None = None
+    allocation: PowerAllocation | None = None
+    batteries: IdRef | None = None
+    capacity_watts: float | None = None
+    description: str | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    power_supplies: IdRef | None = None
+    power_supply_redundancy: list[RedundantGroup] | None = None
+    status: Status | None = None

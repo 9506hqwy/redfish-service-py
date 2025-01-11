@@ -43,6 +43,29 @@ class ComponentIntegrity(RedfishModel):
     target_component_uri: str = Field(alias="TargetComponentURI")
 
 
+class ComponentIntegrityOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#ComponentIntegrity.v1_3_0.ComponentIntegrity"
+    )
+    actions: Actions | None = None
+    component_integrity_enabled: bool | None = None
+    component_integrity_type: ComponentIntegrityType | None = None
+    component_integrity_type_version: str | None = None
+    description: str | None = None
+    id: str | None = None
+    last_updated: str | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    spdm: SpdMinfo | None = Field(alias="SPDM", default=None)
+    status: Status | None = None
+    tpm: TpMinfo | None = Field(alias="TPM", default=None)
+    target_component_uri: str | None = Field(alias="TargetComponentURI", default=None)
+
+
 class ComponentIntegrityType(StrEnum):
     SPDM = "SPDM"
     TPM = "TPM"

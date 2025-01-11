@@ -270,6 +270,81 @@ class ComputerSystemOnCreate(RedfishModel):
     virtual_media_config: VirtualMediaConfig | None = None
 
 
+class ComputerSystemOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem"
+    )
+    actions: Actions | None = None
+    asset_tag: str | None = None
+    bios: IdRef | None = None
+    bios_version: str | None = None
+    boot: Boot | None = None
+    boot_progress: BootProgress | None = None
+    certificates: IdRef | None = None
+    composition: Composition | None = None
+    description: str | None = None
+    ethernet_interfaces: IdRef | None = None
+    fabric_adapters: IdRef | None = None
+    graphical_console: HostGraphicalConsole | None = None
+    graphics_controllers: IdRef | None = None
+    host_name: str | None = None
+    host_watchdog_timer: WatchdogTimer | None = None
+    hosted_services: HostedServices | None = None
+    hosting_roles: list[HostingRole] | None = None
+    id: str | None = None
+    idle_power_saver: IdlePowerSaver | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    key_management: KeyManagement | None = None
+    last_reset_cause: LastResetCauses | None = None
+    last_reset_time: str | None = None
+    links: Links | None = None
+    location_indicator_active: bool | None = None
+    log_services: IdRef | None = None
+    manufacturer: str | None = None
+    manufacturing_mode: bool | None = None
+    measurements: list[MeasurementBlock] | None = None
+    memory: IdRef | None = None
+    memory_domains: IdRef | None = None
+    memory_summary: MemorySummary | None = None
+    model: str | None = None
+    name: str | None = None
+    network_interfaces: IdRef | None = None
+    oem: dict[str, Any] | None = None
+    operating_system: IdRef | None = None
+    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
+    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    part_number: str | None = None
+    power_cycle_delay_seconds: float | None = None
+    power_mode: PowerMode | None = None
+    power_off_delay_seconds: float | None = None
+    power_on_delay_seconds: float | None = None
+    power_restore_policy: PowerRestorePolicyTypes | None = None
+    power_state: PowerState | None = None
+    processor_summary: ProcessorSummary | None = None
+    processors: IdRef | None = None
+    redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    sku: str | None = Field(alias="SKU", default=None)
+    secure_boot: IdRef | None = None
+    serial_console: HostSerialConsole | None = None
+    serial_number: str | None = None
+    simple_storage: IdRef | None = None
+    status: Status | None = None
+    storage: IdRef | None = None
+    sub_model: str | None = None
+    system_type: SystemType | None = None
+    trusted_modules: list[TrustedModules] | None = None
+    usb_controllers: IdRef | None = Field(alias="USBControllers", default=None)
+    uuid: str | None = Field(alias="UUID", default=None)
+    virtual_media: IdRef | None = None
+    virtual_media_config: VirtualMediaConfig | None = None
+
+
 class Decommission(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)

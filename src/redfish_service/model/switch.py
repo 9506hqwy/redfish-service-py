@@ -80,5 +80,48 @@ class Switch(RedfishModel):
     uuid: str | None = Field(alias="UUID", default=None)
 
 
+class SwitchOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Switch.v1_9_3.Switch")
+    actions: Actions | None = None
+    asset_tag: str | None = None
+    cxl: Cxl | None = Field(alias="CXL", default=None)
+    certificates: IdRef | None = None
+    current_bandwidth_gbps: float | None = None
+    description: str | None = None
+    domain_id: int | None = Field(alias="DomainID", default=None)
+    enabled: bool | None = None
+    environment_metrics: IdRef | None = None
+    firmware_version: str | None = None
+    id: str | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    is_managed: bool | None = None
+    links: Links | None = None
+    location: Location | None = None
+    location_indicator_active: bool | None = None
+    log_services: IdRef | None = None
+    manufacturer: str | None = None
+    max_bandwidth_gbps: float | None = None
+    measurements: list[MeasurementBlock] | None = None
+    metrics: IdRef | None = None
+    model: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    part_number: str | None = None
+    ports: IdRef | None = None
+    power_state: PowerState | None = None
+    redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    sku: str | None = Field(alias="SKU", default=None)
+    serial_number: str | None = None
+    status: Status | None = None
+    supported_protocols: list[Protocol] | None = None
+    switch_type: Protocol | None = None
+    total_switch_width: int | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
+
+
 class VcsSwitch(RedfishModel):
     hdm_decoders: int | None = Field(alias="HDMDecoders", default=None)

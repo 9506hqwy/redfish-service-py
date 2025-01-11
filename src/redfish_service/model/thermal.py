@@ -108,5 +108,24 @@ class Thermal(RedfishModel):
     temperatures_odata_count: int | None = Field(alias="Temperatures@odata.count", default=None)
 
 
+class ThermalOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Thermal.v1_7_3.Thermal")
+    actions: ThermalActions | None = None
+    description: str | None = None
+    fans: list[Fan] | None = None
+    fans_odata_count: int | None = Field(alias="Fans@odata.count", default=None)
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    status: Status | None = None
+    temperatures: list[Temperature] | None = None
+    temperatures_odata_count: int | None = Field(alias="Temperatures@odata.count", default=None)
+
+
 class ThermalActions(RedfishModel):
     oem: dict[str, Any] | None = None

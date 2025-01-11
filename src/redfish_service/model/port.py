@@ -286,6 +286,52 @@ class Port(RedfishModel):
     width: int | None = None
 
 
+class PortOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Port.v1_14_0.Port")
+    actions: Actions | None = None
+    active_width: int | None = None
+    cxl: Cxl | None = Field(alias="CXL", default=None)
+    capable_protocol_versions: list[str] | None = None
+    current_protocol_version: str | None = None
+    current_speed_gbps: float | None = None
+    description: str | None = None
+    enabled: bool | None = None
+    environment_metrics: IdRef | None = None
+    ethernet: EthernetProperties | None = None
+    fibre_channel: FibreChannelProperties | None = None
+    function_max_bandwidth: list[FunctionMaxBandwidth] | None = None
+    function_min_bandwidth: list[FunctionMinBandwidth] | None = None
+    gen_z: GenZ | None = None
+    id: str | None = None
+    infini_band: InfiniBandProperties | None = None
+    interface_enabled: bool | None = None
+    link_configuration: list[LinkConfiguration] | None = None
+    link_network_technology: LinkNetworkTechnology | None = None
+    link_state: LinkState | None = None
+    link_status: LinkStatus | None = None
+    link_transition_indicator: int | None = None
+    links: Links | None = None
+    location: Location | None = None
+    location_indicator_active: bool | None = None
+    max_frame_size: int | None = None
+    max_speed_gbps: float | None = None
+    metrics: IdRef | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    port_id: str | None = None
+    port_medium: PortMedium | None = None
+    port_protocol: Protocol | None = None
+    port_type: PortType | None = None
+    remote_port_id: str | None = None
+    sfp: Sfp | None = Field(alias="SFP", default=None)
+    signal_detected: bool | None = None
+    status: Status | None = None
+    width: int | None = None
+
+
 class PortConnectionType(StrEnum):
     NOT_CONNECTED = "NotConnected"
     N_PORT = "NPort"

@@ -31,3 +31,20 @@ class LicenseService(RedfishModel):
     name: str
     oem: dict[str, Any] | None = None
     service_enabled: bool | None = None
+
+
+class LicenseServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#LicenseService.v1_1_2.LicenseService"
+    )
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    license_expiration_warning_days: int | None = None
+    licenses: IdRef | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    service_enabled: bool | None = None

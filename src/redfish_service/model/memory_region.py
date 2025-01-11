@@ -78,6 +78,33 @@ class MemoryRegionOnCreate(RedfishModel):
     status: Status | None = None
 
 
+class MemoryRegionOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion"
+    )
+    actions: Actions | None = None
+    block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
+    description: str | None = None
+    extents_count: int | None = None
+    hardware_managed_coherency_region: bool | None = None
+    id: str | None = None
+    memory_chunks: list[MemoryChunk] | None = None
+    memory_extents: list[MemoryExtent] | None = None
+    name: str | None = None
+    non_volatile_region: bool | None = None
+    oem: dict[str, Any] | None = None
+    region_base_offset_mib: int | None = Field(alias="RegionBaseOffsetMiB", default=None)
+    region_number: int | None = None
+    region_size_mib: int | None = Field(alias="RegionSizeMiB", default=None)
+    region_type: RegionType | None = None
+    sanitize_on_release: bool | None = None
+    shareable_region: bool | None = None
+    status: Status | None = None
+
+
 class RegionType(StrEnum):
     STATIC = "Static"
     DYNAMIC = "Dynamic"

@@ -46,6 +46,23 @@ class KeyOnCreate(RedfishModel):
     user_description: str | None = None
 
 
+class KeyOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Key.v1_4_1.Key")
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    key_string: str | None = None
+    key_type: KeyType | None = None
+    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    ssh: SshType | None = Field(alias="SSH", default=None)
+    user_description: str | None = None
+
+
 class KeyType(StrEnum):
     NVME_OF = "NVMeoF"
     SSH = "SSH"

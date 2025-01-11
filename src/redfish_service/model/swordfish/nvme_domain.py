@@ -86,3 +86,33 @@ class NvmeDomainOnCreate(RedfishModel):
     status: Status | None = None
     total_domain_capacity_bytes: int | None = None
     unallocated_domain_capacity_bytes: int | None = None
+
+
+class NvmeDomainOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#NVMeDomain.v1_2_0.NVMeDomain")
+    ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
+    actions: Actions | None = None
+    available_firmware_images: list[IdRef] | None = None
+    available_firmware_images_odata_count: int | None = Field(
+        alias="AvailableFirmwareImages@odata.count", default=None
+    )
+    description: str | None = None
+    domain_contents: DomainContents | None = None
+    domain_members: list[IdRef] | None = None
+    domain_members_odata_count: int | None = Field(alias="DomainMembers@odata.count", default=None)
+    firmware_images: list[IdRef] | None = None
+    firmware_images_odata_count: int | None = Field(
+        alias="FirmwareImages@odata.count", default=None
+    )
+    id: str | None = None
+    links: Links | None = None
+    max_namespaces_supported_per_controller: float | None = None
+    maximum_capacity_per_endurance_group_bytes: int | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+    total_domain_capacity_bytes: int | None = None
+    unallocated_domain_capacity_bytes: int | None = None

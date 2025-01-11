@@ -96,6 +96,33 @@ class ExternalAccountProviderOnCreate(RedfishModel):
     timeout_seconds: int | None = None
 
 
+class ExternalAccountProviderOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider"
+    )
+    account_provider_type: AccountProviderTypes | None = None
+    actions: Actions | None = None
+    authentication: Authentication | None = None
+    certificates: IdRef | None = None
+    description: str | None = None
+    id: str | None = None
+    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
+    links: Links | None = None
+    name: str | None = None
+    oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
+    oem: dict[str, Any] | None = None
+    priority: int | None = None
+    remote_role_mapping: list[RoleMapping] | None = None
+    retries: int | None = None
+    service_addresses: list[str] | None = None
+    service_enabled: bool | None = None
+    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
+    timeout_seconds: int | None = None
+
+
 class LdapSearchSettings(RedfishModel):
     base_distinguished_names: list[str] | None = None
     email_attribute: str | None = None

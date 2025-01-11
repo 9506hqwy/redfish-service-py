@@ -153,6 +153,47 @@ class NetworkDeviceFunction(RedfishModel):
     i_scsi_boot: IScsiBoot | None = Field(alias="iSCSIBoot", default=None)
 
 
+class NetworkDeviceFunctionOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#NetworkDeviceFunction.v1_9_2.NetworkDeviceFunction"
+    )
+    actions: Actions | None = None
+    allow_deny: IdRef | None = None
+    assignable_physical_network_ports: list[IdRef] | None = None
+    assignable_physical_network_ports_odata_count: int | None = Field(
+        alias="AssignablePhysicalNetworkPorts@odata.count", default=None
+    )
+    assignable_physical_ports: list[IdRef] | None = None
+    assignable_physical_ports_odata_count: int | None = Field(
+        alias="AssignablePhysicalPorts@odata.count", default=None
+    )
+    boot_mode: BootMode | None = None
+    description: str | None = None
+    device_enabled: bool | None = None
+    ethernet: Ethernet | None = None
+    fibre_channel: FibreChannel | None = None
+    http_boot: HttpBoot | None = Field(alias="HTTPBoot", default=None)
+    id: str | None = None
+    infini_band: InfiniBand | None = None
+    limits: list[Limit] | None = None
+    links: Links | None = None
+    max_virtual_functions: int | None = None
+    metrics: IdRef | None = None
+    name: str | None = None
+    net_dev_func_capabilities: list[NetworkDeviceTechnology] | None = None
+    net_dev_func_type: NetworkDeviceTechnology | None = None
+    oem: dict[str, Any] | None = None
+    physical_network_port_assignment: IdRef | None = None
+    physical_port_assignment: IdRef | None = None
+    savi_enabled: bool | None = Field(alias="SAVIEnabled", default=None)
+    status: Status | None = None
+    virtual_functions_enabled: bool | None = None
+    i_scsi_boot: IScsiBoot | None = Field(alias="iSCSIBoot", default=None)
+
+
 class NetworkDeviceTechnology(StrEnum):
     DISABLED = "Disabled"
     ETHERNET = "Ethernet"

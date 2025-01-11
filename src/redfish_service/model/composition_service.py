@@ -41,3 +41,27 @@ class CompositionService(RedfishModel):
     resource_zones: IdRef | None = None
     service_enabled: bool | None = None
     status: Status | None = None
+
+
+class CompositionServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#CompositionService.v1_2_3.CompositionService"
+    )
+    actions: Actions | None = None
+    active_pool: IdRef | None = None
+    allow_overprovisioning: bool | None = None
+    allow_zone_affinity: bool | None = None
+    composition_reservations: IdRef | None = None
+    description: str | None = None
+    free_pool: IdRef | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    reservation_duration: str | None = None
+    resource_blocks: IdRef | None = None
+    resource_zones: IdRef | None = None
+    service_enabled: bool | None = None
+    status: Status | None = None

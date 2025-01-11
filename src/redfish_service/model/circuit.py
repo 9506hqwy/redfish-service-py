@@ -90,6 +90,60 @@ class Circuit(RedfishModel):
     voltage_type: VoltageType | None = None
 
 
+class CircuitOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Circuit.v1_8_1.Circuit")
+    actions: Actions | None = None
+    breaker_state: BreakerStates | None = None
+    circuit_type: CircuitType | None = None
+    configuration_locked: bool | None = None
+    critical_circuit: bool | None = None
+    current_amps: SensorCurrentExcerpt | None = None
+    description: str | None = None
+    electrical_consumer_names: list[str] | None = None
+    electrical_context: ElectricalContext | None = None
+    electrical_source_manager_uri: str | None = Field(
+        alias="ElectricalSourceManagerURI", default=None
+    )
+    electrical_source_name: str | None = None
+    energyk_wh: SensorEnergykWhExcerpt | None = None
+    frequency_hz: SensorExcerpt | None = None
+    id: str | None = None
+    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    links: Links | None = None
+    location_indicator_active: bool | None = None
+    name: str | None = None
+    nominal_frequency_hz: float | None = None
+    nominal_voltage: NominalVoltageType | None = None
+    oem: dict[str, Any] | None = None
+    phase_wiring_type: PhaseWiringType | None = None
+    plug_type: PlugType | None = None
+    poly_phase_current_amps: CurrentSensors | None = None
+    poly_phase_energyk_wh: EnergySensors | None = None
+    poly_phase_power_watts: PowerSensors | None = None
+    poly_phase_voltage: VoltageSensors | None = None
+    power_control_locked: bool | None = None
+    power_cycle_delay_seconds: float | None = None
+    power_enabled: bool | None = None
+    power_load_percent: SensorExcerpt | None = None
+    power_off_delay_seconds: float | None = None
+    power_on_delay_seconds: float | None = None
+    power_restore_delay_seconds: float | None = None
+    power_restore_policy: PowerRestorePolicyTypes | None = None
+    power_state: PowerState | None = None
+    power_state_in_transition: bool | None = None
+    power_watts: SensorPowerExcerpt | None = None
+    rated_current_amps: float | None = None
+    status: Status | None = None
+    unbalanced_current_percent: SensorExcerpt | None = None
+    unbalanced_voltage_percent: SensorExcerpt | None = None
+    user_label: str | None = None
+    voltage: SensorVoltageExcerpt | None = None
+    voltage_type: VoltageType | None = None
+
+
 class CircuitType(StrEnum):
     MAINS = "Mains"
     BRANCH = "Branch"

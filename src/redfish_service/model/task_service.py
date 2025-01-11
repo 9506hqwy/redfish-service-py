@@ -36,3 +36,22 @@ class TaskService(RedfishModel):
     status: Status | None = None
     task_auto_delete_timeout_minutes: int | None = None
     tasks: IdRef | None = None
+
+
+class TaskServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#TaskService.v1_2_1.TaskService")
+    actions: Actions | None = None
+    completed_task_over_write_policy: OverWritePolicy | None = None
+    date_time: str | None = None
+    description: str | None = None
+    id: str | None = None
+    life_cycle_event_on_task_state_change: bool | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    service_enabled: bool | None = None
+    status: Status | None = None
+    task_auto_delete_timeout_minutes: int | None = None
+    tasks: IdRef | None = None

@@ -97,6 +97,34 @@ class LogService(RedfishModel):
     syslog_filters: list[SyslogFilter] | None = None
 
 
+class LogServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#LogService.v1_7_0.LogService")
+    actions: Actions | None = None
+    auto_clear_resolved_entries: AutoClearResolvedEntries | None = None
+    auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
+    date_time: str | None = None
+    date_time_local_offset: str | None = None
+    description: str | None = None
+    diagnostic_data_details: list[DiagnosticDataDetails] | None = None
+    entries: IdRef | None = None
+    id: str | None = None
+    log_entry_type: LogEntryTypes | None = None
+    log_purposes: list[LogPurpose] | None = None
+    max_number_of_records: int | None = None
+    name: str | None = None
+    oem_log_purpose: str | None = Field(alias="OEMLogPurpose", default=None)
+    oem: dict[str, Any] | None = None
+    over_write_policy: OverWritePolicy | None = None
+    overflow: bool | None = None
+    persistency: bool | None = None
+    service_enabled: bool | None = None
+    status: Status | None = None
+    syslog_filters: list[SyslogFilter] | None = None
+
+
 class OverWritePolicy(StrEnum):
     UNKNOWN = "Unknown"
     WRAPS_WHEN_FULL = "WrapsWhenFull"

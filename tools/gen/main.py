@@ -36,6 +36,7 @@ class ClassInfo:
     impl_info: ClassInfo | None = None
     item_info: ClassInfo | None = None
     creatable: bool = False
+    updatable: bool = False
     _module: str | None = None
 
     @property
@@ -120,17 +121,25 @@ class ClassInfo:
         if len(self.properties) == 0:
             w.write("    pass\n")
 
-        if not self.creatable:
-            return
+        if self.creatable:
+            w.write("\n")
+            w.write("\n")
 
-        w.write("\n")
-        w.write("\n")
+            w.write(f"class {self.cls_name}OnCreate({self.base_name}):\n")
+            for p in self.properties:
+                p.write_on_create_to(w, self)
+            if len(self.properties) == 0:
+                w.write("    pass\n")
 
-        w.write(f"class {self.cls_name}OnCreate({self.base_name}):\n")
-        for p in self.properties:
-            p.write_on_create_to(w, self)
-        if len(self.properties) == 0:
-            w.write("    pass\n")
+        if self.updatable:
+            w.write("\n")
+            w.write("\n")
+
+            w.write(f"class {self.cls_name}OnUpdate({self.base_name}):\n")
+            for p in self.properties:
+                p.write_on_update_to(w, self)
+            if len(self.properties) == 0:
+                w.write("    pass\n")
 
     def _load_property(
         self,
@@ -241,6 +250,9 @@ class PropetyInfo:
 
     def write_on_create_to(self, w: Any, owner: ClassInfo) -> None:
         return self._write_to(w, owner, self.nonable_on_create)
+
+    def write_on_update_to(self, w: Any, owner: ClassInfo) -> None:
+        return self._write_to(w, owner, True)
 
     def _write_to(self, w: Any, owner: ClassInfo, nonable: bool) -> None:
         w.write(f"    {self.property_name}: {self.type_name}")
@@ -1029,7 +1041,7 @@ def main() -> int:
             c.set_module(c.module.split(".", 1)[0])
 
     for c in classall:
-        if isinstance(c, ClassInfo) and c.creatable:
+        if isinstance(c, ClassInfo) and not c.versioned:
             for m in (
                 i
                 for i in classall
@@ -1037,6 +1049,7 @@ def main() -> int:
             ):
                 if isinstance(m, ClassInfo):
                     m.creatable = c.creatable
+                    m.updatable = c.definition.get("updatable", False)
 
     loaded = len([c for c in classall if c.loaded])
     print(f"loaded: {loaded}")

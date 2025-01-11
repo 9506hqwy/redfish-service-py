@@ -61,6 +61,41 @@ class ManagerNetworkProtocol(RedfishModel):
     virtual_media: Protocol | None = None
 
 
+class ManagerNetworkProtocolOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#ManagerNetworkProtocol.v1_10_1.ManagerNetworkProtocol"
+    )
+    actions: Actions | None = None
+    dhcp: Protocol | None = Field(alias="DHCP", default=None)
+    dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)
+    description: str | None = None
+    fqdn: str | None = Field(alias="FQDN", default=None)
+    ftp: Protocol | None = Field(alias="FTP", default=None)
+    ftps: Protocol | None = Field(alias="FTPS", default=None)
+    http: Protocol | None = Field(alias="HTTP", default=None)
+    https: HttpsProtocol | None = Field(alias="HTTPS", default=None)
+    host_name: str | None = None
+    ipmi: Protocol | None = Field(alias="IPMI", default=None)
+    id: str | None = None
+    kvmip: Protocol | None = Field(alias="KVMIP", default=None)
+    ntp: NtpProtocol | None = Field(alias="NTP", default=None)
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    proxy: ProxyConfiguration | None = None
+    rdp: Protocol | None = Field(alias="RDP", default=None)
+    rfb: Protocol | None = Field(alias="RFB", default=None)
+    sftp: Protocol | None = Field(alias="SFTP", default=None)
+    snmp: SnmpProtocol | None = Field(alias="SNMP", default=None)
+    ssdp: SsdProtocol | None = Field(alias="SSDP", default=None)
+    ssh: Protocol | None = Field(alias="SSH", default=None)
+    status: Status | None = None
+    telnet: Protocol | None = None
+    virtual_media: Protocol | None = None
+
+
 class NtpProtocol(RedfishModel):
     ntp_servers: list[str] | None = Field(alias="NTPServers", default=None)
     network_supplied_servers: list[str] | None = None

@@ -27,6 +27,20 @@ class Assembly(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class AssemblyOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Assembly.v1_5_1.Assembly")
+    actions: Actions | None = None
+    assemblies: list[AssemblyData] | None = None
+    assemblies_odata_count: int | None = Field(alias="Assemblies@odata.count", default=None)
+    description: str | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+
+
 class AssemblyData(RedfishModel):
     odata_id: str = Field(alias="@odata.id")
     actions: AssemblyDataActions | None = None

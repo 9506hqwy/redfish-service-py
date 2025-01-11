@@ -48,6 +48,19 @@ class PcieSlots(RedfishModel):
     slots: list[PcieSlot] | None = None
 
 
+class PcieSlotsOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#PCIeSlots.v1_6_1.PCIeSlots")
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    slots: list[PcieSlot] | None = None
+
+
 class SlotTypes(StrEnum):
     FULL_LENGTH = "FullLength"
     HALF_LENGTH = "HalfLength"

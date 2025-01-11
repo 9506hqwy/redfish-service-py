@@ -50,6 +50,22 @@ class AddressPoolOnCreate(RedfishModel):
     status: Status | None = None
 
 
+class AddressPoolOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#AddressPool.v1_3_0.AddressPool")
+    actions: Actions | None = None
+    description: str | None = None
+    ethernet: Ethernet | None = None
+    gen_z: GenZ | None = None
+    id: str | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+
+
 class BfdSingleHopOnly(RedfishModel):
     demand_mode_enabled: bool | None = None
     desired_min_tx_interval_milliseconds: int | None = None

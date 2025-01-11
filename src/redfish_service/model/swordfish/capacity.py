@@ -43,3 +43,24 @@ class CapacitySource(RedfishModel):
     providing_memory_chunks: IdRef | None = None
     providing_pools: IdRef | None = None
     providing_volumes: IdRef | None = None
+
+
+class CapacitySourceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#CapacitySource.v1_2_1.CapacitySource"
+    )
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    provided_capacity: Capacity | None = None
+    provided_class_of_service: IdRef | None = None
+    providing_drives: IdRef | None = None
+    providing_memory: IdRef | None = None
+    providing_memory_chunks: IdRef | None = None
+    providing_pools: IdRef | None = None
+    providing_volumes: IdRef | None = None

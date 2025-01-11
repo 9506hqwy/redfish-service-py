@@ -30,6 +30,22 @@ class Bios(RedfishModel):
     reset_bios_to_defaults_pending: bool | None = None
 
 
+class BiosOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Bios.v1_2_3.Bios")
+    actions: Actions | None = None
+    attribute_registry: str | None = None
+    attributes: dict[str, Any] | None = None
+    description: str | None = None
+    id: str | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    reset_bios_to_defaults_pending: bool | None = None
+
+
 class ChangePassword(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)

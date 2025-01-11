@@ -46,3 +46,27 @@ class DataProtectionLineOfService(RedfishModel):
     replica_class_of_service: IdRef | None = None
     replica_type: ReplicaType | None = None
     schedule: Schedule | None = None
+
+
+class DataProtectionLineOfServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type",
+        default="#DataProtectionLineOfService.v1_3_0.DataProtectionLineOfService",
+    )
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    is_isolated: bool | None = None
+    min_lifetime: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    recovery_geographic_objective: FailureDomainScope | None = None
+    recovery_point_objective_time: str | None = None
+    recovery_time_objective: RecoveryAccessScope | None = None
+    replica_access_location: Location | None = None
+    replica_class_of_service: IdRef | None = None
+    replica_type: ReplicaType | None = None
+    schedule: Schedule | None = None

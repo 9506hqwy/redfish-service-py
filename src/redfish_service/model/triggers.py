@@ -125,6 +125,33 @@ class TriggersOnCreate(RedfishModel):
     wildcards: list[Wildcard] | None = None
 
 
+class TriggersOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Triggers.v1_4_0.Triggers")
+    actions: Actions | None = None
+    description: str | None = None
+    discrete_trigger_condition: DiscreteTriggerConditionEnum | None = None
+    discrete_triggers: list[DiscreteTrigger] | None = None
+    event_triggers: list[str] | None = None
+    hysteresis_duration: str | None = None
+    hysteresis_reading: float | None = None
+    id: str | None = None
+    links: Links | None = None
+    metric_ids: list[str] | None = None
+    metric_properties: list[str] | None = None
+    metric_type: MetricTypeEnum | None = None
+    name: str | None = None
+    numeric_thresholds: Thresholds | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+    trigger_action_message: TriggerActionMessage | None = None
+    trigger_actions: list[TriggerActionEnum] | None = None
+    trigger_enabled: bool | None = None
+    wildcards: list[Wildcard] | None = None
+
+
 class Wildcard(RedfishModel):
     name: str | None = None
     values: list[str] | None = None

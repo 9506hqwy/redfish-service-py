@@ -35,6 +35,22 @@ class SecureBoot(RedfishModel):
     secure_boot_mode: SecureBootModeType | None = None
 
 
+class SecureBootOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#SecureBoot.v1_1_2.SecureBoot")
+    actions: Actions | None = None
+    description: str | None = None
+    id: str | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    secure_boot_current_boot: SecureBootCurrentBootType | None = None
+    secure_boot_databases: IdRef | None = None
+    secure_boot_enable: bool | None = None
+    secure_boot_mode: SecureBootModeType | None = None
+
+
 class SecureBootCurrentBootType(StrEnum):
     ENABLED = "Enabled"
     DISABLED = "Disabled"

@@ -62,6 +62,49 @@ class AccountService(RedfishModel):
     tacacs_plus: ExternalAccountProvider | None = Field(alias="TACACSplus", default=None)
 
 
+class AccountServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#AccountService.v1_16_0.AccountService"
+    )
+    account_lockout_counter_reset_after: int | None = None
+    account_lockout_counter_reset_enabled: bool | None = None
+    account_lockout_duration: int | None = None
+    account_lockout_threshold: int | None = None
+    accounts: IdRef | None = None
+    actions: Actions | None = None
+    active_directory: ExternalAccountProvider | None = None
+    additional_external_account_providers: IdRef | None = None
+    auth_failure_logging_threshold: int | None = None
+    description: str | None = None
+    http_basic_auth: BasicAuthState | None = Field(alias="HTTPBasicAuth", default=None)
+    id: str | None = None
+    ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
+    local_account_auth: LocalAccountAuth | None = None
+    max_password_length: int | None = None
+    min_password_length: int | None = None
+    multi_factor_auth: MultiFactorAuth | None = None
+    name: str | None = None
+    oauth2: ExternalAccountProvider | None = Field(alias="OAuth2", default=None)
+    oem: dict[str, Any] | None = None
+    outbound_connections: IdRef | None = None
+    password_expiration_days: int | None = None
+    privilege_map: IdRef | None = None
+    require_change_password_action: bool | None = None
+    restricted_oem_privileges: list[str] | None = None
+    restricted_privileges: list[PrivilegeType] | None = None
+    roles: IdRef | None = None
+    service_enabled: bool | None = None
+    status: Status | None = None
+    supported_account_types: list[AccountTypes] | None = None
+    supported_oem_account_types: list[str] | None = Field(
+        alias="SupportedOEMAccountTypes", default=None
+    )
+    tacacs_plus: ExternalAccountProvider | None = Field(alias="TACACSplus", default=None)
+
+
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 

@@ -96,6 +96,39 @@ class NetworkAdapter(RedfishModel):
     status: Status | None = None
 
 
+class NetworkAdapterOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#NetworkAdapter.v1_11_0.NetworkAdapter"
+    )
+    actions: Actions | None = None
+    assembly: IdRef | None = None
+    certificates: IdRef | None = None
+    controllers: list[Controllers] | None = None
+    description: str | None = None
+    environment_metrics: IdRef | None = None
+    id: str | None = None
+    identifiers: list[Identifier] | None = None
+    lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
+    location: Location | None = None
+    manufacturer: str | None = None
+    measurements: list[MeasurementBlock] | None = None
+    metrics: IdRef | None = None
+    model: str | None = None
+    name: str | None = None
+    network_device_functions: IdRef | None = None
+    network_ports: IdRef | None = None
+    oem: dict[str, Any] | None = None
+    part_number: str | None = None
+    ports: IdRef | None = None
+    processors: IdRef | None = None
+    sku: str | None = Field(alias="SKU", default=None)
+    serial_number: str | None = None
+    status: Status | None = None
+
+
 class NicPartitioning(RedfishModel):
     npar_capable: bool | None = None
     npar_enabled: bool | None = None

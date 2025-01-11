@@ -31,6 +31,24 @@ class JobService(RedfishModel):
     status: Status | None = None
 
 
+class JobServiceOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#JobService.v1_0_6.JobService")
+    actions: Actions | None = None
+    date_time: str | None = None
+    description: str | None = None
+    id: str | None = None
+    jobs: IdRef | None = None
+    log: IdRef | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    service_capabilities: JobServiceCapabilities | None = None
+    service_enabled: bool | None = None
+    status: Status | None = None
+
+
 class JobServiceCapabilities(RedfishModel):
     max_jobs: int | None = None
     max_steps: int | None = None

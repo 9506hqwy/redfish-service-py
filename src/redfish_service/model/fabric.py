@@ -37,5 +37,28 @@ class Fabric(RedfishModel):
     zones: IdRef | None = None
 
 
+class FabricOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Fabric.v1_3_2.Fabric")
+    actions: Actions | None = None
+    address_pools: IdRef | None = None
+    connections: IdRef | None = None
+    description: str | None = None
+    endpoint_groups: IdRef | None = None
+    endpoints: IdRef | None = None
+    fabric_type: Protocol | None = None
+    id: str | None = None
+    links: Links | None = None
+    max_zones: int | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+    switches: IdRef | None = None
+    uuid: str | None = Field(alias="UUID", default=None)
+    zones: IdRef | None = None
+
+
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None

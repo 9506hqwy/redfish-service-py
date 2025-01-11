@@ -50,6 +50,33 @@ class IoPerformanceLosCapabilities(RedfishModel):
     )
 
 
+class IoPerformanceLosCapabilitiesOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type",
+        default="#IOPerformanceLoSCapabilities.v1_3_0.IOPerformanceLoSCapabilities",
+    )
+    actions: Actions | None = None
+    description: str | None = None
+    io_limiting_is_supported: bool | None = Field(alias="IOLimitingIsSupported", default=None)
+    id: str | None = None
+    identifier: Identifier | None = None
+    max_sample_period: str | None = None
+    min_sample_period: str | None = None
+    min_supported_io_operation_latency_microseconds: int | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    supported_io_workloads: list[IoWorkload] | None = Field(
+        alias="SupportedIOWorkloads", default=None
+    )
+    supported_lines_of_service: list[IdRef] | None = None
+    supported_lines_of_service_odata_count: int | None = Field(
+        alias="SupportedLinesOfService@odata.count", default=None
+    )
+
+
 class IoWorkload(RedfishModel):
     components: list[IoWorkloadComponent] | None = None
     name: str | None = None

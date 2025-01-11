@@ -52,6 +52,25 @@ class FacilityOnCreate(RedfishModel):
     status: Status | None = None
 
 
+class FacilityOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Facility.v1_4_2.Facility")
+    actions: Actions | None = None
+    ambient_metrics: IdRef | None = None
+    description: str | None = None
+    environment_metrics: IdRef | None = None
+    facility_type: FacilityType | None = None
+    id: str | None = None
+    links: Links | None = None
+    location: Location | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    power_domains: IdRef | None = None
+    status: Status | None = None
+
+
 class FacilityType(StrEnum):
     ROOM = "Room"
     FLOOR = "Floor"

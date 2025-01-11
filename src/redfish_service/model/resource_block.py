@@ -140,6 +140,48 @@ class ResourceBlockOnCreate(RedfishModel):
     storage_odata_count: int | None = Field(alias="Storage@odata.count", default=None)
 
 
+class ResourceBlockOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#ResourceBlock.v1_4_3.ResourceBlock"
+    )
+    actions: Actions | None = None
+    client: str | None = None
+    composition_status: CompositionStatus | None = None
+    computer_systems: list[IdRef] | None = None
+    computer_systems_odata_count: int | None = Field(
+        alias="ComputerSystems@odata.count", default=None
+    )
+    description: str | None = None
+    drives: list[IdRef] | None = None
+    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    ethernet_interfaces: list[IdRef] | None = None
+    ethernet_interfaces_odata_count: int | None = Field(
+        alias="EthernetInterfaces@odata.count", default=None
+    )
+    id: str | None = None
+    links: Links | None = None
+    memory: list[IdRef] | None = None
+    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    name: str | None = None
+    network_interfaces: list[IdRef] | None = None
+    network_interfaces_odata_count: int | None = Field(
+        alias="NetworkInterfaces@odata.count", default=None
+    )
+    oem: dict[str, Any] | None = None
+    pool: PoolType | None = None
+    processors: list[IdRef] | None = None
+    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    resource_block_type: list[ResourceBlockType] | None = None
+    simple_storage: list[IdRef] | None = None
+    simple_storage_odata_count: int | None = Field(alias="SimpleStorage@odata.count", default=None)
+    status: Status | None = None
+    storage: list[IdRef] | None = None
+    storage_odata_count: int | None = Field(alias="Storage@odata.count", default=None)
+
+
 class ResourceBlockLimits(RedfishModel):
     max_compute: int | None = None
     max_computer_system: int | None = None

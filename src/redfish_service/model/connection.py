@@ -73,6 +73,25 @@ class ConnectionOnCreate(RedfishModel):
     volume_info: list[VolumeInfo] | None = None
 
 
+class ConnectionOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Connection.v1_3_2.Connection")
+    actions: Actions | None = None
+    connection_keys: ConnectionKey | None = None
+    connection_type: ConnectionType | None = None
+    description: str | None = None
+    id: str | None = None
+    links: Links | None = None
+    memory_chunk_info: list[MemoryChunkInfo] | None = None
+    memory_region_info: list[MemoryRegionInfo] | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None
+    volume_info: list[VolumeInfo] | None = None
+
+
 class ConnectionKey(RedfishModel):
     chap: ChapConnectionKey | None = Field(alias="CHAP", default=None)
     dhchap: DhchapKey | None = Field(alias="DHCHAP", default=None)

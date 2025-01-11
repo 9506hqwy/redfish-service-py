@@ -143,6 +143,61 @@ class Manager(RedfishModel):
     virtual_media: IdRef | None = None
 
 
+class ManagerOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Manager.v1_19_2.Manager")
+    actions: Actions | None = None
+    additional_firmware_versions: AdditionalVersions | None = None
+    auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
+    certificates: IdRef | None = None
+    command_shell: CommandShell | None = None
+    date_time: str | None = None
+    date_time_local_offset: str | None = None
+    daylight_saving_time: DaylightSavingTime | None = None
+    dedicated_network_ports: IdRef | None = None
+    description: str | None = None
+    ethernet_interfaces: IdRef | None = None
+    firmware_version: str | None = None
+    graphical_console: GraphicalConsole | None = None
+    host_interfaces: IdRef | None = None
+    id: str | None = None
+    last_reset_time: str | None = None
+    links: Links | None = None
+    location: Location | None = None
+    location_indicator_active: bool | None = None
+    log_services: IdRef | None = None
+    manager_diagnostic_data: IdRef | None = None
+    manager_type: ManagerType | None = None
+    manufacturer: str | None = None
+    measurements: list[MeasurementBlock] | None = None
+    model: str | None = None
+    name: str | None = None
+    network_protocol: IdRef | None = None
+    oem: dict[str, Any] | None = None
+    part_number: str | None = None
+    power_state: PowerState | None = None
+    redundancy: list[IdRef] | None = None
+    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    remote_account_service: IdRef | None = None
+    remote_redfish_service_uri: str | None = None
+    security_policy: IdRef | None = None
+    serial_console: SerialConsole | None = None
+    serial_interfaces: IdRef | None = None
+    serial_number: str | None = None
+    service_entry_point_uuid: str | None = Field(alias="ServiceEntryPointUUID", default=None)
+    service_identification: str | None = None
+    shared_network_ports: IdRef | None = None
+    spare_part_number: str | None = None
+    status: Status | None = None
+    time_zone_name: str | None = None
+    usb_ports: IdRef | None = Field(alias="USBPorts", default=None)
+    uuid: str | None = Field(alias="UUID", default=None)
+    version: str | None = None
+    virtual_media: IdRef | None = None
+
+
 class ManagerType(StrEnum):
     MANAGEMENT_CONTROLLER = "ManagementController"
     ENCLOSURE_MANAGER = "EnclosureManager"

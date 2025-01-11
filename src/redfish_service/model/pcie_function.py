@@ -100,3 +100,34 @@ class PcieFunction(RedfishModel):
     subsystem_id: str | None = None
     subsystem_vendor_id: str | None = None
     vendor_id: str | None = None
+
+
+class PcieFunctionOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#PCIeFunction.v1_6_0.PCIeFunction"
+    )
+    actions: Actions | None = None
+    bus_number: str | None = None
+    class_code: str | None = None
+    description: str | None = None
+    device_class: DeviceClass | None = None
+    device_id: str | None = None
+    device_number: str | None = None
+    enabled: bool | None = None
+    function_id: int | None = None
+    function_number: str | None = None
+    function_protocol: FunctionProtocol | None = None
+    function_type: FunctionType | None = None
+    id: str | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    revision_id: str | None = None
+    segment_number: str | None = None
+    status: Status | None = None
+    subsystem_id: str | None = None
+    subsystem_vendor_id: str | None = None
+    vendor_id: str | None = None

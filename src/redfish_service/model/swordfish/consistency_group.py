@@ -76,6 +76,33 @@ class ConsistencyGroup(RedfishModel):
     volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
 
 
+class ConsistencyGroupOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        alias="@odata.type", default="#ConsistencyGroup.v1_1_1.ConsistencyGroup"
+    )
+    actions: Actions | None = None
+    consistency_method: ApplicationConsistencyMethod | None = None
+    consistency_type: ConsistencyType | None = None
+    description: str | None = None
+    id: str | None = None
+    is_consistent: bool | None = None
+    links: Links | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    remote_replica_targets: list[str] | None = None
+    replica_info: ReplicaInfo | None = None
+    replica_targets: list[IdRef] | None = None
+    replica_targets_odata_count: int | None = Field(
+        alias="ReplicaTargets@odata.count", default=None
+    )
+    status: Status | None = None
+    volumes: list[IdRef] | None = None
+    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
+
+
 class ConsistencyType(StrEnum):
     CRASH_CONSISTENT = "CrashConsistent"
     APPLICATION_CONSISTENT = "ApplicationConsistent"

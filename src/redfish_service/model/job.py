@@ -70,6 +70,33 @@ class JobOnCreate(RedfishModel):
     steps: IdRef | None = None
 
 
+class JobOnUpdate(RedfishModel):
+    odata_context: str | None = Field(alias="@odata.context", default=None)
+    odata_etag: str | None = Field(alias="@odata.etag", default=None)
+    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_type: str | None = Field(alias="@odata.type", default="#Job.v1_2_4.Job")
+    actions: Actions | None = None
+    created_by: str | None = None
+    description: str | None = None
+    end_time: str | None = None
+    estimated_duration: str | None = None
+    hide_payload: bool | None = None
+    id: str | None = None
+    job_state: JobState | None = None
+    job_status: Health | None = None
+    links: Links | None = None
+    max_execution_time: str | None = None
+    messages: list[Message] | None = None
+    name: str | None = None
+    oem: dict[str, Any] | None = None
+    payload: Payload | None = None
+    percent_complete: int | None = None
+    schedule: Schedule | None = None
+    start_time: str | None = None
+    step_order: list[str] | None = None
+    steps: IdRef | None = None
+
+
 class JobState(StrEnum):
     NEW = "New"
     STARTING = "Starting"
