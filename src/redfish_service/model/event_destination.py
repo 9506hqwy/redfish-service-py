@@ -91,7 +91,7 @@ class EventDestinationOnCreate(RedfishModel):
     context: str | None = None
     delivery_retry_policy: DeliveryRetryPolicy | None = None
     description: str | None = None
-    destination: str | None = None
+    destination: str
     event_format_type: EventFormatType | None = None
     event_types: list[EventType] | None = None
     exclude_message_ids: list[str] | None = None
@@ -113,7 +113,7 @@ class EventDestinationOnCreate(RedfishModel):
     origin_resources_odata_count: int | None = Field(
         alias="OriginResources@odata.count", default=None
     )
-    protocol: EventDestinationProtocol | None = None
+    protocol: EventDestinationProtocol
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
     snmp: SnmpSettings | None = Field(alias="SNMP", default=None)

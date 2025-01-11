@@ -66,7 +66,7 @@ class OutboundConnectionOnCreate(RedfishModel):
     client_certificates: IdRef | None = None
     connection_enabled: bool | None = None
     description: str | None = None
-    endpoint_uri: str | None = Field(alias="EndpointURI", default=None)
+    endpoint_uri: str = Field(alias="EndpointURI")
     id: str | None = None
     links: Links | None = None
     name: str | None = None
@@ -75,7 +75,7 @@ class OutboundConnectionOnCreate(RedfishModel):
         alias="PreUpgradeHTTPHeaders", default=None
     )
     retry_policy: RetryPolicyType | None = None
-    roles: list[str] | None = None
+    roles: list[str]
     status: Status | None = None
     web_socket_ping_interval_minutes: int | None = None
 

@@ -149,9 +149,9 @@ class ClassInfo:
         required: list[str],
         required_on_create: list[str],
     ) -> None:
-        type, array, nonable = resolve_property_type(classall, self, definition, True)
-        nonable = nonable or (name not in required)
-        nonable_on_create = nonable or (name not in required_on_create)
+        type, array, nonable_type = resolve_property_type(classall, self, definition, True)
+        nonable = nonable_type or (name not in required)
+        nonable_on_create = nonable_type or (name not in required_on_create)
         info = PropetyInfo(definition, name, type, array, nonable, nonable_on_create)
         self.properties.append(info)
 

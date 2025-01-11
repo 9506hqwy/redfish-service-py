@@ -45,7 +45,7 @@ class RoleOnCreate(RedfishModel):
     oem: dict[str, Any] | None = None
     oem_privileges: list[str] | None = None
     restricted: bool | None = None
-    role_id: str | None = None
+    role_id: str
 
 
 class RoleOnUpdate(RedfishModel):

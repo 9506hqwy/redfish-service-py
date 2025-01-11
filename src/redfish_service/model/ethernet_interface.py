@@ -141,7 +141,7 @@ class EthernetInterfaceOnCreate(RedfishModel):
     id: str | None = None
     interface_enabled: bool | None = None
     link_status: LinkStatus | None = None
-    links: Links | None = None
+    links: Links
     mac_address: str | None = Field(alias="MACAddress", default=None)
     mtu_size: int | None = Field(alias="MTUSize", default=None)
     max_ipv6_static_addresses: int | None = Field(alias="MaxIPv6StaticAddresses", default=None)

@@ -108,11 +108,11 @@ class ManagerAccountOnCreate(RedfishModel):
     password_change_required: bool | None = None
     password_expiration: str | None = None
     phone_number: str | None = None
-    role_id: str | None = None
+    role_id: str
     snmp: SnmpUserInfo | None = Field(alias="SNMP", default=None)
     secret_key_set: bool | None = None
     strict_account_types: bool | None = None
-    user_name: str | None = None
+    user_name: str
 
 
 class ManagerAccountOnUpdate(RedfishModel):
