@@ -9,6 +9,20 @@ class RedfishError(Exception):
         self.error = error
 
 
+class GeneralErrorError(RedfishError):
+    def __init__(self, status_code: int = HTTPStatus.INTERNAL_SERVER_ERROR):
+        info = {
+            "error": {
+                "code": "Base.1.19.0.GeneralError",
+                "message": "A general error has occurred."
+                + " See Resolution for information on how to resolve the error,"
+                + " or @Message.ExtendedInfo if Resolution is not provided.",
+            }
+        }
+        error = Error.model_validate(info)
+        super().__init__(status_code, error)
+
+
 class InvalidURIError(RedfishError):
     def __init__(self, uri: str):
         info = {

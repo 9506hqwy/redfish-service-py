@@ -1,10 +1,36 @@
+from http import HTTPStatus
 from typing import Final
 
 from starlette.datastructures import Headers, MutableHeaders
 from starlette.responses import JSONResponse
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
-from .exception import PreconditionFailedError
+from .exception import GeneralErrorError, PreconditionFailedError
+
+
+class AcceptHeaderMiddleware:
+    HEADER_NAME: Final[str] = "Accept"
+    SUPPORTED_MIMES: Final[list[str]] = ["*/*", "application/*", "application/json"]
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        headers = Headers(scope=scope)
+        if v := headers.getlist(self.HEADER_NAME):
+            if all((s not in v for s in self.SUPPORTED_MIMES)):
+                exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
+                res = JSONResponse(
+                    exc.error.model_dump(exclude_none=True), status_code=exc.status_code
+                )
+                await res(scope, receive, send)
+                return
+
+        await self.app(scope, receive, send)
 
 
 class OdataVersionHeaderMiddleware:
