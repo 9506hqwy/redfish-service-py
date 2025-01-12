@@ -29,9 +29,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunksCollection, s.get(**b))
 
 
@@ -59,9 +56,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunks, s.post(**b))
 
 
@@ -83,9 +77,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunksCollection, s.get(**b))
 
 
@@ -113,9 +104,6 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunks, s.post(**b))
 
 
@@ -142,9 +130,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunksCollection, s.get(**b))
 
 
@@ -174,9 +159,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunks, s.post(**b))
 
 
@@ -203,9 +185,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunksCollection, s.get(**b))
 
 
@@ -235,7 +214,4 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryChunks, s.post(**b))

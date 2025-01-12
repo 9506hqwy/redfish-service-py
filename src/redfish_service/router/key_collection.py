@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> KeyCollection:
     s: Service = get_service(KeyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyCollection, s.get(**b))
 
 
@@ -28,9 +25,6 @@ async def get1(request: Request, response: Response) -> KeyCollection:
 async def post1(request: Request, response: Response, body: KeyOnCreate) -> Key:
     s: ServiceCollection = get_service_collection(KeyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.post(**b))
 
 
@@ -39,9 +33,6 @@ async def post1(request: Request, response: Response, body: KeyOnCreate) -> Key:
 async def get2(request: Request, response: Response) -> KeyCollection:
     s: Service = get_service(KeyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyCollection, s.get(**b))
 
 
@@ -53,9 +44,6 @@ async def get2(request: Request, response: Response) -> KeyCollection:
 async def post2(request: Request, response: Response, body: KeyOnCreate) -> Key:
     s: ServiceCollection = get_service_collection(KeyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.post(**b))
 
 
@@ -74,9 +62,6 @@ async def get3(manager_account_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyCollection, s.get(**b))
 
 
@@ -99,9 +84,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.post(**b))
 
 
@@ -123,9 +105,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyCollection, s.get(**b))
 
 
@@ -153,9 +132,6 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.post(**b))
 
 
@@ -174,9 +150,6 @@ async def get5(aggregation_source_id: str, request: Request, response: Response)
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyCollection, s.get(**b))
 
 
@@ -199,7 +172,4 @@ async def post5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.post(**b))

@@ -14,9 +14,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> CoolingUnitCollection:
     s: Service = get_service(CoolingUnitCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnitCollection, s.get(**b))
 
 
@@ -25,9 +22,6 @@ async def get1(request: Request, response: Response) -> CoolingUnitCollection:
 async def get2(request: Request, response: Response) -> CoolingUnitCollection:
     s: Service = get_service(CoolingUnitCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnitCollection, s.get(**b))
 
 
@@ -36,7 +30,4 @@ async def get2(request: Request, response: Response) -> CoolingUnitCollection:
 async def get3(request: Request, response: Response) -> CoolingUnitCollection:
     s: Service = get_service(CoolingUnitCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnitCollection, s.get(**b))

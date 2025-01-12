@@ -26,9 +26,6 @@ async def get1(chassis_id: str, battery_id: str, request: Request, response: Res
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Battery, s.get(**b))
 
 
@@ -48,7 +45,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Battery, s.patch(**b))

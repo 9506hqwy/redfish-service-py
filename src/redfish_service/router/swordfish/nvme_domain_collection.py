@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> NvmeDomainCollection:
     s: Service = get_service(NvmeDomainCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(NvmeDomainCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> NvmeDomainCollection:
 async def post1(request: Request, response: Response, body: NvmeDomainOnCreate) -> NvmeDomain:
     s: ServiceCollection = get_service_collection(NvmeDomainCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(NvmeDomain, s.post(**b))

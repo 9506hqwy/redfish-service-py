@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroupCollection, s.get(**b))
 
 
@@ -53,9 +50,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroup, s.post(**b))
 
 
@@ -77,9 +71,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroupCollection, s.get(**b))
 
 
@@ -107,9 +98,6 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroup, s.post(**b))
 
 
@@ -118,9 +106,6 @@ async def post2(
 async def get3(storage_id: str, request: Request, response: Response) -> StorageGroupCollection:
     s: Service = get_service(StorageGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroupCollection, s.get(**b))
 
 
@@ -139,9 +124,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroup, s.post(**b))
 
 
@@ -163,9 +145,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroupCollection, s.get(**b))
 
 
@@ -193,7 +172,4 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageGroup, s.post(**b))

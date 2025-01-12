@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> TriggersCollection:
     s: Service = get_service(TriggersCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(TriggersCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> TriggersCollection:
 async def post1(request: Request, response: Response, body: TriggersOnCreate) -> Triggers:
     s: ServiceCollection = get_service_collection(TriggersCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Triggers, s.post(**b))

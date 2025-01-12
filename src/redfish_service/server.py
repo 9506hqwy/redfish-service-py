@@ -10,12 +10,14 @@ from . import router as redfish
 from . import service_impl  # noqa: F401
 from .exception import InternalErrorError, InvalidURIError, MalformedJsonError
 from .exception import RedfishError as RedfishException
+from .middleware import OdataVersionHeaderMiddleware
 from .router import swordfish
 
 ## TODO: 7 Service requests
 ## TODO: 8 Service responses
 
 app = FastAPI()
+app.add_middleware(OdataVersionHeaderMiddleware)
 redfish.include_router(app)
 swordfish.include_router(app)
 

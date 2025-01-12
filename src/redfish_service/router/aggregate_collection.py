@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> AggregateCollection:
     s: Service = get_service(AggregateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AggregateCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> AggregateCollection:
 async def post1(request: Request, response: Response, body: AggregateOnCreate) -> Aggregate:
     s: ServiceCollection = get_service_collection(AggregateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Aggregate, s.post(**b))

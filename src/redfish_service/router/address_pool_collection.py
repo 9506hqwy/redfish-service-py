@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> AddressPoolCollection:
     s: Service = get_service(AddressPoolCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AddressPoolCollection, s.get(**b))
 
 
@@ -37,7 +34,4 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AddressPool, s.post(**b))

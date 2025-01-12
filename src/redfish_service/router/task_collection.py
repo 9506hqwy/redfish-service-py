@@ -14,9 +14,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> TaskCollection:
     s: Service = get_service(TaskCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(TaskCollection, s.get(**b))
 
 
@@ -25,7 +22,4 @@ async def get1(request: Request, response: Response) -> TaskCollection:
 async def get2(task_id: str, request: Request, response: Response) -> TaskCollection:
     s: Service = get_service(TaskCollection, request)
     b: dict[str, Any] = {"task_id": task_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(TaskCollection, s.get(**b))

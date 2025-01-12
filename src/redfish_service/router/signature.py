@@ -30,9 +30,6 @@ async def delete1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -59,9 +56,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Signature, s.get(**b))
 
 
@@ -87,9 +81,6 @@ async def delete2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -118,9 +109,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Signature, s.get(**b))
 
 
@@ -146,9 +134,6 @@ async def delete3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -177,7 +162,4 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Signature, s.get(**b))

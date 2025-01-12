@@ -23,9 +23,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ExternalAccountProviderCollection:
     s: Service = get_service(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ExternalAccountProviderCollection, s.get(**b))
 
 
@@ -41,9 +38,6 @@ async def post1(
 ) -> ExternalAccountProvider:
     s: ServiceCollection = get_service_collection(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ExternalAccountProvider, s.post(**b))
 
 
@@ -60,9 +54,6 @@ async def get2(
 ) -> ExternalAccountProviderCollection:
     s: Service = get_service(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ExternalAccountProviderCollection, s.get(**b))
 
 
@@ -85,7 +76,4 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ExternalAccountProvider, s.post(**b))

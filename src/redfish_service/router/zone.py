@@ -20,9 +20,6 @@ async def delete1(fabric_id: str, zone_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -36,9 +33,6 @@ async def get1(fabric_id: str, zone_id: str, request: Request, response: Respons
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Zone, s.get(**b))
 
 
@@ -55,9 +49,6 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Zone, s.patch(**b))
 
 
@@ -68,9 +59,6 @@ async def patch1(
 async def delete2(zone_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Zone, request)
     b: dict[str, Any] = {"zone_id": zone_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -83,9 +71,6 @@ async def delete2(zone_id: str, request: Request, response: Response) -> None:
 async def get2(zone_id: str, request: Request, response: Response) -> Zone:
     s: Service = get_service(Zone, request)
     b: dict[str, Any] = {"zone_id": zone_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Zone, s.get(**b))
 
 
@@ -101,7 +86,4 @@ async def patch2(zone_id: str, request: Request, response: Response, body: ZoneO
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Zone, s.patch(**b))

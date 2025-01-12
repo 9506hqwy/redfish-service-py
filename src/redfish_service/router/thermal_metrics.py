@@ -20,7 +20,4 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> ThermalMetrics:
     s: Service = get_service(ThermalMetrics, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ThermalMetrics, s.get(**b))

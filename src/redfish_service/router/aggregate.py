@@ -17,9 +17,6 @@ router = APIRouter()
 async def delete1(aggregate_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Aggregate, request)
     b: dict[str, Any] = {"aggregate_id": aggregate_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -32,7 +29,4 @@ async def delete1(aggregate_id: str, request: Request, response: Response) -> No
 async def get1(aggregate_id: str, request: Request, response: Response) -> Aggregate:
     s: Service = get_service(Aggregate, request)
     b: dict[str, Any] = {"aggregate_id": aggregate_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Aggregate, s.get(**b))

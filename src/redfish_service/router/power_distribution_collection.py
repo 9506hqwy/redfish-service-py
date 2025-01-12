@@ -14,9 +14,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = get_service(PowerDistributionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDistributionCollection, s.get(**b))
 
 
@@ -25,9 +22,6 @@ async def get1(request: Request, response: Response) -> PowerDistributionCollect
 async def get2(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = get_service(PowerDistributionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDistributionCollection, s.get(**b))
 
 
@@ -36,9 +30,6 @@ async def get2(request: Request, response: Response) -> PowerDistributionCollect
 async def get3(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = get_service(PowerDistributionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDistributionCollection, s.get(**b))
 
 
@@ -47,9 +38,6 @@ async def get3(request: Request, response: Response) -> PowerDistributionCollect
 async def get4(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = get_service(PowerDistributionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDistributionCollection, s.get(**b))
 
 
@@ -58,9 +46,6 @@ async def get4(request: Request, response: Response) -> PowerDistributionCollect
 async def get5(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = get_service(PowerDistributionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDistributionCollection, s.get(**b))
 
 
@@ -69,7 +54,4 @@ async def get5(request: Request, response: Response) -> PowerDistributionCollect
 async def get6(request: Request, response: Response) -> PowerDistributionCollection:
     s: Service = get_service(PowerDistributionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDistributionCollection, s.get(**b))

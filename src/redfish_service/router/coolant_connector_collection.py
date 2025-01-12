@@ -22,9 +22,6 @@ async def get1(
 ) -> CoolantConnectorCollection:
     s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -45,9 +42,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -68,9 +62,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -91,9 +82,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -114,9 +102,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -137,9 +122,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -160,9 +142,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -183,9 +162,6 @@ async def get8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))
 
 
@@ -206,7 +182,4 @@ async def get9(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolantConnectorCollection, s.get(**b))

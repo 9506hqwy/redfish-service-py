@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FileSystemCollection, s.get(**b))
 
 
@@ -53,9 +50,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FileSystem, s.post(**b))
 
 
@@ -64,9 +58,6 @@ async def post1(
 async def get2(storage_id: str, request: Request, response: Response) -> FileSystemCollection:
     s: Service = get_service(FileSystemCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FileSystemCollection, s.get(**b))
 
 
@@ -85,7 +76,4 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FileSystem, s.post(**b))

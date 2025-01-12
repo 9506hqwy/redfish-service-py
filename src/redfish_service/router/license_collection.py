@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> LicenseCollection:
     s: Service = get_service(LicenseCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LicenseCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> LicenseCollection:
 async def post1(request: Request, response: Response, body: LicenseOnCreate) -> License:
     s: ServiceCollection = get_service_collection(LicenseCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(License, s.post(**b))

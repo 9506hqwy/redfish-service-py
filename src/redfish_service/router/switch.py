@@ -24,9 +24,6 @@ async def get1(fabric_id: str, switch_id: str, request: Request, response: Respo
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Switch, s.get(**b))
 
 
@@ -45,7 +42,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Switch, s.patch(**b))

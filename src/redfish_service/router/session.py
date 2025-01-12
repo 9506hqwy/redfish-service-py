@@ -17,9 +17,6 @@ router = APIRouter()
 async def delete1(session_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Session, request)
     b: dict[str, Any] = {"session_id": session_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -28,7 +25,4 @@ async def delete1(session_id: str, request: Request, response: Response) -> None
 async def get1(session_id: str, request: Request, response: Response) -> Session:
     s: Service = get_service(Session, request)
     b: dict[str, Any] = {"session_id": session_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Session, s.get(**b))

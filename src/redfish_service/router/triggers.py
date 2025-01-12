@@ -17,9 +17,6 @@ router = APIRouter()
 async def delete1(triggers_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Triggers, request)
     b: dict[str, Any] = {"triggers_id": triggers_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -32,9 +29,6 @@ async def delete1(triggers_id: str, request: Request, response: Response) -> Non
 async def get1(triggers_id: str, request: Request, response: Response) -> Triggers:
     s: Service = get_service(Triggers, request)
     b: dict[str, Any] = {"triggers_id": triggers_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Triggers, s.get(**b))
 
 
@@ -52,7 +46,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Triggers, s.patch(**b))

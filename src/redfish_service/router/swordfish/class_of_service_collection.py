@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ClassOfServiceCollection, s.get(**b))
 
 
@@ -53,9 +50,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -77,9 +71,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ClassOfServiceCollection, s.get(**b))
 
 
@@ -107,7 +98,4 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))

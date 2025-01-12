@@ -18,7 +18,4 @@ router = APIRouter()
 async def get1(manager_id: str, request: Request, response: Response) -> ManagerDiagnosticData:
     s: Service = get_service(ManagerDiagnosticData, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ManagerDiagnosticData, s.get(**b))

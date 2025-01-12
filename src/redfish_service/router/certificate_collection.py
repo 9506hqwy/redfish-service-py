@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -53,9 +50,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -68,9 +62,6 @@ async def post1(
 async def get2(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -85,9 +76,6 @@ async def get2(request: Request, response: Response) -> CertificateCollection:
 async def post2(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -96,9 +84,6 @@ async def post2(request: Request, response: Response, body: CertificateOnCreate)
 async def get3(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -110,9 +95,6 @@ async def get3(request: Request, response: Response) -> CertificateCollection:
 async def post3(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -133,9 +115,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -161,9 +140,6 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -178,9 +154,6 @@ async def post4(
 async def get5(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -196,9 +169,6 @@ async def get5(request: Request, response: Response) -> CertificateCollection:
 async def post5(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -213,9 +183,6 @@ async def post5(request: Request, response: Response, body: CertificateOnCreate)
 async def get6(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -231,9 +198,6 @@ async def get6(request: Request, response: Response) -> CertificateCollection:
 async def post6(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -255,9 +219,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -285,9 +246,6 @@ async def post7(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -302,9 +260,6 @@ async def post7(
 async def get8(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -327,9 +282,6 @@ async def post8(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -344,9 +296,6 @@ async def post8(
 async def get9(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -369,9 +318,6 @@ async def post9(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -393,9 +339,6 @@ async def get10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -423,9 +366,6 @@ async def post10(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -440,9 +380,6 @@ async def post10(
 async def get11(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -465,9 +402,6 @@ async def post11(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -482,9 +416,6 @@ async def post11(
 async def get12(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -507,9 +438,6 @@ async def post12(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -524,9 +452,6 @@ async def post12(
 async def get13(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -549,9 +474,6 @@ async def post13(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -570,9 +492,6 @@ async def get14(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -594,9 +513,6 @@ async def post14(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -618,9 +534,6 @@ async def get15(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -648,9 +561,6 @@ async def post15(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -672,9 +582,6 @@ async def get16(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -702,9 +609,6 @@ async def post16(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -726,9 +630,6 @@ async def get17(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -756,9 +657,6 @@ async def post17(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -785,9 +683,6 @@ async def get18(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -817,9 +712,6 @@ async def post18(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -846,9 +738,6 @@ async def get19(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -878,9 +767,6 @@ async def post19(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -901,9 +787,6 @@ async def get20(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -926,9 +809,6 @@ async def post20(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -949,9 +829,6 @@ async def get21(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -974,9 +851,6 @@ async def post21(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -995,9 +869,6 @@ async def get22(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1019,9 +890,6 @@ async def post22(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1043,9 +911,6 @@ async def get23(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1073,9 +938,6 @@ async def post23(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1097,9 +959,6 @@ async def get24(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1127,9 +986,6 @@ async def post24(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1151,9 +1007,6 @@ async def get25(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1181,9 +1034,6 @@ async def post25(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1205,9 +1055,6 @@ async def get26(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1235,9 +1082,6 @@ async def post26(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1259,9 +1103,6 @@ async def get27(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1289,9 +1130,6 @@ async def post27(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1318,9 +1156,6 @@ async def get28(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1350,9 +1185,6 @@ async def post28(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1374,9 +1206,6 @@ async def get29(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1404,9 +1233,6 @@ async def post29(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1433,9 +1259,6 @@ async def get30(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1465,9 +1288,6 @@ async def post30(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1489,9 +1309,6 @@ async def get31(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1519,9 +1336,6 @@ async def post31(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1543,9 +1357,6 @@ async def get32(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1573,9 +1384,6 @@ async def post32(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1602,9 +1410,6 @@ async def get33(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1634,9 +1439,6 @@ async def post33(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1658,9 +1460,6 @@ async def get34(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1688,9 +1487,6 @@ async def post34(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1717,9 +1513,6 @@ async def get35(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1749,9 +1542,6 @@ async def post35(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1773,9 +1563,6 @@ async def get36(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1803,9 +1590,6 @@ async def post36(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1832,9 +1616,6 @@ async def get37(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1864,9 +1645,6 @@ async def post37(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1893,9 +1671,6 @@ async def get38(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1925,9 +1700,6 @@ async def post38(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -1956,9 +1728,6 @@ async def get39(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -1990,9 +1759,6 @@ async def post39(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2019,9 +1785,6 @@ async def get40(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2051,9 +1814,6 @@ async def post40(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2082,9 +1842,6 @@ async def get41(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2116,9 +1873,6 @@ async def post41(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2140,9 +1894,6 @@ async def get42(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2170,9 +1921,6 @@ async def post42(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2199,9 +1947,6 @@ async def get43(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2231,9 +1976,6 @@ async def post43(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2260,9 +2002,6 @@ async def get44(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2292,9 +2031,6 @@ async def post44(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2323,9 +2059,6 @@ async def get45(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2357,9 +2090,6 @@ async def post45(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2386,9 +2116,6 @@ async def get46(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2418,9 +2145,6 @@ async def post46(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2449,9 +2173,6 @@ async def get47(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2483,9 +2204,6 @@ async def post47(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2507,9 +2225,6 @@ async def get48(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2533,9 +2248,6 @@ async def post48(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2544,9 +2256,6 @@ async def post48(
 async def get49(chassis_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2565,9 +2274,6 @@ async def post49(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2590,9 +2296,6 @@ async def get50(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2622,9 +2325,6 @@ async def post50(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2646,9 +2346,6 @@ async def get51(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2672,9 +2369,6 @@ async def post51(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2697,9 +2391,6 @@ async def get52(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2729,9 +2420,6 @@ async def post52(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2753,9 +2441,6 @@ async def get53(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2783,9 +2468,6 @@ async def post53(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2814,9 +2496,6 @@ async def get54(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2848,9 +2527,6 @@ async def post54(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2873,9 +2549,6 @@ async def get55(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2905,9 +2578,6 @@ async def post55(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2929,9 +2599,6 @@ async def get56(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -2959,9 +2626,6 @@ async def post56(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -2990,9 +2654,6 @@ async def get57(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3024,9 +2685,6 @@ async def post57(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3048,9 +2706,6 @@ async def get58(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3078,9 +2733,6 @@ async def post58(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3102,9 +2754,6 @@ async def get59(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3132,9 +2781,6 @@ async def post59(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3156,9 +2802,6 @@ async def get60(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3186,9 +2829,6 @@ async def post60(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3215,9 +2855,6 @@ async def get61(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3247,9 +2884,6 @@ async def post61(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3276,9 +2910,6 @@ async def get62(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3308,9 +2939,6 @@ async def post62(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3337,9 +2965,6 @@ async def get63(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3369,9 +2994,6 @@ async def post63(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3398,9 +3020,6 @@ async def get64(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3430,9 +3049,6 @@ async def post64(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3443,9 +3059,6 @@ async def post64(
 async def get65(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3459,9 +3072,6 @@ async def get65(request: Request, response: Response) -> CertificateCollection:
 async def post65(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3470,9 +3080,6 @@ async def post65(request: Request, response: Response, body: CertificateOnCreate
 async def get66(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3484,9 +3091,6 @@ async def get66(request: Request, response: Response) -> CertificateCollection:
 async def post66(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3495,9 +3099,6 @@ async def post66(request: Request, response: Response, body: CertificateOnCreate
 async def get67(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3516,9 +3117,6 @@ async def post67(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3539,9 +3137,6 @@ async def get68(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3564,9 +3159,6 @@ async def post68(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3588,9 +3180,6 @@ async def get69(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3618,9 +3207,6 @@ async def post69(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3642,9 +3228,6 @@ async def get70(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3672,9 +3255,6 @@ async def post70(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3689,9 +3269,6 @@ async def post70(
 async def get71(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3714,9 +3291,6 @@ async def post71(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3731,9 +3305,6 @@ async def post71(
 async def get72(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3756,9 +3327,6 @@ async def post72(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3773,9 +3341,6 @@ async def post72(
 async def get73(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3798,9 +3363,6 @@ async def post73(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3815,9 +3377,6 @@ async def post73(
 async def get74(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3840,9 +3399,6 @@ async def post74(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3857,9 +3413,6 @@ async def post74(
 async def get75(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3882,9 +3435,6 @@ async def post75(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3899,9 +3449,6 @@ async def post75(
 async def get76(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3924,9 +3471,6 @@ async def post76(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -3948,9 +3492,6 @@ async def get77(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -3978,9 +3519,6 @@ async def post77(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -4001,9 +3539,6 @@ async def get78(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -4026,9 +3561,6 @@ async def post78(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -4049,9 +3581,6 @@ async def get79(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -4074,9 +3603,6 @@ async def post79(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))
 
 
@@ -4098,9 +3624,6 @@ async def get80(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CertificateCollection, s.get(**b))
 
 
@@ -4128,7 +3651,4 @@ async def post80(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Certificate, s.post(**b))

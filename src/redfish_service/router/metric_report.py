@@ -22,9 +22,6 @@ async def delete1(metric_report_id: str, request: Request, response: Response) -
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -43,7 +40,4 @@ async def get1(metric_report_id: str, request: Request, response: Response) -> M
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MetricReport, s.get(**b))

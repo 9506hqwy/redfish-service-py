@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(facility_id: str, request: Request, response: Response) -> PowerDomainCollection:
     s: Service = get_service(PowerDomainCollection, request)
     b: dict[str, Any] = {"facility_id": facility_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDomainCollection, s.get(**b))
 
 
@@ -37,7 +34,4 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PowerDomain, s.post(**b))

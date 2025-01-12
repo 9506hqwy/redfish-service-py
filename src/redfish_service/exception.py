@@ -59,6 +59,19 @@ class OperationNotAllowedError(RedfishError):
         super().__init__(HTTPStatus.METHOD_NOT_ALLOWED, error)
 
 
+class PreconditionFailedError(RedfishError):
+    def __init__(self) -> None:
+        info = {
+            "error": {
+                "code": "Base.1.19.0.PreconditionFailed",
+                "message": "The ETag supplied did not match the ETag required"
+                + " to change this resource.",
+            }
+        }
+        error = Error.model_validate(info)
+        super().__init__(HTTPStatus.PRECONDITION_FAILED, error)
+
+
 class ResourceAtUriUnauthorizedError(RedfishError):
     def __init__(self, uri: str, message: str):
         info = {

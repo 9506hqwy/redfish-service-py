@@ -22,9 +22,6 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Pu
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PumpCollection, s.get(**b))
 
 
@@ -43,9 +40,6 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Pu
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PumpCollection, s.get(**b))
 
 
@@ -64,9 +58,6 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Pu
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PumpCollection, s.get(**b))
 
 
@@ -79,7 +70,4 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Pu
 async def get4(chassis_id: str, request: Request, response: Response) -> PumpCollection:
     s: Service = get_service(PumpCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PumpCollection, s.get(**b))

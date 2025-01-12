@@ -24,9 +24,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryDomainCollection, s.get(**b))
 
 
@@ -35,9 +32,6 @@ async def get1(
 async def get2(chassis_id: str, request: Request, response: Response) -> MemoryDomainCollection:
     s: Service = get_service(MemoryDomainCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryDomainCollection, s.get(**b))
 
 
@@ -59,9 +53,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryDomainCollection, s.get(**b))
 
 
@@ -83,7 +74,4 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryDomainCollection, s.get(**b))

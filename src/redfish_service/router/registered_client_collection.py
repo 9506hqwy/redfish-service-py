@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> RegisteredClientCollection:
     s: Service = get_service(RegisteredClientCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(RegisteredClientCollection, s.get(**b))
 
 
@@ -30,7 +27,4 @@ async def post1(
 ) -> RegisteredClient:
     s: ServiceCollection = get_service_collection(RegisteredClientCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(RegisteredClient, s.post(**b))

@@ -23,9 +23,6 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnit, s.get(**b))
 
 
@@ -43,9 +40,6 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnit, s.patch(**b))
 
 
@@ -64,9 +58,6 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnit, s.get(**b))
 
 
@@ -85,9 +76,6 @@ async def patch2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnit, s.patch(**b))
 
 
@@ -106,9 +94,6 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnit, s.get(**b))
 
 
@@ -127,7 +112,4 @@ async def patch3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingUnit, s.patch(**b))

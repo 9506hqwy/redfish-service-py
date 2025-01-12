@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> SessionCollection:
     s: Service = get_service(SessionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(SessionCollection, s.get(**b))
 
 
@@ -26,7 +23,4 @@ async def get1(request: Request, response: Response) -> SessionCollection:
 async def post1(request: Request, response: Response, body: SessionOnCreate) -> Session:
     s: ServiceCollection = get_service_collection(SessionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Session, s.post(**b))

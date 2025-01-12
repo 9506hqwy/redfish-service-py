@@ -15,9 +15,6 @@ router = APIRouter()
 async def delete1(task_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Task, request)
     b: dict[str, Any] = {"task_id": task_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -26,9 +23,6 @@ async def delete1(task_id: str, request: Request, response: Response) -> None:
 async def get1(task_id: str, request: Request, response: Response) -> Task:
     s: Service = get_service(Task, request)
     b: dict[str, Any] = {"task_id": task_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Task, s.get(**b))
 
 
@@ -44,9 +38,6 @@ async def delete2(task_id: str, task_id2: str, request: Request, response: Respo
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -64,7 +55,4 @@ async def get2(task_id: str, task_id2: str, request: Request, response: Response
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Task, s.get(**b))

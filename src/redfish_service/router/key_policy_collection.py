@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> KeyPolicyCollection:
     s: Service = get_service(KeyPolicyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyPolicyCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> KeyPolicyCollection:
 async def post1(request: Request, response: Response, body: KeyPolicyOnCreate) -> KeyPolicy:
     s: ServiceCollection = get_service_collection(KeyPolicyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyPolicy, s.post(**b))

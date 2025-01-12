@@ -17,9 +17,6 @@ router = APIRouter()
 async def delete1(license_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(License, request)
     b: dict[str, Any] = {"license_id": license_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -28,7 +25,4 @@ async def delete1(license_id: str, request: Request, response: Response) -> None
 async def get1(license_id: str, request: Request, response: Response) -> License:
     s: Service = get_service(License, request)
     b: dict[str, Any] = {"license_id": license_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(License, s.get(**b))

@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> OutboundConnectionCollection:
     s: Service = get_service(OutboundConnectionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(OutboundConnectionCollection, s.get(**b))
 
 
@@ -32,7 +29,4 @@ async def post1(
 ) -> OutboundConnection:
     s: ServiceCollection = get_service_collection(OutboundConnectionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(OutboundConnection, s.post(**b))

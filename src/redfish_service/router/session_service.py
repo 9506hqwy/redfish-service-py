@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> SessionService:
     s: Service = get_service(SessionService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(SessionService, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def patch1(
 ) -> SessionService:
     s: Service = get_service(SessionService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(SessionService, s.patch(**b))

@@ -18,7 +18,4 @@ async def get1(json_schema_file_id: str, request: Request, response: Response) -
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(JsonSchemaFile, s.get(**b))

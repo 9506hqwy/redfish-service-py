@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> TelemetryService:
     s: Service = get_service(TelemetryService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(TelemetryService, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def patch1(
 ) -> TelemetryService:
     s: Service = get_service(TelemetryService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(TelemetryService, s.patch(**b))

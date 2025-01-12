@@ -24,9 +24,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FabricAdapterCollection, s.get(**b))
 
 
@@ -48,9 +45,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FabricAdapterCollection, s.get(**b))
 
 
@@ -72,9 +66,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FabricAdapterCollection, s.get(**b))
 
 
@@ -83,7 +74,4 @@ async def get3(
 async def get4(chassis_id: str, request: Request, response: Response) -> FabricAdapterCollection:
     s: Service = get_service(FabricAdapterCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FabricAdapterCollection, s.get(**b))

@@ -32,7 +32,4 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(OperatingConfig, s.get(**b))

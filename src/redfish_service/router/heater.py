@@ -26,9 +26,6 @@ async def get1(chassis_id: str, heater_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Heater, s.get(**b))
 
 
@@ -48,7 +45,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Heater, s.patch(**b))

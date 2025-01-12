@@ -14,7 +14,4 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> SwitchCollection:
     s: Service = get_service(SwitchCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(SwitchCollection, s.get(**b))

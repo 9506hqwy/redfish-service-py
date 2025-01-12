@@ -27,9 +27,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FileSystemMetrics, s.get(**b))
 
 
@@ -51,7 +48,4 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FileSystemMetrics, s.get(**b))

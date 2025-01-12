@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> EventDestinationCollection:
     s: Service = get_service(EventDestinationCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EventDestinationCollection, s.get(**b))
 
 
@@ -30,7 +27,4 @@ async def post1(
 ) -> EventDestination:
     s: ServiceCollection = get_service_collection(EventDestinationCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EventDestination, s.post(**b))

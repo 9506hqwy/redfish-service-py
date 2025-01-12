@@ -22,9 +22,6 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(OperatingSystem, s.get(**b))
 
 
@@ -46,9 +43,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(OperatingSystem, s.get(**b))
 
 
@@ -70,7 +64,4 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(OperatingSystem, s.get(**b))

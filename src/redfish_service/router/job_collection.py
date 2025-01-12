@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> JobCollection:
     s: Service = get_service(JobCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(JobCollection, s.get(**b))
 
 
@@ -28,9 +25,6 @@ async def get1(request: Request, response: Response) -> JobCollection:
 async def post1(request: Request, response: Response, body: JobOnCreate) -> Job:
     s: ServiceCollection = get_service_collection(JobCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Job, s.post(**b))
 
 
@@ -39,9 +33,6 @@ async def post1(request: Request, response: Response, body: JobOnCreate) -> Job:
 async def get2(job_id: str, request: Request, response: Response) -> JobCollection:
     s: Service = get_service(JobCollection, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(JobCollection, s.get(**b))
 
 
@@ -53,7 +44,4 @@ async def get2(job_id: str, request: Request, response: Response) -> JobCollecti
 async def post2(job_id: str, request: Request, response: Response, body: JobOnCreate) -> Job:
     s: ServiceCollection = get_service_collection(JobCollection, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Job, s.post(**b))

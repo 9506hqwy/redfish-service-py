@@ -14,9 +14,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> PcieDeviceCollection:
     s: Service = get_service(PcieDeviceCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDeviceCollection, s.get(**b))
 
 
@@ -35,9 +32,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDeviceCollection, s.get(**b))
 
 
@@ -59,9 +53,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDeviceCollection, s.get(**b))
 
 
@@ -83,7 +74,4 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDeviceCollection, s.get(**b))

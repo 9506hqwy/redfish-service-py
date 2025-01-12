@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> MetricDefinitionCollection:
     s: Service = get_service(MetricDefinitionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MetricDefinitionCollection, s.get(**b))
 
 
@@ -32,7 +29,4 @@ async def post1(
 ) -> MetricDefinition:
     s: ServiceCollection = get_service_collection(MetricDefinitionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MetricDefinition, s.post(**b))

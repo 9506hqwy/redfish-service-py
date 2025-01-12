@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ChassisCollection:
     s: Service = get_service(ChassisCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ChassisCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> ChassisCollection:
 async def post1(request: Request, response: Response, body: ChassisOnCreate) -> Chassis:
     s: ServiceCollection = get_service_collection(ChassisCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Chassis, s.post(**b))

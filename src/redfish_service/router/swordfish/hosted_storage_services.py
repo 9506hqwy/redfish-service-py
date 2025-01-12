@@ -26,9 +26,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(HostedStorageServices, s.get(**b))
 
 
@@ -50,7 +47,4 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageService, s.post(**b))

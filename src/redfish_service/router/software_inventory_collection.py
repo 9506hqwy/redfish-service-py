@@ -14,9 +14,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> SoftwareInventoryCollection:
     s: Service = get_service(SoftwareInventoryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(SoftwareInventoryCollection, s.get(**b))
 
 
@@ -25,7 +22,4 @@ async def get1(request: Request, response: Response) -> SoftwareInventoryCollect
 async def get2(request: Request, response: Response) -> SoftwareInventoryCollection:
     s: Service = get_service(SoftwareInventoryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(SoftwareInventoryCollection, s.get(**b))

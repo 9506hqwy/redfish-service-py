@@ -32,9 +32,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -61,9 +58,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -92,9 +86,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -121,9 +112,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccelerationFunction, s.get(**b))
 
 
@@ -152,7 +140,4 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccelerationFunction, s.get(**b))

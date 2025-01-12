@@ -19,9 +19,6 @@ async def delete1(nvme_domain_id: str, request: Request, response: Response) -> 
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -34,9 +31,6 @@ async def get1(nvme_domain_id: str, request: Request, response: Response) -> Nvm
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(NvmeDomain, s.get(**b))
 
 
@@ -52,7 +46,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(NvmeDomain, s.patch(**b))

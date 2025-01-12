@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> StorageServiceCollection:
     s: Service = get_service(StorageServiceCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageServiceCollection, s.get(**b))
 
 
@@ -30,9 +27,6 @@ async def post1(
 ) -> StorageService:
     s: ServiceCollection = get_service_collection(StorageServiceCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageService, s.post(**b))
 
 
@@ -51,9 +45,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageServiceCollection, s.get(**b))
 
 
@@ -75,7 +66,4 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(StorageService, s.post(**b))

@@ -34,9 +34,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryRegionCollection, s.get(**b))
 
 
@@ -66,7 +63,4 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(MemoryRegion, s.post(**b))

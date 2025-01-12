@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ManagerAccountCollection:
     s: Service = get_service(ManagerAccountCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ManagerAccountCollection, s.get(**b))
 
 
@@ -30,9 +27,6 @@ async def post1(
 ) -> ManagerAccount:
     s: ServiceCollection = get_service_collection(ManagerAccountCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ManagerAccount, s.post(**b))
 
 
@@ -47,9 +41,6 @@ async def post1(
 async def get2(manager_id: str, request: Request, response: Response) -> ManagerAccountCollection:
     s: Service = get_service(ManagerAccountCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ManagerAccountCollection, s.get(**b))
 
 
@@ -72,7 +63,4 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ManagerAccount, s.post(**b))

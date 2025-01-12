@@ -15,9 +15,6 @@ router = APIRouter()
 async def delete1(job_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -26,9 +23,6 @@ async def delete1(job_id: str, request: Request, response: Response) -> None:
 async def get1(job_id: str, request: Request, response: Response) -> Job:
     s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Job, s.get(**b))
 
 
@@ -37,9 +31,6 @@ async def get1(job_id: str, request: Request, response: Response) -> Job:
 async def patch1(job_id: str, request: Request, response: Response, body: JobOnUpdate) -> Job:
     s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Job, s.patch(**b))
 
 
@@ -55,9 +46,6 @@ async def delete2(job_id: str, job_id2: str, request: Request, response: Respons
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -75,9 +63,6 @@ async def get2(job_id: str, job_id2: str, request: Request, response: Response) 
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Job, s.get(**b))
 
 
@@ -96,7 +81,4 @@ async def patch2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Job, s.patch(**b))

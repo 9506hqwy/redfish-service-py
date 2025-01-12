@@ -23,9 +23,6 @@ async def get1(cooling_loop_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingLoop, s.get(**b))
 
 
@@ -43,7 +40,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CoolingLoop, s.patch(**b))

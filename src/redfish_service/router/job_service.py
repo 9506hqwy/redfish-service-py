@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> JobService:
     s: Service = get_service(JobService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(JobService, s.get(**b))
 
 
@@ -26,7 +23,4 @@ async def get1(request: Request, response: Response) -> JobService:
 async def patch1(request: Request, response: Response, body: JobServiceOnUpdate) -> JobService:
     s: Service = get_service(JobService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(JobService, s.patch(**b))

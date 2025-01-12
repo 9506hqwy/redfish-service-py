@@ -27,9 +27,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -46,9 +43,6 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Fi
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -70,9 +64,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -94,9 +85,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -115,9 +103,6 @@ async def get5(cooling_unit_id: str, request: Request, response: Response) -> Fi
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -139,9 +124,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -163,9 +145,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -184,9 +163,6 @@ async def get8(cooling_unit_id: str, request: Request, response: Response) -> Fi
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -208,9 +184,6 @@ async def get9(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))
 
 
@@ -232,7 +205,4 @@ async def get10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(FilterCollection, s.get(**b))

@@ -20,9 +20,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> LeakDetection:
     s: Service = get_service(LeakDetection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LeakDetection, s.get(**b))
 
 
@@ -41,9 +38,6 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Le
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LeakDetection, s.get(**b))
 
 
@@ -62,9 +56,6 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Le
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LeakDetection, s.get(**b))
 
 
@@ -83,7 +74,4 @@ async def get4(cooling_unit_id: str, request: Request, response: Response) -> Le
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LeakDetection, s.get(**b))

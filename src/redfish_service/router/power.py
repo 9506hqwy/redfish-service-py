@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> Power:
     s: Service = get_service(Power, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Power, s.get(**b))
 
 
@@ -33,7 +30,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Power, s.patch(**b))

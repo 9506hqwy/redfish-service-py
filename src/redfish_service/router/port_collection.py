@@ -25,9 +25,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -54,9 +51,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -83,9 +77,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -107,9 +98,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -131,9 +119,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -155,9 +140,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -179,9 +161,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -203,9 +182,6 @@ async def get8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -227,9 +203,6 @@ async def get9(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -251,9 +224,6 @@ async def get10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -275,9 +245,6 @@ async def get11(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -304,9 +271,6 @@ async def get12(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -333,9 +297,6 @@ async def get13(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -357,9 +318,6 @@ async def get14(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -381,9 +339,6 @@ async def get15(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -412,9 +367,6 @@ async def get16(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -443,9 +395,6 @@ async def get17(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -472,9 +421,6 @@ async def get18(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -501,9 +447,6 @@ async def get19(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -530,9 +473,6 @@ async def get20(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -559,9 +499,6 @@ async def get21(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -588,9 +525,6 @@ async def get22(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -617,9 +551,6 @@ async def get23(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -646,9 +577,6 @@ async def get24(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -670,9 +598,6 @@ async def get25(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -694,9 +619,6 @@ async def get26(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -725,9 +647,6 @@ async def get27(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -756,9 +675,6 @@ async def get28(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -785,9 +701,6 @@ async def get29(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -814,9 +727,6 @@ async def get30(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -843,9 +753,6 @@ async def get31(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -872,9 +779,6 @@ async def get32(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -901,9 +805,6 @@ async def get33(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -925,9 +826,6 @@ async def get34(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -949,9 +847,6 @@ async def get35(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -960,9 +855,6 @@ async def get35(
 async def get36(manager_id: str, request: Request, response: Response) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -975,9 +867,6 @@ async def get36(manager_id: str, request: Request, response: Response) -> PortCo
 async def get37(manager_id: str, request: Request, response: Response) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))
 
 
@@ -990,7 +879,4 @@ async def get37(manager_id: str, request: Request, response: Response) -> PortCo
 async def get38(manager_id: str, request: Request, response: Response) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PortCollection, s.get(**b))

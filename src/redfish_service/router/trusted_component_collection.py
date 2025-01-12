@@ -18,7 +18,4 @@ async def get1(
 ) -> TrustedComponentCollection:
     s: Service = get_service(TrustedComponentCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(TrustedComponentCollection, s.get(**b))

@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -53,9 +50,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -76,9 +70,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -101,9 +92,6 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -124,9 +112,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -149,9 +134,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -172,9 +154,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -197,9 +176,6 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -220,9 +196,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -245,9 +218,6 @@ async def post5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -268,9 +238,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -293,9 +260,6 @@ async def post6(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -317,9 +281,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -347,9 +308,6 @@ async def post7(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -371,9 +329,6 @@ async def get8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -401,9 +356,6 @@ async def post8(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -425,9 +377,6 @@ async def get9(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -455,9 +404,6 @@ async def post9(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -479,9 +425,6 @@ async def get10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -509,9 +452,6 @@ async def post10(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))
 
 
@@ -533,9 +473,6 @@ async def get11(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfServiceCollection, s.get(**b))
 
 
@@ -563,7 +500,4 @@ async def post11(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LineOfService, s.post(**b))

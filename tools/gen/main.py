@@ -920,9 +920,6 @@ def write_routers(
                                     f"async def delete{index}({args}) -> None:\n",
                                     f"    s: Service = get_service({c.cls_name}, request)\n",
                                     f"    b: dict[str, Any] = {{{body}}}\n",
-                                    "\n",
-                                    '    response.headers["OData-Version"] = "4.0"\n',
-                                    "\n",
                                     "    return s.delete(**b)\n",
                                 ]
                             )
@@ -937,9 +934,6 @@ def write_routers(
                                 f"async def get{index}({args}) -> {c.cls_name}:\n",
                                 f"    s: Service = get_service({c.cls_name}, request)\n",
                                 f"    b: dict[str, Any] = {{{body}}}\n",
-                                "\n",
-                                '    response.headers["OData-Version"] = "4.0"\n',
-                                "\n",
                                 f"    return cast({c.cls_name}, s.get(**b))\n",
                             ]
                         )
@@ -965,9 +959,6 @@ def write_routers(
                                     f"async def patch{index}({uargs}) -> {c.cls_name}:\n",
                                     f"    s: Service = get_service({c.cls_name}, request)\n",
                                     f"    b: dict[str, Any] = {{{ubody}}}\n",
-                                    "\n",
-                                    '    response.headers["OData-Version"] = "4.0"\n',
-                                    "\n",
                                     f"    return cast({c.cls_name}, s.patch(**b))\n",
                                 ]
                             )
@@ -998,9 +989,6 @@ def write_routers(
                                     f"async def post{index}({cargs}) -> {c.item_info.cls_name}:\n",
                                     f"    s: ServiceCollection = get_service_collection({c.cls_name}, request)\n",  # noqa E501
                                     f"    b: dict[str, Any] = {{{cbody}}}\n",
-                                    "\n",
-                                    '    response.headers["OData-Version"] = "4.0"\n',
-                                    "\n",
                                     f"    return cast({c.item_info.cls_name}, s.post(**b))\n",
                                 ]
                             )

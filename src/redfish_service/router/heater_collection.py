@@ -18,7 +18,4 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> HeaterCollection:
     s: Service = get_service(HeaterCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(HeaterCollection, s.get(**b))

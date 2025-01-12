@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(storage_id: str, request: Request, response: Response) -> EndpointGroupCollection:
     s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroupCollection, s.get(**b))
 
 
@@ -37,9 +34,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroup, s.post(**b))
 
 
@@ -61,9 +55,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroupCollection, s.get(**b))
 
 
@@ -91,9 +82,6 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroup, s.post(**b))
 
 
@@ -114,9 +102,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroupCollection, s.get(**b))
 
 
@@ -139,9 +124,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroup, s.post(**b))
 
 
@@ -150,9 +132,6 @@ async def post3(
 async def get4(fabric_id: str, request: Request, response: Response) -> EndpointGroupCollection:
     s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroupCollection, s.get(**b))
 
 
@@ -171,7 +150,4 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EndpointGroup, s.post(**b))

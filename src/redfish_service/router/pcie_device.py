@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.get(**b))
 
 
@@ -54,9 +51,6 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.patch(**b))
 
 
@@ -78,9 +72,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.get(**b))
 
 
@@ -104,9 +95,6 @@ async def patch2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.patch(**b))
 
 
@@ -133,9 +121,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.get(**b))
 
 
@@ -161,9 +146,6 @@ async def patch3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.patch(**b))
 
 
@@ -190,9 +172,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.get(**b))
 
 
@@ -218,7 +197,4 @@ async def patch4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(PcieDevice, s.patch(**b))

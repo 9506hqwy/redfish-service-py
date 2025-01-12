@@ -29,9 +29,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -59,9 +56,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -83,9 +77,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -113,9 +104,6 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -142,9 +130,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -174,9 +159,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -203,9 +185,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -235,9 +214,6 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -259,9 +235,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -289,9 +262,6 @@ async def post5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -300,9 +270,6 @@ async def post5(
 async def get6(request: Request, response: Response) -> LogEntryCollection:
     s: Service = get_service(LogEntryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -312,9 +279,6 @@ async def get6(request: Request, response: Response) -> LogEntryCollection:
 async def post6(request: Request, response: Response, body: LogEntryOnCreate) -> LogEntry:
     s: ServiceCollection = get_service_collection(LogEntryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -323,9 +287,6 @@ async def post6(request: Request, response: Response, body: LogEntryOnCreate) ->
 async def get7(request: Request, response: Response) -> LogEntryCollection:
     s: Service = get_service(LogEntryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -337,9 +298,6 @@ async def get7(request: Request, response: Response) -> LogEntryCollection:
 async def post7(request: Request, response: Response, body: LogEntryOnCreate) -> LogEntry:
     s: ServiceCollection = get_service_collection(LogEntryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -361,9 +319,6 @@ async def get8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -391,9 +346,6 @@ async def post8(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))
 
 
@@ -420,9 +372,6 @@ async def get9(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntryCollection, s.get(**b))
 
 
@@ -452,7 +401,4 @@ async def post9(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(LogEntry, s.post(**b))

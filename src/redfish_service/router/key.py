@@ -15,9 +15,6 @@ router = APIRouter()
 async def delete1(key_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -26,9 +23,6 @@ async def delete1(key_id: str, request: Request, response: Response) -> None:
 async def get1(key_id: str, request: Request, response: Response) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -37,9 +31,6 @@ async def get1(key_id: str, request: Request, response: Response) -> Key:
 async def patch1(key_id: str, request: Request, response: Response, body: KeyOnUpdate) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -50,9 +41,6 @@ async def patch1(key_id: str, request: Request, response: Response, body: KeyOnU
 async def delete2(key_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -65,9 +53,6 @@ async def delete2(key_id: str, request: Request, response: Response) -> None:
 async def get2(key_id: str, request: Request, response: Response) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -78,9 +63,6 @@ async def get2(key_id: str, request: Request, response: Response) -> Key:
 async def patch2(key_id: str, request: Request, response: Response, body: KeyOnUpdate) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -91,9 +73,6 @@ async def patch2(key_id: str, request: Request, response: Response, body: KeyOnU
 async def delete3(key_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -106,9 +85,6 @@ async def delete3(key_id: str, request: Request, response: Response) -> None:
 async def get3(key_id: str, request: Request, response: Response) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -119,9 +95,6 @@ async def get3(key_id: str, request: Request, response: Response) -> Key:
 async def patch3(key_id: str, request: Request, response: Response, body: KeyOnUpdate) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -140,9 +113,6 @@ async def delete4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -162,9 +132,6 @@ async def get4(manager_account_id: str, key_id: str, request: Request, response:
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -184,9 +151,6 @@ async def patch4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -206,9 +170,6 @@ async def delete5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -231,9 +192,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -259,9 +217,6 @@ async def patch5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -280,9 +235,6 @@ async def delete6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -304,9 +256,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -330,9 +279,6 @@ async def patch6(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -348,9 +294,6 @@ async def delete7(aggregation_source_id: str, request: Request, response: Respon
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -369,9 +312,6 @@ async def get7(aggregation_source_id: str, request: Request, response: Response)
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -390,9 +330,6 @@ async def patch7(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))
 
 
@@ -408,9 +345,6 @@ async def delete8(aggregation_source_id: str, request: Request, response: Respon
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -429,9 +363,6 @@ async def get8(aggregation_source_id: str, request: Request, response: Response)
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.get(**b))
 
 
@@ -450,7 +381,4 @@ async def patch8(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Key, s.patch(**b))

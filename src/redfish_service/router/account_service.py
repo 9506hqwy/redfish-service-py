@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> AccountService:
     s: Service = get_service(AccountService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccountService, s.get(**b))
 
 
@@ -28,9 +25,6 @@ async def patch1(
 ) -> AccountService:
     s: Service = get_service(AccountService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccountService, s.patch(**b))
 
 
@@ -43,9 +37,6 @@ async def patch1(
 async def get2(manager_id: str, request: Request, response: Response) -> AccountService:
     s: Service = get_service(AccountService, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccountService, s.get(**b))
 
 
@@ -63,7 +54,4 @@ async def patch2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(AccountService, s.patch(**b))

@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> ConnectionCollection:
     s: Service = get_service(ConnectionCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ConnectionCollection, s.get(**b))
 
 
@@ -37,9 +34,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Connection, s.post(**b))
 
 
@@ -48,9 +42,6 @@ async def post1(
 async def get2(storage_id: str, request: Request, response: Response) -> ConnectionCollection:
     s: Service = get_service(ConnectionCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ConnectionCollection, s.get(**b))
 
 
@@ -69,7 +60,4 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Connection, s.post(**b))

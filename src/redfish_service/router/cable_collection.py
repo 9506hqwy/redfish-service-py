@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> CableCollection:
     s: Service = get_service(CableCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(CableCollection, s.get(**b))
 
 
@@ -28,7 +25,4 @@ async def get1(request: Request, response: Response) -> CableCollection:
 async def post1(request: Request, response: Response, body: CableOnCreate) -> Cable:
     s: ServiceCollection = get_service_collection(CableCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Cable, s.post(**b))

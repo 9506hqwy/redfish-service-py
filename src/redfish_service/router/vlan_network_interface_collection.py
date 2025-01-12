@@ -34,9 +34,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -66,9 +63,6 @@ async def post1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))
 
 
@@ -90,9 +84,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -120,9 +111,6 @@ async def post2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))
 
 
@@ -144,9 +132,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -174,9 +159,6 @@ async def post3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))
 
 
@@ -198,9 +180,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -228,9 +207,6 @@ async def post4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))
 
 
@@ -257,9 +233,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -289,9 +262,6 @@ async def post5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))
 
 
@@ -313,9 +283,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -343,9 +310,6 @@ async def post6(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))
 
 
@@ -372,9 +336,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterfaceCollection, s.get(**b))
 
 
@@ -404,7 +365,4 @@ async def post7(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VlanNetworkInterface, s.post(**b))

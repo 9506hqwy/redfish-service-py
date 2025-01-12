@@ -17,9 +17,6 @@ router = APIRouter()
 async def delete1(key_policy_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(KeyPolicy, request)
     b: dict[str, Any] = {"key_policy_id": key_policy_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -32,9 +29,6 @@ async def delete1(key_policy_id: str, request: Request, response: Response) -> N
 async def get1(key_policy_id: str, request: Request, response: Response) -> KeyPolicy:
     s: Service = get_service(KeyPolicy, request)
     b: dict[str, Any] = {"key_policy_id": key_policy_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyPolicy, s.get(**b))
 
 
@@ -52,7 +46,4 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(KeyPolicy, s.patch(**b))

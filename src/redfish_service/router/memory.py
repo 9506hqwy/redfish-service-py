@@ -26,9 +26,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -51,9 +48,6 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))
 
 
@@ -80,9 +74,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -108,9 +99,6 @@ async def patch2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))
 
 
@@ -128,9 +116,6 @@ async def get3(chassis_id: str, memory_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -149,9 +134,6 @@ async def patch3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))
 
 
@@ -173,9 +155,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -199,9 +178,6 @@ async def patch4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))
 
 
@@ -228,9 +204,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -256,9 +229,6 @@ async def patch5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))
 
 
@@ -280,9 +250,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -306,9 +273,6 @@ async def patch6(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))
 
 
@@ -335,9 +299,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.get(**b))
 
 
@@ -363,7 +324,4 @@ async def patch7(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Memory, s.patch(**b))

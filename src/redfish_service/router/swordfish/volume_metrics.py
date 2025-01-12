@@ -28,9 +28,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -59,9 +56,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -84,9 +78,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -115,9 +106,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -144,9 +132,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -175,9 +160,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -200,9 +182,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -231,9 +210,6 @@ async def get8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -255,9 +231,6 @@ async def get9(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -286,9 +259,6 @@ async def get10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -319,9 +289,6 @@ async def get11(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -350,9 +317,6 @@ async def get12(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -383,9 +347,6 @@ async def get13(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -408,9 +369,6 @@ async def get14(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -437,9 +395,6 @@ async def get15(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -468,9 +423,6 @@ async def get16(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -497,9 +449,6 @@ async def get17(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -528,9 +477,6 @@ async def get18(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -552,9 +498,6 @@ async def get19(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))
 
 
@@ -583,7 +526,4 @@ async def get20(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(VolumeMetrics, s.get(**b))

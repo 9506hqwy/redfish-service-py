@@ -26,9 +26,6 @@ async def delete1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -51,9 +48,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -79,9 +73,6 @@ async def patch1(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -107,9 +98,6 @@ async def delete2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -138,9 +126,6 @@ async def get2(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -168,9 +153,6 @@ async def patch2(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -190,9 +172,6 @@ async def delete3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -215,9 +194,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -243,9 +219,6 @@ async def patch3(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -271,9 +244,6 @@ async def delete4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -302,9 +272,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -332,9 +299,6 @@ async def patch4(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -358,9 +322,6 @@ async def delete5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -387,9 +348,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -415,9 +373,6 @@ async def patch5(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -443,9 +398,6 @@ async def delete6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -474,9 +426,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -504,9 +453,6 @@ async def patch6(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -526,9 +472,6 @@ async def delete7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -551,9 +494,6 @@ async def get7(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -579,9 +519,6 @@ async def patch7(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -607,9 +544,6 @@ async def delete8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -638,9 +572,6 @@ async def get8(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -668,9 +599,6 @@ async def patch8(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -686,9 +614,6 @@ async def delete9(storage_id: str, volume_id: str, request: Request, response: R
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -706,9 +631,6 @@ async def get9(storage_id: str, volume_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -727,9 +649,6 @@ async def patch9(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -755,9 +674,6 @@ async def delete10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -786,9 +702,6 @@ async def get10(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -816,9 +729,6 @@ async def patch10(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -846,9 +756,6 @@ async def delete11(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -879,9 +786,6 @@ async def get11(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -911,9 +815,6 @@ async def patch11(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -939,9 +840,6 @@ async def delete12(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -970,9 +868,6 @@ async def get12(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1000,9 +895,6 @@ async def patch12(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1030,9 +922,6 @@ async def delete13(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1063,9 +952,6 @@ async def get13(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1095,9 +981,6 @@ async def patch13(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1117,9 +1000,6 @@ async def delete14(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1142,9 +1022,6 @@ async def get14(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1170,9 +1047,6 @@ async def patch14(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1196,9 +1070,6 @@ async def delete15(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1225,9 +1096,6 @@ async def get15(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1253,9 +1121,6 @@ async def patch15(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1281,9 +1146,6 @@ async def delete16(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1312,9 +1174,6 @@ async def get16(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1342,9 +1201,6 @@ async def patch16(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1368,9 +1224,6 @@ async def delete17(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1397,9 +1250,6 @@ async def get17(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1425,9 +1275,6 @@ async def patch17(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1453,9 +1300,6 @@ async def delete18(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1484,9 +1328,6 @@ async def get18(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1514,9 +1355,6 @@ async def patch18(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1535,9 +1373,6 @@ async def delete19(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1559,9 +1394,6 @@ async def get19(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1585,9 +1417,6 @@ async def patch19(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))
 
 
@@ -1613,9 +1442,6 @@ async def delete20(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return s.delete(**b)
 
 
@@ -1644,9 +1470,6 @@ async def get20(
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.get(**b))
 
 
@@ -1674,7 +1497,4 @@ async def patch20(
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Volume, s.patch(**b))

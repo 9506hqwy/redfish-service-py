@@ -24,9 +24,6 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Re
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ReservoirCollection, s.get(**b))
 
 
@@ -45,9 +42,6 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Re
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ReservoirCollection, s.get(**b))
 
 
@@ -66,7 +60,4 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Re
         "request": request,
         "response": response,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ReservoirCollection, s.get(**b))

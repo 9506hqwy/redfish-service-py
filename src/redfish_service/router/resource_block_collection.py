@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = get_service(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlockCollection, s.get(**b))
 
 
@@ -30,9 +27,6 @@ async def post1(
 ) -> ResourceBlock:
     s: ServiceCollection = get_service_collection(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlock, s.post(**b))
 
 
@@ -41,9 +35,6 @@ async def post1(
 async def get2(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = get_service(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlockCollection, s.get(**b))
 
 
@@ -55,9 +46,6 @@ async def post2(
 ) -> ResourceBlock:
     s: ServiceCollection = get_service_collection(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlock, s.post(**b))
 
 
@@ -66,9 +54,6 @@ async def post2(
 async def get3(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = get_service(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlockCollection, s.get(**b))
 
 
@@ -82,9 +67,6 @@ async def post3(
 ) -> ResourceBlock:
     s: ServiceCollection = get_service_collection(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlock, s.post(**b))
 
 
@@ -93,9 +75,6 @@ async def post3(
 async def get4(request: Request, response: Response) -> ResourceBlockCollection:
     s: Service = get_service(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlockCollection, s.get(**b))
 
 
@@ -107,7 +86,4 @@ async def post4(
 ) -> ResourceBlock:
     s: ServiceCollection = get_service_collection(ResourceBlockCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ResourceBlock, s.post(**b))

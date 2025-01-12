@@ -15,9 +15,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> EventService:
     s: Service = get_service(EventService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EventService, s.get(**b))
 
 
@@ -26,7 +23,4 @@ async def get1(request: Request, response: Response) -> EventService:
 async def patch1(request: Request, response: Response, body: EventServiceOnUpdate) -> EventService:
     s: Service = get_service(EventService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(EventService, s.patch(**b))

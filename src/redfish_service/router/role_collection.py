@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> RoleCollection:
     s: Service = get_service(RoleCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(RoleCollection, s.get(**b))
 
 
@@ -28,9 +25,6 @@ async def get1(request: Request, response: Response) -> RoleCollection:
 async def post1(request: Request, response: Response, body: RoleOnCreate) -> Role:
     s: ServiceCollection = get_service_collection(RoleCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Role, s.post(**b))
 
 
@@ -45,9 +39,6 @@ async def post1(request: Request, response: Response, body: RoleOnCreate) -> Rol
 async def get2(manager_id: str, request: Request, response: Response) -> RoleCollection:
     s: Service = get_service(RoleCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(RoleCollection, s.get(**b))
 
 
@@ -68,7 +59,4 @@ async def post2(manager_id: str, request: Request, response: Response, body: Rol
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Role, s.post(**b))

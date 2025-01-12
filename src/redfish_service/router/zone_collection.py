@@ -16,9 +16,6 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> ZoneCollection:
     s: Service = get_service(ZoneCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ZoneCollection, s.get(**b))
 
 
@@ -33,9 +30,6 @@ async def post1(fabric_id: str, request: Request, response: Response, body: Zone
         "response": response,
         "body": body,
     }
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Zone, s.post(**b))
 
 
@@ -44,9 +38,6 @@ async def post1(fabric_id: str, request: Request, response: Response, body: Zone
 async def get2(request: Request, response: Response) -> ZoneCollection:
     s: Service = get_service(ZoneCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(ZoneCollection, s.get(**b))
 
 
@@ -58,7 +49,4 @@ async def get2(request: Request, response: Response) -> ZoneCollection:
 async def post2(request: Request, response: Response, body: ZoneOnCreate) -> Zone:
     s: ServiceCollection = get_service_collection(ZoneCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
-
-    response.headers["OData-Version"] = "4.0"
-
     return cast(Zone, s.post(**b))
