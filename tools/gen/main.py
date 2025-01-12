@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.12"
+# ///
+
 from __future__ import annotations  # PEP563 Forward References
 
 import itertools
