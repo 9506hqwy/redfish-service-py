@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.key_policy import KeyPolicy, KeyPolicyOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -14,7 +15,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(key_policy_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(KeyPolicy)
+    s: Service = get_service(KeyPolicy, request)
     b: dict[str, Any] = {"key_policy_id": key_policy_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -29,7 +30,7 @@ async def delete1(key_policy_id: str, request: Request, response: Response) -> N
     "/redfish/v1/KeyService/NVMeoFKeyPolicies/{key_policy_id}", response_model_exclude_none=True
 )
 async def get1(key_policy_id: str, request: Request, response: Response) -> KeyPolicy:
-    s: Service = find_service(KeyPolicy)
+    s: Service = get_service(KeyPolicy, request)
     b: dict[str, Any] = {"key_policy_id": key_policy_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -44,7 +45,7 @@ async def get1(key_policy_id: str, request: Request, response: Response) -> KeyP
 async def patch1(
     key_policy_id: str, request: Request, response: Response, body: KeyPolicyOnUpdate
 ) -> KeyPolicy:
-    s: Service = find_service(KeyPolicy)
+    s: Service = get_service(KeyPolicy, request)
     b: dict[str, Any] = {
         "key_policy_id": key_policy_id,
         "request": request,

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.assembly import Assembly, AssemblyOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
 async def get1(chassis_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -25,7 +26,7 @@ async def get1(chassis_id: str, request: Request, response: Response) -> Assembl
 async def patch1(
     chassis_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "request": request,
@@ -49,7 +50,7 @@ async def patch1(
 async def get2(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -76,7 +77,7 @@ async def patch2(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -98,7 +99,7 @@ async def patch2(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Assembly", response_model_exclude_none=True
 )
 async def get3(chassis_id: str, drive_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -118,7 +119,7 @@ async def get3(chassis_id: str, drive_id: str, request: Request, response: Respo
 async def patch3(
     chassis_id: str, drive_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -143,7 +144,7 @@ async def patch3(
 async def get4(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -170,7 +171,7 @@ async def patch4(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -196,7 +197,7 @@ async def patch4(
 async def get5(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -221,7 +222,7 @@ async def patch5(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -251,7 +252,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -280,7 +281,7 @@ async def patch6(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -307,7 +308,7 @@ async def patch6(
 async def get7(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -334,7 +335,7 @@ async def patch7(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -360,7 +361,7 @@ async def patch7(
 async def get8(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -385,7 +386,7 @@ async def patch8(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -415,7 +416,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -444,7 +445,7 @@ async def patch9(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -471,7 +472,7 @@ async def patch9(
 async def get10(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -496,7 +497,7 @@ async def patch10(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -521,7 +522,7 @@ async def patch10(
 async def get11(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -546,7 +547,7 @@ async def patch11(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -575,7 +576,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -602,7 +603,7 @@ async def patch12(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -628,7 +629,7 @@ async def patch12(
 async def get13(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -653,7 +654,7 @@ async def patch13(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -682,7 +683,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -709,7 +710,7 @@ async def patch14(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -735,7 +736,7 @@ async def patch14(
 async def get15(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -760,7 +761,7 @@ async def patch15(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -785,7 +786,7 @@ async def patch15(
 async def get16(
     chassis_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -810,7 +811,7 @@ async def patch16(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -835,7 +836,7 @@ async def patch16(
 async def get17(
     computer_system_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
@@ -860,7 +861,7 @@ async def patch17(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
@@ -885,7 +886,7 @@ async def patch17(
 async def get18(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -910,7 +911,7 @@ async def patch18(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -935,7 +936,7 @@ async def patch18(
 async def get19(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -960,7 +961,7 @@ async def patch19(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -989,7 +990,7 @@ async def get20(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -1016,7 +1017,7 @@ async def patch20(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -1047,7 +1048,7 @@ async def get21(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -1076,7 +1077,7 @@ async def patch21(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -1103,7 +1104,7 @@ async def patch21(
 async def get22(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1128,7 +1129,7 @@ async def patch22(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1157,7 +1158,7 @@ async def get23(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1184,7 +1185,7 @@ async def patch23(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1215,7 +1216,7 @@ async def get24(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1244,7 +1245,7 @@ async def patch24(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1275,7 +1276,7 @@ async def get25(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1302,7 +1303,7 @@ async def patch25(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1333,7 +1334,7 @@ async def get26(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1362,7 +1363,7 @@ async def patch26(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1395,7 +1396,7 @@ async def get27(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1426,7 +1427,7 @@ async def patch27(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1454,7 +1455,7 @@ async def patch27(
 async def get28(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1479,7 +1480,7 @@ async def patch28(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1508,7 +1509,7 @@ async def get29(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1535,7 +1536,7 @@ async def patch29(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1566,7 +1567,7 @@ async def get30(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1595,7 +1596,7 @@ async def patch30(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1626,7 +1627,7 @@ async def get31(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1653,7 +1654,7 @@ async def patch31(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1684,7 +1685,7 @@ async def get32(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1713,7 +1714,7 @@ async def patch32(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1746,7 +1747,7 @@ async def get33(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1777,7 +1778,7 @@ async def patch33(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1809,7 +1810,7 @@ async def get34(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1836,7 +1837,7 @@ async def patch34(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1867,7 +1868,7 @@ async def get35(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1896,7 +1897,7 @@ async def patch35(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1929,7 +1930,7 @@ async def get36(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1960,7 +1961,7 @@ async def patch36(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1992,7 +1993,7 @@ async def get37(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2019,7 +2020,7 @@ async def patch37(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2049,7 +2050,7 @@ async def get38(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2076,7 +2077,7 @@ async def patch38(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2106,7 +2107,7 @@ async def get39(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2133,7 +2134,7 @@ async def patch39(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2163,7 +2164,7 @@ async def get40(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2190,7 +2191,7 @@ async def patch40(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2221,7 +2222,7 @@ async def get41(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2250,7 +2251,7 @@ async def patch41(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2282,7 +2283,7 @@ async def get42(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2311,7 +2312,7 @@ async def patch42(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2342,7 +2343,7 @@ async def get43(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2369,7 +2370,7 @@ async def patch43(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2399,7 +2400,7 @@ async def get44(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2426,7 +2427,7 @@ async def patch44(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2457,7 +2458,7 @@ async def get45(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2486,7 +2487,7 @@ async def patch45(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2518,7 +2519,7 @@ async def get46(
     request: Request,
     response: Response,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2547,7 +2548,7 @@ async def patch46(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2574,7 +2575,7 @@ async def patch46(
 async def get47(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2599,7 +2600,7 @@ async def patch47(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2624,7 +2625,7 @@ async def patch47(
 async def get48(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2649,7 +2650,7 @@ async def patch48(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2672,7 +2673,7 @@ async def patch48(
     response_model_exclude_none=True,
 )
 async def get49(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fan_id": fan_id,
@@ -2693,7 +2694,7 @@ async def get49(chassis_id: str, fan_id: str, request: Request, response: Respon
 async def patch49(
     chassis_id: str, fan_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fan_id": fan_id,
@@ -2716,7 +2717,7 @@ async def patch49(
     response_model_exclude_none=True,
 )
 async def get50(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fan_id": fan_id,
@@ -2737,7 +2738,7 @@ async def get50(chassis_id: str, fan_id: str, request: Request, response: Respon
 async def patch50(
     chassis_id: str, fan_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fan_id": fan_id,
@@ -2762,7 +2763,7 @@ async def patch50(
 async def get51(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -2787,7 +2788,7 @@ async def patch51(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -2812,7 +2813,7 @@ async def patch51(
 async def get52(
     power_distribution_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "power_supply_id": power_supply_id,
@@ -2837,7 +2838,7 @@ async def patch52(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "power_supply_id": power_supply_id,
@@ -2862,7 +2863,7 @@ async def patch52(
 async def get53(
     chassis_id: str, battery_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "battery_id": battery_id,
@@ -2883,7 +2884,7 @@ async def get53(
 async def patch53(
     chassis_id: str, battery_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "battery_id": battery_id,
@@ -2906,7 +2907,7 @@ async def patch53(
     response_model_exclude_none=True,
 )
 async def get54(chassis_id: str, header_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "header_id": header_id,
@@ -2927,7 +2928,7 @@ async def get54(chassis_id: str, header_id: str, request: Request, response: Res
 async def patch54(
     chassis_id: str, header_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "header_id": header_id,
@@ -2950,7 +2951,7 @@ async def patch54(
     response_model_exclude_none=True,
 )
 async def get55(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -2970,7 +2971,7 @@ async def get55(cooling_unit_id: str, request: Request, response: Response) -> A
 async def patch55(
     cooling_unit_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -2992,7 +2993,7 @@ async def patch55(
     response_model_exclude_none=True,
 )
 async def get56(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3012,7 +3013,7 @@ async def get56(cooling_unit_id: str, request: Request, response: Response) -> A
 async def patch56(
     cooling_unit_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3034,7 +3035,7 @@ async def patch56(
     response_model_exclude_none=True,
 )
 async def get57(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3054,7 +3055,7 @@ async def get57(cooling_unit_id: str, request: Request, response: Response) -> A
 async def patch57(
     cooling_unit_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3078,7 +3079,7 @@ async def patch57(
 async def get58(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3103,7 +3104,7 @@ async def patch58(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3128,7 +3129,7 @@ async def patch58(
 async def get59(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3153,7 +3154,7 @@ async def patch59(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3178,7 +3179,7 @@ async def patch59(
 async def get60(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3203,7 +3204,7 @@ async def patch60(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3228,7 +3229,7 @@ async def patch60(
 async def get61(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3253,7 +3254,7 @@ async def patch61(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3278,7 +3279,7 @@ async def patch61(
 async def get62(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3303,7 +3304,7 @@ async def patch62(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3328,7 +3329,7 @@ async def patch62(
 async def get63(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3353,7 +3354,7 @@ async def patch63(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3378,7 +3379,7 @@ async def patch63(
 async def get64(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -3403,7 +3404,7 @@ async def patch64(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -3428,7 +3429,7 @@ async def patch64(
 async def get65(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3455,7 +3456,7 @@ async def patch65(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3481,7 +3482,7 @@ async def patch65(
 async def get66(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3508,7 +3509,7 @@ async def patch66(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3534,7 +3535,7 @@ async def patch66(
 async def get67(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -3559,7 +3560,7 @@ async def patch67(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -3584,7 +3585,7 @@ async def patch67(
 async def get68(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3611,7 +3612,7 @@ async def patch68(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3637,7 +3638,7 @@ async def patch68(
 async def get69(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3664,7 +3665,7 @@ async def patch69(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3690,7 +3691,7 @@ async def patch69(
 async def get70(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -3715,7 +3716,7 @@ async def patch70(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -3740,7 +3741,7 @@ async def patch70(
 async def get71(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3767,7 +3768,7 @@ async def patch71(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -3793,7 +3794,7 @@ async def patch71(
 async def get72(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -3820,7 +3821,7 @@ async def patch72(
     response: Response,
     body: AssemblyOnUpdate,
 ) -> Assembly:
-    s: Service = find_service(Assembly)
+    s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,

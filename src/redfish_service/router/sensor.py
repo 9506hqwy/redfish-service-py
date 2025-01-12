@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.sensor import Sensor, SensorOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -16,7 +17,7 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/Sensors/{sensor_id}", response_model_exclude_none=True
 )
 async def get1(chassis_id: str, sensor_id: str, request: Request, response: Response) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "sensor_id": sensor_id,
@@ -36,7 +37,7 @@ async def get1(chassis_id: str, sensor_id: str, request: Request, response: Resp
 async def patch1(
     chassis_id: str, sensor_id: str, request: Request, response: Response, body: SensorOnUpdate
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "sensor_id": sensor_id,
@@ -61,7 +62,7 @@ async def patch1(
 async def get2(
     power_distribution_id: str, sensor_id: str, request: Request, response: Response
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -86,7 +87,7 @@ async def patch2(
     response: Response,
     body: SensorOnUpdate,
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -111,7 +112,7 @@ async def patch2(
 async def get3(
     power_distribution_id: str, sensor_id: str, request: Request, response: Response
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -136,7 +137,7 @@ async def patch3(
     response: Response,
     body: SensorOnUpdate,
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -161,7 +162,7 @@ async def patch3(
 async def get4(
     power_distribution_id: str, sensor_id: str, request: Request, response: Response
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -186,7 +187,7 @@ async def patch4(
     response: Response,
     body: SensorOnUpdate,
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -211,7 +212,7 @@ async def patch4(
 async def get5(
     power_distribution_id: str, sensor_id: str, request: Request, response: Response
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -236,7 +237,7 @@ async def patch5(
     response: Response,
     body: SensorOnUpdate,
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -261,7 +262,7 @@ async def patch5(
 async def get6(
     power_distribution_id: str, sensor_id: str, request: Request, response: Response
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,
@@ -286,7 +287,7 @@ async def patch6(
     response: Response,
     body: SensorOnUpdate,
 ) -> Sensor:
-    s: Service = find_service(Sensor)
+    s: Service = get_service(Sensor, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "sensor_id": sensor_id,

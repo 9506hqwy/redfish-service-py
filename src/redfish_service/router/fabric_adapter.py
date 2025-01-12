@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.fabric_adapter import FabricAdapter, FabricAdapterOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: FabricAdapterOnUpdate,
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -74,7 +75,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -101,7 +102,7 @@ async def patch2(
     response: Response,
     body: FabricAdapterOnUpdate,
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -131,7 +132,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -158,7 +159,7 @@ async def patch3(
     response: Response,
     body: FabricAdapterOnUpdate,
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -184,7 +185,7 @@ async def patch3(
 async def get4(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -209,7 +210,7 @@ async def patch4(
     response: Response,
     body: FabricAdapterOnUpdate,
 ) -> FabricAdapter:
-    s: Service = find_service(FabricAdapter)
+    s: Service = get_service(FabricAdapter, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,

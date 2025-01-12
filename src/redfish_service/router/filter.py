@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.filter import Filter, FilterOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pump_id": pump_id,
@@ -47,7 +48,7 @@ async def patch1(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pump_id": pump_id,
@@ -73,7 +74,7 @@ async def patch1(
 async def get2(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -98,7 +99,7 @@ async def patch2(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -123,7 +124,7 @@ async def patch2(
 async def get3(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -150,7 +151,7 @@ async def patch3(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -176,7 +177,7 @@ async def patch3(
 async def get4(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -203,7 +204,7 @@ async def patch4(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -229,7 +230,7 @@ async def patch4(
 async def get5(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -254,7 +255,7 @@ async def patch5(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -279,7 +280,7 @@ async def patch5(
 async def get6(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -306,7 +307,7 @@ async def patch6(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -332,7 +333,7 @@ async def patch6(
 async def get7(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -359,7 +360,7 @@ async def patch7(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -385,7 +386,7 @@ async def patch7(
 async def get8(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -410,7 +411,7 @@ async def patch8(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "filter_id": filter_id,
@@ -435,7 +436,7 @@ async def patch8(
 async def get9(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -462,7 +463,7 @@ async def patch9(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -488,7 +489,7 @@ async def patch9(
 async def get10(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -515,7 +516,7 @@ async def patch10(
     response: Response,
     body: FilterOnUpdate,
 ) -> Filter:
-    s: Service = find_service(Filter)
+    s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,

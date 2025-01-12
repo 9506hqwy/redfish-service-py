@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.memory_chunks import MemoryChunks, MemoryChunksOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
@@ -50,7 +51,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
@@ -77,7 +78,7 @@ async def patch1(
     response: Response,
     body: MemoryChunksOnUpdate,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
@@ -104,7 +105,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_domain_id": memory_domain_id,
@@ -133,7 +134,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_domain_id": memory_domain_id,
@@ -160,7 +161,7 @@ async def patch2(
     response: Response,
     body: MemoryChunksOnUpdate,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_domain_id": memory_domain_id,
@@ -188,7 +189,7 @@ async def delete3(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -219,7 +220,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -248,7 +249,7 @@ async def patch3(
     response: Response,
     body: MemoryChunksOnUpdate,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -277,7 +278,7 @@ async def delete4(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -308,7 +309,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -337,7 +338,7 @@ async def patch4(
     response: Response,
     body: MemoryChunksOnUpdate,
 ) -> MemoryChunks:
-    s: Service = find_service(MemoryChunks)
+    s: Service = get_service(MemoryChunks, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

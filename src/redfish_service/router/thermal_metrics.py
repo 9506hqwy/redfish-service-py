@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.thermal_metrics import ThermalMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 async def get1(chassis_id: str, request: Request, response: Response) -> ThermalMetrics:
-    s: Service = find_service(ThermalMetrics)
+    s: Service = get_service(ThermalMetrics, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"

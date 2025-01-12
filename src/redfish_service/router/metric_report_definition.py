@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.metric_report_definition import MetricReportDefinition, MetricReportDefinitionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(metric_report_definition_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(MetricReportDefinition)
+    s: Service = get_service(MetricReportDefinition, request)
     b: dict[str, Any] = {
         "metric_report_definition_id": metric_report_definition_id,
         "request": request,
@@ -38,7 +39,7 @@ async def delete1(metric_report_definition_id: str, request: Request, response: 
 async def get1(
     metric_report_definition_id: str, request: Request, response: Response
 ) -> MetricReportDefinition:
-    s: Service = find_service(MetricReportDefinition)
+    s: Service = get_service(MetricReportDefinition, request)
     b: dict[str, Any] = {
         "metric_report_definition_id": metric_report_definition_id,
         "request": request,
@@ -61,7 +62,7 @@ async def patch1(
     response: Response,
     body: MetricReportDefinitionOnUpdate,
 ) -> MetricReportDefinition:
-    s: Service = find_service(MetricReportDefinition)
+    s: Service = get_service(MetricReportDefinition, request)
     b: dict[str, Any] = {
         "metric_report_definition_id": metric_report_definition_id,
         "request": request,

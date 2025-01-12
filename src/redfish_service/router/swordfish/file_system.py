@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.file_system import FileSystem, FileSystemOnUpdate
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     storage_service_id: str, file_system_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(FileSystem)
+    s: Service = get_service(FileSystem, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     storage_service_id: str, file_system_id: str, request: Request, response: Response
 ) -> FileSystem:
-    s: Service = find_service(FileSystem)
+    s: Service = get_service(FileSystem, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: FileSystemOnUpdate,
 ) -> FileSystem:
-    s: Service = find_service(FileSystem)
+    s: Service = get_service(FileSystem, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -88,7 +89,7 @@ async def patch1(
 async def delete2(
     storage_id: str, file_system_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(FileSystem)
+    s: Service = get_service(FileSystem, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -112,7 +113,7 @@ async def delete2(
 async def get2(
     storage_id: str, file_system_id: str, request: Request, response: Response
 ) -> FileSystem:
-    s: Service = find_service(FileSystem)
+    s: Service = get_service(FileSystem, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -137,7 +138,7 @@ async def patch2(
     response: Response,
     body: FileSystemOnUpdate,
 ) -> FileSystem:
-    s: Service = find_service(FileSystem)
+    s: Service = get_service(FileSystem, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,

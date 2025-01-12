@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.ethernet_interface import EthernetInterface, EthernetInterfaceOnCreate
 from ..model.ethernet_interface_collection import EthernetInterfaceCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     manager_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -38,7 +39,7 @@ async def get1(
 async def post1(
     manager_id: str, request: Request, response: Response, body: EthernetInterfaceOnCreate
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -62,7 +63,7 @@ async def post1(
 async def get2(
     manager_id: str, host_interface_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "host_interface_id": host_interface_id,
@@ -91,7 +92,7 @@ async def post2(
     response: Response,
     body: EthernetInterfaceOnCreate,
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "host_interface_id": host_interface_id,
@@ -114,7 +115,7 @@ async def post2(
 async def get3(
     computer_system_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -137,7 +138,7 @@ async def get3(
 async def post3(
     computer_system_id: str, request: Request, response: Response, body: EthernetInterfaceOnCreate
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -161,7 +162,7 @@ async def post3(
 async def get4(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -190,7 +191,7 @@ async def post4(
     response: Response,
     body: EthernetInterfaceOnCreate,
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -215,7 +216,7 @@ async def post4(
 async def get5(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -244,7 +245,7 @@ async def post5(
     response: Response,
     body: EthernetInterfaceOnCreate,
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -269,7 +270,7 @@ async def post5(
 async def get6(
     computer_system_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -293,7 +294,7 @@ async def get6(
 async def post6(
     computer_system_id: str, request: Request, response: Response, body: EthernetInterfaceOnCreate
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -317,7 +318,7 @@ async def post6(
 async def get7(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -346,7 +347,7 @@ async def post7(
     response: Response,
     body: EthernetInterfaceOnCreate,
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -371,7 +372,7 @@ async def post7(
 async def get8(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -400,7 +401,7 @@ async def post8(
     response: Response,
     body: EthernetInterfaceOnCreate,
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -429,7 +430,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> EthernetInterfaceCollection:
-    s: Service = find_service(EthernetInterfaceCollection)
+    s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -460,7 +461,7 @@ async def post9(
     response: Response,
     body: EthernetInterfaceOnCreate,
 ) -> EthernetInterface:
-    s: ServiceCollection = find_service_collection(EthernetInterfaceCollection)
+    s: ServiceCollection = get_service_collection(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.memory_region import MemoryRegion, MemoryRegionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -22,7 +23,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(MemoryRegion)
+    s: Service = get_service(MemoryRegion, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -53,7 +54,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> MemoryRegion:
-    s: Service = find_service(MemoryRegion)
+    s: Service = get_service(MemoryRegion, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -82,7 +83,7 @@ async def patch1(
     response: Response,
     body: MemoryRegionOnUpdate,
 ) -> MemoryRegion:
-    s: Service = find_service(MemoryRegion)
+    s: Service = get_service(MemoryRegion, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,

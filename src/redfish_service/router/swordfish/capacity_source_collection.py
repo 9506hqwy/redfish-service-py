@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ...model.swordfish.capacity_source_collection import CapacitySourceCollection
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -43,7 +44,7 @@ async def get1(
 async def get2(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -67,7 +68,7 @@ async def get2(
 async def get3(
     storage_service_id: str, file_system_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -91,7 +92,7 @@ async def get3(
 async def get4(
     storage_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -115,7 +116,7 @@ async def get4(
 async def get5(
     storage_id: str, volume_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -139,7 +140,7 @@ async def get5(
 async def get6(
     storage_id: str, file_system_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -167,7 +168,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -192,7 +193,7 @@ async def get7(
 async def get8(
     computer_system_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -221,7 +222,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> CapacitySourceCollection:
-    s: Service = find_service(CapacitySourceCollection)
+    s: Service = get_service(CapacitySourceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,

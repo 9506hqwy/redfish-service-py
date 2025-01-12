@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.file_share import FileShare, FileShareOnUpdate
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
@@ -50,7 +51,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> FileShare:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
@@ -77,7 +78,7 @@ async def patch1(
     response: Response,
     body: FileShareOnUpdate,
 ) -> FileShare:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
@@ -105,7 +106,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "computer_systems_id": computer_systems_id,
         "storage_id": storage_id,
@@ -136,7 +137,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> FileShare:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "computer_systems_id": computer_systems_id,
         "storage_id": storage_id,
@@ -165,7 +166,7 @@ async def patch2(
     response: Response,
     body: FileShareOnUpdate,
 ) -> FileShare:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "computer_systems_id": computer_systems_id,
         "storage_id": storage_id,
@@ -193,7 +194,7 @@ async def delete3(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,
@@ -222,7 +223,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> FileShare:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,
@@ -249,7 +250,7 @@ async def patch3(
     response: Response,
     body: FileShareOnUpdate,
 ) -> FileShare:
-    s: Service = find_service(FileShare)
+    s: Service = get_service(FileShare, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,

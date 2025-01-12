@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.signature import Signature, SignatureOnCreate
 from ..model.signature_collection import SignatureCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, database_id: str, request: Request, response: Response
 ) -> SignatureCollection:
-    s: Service = find_service(SignatureCollection)
+    s: Service = get_service(SignatureCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -50,7 +51,7 @@ async def post1(
     response: Response,
     body: SignatureOnCreate,
 ) -> Signature:
-    s: ServiceCollection = find_service_collection(SignatureCollection)
+    s: ServiceCollection = get_service_collection(SignatureCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -79,7 +80,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> SignatureCollection:
-    s: Service = find_service(SignatureCollection)
+    s: Service = get_service(SignatureCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -110,7 +111,7 @@ async def post2(
     response: Response,
     body: SignatureOnCreate,
 ) -> Signature:
-    s: ServiceCollection = find_service_collection(SignatureCollection)
+    s: ServiceCollection = get_service_collection(SignatureCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -140,7 +141,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> SignatureCollection:
-    s: Service = find_service(SignatureCollection)
+    s: Service = get_service(SignatureCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -171,7 +172,7 @@ async def post3(
     response: Response,
     body: SignatureOnCreate,
 ) -> Signature:
-    s: ServiceCollection = find_service_collection(SignatureCollection)
+    s: ServiceCollection = get_service_collection(SignatureCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

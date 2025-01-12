@@ -7,7 +7,8 @@ from ...model.swordfish.data_protection_line_of_service import (
     DataProtectionLineOfService,
     DataProtectionLineOfServiceOnUpdate,
 )
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(DataProtectionLineOfService)
+    s: Service = get_service(DataProtectionLineOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "data_protection_line_of_service_id": data_protection_line_of_service_id,
@@ -50,7 +51,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> DataProtectionLineOfService:
-    s: Service = find_service(DataProtectionLineOfService)
+    s: Service = get_service(DataProtectionLineOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "data_protection_line_of_service_id": data_protection_line_of_service_id,
@@ -75,7 +76,7 @@ async def patch1(
     response: Response,
     body: DataProtectionLineOfServiceOnUpdate,
 ) -> DataProtectionLineOfService:
-    s: Service = find_service(DataProtectionLineOfService)
+    s: Service = get_service(DataProtectionLineOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "data_protection_line_of_service_id": data_protection_line_of_service_id,
@@ -101,7 +102,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(DataProtectionLineOfService)
+    s: Service = get_service(DataProtectionLineOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -130,7 +131,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> DataProtectionLineOfService:
-    s: Service = find_service(DataProtectionLineOfService)
+    s: Service = get_service(DataProtectionLineOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -157,7 +158,7 @@ async def patch2(
     response: Response,
     body: DataProtectionLineOfServiceOnUpdate,
 ) -> DataProtectionLineOfService:
-    s: Service = find_service(DataProtectionLineOfService)
+    s: Service = get_service(DataProtectionLineOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,

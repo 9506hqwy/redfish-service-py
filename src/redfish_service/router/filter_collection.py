@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.filter_collection import FilterCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pump_id": pump_id,
@@ -39,7 +40,7 @@ async def get1(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters", response_model_exclude_none=True
 )
 async def get2(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -62,7 +63,7 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Fi
 async def get3(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -86,7 +87,7 @@ async def get3(
 async def get4(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -108,7 +109,7 @@ async def get4(
     response_model_exclude_none=True,
 )
 async def get5(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -131,7 +132,7 @@ async def get5(cooling_unit_id: str, request: Request, response: Response) -> Fi
 async def get6(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -155,7 +156,7 @@ async def get6(
 async def get7(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,
@@ -177,7 +178,7 @@ async def get7(
     response_model_exclude_none=True,
 )
 async def get8(cooling_unit_id: str, request: Request, response: Response) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -200,7 +201,7 @@ async def get8(cooling_unit_id: str, request: Request, response: Response) -> Fi
 async def get9(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -224,7 +225,7 @@ async def get9(
 async def get10(
     cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> FilterCollection:
-    s: Service = find_service(FilterCollection)
+    s: Service = get_service(FilterCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "pump_id": pump_id,

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.allow_deny import AllowDeny, AllowDenyOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -22,7 +23,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -53,7 +54,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -82,7 +83,7 @@ async def patch1(
     response: Response,
     body: AllowDenyOnUpdate,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -111,7 +112,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -142,7 +143,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -171,7 +172,7 @@ async def patch2(
     response: Response,
     body: AllowDenyOnUpdate,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -200,7 +201,7 @@ async def delete3(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -231,7 +232,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -260,7 +261,7 @@ async def patch3(
     response: Response,
     body: AllowDenyOnUpdate,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -290,7 +291,7 @@ async def delete4(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -323,7 +324,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -354,7 +355,7 @@ async def patch4(
     response: Response,
     body: AllowDenyOnUpdate,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -384,7 +385,7 @@ async def delete5(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -415,7 +416,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -444,7 +445,7 @@ async def patch5(
     response: Response,
     body: AllowDenyOnUpdate,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -474,7 +475,7 @@ async def delete6(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -507,7 +508,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -538,7 +539,7 @@ async def patch6(
     response: Response,
     body: AllowDenyOnUpdate,
 ) -> AllowDeny:
-    s: Service = find_service(AllowDeny)
+    s: Service = get_service(AllowDeny, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

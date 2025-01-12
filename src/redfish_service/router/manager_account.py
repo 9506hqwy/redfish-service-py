@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.manager_account import ManagerAccount, ManagerAccountOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -14,7 +15,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(manager_account_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(ManagerAccount)
+    s: Service = get_service(ManagerAccount, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "request": request,
@@ -33,7 +34,7 @@ async def delete1(manager_account_id: str, request: Request, response: Response)
     "/redfish/v1/AccountService/Accounts/{manager_account_id}", response_model_exclude_none=True
 )
 async def get1(manager_account_id: str, request: Request, response: Response) -> ManagerAccount:
-    s: Service = find_service(ManagerAccount)
+    s: Service = get_service(ManagerAccount, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "request": request,
@@ -52,7 +53,7 @@ async def get1(manager_account_id: str, request: Request, response: Response) ->
 async def patch1(
     manager_account_id: str, request: Request, response: Response, body: ManagerAccountOnUpdate
 ) -> ManagerAccount:
-    s: Service = find_service(ManagerAccount)
+    s: Service = get_service(ManagerAccount, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "request": request,
@@ -73,7 +74,7 @@ async def patch1(
 async def delete2(
     manager_id: str, manager_account_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(ManagerAccount)
+    s: Service = get_service(ManagerAccount, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -97,7 +98,7 @@ async def delete2(
 async def get2(
     manager_id: str, manager_account_id: str, request: Request, response: Response
 ) -> ManagerAccount:
-    s: Service = find_service(ManagerAccount)
+    s: Service = get_service(ManagerAccount, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -122,7 +123,7 @@ async def patch2(
     response: Response,
     body: ManagerAccountOnUpdate,
 ) -> ManagerAccount:
-    s: Service = find_service(ManagerAccount)
+    s: Service = get_service(ManagerAccount, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,

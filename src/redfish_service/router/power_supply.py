@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.power_supply import PowerSupply, PowerSupplyOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> PowerSupply:
-    s: Service = find_service(PowerSupply)
+    s: Service = get_service(PowerSupply, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: PowerSupplyOnUpdate,
 ) -> PowerSupply:
-    s: Service = find_service(PowerSupply)
+    s: Service = get_service(PowerSupply, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     power_distribution_id: str, power_supply_id: str, request: Request, response: Response
 ) -> PowerSupply:
-    s: Service = find_service(PowerSupply)
+    s: Service = get_service(PowerSupply, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "power_supply_id": power_supply_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: PowerSupplyOnUpdate,
 ) -> PowerSupply:
-    s: Service = find_service(PowerSupply)
+    s: Service = get_service(PowerSupply, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "power_supply_id": power_supply_id,

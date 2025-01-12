@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.outlet_group import OutletGroup, OutletGroupOnCreate
 from ..model.outlet_group_collection import OutletGroupCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     power_distribution_id: str, request: Request, response: Response
 ) -> OutletGroupCollection:
-    s: Service = find_service(OutletGroupCollection)
+    s: Service = get_service(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -45,7 +46,7 @@ async def get1(
 async def post1(
     power_distribution_id: str, request: Request, response: Response, body: OutletGroupOnCreate
 ) -> OutletGroup:
-    s: ServiceCollection = find_service_collection(OutletGroupCollection)
+    s: ServiceCollection = get_service_collection(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -69,7 +70,7 @@ async def post1(
 async def get2(
     power_distribution_id: str, request: Request, response: Response
 ) -> OutletGroupCollection:
-    s: Service = find_service(OutletGroupCollection)
+    s: Service = get_service(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -93,7 +94,7 @@ async def get2(
 async def post2(
     power_distribution_id: str, request: Request, response: Response, body: OutletGroupOnCreate
 ) -> OutletGroup:
-    s: ServiceCollection = find_service_collection(OutletGroupCollection)
+    s: ServiceCollection = get_service_collection(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -117,7 +118,7 @@ async def post2(
 async def get3(
     power_distribution_id: str, request: Request, response: Response
 ) -> OutletGroupCollection:
-    s: Service = find_service(OutletGroupCollection)
+    s: Service = get_service(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -141,7 +142,7 @@ async def get3(
 async def post3(
     power_distribution_id: str, request: Request, response: Response, body: OutletGroupOnCreate
 ) -> OutletGroup:
-    s: ServiceCollection = find_service_collection(OutletGroupCollection)
+    s: ServiceCollection = get_service_collection(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -165,7 +166,7 @@ async def post3(
 async def get4(
     power_distribution_id: str, request: Request, response: Response
 ) -> OutletGroupCollection:
-    s: Service = find_service(OutletGroupCollection)
+    s: Service = get_service(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -189,7 +190,7 @@ async def get4(
 async def post4(
     power_distribution_id: str, request: Request, response: Response, body: OutletGroupOnCreate
 ) -> OutletGroup:
-    s: ServiceCollection = find_service_collection(OutletGroupCollection)
+    s: ServiceCollection = get_service_collection(OutletGroupCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,

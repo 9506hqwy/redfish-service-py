@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.network_port_collection import NetworkPortCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> NetworkPortCollection:
-    s: Service = find_service(NetworkPortCollection)
+    s: Service = get_service(NetworkPortCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -43,7 +44,7 @@ async def get1(
 async def get2(
     computer_system_id: str, network_interface_id: str, request: Request, response: Response
 ) -> NetworkPortCollection:
-    s: Service = find_service(NetworkPortCollection)
+    s: Service = get_service(NetworkPortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -67,7 +68,7 @@ async def get2(
 async def get3(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
 ) -> NetworkPortCollection:
-    s: Service = find_service(NetworkPortCollection)
+    s: Service = get_service(NetworkPortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -95,7 +96,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> NetworkPortCollection:
-    s: Service = find_service(NetworkPortCollection)
+    s: Service = get_service(NetworkPortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -120,7 +121,7 @@ async def get4(
 async def get5(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
 ) -> NetworkPortCollection:
-    s: Service = find_service(NetworkPortCollection)
+    s: Service = get_service(NetworkPortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -148,7 +149,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> NetworkPortCollection:
-    s: Service = find_service(NetworkPortCollection)
+    s: Service = get_service(NetworkPortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

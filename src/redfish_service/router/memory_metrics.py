@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.memory_metrics import MemoryMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 async def get1(computer_system_id: str, request: Request, response: Response) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -40,7 +41,7 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
 async def get2(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -68,7 +69,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -93,7 +94,7 @@ async def get3(
 async def get4(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -117,7 +118,7 @@ async def get4(
 async def get5(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -141,7 +142,7 @@ async def get5(
 async def get6(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -169,7 +170,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -194,7 +195,7 @@ async def get7(
 async def get8(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -222,7 +223,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -247,7 +248,7 @@ async def get9(
 async def get10(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -271,7 +272,7 @@ async def get10(
 async def get11(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -299,7 +300,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -324,7 +325,7 @@ async def get12(
 async def get13(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -352,7 +353,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -377,7 +378,7 @@ async def get14(
 async def get15(
     chassis_id: str, memory_id: str, request: Request, response: Response
 ) -> MemoryMetrics:
-    s: Service = find_service(MemoryMetrics)
+    s: Service = get_service(MemoryMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,

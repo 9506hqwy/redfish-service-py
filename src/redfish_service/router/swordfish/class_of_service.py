@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.class_of_service import ClassOfService, ClassOfServiceOnUpdate
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(ClassOfService)
+    s: Service = get_service(ClassOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> ClassOfService:
-    s: Service = find_service(ClassOfService)
+    s: Service = get_service(ClassOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: ClassOfServiceOnUpdate,
 ) -> ClassOfService:
-    s: Service = find_service(ClassOfService)
+    s: Service = get_service(ClassOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -92,7 +93,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(ClassOfService)
+    s: Service = get_service(ClassOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -121,7 +122,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> ClassOfService:
-    s: Service = find_service(ClassOfService)
+    s: Service = get_service(ClassOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -148,7 +149,7 @@ async def patch2(
     response: Response,
     body: ClassOfServiceOnUpdate,
 ) -> ClassOfService:
-    s: Service = find_service(ClassOfService)
+    s: Service = get_service(ClassOfService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,

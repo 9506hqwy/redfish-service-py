@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.graphics_controller import GraphicsController, GraphicsControllerOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     computer_system_id: str, controller_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(GraphicsController)
+    s: Service = get_service(GraphicsController, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     computer_system_id: str, controller_id: str, request: Request, response: Response
 ) -> GraphicsController:
-    s: Service = find_service(GraphicsController)
+    s: Service = get_service(GraphicsController, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: GraphicsControllerOnUpdate,
 ) -> GraphicsController:
-    s: Service = find_service(GraphicsController)
+    s: Service = get_service(GraphicsController, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,

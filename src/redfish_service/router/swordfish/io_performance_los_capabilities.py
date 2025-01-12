@@ -7,7 +7,8 @@ from ...model.swordfish.io_performance_los_capabilities import (
     IoPerformanceLosCapabilities,
     IoPerformanceLosCapabilitiesOnUpdate,
 )
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> IoPerformanceLosCapabilities:
-    s: Service = find_service(IoPerformanceLosCapabilities)
+    s: Service = get_service(IoPerformanceLosCapabilities, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -46,7 +47,7 @@ async def patch1(
     response: Response,
     body: IoPerformanceLosCapabilitiesOnUpdate,
 ) -> IoPerformanceLosCapabilities:
-    s: Service = find_service(IoPerformanceLosCapabilities)
+    s: Service = get_service(IoPerformanceLosCapabilities, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,

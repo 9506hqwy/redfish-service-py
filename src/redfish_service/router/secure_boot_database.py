@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.secure_boot_database import SecureBootDatabase
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, database_id: str, request: Request, response: Response
 ) -> SecureBootDatabase:
-    s: Service = find_service(SecureBootDatabase)
+    s: Service = get_service(SecureBootDatabase, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -47,7 +48,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> SecureBootDatabase:
-    s: Service = find_service(SecureBootDatabase)
+    s: Service = get_service(SecureBootDatabase, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -76,7 +77,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> SecureBootDatabase:
-    s: Service = find_service(SecureBootDatabase)
+    s: Service = get_service(SecureBootDatabase, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

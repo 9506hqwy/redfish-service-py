@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.class_of_service_collection import ClassOfServiceCollection
 from ...model.swordfish.line_of_service import LineOfService, LineOfServiceOnCreate
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> ClassOfServiceCollection:
-    s: Service = find_service(ClassOfServiceCollection)
+    s: Service = get_service(ClassOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -45,7 +46,7 @@ async def get1(
 async def post1(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(ClassOfServiceCollection)
+    s: ServiceCollection = get_service_collection(ClassOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -69,7 +70,7 @@ async def post1(
 async def get2(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> ClassOfServiceCollection:
-    s: Service = find_service(ClassOfServiceCollection)
+    s: Service = get_service(ClassOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -98,7 +99,7 @@ async def post2(
     response: Response,
     body: LineOfServiceOnCreate,
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(ClassOfServiceCollection)
+    s: ServiceCollection = get_service_collection(ClassOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,

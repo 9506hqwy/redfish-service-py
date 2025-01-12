@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.route_entry import RouteEntry, RouteEntryOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -22,7 +23,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -53,7 +54,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -82,7 +83,7 @@ async def patch1(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -111,7 +112,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -142,7 +143,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -171,7 +172,7 @@ async def patch2(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -195,7 +196,7 @@ async def patch2(
 async def delete3(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -220,7 +221,7 @@ async def delete3(
 async def get3(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -247,7 +248,7 @@ async def patch3(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -270,7 +271,7 @@ async def patch3(
 async def delete4(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -295,7 +296,7 @@ async def delete4(
 async def get4(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -322,7 +323,7 @@ async def patch4(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -350,7 +351,7 @@ async def delete5(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -381,7 +382,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -410,7 +411,7 @@ async def patch5(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -439,7 +440,7 @@ async def delete6(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -470,7 +471,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -499,7 +500,7 @@ async def patch6(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -527,7 +528,7 @@ async def delete7(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -556,7 +557,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -583,7 +584,7 @@ async def patch7(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -610,7 +611,7 @@ async def delete8(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -639,7 +640,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -666,7 +667,7 @@ async def patch8(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -694,7 +695,7 @@ async def delete9(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -725,7 +726,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -754,7 +755,7 @@ async def patch9(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -783,7 +784,7 @@ async def delete10(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -814,7 +815,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -843,7 +844,7 @@ async def patch10(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -872,7 +873,7 @@ async def delete11(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -903,7 +904,7 @@ async def get11(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -932,7 +933,7 @@ async def patch11(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -961,7 +962,7 @@ async def delete12(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -992,7 +993,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1021,7 +1022,7 @@ async def patch12(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1051,7 +1052,7 @@ async def delete13(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1084,7 +1085,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1115,7 +1116,7 @@ async def patch13(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1146,7 +1147,7 @@ async def delete14(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1179,7 +1180,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1210,7 +1211,7 @@ async def patch14(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1240,7 +1241,7 @@ async def delete15(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1271,7 +1272,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1300,7 +1301,7 @@ async def patch15(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1329,7 +1330,7 @@ async def delete16(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1360,7 +1361,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1389,7 +1390,7 @@ async def patch16(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1419,7 +1420,7 @@ async def delete17(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1452,7 +1453,7 @@ async def get17(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1483,7 +1484,7 @@ async def patch17(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1514,7 +1515,7 @@ async def delete18(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1547,7 +1548,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1578,7 +1579,7 @@ async def patch18(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1608,7 +1609,7 @@ async def delete19(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1639,7 +1640,7 @@ async def get19(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1668,7 +1669,7 @@ async def patch19(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1697,7 +1698,7 @@ async def delete20(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1728,7 +1729,7 @@ async def get20(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1757,7 +1758,7 @@ async def patch20(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1781,7 +1782,7 @@ async def patch20(
 async def delete21(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1806,7 +1807,7 @@ async def delete21(
 async def get21(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1833,7 +1834,7 @@ async def patch21(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1856,7 +1857,7 @@ async def patch21(
 async def delete22(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1881,7 +1882,7 @@ async def delete22(
 async def get22(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1908,7 +1909,7 @@ async def patch22(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1936,7 +1937,7 @@ async def delete23(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1967,7 +1968,7 @@ async def get23(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1996,7 +1997,7 @@ async def patch23(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -2025,7 +2026,7 @@ async def delete24(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -2056,7 +2057,7 @@ async def get24(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -2085,7 +2086,7 @@ async def patch24(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -2113,7 +2114,7 @@ async def delete25(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2142,7 +2143,7 @@ async def get25(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2169,7 +2170,7 @@ async def patch25(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2196,7 +2197,7 @@ async def delete26(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2225,7 +2226,7 @@ async def get26(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2252,7 +2253,7 @@ async def patch26(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2280,7 +2281,7 @@ async def delete27(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2311,7 +2312,7 @@ async def get27(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2340,7 +2341,7 @@ async def patch27(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2369,7 +2370,7 @@ async def delete28(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2400,7 +2401,7 @@ async def get28(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2429,7 +2430,7 @@ async def patch28(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2458,7 +2459,7 @@ async def delete29(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2489,7 +2490,7 @@ async def get29(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2518,7 +2519,7 @@ async def patch29(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2547,7 +2548,7 @@ async def delete30(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2578,7 +2579,7 @@ async def get30(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2607,7 +2608,7 @@ async def patch30(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2637,7 +2638,7 @@ async def delete31(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2670,7 +2671,7 @@ async def get31(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2701,7 +2702,7 @@ async def patch31(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2732,7 +2733,7 @@ async def delete32(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2765,7 +2766,7 @@ async def get32(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2796,7 +2797,7 @@ async def patch32(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2826,7 +2827,7 @@ async def delete33(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2857,7 +2858,7 @@ async def get33(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2886,7 +2887,7 @@ async def patch33(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2915,7 +2916,7 @@ async def delete34(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2946,7 +2947,7 @@ async def get34(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2975,7 +2976,7 @@ async def patch34(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3005,7 +3006,7 @@ async def delete35(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3038,7 +3039,7 @@ async def get35(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3069,7 +3070,7 @@ async def patch35(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3100,7 +3101,7 @@ async def delete36(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3133,7 +3134,7 @@ async def get36(
     request: Request,
     response: Response,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3164,7 +3165,7 @@ async def patch36(
     response: Response,
     body: RouteEntryOnUpdate,
 ) -> RouteEntry:
-    s: Service = find_service(RouteEntry)
+    s: Service = get_service(RouteEntry, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

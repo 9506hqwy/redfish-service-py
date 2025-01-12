@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.port_collection import PortCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def get1(
     fabric_id: str, switch_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -45,7 +46,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -74,7 +75,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -99,7 +100,7 @@ async def get3(
 async def get4(
     computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -123,7 +124,7 @@ async def get4(
 async def get5(
     computer_system_id: str, network_interface_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -147,7 +148,7 @@ async def get5(
 async def get6(
     computer_system_id: str, controller_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -171,7 +172,7 @@ async def get6(
 async def get7(
     computer_system_id: str, controller_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -195,7 +196,7 @@ async def get7(
 async def get8(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -219,7 +220,7 @@ async def get8(
 async def get9(
     chassis_id: str, media_controller_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
@@ -243,7 +244,7 @@ async def get9(
 async def get10(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -267,7 +268,7 @@ async def get10(
 async def get11(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -295,7 +296,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -324,7 +325,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -349,7 +350,7 @@ async def get13(
 async def get14(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -373,7 +374,7 @@ async def get14(
 async def get15(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -402,7 +403,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -433,7 +434,7 @@ async def get17(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -463,7 +464,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -492,7 +493,7 @@ async def get19(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -521,7 +522,7 @@ async def get20(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -550,7 +551,7 @@ async def get21(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -579,7 +580,7 @@ async def get22(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -608,7 +609,7 @@ async def get23(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -637,7 +638,7 @@ async def get24(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -662,7 +663,7 @@ async def get24(
 async def get25(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -686,7 +687,7 @@ async def get25(
 async def get26(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -715,7 +716,7 @@ async def get27(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -746,7 +747,7 @@ async def get28(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -776,7 +777,7 @@ async def get29(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -805,7 +806,7 @@ async def get30(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -834,7 +835,7 @@ async def get31(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -863,7 +864,7 @@ async def get32(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -892,7 +893,7 @@ async def get33(
     request: Request,
     response: Response,
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -917,7 +918,7 @@ async def get33(
 async def get34(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -941,7 +942,7 @@ async def get34(
 async def get35(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -957,7 +958,7 @@ async def get35(
 @router.get("/redfish/v1/Managers/{manager_id}/USBPorts", response_model_exclude_none=True)
 @router.head("/redfish/v1/Managers/{manager_id}/USBPorts", response_model_exclude_none=True)
 async def get36(manager_id: str, request: Request, response: Response) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -972,7 +973,7 @@ async def get36(manager_id: str, request: Request, response: Response) -> PortCo
     "/redfish/v1/Managers/{manager_id}/DedicatedNetworkPorts", response_model_exclude_none=True
 )
 async def get37(manager_id: str, request: Request, response: Response) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -987,7 +988,7 @@ async def get37(manager_id: str, request: Request, response: Response) -> PortCo
     "/redfish/v1/Managers/{manager_id}/SharedNetworkPorts", response_model_exclude_none=True
 )
 async def get38(manager_id: str, request: Request, response: Response) -> PortCollection:
-    s: Service = find_service(PortCollection)
+    s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"

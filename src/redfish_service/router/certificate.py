@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.certificate import Certificate, CertificateOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     manager_account_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "certificate_id": certificate_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     manager_account_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "certificate_id": certificate_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "certificate_id": certificate_id,
@@ -86,7 +87,7 @@ async def patch1(
 )
 @authenticate
 async def delete2(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -107,7 +108,7 @@ async def delete2(certificate_id: str, request: Request, response: Response) -> 
     response_model_exclude_none=True,
 )
 async def get2(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -127,7 +128,7 @@ async def get2(certificate_id: str, request: Request, response: Response) -> Cer
 async def patch2(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -146,7 +147,7 @@ async def patch2(
 )
 @authenticate
 async def delete3(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -167,7 +168,7 @@ async def delete3(certificate_id: str, request: Request, response: Response) -> 
     response_model_exclude_none=True,
 )
 async def get3(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -187,7 +188,7 @@ async def get3(certificate_id: str, request: Request, response: Response) -> Cer
 async def patch3(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -208,7 +209,7 @@ async def patch3(
 async def delete4(
     external_account_provider_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "certificate_id": certificate_id,
@@ -232,7 +233,7 @@ async def delete4(
 async def get4(
     external_account_provider_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "certificate_id": certificate_id,
@@ -257,7 +258,7 @@ async def patch4(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "certificate_id": certificate_id,
@@ -277,7 +278,7 @@ async def patch4(
 )
 @authenticate
 async def delete5(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -298,7 +299,7 @@ async def delete5(certificate_id: str, request: Request, response: Response) -> 
     response_model_exclude_none=True,
 )
 async def get5(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -318,7 +319,7 @@ async def get5(certificate_id: str, request: Request, response: Response) -> Cer
 async def patch5(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -337,7 +338,7 @@ async def patch5(
 )
 @authenticate
 async def delete6(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -358,7 +359,7 @@ async def delete6(certificate_id: str, request: Request, response: Response) -> 
     response_model_exclude_none=True,
 )
 async def get6(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -378,7 +379,7 @@ async def get6(certificate_id: str, request: Request, response: Response) -> Cer
 async def patch6(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -403,7 +404,7 @@ async def delete7(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -432,7 +433,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -459,7 +460,7 @@ async def patch7(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -482,7 +483,7 @@ async def patch7(
 async def delete8(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -506,7 +507,7 @@ async def delete8(
 async def get8(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -531,7 +532,7 @@ async def patch8(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -553,7 +554,7 @@ async def patch8(
 async def delete9(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -577,7 +578,7 @@ async def delete9(
 async def get9(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -602,7 +603,7 @@ async def patch9(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -628,7 +629,7 @@ async def delete10(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -657,7 +658,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -684,7 +685,7 @@ async def patch10(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -707,7 +708,7 @@ async def patch10(
 async def delete11(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -731,7 +732,7 @@ async def delete11(
 async def get11(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -756,7 +757,7 @@ async def patch11(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -778,7 +779,7 @@ async def patch11(
 async def delete12(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -802,7 +803,7 @@ async def delete12(
 async def get12(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -827,7 +828,7 @@ async def patch12(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -849,7 +850,7 @@ async def patch12(
 async def delete13(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -873,7 +874,7 @@ async def delete13(
 async def get13(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -898,7 +899,7 @@ async def patch13(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -920,7 +921,7 @@ async def patch13(
 async def delete14(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -944,7 +945,7 @@ async def delete14(
 async def get14(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -969,7 +970,7 @@ async def patch14(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -995,7 +996,7 @@ async def delete15(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1024,7 +1025,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1051,7 +1052,7 @@ async def patch15(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1078,7 +1079,7 @@ async def delete16(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1107,7 +1108,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1134,7 +1135,7 @@ async def patch16(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1161,7 +1162,7 @@ async def delete17(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -1190,7 +1191,7 @@ async def get17(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -1217,7 +1218,7 @@ async def patch17(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -1245,7 +1246,7 @@ async def delete18(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1276,7 +1277,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1305,7 +1306,7 @@ async def patch18(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1334,7 +1335,7 @@ async def delete19(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1365,7 +1366,7 @@ async def get19(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1394,7 +1395,7 @@ async def patch19(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1418,7 +1419,7 @@ async def patch19(
 async def delete20(
     event_destination_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
@@ -1442,7 +1443,7 @@ async def delete20(
 async def get20(
     event_destination_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
@@ -1467,7 +1468,7 @@ async def patch20(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
@@ -1489,7 +1490,7 @@ async def patch20(
 async def delete21(
     event_destination_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
@@ -1513,7 +1514,7 @@ async def delete21(
 async def get21(
     event_destination_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
@@ -1538,7 +1539,7 @@ async def patch21(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "certificate_id": certificate_id,
@@ -1560,7 +1561,7 @@ async def patch21(
 async def delete22(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -1584,7 +1585,7 @@ async def delete22(
 async def get22(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -1609,7 +1610,7 @@ async def patch22(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -1635,7 +1636,7 @@ async def delete23(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1664,7 +1665,7 @@ async def get23(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1691,7 +1692,7 @@ async def patch23(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1718,7 +1719,7 @@ async def delete24(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1747,7 +1748,7 @@ async def get24(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1774,7 +1775,7 @@ async def patch24(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1801,7 +1802,7 @@ async def delete25(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -1830,7 +1831,7 @@ async def get25(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -1857,7 +1858,7 @@ async def patch25(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -1880,7 +1881,7 @@ async def patch25(
 async def delete26(
     chassis_id: str, memory_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1905,7 +1906,7 @@ async def delete26(
 async def get26(
     chassis_id: str, memory_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1932,7 +1933,7 @@ async def patch26(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1959,7 +1960,7 @@ async def delete27(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -1988,7 +1989,7 @@ async def get27(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -2015,7 +2016,7 @@ async def patch27(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -2043,7 +2044,7 @@ async def delete28(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2074,7 +2075,7 @@ async def get28(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2103,7 +2104,7 @@ async def patch28(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2131,7 +2132,7 @@ async def delete29(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -2160,7 +2161,7 @@ async def get29(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -2187,7 +2188,7 @@ async def patch29(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -2215,7 +2216,7 @@ async def delete30(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2246,7 +2247,7 @@ async def get30(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2275,7 +2276,7 @@ async def patch30(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2303,7 +2304,7 @@ async def delete31(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -2332,7 +2333,7 @@ async def get31(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -2359,7 +2360,7 @@ async def patch31(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -2386,7 +2387,7 @@ async def delete32(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2415,7 +2416,7 @@ async def get32(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2442,7 +2443,7 @@ async def patch32(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2470,7 +2471,7 @@ async def delete33(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2501,7 +2502,7 @@ async def get33(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2530,7 +2531,7 @@ async def patch33(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2558,7 +2559,7 @@ async def delete34(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2587,7 +2588,7 @@ async def get34(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2614,7 +2615,7 @@ async def patch34(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2642,7 +2643,7 @@ async def delete35(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2673,7 +2674,7 @@ async def get35(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2702,7 +2703,7 @@ async def patch35(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2730,7 +2731,7 @@ async def delete36(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2759,7 +2760,7 @@ async def get36(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2786,7 +2787,7 @@ async def patch36(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2814,7 +2815,7 @@ async def delete37(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2845,7 +2846,7 @@ async def get37(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2874,7 +2875,7 @@ async def patch37(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2903,7 +2904,7 @@ async def delete38(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2934,7 +2935,7 @@ async def get38(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2963,7 +2964,7 @@ async def patch38(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2993,7 +2994,7 @@ async def delete39(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3026,7 +3027,7 @@ async def get39(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3057,7 +3058,7 @@ async def patch39(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3087,7 +3088,7 @@ async def delete40(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3118,7 +3119,7 @@ async def get40(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3147,7 +3148,7 @@ async def patch40(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3177,7 +3178,7 @@ async def delete41(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3210,7 +3211,7 @@ async def get41(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3241,7 +3242,7 @@ async def patch41(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3270,7 +3271,7 @@ async def delete42(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3299,7 +3300,7 @@ async def get42(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3326,7 +3327,7 @@ async def patch42(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3354,7 +3355,7 @@ async def delete43(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -3385,7 +3386,7 @@ async def get43(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -3414,7 +3415,7 @@ async def patch43(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -3443,7 +3444,7 @@ async def delete44(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3474,7 +3475,7 @@ async def get44(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3503,7 +3504,7 @@ async def patch44(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3533,7 +3534,7 @@ async def delete45(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3566,7 +3567,7 @@ async def get45(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3597,7 +3598,7 @@ async def patch45(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3627,7 +3628,7 @@ async def delete46(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3658,7 +3659,7 @@ async def get46(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3687,7 +3688,7 @@ async def patch46(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3717,7 +3718,7 @@ async def delete47(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3750,7 +3751,7 @@ async def get47(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3781,7 +3782,7 @@ async def patch47(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3806,7 +3807,7 @@ async def patch47(
 async def delete48(
     fabric_id: str, switch_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -3831,7 +3832,7 @@ async def delete48(
 async def get48(
     fabric_id: str, switch_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -3858,7 +3859,7 @@ async def patch48(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -3881,7 +3882,7 @@ async def patch48(
 async def delete49(
     chassis_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "certificate_id": certificate_id,
@@ -3905,7 +3906,7 @@ async def delete49(
 async def get49(
     chassis_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "certificate_id": certificate_id,
@@ -3930,7 +3931,7 @@ async def patch49(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "certificate_id": certificate_id,
@@ -3957,7 +3958,7 @@ async def delete50(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -3988,7 +3989,7 @@ async def get50(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -4017,7 +4018,7 @@ async def patch50(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -4041,7 +4042,7 @@ async def patch50(
 async def delete51(
     chassis_id: str, drive_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -4066,7 +4067,7 @@ async def delete51(
 async def get51(
     chassis_id: str, drive_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -4093,7 +4094,7 @@ async def patch51(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -4121,7 +4122,7 @@ async def delete52(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -4152,7 +4153,7 @@ async def get52(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -4181,7 +4182,7 @@ async def patch52(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -4209,7 +4210,7 @@ async def delete53(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -4238,7 +4239,7 @@ async def get53(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -4265,7 +4266,7 @@ async def patch53(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -4294,7 +4295,7 @@ async def delete54(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4327,7 +4328,7 @@ async def get54(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4358,7 +4359,7 @@ async def patch54(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4388,7 +4389,7 @@ async def delete55(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -4419,7 +4420,7 @@ async def get55(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -4448,7 +4449,7 @@ async def patch55(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -4476,7 +4477,7 @@ async def delete56(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -4505,7 +4506,7 @@ async def get56(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -4532,7 +4533,7 @@ async def patch56(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -4561,7 +4562,7 @@ async def delete57(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4594,7 +4595,7 @@ async def get57(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4625,7 +4626,7 @@ async def patch57(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4654,7 +4655,7 @@ async def delete58(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -4683,7 +4684,7 @@ async def get58(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -4710,7 +4711,7 @@ async def patch58(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -4737,7 +4738,7 @@ async def delete59(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -4766,7 +4767,7 @@ async def get59(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -4793,7 +4794,7 @@ async def patch59(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -4820,7 +4821,7 @@ async def delete60(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -4849,7 +4850,7 @@ async def get60(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -4876,7 +4877,7 @@ async def patch60(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -4904,7 +4905,7 @@ async def delete61(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4935,7 +4936,7 @@ async def get61(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4964,7 +4965,7 @@ async def patch61(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -4993,7 +4994,7 @@ async def delete62(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5024,7 +5025,7 @@ async def get62(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5053,7 +5054,7 @@ async def patch62(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5082,7 +5083,7 @@ async def delete63(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5113,7 +5114,7 @@ async def get63(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5142,7 +5143,7 @@ async def patch63(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5171,7 +5172,7 @@ async def delete64(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5202,7 +5203,7 @@ async def get64(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5231,7 +5232,7 @@ async def patch64(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5253,7 +5254,7 @@ async def patch64(
 )
 @authenticate
 async def delete65(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -5274,7 +5275,7 @@ async def delete65(certificate_id: str, request: Request, response: Response) ->
     response_model_exclude_none=True,
 )
 async def get65(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -5294,7 +5295,7 @@ async def get65(certificate_id: str, request: Request, response: Response) -> Ce
 async def patch65(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -5313,7 +5314,7 @@ async def patch65(
 )
 @authenticate
 async def delete66(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -5334,7 +5335,7 @@ async def delete66(certificate_id: str, request: Request, response: Response) ->
     response_model_exclude_none=True,
 )
 async def get66(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -5354,7 +5355,7 @@ async def get66(certificate_id: str, request: Request, response: Response) -> Ce
 async def patch66(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
         "request": request,
@@ -5375,7 +5376,7 @@ async def patch66(
 async def delete67(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5399,7 +5400,7 @@ async def delete67(
 async def get67(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5424,7 +5425,7 @@ async def patch67(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5446,7 +5447,7 @@ async def patch67(
 async def delete68(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -5470,7 +5471,7 @@ async def delete68(
 async def get68(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -5495,7 +5496,7 @@ async def patch68(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
@@ -5521,7 +5522,7 @@ async def delete69(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5550,7 +5551,7 @@ async def get69(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5577,7 +5578,7 @@ async def patch69(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5604,7 +5605,7 @@ async def delete70(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5633,7 +5634,7 @@ async def get70(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5660,7 +5661,7 @@ async def patch70(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -5683,7 +5684,7 @@ async def patch70(
 async def delete71(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5707,7 +5708,7 @@ async def delete71(
 async def get71(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5732,7 +5733,7 @@ async def patch71(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5754,7 +5755,7 @@ async def patch71(
 async def delete72(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5778,7 +5779,7 @@ async def delete72(
 async def get72(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5803,7 +5804,7 @@ async def patch72(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5825,7 +5826,7 @@ async def patch72(
 async def delete73(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5849,7 +5850,7 @@ async def delete73(
 async def get73(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5874,7 +5875,7 @@ async def patch73(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5896,7 +5897,7 @@ async def patch73(
 async def delete74(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5920,7 +5921,7 @@ async def delete74(
 async def get74(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5945,7 +5946,7 @@ async def patch74(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5967,7 +5968,7 @@ async def patch74(
 async def delete75(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -5991,7 +5992,7 @@ async def delete75(
 async def get75(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -6016,7 +6017,7 @@ async def patch75(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -6038,7 +6039,7 @@ async def patch75(
 async def delete76(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -6062,7 +6063,7 @@ async def delete76(
 async def get76(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -6087,7 +6088,7 @@ async def patch76(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "certificate_id": certificate_id,
@@ -6113,7 +6114,7 @@ async def delete77(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
@@ -6142,7 +6143,7 @@ async def get77(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
@@ -6169,7 +6170,7 @@ async def patch77(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
@@ -6192,7 +6193,7 @@ async def patch77(
 async def delete78(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
@@ -6216,7 +6217,7 @@ async def delete78(
 async def get78(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
@@ -6241,7 +6242,7 @@ async def patch78(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
@@ -6263,7 +6264,7 @@ async def patch78(
 async def delete79(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
@@ -6287,7 +6288,7 @@ async def delete79(
 async def get79(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
@@ -6312,7 +6313,7 @@ async def patch79(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "certificate_id": certificate_id,
@@ -6338,7 +6339,7 @@ async def delete80(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -6367,7 +6368,7 @@ async def get80(
     request: Request,
     response: Response,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -6394,7 +6395,7 @@ async def patch80(
     response: Response,
     body: CertificateOnUpdate,
 ) -> Certificate:
-    s: Service = find_service(Certificate)
+    s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,

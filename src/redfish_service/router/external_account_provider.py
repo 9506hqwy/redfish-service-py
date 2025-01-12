@@ -7,7 +7,8 @@ from ..model.external_account_provider import (
     ExternalAccountProvider,
     ExternalAccountProviderOnUpdate,
 )
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -18,7 +19,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(external_account_provider_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(ExternalAccountProvider)
+    s: Service = get_service(ExternalAccountProvider, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "request": request,
@@ -41,7 +42,7 @@ async def delete1(external_account_provider_id: str, request: Request, response:
 async def get1(
     external_account_provider_id: str, request: Request, response: Response
 ) -> ExternalAccountProvider:
-    s: Service = find_service(ExternalAccountProvider)
+    s: Service = get_service(ExternalAccountProvider, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "request": request,
@@ -64,7 +65,7 @@ async def patch1(
     response: Response,
     body: ExternalAccountProviderOnUpdate,
 ) -> ExternalAccountProvider:
-    s: Service = find_service(ExternalAccountProvider)
+    s: Service = get_service(ExternalAccountProvider, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "request": request,
@@ -85,7 +86,7 @@ async def patch1(
 async def delete2(
     manager_id: str, external_account_provider_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(ExternalAccountProvider)
+    s: Service = get_service(ExternalAccountProvider, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -109,7 +110,7 @@ async def delete2(
 async def get2(
     manager_id: str, external_account_provider_id: str, request: Request, response: Response
 ) -> ExternalAccountProvider:
-    s: Service = find_service(ExternalAccountProvider)
+    s: Service = get_service(ExternalAccountProvider, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -134,7 +135,7 @@ async def patch2(
     response: Response,
     body: ExternalAccountProviderOnUpdate,
 ) -> ExternalAccountProvider:
-    s: Service = find_service(ExternalAccountProvider)
+    s: Service = get_service(ExternalAccountProvider, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,

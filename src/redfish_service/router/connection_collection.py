@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.connection import Connection, ConnectionOnCreate
 from ..model.connection_collection import ConnectionCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Fabrics/{fabric_id}/Connections", response_model_exclude_none=True)
 @router.head("/redfish/v1/Fabrics/{fabric_id}/Connections", response_model_exclude_none=True)
 async def get1(fabric_id: str, request: Request, response: Response) -> ConnectionCollection:
-    s: Service = find_service(ConnectionCollection)
+    s: Service = get_service(ConnectionCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -29,7 +30,7 @@ async def get1(fabric_id: str, request: Request, response: Response) -> Connecti
 async def post1(
     fabric_id: str, request: Request, response: Response, body: ConnectionOnCreate
 ) -> Connection:
-    s: ServiceCollection = find_service_collection(ConnectionCollection)
+    s: ServiceCollection = get_service_collection(ConnectionCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "request": request,
@@ -45,7 +46,7 @@ async def post1(
 @router.get("/redfish/v1/Storage/{storage_id}/Connections", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/Connections", response_model_exclude_none=True)
 async def get2(storage_id: str, request: Request, response: Response) -> ConnectionCollection:
-    s: Service = find_service(ConnectionCollection)
+    s: Service = get_service(ConnectionCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -61,7 +62,7 @@ async def get2(storage_id: str, request: Request, response: Response) -> Connect
 async def post2(
     storage_id: str, request: Request, response: Response, body: ConnectionOnCreate
 ) -> Connection:
-    s: ServiceCollection = find_service_collection(ConnectionCollection)
+    s: ServiceCollection = get_service_collection(ConnectionCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "request": request,

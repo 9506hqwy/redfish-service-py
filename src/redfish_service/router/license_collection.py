@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.license import License, LicenseOnCreate
 from ..model.license_collection import LicenseCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/LicenseService/Licenses", response_model_exclude_none=True)
 @router.head("/redfish/v1/LicenseService/Licenses", response_model_exclude_none=True)
 async def get1(request: Request, response: Response) -> LicenseCollection:
-    s: Service = find_service(LicenseCollection)
+    s: Service = get_service(LicenseCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -25,7 +26,7 @@ async def get1(request: Request, response: Response) -> LicenseCollection:
 @router.post("/redfish/v1/LicenseService/Licenses/Members", response_model_exclude_none=True)
 @authenticate
 async def post1(request: Request, response: Response, body: LicenseOnCreate) -> License:
-    s: ServiceCollection = find_service_collection(LicenseCollection)
+    s: ServiceCollection = get_service_collection(LicenseCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"

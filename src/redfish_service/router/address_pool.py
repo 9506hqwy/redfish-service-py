@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.address_pool import AddressPool, AddressPoolOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     fabric_id: str, address_pool_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(AddressPool)
+    s: Service = get_service(AddressPool, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "address_pool_id": address_pool_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     fabric_id: str, address_pool_id: str, request: Request, response: Response
 ) -> AddressPool:
-    s: Service = find_service(AddressPool)
+    s: Service = get_service(AddressPool, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "address_pool_id": address_pool_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: AddressPoolOnUpdate,
 ) -> AddressPool:
-    s: Service = find_service(AddressPool)
+    s: Service = get_service(AddressPool, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "address_pool_id": address_pool_id,

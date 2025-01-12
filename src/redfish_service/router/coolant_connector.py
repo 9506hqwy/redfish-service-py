@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.coolant_connector import CoolantConnector, CoolantConnectorOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "coolant_connector_id": coolant_connector_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "coolant_connector_id": coolant_connector_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -120,7 +121,7 @@ async def patch2(
 async def get3(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -145,7 +146,7 @@ async def patch3(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -170,7 +171,7 @@ async def patch3(
 async def get4(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -195,7 +196,7 @@ async def patch4(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -220,7 +221,7 @@ async def patch4(
 async def get5(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -245,7 +246,7 @@ async def patch5(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -270,7 +271,7 @@ async def patch5(
 async def get6(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -295,7 +296,7 @@ async def patch6(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -320,7 +321,7 @@ async def patch6(
 async def get7(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -345,7 +346,7 @@ async def patch7(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -370,7 +371,7 @@ async def patch7(
 async def get8(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -395,7 +396,7 @@ async def patch8(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -420,7 +421,7 @@ async def patch8(
 async def get9(
     cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,
@@ -445,7 +446,7 @@ async def patch9(
     response: Response,
     body: CoolantConnectorOnUpdate,
 ) -> CoolantConnector:
-    s: Service = find_service(CoolantConnector)
+    s: Service = get_service(CoolantConnector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "coolant_connector_id": coolant_connector_id,

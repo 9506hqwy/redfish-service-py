@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.cxl_logical_device import CxlLogicalDevice, CxlLogicalDeviceOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -24,7 +25,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> CxlLogicalDevice:
-    s: Service = find_service(CxlLogicalDevice)
+    s: Service = get_service(CxlLogicalDevice, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -51,7 +52,7 @@ async def patch1(
     response: Response,
     body: CxlLogicalDeviceOnUpdate,
 ) -> CxlLogicalDevice:
-    s: Service = find_service(CxlLogicalDevice)
+    s: Service = get_service(CxlLogicalDevice, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,

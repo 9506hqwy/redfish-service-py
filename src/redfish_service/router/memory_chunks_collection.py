@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.memory_chunks import MemoryChunks, MemoryChunksOnCreate
 from ..model.memory_chunks_collection import MemoryChunksCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, memory_domain_id: str, request: Request, response: Response
 ) -> MemoryChunksCollection:
-    s: Service = find_service(MemoryChunksCollection)
+    s: Service = get_service(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
@@ -50,7 +51,7 @@ async def post1(
     response: Response,
     body: MemoryChunksOnCreate,
 ) -> MemoryChunks:
-    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    s: ServiceCollection = get_service_collection(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_domain_id": memory_domain_id,
@@ -75,7 +76,7 @@ async def post1(
 async def get2(
     chassis_id: str, memory_domain_id: str, request: Request, response: Response
 ) -> MemoryChunksCollection:
-    s: Service = find_service(MemoryChunksCollection)
+    s: Service = get_service(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_domain_id": memory_domain_id,
@@ -104,7 +105,7 @@ async def post2(
     response: Response,
     body: MemoryChunksOnCreate,
 ) -> MemoryChunks:
-    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    s: ServiceCollection = get_service_collection(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_domain_id": memory_domain_id,
@@ -133,7 +134,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> MemoryChunksCollection:
-    s: Service = find_service(MemoryChunksCollection)
+    s: Service = get_service(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -164,7 +165,7 @@ async def post3(
     response: Response,
     body: MemoryChunksOnCreate,
 ) -> MemoryChunks:
-    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    s: ServiceCollection = get_service_collection(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -194,7 +195,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> MemoryChunksCollection:
-    s: Service = find_service(MemoryChunksCollection)
+    s: Service = get_service(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -225,7 +226,7 @@ async def post4(
     response: Response,
     body: MemoryChunksOnCreate,
 ) -> MemoryChunks:
-    s: ServiceCollection = find_service_collection(MemoryChunksCollection)
+    s: ServiceCollection = get_service_collection(MemoryChunksCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

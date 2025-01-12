@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.leak_detector import LeakDetector, LeakDetectorOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "leak_detector_id": leak_detector_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: LeakDetectorOnUpdate,
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "leak_detector_id": leak_detector_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     cooling_unit_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "leak_detector_id": leak_detector_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: LeakDetectorOnUpdate,
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "leak_detector_id": leak_detector_id,
@@ -120,7 +121,7 @@ async def patch2(
 async def get3(
     cooling_unit_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "leak_detector_id": leak_detector_id,
@@ -145,7 +146,7 @@ async def patch3(
     response: Response,
     body: LeakDetectorOnUpdate,
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "leak_detector_id": leak_detector_id,
@@ -170,7 +171,7 @@ async def patch3(
 async def get4(
     cooling_unit_id: str, leak_detector_id: str, request: Request, response: Response
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "leak_detector_id": leak_detector_id,
@@ -195,7 +196,7 @@ async def patch4(
     response: Response,
     body: LeakDetectorOnUpdate,
 ) -> LeakDetector:
-    s: Service = find_service(LeakDetector)
+    s: Service = get_service(LeakDetector, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "leak_detector_id": leak_detector_id,

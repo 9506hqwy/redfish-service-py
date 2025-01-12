@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.cable import Cable, CableOnCreate
 from ..model.cable_collection import CableCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Cables", response_model_exclude_none=True)
 @router.head("/redfish/v1/Cables", response_model_exclude_none=True)
 async def get1(request: Request, response: Response) -> CableCollection:
-    s: Service = find_service(CableCollection)
+    s: Service = get_service(CableCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -25,7 +26,7 @@ async def get1(request: Request, response: Response) -> CableCollection:
 @router.post("/redfish/v1/Cables/Members", response_model_exclude_none=True)
 @authenticate
 async def post1(request: Request, response: Response, body: CableOnCreate) -> Cable:
-    s: ServiceCollection = find_service_collection(CableCollection)
+    s: ServiceCollection = get_service_collection(CableCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.reservoir import Reservoir, ReservoirOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Reservoir:
-    s: Service = find_service(Reservoir)
+    s: Service = get_service(Reservoir, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: ReservoirOnUpdate,
 ) -> Reservoir:
-    s: Service = find_service(Reservoir)
+    s: Service = get_service(Reservoir, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Reservoir:
-    s: Service = find_service(Reservoir)
+    s: Service = get_service(Reservoir, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: ReservoirOnUpdate,
 ) -> Reservoir:
-    s: Service = find_service(Reservoir)
+    s: Service = get_service(Reservoir, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -120,7 +121,7 @@ async def patch2(
 async def get3(
     cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Reservoir:
-    s: Service = find_service(Reservoir)
+    s: Service = get_service(Reservoir, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,
@@ -145,7 +146,7 @@ async def patch3(
     response: Response,
     body: ReservoirOnUpdate,
 ) -> Reservoir:
-    s: Service = find_service(Reservoir)
+    s: Service = get_service(Reservoir, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "reservoir_id": reservoir_id,

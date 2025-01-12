@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.memory_region import MemoryRegion, MemoryRegionOnCreate
 from ..model.memory_region_collection import MemoryRegionCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> MemoryRegionCollection:
-    s: Service = find_service(MemoryRegionCollection)
+    s: Service = get_service(MemoryRegionCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -56,7 +57,7 @@ async def post1(
     response: Response,
     body: MemoryRegionOnCreate,
 ) -> MemoryRegion:
-    s: ServiceCollection = find_service_collection(MemoryRegionCollection)
+    s: ServiceCollection = get_service_collection(MemoryRegionCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,

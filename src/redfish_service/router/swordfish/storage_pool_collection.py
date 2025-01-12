@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.storage_pool import StoragePool, StoragePoolOnCreate
 from ...model.swordfish.storage_pool_collection import StoragePoolCollection
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -45,7 +46,7 @@ async def get1(
 async def post1(
     storage_service_id: str, request: Request, response: Response, body: StoragePoolOnCreate
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -69,7 +70,7 @@ async def post1(
 async def get2(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -98,7 +99,7 @@ async def post2(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -127,7 +128,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -158,7 +159,7 @@ async def post3(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -188,7 +189,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -219,7 +220,7 @@ async def post4(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -245,7 +246,7 @@ async def post4(
 async def get5(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -274,7 +275,7 @@ async def post5(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -303,7 +304,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -334,7 +335,7 @@ async def post6(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -352,7 +353,7 @@ async def post6(
 @router.get("/redfish/v1/Storage/{storage_id}/StoragePools", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/StoragePools", response_model_exclude_none=True)
 async def get7(storage_id: str, request: Request, response: Response) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -368,7 +369,7 @@ async def get7(storage_id: str, request: Request, response: Response) -> Storage
 async def post7(
     storage_id: str, request: Request, response: Response, body: StoragePoolOnCreate
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "request": request,
@@ -392,7 +393,7 @@ async def post7(
 async def get8(
     storage_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -421,7 +422,7 @@ async def post8(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -450,7 +451,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -481,7 +482,7 @@ async def post9(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -507,7 +508,7 @@ async def post9(
 async def get10(
     storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -538,7 +539,7 @@ async def post10(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -564,7 +565,7 @@ async def post10(
 async def get11(
     storage_id: str, volume_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -593,7 +594,7 @@ async def post11(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -622,7 +623,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -653,7 +654,7 @@ async def post12(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -679,7 +680,7 @@ async def post12(
 async def get13(
     computer_system_id: str, storage_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -708,7 +709,7 @@ async def post13(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -737,7 +738,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -768,7 +769,7 @@ async def post14(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -799,7 +800,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -832,7 +833,7 @@ async def post15(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -864,7 +865,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -897,7 +898,7 @@ async def post16(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -924,7 +925,7 @@ async def post16(
 async def get17(
     computer_system_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -955,7 +956,7 @@ async def post17(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -986,7 +987,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> StoragePoolCollection:
-    s: Service = find_service(StoragePoolCollection)
+    s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1019,7 +1020,7 @@ async def post18(
     response: Response,
     body: StoragePoolOnCreate,
 ) -> StoragePool:
-    s: ServiceCollection = find_service_collection(StoragePoolCollection)
+    s: ServiceCollection = get_service_collection(StoragePoolCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,

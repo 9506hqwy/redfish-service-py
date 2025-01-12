@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.connection import Connection, ConnectionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -16,7 +17,7 @@ router = APIRouter()
 async def delete1(
     fabric_id: str, connection_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Connection)
+    s: Service = get_service(Connection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "connection_id": connection_id,
@@ -38,7 +39,7 @@ async def delete1(
 async def get1(
     fabric_id: str, connection_id: str, request: Request, response: Response
 ) -> Connection:
-    s: Service = find_service(Connection)
+    s: Service = get_service(Connection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "connection_id": connection_id,
@@ -62,7 +63,7 @@ async def patch1(
     response: Response,
     body: ConnectionOnUpdate,
 ) -> Connection:
-    s: Service = find_service(Connection)
+    s: Service = get_service(Connection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "connection_id": connection_id,

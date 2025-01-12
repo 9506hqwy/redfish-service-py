@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ...model.swordfish.storage_pool_metrics import StoragePoolMetrics
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -47,7 +48,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -77,7 +78,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -108,7 +109,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -138,7 +139,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -168,7 +169,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -194,7 +195,7 @@ async def get6(
 async def get7(
     storage_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -222,7 +223,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -252,7 +253,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -283,7 +284,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -309,7 +310,7 @@ async def get10(
 async def get11(
     storage_id: str, volume_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -339,7 +340,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -369,7 +370,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -399,7 +400,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -431,7 +432,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -464,7 +465,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -496,7 +497,7 @@ async def get17(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -528,7 +529,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> StoragePoolMetrics:
-    s: Service = find_service(StoragePoolMetrics)
+    s: Service = get_service(StoragePoolMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,

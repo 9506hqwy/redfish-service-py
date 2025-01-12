@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.boot_option import BootOption, BootOptionOnCreate
 from ..model.boot_option_collection import BootOptionCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, request: Request, response: Response
 ) -> BootOptionCollection:
-    s: Service = find_service(BootOptionCollection)
+    s: Service = get_service(BootOptionCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -42,7 +43,7 @@ async def get1(
 async def post1(
     computer_system_id: str, request: Request, response: Response, body: BootOptionOnCreate
 ) -> BootOption:
-    s: ServiceCollection = find_service_collection(BootOptionCollection)
+    s: ServiceCollection = get_service_collection(BootOptionCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -66,7 +67,7 @@ async def post1(
 async def get2(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> BootOptionCollection:
-    s: Service = find_service(BootOptionCollection)
+    s: Service = get_service(BootOptionCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -95,7 +96,7 @@ async def post2(
     response: Response,
     body: BootOptionOnCreate,
 ) -> BootOption:
-    s: ServiceCollection = find_service_collection(BootOptionCollection)
+    s: ServiceCollection = get_service_collection(BootOptionCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -120,7 +121,7 @@ async def post2(
 async def get3(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> BootOptionCollection:
-    s: Service = find_service(BootOptionCollection)
+    s: Service = get_service(BootOptionCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -149,7 +150,7 @@ async def post3(
     response: Response,
     body: BootOptionOnCreate,
 ) -> BootOption:
-    s: ServiceCollection = find_service_collection(BootOptionCollection)
+    s: ServiceCollection = get_service_collection(BootOptionCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

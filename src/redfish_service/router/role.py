@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.role import Role, RoleOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 @router.delete("/redfish/v1/AccountService/Roles/{role_id}", response_model_exclude_none=True)
 @authenticate
 async def delete1(role_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Role)
+    s: Service = get_service(Role, request)
     b: dict[str, Any] = {"role_id": role_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -23,7 +24,7 @@ async def delete1(role_id: str, request: Request, response: Response) -> None:
 @router.get("/redfish/v1/AccountService/Roles/{role_id}", response_model_exclude_none=True)
 @router.head("/redfish/v1/AccountService/Roles/{role_id}", response_model_exclude_none=True)
 async def get1(role_id: str, request: Request, response: Response) -> Role:
-    s: Service = find_service(Role)
+    s: Service = get_service(Role, request)
     b: dict[str, Any] = {"role_id": role_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -34,7 +35,7 @@ async def get1(role_id: str, request: Request, response: Response) -> Role:
 @router.patch("/redfish/v1/AccountService/Roles/{role_id}", response_model_exclude_none=True)
 @authenticate
 async def patch1(role_id: str, request: Request, response: Response, body: RoleOnUpdate) -> Role:
-    s: Service = find_service(Role)
+    s: Service = get_service(Role, request)
     b: dict[str, Any] = {
         "role_id": role_id,
         "request": request,
@@ -53,7 +54,7 @@ async def patch1(role_id: str, request: Request, response: Response, body: RoleO
 )
 @authenticate
 async def delete2(manager_id: str, role_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Role)
+    s: Service = get_service(Role, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "role_id": role_id,
@@ -75,7 +76,7 @@ async def delete2(manager_id: str, role_id: str, request: Request, response: Res
     response_model_exclude_none=True,
 )
 async def get2(manager_id: str, role_id: str, request: Request, response: Response) -> Role:
-    s: Service = find_service(Role)
+    s: Service = get_service(Role, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "role_id": role_id,
@@ -96,7 +97,7 @@ async def get2(manager_id: str, role_id: str, request: Request, response: Respon
 async def patch2(
     manager_id: str, role_id: str, request: Request, response: Response, body: RoleOnUpdate
 ) -> Role:
-    s: Service = find_service(Role)
+    s: Service = get_service(Role, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "role_id": role_id,

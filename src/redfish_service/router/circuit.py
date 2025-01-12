@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.circuit import Circuit, CircuitOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -120,7 +121,7 @@ async def patch2(
 async def get3(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -145,7 +146,7 @@ async def patch3(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -170,7 +171,7 @@ async def patch3(
 async def get4(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -195,7 +196,7 @@ async def patch4(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -220,7 +221,7 @@ async def patch4(
 async def get5(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -245,7 +246,7 @@ async def patch5(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -270,7 +271,7 @@ async def patch5(
 async def get6(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -295,7 +296,7 @@ async def patch6(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -320,7 +321,7 @@ async def patch6(
 async def get7(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -345,7 +346,7 @@ async def patch7(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -370,7 +371,7 @@ async def patch7(
 async def get8(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -395,7 +396,7 @@ async def patch8(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -420,7 +421,7 @@ async def patch8(
 async def get9(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -445,7 +446,7 @@ async def patch9(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -470,7 +471,7 @@ async def patch9(
 async def get10(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -495,7 +496,7 @@ async def patch10(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -520,7 +521,7 @@ async def patch10(
 async def get11(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -545,7 +546,7 @@ async def patch11(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -570,7 +571,7 @@ async def patch11(
 async def get12(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -595,7 +596,7 @@ async def patch12(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -620,7 +621,7 @@ async def patch12(
 async def get13(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -645,7 +646,7 @@ async def patch13(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -670,7 +671,7 @@ async def patch13(
 async def get14(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -695,7 +696,7 @@ async def patch14(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -720,7 +721,7 @@ async def patch14(
 async def get15(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -745,7 +746,7 @@ async def patch15(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -770,7 +771,7 @@ async def patch15(
 async def get16(
     power_distribution_id: str, circuit_id: str, request: Request, response: Response
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,
@@ -795,7 +796,7 @@ async def patch16(
     response: Response,
     body: CircuitOnUpdate,
 ) -> Circuit:
-    s: Service = find_service(Circuit)
+    s: Service = get_service(Circuit, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "circuit_id": circuit_id,

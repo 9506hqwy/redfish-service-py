@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.component_integrity import ComponentIntegrity, ComponentIntegrityOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -18,7 +19,7 @@ router = APIRouter()
 async def get1(
     component_integrity_id: str, request: Request, response: Response
 ) -> ComponentIntegrity:
-    s: Service = find_service(ComponentIntegrity)
+    s: Service = get_service(ComponentIntegrity, request)
     b: dict[str, Any] = {
         "component_integrity_id": component_integrity_id,
         "request": request,
@@ -40,7 +41,7 @@ async def patch1(
     response: Response,
     body: ComponentIntegrityOnUpdate,
 ) -> ComponentIntegrity:
-    s: Service = find_service(ComponentIntegrity)
+    s: Service = get_service(ComponentIntegrity, request)
     b: dict[str, Any] = {
         "component_integrity_id": component_integrity_id,
         "request": request,

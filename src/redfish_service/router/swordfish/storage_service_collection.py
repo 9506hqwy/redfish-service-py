@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.storage_service import StorageService, StorageServiceOnCreate
 from ...model.swordfish.storage_service_collection import StorageServiceCollection
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/StorageServices", response_model_exclude_none=True)
 @router.head("/redfish/v1/StorageServices", response_model_exclude_none=True)
 async def get1(request: Request, response: Response) -> StorageServiceCollection:
-    s: Service = find_service(StorageServiceCollection)
+    s: Service = get_service(StorageServiceCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -27,7 +28,7 @@ async def get1(request: Request, response: Response) -> StorageServiceCollection
 async def post1(
     request: Request, response: Response, body: StorageServiceOnCreate
 ) -> StorageService:
-    s: ServiceCollection = find_service_collection(StorageServiceCollection)
+    s: ServiceCollection = get_service_collection(StorageServiceCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -44,7 +45,7 @@ async def post1(
 async def get2(
     computer_system_id: str, request: Request, response: Response
 ) -> StorageServiceCollection:
-    s: Service = find_service(StorageServiceCollection)
+    s: Service = get_service(StorageServiceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -67,7 +68,7 @@ async def get2(
 async def post2(
     computer_system_id: str, request: Request, response: Response, body: StorageServiceOnCreate
 ) -> StorageService:
-    s: ServiceCollection = find_service_collection(StorageServiceCollection)
+    s: ServiceCollection = get_service_collection(StorageServiceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,

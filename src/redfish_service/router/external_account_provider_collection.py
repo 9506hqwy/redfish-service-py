@@ -8,7 +8,8 @@ from ..model.external_account_provider import (
     ExternalAccountProviderOnCreate,
 )
 from ..model.external_account_provider_collection import ExternalAccountProviderCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
     "/redfish/v1/AccountService/ExternalAccountProviders", response_model_exclude_none=True
 )
 async def get1(request: Request, response: Response) -> ExternalAccountProviderCollection:
-    s: Service = find_service(ExternalAccountProviderCollection)
+    s: Service = get_service(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -38,7 +39,7 @@ async def get1(request: Request, response: Response) -> ExternalAccountProviderC
 async def post1(
     request: Request, response: Response, body: ExternalAccountProviderOnCreate
 ) -> ExternalAccountProvider:
-    s: ServiceCollection = find_service_collection(ExternalAccountProviderCollection)
+    s: ServiceCollection = get_service_collection(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -57,7 +58,7 @@ async def post1(
 async def get2(
     manager_id: str, request: Request, response: Response
 ) -> ExternalAccountProviderCollection:
-    s: Service = find_service(ExternalAccountProviderCollection)
+    s: Service = get_service(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -77,7 +78,7 @@ async def get2(
 async def post2(
     manager_id: str, request: Request, response: Response, body: ExternalAccountProviderOnCreate
 ) -> ExternalAccountProvider:
-    s: ServiceCollection = find_service_collection(ExternalAccountProviderCollection)
+    s: ServiceCollection = get_service_collection(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,

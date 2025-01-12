@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.drive import Drive, DriveOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -47,7 +48,7 @@ async def patch1(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -67,7 +68,7 @@ async def patch1(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}", response_model_exclude_none=True
 )
 async def get2(chassis_id: str, drive_id: str, request: Request, response: Response) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -87,7 +88,7 @@ async def get2(chassis_id: str, drive_id: str, request: Request, response: Respo
 async def patch2(
     chassis_id: str, drive_id: str, request: Request, response: Response, body: DriveOnUpdate
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -112,7 +113,7 @@ async def patch2(
 async def get3(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -139,7 +140,7 @@ async def patch3(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -165,7 +166,7 @@ async def patch3(
 async def get4(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -190,7 +191,7 @@ async def patch4(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -220,7 +221,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -249,7 +250,7 @@ async def patch5(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -276,7 +277,7 @@ async def patch5(
 async def get6(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -303,7 +304,7 @@ async def patch6(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -329,7 +330,7 @@ async def patch6(
 async def get7(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -354,7 +355,7 @@ async def patch7(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -384,7 +385,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -413,7 +414,7 @@ async def patch8(
     response: Response,
     body: DriveOnUpdate,
 ) -> Drive:
-    s: Service = find_service(Drive)
+    s: Service = get_service(Drive, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

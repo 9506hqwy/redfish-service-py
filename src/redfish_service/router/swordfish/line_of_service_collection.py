@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.line_of_service import LineOfService, LineOfServiceOnCreate
 from ...model.swordfish.line_of_service_collection import LineOfServiceCollection
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -45,7 +46,7 @@ async def get1(
 async def post1(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -69,7 +70,7 @@ async def post1(
 async def get2(
     storage_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -93,7 +94,7 @@ async def get2(
 async def post2(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -117,7 +118,7 @@ async def post2(
 async def get3(
     storage_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -141,7 +142,7 @@ async def get3(
 async def post3(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -165,7 +166,7 @@ async def post3(
 async def get4(
     storage_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -189,7 +190,7 @@ async def get4(
 async def post4(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -213,7 +214,7 @@ async def post4(
 async def get5(
     storage_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -237,7 +238,7 @@ async def get5(
 async def post5(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -261,7 +262,7 @@ async def post5(
 async def get6(
     storage_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -285,7 +286,7 @@ async def get6(
 async def post6(
     storage_service_id: str, request: Request, response: Response, body: LineOfServiceOnCreate
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -309,7 +310,7 @@ async def post6(
 async def get7(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -338,7 +339,7 @@ async def post7(
     response: Response,
     body: LineOfServiceOnCreate,
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -363,7 +364,7 @@ async def post7(
 async def get8(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -392,7 +393,7 @@ async def post8(
     response: Response,
     body: LineOfServiceOnCreate,
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -417,7 +418,7 @@ async def post8(
 async def get9(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -446,7 +447,7 @@ async def post9(
     response: Response,
     body: LineOfServiceOnCreate,
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -471,7 +472,7 @@ async def post9(
 async def get10(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -500,7 +501,7 @@ async def post10(
     response: Response,
     body: LineOfServiceOnCreate,
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -525,7 +526,7 @@ async def post10(
 async def get11(
     storage_service_id: str, class_of_service_id: str, request: Request, response: Response
 ) -> LineOfServiceCollection:
-    s: Service = find_service(LineOfServiceCollection)
+    s: Service = get_service(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,
@@ -554,7 +555,7 @@ async def post11(
     response: Response,
     body: LineOfServiceOnCreate,
 ) -> LineOfService:
-    s: ServiceCollection = find_service_collection(LineOfServiceCollection)
+    s: ServiceCollection = get_service_collection(LineOfServiceCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "class_of_service_id": class_of_service_id,

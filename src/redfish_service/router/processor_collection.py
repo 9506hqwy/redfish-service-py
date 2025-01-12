@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.processor_collection import ProcessorCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -40,7 +41,7 @@ async def get1(
 async def get2(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -68,7 +69,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -93,7 +94,7 @@ async def get3(
 async def get4(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -121,7 +122,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -146,7 +147,7 @@ async def get5(
 async def get6(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -174,7 +175,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -204,7 +205,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -230,7 +231,7 @@ async def get8(
 async def get9(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -258,7 +259,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -283,7 +284,7 @@ async def get10(
 async def get11(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -311,7 +312,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -341,7 +342,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -367,7 +368,7 @@ async def get13(
 async def get14(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -395,7 +396,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -425,7 +426,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -443,7 +444,7 @@ async def get16(
 @router.get("/redfish/v1/Chassis/{chassis_id}/Processors", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Processors", response_model_exclude_none=True)
 async def get17(chassis_id: str, request: Request, response: Response) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -462,7 +463,7 @@ async def get17(chassis_id: str, request: Request, response: Response) -> Proces
 async def get18(
     chassis_id: str, processor_id: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "processor_id": processor_id,
@@ -486,7 +487,7 @@ async def get18(
 async def get19(
     chassis_id: str, processor_id: str, processor_id2: str, request: Request, response: Response
 ) -> ProcessorCollection:
-    s: Service = find_service(ProcessorCollection)
+    s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "processor_id": processor_id,

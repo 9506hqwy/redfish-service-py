@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.registered_client import RegisteredClient, RegisteredClientOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -14,7 +15,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(registered_client_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(RegisteredClient)
+    s: Service = get_service(RegisteredClient, request)
     b: dict[str, Any] = {
         "registered_client_id": registered_client_id,
         "request": request,
@@ -35,7 +36,7 @@ async def delete1(registered_client_id: str, request: Request, response: Respons
 async def get1(
     registered_client_id: str, request: Request, response: Response
 ) -> RegisteredClient:
-    s: Service = find_service(RegisteredClient)
+    s: Service = get_service(RegisteredClient, request)
     b: dict[str, Any] = {
         "registered_client_id": registered_client_id,
         "request": request,
@@ -54,7 +55,7 @@ async def get1(
 async def patch1(
     registered_client_id: str, request: Request, response: Response, body: RegisteredClientOnUpdate
 ) -> RegisteredClient:
-    s: Service = find_service(RegisteredClient)
+    s: Service = get_service(RegisteredClient, request)
     b: dict[str, Any] = {
         "registered_client_id": registered_client_id,
         "request": request,

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.outlet import Outlet, OutletOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     power_distribution_id: str, outlet_id: str, request: Request, response: Response
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: OutletOnUpdate,
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     power_distribution_id: str, outlet_id: str, request: Request, response: Response
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: OutletOnUpdate,
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -120,7 +121,7 @@ async def patch2(
 async def get3(
     power_distribution_id: str, outlet_id: str, request: Request, response: Response
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -145,7 +146,7 @@ async def patch3(
     response: Response,
     body: OutletOnUpdate,
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -170,7 +171,7 @@ async def patch3(
 async def get4(
     power_distribution_id: str, outlet_id: str, request: Request, response: Response
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -195,7 +196,7 @@ async def patch4(
     response: Response,
     body: OutletOnUpdate,
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -220,7 +221,7 @@ async def patch4(
 async def get5(
     power_distribution_id: str, outlet_id: str, request: Request, response: Response
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,
@@ -245,7 +246,7 @@ async def patch5(
     response: Response,
     body: OutletOnUpdate,
 ) -> Outlet:
-    s: Service = find_service(Outlet)
+    s: Service = get_service(Outlet, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_id": outlet_id,

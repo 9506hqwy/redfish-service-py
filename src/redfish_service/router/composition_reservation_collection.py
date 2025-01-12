@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.composition_reservation_collection import CompositionReservationCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
     "/redfish/v1/CompositionService/CompositionReservations", response_model_exclude_none=True
 )
 async def get1(request: Request, response: Response) -> CompositionReservationCollection:
-    s: Service = find_service(CompositionReservationCollection)
+    s: Service = get_service(CompositionReservationCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"

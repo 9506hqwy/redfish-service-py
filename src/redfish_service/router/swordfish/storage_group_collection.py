@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.storage_group import StorageGroup, StorageGroupOnCreate
 from ...model.swordfish.storage_group_collection import StorageGroupCollection
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> StorageGroupCollection:
-    s: Service = find_service(StorageGroupCollection)
+    s: Service = get_service(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -45,7 +46,7 @@ async def get1(
 async def post1(
     storage_service_id: str, request: Request, response: Response, body: StorageGroupOnCreate
 ) -> StorageGroup:
-    s: ServiceCollection = find_service_collection(StorageGroupCollection)
+    s: ServiceCollection = get_service_collection(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -69,7 +70,7 @@ async def post1(
 async def get2(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> StorageGroupCollection:
-    s: Service = find_service(StorageGroupCollection)
+    s: Service = get_service(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -98,7 +99,7 @@ async def post2(
     response: Response,
     body: StorageGroupOnCreate,
 ) -> StorageGroup:
-    s: ServiceCollection = find_service_collection(StorageGroupCollection)
+    s: ServiceCollection = get_service_collection(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -115,7 +116,7 @@ async def post2(
 @router.get("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
 async def get3(storage_id: str, request: Request, response: Response) -> StorageGroupCollection:
-    s: Service = find_service(StorageGroupCollection)
+    s: Service = get_service(StorageGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -131,7 +132,7 @@ async def get3(storage_id: str, request: Request, response: Response) -> Storage
 async def post3(
     storage_id: str, request: Request, response: Response, body: StorageGroupOnCreate
 ) -> StorageGroup:
-    s: ServiceCollection = find_service_collection(StorageGroupCollection)
+    s: ServiceCollection = get_service_collection(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "request": request,
@@ -155,7 +156,7 @@ async def post3(
 async def get4(
     storage_id: str, volume_id: str, request: Request, response: Response
 ) -> StorageGroupCollection:
-    s: Service = find_service(StorageGroupCollection)
+    s: Service = get_service(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -184,7 +185,7 @@ async def post4(
     response: Response,
     body: StorageGroupOnCreate,
 ) -> StorageGroup:
-    s: ServiceCollection = find_service_collection(StorageGroupCollection)
+    s: ServiceCollection = get_service_collection(StorageGroupCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,

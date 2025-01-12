@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.route_set_entry import RouteSetEntry, RouteSetEntryOnCreate
 from ..model.route_set_entry_collection import RouteSetEntryCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -26,7 +27,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -59,7 +60,7 @@ async def post1(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -91,7 +92,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -124,7 +125,7 @@ async def post2(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -156,7 +157,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -189,7 +190,7 @@ async def post3(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -221,7 +222,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -254,7 +255,7 @@ async def post4(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -281,7 +282,7 @@ async def post4(
 async def get5(
     chassis_id: str, fabric_adapter_id: str, ssdt_id: str, request: Request, response: Response
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -312,7 +313,7 @@ async def post5(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -338,7 +339,7 @@ async def post5(
 async def get6(
     chassis_id: str, fabric_adapter_id: str, msdt_id: str, request: Request, response: Response
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -369,7 +370,7 @@ async def post6(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -399,7 +400,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -430,7 +431,7 @@ async def post7(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -460,7 +461,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -491,7 +492,7 @@ async def post8(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -522,7 +523,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -555,7 +556,7 @@ async def post9(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -587,7 +588,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> RouteSetEntryCollection:
-    s: Service = find_service(RouteSetEntryCollection)
+    s: Service = get_service(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -620,7 +621,7 @@ async def post10(
     response: Response,
     body: RouteSetEntryOnCreate,
 ) -> RouteSetEntry:
-    s: ServiceCollection = find_service_collection(RouteSetEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteSetEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,

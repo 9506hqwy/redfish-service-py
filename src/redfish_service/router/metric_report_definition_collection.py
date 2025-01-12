@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.metric_report_definition import MetricReportDefinition, MetricReportDefinitionOnCreate
 from ..model.metric_report_definition_collection import MetricReportDefinitionCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
     "/redfish/v1/TelemetryService/MetricReportDefinitions", response_model_exclude_none=True
 )
 async def get1(request: Request, response: Response) -> MetricReportDefinitionCollection:
-    s: Service = find_service(MetricReportDefinitionCollection)
+    s: Service = get_service(MetricReportDefinitionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -36,7 +37,7 @@ async def get1(request: Request, response: Response) -> MetricReportDefinitionCo
 async def post1(
     request: Request, response: Response, body: MetricReportDefinitionOnCreate
 ) -> MetricReportDefinition:
-    s: ServiceCollection = find_service_collection(MetricReportDefinitionCollection)
+    s: ServiceCollection = get_service_collection(MetricReportDefinitionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"

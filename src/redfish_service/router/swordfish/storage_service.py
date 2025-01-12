@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.storage_service import StorageService, StorageServiceOnUpdate
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -14,7 +15,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(storage_service_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(StorageService)
+    s: Service = get_service(StorageService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -29,7 +30,7 @@ async def delete1(storage_service_id: str, request: Request, response: Response)
 @router.get("/redfish/v1/StorageServices/{storage_service_id}", response_model_exclude_none=True)
 @router.head("/redfish/v1/StorageServices/{storage_service_id}", response_model_exclude_none=True)
 async def get1(storage_service_id: str, request: Request, response: Response) -> StorageService:
-    s: Service = find_service(StorageService)
+    s: Service = get_service(StorageService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -46,7 +47,7 @@ async def get1(storage_service_id: str, request: Request, response: Response) ->
 async def patch1(
     storage_service_id: str, request: Request, response: Response, body: StorageServiceOnUpdate
 ) -> StorageService:
-    s: Service = find_service(StorageService)
+    s: Service = get_service(StorageService, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -67,7 +68,7 @@ async def patch1(
 async def delete2(
     computer_system_id: str, storage_service_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(StorageService)
+    s: Service = get_service(StorageService, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_service_id": storage_service_id,
@@ -91,7 +92,7 @@ async def delete2(
 async def get2(
     computer_system_id: str, storage_service_id: str, request: Request, response: Response
 ) -> StorageService:
-    s: Service = find_service(StorageService)
+    s: Service = get_service(StorageService, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_service_id": storage_service_id,
@@ -116,7 +117,7 @@ async def patch2(
     response: Response,
     body: StorageServiceOnUpdate,
 ) -> StorageService:
-    s: Service = find_service(StorageService)
+    s: Service = get_service(StorageService, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_service_id": storage_service_id,

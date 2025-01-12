@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.outbound_connection import OutboundConnection, OutboundConnectionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(outbound_connection_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(OutboundConnection)
+    s: Service = get_service(OutboundConnection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,
@@ -38,7 +39,7 @@ async def delete1(outbound_connection_id: str, request: Request, response: Respo
 async def get1(
     outbound_connection_id: str, request: Request, response: Response
 ) -> OutboundConnection:
-    s: Service = find_service(OutboundConnection)
+    s: Service = get_service(OutboundConnection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,
@@ -61,7 +62,7 @@ async def patch1(
     response: Response,
     body: OutboundConnectionOnUpdate,
 ) -> OutboundConnection:
-    s: Service = find_service(OutboundConnection)
+    s: Service = get_service(OutboundConnection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,

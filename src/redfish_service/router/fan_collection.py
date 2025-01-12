@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.fan_collection import FanCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans", response_model_exclude_none=True
 )
 async def get1(chassis_id: str, request: Request, response: Response) -> FanCollection:
-    s: Service = find_service(FanCollection)
+    s: Service = get_service(FanCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"

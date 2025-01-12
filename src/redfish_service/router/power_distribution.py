@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.power_distribution import PowerDistribution, PowerDistributionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -18,7 +19,7 @@ router = APIRouter()
 async def get1(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -40,7 +41,7 @@ async def patch1(
     response: Response,
     body: PowerDistributionOnUpdate,
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -64,7 +65,7 @@ async def patch1(
 async def get2(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -87,7 +88,7 @@ async def patch2(
     response: Response,
     body: PowerDistributionOnUpdate,
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -111,7 +112,7 @@ async def patch2(
 async def get3(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -134,7 +135,7 @@ async def patch3(
     response: Response,
     body: PowerDistributionOnUpdate,
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -158,7 +159,7 @@ async def patch3(
 async def get4(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -181,7 +182,7 @@ async def patch4(
     response: Response,
     body: PowerDistributionOnUpdate,
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -205,7 +206,7 @@ async def patch4(
 async def get5(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -228,7 +229,7 @@ async def patch5(
     response: Response,
     body: PowerDistributionOnUpdate,
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -252,7 +253,7 @@ async def patch5(
 async def get6(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -275,7 +276,7 @@ async def patch6(
     response: Response,
     body: PowerDistributionOnUpdate,
 ) -> PowerDistribution:
-    s: Service = find_service(PowerDistribution)
+    s: Service = get_service(PowerDistribution, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,

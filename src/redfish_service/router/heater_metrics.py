@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.heater_metrics import HeaterMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, header_id: str, request: Request, response: Response
 ) -> HeaterMetrics:
-    s: Service = find_service(HeaterMetrics)
+    s: Service = get_service(HeaterMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "header_id": header_id,

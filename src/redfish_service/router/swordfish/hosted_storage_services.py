@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.hosted_storage_services import HostedStorageServices
 from ...model.swordfish.storage_service import StorageService, StorageServiceOnCreate
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, request: Request, response: Response
 ) -> HostedStorageServices:
-    s: Service = find_service(HostedStorageServices)
+    s: Service = get_service(HostedStorageServices, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -42,7 +43,7 @@ async def get1(
 async def post1(
     computer_system_id: str, request: Request, response: Response, body: StorageServiceOnCreate
 ) -> StorageService:
-    s: ServiceCollection = find_service_collection(HostedStorageServices)
+    s: ServiceCollection = get_service_collection(HostedStorageServices, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,

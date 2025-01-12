@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.acceleration_function import AccelerationFunction
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> AccelerationFunction:
-    s: Service = find_service(AccelerationFunction)
+    s: Service = get_service(AccelerationFunction, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -52,7 +53,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> AccelerationFunction:
-    s: Service = find_service(AccelerationFunction)
+    s: Service = get_service(AccelerationFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -82,7 +83,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> AccelerationFunction:
-    s: Service = find_service(AccelerationFunction)
+    s: Service = get_service(AccelerationFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -112,7 +113,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> AccelerationFunction:
-    s: Service = find_service(AccelerationFunction)
+    s: Service = get_service(AccelerationFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -142,7 +143,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> AccelerationFunction:
-    s: Service = find_service(AccelerationFunction)
+    s: Service = get_service(AccelerationFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

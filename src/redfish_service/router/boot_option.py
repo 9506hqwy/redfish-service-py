@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.boot_option import BootOption, BootOptionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     computer_system_id: str, boot_option_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "boot_option_id": boot_option_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     computer_system_id: str, boot_option_id: str, request: Request, response: Response
 ) -> BootOption:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "boot_option_id": boot_option_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: BootOptionOnUpdate,
 ) -> BootOption:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "boot_option_id": boot_option_id,
@@ -92,7 +93,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -121,7 +122,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> BootOption:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -148,7 +149,7 @@ async def patch2(
     response: Response,
     body: BootOptionOnUpdate,
 ) -> BootOption:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -175,7 +176,7 @@ async def delete3(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -204,7 +205,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> BootOption:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -231,7 +232,7 @@ async def patch3(
     response: Response,
     body: BootOptionOnUpdate,
 ) -> BootOption:
-    s: Service = find_service(BootOption)
+    s: Service = get_service(BootOption, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

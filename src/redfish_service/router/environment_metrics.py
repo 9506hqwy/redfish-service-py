@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.environment_metrics import EnvironmentMetrics, EnvironmentMetricsOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -70,7 +71,7 @@ async def patch1(
 async def get2(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -95,7 +96,7 @@ async def patch2(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -120,7 +121,7 @@ async def patch2(
 async def get3(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -147,7 +148,7 @@ async def patch3(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -173,7 +174,7 @@ async def patch3(
 async def get4(
     computer_system_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
@@ -198,7 +199,7 @@ async def patch4(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
@@ -227,7 +228,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -254,7 +255,7 @@ async def patch5(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -280,7 +281,7 @@ async def patch5(
 async def get6(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -305,7 +306,7 @@ async def patch6(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -330,7 +331,7 @@ async def patch6(
 async def get7(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -355,7 +356,7 @@ async def patch7(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -380,7 +381,7 @@ async def patch7(
 async def get8(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -407,7 +408,7 @@ async def patch8(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -433,7 +434,7 @@ async def patch8(
 async def get9(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -458,7 +459,7 @@ async def patch9(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -487,7 +488,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -514,7 +515,7 @@ async def patch10(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -544,7 +545,7 @@ async def get11(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -571,7 +572,7 @@ async def patch11(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -601,7 +602,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -628,7 +629,7 @@ async def patch12(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -659,7 +660,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -688,7 +689,7 @@ async def patch13(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -720,7 +721,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -749,7 +750,7 @@ async def patch14(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -780,7 +781,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -807,7 +808,7 @@ async def patch15(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -833,7 +834,7 @@ async def patch15(
 async def get16(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -858,7 +859,7 @@ async def patch16(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -883,7 +884,7 @@ async def patch16(
 async def get17(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -908,7 +909,7 @@ async def patch17(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -933,7 +934,7 @@ async def patch17(
 async def get18(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -960,7 +961,7 @@ async def patch18(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -990,7 +991,7 @@ async def get19(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -1017,7 +1018,7 @@ async def patch19(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -1043,7 +1044,7 @@ async def patch19(
 async def get20(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -1068,7 +1069,7 @@ async def patch20(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -1097,7 +1098,7 @@ async def get21(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1124,7 +1125,7 @@ async def patch21(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1154,7 +1155,7 @@ async def get22(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1181,7 +1182,7 @@ async def patch22(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1211,7 +1212,7 @@ async def get23(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1238,7 +1239,7 @@ async def patch23(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1269,7 +1270,7 @@ async def get24(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1298,7 +1299,7 @@ async def patch24(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1330,7 +1331,7 @@ async def get25(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1359,7 +1360,7 @@ async def patch25(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1386,7 +1387,7 @@ async def patch25(
 async def get26(
     chassis_id: str, memory_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1411,7 +1412,7 @@ async def patch26(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1436,7 +1437,7 @@ async def patch26(
 async def get27(
     chassis_id: str, drive_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -1461,7 +1462,7 @@ async def patch27(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -1482,7 +1483,7 @@ async def patch27(
     "/redfish/v1/Chassis/{chassis_id}/EnvironmentMetrics", response_model_exclude_none=True
 )
 async def get28(chassis_id: str, request: Request, response: Response) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -1497,7 +1498,7 @@ async def get28(chassis_id: str, request: Request, response: Response) -> Enviro
 async def patch28(
     chassis_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "request": request,
@@ -1521,7 +1522,7 @@ async def patch28(
 async def get29(
     chassis_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -1546,7 +1547,7 @@ async def patch29(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -1571,7 +1572,7 @@ async def patch29(
 async def get30(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1596,7 +1597,7 @@ async def patch30(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -1621,7 +1622,7 @@ async def patch30(
 async def get31(
     chassis_id: str, media_controller_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
@@ -1646,7 +1647,7 @@ async def patch31(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
@@ -1667,7 +1668,7 @@ async def patch31(
     "/redfish/v1/Facilities/{facility_id}/EnvironmentMetrics", response_model_exclude_none=True
 )
 async def get32(facility_id: str, request: Request, response: Response) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {"facility_id": facility_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -1682,7 +1683,7 @@ async def get32(facility_id: str, request: Request, response: Response) -> Envir
 async def patch32(
     facility_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "facility_id": facility_id,
         "request": request,
@@ -1702,7 +1703,7 @@ async def patch32(
     "/redfish/v1/Facilities/{facility_id}/AmbientMetrics", response_model_exclude_none=True
 )
 async def get33(facility_id: str, request: Request, response: Response) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {"facility_id": facility_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -1717,7 +1718,7 @@ async def get33(facility_id: str, request: Request, response: Response) -> Envir
 async def patch33(
     facility_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "facility_id": facility_id,
         "request": request,
@@ -1741,7 +1742,7 @@ async def patch33(
 async def get34(
     fabric_id: str, switch_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1766,7 +1767,7 @@ async def patch34(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1791,7 +1792,7 @@ async def patch34(
 async def get35(
     storage_id: str, controller_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "controller_id": controller_id,
@@ -1816,7 +1817,7 @@ async def patch35(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "controller_id": controller_id,
@@ -1841,7 +1842,7 @@ async def patch35(
 async def get36(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1868,7 +1869,7 @@ async def patch36(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1899,7 +1900,7 @@ async def get37(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1928,7 +1929,7 @@ async def patch37(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1960,7 +1961,7 @@ async def get38(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1989,7 +1990,7 @@ async def patch38(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2020,7 +2021,7 @@ async def get39(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2047,7 +2048,7 @@ async def patch39(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2073,7 +2074,7 @@ async def patch39(
 async def get40(
     computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -2100,7 +2101,7 @@ async def patch40(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -2126,7 +2127,7 @@ async def patch40(
 async def get41(
     computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -2153,7 +2154,7 @@ async def patch41(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "controller_id": controller_id,
@@ -2179,7 +2180,7 @@ async def patch41(
 async def get42(
     computer_system_id: str, processor_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -2206,7 +2207,7 @@ async def patch42(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -2232,7 +2233,7 @@ async def patch42(
 async def get43(
     chassis_id: str, media_controller_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
@@ -2259,7 +2260,7 @@ async def patch43(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "media_controller_id": media_controller_id,
@@ -2285,7 +2286,7 @@ async def patch43(
 async def get44(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2312,7 +2313,7 @@ async def patch44(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -2338,7 +2339,7 @@ async def patch44(
 async def get45(
     chassis_id: str, network_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -2365,7 +2366,7 @@ async def patch45(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -2396,7 +2397,7 @@ async def get46(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2425,7 +2426,7 @@ async def patch46(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2457,7 +2458,7 @@ async def get47(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2486,7 +2487,7 @@ async def patch47(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2513,7 +2514,7 @@ async def patch47(
 async def get48(
     resource_block_id: str, processor_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2540,7 +2541,7 @@ async def patch48(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -2572,7 +2573,7 @@ async def get49(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2603,7 +2604,7 @@ async def patch49(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2637,7 +2638,7 @@ async def get50(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2668,7 +2669,7 @@ async def patch50(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2701,7 +2702,7 @@ async def get51(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2730,7 +2731,7 @@ async def patch51(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2762,7 +2763,7 @@ async def get52(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2791,7 +2792,7 @@ async def patch52(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2823,7 +2824,7 @@ async def get53(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2852,7 +2853,7 @@ async def patch53(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2884,7 +2885,7 @@ async def get54(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2913,7 +2914,7 @@ async def patch54(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2945,7 +2946,7 @@ async def get55(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2974,7 +2975,7 @@ async def patch55(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3006,7 +3007,7 @@ async def get56(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3035,7 +3036,7 @@ async def patch56(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -3062,7 +3063,7 @@ async def patch56(
 async def get57(
     resource_block_id: str, processor_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -3089,7 +3090,7 @@ async def patch57(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -3121,7 +3122,7 @@ async def get58(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3152,7 +3153,7 @@ async def patch58(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3186,7 +3187,7 @@ async def get59(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3217,7 +3218,7 @@ async def patch59(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3250,7 +3251,7 @@ async def get60(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3279,7 +3280,7 @@ async def patch60(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3311,7 +3312,7 @@ async def get61(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3340,7 +3341,7 @@ async def patch61(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3372,7 +3373,7 @@ async def get62(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3401,7 +3402,7 @@ async def patch62(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3433,7 +3434,7 @@ async def get63(
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3462,7 +3463,7 @@ async def patch63(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3489,7 +3490,7 @@ async def patch63(
 async def get64(
     storage_id: str, storage_controller_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3516,7 +3517,7 @@ async def patch64(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3542,7 +3543,7 @@ async def patch64(
 async def get65(
     storage_id: str, storage_controller_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3569,7 +3570,7 @@ async def patch65(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -3595,7 +3596,7 @@ async def patch65(
 async def get66(
     manager_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "port_id": port_id,
@@ -3620,7 +3621,7 @@ async def patch66(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "port_id": port_id,
@@ -3645,7 +3646,7 @@ async def patch66(
 async def get67(
     manager_id: str, port_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "port_id": port_id,
@@ -3670,7 +3671,7 @@ async def patch67(
     response: Response,
     body: EnvironmentMetricsOnUpdate,
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "port_id": port_id,
@@ -3693,7 +3694,7 @@ async def patch67(
     response_model_exclude_none=True,
 )
 async def get68(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3713,7 +3714,7 @@ async def get68(cooling_unit_id: str, request: Request, response: Response) -> E
 async def patch68(
     cooling_unit_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3735,7 +3736,7 @@ async def patch68(
     response_model_exclude_none=True,
 )
 async def get69(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3755,7 +3756,7 @@ async def get69(cooling_unit_id: str, request: Request, response: Response) -> E
 async def patch69(
     cooling_unit_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3777,7 +3778,7 @@ async def patch69(
     response_model_exclude_none=True,
 )
 async def get70(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -3797,7 +3798,7 @@ async def get70(cooling_unit_id: str, request: Request, response: Response) -> E
 async def patch70(
     cooling_unit_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
-    s: Service = find_service(EnvironmentMetrics)
+    s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,

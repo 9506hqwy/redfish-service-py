@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.ethernet_interface import EthernetInterface, EthernetInterfaceOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     manager_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     manager_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -88,7 +89,7 @@ async def patch1(
 async def delete2(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -112,7 +113,7 @@ async def delete2(
 async def get2(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -137,7 +138,7 @@ async def patch2(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -159,7 +160,7 @@ async def patch2(
 async def delete3(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -183,7 +184,7 @@ async def delete3(
 async def get3(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -208,7 +209,7 @@ async def patch3(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -234,7 +235,7 @@ async def delete4(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -263,7 +264,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -290,7 +291,7 @@ async def patch4(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -313,7 +314,7 @@ async def patch4(
 async def delete5(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -337,7 +338,7 @@ async def delete5(
 async def get5(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -362,7 +363,7 @@ async def patch5(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -388,7 +389,7 @@ async def delete6(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -417,7 +418,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -444,7 +445,7 @@ async def patch6(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -467,7 +468,7 @@ async def patch6(
 async def delete7(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -491,7 +492,7 @@ async def delete7(
 async def get7(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -516,7 +517,7 @@ async def patch7(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -542,7 +543,7 @@ async def delete8(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -571,7 +572,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -598,7 +599,7 @@ async def patch8(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -625,7 +626,7 @@ async def delete9(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -654,7 +655,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -681,7 +682,7 @@ async def patch9(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -709,7 +710,7 @@ async def delete10(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -740,7 +741,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -769,7 +770,7 @@ async def patch10(
     response: Response,
     body: EthernetInterfaceOnUpdate,
 ) -> EthernetInterface:
-    s: Service = find_service(EthernetInterface)
+    s: Service = get_service(EthernetInterface, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,

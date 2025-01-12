@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.file_share import FileShare, FileShareOnCreate
 from ...model.swordfish.file_share_collection import FileShareCollection
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     storage_id: str, file_systems_id: str, request: Request, response: Response
 ) -> FileShareCollection:
-    s: Service = find_service(FileShareCollection)
+    s: Service = get_service(FileShareCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
@@ -50,7 +51,7 @@ async def post1(
     response: Response,
     body: FileShareOnCreate,
 ) -> FileShare:
-    s: ServiceCollection = find_service_collection(FileShareCollection)
+    s: ServiceCollection = get_service_collection(FileShareCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_systems_id": file_systems_id,
@@ -75,7 +76,7 @@ async def post1(
 async def get2(
     storage_service_id: str, file_systems_id: str, request: Request, response: Response
 ) -> FileShareCollection:
-    s: Service = find_service(FileShareCollection)
+    s: Service = get_service(FileShareCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,
@@ -104,7 +105,7 @@ async def post2(
     response: Response,
     body: FileShareOnCreate,
 ) -> FileShare:
-    s: ServiceCollection = find_service_collection(FileShareCollection)
+    s: ServiceCollection = get_service_collection(FileShareCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_systems_id": file_systems_id,

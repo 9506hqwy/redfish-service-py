@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.allow_deny import AllowDeny, AllowDenyOnCreate
 from ..model.allow_deny_collection import AllowDenyCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> AllowDenyCollection:
-    s: Service = find_service(AllowDenyCollection)
+    s: Service = get_service(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -56,7 +57,7 @@ async def post1(
     response: Response,
     body: AllowDenyOnCreate,
 ) -> AllowDeny:
-    s: ServiceCollection = find_service_collection(AllowDenyCollection)
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -86,7 +87,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> AllowDenyCollection:
-    s: Service = find_service(AllowDenyCollection)
+    s: Service = get_service(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -117,7 +118,7 @@ async def post2(
     response: Response,
     body: AllowDenyOnCreate,
 ) -> AllowDeny:
-    s: ServiceCollection = find_service_collection(AllowDenyCollection)
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -147,7 +148,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> AllowDenyCollection:
-    s: Service = find_service(AllowDenyCollection)
+    s: Service = get_service(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -178,7 +179,7 @@ async def post3(
     response: Response,
     body: AllowDenyOnCreate,
 ) -> AllowDeny:
-    s: ServiceCollection = find_service_collection(AllowDenyCollection)
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -209,7 +210,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> AllowDenyCollection:
-    s: Service = find_service(AllowDenyCollection)
+    s: Service = get_service(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -242,7 +243,7 @@ async def post4(
     response: Response,
     body: AllowDenyOnCreate,
 ) -> AllowDeny:
-    s: ServiceCollection = find_service_collection(AllowDenyCollection)
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -273,7 +274,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> AllowDenyCollection:
-    s: Service = find_service(AllowDenyCollection)
+    s: Service = get_service(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -304,7 +305,7 @@ async def post5(
     response: Response,
     body: AllowDenyOnCreate,
 ) -> AllowDeny:
-    s: ServiceCollection = find_service_collection(AllowDenyCollection)
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -335,7 +336,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> AllowDenyCollection:
-    s: Service = find_service(AllowDenyCollection)
+    s: Service = get_service(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -368,7 +369,7 @@ async def post6(
     response: Response,
     body: AllowDenyOnCreate,
 ) -> AllowDeny:
-    s: ServiceCollection = find_service_collection(AllowDenyCollection)
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

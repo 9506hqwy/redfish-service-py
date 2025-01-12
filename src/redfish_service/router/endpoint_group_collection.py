@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.endpoint_group import EndpointGroup, EndpointGroupOnCreate
 from ..model.endpoint_group_collection import EndpointGroupCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Storage/{storage_id}/EndpointGroups", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/EndpointGroups", response_model_exclude_none=True)
 async def get1(storage_id: str, request: Request, response: Response) -> EndpointGroupCollection:
-    s: Service = find_service(EndpointGroupCollection)
+    s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -29,7 +30,7 @@ async def get1(storage_id: str, request: Request, response: Response) -> Endpoin
 async def post1(
     storage_id: str, request: Request, response: Response, body: EndpointGroupOnCreate
 ) -> EndpointGroup:
-    s: ServiceCollection = find_service_collection(EndpointGroupCollection)
+    s: ServiceCollection = get_service_collection(EndpointGroupCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "request": request,
@@ -53,7 +54,7 @@ async def post1(
 async def get2(
     computer_system_id: str, storage_id: str, request: Request, response: Response
 ) -> EndpointGroupCollection:
-    s: Service = find_service(EndpointGroupCollection)
+    s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -82,7 +83,7 @@ async def post2(
     response: Response,
     body: EndpointGroupOnCreate,
 ) -> EndpointGroup:
-    s: ServiceCollection = find_service_collection(EndpointGroupCollection)
+    s: ServiceCollection = get_service_collection(EndpointGroupCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -107,7 +108,7 @@ async def post2(
 async def get3(
     storage_service_id: str, request: Request, response: Response
 ) -> EndpointGroupCollection:
-    s: Service = find_service(EndpointGroupCollection)
+    s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -131,7 +132,7 @@ async def get3(
 async def post3(
     storage_service_id: str, request: Request, response: Response, body: EndpointGroupOnCreate
 ) -> EndpointGroup:
-    s: ServiceCollection = find_service_collection(EndpointGroupCollection)
+    s: ServiceCollection = get_service_collection(EndpointGroupCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -147,7 +148,7 @@ async def post3(
 @router.get("/redfish/v1/Fabrics/{fabric_id}/EndpointGroups", response_model_exclude_none=True)
 @router.head("/redfish/v1/Fabrics/{fabric_id}/EndpointGroups", response_model_exclude_none=True)
 async def get4(fabric_id: str, request: Request, response: Response) -> EndpointGroupCollection:
-    s: Service = find_service(EndpointGroupCollection)
+    s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -163,7 +164,7 @@ async def get4(fabric_id: str, request: Request, response: Response) -> Endpoint
 async def post4(
     fabric_id: str, request: Request, response: Response, body: EndpointGroupOnCreate
 ) -> EndpointGroup:
-    s: ServiceCollection = find_service_collection(EndpointGroupCollection)
+    s: ServiceCollection = get_service_collection(EndpointGroupCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "request": request,

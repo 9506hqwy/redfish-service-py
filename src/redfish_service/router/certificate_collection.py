@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.certificate import Certificate, CertificateOnCreate
 from ..model.certificate_collection import CertificateCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     manager_account_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "request": request,
@@ -45,7 +46,7 @@ async def get1(
 async def post1(
     manager_account_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "request": request,
@@ -65,7 +66,7 @@ async def post1(
     "/redfish/v1/AccountService/ActiveDirectory/Certificates", response_model_exclude_none=True
 )
 async def get2(request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -82,7 +83,7 @@ async def get2(request: Request, response: Response) -> CertificateCollection:
 )
 @authenticate
 async def post2(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -93,7 +94,7 @@ async def post2(request: Request, response: Response, body: CertificateOnCreate)
 @router.get("/redfish/v1/AccountService/LDAP/Certificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/AccountService/LDAP/Certificates", response_model_exclude_none=True)
 async def get3(request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -107,7 +108,7 @@ async def get3(request: Request, response: Response) -> CertificateCollection:
 )
 @authenticate
 async def post3(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -126,7 +127,7 @@ async def post3(request: Request, response: Response, body: CertificateOnCreate)
 async def get4(
     external_account_provider_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "request": request,
@@ -153,7 +154,7 @@ async def post4(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "external_account_provider_id": external_account_provider_id,
         "request": request,
@@ -175,7 +176,7 @@ async def post4(
     response_model_exclude_none=True,
 )
 async def get5(request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -193,7 +194,7 @@ async def get5(request: Request, response: Response) -> CertificateCollection:
 )
 @authenticate
 async def post5(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -210,7 +211,7 @@ async def post5(request: Request, response: Response, body: CertificateOnCreate)
     response_model_exclude_none=True,
 )
 async def get6(request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -228,7 +229,7 @@ async def get6(request: Request, response: Response) -> CertificateCollection:
 )
 @authenticate
 async def post6(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -247,7 +248,7 @@ async def post6(request: Request, response: Response, body: CertificateOnCreate)
 async def get7(
     manager_id: str, manager_account_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -276,7 +277,7 @@ async def post7(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -299,7 +300,7 @@ async def post7(
     response_model_exclude_none=True,
 )
 async def get8(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -319,7 +320,7 @@ async def get8(manager_id: str, request: Request, response: Response) -> Certifi
 async def post8(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -341,7 +342,7 @@ async def post8(
     response_model_exclude_none=True,
 )
 async def get9(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -361,7 +362,7 @@ async def get9(manager_id: str, request: Request, response: Response) -> Certifi
 async def post9(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -385,7 +386,7 @@ async def post9(
 async def get10(
     manager_id: str, external_account_provider_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -414,7 +415,7 @@ async def post10(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "external_account_provider_id": external_account_provider_id,
@@ -437,7 +438,7 @@ async def post10(
     response_model_exclude_none=True,
 )
 async def get11(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -457,7 +458,7 @@ async def get11(manager_id: str, request: Request, response: Response) -> Certif
 async def post11(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -479,7 +480,7 @@ async def post11(
     response_model_exclude_none=True,
 )
 async def get12(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -499,7 +500,7 @@ async def get12(manager_id: str, request: Request, response: Response) -> Certif
 async def post12(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -521,7 +522,7 @@ async def post12(
     response_model_exclude_none=True,
 )
 async def get13(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -541,7 +542,7 @@ async def get13(manager_id: str, request: Request, response: Response) -> Certif
 async def post13(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -563,7 +564,7 @@ async def post13(
 async def get14(
     computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -586,7 +587,7 @@ async def get14(
 async def post14(
     computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -610,7 +611,7 @@ async def post14(
 async def get15(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -639,7 +640,7 @@ async def post15(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -664,7 +665,7 @@ async def post15(
 async def get16(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -693,7 +694,7 @@ async def post16(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -718,7 +719,7 @@ async def post16(
 async def get17(
     computer_system_id: str, database_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -747,7 +748,7 @@ async def post17(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "database_id": database_id,
@@ -776,7 +777,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -807,7 +808,7 @@ async def post18(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -837,7 +838,7 @@ async def get19(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -868,7 +869,7 @@ async def post19(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -894,7 +895,7 @@ async def post19(
 async def get20(
     event_destination_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "request": request,
@@ -918,7 +919,7 @@ async def get20(
 async def post20(
     event_destination_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "request": request,
@@ -942,7 +943,7 @@ async def post20(
 async def get21(
     event_destination_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "request": request,
@@ -966,7 +967,7 @@ async def get21(
 async def post21(
     event_destination_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "event_destination_id": event_destination_id,
         "request": request,
@@ -988,7 +989,7 @@ async def post21(
 async def get22(
     computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -1011,7 +1012,7 @@ async def get22(
 async def post22(
     computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -1035,7 +1036,7 @@ async def post22(
 async def get23(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1064,7 +1065,7 @@ async def post23(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1089,7 +1090,7 @@ async def post23(
 async def get24(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1118,7 +1119,7 @@ async def post24(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1143,7 +1144,7 @@ async def post24(
 async def get25(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -1172,7 +1173,7 @@ async def post25(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "memory_id": memory_id,
@@ -1197,7 +1198,7 @@ async def post25(
 async def get26(
     chassis_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1226,7 +1227,7 @@ async def post26(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "memory_id": memory_id,
@@ -1251,7 +1252,7 @@ async def post26(
 async def get27(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -1280,7 +1281,7 @@ async def post27(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -1309,7 +1310,7 @@ async def get28(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1340,7 +1341,7 @@ async def post28(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1366,7 +1367,7 @@ async def post28(
 async def get29(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -1395,7 +1396,7 @@ async def post29(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "memory_id": memory_id,
@@ -1424,7 +1425,7 @@ async def get30(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1455,7 +1456,7 @@ async def post30(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1481,7 +1482,7 @@ async def post30(
 async def get31(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -1510,7 +1511,7 @@ async def post31(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
@@ -1535,7 +1536,7 @@ async def post31(
 async def get32(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1564,7 +1565,7 @@ async def post32(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1593,7 +1594,7 @@ async def get33(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1624,7 +1625,7 @@ async def post33(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1650,7 +1651,7 @@ async def post33(
 async def get34(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1679,7 +1680,7 @@ async def post34(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
@@ -1708,7 +1709,7 @@ async def get35(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1739,7 +1740,7 @@ async def post35(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1765,7 +1766,7 @@ async def post35(
 async def get36(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -1794,7 +1795,7 @@ async def post36(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -1823,7 +1824,7 @@ async def get37(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1854,7 +1855,7 @@ async def post37(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1884,7 +1885,7 @@ async def get38(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -1915,7 +1916,7 @@ async def post38(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -1946,7 +1947,7 @@ async def get39(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1979,7 +1980,7 @@ async def post39(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2010,7 +2011,7 @@ async def get40(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2041,7 +2042,7 @@ async def post40(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2072,7 +2073,7 @@ async def get41(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2105,7 +2106,7 @@ async def post41(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2132,7 +2133,7 @@ async def post41(
 async def get42(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2161,7 +2162,7 @@ async def post42(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
@@ -2190,7 +2191,7 @@ async def get43(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2221,7 +2222,7 @@ async def post43(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2251,7 +2252,7 @@ async def get44(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2282,7 +2283,7 @@ async def post44(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2313,7 +2314,7 @@ async def get45(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2346,7 +2347,7 @@ async def post45(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2377,7 +2378,7 @@ async def get46(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2408,7 +2409,7 @@ async def post46(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2439,7 +2440,7 @@ async def get47(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2472,7 +2473,7 @@ async def post47(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2499,7 +2500,7 @@ async def post47(
 async def get48(
     fabric_id: str, switch_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -2524,7 +2525,7 @@ async def get48(
 async def post48(
     fabric_id: str, switch_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -2541,7 +2542,7 @@ async def post48(
 @router.get("/redfish/v1/Chassis/{chassis_id}/Certificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Certificates", response_model_exclude_none=True)
 async def get49(chassis_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -2557,7 +2558,7 @@ async def get49(chassis_id: str, request: Request, response: Response) -> Certif
 async def post49(
     chassis_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "request": request,
@@ -2581,7 +2582,7 @@ async def post49(
 async def get50(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2612,7 +2613,7 @@ async def post50(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -2638,7 +2639,7 @@ async def post50(
 async def get51(
     chassis_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -2663,7 +2664,7 @@ async def get51(
 async def post51(
     chassis_id: str, drive_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -2688,7 +2689,7 @@ async def post51(
 async def get52(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2719,7 +2720,7 @@ async def post52(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2745,7 +2746,7 @@ async def post52(
 async def get53(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -2774,7 +2775,7 @@ async def post53(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -2804,7 +2805,7 @@ async def get54(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2837,7 +2838,7 @@ async def post54(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2864,7 +2865,7 @@ async def post54(
 async def get55(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2895,7 +2896,7 @@ async def post55(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -2921,7 +2922,7 @@ async def post55(
 async def get56(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -2950,7 +2951,7 @@ async def post56(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -2980,7 +2981,7 @@ async def get57(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3013,7 +3014,7 @@ async def post57(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3040,7 +3041,7 @@ async def post57(
 async def get58(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -3069,7 +3070,7 @@ async def post58(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -3094,7 +3095,7 @@ async def post58(
 async def get59(
     computer_system_id: str, virtual_media_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -3123,7 +3124,7 @@ async def post59(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -3148,7 +3149,7 @@ async def post59(
 async def get60(
     computer_system_id: str, virtual_media_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -3177,7 +3178,7 @@ async def post60(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
@@ -3206,7 +3207,7 @@ async def get61(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3237,7 +3238,7 @@ async def post61(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3267,7 +3268,7 @@ async def get62(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3298,7 +3299,7 @@ async def post62(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3328,7 +3329,7 @@ async def get63(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3359,7 +3360,7 @@ async def post63(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3389,7 +3390,7 @@ async def get64(
     request: Request,
     response: Response,
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3420,7 +3421,7 @@ async def post64(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3440,7 +3441,7 @@ async def post64(
     "/redfish/v1/UpdateService/RemoteServerCertificates", response_model_exclude_none=True
 )
 async def get65(request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3456,7 +3457,7 @@ async def get65(request: Request, response: Response) -> CertificateCollection:
 )
 @authenticate
 async def post65(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -3467,7 +3468,7 @@ async def post65(request: Request, response: Response, body: CertificateOnCreate
 @router.get("/redfish/v1/UpdateService/ClientCertificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/UpdateService/ClientCertificates", response_model_exclude_none=True)
 async def get66(request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3481,7 +3482,7 @@ async def get66(request: Request, response: Response) -> CertificateCollection:
 )
 @authenticate
 async def post66(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -3492,7 +3493,7 @@ async def post66(request: Request, response: Response, body: CertificateOnCreate
 @router.get("/redfish/v1/Managers/{manager_id}/Certificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/Managers/{manager_id}/Certificates", response_model_exclude_none=True)
 async def get67(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3508,7 +3509,7 @@ async def get67(manager_id: str, request: Request, response: Response) -> Certif
 async def post67(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3532,7 +3533,7 @@ async def post67(
 async def get68(
     computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -3556,7 +3557,7 @@ async def get68(
 async def post68(
     computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -3580,7 +3581,7 @@ async def post68(
 async def get69(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3609,7 +3610,7 @@ async def post69(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3634,7 +3635,7 @@ async def post69(
 async def get70(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3663,7 +3664,7 @@ async def post70(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -3686,7 +3687,7 @@ async def post70(
     response_model_exclude_none=True,
 )
 async def get71(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3706,7 +3707,7 @@ async def get71(manager_id: str, request: Request, response: Response) -> Certif
 async def post71(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3728,7 +3729,7 @@ async def post71(
     response_model_exclude_none=True,
 )
 async def get72(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3748,7 +3749,7 @@ async def get72(manager_id: str, request: Request, response: Response) -> Certif
 async def post72(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3770,7 +3771,7 @@ async def post72(
     response_model_exclude_none=True,
 )
 async def get73(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3790,7 +3791,7 @@ async def get73(manager_id: str, request: Request, response: Response) -> Certif
 async def post73(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3812,7 +3813,7 @@ async def post73(
     response_model_exclude_none=True,
 )
 async def get74(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3832,7 +3833,7 @@ async def get74(manager_id: str, request: Request, response: Response) -> Certif
 async def post74(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3854,7 +3855,7 @@ async def post74(
     response_model_exclude_none=True,
 )
 async def get75(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3874,7 +3875,7 @@ async def get75(manager_id: str, request: Request, response: Response) -> Certif
 async def post75(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3896,7 +3897,7 @@ async def post75(
     response_model_exclude_none=True,
 )
 async def get76(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -3916,7 +3917,7 @@ async def get76(manager_id: str, request: Request, response: Response) -> Certif
 async def post76(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,
@@ -3940,7 +3941,7 @@ async def post76(
 async def get77(
     chassis_id: str, trusted_component_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
@@ -3969,7 +3970,7 @@ async def post77(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
@@ -3994,7 +3995,7 @@ async def post77(
 async def get78(
     outbound_connection_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,
@@ -4018,7 +4019,7 @@ async def get78(
 async def post78(
     outbound_connection_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,
@@ -4042,7 +4043,7 @@ async def post78(
 async def get79(
     outbound_connection_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,
@@ -4066,7 +4067,7 @@ async def get79(
 async def post79(
     outbound_connection_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "outbound_connection_id": outbound_connection_id,
         "request": request,
@@ -4090,7 +4091,7 @@ async def post79(
 async def get80(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> CertificateCollection:
-    s: Service = find_service(CertificateCollection)
+    s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,
@@ -4119,7 +4120,7 @@ async def post80(
     response: Response,
     body: CertificateOnCreate,
 ) -> Certificate:
-    s: ServiceCollection = find_service_collection(CertificateCollection)
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "power_supply_id": power_supply_id,

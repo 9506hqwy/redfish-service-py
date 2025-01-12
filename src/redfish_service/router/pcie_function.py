@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.pcie_function import PcieFunction, PcieFunctionOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -24,7 +25,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -51,7 +52,7 @@ async def patch1(
     response: Response,
     body: PcieFunctionOnUpdate,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "pcie_device_id": pcie_device_id,
@@ -81,7 +82,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
@@ -108,7 +109,7 @@ async def patch2(
     response: Response,
     body: PcieFunctionOnUpdate,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "pcie_device_id": pcie_device_id,
@@ -139,7 +140,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -168,7 +169,7 @@ async def patch3(
     response: Response,
     body: PcieFunctionOnUpdate,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -200,7 +201,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -229,7 +230,7 @@ async def patch4(
     response: Response,
     body: PcieFunctionOnUpdate,
 ) -> PcieFunction:
-    s: Service = find_service(PcieFunction)
+    s: Service = get_service(PcieFunction, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

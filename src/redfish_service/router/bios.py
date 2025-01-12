@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.bios import Bios, BiosOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Systems/{computer_system_id}/Bios", response_model_exclude_none=True)
 @router.head("/redfish/v1/Systems/{computer_system_id}/Bios", response_model_exclude_none=True)
 async def get1(computer_system_id: str, request: Request, response: Response) -> Bios:
-    s: Service = find_service(Bios)
+    s: Service = get_service(Bios, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -29,7 +30,7 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
 async def patch1(
     computer_system_id: str, request: Request, response: Response, body: BiosOnUpdate
 ) -> Bios:
-    s: Service = find_service(Bios)
+    s: Service = get_service(Bios, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "request": request,
@@ -53,7 +54,7 @@ async def patch1(
 async def get2(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> Bios:
-    s: Service = find_service(Bios)
+    s: Service = get_service(Bios, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -78,7 +79,7 @@ async def patch2(
     response: Response,
     body: BiosOnUpdate,
 ) -> Bios:
-    s: Service = find_service(Bios)
+    s: Service = get_service(Bios, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -103,7 +104,7 @@ async def patch2(
 async def get3(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> Bios:
-    s: Service = find_service(Bios)
+    s: Service = get_service(Bios, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -128,7 +129,7 @@ async def patch3(
     response: Response,
     body: BiosOnUpdate,
 ) -> Bios:
-    s: Service = find_service(Bios)
+    s: Service = get_service(Bios, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

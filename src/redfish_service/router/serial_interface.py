@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.serial_interface import SerialInterface, SerialInterfaceOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     manager_id: str, serial_interface_id: str, request: Request, response: Response
 ) -> SerialInterface:
-    s: Service = find_service(SerialInterface)
+    s: Service = get_service(SerialInterface, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "serial_interface_id": serial_interface_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: SerialInterfaceOnUpdate,
 ) -> SerialInterface:
-    s: Service = find_service(SerialInterface)
+    s: Service = get_service(SerialInterface, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "serial_interface_id": serial_interface_id,

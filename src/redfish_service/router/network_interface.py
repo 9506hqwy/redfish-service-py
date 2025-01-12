@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.network_interface import NetworkInterface
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, network_interface_id: str, request: Request, response: Response
 ) -> NetworkInterface:
-    s: Service = find_service(NetworkInterface)
+    s: Service = get_service(NetworkInterface, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "network_interface_id": network_interface_id,
@@ -43,7 +44,7 @@ async def get1(
 async def get2(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
 ) -> NetworkInterface:
-    s: Service = find_service(NetworkInterface)
+    s: Service = get_service(NetworkInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -71,7 +72,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> NetworkInterface:
-    s: Service = find_service(NetworkInterface)
+    s: Service = get_service(NetworkInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -96,7 +97,7 @@ async def get3(
 async def get4(
     resource_block_id: str, network_interface_id: str, request: Request, response: Response
 ) -> NetworkInterface:
-    s: Service = find_service(NetworkInterface)
+    s: Service = get_service(NetworkInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "network_interface_id": network_interface_id,
@@ -124,7 +125,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> NetworkInterface:
-    s: Service = find_service(NetworkInterface)
+    s: Service = get_service(NetworkInterface, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.aggregation_source import AggregationSource, AggregationSourceOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(aggregation_source_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(AggregationSource)
+    s: Service = get_service(AggregationSource, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -38,7 +39,7 @@ async def delete1(aggregation_source_id: str, request: Request, response: Respon
 async def get1(
     aggregation_source_id: str, request: Request, response: Response
 ) -> AggregationSource:
-    s: Service = find_service(AggregationSource)
+    s: Service = get_service(AggregationSource, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -61,7 +62,7 @@ async def patch1(
     response: Response,
     body: AggregationSourceOnUpdate,
 ) -> AggregationSource:
-    s: Service = find_service(AggregationSource)
+    s: Service = get_service(AggregationSource, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,

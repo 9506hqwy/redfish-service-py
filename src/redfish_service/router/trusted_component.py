@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.trusted_component import TrustedComponent, TrustedComponentOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, trusted_component_id: str, request: Request, response: Response
 ) -> TrustedComponent:
-    s: Service = find_service(TrustedComponent)
+    s: Service = get_service(TrustedComponent, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,
@@ -45,7 +46,7 @@ async def patch1(
     response: Response,
     body: TrustedComponentOnUpdate,
 ) -> TrustedComponent:
-    s: Service = find_service(TrustedComponent)
+    s: Service = get_service(TrustedComponent, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "trusted_component_id": trusted_component_id,

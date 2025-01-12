@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.job import Job, JobOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 @router.delete("/redfish/v1/JobService/Jobs/{job_id}", response_model_exclude_none=True)
 @authenticate
 async def delete1(job_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Job)
+    s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -23,7 +24,7 @@ async def delete1(job_id: str, request: Request, response: Response) -> None:
 @router.get("/redfish/v1/JobService/Jobs/{job_id}", response_model_exclude_none=True)
 @router.head("/redfish/v1/JobService/Jobs/{job_id}", response_model_exclude_none=True)
 async def get1(job_id: str, request: Request, response: Response) -> Job:
-    s: Service = find_service(Job)
+    s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -34,7 +35,7 @@ async def get1(job_id: str, request: Request, response: Response) -> Job:
 @router.patch("/redfish/v1/JobService/Jobs/{job_id}", response_model_exclude_none=True)
 @authenticate
 async def patch1(job_id: str, request: Request, response: Response, body: JobOnUpdate) -> Job:
-    s: Service = find_service(Job)
+    s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -47,7 +48,7 @@ async def patch1(job_id: str, request: Request, response: Response, body: JobOnU
 )
 @authenticate
 async def delete2(job_id: str, job_id2: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Job)
+    s: Service = get_service(Job, request)
     b: dict[str, Any] = {
         "job_id": job_id,
         "job_id2": job_id2,
@@ -67,7 +68,7 @@ async def delete2(job_id: str, job_id2: str, request: Request, response: Respons
     "/redfish/v1/JobService/Jobs/{job_id}/Steps/{job_id2}", response_model_exclude_none=True
 )
 async def get2(job_id: str, job_id2: str, request: Request, response: Response) -> Job:
-    s: Service = find_service(Job)
+    s: Service = get_service(Job, request)
     b: dict[str, Any] = {
         "job_id": job_id,
         "job_id2": job_id2,
@@ -87,7 +88,7 @@ async def get2(job_id: str, job_id2: str, request: Request, response: Response) 
 async def patch2(
     job_id: str, job_id2: str, request: Request, response: Response, body: JobOnUpdate
 ) -> Job:
-    s: Service = find_service(Job)
+    s: Service = get_service(Job, request)
     b: dict[str, Any] = {
         "job_id": job_id,
         "job_id2": job_id2,

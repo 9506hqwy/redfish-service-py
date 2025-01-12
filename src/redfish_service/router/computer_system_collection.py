@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.computer_system import ComputerSystem, ComputerSystemOnCreate
 from ..model.computer_system_collection import ComputerSystemCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Systems", response_model_exclude_none=True)
 @router.head("/redfish/v1/Systems", response_model_exclude_none=True)
 async def get1(request: Request, response: Response) -> ComputerSystemCollection:
-    s: Service = find_service(ComputerSystemCollection)
+    s: Service = get_service(ComputerSystemCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -27,7 +28,7 @@ async def get1(request: Request, response: Response) -> ComputerSystemCollection
 async def post1(
     request: Request, response: Response, body: ComputerSystemOnCreate
 ) -> ComputerSystem:
-    s: ServiceCollection = find_service_collection(ComputerSystemCollection)
+    s: ServiceCollection = get_service_collection(ComputerSystemCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"

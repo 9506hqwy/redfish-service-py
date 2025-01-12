@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.connection_method import ConnectionMethod, ConnectionMethodOnCreate
 from ..model.connection_method_collection import ConnectionMethodCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.get("/redfish/v1/AggregationService/ConnectionMethods", response_model_exclude_none=True)
 @router.head("/redfish/v1/AggregationService/ConnectionMethods", response_model_exclude_none=True)
 async def get1(request: Request, response: Response) -> ConnectionMethodCollection:
-    s: Service = find_service(ConnectionMethodCollection)
+    s: Service = get_service(ConnectionMethodCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -29,7 +30,7 @@ async def get1(request: Request, response: Response) -> ConnectionMethodCollecti
 async def post1(
     request: Request, response: Response, body: ConnectionMethodOnCreate
 ) -> ConnectionMethod:
-    s: ServiceCollection = find_service_collection(ConnectionMethodCollection)
+    s: ServiceCollection = get_service_collection(ConnectionMethodCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"

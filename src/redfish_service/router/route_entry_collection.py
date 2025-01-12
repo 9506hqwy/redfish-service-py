@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.route_entry import RouteEntry, RouteEntryOnCreate
 from ..model.route_entry_collection import RouteEntryCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -52,7 +53,7 @@ async def post1(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -78,7 +79,7 @@ async def post1(
 async def get2(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -109,7 +110,7 @@ async def post2(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -135,7 +136,7 @@ async def post2(
 async def get3(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -164,7 +165,7 @@ async def post3(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -189,7 +190,7 @@ async def post3(
 async def get4(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -218,7 +219,7 @@ async def post4(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -243,7 +244,7 @@ async def post4(
 async def get5(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -274,7 +275,7 @@ async def post5(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -300,7 +301,7 @@ async def post5(
 async def get6(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -331,7 +332,7 @@ async def post6(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -357,7 +358,7 @@ async def post6(
 async def get7(
     computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -386,7 +387,7 @@ async def post7(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -411,7 +412,7 @@ async def post7(
 async def get8(
     computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -440,7 +441,7 @@ async def post8(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -469,7 +470,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -500,7 +501,7 @@ async def post9(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -530,7 +531,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -561,7 +562,7 @@ async def post10(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -591,7 +592,7 @@ async def get11(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -622,7 +623,7 @@ async def post11(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -652,7 +653,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -683,7 +684,7 @@ async def post12(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -714,7 +715,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -747,7 +748,7 @@ async def post13(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -779,7 +780,7 @@ async def get14(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -812,7 +813,7 @@ async def post14(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -843,7 +844,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -874,7 +875,7 @@ async def post15(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -904,7 +905,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -935,7 +936,7 @@ async def post16(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -966,7 +967,7 @@ async def get17(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -999,7 +1000,7 @@ async def post17(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1031,7 +1032,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1064,7 +1065,7 @@ async def post18(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1091,7 +1092,7 @@ async def post18(
 async def get19(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1122,7 +1123,7 @@ async def post19(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1148,7 +1149,7 @@ async def post19(
 async def get20(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1179,7 +1180,7 @@ async def post20(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1205,7 +1206,7 @@ async def post20(
 async def get21(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1234,7 +1235,7 @@ async def post21(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1259,7 +1260,7 @@ async def post21(
 async def get22(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1288,7 +1289,7 @@ async def post22(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1313,7 +1314,7 @@ async def post22(
 async def get23(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1344,7 +1345,7 @@ async def post23(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1370,7 +1371,7 @@ async def post23(
 async def get24(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1401,7 +1402,7 @@ async def post24(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -1427,7 +1428,7 @@ async def post24(
 async def get25(
     computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1456,7 +1457,7 @@ async def post25(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1481,7 +1482,7 @@ async def post25(
 async def get26(
     computer_system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1510,7 +1511,7 @@ async def post26(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1539,7 +1540,7 @@ async def get27(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1570,7 +1571,7 @@ async def post27(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1600,7 +1601,7 @@ async def get28(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1631,7 +1632,7 @@ async def post28(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1661,7 +1662,7 @@ async def get29(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1692,7 +1693,7 @@ async def post29(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1722,7 +1723,7 @@ async def get30(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1753,7 +1754,7 @@ async def post30(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1784,7 +1785,7 @@ async def get31(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1817,7 +1818,7 @@ async def post31(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1849,7 +1850,7 @@ async def get32(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1882,7 +1883,7 @@ async def post32(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1913,7 +1914,7 @@ async def get33(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1944,7 +1945,7 @@ async def post33(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -1974,7 +1975,7 @@ async def get34(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2005,7 +2006,7 @@ async def post34(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2036,7 +2037,7 @@ async def get35(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2069,7 +2070,7 @@ async def post35(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2101,7 +2102,7 @@ async def get36(
     request: Request,
     response: Response,
 ) -> RouteEntryCollection:
-    s: Service = find_service(RouteEntryCollection)
+    s: Service = get_service(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -2134,7 +2135,7 @@ async def post36(
     response: Response,
     body: RouteEntryOnCreate,
 ) -> RouteEntry:
-    s: ServiceCollection = find_service_collection(RouteEntryCollection)
+    s: ServiceCollection = get_service_collection(RouteEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.outlet_group import OutletGroup, OutletGroupOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: OutletGroupOnUpdate,
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -88,7 +89,7 @@ async def patch1(
 async def delete2(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -112,7 +113,7 @@ async def delete2(
 async def get2(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -137,7 +138,7 @@ async def patch2(
     response: Response,
     body: OutletGroupOnUpdate,
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -159,7 +160,7 @@ async def patch2(
 async def delete3(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -183,7 +184,7 @@ async def delete3(
 async def get3(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -208,7 +209,7 @@ async def patch3(
     response: Response,
     body: OutletGroupOnUpdate,
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -230,7 +231,7 @@ async def patch3(
 async def delete4(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -254,7 +255,7 @@ async def delete4(
 async def get4(
     power_distribution_id: str, outlet_group_id: str, request: Request, response: Response
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,
@@ -279,7 +280,7 @@ async def patch4(
     response: Response,
     body: OutletGroupOnUpdate,
 ) -> OutletGroup:
-    s: Service = find_service(OutletGroup)
+    s: Service = get_service(OutletGroup, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "outlet_group_id": outlet_group_id,

@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.volume import Volume, VolumeOnCreate
 from ...model.swordfish.volume_collection import VolumeCollection
-from ...service import Service, ServiceCollection, find_service, find_service_collection
+from ...service import Service, ServiceCollection
+from ...util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     resource_block_id: str, storage_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -50,7 +51,7 @@ async def post1(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -79,7 +80,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -110,7 +111,7 @@ async def post2(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -136,7 +137,7 @@ async def post2(
 async def get3(
     resource_block_id: str, storage_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -165,7 +166,7 @@ async def post3(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -194,7 +195,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -225,7 +226,7 @@ async def post4(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -251,7 +252,7 @@ async def post4(
 async def get5(
     storage_id: str, consistency_group_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "consistency_group_id": consistency_group_id,
@@ -280,7 +281,7 @@ async def post5(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "consistency_group_id": consistency_group_id,
@@ -309,7 +310,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -340,7 +341,7 @@ async def post6(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -366,7 +367,7 @@ async def post6(
 async def get7(
     storage_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -395,7 +396,7 @@ async def post7(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -424,7 +425,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -455,7 +456,7 @@ async def post8(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -473,7 +474,7 @@ async def post8(
 @router.get("/redfish/v1/Storage/{storage_id}/Volumes", response_model_exclude_none=True)
 @router.head("/redfish/v1/Storage/{storage_id}/Volumes", response_model_exclude_none=True)
 async def get9(storage_id: str, request: Request, response: Response) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -487,7 +488,7 @@ async def get9(storage_id: str, request: Request, response: Response) -> VolumeC
 async def post9(
     storage_id: str, request: Request, response: Response, body: VolumeOnCreate
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "request": request,
@@ -515,7 +516,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -546,7 +547,7 @@ async def post10(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -577,7 +578,7 @@ async def get11(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -610,7 +611,7 @@ async def post11(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -641,7 +642,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -672,7 +673,7 @@ async def post12(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -703,7 +704,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -736,7 +737,7 @@ async def post13(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -763,7 +764,7 @@ async def post13(
 async def get14(
     computer_system_id: str, storage_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -792,7 +793,7 @@ async def post14(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -817,7 +818,7 @@ async def post14(
 async def get15(
     storage_service_id: str, consistency_group_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "consistency_group_id": consistency_group_id,
@@ -846,7 +847,7 @@ async def post15(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "consistency_group_id": consistency_group_id,
@@ -875,7 +876,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -906,7 +907,7 @@ async def post16(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -932,7 +933,7 @@ async def post16(
 async def get17(
     storage_service_id: str, storage_pool_id: str, request: Request, response: Response
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -961,7 +962,7 @@ async def post17(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -990,7 +991,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1021,7 +1022,7 @@ async def post18(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1043,7 +1044,7 @@ async def post18(
     "/redfish/v1/StorageServices/{storage_service_id}/Volumes", response_model_exclude_none=True
 )
 async def get19(storage_service_id: str, request: Request, response: Response) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -1066,7 +1067,7 @@ async def get19(storage_service_id: str, request: Request, response: Response) -
 async def post19(
     storage_service_id: str, request: Request, response: Response, body: VolumeOnCreate
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -1094,7 +1095,7 @@ async def get20(
     request: Request,
     response: Response,
 ) -> VolumeCollection:
-    s: Service = find_service(VolumeCollection)
+    s: Service = get_service(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -1125,7 +1126,7 @@ async def post20(
     response: Response,
     body: VolumeOnCreate,
 ) -> Volume:
-    s: ServiceCollection = find_service_collection(VolumeCollection)
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,

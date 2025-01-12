@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.coolant_connector_collection import CoolantConnectorCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -38,7 +39,7 @@ async def get1(
 async def get2(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -61,7 +62,7 @@ async def get2(
 async def get3(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -84,7 +85,7 @@ async def get3(
 async def get4(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -107,7 +108,7 @@ async def get4(
 async def get5(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -130,7 +131,7 @@ async def get5(
 async def get6(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -153,7 +154,7 @@ async def get6(
 async def get7(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -176,7 +177,7 @@ async def get7(
 async def get8(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,
@@ -199,7 +200,7 @@ async def get8(
 async def get9(
     cooling_unit_id: str, request: Request, response: Response
 ) -> CoolantConnectorCollection:
-    s: Service = find_service(CoolantConnectorCollection)
+    s: Service = get_service(CoolantConnectorCollection, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
         "request": request,

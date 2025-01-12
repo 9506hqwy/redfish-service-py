@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.battery import Battery, BatteryOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -18,7 +19,7 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 async def get1(chassis_id: str, battery_id: str, request: Request, response: Response) -> Battery:
-    s: Service = find_service(Battery)
+    s: Service = get_service(Battery, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "battery_id": battery_id,
@@ -39,7 +40,7 @@ async def get1(chassis_id: str, battery_id: str, request: Request, response: Res
 async def patch1(
     chassis_id: str, battery_id: str, request: Request, response: Response, body: BatteryOnUpdate
 ) -> Battery:
-    s: Service = find_service(Battery)
+    s: Service = get_service(Battery, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "battery_id": battery_id,

@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.trusted_component_collection import TrustedComponentCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
 async def get1(
     chassis_id: str, request: Request, response: Response
 ) -> TrustedComponentCollection:
-    s: Service = find_service(TrustedComponentCollection)
+    s: Service = get_service(TrustedComponentCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"

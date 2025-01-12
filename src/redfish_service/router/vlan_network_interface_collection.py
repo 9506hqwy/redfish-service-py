@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.vlan_network_interface import VlanNetworkInterface, VlanNetworkInterfaceOnCreate
 from ..model.vlan_network_interface_collection import VlanNetworkInterfaceCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -56,7 +57,7 @@ async def post1(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -82,7 +83,7 @@ async def post1(
 async def get2(
     manager_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -111,7 +112,7 @@ async def post2(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -136,7 +137,7 @@ async def post2(
 async def get3(
     computer_system_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -165,7 +166,7 @@ async def post3(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -190,7 +191,7 @@ async def post3(
 async def get4(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -219,7 +220,7 @@ async def post4(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -248,7 +249,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -279,7 +280,7 @@ async def post5(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -305,7 +306,7 @@ async def post5(
 async def get6(
     resource_block_id: str, ethernet_interface_id: str, request: Request, response: Response
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -334,7 +335,7 @@ async def post6(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "ethernet_interface_id": ethernet_interface_id,
@@ -363,7 +364,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> VlanNetworkInterfaceCollection:
-    s: Service = find_service(VlanNetworkInterfaceCollection)
+    s: Service = get_service(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -394,7 +395,7 @@ async def post7(
     response: Response,
     body: VlanNetworkInterfaceOnCreate,
 ) -> VlanNetworkInterface:
-    s: ServiceCollection = find_service_collection(VlanNetworkInterfaceCollection)
+    s: ServiceCollection = get_service_collection(VlanNetworkInterfaceCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

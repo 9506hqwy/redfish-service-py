@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.swordfish.volume import Volume, VolumeOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     resource_block_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -42,7 +43,7 @@ async def delete1(
 async def get1(
     resource_block_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -69,7 +70,7 @@ async def patch1(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -97,7 +98,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -128,7 +129,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -157,7 +158,7 @@ async def patch2(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -181,7 +182,7 @@ async def patch2(
 async def delete3(
     resource_block_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -206,7 +207,7 @@ async def delete3(
 async def get3(
     resource_block_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -233,7 +234,7 @@ async def patch3(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -261,7 +262,7 @@ async def delete4(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -292,7 +293,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -321,7 +322,7 @@ async def patch4(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -349,7 +350,7 @@ async def delete5(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "consistency_group_id": consistency_group_id,
@@ -378,7 +379,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "consistency_group_id": consistency_group_id,
@@ -405,7 +406,7 @@ async def patch5(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "consistency_group_id": consistency_group_id,
@@ -433,7 +434,7 @@ async def delete6(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -464,7 +465,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -493,7 +494,7 @@ async def patch6(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -517,7 +518,7 @@ async def patch6(
 async def delete7(
     storage_id: str, storage_pool_id: str, volume_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -542,7 +543,7 @@ async def delete7(
 async def get7(
     storage_id: str, storage_pool_id: str, volume_id: str, request: Request, response: Response
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -569,7 +570,7 @@ async def patch7(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -597,7 +598,7 @@ async def delete8(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -628,7 +629,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -657,7 +658,7 @@ async def patch8(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -678,7 +679,7 @@ async def patch8(
 )
 @authenticate
 async def delete9(storage_id: str, volume_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -698,7 +699,7 @@ async def delete9(storage_id: str, volume_id: str, request: Request, response: R
     "/redfish/v1/Storage/{storage_id}/Volumes/{volume_id}", response_model_exclude_none=True
 )
 async def get9(storage_id: str, volume_id: str, request: Request, response: Response) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -718,7 +719,7 @@ async def get9(storage_id: str, volume_id: str, request: Request, response: Resp
 async def patch9(
     storage_id: str, volume_id: str, request: Request, response: Response, body: VolumeOnUpdate
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -745,7 +746,7 @@ async def delete10(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -776,7 +777,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -805,7 +806,7 @@ async def patch10(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -835,7 +836,7 @@ async def delete11(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -868,7 +869,7 @@ async def get11(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -899,7 +900,7 @@ async def patch11(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -929,7 +930,7 @@ async def delete12(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -960,7 +961,7 @@ async def get12(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -989,7 +990,7 @@ async def patch12(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1019,7 +1020,7 @@ async def delete13(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1052,7 +1053,7 @@ async def get13(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1083,7 +1084,7 @@ async def patch13(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1108,7 +1109,7 @@ async def patch13(
 async def delete14(
     computer_system_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1133,7 +1134,7 @@ async def delete14(
 async def get14(
     computer_system_id: str, storage_id: str, volume_id: str, request: Request, response: Response
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1160,7 +1161,7 @@ async def patch14(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -1187,7 +1188,7 @@ async def delete15(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "consistency_group_id": consistency_group_id,
@@ -1216,7 +1217,7 @@ async def get15(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "consistency_group_id": consistency_group_id,
@@ -1243,7 +1244,7 @@ async def patch15(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "consistency_group_id": consistency_group_id,
@@ -1271,7 +1272,7 @@ async def delete16(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -1302,7 +1303,7 @@ async def get16(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -1331,7 +1332,7 @@ async def patch16(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -1359,7 +1360,7 @@ async def delete17(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1388,7 +1389,7 @@ async def get17(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1415,7 +1416,7 @@ async def patch17(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1443,7 +1444,7 @@ async def delete18(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1474,7 +1475,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1503,7 +1504,7 @@ async def patch18(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -1527,7 +1528,7 @@ async def patch18(
 async def delete19(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -1551,7 +1552,7 @@ async def delete19(
 async def get19(
     storage_service_id: str, volume_id: str, request: Request, response: Response
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -1576,7 +1577,7 @@ async def patch19(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -1603,7 +1604,7 @@ async def delete20(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -1634,7 +1635,7 @@ async def get20(
     request: Request,
     response: Response,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -1663,7 +1664,7 @@ async def patch20(
     response: Response,
     body: VolumeOnUpdate,
 ) -> Volume:
-    s: Service = find_service(Volume)
+    s: Service = get_service(Volume, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,

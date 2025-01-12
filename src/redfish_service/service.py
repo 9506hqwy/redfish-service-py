@@ -8,20 +8,20 @@ from .model import RedfishModel
 services: list[Service] = []
 
 
-def find_service[T: RedfishModel](ty: type[T]) -> Service:
+def find_service[T: RedfishModel](ty: type[T]) -> Service | None:
     for s in services:
         if s.respond(ty):
             return s
 
-    raise OperationNotAllowedError
+    return None
 
 
-def find_service_collection[T: RedfishModel](ty: type[T]) -> ServiceCollection:
+def find_service_collection[T: RedfishModel](ty: type[T]) -> ServiceCollection | None:
     for s in services:
         if s.respond(ty):
             return cast(ServiceCollection, s)
 
-    raise OperationNotAllowedError
+    return None
 
 
 def registry_service(s: Service) -> None:

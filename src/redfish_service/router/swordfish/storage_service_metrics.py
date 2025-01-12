@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ...model.swordfish.storage_service_metrics import StorageServiceMetrics
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def get1(
     storage_service_id: str, request: Request, response: Response
 ) -> StorageServiceMetrics:
-    s: Service = find_service(StorageServiceMetrics)
+    s: Service = get_service(StorageServiceMetrics, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -40,7 +41,7 @@ async def get1(
 async def get2(
     computer_system_id: str, storage_service_id: str, request: Request, response: Response
 ) -> StorageServiceMetrics:
-    s: Service = find_service(StorageServiceMetrics)
+    s: Service = get_service(StorageServiceMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_service_id": storage_service_id,

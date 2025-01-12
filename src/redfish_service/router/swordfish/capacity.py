@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
 from ...model.swordfish.capacity import CapacitySource, CapacitySourceOnUpdate
-from ...service import Service, find_service
+from ...service import Service
+from ...util import get_service
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ async def delete1(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -50,7 +51,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -77,7 +78,7 @@ async def patch1(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -104,7 +105,7 @@ async def delete2(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -133,7 +134,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -160,7 +161,7 @@ async def patch2(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,
@@ -187,7 +188,7 @@ async def delete3(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -216,7 +217,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -243,7 +244,7 @@ async def patch3(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -270,7 +271,7 @@ async def delete4(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -299,7 +300,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -326,7 +327,7 @@ async def patch4(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -354,7 +355,7 @@ async def delete5(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -385,7 +386,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -414,7 +415,7 @@ async def patch5(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -438,7 +439,7 @@ async def patch5(
 async def delete6(
     storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -463,7 +464,7 @@ async def delete6(
 async def get6(
     storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -490,7 +491,7 @@ async def patch6(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -517,7 +518,7 @@ async def delete7(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -546,7 +547,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -573,7 +574,7 @@ async def patch7(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -601,7 +602,7 @@ async def delete8(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -632,7 +633,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -661,7 +662,7 @@ async def patch8(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -690,7 +691,7 @@ async def delete9(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -721,7 +722,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -750,7 +751,7 @@ async def patch9(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -779,7 +780,7 @@ async def delete10(
     request: Request,
     response: Response,
 ) -> None:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -810,7 +811,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -839,7 +840,7 @@ async def patch10(
     response: Response,
     body: CapacitySourceOnUpdate,
 ) -> CapacitySource:
-    s: Service = find_service(CapacitySource)
+    s: Service = get_service(CapacitySource, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,

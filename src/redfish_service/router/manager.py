@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.manager import Manager, ManagerOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Managers/{manager_id}", response_model_exclude_none=True)
 @router.head("/redfish/v1/Managers/{manager_id}", response_model_exclude_none=True)
 async def get1(manager_id: str, request: Request, response: Response) -> Manager:
-    s: Service = find_service(Manager)
+    s: Service = get_service(Manager, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -25,7 +26,7 @@ async def get1(manager_id: str, request: Request, response: Response) -> Manager
 async def patch1(
     manager_id: str, request: Request, response: Response, body: ManagerOnUpdate
 ) -> Manager:
-    s: Service = find_service(Manager)
+    s: Service = get_service(Manager, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "request": request,

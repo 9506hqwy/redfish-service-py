@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.drive_metrics import DriveMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -42,7 +43,7 @@ async def get1(
 async def get2(
     chassis_id: str, drive_id: str, request: Request, response: Response
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "drive_id": drive_id,
@@ -66,7 +67,7 @@ async def get2(
 async def get3(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -91,7 +92,7 @@ async def get3(
 async def get4(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -120,7 +121,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -146,7 +147,7 @@ async def get5(
 async def get6(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -171,7 +172,7 @@ async def get6(
 async def get7(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "drive_id": drive_id,
@@ -200,7 +201,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> DriveMetrics:
-    s: Service = find_service(DriveMetrics)
+    s: Service = get_service(DriveMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

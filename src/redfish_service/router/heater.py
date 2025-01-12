@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.heater import Heater, HeaterOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -18,7 +19,7 @@ router = APIRouter()
     response_model_exclude_none=True,
 )
 async def get1(chassis_id: str, heater_id: str, request: Request, response: Response) -> Heater:
-    s: Service = find_service(Heater)
+    s: Service = get_service(Heater, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "heater_id": heater_id,
@@ -39,7 +40,7 @@ async def get1(chassis_id: str, heater_id: str, request: Request, response: Resp
 async def patch1(
     chassis_id: str, heater_id: str, request: Request, response: Response, body: HeaterOnUpdate
 ) -> Heater:
-    s: Service = find_service(Heater)
+    s: Service = get_service(Heater, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "heater_id": heater_id,

@@ -835,7 +835,8 @@ def write_imports_router_to(
             )
 
     w.write(
-        f"from {parent}service import Service, ServiceCollection, find_service, find_service_collection\n"  # noqa E501
+        f"from {parent}service import Service, ServiceCollection\n"
+        f"from {parent}util import get_service, get_service_collection\n"
     )
     w.write(f"from {parent}authenticate import authenticate\n")
     w.write("\n")
@@ -917,7 +918,7 @@ def write_routers(
                             w.writelines(
                                 [
                                     f"async def delete{index}({args}) -> None:\n",
-                                    f"    s: Service = find_service({c.cls_name})\n",
+                                    f"    s: Service = get_service({c.cls_name}, request)\n",
                                     f"    b: dict[str, Any] = {{{body}}}\n",
                                     "\n",
                                     '    response.headers["OData-Version"] = "4.0"\n',
@@ -934,7 +935,7 @@ def write_routers(
                                 f'@router.get("{url}", response_model_exclude_none=True)\n',
                                 f'@router.head("{url}", response_model_exclude_none=True)\n',
                                 f"async def get{index}({args}) -> {c.cls_name}:\n",
-                                f"    s: Service = find_service({c.cls_name})\n",
+                                f"    s: Service = get_service({c.cls_name}, request)\n",
                                 f"    b: dict[str, Any] = {{{body}}}\n",
                                 "\n",
                                 '    response.headers["OData-Version"] = "4.0"\n',
@@ -962,7 +963,7 @@ def write_routers(
                             w.writelines(
                                 [
                                     f"async def patch{index}({uargs}) -> {c.cls_name}:\n",
-                                    f"    s: Service = find_service({c.cls_name})\n",
+                                    f"    s: Service = get_service({c.cls_name}, request)\n",
                                     f"    b: dict[str, Any] = {{{ubody}}}\n",
                                     "\n",
                                     '    response.headers["OData-Version"] = "4.0"\n',
@@ -995,7 +996,7 @@ def write_routers(
                             w.writelines(
                                 [
                                     f"async def post{index}({cargs}) -> {c.item_info.cls_name}:\n",
-                                    f"    s: ServiceCollection = find_service_collection({c.cls_name})\n",  # noqa E501
+                                    f"    s: ServiceCollection = get_service_collection({c.cls_name}, request)\n",  # noqa E501
                                     f"    b: dict[str, Any] = {{{cbody}}}\n",
                                     "\n",
                                     '    response.headers["OData-Version"] = "4.0"\n',

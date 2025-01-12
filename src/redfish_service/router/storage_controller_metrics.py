@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.storage_controller_metrics import StorageControllerMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     storage_id: str, controller_id: str, request: Request, response: Response
 ) -> StorageControllerMetrics:
-    s: Service = find_service(StorageControllerMetrics)
+    s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "controller_id": controller_id,
@@ -47,7 +48,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
-    s: Service = find_service(StorageControllerMetrics)
+    s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -76,7 +77,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
-    s: Service = find_service(StorageControllerMetrics)
+    s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -106,7 +107,7 @@ async def get4(
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
-    s: Service = find_service(StorageControllerMetrics)
+    s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
@@ -136,7 +137,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
-    s: Service = find_service(StorageControllerMetrics)
+    s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
@@ -166,7 +167,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
-    s: Service = find_service(StorageControllerMetrics)
+    s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,

@@ -5,7 +5,8 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.vcat_entry import VcatEntry, VcatEntryOnCreate
 from ..model.vcat_entry_collection import VcatEntryCollection
-from ..service import Service, ServiceCollection, find_service, find_service_collection
+from ..service import Service, ServiceCollection
+from ..util import get_service, get_service_collection
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ router = APIRouter()
 async def get1(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -52,7 +53,7 @@ async def post1(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -78,7 +79,7 @@ async def post1(
 async def get2(
     system_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -109,7 +110,7 @@ async def post2(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -135,7 +136,7 @@ async def post2(
 async def get3(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -164,7 +165,7 @@ async def post3(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -189,7 +190,7 @@ async def post3(
 async def get4(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -218,7 +219,7 @@ async def post4(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -248,7 +249,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -281,7 +282,7 @@ async def post5(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -312,7 +313,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -343,7 +344,7 @@ async def post6(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -373,7 +374,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -404,7 +405,7 @@ async def post7(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -435,7 +436,7 @@ async def get8(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -468,7 +469,7 @@ async def post8(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -499,7 +500,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -530,7 +531,7 @@ async def post9(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -560,7 +561,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -591,7 +592,7 @@ async def post10(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -617,7 +618,7 @@ async def post10(
 async def get11(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -648,7 +649,7 @@ async def post11(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -674,7 +675,7 @@ async def post11(
 async def get12(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -703,7 +704,7 @@ async def post12(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -728,7 +729,7 @@ async def post12(
 async def get13(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -757,7 +758,7 @@ async def post13(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -782,7 +783,7 @@ async def post13(
 async def get14(
     fabric_id: str, switch_id: str, port_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -813,7 +814,7 @@ async def post14(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "fabric_id": fabric_id,
         "switch_id": switch_id,
@@ -839,7 +840,7 @@ async def post14(
 async def get15(
     system_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -870,7 +871,7 @@ async def post15(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -896,7 +897,7 @@ async def post15(
 async def get16(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -925,7 +926,7 @@ async def post16(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -950,7 +951,7 @@ async def post16(
 async def get17(
     system_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -979,7 +980,7 @@ async def post17(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "system_id": system_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1009,7 +1010,7 @@ async def get18(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1042,7 +1043,7 @@ async def post18(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1073,7 +1074,7 @@ async def get19(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1104,7 +1105,7 @@ async def post19(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1134,7 +1135,7 @@ async def get20(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1165,7 +1166,7 @@ async def post20(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1196,7 +1197,7 @@ async def get21(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1229,7 +1230,7 @@ async def post21(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1260,7 +1261,7 @@ async def get22(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1291,7 +1292,7 @@ async def post22(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1321,7 +1322,7 @@ async def get23(
     request: Request,
     response: Response,
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1352,7 +1353,7 @@ async def post23(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "system_id": system_id,
@@ -1378,7 +1379,7 @@ async def post23(
 async def get24(
     chassis_id: str, fabric_adapter_id: str, port_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1409,7 +1410,7 @@ async def post24(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1435,7 +1436,7 @@ async def post24(
 async def get25(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1464,7 +1465,7 @@ async def post25(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1489,7 +1490,7 @@ async def post25(
 async def get26(
     chassis_id: str, fabric_adapter_id: str, request: Request, response: Response
 ) -> VcatEntryCollection:
-    s: Service = find_service(VcatEntryCollection)
+    s: Service = get_service(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,
@@ -1518,7 +1519,7 @@ async def post26(
     response: Response,
     body: VcatEntryOnCreate,
 ) -> VcatEntry:
-    s: ServiceCollection = find_service_collection(VcatEntryCollection)
+    s: ServiceCollection = get_service_collection(VcatEntryCollection, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "fabric_adapter_id": fabric_adapter_id,

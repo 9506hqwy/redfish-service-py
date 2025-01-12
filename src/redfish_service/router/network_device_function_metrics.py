@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.network_device_function_metrics import NetworkDeviceFunctionMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> NetworkDeviceFunctionMetrics:
-    s: Service = find_service(NetworkDeviceFunctionMetrics)
+    s: Service = get_service(NetworkDeviceFunctionMetrics, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,

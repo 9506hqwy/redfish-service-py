@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.power_distribution_metrics import PowerDistributionMetrics
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistributionMetrics:
-    s: Service = find_service(PowerDistributionMetrics)
+    s: Service = get_service(PowerDistributionMetrics, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -42,7 +43,7 @@ async def get1(
 async def get2(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistributionMetrics:
-    s: Service = find_service(PowerDistributionMetrics)
+    s: Service = get_service(PowerDistributionMetrics, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -65,7 +66,7 @@ async def get2(
 async def get3(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistributionMetrics:
-    s: Service = find_service(PowerDistributionMetrics)
+    s: Service = get_service(PowerDistributionMetrics, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -88,7 +89,7 @@ async def get3(
 async def get4(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistributionMetrics:
-    s: Service = find_service(PowerDistributionMetrics)
+    s: Service = get_service(PowerDistributionMetrics, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -111,7 +112,7 @@ async def get4(
 async def get5(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistributionMetrics:
-    s: Service = find_service(PowerDistributionMetrics)
+    s: Service = get_service(PowerDistributionMetrics, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -134,7 +135,7 @@ async def get5(
 async def get6(
     power_distribution_id: str, request: Request, response: Response
 ) -> PowerDistributionMetrics:
-    s: Service = find_service(PowerDistributionMetrics)
+    s: Service = get_service(PowerDistributionMetrics, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,

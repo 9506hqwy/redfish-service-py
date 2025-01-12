@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.circuit_collection import CircuitCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ router = APIRouter()
 async def get1(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -42,7 +43,7 @@ async def get1(
 async def get2(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -65,7 +66,7 @@ async def get2(
 async def get3(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -88,7 +89,7 @@ async def get3(
 async def get4(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -111,7 +112,7 @@ async def get4(
 async def get5(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -134,7 +135,7 @@ async def get5(
 async def get6(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -157,7 +158,7 @@ async def get6(
 async def get7(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -180,7 +181,7 @@ async def get7(
 async def get8(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -203,7 +204,7 @@ async def get8(
 async def get9(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -226,7 +227,7 @@ async def get9(
 async def get10(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -249,7 +250,7 @@ async def get10(
 async def get11(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -272,7 +273,7 @@ async def get11(
 async def get12(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -295,7 +296,7 @@ async def get12(
 async def get13(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -318,7 +319,7 @@ async def get13(
 async def get14(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -341,7 +342,7 @@ async def get14(
 async def get15(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,
@@ -364,7 +365,7 @@ async def get15(
 async def get16(
     power_distribution_id: str, request: Request, response: Response
 ) -> CircuitCollection:
-    s: Service = find_service(CircuitCollection)
+    s: Service = get_service(CircuitCollection, request)
     b: dict[str, Any] = {
         "power_distribution_id": power_distribution_id,
         "request": request,

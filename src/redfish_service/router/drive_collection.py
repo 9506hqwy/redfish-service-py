@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..model.drive_collection import DriveCollection
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -11,7 +12,7 @@ router = APIRouter()
 @router.get("/redfish/v1/Chassis/{chassis_id}/Drives", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Drives", response_model_exclude_none=True)
 async def get1(chassis_id: str, request: Request, response: Response) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -34,7 +35,7 @@ async def get2(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "file_system_id": file_system_id,
@@ -63,7 +64,7 @@ async def get3(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "storage_pool_id": storage_pool_id,
@@ -88,7 +89,7 @@ async def get3(
 async def get4(
     storage_id: str, volume_id: str, capacity_source_id: str, request: Request, response: Response
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
         "volume_id": volume_id,
@@ -118,7 +119,7 @@ async def get5(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -149,7 +150,7 @@ async def get6(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -180,7 +181,7 @@ async def get7(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
@@ -202,7 +203,7 @@ async def get7(
     "/redfish/v1/StorageServices/{storage_service_id}/Drives", response_model_exclude_none=True
 )
 async def get8(storage_service_id: str, request: Request, response: Response) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "request": request,
@@ -229,7 +230,7 @@ async def get9(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "file_system_id": file_system_id,
@@ -258,7 +259,7 @@ async def get10(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "storage_pool_id": storage_pool_id,
@@ -287,7 +288,7 @@ async def get11(
     request: Request,
     response: Response,
 ) -> DriveCollection:
-    s: Service = find_service(DriveCollection)
+    s: Service = get_service(DriveCollection, request)
     b: dict[str, Any] = {
         "storage_service_id": storage_service_id,
         "volume_id": volume_id,

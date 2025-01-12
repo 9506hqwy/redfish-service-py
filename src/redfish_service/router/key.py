@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.key import Key, KeyOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 @router.delete("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
 @authenticate
 async def delete1(key_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -23,7 +24,7 @@ async def delete1(key_id: str, request: Request, response: Response) -> None:
 @router.get("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
 @router.head("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
 async def get1(key_id: str, request: Request, response: Response) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -34,7 +35,7 @@ async def get1(key_id: str, request: Request, response: Response) -> Key:
 @router.patch("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
 @authenticate
 async def patch1(key_id: str, request: Request, response: Response, body: KeyOnUpdate) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -47,7 +48,7 @@ async def patch1(key_id: str, request: Request, response: Response, body: KeyOnU
 )
 @authenticate
 async def delete2(key_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -62,7 +63,7 @@ async def delete2(key_id: str, request: Request, response: Response) -> None:
     "/redfish/v1/UpdateService/RemoteServerSSHKeys/{key_id}", response_model_exclude_none=True
 )
 async def get2(key_id: str, request: Request, response: Response) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -75,7 +76,7 @@ async def get2(key_id: str, request: Request, response: Response) -> Key:
 )
 @authenticate
 async def patch2(key_id: str, request: Request, response: Response, body: KeyOnUpdate) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -88,7 +89,7 @@ async def patch2(key_id: str, request: Request, response: Response, body: KeyOnU
 )
 @authenticate
 async def delete3(key_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -103,7 +104,7 @@ async def delete3(key_id: str, request: Request, response: Response) -> None:
     "/redfish/v1/UpdateService/PublicIdentitySSHKey/{key_id}", response_model_exclude_none=True
 )
 async def get3(key_id: str, request: Request, response: Response) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
 
     response.headers["OData-Version"] = "4.0"
@@ -116,7 +117,7 @@ async def get3(key_id: str, request: Request, response: Response) -> Key:
 )
 @authenticate
 async def patch3(key_id: str, request: Request, response: Response, body: KeyOnUpdate) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response, "body": body}
 
     response.headers["OData-Version"] = "4.0"
@@ -132,7 +133,7 @@ async def patch3(key_id: str, request: Request, response: Response, body: KeyOnU
 async def delete4(
     manager_account_id: str, key_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "key_id": key_id,
@@ -154,7 +155,7 @@ async def delete4(
     response_model_exclude_none=True,
 )
 async def get4(manager_account_id: str, key_id: str, request: Request, response: Response) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "key_id": key_id,
@@ -175,7 +176,7 @@ async def get4(manager_account_id: str, key_id: str, request: Request, response:
 async def patch4(
     manager_account_id: str, key_id: str, request: Request, response: Response, body: KeyOnUpdate
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "manager_account_id": manager_account_id,
         "key_id": key_id,
@@ -197,7 +198,7 @@ async def patch4(
 async def delete5(
     manager_id: str, manager_account_id: str, key_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -222,7 +223,7 @@ async def delete5(
 async def get5(
     manager_id: str, manager_account_id: str, key_id: str, request: Request, response: Response
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -249,7 +250,7 @@ async def patch5(
     response: Response,
     body: KeyOnUpdate,
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "manager_id": manager_id,
         "manager_account_id": manager_account_id,
@@ -272,7 +273,7 @@ async def patch5(
 async def delete6(
     aggregation_source_id: str, key_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "key_id": key_id,
@@ -296,7 +297,7 @@ async def delete6(
 async def get6(
     aggregation_source_id: str, key_id: str, request: Request, response: Response
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "key_id": key_id,
@@ -321,7 +322,7 @@ async def patch6(
     response: Response,
     body: KeyOnUpdate,
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "key_id": key_id,
@@ -341,7 +342,7 @@ async def patch6(
 )
 @authenticate
 async def delete7(aggregation_source_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -362,7 +363,7 @@ async def delete7(aggregation_source_id: str, request: Request, response: Respon
     response_model_exclude_none=True,
 )
 async def get7(aggregation_source_id: str, request: Request, response: Response) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -382,7 +383,7 @@ async def get7(aggregation_source_id: str, request: Request, response: Response)
 async def patch7(
     aggregation_source_id: str, request: Request, response: Response, body: KeyOnUpdate
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -401,7 +402,7 @@ async def patch7(
 )
 @authenticate
 async def delete8(aggregation_source_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -422,7 +423,7 @@ async def delete8(aggregation_source_id: str, request: Request, response: Respon
     response_model_exclude_none=True,
 )
 async def get8(aggregation_source_id: str, request: Request, response: Response) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,
@@ -442,7 +443,7 @@ async def get8(aggregation_source_id: str, request: Request, response: Response)
 async def patch8(
     aggregation_source_id: str, request: Request, response: Response, body: KeyOnUpdate
 ) -> Key:
-    s: Service = find_service(Key)
+    s: Service = get_service(Key, request)
     b: dict[str, Any] = {
         "aggregation_source_id": aggregation_source_id,
         "request": request,

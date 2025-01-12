@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.software_inventory import SoftwareInventory, SoftwareInventoryOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ router = APIRouter()
 async def get1(
     software_inventory_id: str, request: Request, response: Response
 ) -> SoftwareInventory:
-    s: Service = find_service(SoftwareInventory)
+    s: Service = get_service(SoftwareInventory, request)
     b: dict[str, Any] = {
         "software_inventory_id": software_inventory_id,
         "request": request,
@@ -43,7 +44,7 @@ async def patch1(
     response: Response,
     body: SoftwareInventoryOnUpdate,
 ) -> SoftwareInventory:
-    s: Service = find_service(SoftwareInventory)
+    s: Service = get_service(SoftwareInventory, request)
     b: dict[str, Any] = {
         "software_inventory_id": software_inventory_id,
         "request": request,
@@ -67,7 +68,7 @@ async def patch1(
 async def get2(
     software_inventory_id: str, request: Request, response: Response
 ) -> SoftwareInventory:
-    s: Service = find_service(SoftwareInventory)
+    s: Service = get_service(SoftwareInventory, request)
     b: dict[str, Any] = {
         "software_inventory_id": software_inventory_id,
         "request": request,
@@ -90,7 +91,7 @@ async def patch2(
     response: Response,
     body: SoftwareInventoryOnUpdate,
 ) -> SoftwareInventory:
-    s: Service = find_service(SoftwareInventory)
+    s: Service = get_service(SoftwareInventory, request)
     b: dict[str, Any] = {
         "software_inventory_id": software_inventory_id,
         "request": request,

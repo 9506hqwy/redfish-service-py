@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.resource_block import ResourceBlock, ResourceBlockOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ router = APIRouter()
 )
 @authenticate
 async def delete1(resource_block_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(ResourceBlock)
+    s: Service = get_service(ResourceBlock, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "request": request,
@@ -36,7 +37,7 @@ async def delete1(resource_block_id: str, request: Request, response: Response) 
     response_model_exclude_none=True,
 )
 async def get1(resource_block_id: str, request: Request, response: Response) -> ResourceBlock:
-    s: Service = find_service(ResourceBlock)
+    s: Service = get_service(ResourceBlock, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "request": request,
@@ -56,7 +57,7 @@ async def get1(resource_block_id: str, request: Request, response: Response) -> 
 async def patch1(
     resource_block_id: str, request: Request, response: Response, body: ResourceBlockOnUpdate
 ) -> ResourceBlock:
-    s: Service = find_service(ResourceBlock)
+    s: Service = get_service(ResourceBlock, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "request": request,
@@ -72,7 +73,7 @@ async def patch1(
 @router.delete("/redfish/v1/ResourceBlocks/{resource_block_id}", response_model_exclude_none=True)
 @authenticate
 async def delete2(resource_block_id: str, request: Request, response: Response) -> None:
-    s: Service = find_service(ResourceBlock)
+    s: Service = get_service(ResourceBlock, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "request": request,
@@ -87,7 +88,7 @@ async def delete2(resource_block_id: str, request: Request, response: Response) 
 @router.get("/redfish/v1/ResourceBlocks/{resource_block_id}", response_model_exclude_none=True)
 @router.head("/redfish/v1/ResourceBlocks/{resource_block_id}", response_model_exclude_none=True)
 async def get2(resource_block_id: str, request: Request, response: Response) -> ResourceBlock:
-    s: Service = find_service(ResourceBlock)
+    s: Service = get_service(ResourceBlock, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "request": request,
@@ -104,7 +105,7 @@ async def get2(resource_block_id: str, request: Request, response: Response) -> 
 async def patch2(
     resource_block_id: str, request: Request, response: Response, body: ResourceBlockOnUpdate
 ) -> ResourceBlock:
-    s: Service = find_service(ResourceBlock)
+    s: Service = get_service(ResourceBlock, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "request": request,

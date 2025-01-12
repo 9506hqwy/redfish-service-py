@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.network_port import NetworkPort, NetworkPortOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -24,7 +25,7 @@ async def get1(
     request: Request,
     response: Response,
 ) -> NetworkPort:
-    s: Service = find_service(NetworkPort)
+    s: Service = get_service(NetworkPort, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
@@ -51,7 +52,7 @@ async def patch1(
     response: Response,
     body: NetworkPortOnUpdate,
 ) -> NetworkPort:
-    s: Service = find_service(NetworkPort)
+    s: Service = get_service(NetworkPort, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,

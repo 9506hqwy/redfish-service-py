@@ -4,7 +4,8 @@ from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
 from ..model.power_domain import PowerDomain, PowerDomainOnUpdate
-from ..service import Service, find_service
+from ..service import Service
+from ..util import get_service
 
 router = APIRouter()
 
@@ -17,7 +18,7 @@ router = APIRouter()
 async def delete1(
     facility_id: str, power_domain_id: str, request: Request, response: Response
 ) -> None:
-    s: Service = find_service(PowerDomain)
+    s: Service = get_service(PowerDomain, request)
     b: dict[str, Any] = {
         "facility_id": facility_id,
         "power_domain_id": power_domain_id,
@@ -41,7 +42,7 @@ async def delete1(
 async def get1(
     facility_id: str, power_domain_id: str, request: Request, response: Response
 ) -> PowerDomain:
-    s: Service = find_service(PowerDomain)
+    s: Service = get_service(PowerDomain, request)
     b: dict[str, Any] = {
         "facility_id": facility_id,
         "power_domain_id": power_domain_id,
@@ -66,7 +67,7 @@ async def patch1(
     response: Response,
     body: PowerDomainOnUpdate,
 ) -> PowerDomain:
-    s: Service = find_service(PowerDomain)
+    s: Service = get_service(PowerDomain, request)
     b: dict[str, Any] = {
         "facility_id": facility_id,
         "power_domain_id": power_domain_id,
