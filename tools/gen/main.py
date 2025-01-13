@@ -45,6 +45,7 @@ class ClassInfo:
     raw: bool = False
     impl_info: ClassInfo | None = None
     item_info: ClassInfo | None = None
+    action_info: ClassInfo | None = None
     creatable: bool = False
     updatable: bool = False
     action_parameter: bool = False
@@ -443,7 +444,7 @@ def iter_schemas(base_path: Path) -> Generator[Path, None, None]:
 def load_actions(classall: list[ClassInfo | EnumInfo]) -> None:
     actions: list[ClassInfo] = []
     for c in (c for c in classall if c.loaded):
-        if c.definition.get("parameters", None):
+        if isinstance(c, ClassInfo) and c.definition.get("parameters", None):
             info = ClassInfo(
                 c.domain,
                 c.schema_path,
@@ -453,6 +454,7 @@ def load_actions(classall: list[ClassInfo | EnumInfo]) -> None:
                 reachable=True,
                 action_parameter=True,
             )
+            c.action_info = info
 
             actions.append(info)
 
@@ -892,7 +894,25 @@ def write_imports_router_to(
                 ]
             )
 
+        if c.name == "Actions":
+            for action in c.properties:
+                if not isinstance(action, PropetyInfo):
+                    continue
+
+                if not isinstance(action.type, ClassInfo):
+                    continue
+
+                if not action.type.action_info:
+                    continue
+
+                if not action.name.startswith("#"):
+                    continue
+
+                a = action.type.action_info
+                w.write(f"from {parent}model.{a.module_path} import {a.cls_name}\n")
+
     w.write(
+        f"from {parent}model.redfish_error import RedfishError\n"
         f"from {parent}service import Service, ServiceCollection\n"
         f"from {parent}util import get_service, get_service_collection\n"
     )
@@ -912,7 +932,8 @@ def write_routers(
 
     urls: list[str] = []
     routing: list[ClassInfo | EnumInfo] = []
-    for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
+    domains = sorted(list(classall), key=lambda m: m.domain)
+    for domain_name, modules_iter in itertools.groupby(domains, lambda c: c.domain):
         out_dir = out_path
         if domain_name == "swordfish":
             out_dir = out_path / "swordfish"
@@ -926,8 +947,10 @@ def write_routers(
                 continue
 
             classes = sorted(
-                [c for c in classes_iter if "uris" in c.definition], key=lambda c: c.name
+                [c for c in classes_iter if "uris" in c.definition or c.name == "Actions"],
+                key=lambda c: c.name,
             )
+
             if len(classes) == 0:
                 continue
 
@@ -937,7 +960,7 @@ def write_routers(
 
                 for c in classes:
                     index = 0
-                    for url in c.definition["uris"]:
+                    for url in c.definition.get("uris", []):
                         if url == "/redfish/v1":
                             # redirect to /redfish/v1/
                             continue
@@ -1054,7 +1077,55 @@ def write_routers(
                         urls.append(url)
                         print(f"{len(urls)}: {url} to {module_path}")
 
-                    routing.append(c)
+                        # Actions
+                        if isinstance(c, ClassInfo) and c.impl_info:
+                            actions = next(
+                                (
+                                    a
+                                    for a in classes
+                                    if a.loaded and a.name == "Actions" and a.module == c.module
+                                ),
+                                None,
+                            )
+                            if actions:
+                                for action in actions.properties:
+                                    if not isinstance(action, PropetyInfo):
+                                        continue
+
+                                    if not isinstance(action.type, ClassInfo):
+                                        continue
+
+                                    if not action.type.action_info:
+                                        continue
+
+                                    if not action.name.startswith("#"):
+                                        continue
+
+                                    action_qname = action.name.removeprefix("#")
+                                    action_name = action_qname.split(".")[-1]
+                                    action_url = f"{url}/Actions/{action_qname}"
+
+                                    aargs = args + f",body: {action.type.action_info.cls_name}"
+                                    abody = body + f',"body": body,"action": "{action_name}"'
+
+                                    w.writelines(
+                                        [
+                                            "\n",
+                                            "\n",
+                                            f'@router.post("{action_url}", response_model_exclude_none=True)\n',  # noqa E501
+                                            "@authenticate\n"
+                                            f"async def {action.property_name}{index}({aargs}) -> RedfishError:\n",  # noqa E501
+                                            f"    s: Service = get_service({c.cls_name}, request)\n",  # noqa E501
+                                            f"    b: dict[str, Any] = {{{abody}}}\n",
+                                            "    return s.action(**b)\n",
+                                        ]
+                                    )
+
+                                    urls.append(action_url)
+                                    print(f"{len(urls)}: {action_url} to {module_path}")
+
+                    if "uris" in c.definition:
+                        routing.append(c)
 
     return routing
 

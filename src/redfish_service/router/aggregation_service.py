@@ -3,7 +3,13 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.aggregation_service import AggregationService, AggregationServiceOnUpdate
+from ..model.aggregation_service import (
+    AggregationService,
+    AggregationServiceOnUpdate,
+    ResetRequest,
+    SetDefaultBootOrderRequest,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -26,3 +32,32 @@ async def patch1(
     s: Service = get_service(AggregationService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(AggregationService, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/AggregationService/Actions/AggregationService.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset1(request: Request, response: Response, body: ResetRequest) -> RedfishError:
+    s: Service = get_service(AggregationService, request)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body, "action": "Reset"}
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/AggregationService/Actions/AggregationService.SetDefaultBootOrder",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_default_boot_order1(
+    request: Request, response: Response, body: SetDefaultBootOrderRequest
+) -> RedfishError:
+    s: Service = get_service(AggregationService, request)
+    b: dict[str, Any] = {
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetDefaultBootOrder",
+    }
+    return s.action(**b)

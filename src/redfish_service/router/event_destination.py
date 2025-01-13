@@ -3,7 +3,12 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.event_destination import EventDestination, EventDestinationOnUpdate
+from ..model.event_destination import (
+    EventDestination,
+    EventDestinationOnUpdate,
+    ResumeSubscriptionRequest,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -61,3 +66,25 @@ async def patch1(
         "body": body,
     }
     return cast(EventDestination, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Actions/EventDestination.ResumeSubscription",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def resume_subscription1(
+    event_destination_id: str,
+    request: Request,
+    response: Response,
+    body: ResumeSubscriptionRequest,
+) -> RedfishError:
+    s: Service = get_service(EventDestination, request)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ResumeSubscription",
+    }
+    return s.action(**b)

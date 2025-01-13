@@ -3,7 +3,13 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.circuit import Circuit, CircuitOnUpdate
+from ..model.circuit import (
+    BreakerControlRequest,
+    Circuit,
+    CircuitOnUpdate,
+    PowerControlRequest,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -54,6 +60,54 @@ async def patch1(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control1(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control1(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Branches/{circuit_id}",
     response_model_exclude_none=True,
@@ -96,6 +150,54 @@ async def patch2(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control2(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control2(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -142,6 +244,54 @@ async def patch3(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control3(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control3(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Branches/{circuit_id}",
     response_model_exclude_none=True,
@@ -184,6 +334,54 @@ async def patch4(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control4(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control4(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -230,6 +428,54 @@ async def patch5(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Subfeeds/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control5(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Subfeeds/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control5(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Mains/{circuit_id}",
     response_model_exclude_none=True,
@@ -272,6 +518,54 @@ async def patch6(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control6(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control6(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -318,6 +612,54 @@ async def patch7(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control7(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control7(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Feeders/{circuit_id}",
     response_model_exclude_none=True,
@@ -360,6 +702,54 @@ async def patch8(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Feeders/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control8(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Feeders/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control8(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -406,6 +796,54 @@ async def patch9(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control9(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control9(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Branches/{circuit_id}",
     response_model_exclude_none=True,
@@ -448,6 +886,54 @@ async def patch10(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control10(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control10(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -494,6 +980,54 @@ async def patch11(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control11(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control11(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Subfeeds/{circuit_id}",
     response_model_exclude_none=True,
@@ -536,6 +1070,54 @@ async def patch12(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Subfeeds/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control12(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Subfeeds/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control12(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -582,6 +1164,54 @@ async def patch13(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Feeders/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control13(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Feeders/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control13(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Branches/{circuit_id}",
     response_model_exclude_none=True,
@@ -624,6 +1254,54 @@ async def patch14(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control14(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control14(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -670,6 +1348,54 @@ async def patch15(
     return cast(Circuit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control15(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Mains/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control15(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Branches/{circuit_id}",
     response_model_exclude_none=True,
@@ -712,3 +1438,51 @@ async def patch16(
         "body": body,
     }
     return cast(Circuit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.BreakerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def breaker_control16(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: BreakerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "BreakerControl",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Branches/{circuit_id}/Actions/Circuit.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control16(
+    power_distribution_id: str,
+    circuit_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(Circuit, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "circuit_id": circuit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)

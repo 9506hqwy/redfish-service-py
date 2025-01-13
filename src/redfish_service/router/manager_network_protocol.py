@@ -3,7 +3,10 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.manager_network_protocol import ManagerNetworkProtocol, ManagerNetworkProtocolOnUpdate
+from ..model.manager_network_protocol import (
+    ManagerNetworkProtocol,
+    ManagerNetworkProtocolOnUpdate,
+)
 from ..service import Service
 from ..util import get_service
 

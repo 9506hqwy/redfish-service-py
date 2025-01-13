@@ -3,7 +3,10 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.network_device_function import NetworkDeviceFunction, NetworkDeviceFunctionOnUpdate
+from ..model.network_device_function import (
+    NetworkDeviceFunction,
+    NetworkDeviceFunctionOnUpdate,
+)
 from ..service import Service
 from ..util import get_service
 

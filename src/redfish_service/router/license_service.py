@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.license_service import LicenseService, LicenseServiceOnUpdate
+from ..model.license_service import InstallRequest, LicenseService, LicenseServiceOnUpdate
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -26,3 +27,18 @@ async def patch1(
     s: Service = get_service(LicenseService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(LicenseService, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/LicenseService/Actions/LicenseService.Install", response_model_exclude_none=True
+)
+@authenticate
+async def install1(request: Request, response: Response, body: InstallRequest) -> RedfishError:
+    s: Service = get_service(LicenseService, request)
+    b: dict[str, Any] = {
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Install",
+    }
+    return s.action(**b)

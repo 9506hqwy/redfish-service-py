@@ -3,7 +3,9 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ...authenticate import authenticate
+from ...model.redfish_error import RedfishError
 from ...model.swordfish.data_protection_line_of_service import (
+    CreateReplicasRequest,
     DataProtectionLineOfService,
     DataProtectionLineOfServiceOnUpdate,
 )
@@ -81,6 +83,30 @@ async def patch1(
     return cast(DataProtectionLineOfService, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/StorageServices/{storage_service_id}/LinesOfService/DataProtectionLinesOfService/{data_protection_line_of_service_id}/Actions/DataProtectionLineOfService.CreateReplicas",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def create_replicas1(
+    storage_service_id: str,
+    data_protection_line_of_service_id: str,
+    request: Request,
+    response: Response,
+    body: CreateReplicasRequest,
+) -> RedfishError:
+    s: Service = get_service(DataProtectionLineOfService, request)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "data_protection_line_of_service_id": data_protection_line_of_service_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "CreateReplicas",
+    }
+    return s.action(**b)
+
+
 @router.delete(
     "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataProtectionLinesOfService/{data_protection_line_of_service_id}",
     response_model_exclude_none=True,
@@ -153,3 +179,29 @@ async def patch2(
         "body": body,
     }
     return cast(DataProtectionLineOfService, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/StorageServices/{storage_service_id}/ClassesOfService/{class_of_service_id}/DataProtectionLinesOfService/{data_protection_line_of_service_id}/Actions/DataProtectionLineOfService.CreateReplicas",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def create_replicas2(
+    storage_service_id: str,
+    class_of_service_id: str,
+    data_protection_line_of_service_id: str,
+    request: Request,
+    response: Response,
+    body: CreateReplicasRequest,
+) -> RedfishError:
+    s: Service = get_service(DataProtectionLineOfService, request)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "class_of_service_id": class_of_service_id,
+        "data_protection_line_of_service_id": data_protection_line_of_service_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "CreateReplicas",
+    }
+    return s.action(**b)

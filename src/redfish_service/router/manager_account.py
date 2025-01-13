@@ -3,7 +3,13 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.manager_account import ManagerAccount, ManagerAccountOnUpdate
+from ..model.manager_account import (
+    ChangePasswordRequest,
+    ManagerAccount,
+    ManagerAccountOnUpdate,
+    VerifyTimeBasedOneTimePasswordRequest,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -55,6 +61,47 @@ async def patch1(
         "body": body,
     }
     return cast(ManagerAccount, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/AccountService/Accounts/{manager_account_id}/Actions/ManagerAccount.ChangePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def change_password1(
+    manager_account_id: str, request: Request, response: Response, body: ChangePasswordRequest
+) -> RedfishError:
+    s: Service = get_service(ManagerAccount, request)
+    b: dict[str, Any] = {
+        "manager_account_id": manager_account_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ChangePassword",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/AccountService/Accounts/{manager_account_id}/Actions/ManagerAccount.VerifyTimeBasedOneTimePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def verify_time_based_one_time_password1(
+    manager_account_id: str,
+    request: Request,
+    response: Response,
+    body: VerifyTimeBasedOneTimePasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ManagerAccount, request)
+    b: dict[str, Any] = {
+        "manager_account_id": manager_account_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "VerifyTimeBasedOneTimePassword",
+    }
+    return s.action(**b)
 
 
 @router.delete(
@@ -117,3 +164,51 @@ async def patch2(
         "body": body,
     }
     return cast(ManagerAccount, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Actions/ManagerAccount.ChangePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def change_password2(
+    manager_id: str,
+    manager_account_id: str,
+    request: Request,
+    response: Response,
+    body: ChangePasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ManagerAccount, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "manager_account_id": manager_account_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ChangePassword",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Actions/ManagerAccount.VerifyTimeBasedOneTimePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def verify_time_based_one_time_password2(
+    manager_id: str,
+    manager_account_id: str,
+    request: Request,
+    response: Response,
+    body: VerifyTimeBasedOneTimePasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ManagerAccount, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "manager_account_id": manager_account_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "VerifyTimeBasedOneTimePassword",
+    }
+    return s.action(**b)

@@ -3,7 +3,10 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.metric_report_definition import MetricReportDefinition, MetricReportDefinitionOnUpdate
+from ..model.metric_report_definition import (
+    MetricReportDefinition,
+    MetricReportDefinitionOnUpdate,
+)
 from ..service import Service
 from ..util import get_service
 

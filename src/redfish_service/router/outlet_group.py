@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.outlet_group import OutletGroup, OutletGroupOnUpdate
+from ..model.outlet_group import OutletGroup, OutletGroupOnUpdate, PowerControlRequest
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -72,6 +73,30 @@ async def patch1(
     return cast(OutletGroup, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/OutletGroups/{outlet_group_id}/Actions/OutletGroup.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control1(
+    power_distribution_id: str,
+    outlet_group_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(OutletGroup, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.delete(
     "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/OutletGroups/{outlet_group_id}",
     response_model_exclude_none=True,
@@ -132,6 +157,30 @@ async def patch2(
         "body": body,
     }
     return cast(OutletGroup, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/OutletGroups/{outlet_group_id}/Actions/OutletGroup.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control2(
+    power_distribution_id: str,
+    outlet_group_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(OutletGroup, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
 
 
 @router.delete(
@@ -196,6 +245,30 @@ async def patch3(
     return cast(OutletGroup, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/OutletGroups/{outlet_group_id}/Actions/OutletGroup.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control3(
+    power_distribution_id: str,
+    outlet_group_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(OutletGroup, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.delete(
     "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/OutletGroups/{outlet_group_id}",
     response_model_exclude_none=True,
@@ -256,3 +329,27 @@ async def patch4(
         "body": body,
     }
     return cast(OutletGroup, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/OutletGroups/{outlet_group_id}/Actions/OutletGroup.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control4(
+    power_distribution_id: str,
+    outlet_group_id: str,
+    request: Request,
+    response: Response,
+    body: PowerControlRequest,
+) -> RedfishError:
+    s: Service = get_service(OutletGroup, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "outlet_group_id": outlet_group_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)

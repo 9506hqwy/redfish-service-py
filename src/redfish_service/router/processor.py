@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.processor import Processor, ProcessorOnUpdate
+from ..model.processor import Processor, ProcessorOnUpdate, ResetRequest
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -52,6 +53,30 @@ async def patch1(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset1(
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -103,6 +128,32 @@ async def patch2(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset2(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -160,6 +211,34 @@ async def patch3(
     return cast(Processor, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset3(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -202,6 +281,30 @@ async def patch4(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset4(
+    resource_block_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -253,6 +356,32 @@ async def patch5(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset5(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -310,6 +439,34 @@ async def patch6(
     return cast(Processor, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset6(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -359,6 +516,32 @@ async def patch7(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset7(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -414,6 +597,34 @@ async def patch8(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset8(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -475,6 +686,36 @@ async def patch9(
     return cast(Processor, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset9(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -517,6 +758,30 @@ async def patch10(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset10(
+    resource_block_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -568,6 +833,32 @@ async def patch11(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset11(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -625,6 +916,34 @@ async def patch12(
     return cast(Processor, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset12(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -674,6 +993,32 @@ async def patch13(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset13(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -729,6 +1074,34 @@ async def patch14(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset14(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -790,6 +1163,36 @@ async def patch15(
     return cast(Processor, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset15(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}",
     response_model_exclude_none=True,
@@ -839,6 +1242,32 @@ async def patch16(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset16(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -894,6 +1323,34 @@ async def patch17(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset17(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -955,6 +1412,36 @@ async def patch18(
     return cast(Processor, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset18(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}", response_model_exclude_none=True
 )
@@ -994,6 +1481,26 @@ async def patch19(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset19(
+    chassis_id: str, processor_id: str, request: Request, response: Response, body: ResetRequest
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "processor_id": processor_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -1041,6 +1548,32 @@ async def patch20(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset20(
+    chassis_id: str,
+    processor_id: str,
+    processor_id2: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -1096,3 +1629,31 @@ async def patch21(
         "body": body,
     }
     return cast(Processor, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Actions/Processor.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset21(
+    chassis_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+    body: ResetRequest,
+) -> RedfishError:
+    s: Service = get_service(Processor, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)

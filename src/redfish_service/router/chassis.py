@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.chassis import Chassis, ChassisOnUpdate
+from ..model.chassis import Chassis, ChassisOnUpdate, ResetRequest
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -39,3 +40,21 @@ async def patch1(
         "body": body,
     }
     return cast(Chassis, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Actions/Chassis.Reset", response_model_exclude_none=True
+)
+@authenticate
+async def reset1(
+    chassis_id: str, request: Request, response: Response, body: ResetRequest
+) -> RedfishError:
+    s: Service = get_service(Chassis, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)

@@ -4,6 +4,7 @@ from typing import Any, Protocol, cast
 
 from .exception import OperationNotAllowedError
 from .model import RedfishModel
+from .model.redfish_error import RedfishError
 
 services: list[Service] = []
 
@@ -38,6 +39,9 @@ class Service[T: RedfishModel](Protocol):
         raise OperationNotAllowedError
 
     def patch(self, **kwargs: dict[str, Any]) -> T:
+        raise OperationNotAllowedError
+
+    def action(self, **kwargs: dict[str, Any]) -> RedfishError:
         raise OperationNotAllowedError
 
 

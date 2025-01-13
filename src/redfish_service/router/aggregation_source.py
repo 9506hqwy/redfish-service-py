@@ -3,7 +3,12 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.aggregation_source import AggregationSource, AggregationSourceOnUpdate
+from ..model.aggregation_source import (
+    AggregationSource,
+    AggregationSourceOnUpdate,
+    GenerateSshIdentityKeyPairRequest,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -64,3 +69,25 @@ async def patch1(
         "body": body,
     }
     return cast(AggregationSource, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/AggregationService/AggregationSources/{aggregation_source_id}/Actions/AggregationSource.GenerateSSHIdentityKeyPair",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def generate_ssh_identity_key_pair1(
+    aggregation_source_id: str,
+    request: Request,
+    response: Response,
+    body: GenerateSshIdentityKeyPairRequest,
+) -> RedfishError:
+    s: Service = get_service(AggregationSource, request)
+    b: dict[str, Any] = {
+        "aggregation_source_id": aggregation_source_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GenerateSSHIdentityKeyPair",
+    }
+    return s.action(**b)

@@ -3,7 +3,13 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.aggregate import Aggregate
+from ..model.aggregate import (
+    AddElementsRequest,
+    Aggregate,
+    RemoveElementsRequest,
+    ResetRequest,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -30,3 +36,60 @@ async def get1(aggregate_id: str, request: Request, response: Response) -> Aggre
     s: Service = get_service(Aggregate, request)
     b: dict[str, Any] = {"aggregate_id": aggregate_id, "request": request, "response": response}
     return cast(Aggregate, s.get(**b))
+
+
+@router.post(
+    "/redfish/v1/AggregationService/Aggregates/{aggregate_id}/Actions/Aggregate.AddElements",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def add_elements1(
+    aggregate_id: str, request: Request, response: Response, body: AddElementsRequest
+) -> RedfishError:
+    s: Service = get_service(Aggregate, request)
+    b: dict[str, Any] = {
+        "aggregate_id": aggregate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "AddElements",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/AggregationService/Aggregates/{aggregate_id}/Actions/Aggregate.RemoveElements",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def remove_elements1(
+    aggregate_id: str, request: Request, response: Response, body: RemoveElementsRequest
+) -> RedfishError:
+    s: Service = get_service(Aggregate, request)
+    b: dict[str, Any] = {
+        "aggregate_id": aggregate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "RemoveElements",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/AggregationService/Aggregates/{aggregate_id}/Actions/Aggregate.Reset",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def reset1(
+    aggregate_id: str, request: Request, response: Response, body: ResetRequest
+) -> RedfishError:
+    s: Service = get_service(Aggregate, request)
+    b: dict[str, Any] = {
+        "aggregate_id": aggregate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Reset",
+    }
+    return s.action(**b)

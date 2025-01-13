@@ -3,7 +3,12 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.telemetry_service import TelemetryService, TelemetryServiceOnUpdate
+from ..model.redfish_error import RedfishError
+from ..model.telemetry_service import (
+    SubmitTestMetricReportRequest,
+    TelemetryService,
+    TelemetryServiceOnUpdate,
+)
 from ..service import Service
 from ..util import get_service
 
@@ -26,3 +31,21 @@ async def patch1(
     s: Service = get_service(TelemetryService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(TelemetryService, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/TelemetryService/Actions/TelemetryService.SubmitTestMetricReport",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def submit_test_metric_report1(
+    request: Request, response: Response, body: SubmitTestMetricReportRequest
+) -> RedfishError:
+    s: Service = get_service(TelemetryService, request)
+    b: dict[str, Any] = {
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SubmitTestMetricReport",
+    }
+    return s.action(**b)
