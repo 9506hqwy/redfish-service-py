@@ -19,6 +19,16 @@ class ResetKeys(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ResetKeysRequest(RedfishModel):
+    reset_keys_type: ResetKeysType
+
+
+class ResetKeysType(StrEnum):
+    RESET_ALL_KEYS_TO_DEFAULT = "ResetAllKeysToDefault"
+    DELETE_ALL_KEYS = "DeleteAllKeys"
+    DELETE_PK = "DeletePK"
+
+
 class SecureBoot(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)

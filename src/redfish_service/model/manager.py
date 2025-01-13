@@ -7,7 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel
 from .odata_v4 import IdRef
-from .resource import Location, PowerState, Status
+from .resource import Location, PowerState, ResetType, Status
 from .software_inventory import AdditionalVersions, MeasurementBlock
 
 
@@ -46,6 +46,10 @@ class DaylightSavingTime(RedfishModel):
 class ForceFailover(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ForceFailoverRequest(RedfishModel):
+    new_manager: IdRef
 
 
 class GraphicalConnectTypesSupported(StrEnum):
@@ -212,14 +216,33 @@ class ModifyRedundancySet(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ModifyRedundancySetRequest(RedfishModel):
+    add: list[IdRef] | None = None
+    remove: list[IdRef] | None = None
+
+
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
+
+
 class ResetToDefaults(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetToDefaultsRequest(RedfishModel):
+    reset_type: ResetToDefaultsType
+
+
+class ResetToDefaultsType(StrEnum):
+    RESET_ALL = "ResetAll"
+    PRESERVE_NETWORK_AND_USERS = "PreserveNetworkAndUsers"
+    PRESERVE_NETWORK = "PreserveNetwork"
 
 
 class SerialConnectTypesSupported(StrEnum):

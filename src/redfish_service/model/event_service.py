@@ -129,6 +129,19 @@ class SubmitTestEvent(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SubmitTestEventRequest(RedfishModel):
+    event_group_id: int | None = None
+    event_id: str | None = None
+    event_timestamp: str | None = None
+    event_type: EventType | None = None
+    message: str | None = None
+    message_args: list[str] | None = None
+    message_id: str
+    message_severity: Health | None = None
+    origin_of_condition: str | None = None
+    severity: str | None = None
+
+
 class TestEventSubscription(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)

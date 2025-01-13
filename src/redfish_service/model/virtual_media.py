@@ -41,6 +41,16 @@ class InsertMedia(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class InsertMediaRequest(RedfishModel):
+    image: str
+    inserted: bool | None = None
+    password: str | None = None
+    transfer_method: TransferMethod | None = None
+    transfer_protocol_type: TransferProtocolType | None = None
+    user_name: str | None = None
+    write_protected: bool | None = None
+
+
 class MediaType(StrEnum):
     CD = "CD"
     FLOPPY = "Floppy"

@@ -122,14 +122,35 @@ class ResetToDefaults(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ResetToDefaultsRequest(RedfishModel):
+    reset_type: ResetToDefaultsType
+
+
+class ResetToDefaultsType(StrEnum):
+    RESET_ALL = "ResetAll"
+    PRESERVE_VOLUMES = "PreserveVolumes"
+
+
 class SetControllerPassword(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
+class SetControllerPasswordRequest(RedfishModel):
+    current_password: str | None = None
+    new_password: str
+    security_key: str | None = None
+
+
 class SetEncryptionKey(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SetEncryptionKeyRequest(RedfishModel):
+    current_encryption_key: str | None = None
+    encryption_key: str
+    encryption_key_identifier: str | None = None
 
 
 class Storage(RedfishModel):

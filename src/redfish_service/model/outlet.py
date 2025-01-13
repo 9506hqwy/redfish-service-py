@@ -6,7 +6,12 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
-from .circuit import NominalVoltageType, PhaseWiringType, PowerRestorePolicyTypes
+from .circuit import (
+    CircuitPowerState,
+    NominalVoltageType,
+    PhaseWiringType,
+    PowerRestorePolicyTypes,
+)
 from .odata_v4 import IdRef
 from .resource import IndicatorLed, PowerState, Status
 from .sensor import (
@@ -132,6 +137,10 @@ class OutletOnUpdate(RedfishModel):
 class PowerControl(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class PowerControlRequest(RedfishModel):
+    power_state: CircuitPowerState | None = None
 
 
 class ReceptacleType(StrEnum):

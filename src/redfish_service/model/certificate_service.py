@@ -5,6 +5,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
+from .certificate import CertificateType, KeyUsage
 from .odata_v4 import IdRef
 
 
@@ -36,6 +37,34 @@ class GenerateCsr(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class GenerateCsrRequest(RedfishModel):
+    alternative_names: list[str] | None = None
+    certificate_collection: IdRef
+    challenge_password: str | None = None
+    city: str
+    common_name: str
+    contact_person: str | None = None
+    country: str
+    email: str | None = None
+    given_name: str | None = None
+    initials: str | None = None
+    key_bit_length: int | None = None
+    key_curve_id: str | None = None
+    key_pair_algorithm: str | None = None
+    key_usage: list[KeyUsage] | None = None
+    organization: str
+    organizational_unit: str
+    state: str
+    surname: str | None = None
+    unstructured_name: str | None = None
+
+
 class ReplaceCertificate(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ReplaceCertificateRequest(RedfishModel):
+    certificate_string: str
+    certificate_type: CertificateType
+    certificate_uri: IdRef

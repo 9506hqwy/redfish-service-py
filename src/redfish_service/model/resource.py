@@ -188,6 +188,21 @@ class ReferenceableMember(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class ResetType(StrEnum):
+    ON = "On"
+    FORCE_OFF = "ForceOff"
+    GRACEFUL_SHUTDOWN = "GracefulShutdown"
+    GRACEFUL_RESTART = "GracefulRestart"
+    FORCE_RESTART = "ForceRestart"
+    NMI = "Nmi"
+    FORCE_ON = "ForceOn"
+    PUSH_POWER_BUTTON = "PushPowerButton"
+    POWER_CYCLE = "PowerCycle"
+    SUSPEND = "Suspend"
+    PAUSE = "Pause"
+    RESUME = "Resume"
+
+
 class Resource(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)

@@ -199,6 +199,10 @@ class ResumeSubscription(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ResumeSubscriptionRequest(RedfishModel):
+    deliver_buffered_event_duration: str | None = None
+
+
 class SnmpAuthenticationProtocols(StrEnum):
     NONE = "None"
     COMMUNITY_STRING = "CommunityString"

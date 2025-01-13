@@ -9,7 +9,7 @@ from . import RedfishModel
 from .circuit import NominalVoltageType, PhaseWiringType, PlugType
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
-from .resource import Location, Status
+from .resource import Location, ResetType, Status
 
 
 class Actions(RedfishModel):
@@ -145,3 +145,7 @@ class PowerSupplyType(StrEnum):
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None

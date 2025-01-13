@@ -8,7 +8,7 @@ from pydantic import Field
 from . import RedfishModel
 from .odata_v4 import IdRef
 from .protocol import Protocol
-from .resource import Identifier, IndicatorLed, Location, Status
+from .resource import Identifier, IndicatorLed, Location, ResetType, Status
 from .software_inventory import MeasurementBlock
 from .swordfish.volume import OperationType
 
@@ -33,6 +33,12 @@ class ConfigurationLock(StrEnum):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
     PARTIAL = "Partial"
+
+
+class DataSanitizationType(StrEnum):
+    BLOCK_ERASE = "BlockErase"
+    CRYPTOGRAPHIC_ERASE = "CryptographicErase"
+    OVERWRITE = "Overwrite"
 
 
 class Drive(RedfishModel):
@@ -251,14 +257,27 @@ class Reset(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
+
+
 class RevertToOriginalFactoryState(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
+class RevertToOriginalFactoryStateRequest(RedfishModel):
+    physical_secure_id: str | None = Field(alias="PhysicalSecureID", default=None)
+
+
 class SecureErase(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SecureEraseRequest(RedfishModel):
+    overwrite_passes: int | None = None
+    sanitization_type: DataSanitizationType | None = None
 
 
 class StatusIndicator(StrEnum):

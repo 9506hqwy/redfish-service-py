@@ -7,7 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel
 from .odata_v4 import IdRef
-from .resource import PowerState, Status
+from .resource import PowerState, ResetType, Status
 from .software_inventory import MeasurementBlock
 
 
@@ -29,6 +29,12 @@ class Actions(RedfishModel):
 class AddResourceBlock(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class AddResourceBlockRequest(RedfishModel):
+    computer_system_etag: str | None = Field(alias="ComputerSystemETag", default=None)
+    resource_block: IdRef
+    resource_block_etag: str | None = Field(alias="ResourceBlockETag", default=None)
 
 
 class AutomaticRetryConfig(StrEnum):
@@ -350,6 +356,23 @@ class Decommission(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class DecommissionRequest(RedfishModel):
+    computer_system_etag: str | None = Field(alias="ComputerSystemETag", default=None)
+    decommission_types: list[DecommissionType]
+    oem_decommission_types: list[str] | None = Field(alias="OEMDecommissionTypes", default=None)
+    require_secure_erase: bool | None = None
+
+
+class DecommissionType(StrEnum):
+    ALL = "All"
+    USER_DATA = "UserData"
+    MANAGER_CONFIG = "ManagerConfig"
+    BIOS_CONFIG = "BIOSConfig"
+    NETWORK_CONFIG = "NetworkConfig"
+    STORAGE_CONFIG = "StorageConfig"
+    LOGS = "Logs"
+
+
 class GraphicalConnectTypesSupported(StrEnum):
     KVMIP = "KVMIP"
     OEM = "OEM"
@@ -532,9 +555,19 @@ class RemoveResourceBlock(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class RemoveResourceBlockRequest(RedfishModel):
+    computer_system_etag: str | None = Field(alias="ComputerSystemETag", default=None)
+    resource_block: IdRef
+    resource_block_etag: str | None = Field(alias="ResourceBlockETag", default=None)
+
+
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
 
 
 class SerialConsoleProtocol(RedfishModel):

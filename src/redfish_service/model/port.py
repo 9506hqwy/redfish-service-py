@@ -8,7 +8,7 @@ from pydantic import Field
 from . import RedfishModel
 from .odata_v4 import IdRef
 from .protocol import Protocol
-from .resource import Location, Status
+from .resource import Location, ResetType, Status
 
 
 class Actions(RedfishModel):
@@ -379,6 +379,10 @@ class Reset(RedfishModel):
 class ResetPpb(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
 
 
 class Sfp(RedfishModel):

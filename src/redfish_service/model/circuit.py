@@ -30,6 +30,10 @@ class BreakerControl(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class BreakerControlRequest(RedfishModel):
+    power_state: CircuitPowerState | None = None
+
+
 class BreakerStates(StrEnum):
     NORMAL = "Normal"
     TRIPPED = "Tripped"
@@ -257,6 +261,10 @@ class PowerControl(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class PowerControlRequest(RedfishModel):
+    power_state: CircuitPowerState | None = None
+
+
 class PowerRestorePolicyTypes(StrEnum):
     ALWAYS_ON = "AlwaysOn"
     ALWAYS_OFF = "AlwaysOff"
@@ -270,6 +278,12 @@ class PowerSensors(RedfishModel):
     line2_to_neutral: SensorPowerExcerpt | None = None
     line3_to_line1: SensorPowerExcerpt | None = None
     line3_to_neutral: SensorPowerExcerpt | None = None
+
+
+class CircuitPowerState(StrEnum):
+    ON = "On"
+    OFF = "Off"
+    POWER_CYCLE = "PowerCycle"
 
 
 class ResetMetrics(RedfishModel):

@@ -8,7 +8,7 @@ from pydantic import Field
 from .. import RedfishModel
 from ..odata_v4 import IdRef
 from ..resource import Status
-from ..swordfish.storage_replica_info import ReplicaInfo
+from ..swordfish.storage_replica_info import ReplicaInfo, ReplicaType, ReplicaUpdateMode
 
 
 class Actions(RedfishModel):
@@ -47,6 +47,12 @@ class ApplicationConsistencyMethod(StrEnum):
 class AssignReplicaTarget(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class AssignReplicaTargetRequest(RedfishModel):
+    replica_type: ReplicaType
+    replica_update_mode: ReplicaUpdateMode
+    target_consistency_group: str
 
 
 class ConsistencyGroup(RedfishModel):
@@ -113,6 +119,13 @@ class CreateReplicaTarget(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class CreateReplicaTargetRequest(RedfishModel):
+    consistency_group_name: str
+    replica_type: ReplicaType
+    replica_update_mode: ReplicaUpdateMode
+    target_storage_pool: str
+
+
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
@@ -122,9 +135,18 @@ class RemoveReplicaRelationship(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class RemoveReplicaRelationshipRequest(RedfishModel):
+    delete_target_consistency_group: bool | None = None
+    target_consistency_group: str
+
+
 class ResumeReplication(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResumeReplicationRequest(RedfishModel):
+    target_consistency_group: str
 
 
 class ReverseReplicationRelationship(RedfishModel):
@@ -132,11 +154,23 @@ class ReverseReplicationRelationship(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ReverseReplicationRelationshipRequest(RedfishModel):
+    target_consistency_group: str
+
+
 class SplitReplication(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
+class SplitReplicationRequest(RedfishModel):
+    target_consistency_group: str
+
+
 class SuspendReplication(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SuspendReplicationRequest(RedfishModel):
+    target_consistency_group: str

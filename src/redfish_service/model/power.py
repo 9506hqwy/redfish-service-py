@@ -8,7 +8,7 @@ from pydantic import Field
 from . import RedfishModel
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
-from .resource import IndicatorLed, Location, Status
+from .resource import IndicatorLed, Location, ResetType, Status
 
 
 class Actions(RedfishModel):
@@ -170,6 +170,11 @@ class PowerSupplyActions(RedfishModel):
 class PowerSupplyReset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class PowerSupplyResetRequest(RedfishModel):
+    member_id: str
+    reset_type: ResetType | None = None
 
 
 class PowerSupplyType(StrEnum):

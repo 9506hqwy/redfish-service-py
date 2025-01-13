@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -16,6 +17,15 @@ class Actions(RedfishModel):
 class ResetKeys(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetKeysRequest(RedfishModel):
+    reset_keys_type: ResetKeysType
+
+
+class ResetKeysType(StrEnum):
+    RESET_ALL_KEYS_TO_DEFAULT = "ResetAllKeysToDefault"
+    DELETE_ALL_KEYS = "DeleteAllKeys"
 
 
 class SecureBootDatabase(RedfishModel):

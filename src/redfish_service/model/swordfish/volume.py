@@ -11,7 +11,7 @@ from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
 from ..swordfish.data_storage_los_capabilities import ProvisioningPolicy, StorageAccessCapability
 from ..swordfish.io_statistics import IoStatistics
-from ..swordfish.storage_replica_info import ReplicaInfo
+from ..swordfish.storage_replica_info import ReplicaInfo, ReplicaType, ReplicaUpdateMode
 
 
 class Alua(RedfishModel):
@@ -56,9 +56,22 @@ class AssignReplicaTarget(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class AssignReplicaTargetRequest(RedfishModel):
+    replica_type: ReplicaType
+    replica_update_mode: ReplicaUpdateMode
+    target_volume: str
+
+
 class ChangeRaidLayout(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ChangeRaidLayoutRequest(RedfishModel):
+    drives: list[IdRef] | None = None
+    media_span_count: int | None = None
+    raid_type: RaidType | None = Field(alias="RAIDType", default=None)
+    strip_size_bytes: int | None = None
 
 
 class CheckConsistency(RedfishModel):
@@ -69,6 +82,13 @@ class CheckConsistency(RedfishModel):
 class CreateReplicaTarget(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class CreateReplicaTargetRequest(RedfishModel):
+    replica_type: ReplicaType
+    replica_update_mode: ReplicaUpdateMode
+    target_storage_pool: str
+    volume_name: str | None = None
 
 
 class EncryptionTypes(StrEnum):
@@ -91,6 +111,16 @@ class InitializeMethod(StrEnum):
     SKIP = "Skip"
     BACKGROUND = "Background"
     FOREGROUND = "Foreground"
+
+
+class InitializeRequest(RedfishModel):
+    initialize_method: InitializeMethod | None = None
+    initialize_type: InitializeType | None = None
+
+
+class InitializeType(StrEnum):
+    FAST = "Fast"
+    SLOW = "Slow"
 
 
 class LbaFormat(RedfishModel):
@@ -263,9 +293,18 @@ class RemoveReplicaRelationship(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class RemoveReplicaRelationshipRequest(RedfishModel):
+    delete_target_volume: bool | None = None
+    target_volume: str
+
+
 class ResumeReplication(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResumeReplicationRequest(RedfishModel):
+    target_volume: str
 
 
 class ReverseReplicationRelationship(RedfishModel):
@@ -273,14 +312,26 @@ class ReverseReplicationRelationship(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ReverseReplicationRelationshipRequest(RedfishModel):
+    target_volume: str
+
+
 class SplitReplication(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
+class SplitReplicationRequest(RedfishModel):
+    target_volume: str
+
+
 class SuspendReplication(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SuspendReplicationRequest(RedfishModel):
+    target_volume: str
 
 
 class Volume(RedfishModel):

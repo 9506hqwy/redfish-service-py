@@ -7,7 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel
 from .odata_v4 import IdRef
-from .resource import Location, Status
+from .resource import Location, ResetType, Status
 from .sensor import SensorExcerpt
 
 
@@ -118,6 +118,10 @@ class Links(RedfishModel):
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
 
 
 class SelfTest(RedfishModel):

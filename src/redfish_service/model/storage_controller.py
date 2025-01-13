@@ -47,6 +47,10 @@ class AttachNamespaces(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class AttachNamespacesRequest(RedfishModel):
+    namespaces: list[IdRef]
+
+
 class CacheSummary(RedfishModel):
     persistent_cache_size_mib: int | None = Field(alias="PersistentCacheSizeMiB", default=None)
     status: Status | None = None
@@ -56,6 +60,10 @@ class CacheSummary(RedfishModel):
 class DetachNamespaces(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class DetachNamespacesRequest(RedfishModel):
+    namespaces: list[IdRef]
 
 
 class Links(RedfishModel):
@@ -139,9 +147,21 @@ class SecurityReceive(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SecurityReceiveRequest(RedfishModel):
+    allocation_length: int
+    security_protocol: int
+    security_protocol_specific: int
+
+
 class SecuritySend(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SecuritySendRequest(RedfishModel):
+    data: str
+    security_protocol: int
+    security_protocol_specific: int
 
 
 class StorageController(RedfishModel):

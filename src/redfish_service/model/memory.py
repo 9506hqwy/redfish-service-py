@@ -8,7 +8,7 @@ from pydantic import Field
 from . import RedfishModel
 from .control import ControlRangeExcerpt
 from .odata_v4 import IdRef
-from .resource import Location, Status
+from .resource import Location, ResetType, Status
 from .software_inventory import MeasurementBlock
 
 
@@ -69,9 +69,19 @@ class DisableMasterPassphrase(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class DisableMasterPassphraseRequest(RedfishModel):
+    passphrase: str
+    region_id: str
+
+
 class DisablePassphrase(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class DisablePassphraseRequest(RedfishModel):
+    passphrase: str
+    region_id: str
 
 
 class ErrorCorrection(StrEnum):
@@ -93,6 +103,10 @@ class HealthData(RedfishModel):
 class InjectPersistentPoison(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class InjectPersistentPoisonRequest(RedfishModel):
+    physical_address: str
 
 
 class Links(RedfishModel):
@@ -395,6 +409,11 @@ class OverwriteUnit(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class OverwriteUnitRequest(RedfishModel):
+    passphrase: str
+    region_id: str
+
+
 class PowerManagementPolicy(RedfishModel):
     average_power_budget_milli_watts: int | None = None
     max_tdp_milli_watts: int | None = Field(alias="MaxTDPMilliWatts", default=None)
@@ -417,6 +436,10 @@ class Reset(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
+
+
 class ResetToDefaults(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
@@ -427,9 +450,20 @@ class ScanMedia(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ScanMediaRequest(RedfishModel):
+    length: int
+    no_event_log: bool | None = None
+    physical_address: str
+
+
 class SecureEraseUnit(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SecureEraseUnitRequest(RedfishModel):
+    passphrase: str
+    region_id: str
 
 
 class SecurityCapabilities(RedfishModel):
@@ -460,11 +494,26 @@ class SetMasterPassphrase(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SetMasterPassphraseRequest(RedfishModel):
+    passphrase: str
+    region_id: str
+
+
 class SetPassphrase(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
 
 
+class SetPassphraseRequest(RedfishModel):
+    passphrase: str
+    region_id: str
+
+
 class UnlockUnit(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class UnlockUnitRequest(RedfishModel):
+    passphrase: str
+    region_id: str

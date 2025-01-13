@@ -162,6 +162,12 @@ class SingleSessionInfo(RedfishModel):
     session_type: SecureSessionType | None = None
 
 
+class SpdmGetSignedMeasurementsRequest(RedfishModel):
+    measurement_indices: list[int] | None = None
+    nonce: str | None = None
+    slot_id: int | None = None
+
+
 class TpmGetSignedMeasurements(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
@@ -192,6 +198,13 @@ class TpMsingleMeasurement(RedfishModel):
     measurement: str | None = None
     measurement_hash_algorithm: str | None = None
     pcr: int | None = Field(alias="PCR", default=None)
+
+
+class TpmGetSignedMeasurementsRequest(RedfishModel):
+    certificate: IdRef
+    nonce: str | None = None
+    pcr_selection: str = Field(alias="PCRSelection")
+    scheme: str
 
 
 class VerificationStatus(StrEnum):

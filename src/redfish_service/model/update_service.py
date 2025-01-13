@@ -6,6 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
+from .key import EcdsaCurveType, SshKeyType
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -36,6 +37,12 @@ class GenerateSshIdentityKeyPair(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class GenerateSshIdentityKeyPairRequest(RedfishModel):
+    curve: EcdsaCurveType | None = None
+    key_length: int | None = None
+    key_type: SshKeyType
+
+
 class HttpPushUriApplyTime(RedfishModel):
     apply_time: ApplyTime | None = None
     maintenance_window_duration_in_seconds: int | None = None
@@ -57,6 +64,15 @@ class SimpleUpdate(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SimpleUpdateRequest(RedfishModel):
+    force_update: bool | None = None
+    image_uri: str = Field(alias="ImageURI")
+    password: str | None = None
+    targets: list[str] | None = None
+    transfer_protocol: TransferProtocolType | None = None
+    username: str | None = None
+
+
 class StartUpdate(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
@@ -69,6 +85,19 @@ class SupportedUpdateImageFormatType(StrEnum):
     PLDM_V1_3 = "PLDMv1_3"
     UEFI_CAPSULE = "UEFICapsule"
     VENDOR_DEFINED = "VendorDefined"
+
+
+class TransferProtocolType(StrEnum):
+    CIFS = "CIFS"
+    FTP = "FTP"
+    SFTP = "SFTP"
+    HTTP = "HTTP"
+    HTTPS = "HTTPS"
+    NSF = "NSF"
+    SCP = "SCP"
+    TFTP = "TFTP"
+    OEM = "OEM"
+    NFS = "NFS"
 
 
 class UpdateParameters(RedfishModel):

@@ -9,7 +9,7 @@ from . import RedfishModel
 from .control import ControlRangeExcerpt
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
-from .resource import Location, PowerState, Status
+from .resource import Location, PowerState, ResetType, Status
 from .software_inventory import AdditionalVersions, MeasurementBlock
 
 
@@ -322,6 +322,10 @@ class ProcessorType(StrEnum):
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
 
 
 class ResetToDefaults(RedfishModel):

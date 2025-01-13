@@ -32,6 +32,11 @@ class ChangePassword(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ChangePasswordRequest(RedfishModel):
+    new_password: str
+    session_account_password: str
+
+
 class ClearSecretKey(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
@@ -180,3 +185,7 @@ class SnmpUserInfo(RedfishModel):
 class VerifyTimeBasedOneTimePassword(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class VerifyTimeBasedOneTimePasswordRequest(RedfishModel):
+    time_based_one_time_password: str

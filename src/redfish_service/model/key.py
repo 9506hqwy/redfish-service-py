@@ -12,6 +12,21 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class EcdsaCurveType(StrEnum):
+    NISTP256 = "NISTP256"
+    NISTP384 = "NISTP384"
+    NISTP521 = "NISTP521"
+    NISTK163 = "NISTK163"
+    NISTP192 = "NISTP192"
+    NISTP224 = "NISTP224"
+    NISTK233 = "NISTK233"
+    NISTB233 = "NISTB233"
+    NISTK283 = "NISTK283"
+    NISTK409 = "NISTK409"
+    NISTB409 = "NISTB409"
+    NISTT571 = "NISTT571"
+
+
 class Key(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
@@ -86,6 +101,13 @@ class NvmeOfSecurityProtocolType(StrEnum):
     DHHC = "DHHC"
     TL_S_PSK = "TLS_PSK"
     OEM = "OEM"
+
+
+class SshKeyType(StrEnum):
+    RSA = "RSA"
+    DSA = "DSA"
+    ECDSA = "ECDSA"
+    ED25519 = "Ed25519"
 
 
 class SshType(RedfishModel):

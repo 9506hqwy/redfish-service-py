@@ -33,9 +33,22 @@ class ClearLog(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ClearLogRequest(RedfishModel):
+    log_entries_etag: str | None = Field(alias="LogEntriesETag", default=None)
+
+
 class CollectDiagnosticData(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class CollectDiagnosticDataRequest(RedfishModel):
+    diagnostic_data_type: LogDiagnosticDataTypes
+    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    password: str | None = None
+    target_uri: str | None = Field(alias="TargetURI", default=None)
+    transfer_protocol: TransferProtocolType | None = None
+    user_name: str | None = None
 
 
 class DiagnosticDataDetails(RedfishModel):
@@ -136,6 +149,14 @@ class PushDiagnosticData(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class PushDiagnosticDataRequest(RedfishModel):
+    additional_data_uri: str = Field(alias="AdditionalDataURI")
+    password: str | None = None
+    target_uri: str = Field(alias="TargetURI")
+    transfer_protocol: TransferProtocolType | None = None
+    user_name: str | None = None
+
+
 class SyslogFacility(StrEnum):
     KERN = "Kern"
     USER = "User"
@@ -178,3 +199,15 @@ class SyslogSeverity(StrEnum):
     INFORMATIONAL = "Informational"
     DEBUG = "Debug"
     ALL = "All"
+
+
+class TransferProtocolType(StrEnum):
+    CIFS = "CIFS"
+    FTP = "FTP"
+    SFTP = "SFTP"
+    HTTP = "HTTP"
+    HTTPS = "HTTPS"
+    NFS = "NFS"
+    SCP = "SCP"
+    TFTP = "TFTP"
+    OEM = "OEM"

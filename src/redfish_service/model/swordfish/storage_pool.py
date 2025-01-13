@@ -34,6 +34,11 @@ class AddDrives(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class AddDrivesRequest(RedfishModel):
+    capacity_source: IdRef | None = None
+    drives: list[IdRef]
+
+
 class EndGrpLifetime(RedfishModel):
     data_units_read: int | None = None
     data_units_written: int | None = None
@@ -96,9 +101,17 @@ class RemoveDrives(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class RemoveDrivesRequest(RedfishModel):
+    drives: list[IdRef]
+
+
 class SetCompressionState(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SetCompressionStateRequest(RedfishModel):
+    enable: bool
 
 
 class SetDeduplicationState(RedfishModel):
@@ -106,9 +119,17 @@ class SetDeduplicationState(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SetDeduplicationStateRequest(RedfishModel):
+    enable: bool
+
+
 class SetEncryptionState(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SetEncryptionStateRequest(RedfishModel):
+    enable: bool
 
 
 class StoragePool(RedfishModel):

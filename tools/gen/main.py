@@ -15,6 +15,11 @@ from typing import Any, Callable, Generator, TypeGuard
 from urllib.parse import urlparse
 from warnings import warn
 
+# alias class name mapping.
+ALIAS_CLASS_NAMES: dict[str, dict[str, str]] = {
+    "circuit": {"PowerState": "CircuitPowerState"},
+}
+
 # pydantic.BaseModel properties.
 BASE_MODEL_PROPERTIES: list[str] = ["schema"]
 
@@ -42,6 +47,7 @@ class ClassInfo:
     item_info: ClassInfo | None = None
     creatable: bool = False
     updatable: bool = False
+    action_parameter: bool = False
     _module: str | None = None
 
     @property
@@ -50,7 +56,13 @@ class ClassInfo:
 
     @property
     def cls_name(self) -> str:
-        return get_class_name(self.name)
+        name = get_class_name(self.name)
+
+        if mapping := ALIAS_CLASS_NAMES.get(self.module, None):
+            if alias := mapping.get(name):
+                return alias
+
+        return name
 
     @property
     def id_ref(self) -> bool:
@@ -116,6 +128,12 @@ class ClassInfo:
                     classall, prop_name, prop_definition, required, required_on_create
                 )
 
+    def load_properties_from_parameters(self, classall: list[ClassInfo | EnumInfo]) -> None:
+        if (parameters := self.definition.get("parameters", None)) is not None:
+            for prop_name, prop_definition in parameters.items():
+                required = [prop_name] if prop_definition.get("requiredParameter", None) else []
+                self._load_property(classall, prop_name, prop_definition, required, [])
+
     def set_module(self, module: str) -> None:
         self._module = module
 
@@ -180,7 +198,13 @@ class EnumInfo:
 
     @property
     def cls_name(self) -> str:
-        return get_class_name(self.name)
+        name = get_class_name(self.name)
+
+        if mapping := ALIAS_CLASS_NAMES.get(self.module, None):
+            if alias := mapping.get(name):
+                return alias
+
+        return name
 
     @property
     def id_ref(self) -> bool:
@@ -416,6 +440,25 @@ def iter_schemas(base_path: Path) -> Generator[Path, None, None]:
         yield f
 
 
+def load_actions(classall: list[ClassInfo | EnumInfo]) -> None:
+    actions: list[ClassInfo] = []
+    for c in (c for c in classall if c.loaded):
+        if c.definition.get("parameters", None):
+            info = ClassInfo(
+                c.domain,
+                c.schema_path,
+                c.definition,
+                f"{c.cls_name}Request",
+                [],
+                reachable=True,
+                action_parameter=True,
+            )
+
+            actions.append(info)
+
+    classall.extend(actions)
+
+
 def load_classes(redfish_path: Path, swordfish_path: Path) -> list[ClassInfo | EnumInfo]:
     classes: list[ClassInfo | EnumInfo] = []
 
@@ -485,11 +528,14 @@ def load_properties(
                 continue
 
             target.load_properties_from_definition(classall, selected)
+        elif target.action_parameter and (target.definition.get("parameters", None)) is not None:
+            target.load_properties_from_parameters(classall)
         elif target.definition.get("properties", []):
             target.load_properties(classall)
         elif "type" in target.definition and is_object(target.definition):
             target.raw = True
         else:
+            print(target.definition)
             raise Exception(f"Not found schema. '{target}'")
 
         target.loaded = True
@@ -523,6 +569,17 @@ def load_properties(
         target.item_info = item_type
         if target.definition.get("insertable", False):
             target.item_info.creatable = True
+
+
+def load_properties_all(classall: list[ClassInfo | EnumInfo]) -> None:
+    old_reachable = 0
+    new_reachable = len([c for c in classall if c.reachable])
+
+    while old_reachable != new_reachable:
+        print(f"reachable: {new_reachable}")
+        old_reachable = new_reachable
+        load_properties(classall, classall)
+        new_reachable = len([c for c in classall if c.reachable])
 
 
 def func_match_domain(
@@ -700,7 +757,8 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
     out_path = out_path / "model"
 
     count = 0
-    for domain_name, modules_iter in itertools.groupby(classall, lambda c: c.domain):
+    domains = sorted(list(classall), key=lambda m: m.domain)
+    for domain_name, modules_iter in itertools.groupby(domains, lambda c: c.domain):
         out_file = out_path
         if domain_name == "swordfish":
             out_file = out_path / "swordfish"
@@ -1057,14 +1115,11 @@ def main() -> int:
         if isinstance(c, ClassInfo):
             c.reachable = True
 
-    old_reachable = 0
-    new_reachable = len([c for c in classall if c.reachable])
+    load_properties_all(classall)
 
-    while old_reachable != new_reachable:
-        print(f"reachable: {new_reachable}")
-        old_reachable = new_reachable
-        load_properties(classall, classall)
-        new_reachable = len([c for c in classall if c.reachable])
+    load_actions(classall)
+
+    load_properties_all(classall)
 
     for c in classall:
         if c.loaded and c.versioned:

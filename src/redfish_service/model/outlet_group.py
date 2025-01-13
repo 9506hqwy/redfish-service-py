@@ -6,7 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
-from .circuit import PowerRestorePolicyTypes
+from .circuit import CircuitPowerState, PowerRestorePolicyTypes
 from .odata_v4 import IdRef
 from .resource import PowerState, Status
 from .sensor import SensorEnergykWhExcerpt, SensorPowerExcerpt
@@ -118,6 +118,10 @@ class OutletGroupType(StrEnum):
 class PowerControl(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class PowerControlRequest(RedfishModel):
+    power_state: CircuitPowerState | None = None
 
 
 class ResetMetrics(RedfishModel):

@@ -7,7 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel
 from .odata_v4 import IdRef
-from .resource import Location, PowerState, Status
+from .resource import Location, PowerState, ResetType, Status
 from .software_inventory import MeasurementBlock
 
 
@@ -359,6 +359,10 @@ class PhysicalSecurity(RedfishModel):
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
 
 
 class ThermalDirection(StrEnum):

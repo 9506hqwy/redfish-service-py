@@ -6,6 +6,7 @@ from pydantic import Field
 
 from . import RedfishModel
 from .odata_v4 import IdRef
+from .resource import ResetType
 
 
 class Actions(RedfishModel):
@@ -21,6 +22,10 @@ class Actions(RedfishModel):
 class AddElements(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class AddElementsRequest(RedfishModel):
+    elements: list[IdRef]
 
 
 class Aggregate(RedfishModel):
@@ -58,9 +63,19 @@ class RemoveElements(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class RemoveElementsRequest(RedfishModel):
+    elements: list[IdRef]
+
+
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    batch_size: int | None = None
+    delay_between_batches_in_seconds: int | None = None
+    reset_type: ResetType | None = None
 
 
 class SetDefaultBootOrder(RedfishModel):

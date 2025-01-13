@@ -6,7 +6,7 @@ from pydantic import Field
 
 from . import RedfishModel
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import ResetType, Status
 
 
 class Actions(RedfishModel):
@@ -41,3 +41,7 @@ class Links(RedfishModel):
 class Reset(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None

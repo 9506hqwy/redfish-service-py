@@ -161,9 +161,20 @@ class Rekey(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class RekeyRequest(RedfishModel):
+    challenge_password: str | None = None
+    key_bit_length: int | None = None
+    key_curve_id: str | None = None
+    key_pair_algorithm: str | None = None
+
+
 class Renew(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class RenewRequest(RedfishModel):
+    challenge_password: str | None = None
 
 
 class Spdm(RedfishModel):

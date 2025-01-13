@@ -1,10 +1,12 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
 
 from . import RedfishModel
+from .manifest import Manifest
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -17,6 +19,23 @@ class Actions(RedfishModel):
 class Compose(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class ComposeRequest(RedfishModel):
+    manifest: Manifest | None = None
+    request_format: ComposeRequestFormat
+    request_type: ComposeRequestType
+    reservation_id: str | None = None
+
+
+class ComposeRequestFormat(StrEnum):
+    MANIFEST = "Manifest"
+
+
+class ComposeRequestType(StrEnum):
+    PREVIEW = "Preview"
+    PREVIEW_RESERVE = "PreviewReserve"
+    APPLY = "Apply"
 
 
 class CompositionService(RedfishModel):

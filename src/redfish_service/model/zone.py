@@ -21,6 +21,12 @@ class AddEndpoint(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class AddEndpointRequest(RedfishModel):
+    endpoint: IdRef
+    endpoint_etag: str | None = Field(alias="EndpointETag", default=None)
+    zone_etag: str | None = Field(alias="ZoneETag", default=None)
+
+
 class ExternalAccessibility(StrEnum):
     GLOBALLY_ACCESSIBLE = "GloballyAccessible"
     NON_ZONED_ACCESSIBLE = "NonZonedAccessible"
@@ -53,6 +59,12 @@ class Links(RedfishModel):
 class RemoveEndpoint(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class RemoveEndpointRequest(RedfishModel):
+    endpoint: IdRef
+    endpoint_etag: str | None = Field(alias="EndpointETag", default=None)
+    zone_etag: str | None = Field(alias="ZoneETag", default=None)
 
 
 class Zone(RedfishModel):

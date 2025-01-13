@@ -38,6 +38,14 @@ class CollectionFunction(StrEnum):
     SUMMATION = "Summation"
 
 
+class MetricValue(RedfishModel):
+    metric_definition: IdRef | None = None
+    metric_id: str | None = None
+    metric_property: str | None = None
+    metric_value: str | None = None
+    timestamp: str | None = None
+
+
 class ResetMetricReportDefinitionsToDefaults(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
@@ -51,6 +59,12 @@ class ResetTriggersToDefaults(RedfishModel):
 class SubmitTestMetricReport(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class SubmitTestMetricReportRequest(RedfishModel):
+    generated_metric_report_values: list[MetricValue]
+    metric_report_name: str
+    metric_report_values: str | None = None
 
 
 class TelemetryService(RedfishModel):

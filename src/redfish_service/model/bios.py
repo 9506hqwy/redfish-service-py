@@ -51,6 +51,12 @@ class ChangePassword(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class ChangePasswordRequest(RedfishModel):
+    new_password: str
+    old_password: str
+    password_name: str
+
+
 class Links(RedfishModel):
     active_software_image: IdRef | None = None
     oem: dict[str, Any] | None = None

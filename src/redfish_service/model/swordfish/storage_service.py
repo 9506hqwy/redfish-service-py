@@ -43,6 +43,10 @@ class SetEncryptionKey(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class SetEncryptionKeyRequest(RedfishModel):
+    encryption_key: str | None = None
+
+
 class StorageService(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)

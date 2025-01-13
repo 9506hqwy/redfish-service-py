@@ -6,6 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
+from .key import EcdsaCurveType, SshKeyType
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -94,6 +95,12 @@ class AggregationType(StrEnum):
 class GenerateSshIdentityKeyPair(RedfishModel):
     target: str | None = Field(alias="target", default=None)
     title: str | None = Field(alias="title", default=None)
+
+
+class GenerateSshIdentityKeyPairRequest(RedfishModel):
+    curve: EcdsaCurveType | None = None
+    key_length: int | None = None
+    key_type: SshKeyType
 
 
 class Links(RedfishModel):

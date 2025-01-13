@@ -24,6 +24,11 @@ class CreateReplicas(RedfishModel):
     title: str | None = Field(alias="title", default=None)
 
 
+class CreateReplicasRequest(RedfishModel):
+    replica_line_of_service: IdRef
+    replica_requests: list[ReplicaRequest] | None = None
+
+
 class DataProtectionLineOfService(RedfishModel):
     odata_context: str | None = Field(alias="@odata.context", default=None)
     odata_etag: str | None = Field(alias="@odata.etag", default=None)
@@ -70,3 +75,8 @@ class DataProtectionLineOfServiceOnUpdate(RedfishModel):
     replica_class_of_service: IdRef | None = None
     replica_type: ReplicaType | None = None
     schedule: Schedule | None = None
+
+
+class ReplicaRequest(RedfishModel):
+    replica_name: str | None = None
+    replica_source: IdRef | None = None
