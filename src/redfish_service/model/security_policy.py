@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -51,17 +51,8 @@ class SecurityPolicy(RedfishModel):
     tls: TlsCommunication | None = Field(alias="TLS", default=None)
 
 
-class SecurityPolicyOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#SecurityPolicy.v1_0_2.SecurityPolicy"
-    )
+class SecurityPolicyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
-    id: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     override_parent_manager: bool | None = None
     spdm: SpdmPolicy | None = Field(alias="SPDM", default=None)

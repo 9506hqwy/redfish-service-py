@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Health, Status
 from .sensor import SensorExcerpt
@@ -60,28 +60,14 @@ class CoolingLoop(RedfishModel):
     user_label: str | None = None
 
 
-class CoolingLoopOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#CoolingLoop.v1_0_3.CoolingLoop")
+class CoolingLoopOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None
-    coolant_level_percent: SensorExcerpt | None = None
-    coolant_level_status: Health | None = None
-    coolant_quality: Health | None = None
     cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
-    description: str | None = None
-    id: str | None = None
     links: Links | None = None
     location_indicator_active: bool | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    primary_coolant_connectors: IdRef | None = None
-    rated_flow_liters_per_minute: float | None = None
-    rated_pressurek_pa: float | None = None
-    secondary_coolant_connectors: IdRef | None = None
     status: Status | None = None
     supply_equipment_names: list[str] | None = None
     user_label: str | None = None

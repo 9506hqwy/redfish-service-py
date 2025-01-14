@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .circuit import NominalVoltageType, PhaseWiringType, PlugType
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
@@ -92,47 +92,20 @@ class PowerSupply(RedfishModel):
     version: str | None = None
 
 
-class PowerSupplyOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#PowerSupply.v1_6_0.PowerSupply")
+class PowerSupplyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    assembly: IdRef | None = None
-    certificates: IdRef | None = None
-    description: str | None = None
     efficiency_ratings: list[EfficiencyRating] | None = None
     electrical_source_manager_ur_is: list[str] | None = Field(
         alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
-    firmware_version: str | None = None
-    hot_pluggable: bool | None = None
-    id: str | None = None
-    input_nominal_voltage_type: NominalVoltageType | None = None
     input_ranges: list[InputRange] | None = None
-    line_input_status: LineStatus | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
-    manufacturer: str | None = None
-    metrics: IdRef | None = None
-    model: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    output_nominal_voltage_type: NominalVoltageType | None = None
     output_rails: list[OutputRail] | None = None
-    part_number: str | None = None
-    phase_wiring_type: PhaseWiringType | None = None
-    plug_type: PlugType | None = None
-    power_capacity_watts: float | None = None
-    power_supply_type: PowerSupplyType | None = None
-    production_date: str | None = None
-    replaceable: bool | None = None
-    serial_number: str | None = None
-    spare_part_number: str | None = None
     status: Status | None = None
-    version: str | None = None
 
 
 class PowerSupplyType(StrEnum):

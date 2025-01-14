@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -61,28 +61,17 @@ class ManagerNetworkProtocol(RedfishModel):
     virtual_media: Protocol | None = None
 
 
-class ManagerNetworkProtocolOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#ManagerNetworkProtocol.v1_10_1.ManagerNetworkProtocol"
-    )
+class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     dhcp: Protocol | None = Field(alias="DHCP", default=None)
     dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)
-    description: str | None = None
-    fqdn: str | None = Field(alias="FQDN", default=None)
     ftp: Protocol | None = Field(alias="FTP", default=None)
     ftps: Protocol | None = Field(alias="FTPS", default=None)
     http: Protocol | None = Field(alias="HTTP", default=None)
     https: HttpsProtocol | None = Field(alias="HTTPS", default=None)
-    host_name: str | None = None
     ipmi: Protocol | None = Field(alias="IPMI", default=None)
-    id: str | None = None
     kvmip: Protocol | None = Field(alias="KVMIP", default=None)
     ntp: NtpProtocol | None = Field(alias="NTP", default=None)
-    name: str | None = None
     oem: dict[str, Any] | None = None
     proxy: ProxyConfiguration | None = None
     rdp: Protocol | None = Field(alias="RDP", default=None)

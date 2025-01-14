@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 
 
 class Actions(RedfishModel):
@@ -89,27 +89,15 @@ class SerialInterface(RedfishModel):
     stop_bits: StopBits | None = None
 
 
-class SerialInterfaceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#SerialInterface.v1_2_1.SerialInterface"
-    )
+class SerialInterfaceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     bit_rate: BitRate | None = None
-    connector_type: ConnectorType | None = None
     data_bits: DataBits | None = None
-    description: str | None = None
     flow_control: FlowControl | None = None
-    id: str | None = None
     interface_enabled: bool | None = None
     links: Links | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     parity: Parity | None = None
-    pin_out: PinOut | None = None
-    signal_type: SignalType | None = None
     stop_bits: StopBits | None = None
 
 

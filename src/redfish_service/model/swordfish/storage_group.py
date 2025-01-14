@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .. import RedfishModel
+from .. import RedfishModel, RedfishModelOnUpdate
 from ..endpoint_group import AccessState
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
@@ -150,40 +150,20 @@ class StorageGroupOnCreate(RedfishModel):
     volumes_are_exposed: bool | None = None
 
 
-class StorageGroupOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#StorageGroup.v1_6_0.StorageGroup"
-    )
+class StorageGroupOnUpdate(RedfishModelOnUpdate):
     access_state: AccessState | None = None
     actions: Actions | None = None
     authentication_method: AuthenticationMethod | None = None
     chap_info: list[ChapInformation] | None = None
     client_endpoint_groups: list[IdRef] | None = None
-    client_endpoint_groups_odata_count: int | None = Field(
-        alias="ClientEndpointGroups@odata.count", default=None
-    )
     dh_chap_info: list[DhchapInformation] | None = Field(alias="DHChapInfo", default=None)
-    description: str | None = None
-    id: str | None = None
     identifier: Identifier | None = None
     links: Links | None = None
     mapped_volumes: list[MappedVolume] | None = None
     members_are_consistent: bool | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     replica_info: ReplicaInfo | None = None
-    replica_targets: list[IdRef] | None = None
-    replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
-    )
     server_endpoint_groups: list[IdRef] | None = None
-    server_endpoint_groups_odata_count: int | None = Field(
-        alias="ServerEndpointGroups@odata.count", default=None
-    )
     status: Status | None = None
     volumes: list[IdRef] | None = None
-    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
     volumes_are_exposed: bool | None = None

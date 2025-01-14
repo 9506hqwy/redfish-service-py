@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Location, PowerState, ResetType, Status
 from .software_inventory import MeasurementBlock
@@ -158,75 +158,28 @@ class ChassisOnCreate(RedfishModel):
     width_mm: float | None = None
 
 
-class ChassisOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Chassis.v1_25_2.Chassis")
+class ChassisOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    assembly: IdRef | None = None
     asset_tag: str | None = None
-    certificates: IdRef | None = None
-    chassis_type: ChassisType | None = None
-    controls: IdRef | None = None
-    depth_mm: float | None = None
-    description: str | None = None
     doors: Doors | None = None
     drives: IdRef | None = None
     electrical_source_manager_ur_is: list[str] | None = Field(
         alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
-    environment_metrics: IdRef | None = None
     environmental_class: EnvironmentalClass | None = None
-    fabric_adapters: IdRef | None = None
     heating_cooling_equipment_names: list[str] | None = None
     heating_cooling_manager_ur_is: list[str] | None = Field(
         alias="HeatingCoolingManagerURIs", default=None
     )
-    height_mm: float | None = None
-    hot_pluggable: bool | None = None
-    id: str | None = None
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
-    log_services: IdRef | None = None
-    manufacturer: str | None = None
-    max_power_watts: float | None = None
     measurements: list[MeasurementBlock] | None = None
-    media_controllers: IdRef | None = None
-    memory: IdRef | None = None
-    memory_domains: IdRef | None = None
-    min_power_watts: float | None = None
-    model: str | None = None
-    name: str | None = None
-    network_adapters: IdRef | None = None
     oem: dict[str, Any] | None = None
-    pcie_devices: IdRef | None = Field(alias="PCIeDevices", default=None)
-    pcie_slots: IdRef | None = Field(alias="PCIeSlots", default=None)
-    part_number: str | None = None
     physical_security: PhysicalSecurity | None = None
-    power: IdRef | None = None
-    power_state: PowerState | None = None
-    power_subsystem: IdRef | None = None
-    powered_by_parent: bool | None = None
-    processors: IdRef | None = None
-    replaceable: bool | None = None
-    sku: str | None = Field(alias="SKU", default=None)
-    sensors: IdRef | None = None
-    serial_number: str | None = None
-    spare_part_number: str | None = None
     status: Status | None = None
-    thermal: IdRef | None = None
-    thermal_direction: ThermalDirection | None = None
-    thermal_managed_by_parent: bool | None = None
-    thermal_subsystem: IdRef | None = None
-    trusted_components: IdRef | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
-    version: str | None = None
-    weight_kg: float | None = None
-    width_mm: float | None = None
 
 
 class ChassisType(StrEnum):

@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -103,26 +103,12 @@ class VirtualMedia(RedfishModel):
     write_protected: bool | None = None
 
 
-class VirtualMediaOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#VirtualMedia.v1_6_4.VirtualMedia"
-    )
+class VirtualMediaOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    certificates: IdRef | None = None
-    client_certificates: IdRef | None = None
-    connected_via: ConnectedVia | None = None
-    description: str | None = None
     eject_policy: EjectPolicy | None = None
     eject_timeout: str | None = None
-    id: str | None = None
     image: str | None = None
-    image_name: str | None = None
     inserted: bool | None = None
-    media_types: list[MediaType] | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
     status: Status | None = None

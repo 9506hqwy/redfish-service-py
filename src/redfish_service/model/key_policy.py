@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 
 
 class Actions(RedfishModel):
@@ -42,18 +42,10 @@ class KeyPolicyOnCreate(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class KeyPolicyOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#KeyPolicy.v1_0_1.KeyPolicy")
+class KeyPolicyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
-    id: str | None = None
     is_default: bool | None = None
-    key_policy_type: KeyPolicyType | None = None
     nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
-    name: str | None = None
     oem: dict[str, Any] | None = None
 
 

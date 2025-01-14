@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -94,26 +94,12 @@ class MemoryChunksOnCreate(RedfishModel):
     status: Status | None = None
 
 
-class MemoryChunksOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#MemoryChunks.v1_6_2.MemoryChunks"
-    )
+class MemoryChunksOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    address_range_offset_mib: int | None = Field(alias="AddressRangeOffsetMiB", default=None)
-    address_range_type: AddressRangeType | None = None
-    description: str | None = None
     display_name: str | None = None
-    id: str | None = None
     interleave_sets: list[InterleaveSet] | None = None
-    is_mirror_enabled: bool | None = None
-    is_spare: bool | None = None
     links: Links | None = None
     media_location: MediaLocation | None = None
-    memory_chunk_size_mib: int | None = Field(alias="MemoryChunkSizeMiB", default=None)
-    name: str | None = None
     oem: dict[str, Any] | None = None
     requested_operational_state: OperationalState | None = None
     status: Status | None = None

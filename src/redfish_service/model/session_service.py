@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -29,19 +29,9 @@ class SessionService(RedfishModel):
     status: Status | None = None
 
 
-class SessionServiceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#SessionService.v1_1_9.SessionService"
-    )
+class SessionServiceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
-    id: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     service_enabled: bool | None = None
     session_timeout: int | None = None
-    sessions: IdRef | None = None
     status: Status | None = None

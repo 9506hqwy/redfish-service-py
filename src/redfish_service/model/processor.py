@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .control import ControlRangeExcerpt
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
@@ -173,73 +173,27 @@ class Processor(RedfishModel):
     version: str | None = None
 
 
-class ProcessorOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Processor.v1_20_1.Processor")
-    acceleration_functions: IdRef | None = None
+class ProcessorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     applied_operating_config: IdRef | None = None
-    assembly: IdRef | None = None
-    base_speed_mhz: int | None = Field(alias="BaseSpeedMHz", default=None)
-    base_speed_priority_state: BaseSpeedPriorityState | None = None
-    cache_memory: IdRef | None = None
-    certificates: IdRef | None = None
-    description: str | None = None
     enabled: bool | None = None
-    environment_metrics: IdRef | None = None
     fpga: Fpga | None = Field(alias="FPGA", default=None)
-    family: str | None = None
-    firmware_version: str | None = None
-    high_speed_core_ids: list[int] | None = Field(alias="HighSpeedCoreIDs", default=None)
-    id: str | None = None
-    instruction_set: InstructionSet | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
-    manufacturer: str | None = None
-    max_speed_mhz: int | None = Field(alias="MaxSpeedMHz", default=None)
-    max_tdp_watts: int | None = Field(alias="MaxTDPWatts", default=None)
     measurements: list[MeasurementBlock] | None = None
     memory_summary: MemorySummary | None = None
-    metrics: IdRef | None = None
-    min_speed_mhz: int | None = Field(alias="MinSpeedMHz", default=None)
-    model: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    operating_configs: IdRef | None = None
-    operating_speed_mhz: int | None = Field(alias="OperatingSpeedMHz", default=None)
     operating_speed_range_mhz: ControlRangeExcerpt | None = Field(
         alias="OperatingSpeedRangeMHz", default=None
     )
-    part_number: str | None = None
-    ports: IdRef | None = None
-    power_state: PowerState | None = None
-    processor_architecture: ProcessorArchitecture | None = None
     processor_id: ProcessorId | None = None
-    processor_index: int | None = None
     processor_memory: list[ProcessorMemory] | None = None
-    processor_type: ProcessorType | None = None
-    replaceable: bool | None = None
-    serial_number: str | None = None
-    socket: str | None = None
-    spare_part_number: str | None = None
     speed_limit_mhz: int | None = Field(alias="SpeedLimitMHz", default=None)
     speed_locked: bool | None = None
     status: Status | None = None
-    sub_processors: IdRef | None = None
     system_interface: ProcessorInterface | None = None
-    tdp_watts: int | None = Field(alias="TDPWatts", default=None)
-    throttle_causes: list[ThrottleCause] | None = None
-    throttled: bool | None = None
-    total_cores: int | None = None
-    total_enabled_cores: int | None = None
-    total_threads: int | None = None
-    turbo_state: TurboState | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
-    version: str | None = None
 
 
 class ProcessorArchitecture(StrEnum):

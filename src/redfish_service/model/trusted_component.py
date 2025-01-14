@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -74,30 +74,12 @@ class TrustedComponent(RedfishModel):
     uuid: str | None = Field(alias="UUID", default=None)
 
 
-class TrustedComponentOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#TrustedComponent.v1_3_1.TrustedComponent"
-    )
+class TrustedComponentOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    certificates: IdRef | None = None
-    description: str | None = None
-    firmware_version: str | None = None
-    id: str | None = None
     links: Links | None = None
-    manufacturer: str | None = None
-    model: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    part_number: str | None = None
-    sku: str | None = Field(alias="SKU", default=None)
-    serial_number: str | None = None
     status: Status | None = None
     tpm: Tpm | None = Field(alias="TPM", default=None)
-    trusted_component_type: TrustedComponentType | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
 
 
 class TrustedComponentType(StrEnum):

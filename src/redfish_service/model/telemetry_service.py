@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -91,25 +91,8 @@ class TelemetryService(RedfishModel):
     triggers: IdRef | None = None
 
 
-class TelemetryServiceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#TelemetryService.v1_3_4.TelemetryService"
-    )
+class TelemetryServiceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
-    id: str | None = None
-    log_service: IdRef | None = None
-    max_reports: int | None = None
-    metric_definitions: IdRef | None = None
-    metric_report_definitions: IdRef | None = None
-    metric_reports: IdRef | None = None
-    min_collection_interval: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     service_enabled: bool | None = None
     status: Status | None = None
-    supported_collection_functions: list[CollectionFunction] | None = None
-    triggers: IdRef | None = None

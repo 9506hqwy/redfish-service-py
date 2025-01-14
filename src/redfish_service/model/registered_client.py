@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 
 
 class Actions(RedfishModel):
@@ -65,22 +65,12 @@ class RegisteredClientOnCreate(RedfishModel):
     sub_context: str | None = None
 
 
-class RegisteredClientOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#RegisteredClient.v1_1_2.RegisteredClient"
-    )
+class RegisteredClientOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     client_type: ClientType | None = None
     client_uri: str | None = Field(alias="ClientURI", default=None)
     context: str | None = None
-    created_date: str | None = None
-    description: str | None = None
     expiration_date: str | None = None
-    id: str | None = None
     managed_resources: list[ManagedResource] | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     sub_context: str | None = None

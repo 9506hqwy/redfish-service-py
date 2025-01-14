@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .account_service import MfaBypass
 from .odata_v4 import IdRef
 from .values import AccountTypes
@@ -120,27 +120,15 @@ class ManagerAccountOnCreate(RedfishModel):
     user_name: str
 
 
-class ManagerAccountOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount"
-    )
+class ManagerAccountOnUpdate(RedfishModelOnUpdate):
     account_expiration: str | None = None
     account_types: list[AccountTypes] | None = None
     actions: Actions | None = None
-    certificates: IdRef | None = None
-    description: str | None = None
     email_address: str | None = None
     enabled: bool | None = None
-    host_bootstrap_account: bool | None = None
-    id: str | None = None
-    keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
     mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
-    name: str | None = None
     oem_account_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None
@@ -150,7 +138,6 @@ class ManagerAccountOnUpdate(RedfishModel):
     phone_number: str | None = None
     role_id: str | None = None
     snmp: SnmpUserInfo | None = Field(alias="SNMP", default=None)
-    secret_key_set: bool | None = None
     strict_account_types: bool | None = None
     user_name: str | None = None
 

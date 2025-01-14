@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .. import RedfishModel
+from .. import RedfishModel, RedfishModelOnUpdate
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
@@ -232,20 +232,10 @@ class StoragePoolOnCreate(RedfishModel):
     supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
 
 
-class StoragePoolOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool")
+class StoragePoolOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    allocated_pools: IdRef | None = None
-    allocated_volumes: IdRef | None = None
-    block_size_bytes: int | None = None
     capacity: Capacity | None = None
     capacity_sources: list[IdRef] | None = None
-    capacity_sources_odata_count: int | None = Field(
-        alias="CapacitySources@odata.count", default=None
-    )
     classes_of_service: IdRef | None = None
     compressed: bool | None = None
     compression_enabled: bool | None = None
@@ -255,28 +245,19 @@ class StoragePoolOnUpdate(RedfishModel):
     default_compression_behavior: bool | None = None
     default_deduplication_behavior: bool | None = None
     default_encryption_behavior: bool | None = None
-    description: str | None = None
     encrypted: bool | None = None
     encryption_enabled: bool | None = None
     io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
-    id: str | None = None
     identifier: Identifier | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
-    max_block_size_bytes: int | None = None
-    metrics: IdRef | None = None
     nvme_endurance_group_properties: NvmeEnduranceGroupProperties | None = Field(
         alias="NVMeEnduranceGroupProperties", default=None
     )
     nvme_properties: NvmeProperties | None = Field(alias="NVMeProperties", default=None)
     nvme_set_properties: NvmeSetProperties | None = Field(alias="NVMeSetProperties", default=None)
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    pool_type: list[PoolType] | None = None
     recoverable_capacity_source_count: int | None = None
-    remaining_capacity_percent: int | None = None
     replication_enabled: bool | None = None
     status: Status | None = None
-    supported_pool_types: list[PoolType] | None = None
     supported_provisioning_policies: list[ProvisioningPolicy] | None = None
-    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)

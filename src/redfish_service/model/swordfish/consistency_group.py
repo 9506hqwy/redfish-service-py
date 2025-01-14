@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .. import RedfishModel
+from .. import RedfishModel, RedfishModelOnUpdate
 from ..odata_v4 import IdRef
 from ..resource import Status
 from ..swordfish.storage_replica_info import ReplicaInfo, ReplicaType, ReplicaUpdateMode
@@ -82,31 +82,15 @@ class ConsistencyGroup(RedfishModel):
     volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
 
 
-class ConsistencyGroupOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#ConsistencyGroup.v1_1_1.ConsistencyGroup"
-    )
+class ConsistencyGroupOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     consistency_method: ApplicationConsistencyMethod | None = None
     consistency_type: ConsistencyType | None = None
-    description: str | None = None
-    id: str | None = None
-    is_consistent: bool | None = None
     links: Links | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    remote_replica_targets: list[str] | None = None
     replica_info: ReplicaInfo | None = None
-    replica_targets: list[IdRef] | None = None
-    replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
-    )
     status: Status | None = None
     volumes: list[IdRef] | None = None
-    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
 
 
 class ConsistencyType(StrEnum):

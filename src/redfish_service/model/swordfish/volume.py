@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from .. import RedfishModel
+from .. import RedfishModel, RedfishModelOnUpdate
 from ..odata_v4 import IdRef
 from ..resource import Identifier, Status
 from ..swordfish.capacity import Capacity
@@ -468,70 +468,37 @@ class VolumeOnCreate(RedfishModel):
     write_hole_protection_policy: WriteHoleProtectionPolicyType | None = None
 
 
-class VolumeOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Volume.v1_10_1.Volume")
+class VolumeOnUpdate(RedfishModelOnUpdate):
     alua: Alua | None = Field(alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
-    allocated_pools: IdRef | None = None
-    block_size_bytes: int | None = None
     capacity: Capacity | None = None
     capacity_bytes: int | None = None
     capacity_sources: list[IdRef] | None = None
-    capacity_sources_odata_count: int | None = Field(
-        alias="CapacitySources@odata.count", default=None
-    )
     compressed: bool | None = None
-    connections: list[IdRef] | None = None
-    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
     deduplicated: bool | None = None
-    description: str | None = None
     display_name: str | None = None
     encrypted: bool | None = None
     encryption_types: list[EncryptionTypes] | None = None
     io_perf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
     io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
-    id: str | None = None
     identifiers: list[Identifier] | None = None
-    initialize_method: InitializeMethod | None = None
     is_boot_capable: bool | None = None
     links: Links | None = None
-    logical_unit_number: int | None = None
     low_space_warning_threshold_percents: list[int] | None = None
-    manufacturer: str | None = None
-    max_block_size_bytes: int | None = None
-    media_span_count: int | None = None
-    metrics: IdRef | None = None
-    model: str | None = None
     nvme_namespace_properties: NvmeNamespaceProperties | None = Field(
         alias="NVMeNamespaceProperties", default=None
     )
-    name: str | None = None
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None
-    optimum_io_size_bytes: int | None = Field(alias="OptimumIOSizeBytes", default=None)
     provisioning_policy: ProvisioningPolicy | None = None
-    raid_type: RaidType | None = Field(alias="RAIDType", default=None)
     read_cache_policy: ReadCachePolicyType | None = None
     recoverable_capacity_source_count: int | None = None
-    remaining_capacity_percent: int | None = None
-    remote_replica_targets: list[str] | None = None
     replica_info: ReplicaInfo | None = None
-    replica_targets: list[IdRef] | None = None
-    replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
-    )
     replication_enabled: bool | None = None
     status: Status | None = None
-    storage_groups: IdRef | None = None
     strip_size_bytes: int | None = None
-    volume_type: VolumeType | None = None
-    volume_usage: VolumeUsageType | None = None
     write_cache_policy: WriteCachePolicyType | None = None
-    write_cache_state: WriteCacheStateType | None = None
     write_hole_protection_policy: WriteHoleProtectionPolicyType | None = None
 
 

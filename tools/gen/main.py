@@ -11,7 +11,7 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Generator, TypeGuard
+from typing import Any, Callable, Generator, TypeGuard, cast
 from urllib.parse import urlparse
 from warnings import warn
 
@@ -92,6 +92,10 @@ class ClassInfo:
         return m
 
     @property
+    def read_only(self) -> bool:
+        return cast(bool, self.definition.get("readonly", False))
+
+    @property
     def required(self) -> list[str]:
         v: list[str] = self.definition.get("required", [])
         return v
@@ -159,9 +163,10 @@ class ClassInfo:
             w.write("\n")
             w.write("\n")
 
-            w.write(f"class {self.cls_name}OnUpdate({self.base_name}):\n")
+            w.write(f"class {self.cls_name}OnUpdate({self.base_name}OnUpdate):\n")
             for p in self.properties:
-                p.write_on_update_to(w, self)
+                if not p.read_only:
+                    p.write_on_update_to(w, self)
             if len(self.properties) == 0:
                 w.write("    pass\n")
 
@@ -269,6 +274,16 @@ class PropetyInfo:
     @property
     def property_name(self) -> str:
         return get_property_name(self.name)
+
+    @property
+    def read_only(self) -> bool:
+        if b := self.definition.get("readonly", None):
+            return cast(bool, b)
+
+        if not isinstance(self.type, ClassInfo):
+            return False
+
+        return self.type.read_only
 
     @property
     def type_name(self) -> str:
@@ -743,6 +758,10 @@ def write_base_classes(out_path: Path) -> None:
                 '    model_config = ConfigDict(alias_generator=to_pascal, extra="forbid", populate_by_name=True, strict=True)\n',  # noqa: E501
                 "\n",
                 "    extra_fields: dict[str, Any] = Field(exclude=True, default={})\n",
+                "\n",
+                "\n",
+                "class RedfishModelOnUpdate(BaseModel):\n",
+                '    model_config = ConfigDict(alias_generator=to_pascal, extra="allow", populate_by_name=True, strict=True)\n',  # noqa: E501
             ]
         )
 
@@ -835,7 +854,7 @@ def write_imports_to(
     if domaon == "swordfish":
         parent = ".."
 
-    w.write(f"from {parent} import RedfishModel\n")
+    w.write(f"from {parent} import RedfishModel, RedfishModelOnUpdate\n")
 
     imports: set[ClassInfo | EnumInfo] = set([])
     for c in classall:

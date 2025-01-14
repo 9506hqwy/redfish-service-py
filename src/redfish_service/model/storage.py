@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
@@ -193,44 +193,21 @@ class Storage(RedfishModel):
     volumes: IdRef | None = None
 
 
-class StorageOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Storage.v1_17_1.Storage")
+class StorageOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     configuration_lock: ConfigurationLock | None = None
-    connections: IdRef | None = None
-    consistency_groups: IdRef | None = None
-    controllers: IdRef | None = None
-    description: str | None = None
-    drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
     encryption_mode: EncryptionMode | None = None
-    endpoint_groups: IdRef | None = None
-    file_systems: IdRef | None = None
     hotspare_activation_policy: HotspareActivationPolicy | None = None
-    id: str | None = None
     identifiers: list[Identifier] | None = None
     links: Links | None = None
-    local_encryption_key_identifier: str | None = None
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
         alias="NVMeSubsystemProperties", default=None
     )
-    name: str | None = None
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
     status: Status | None = None
-    storage_controllers: list[StorageController] | None = None
-    storage_controllers_odata_count: int | None = Field(
-        alias="StorageControllers@odata.count", default=None
-    )
-    storage_groups: IdRef | None = None
-    storage_pools: IdRef | None = None
     target_configuration_lock_level: TargetConfigurationLockLevel | None = None
-    volumes: IdRef | None = None
 
 
 class StorageController(RedfishModel):

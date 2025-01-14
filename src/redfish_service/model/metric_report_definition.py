@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 from .schedule import Schedule
@@ -101,25 +101,14 @@ class MetricReportDefinitionOnCreate(RedfishModel):
     wildcards: list[Wildcard] | None = None
 
 
-class MetricReportDefinitionOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#MetricReportDefinition.v1_4_6.MetricReportDefinition"
-    )
+class MetricReportDefinitionOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    append_limit: int | None = None
-    description: str | None = None
-    id: str | None = None
     links: Links | None = None
     metric_properties: list[str] | None = None
-    metric_report: IdRef | None = None
     metric_report_definition_enabled: bool | None = None
     metric_report_definition_type: MetricReportDefinitionType | None = None
     metric_report_heartbeat_interval: str | None = None
     metrics: list[Metric] | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     report_actions: list[ReportActionsEnum] | None = None
     report_timespan: str | None = None

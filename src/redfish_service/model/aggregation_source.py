@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .key import EcdsaCurveType, SshKeyType
 from .odata_v4 import IdRef
 from .resource import Status
@@ -65,20 +65,11 @@ class AggregationSourceOnCreate(RedfishModel):
     user_name: str | None = None
 
 
-class AggregationSourceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
-    )
+class AggregationSourceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
-    description: str | None = None
     host_name: str | None = None
-    id: str | None = None
     links: Links | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
     snmp: SnmpSettings | None = Field(alias="SNMP", default=None)

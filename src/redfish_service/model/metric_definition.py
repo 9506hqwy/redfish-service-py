@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .physical_context import LogicalContext, PhysicalContext
 
 
@@ -119,38 +119,18 @@ class MetricDefinitionOnCreate(RedfishModel):
     wildcards: list[Wildcard] | None = None
 
 
-class MetricDefinitionOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
-    )
-    accuracy: float | None = None
+class MetricDefinitionOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     calculable: Calculable | None = None
-    calculation_algorithm: CalculationAlgorithmEnum | None = None
     calculation_parameters: list[CalculationParamsType] | None = None
     calculation_time_interval: str | None = None
-    calibration: float | None = None
-    description: str | None = None
     discrete_values: list[str] | None = None
-    id: str | None = None
-    implementation: ImplementationType | None = None
     is_linear: bool | None = None
-    logical_contexts: list[LogicalContext] | None = None
-    max_reading_range: float | None = None
     metric_data_type: MetricDataType | None = None
     metric_properties: list[str] | None = None
     metric_type: MetricType | None = None
-    min_reading_range: float | None = None
-    name: str | None = None
-    oem_calculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
     oem: dict[str, Any] | None = None
-    physical_context: PhysicalContext | None = None
-    precision: int | None = None
     sensing_interval: str | None = None
-    timestamp_accuracy: str | None = None
     units: str | None = None
     wildcards: list[Wildcard] | None = None
 

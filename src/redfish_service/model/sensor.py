@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext, PhysicalSubContext
 from .redundancy import RedundantGroup
@@ -167,74 +167,19 @@ class Sensor(RedfishModel):
     voltage_type: VoltageType | None = None
 
 
-class SensorOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Sensor.v1_10_1.Sensor")
-    accuracy: float | None = None
+class SensorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    adjusted_max_allowable_operating_value: float | None = None
-    adjusted_min_allowable_operating_value: float | None = None
-    apparent_va: float | None = Field(alias="ApparentVA", default=None)
-    apparent_kvah: float | None = Field(alias="ApparentkVAh", default=None)
-    average_reading: float | None = None
     averaging_interval: str | None = None
-    averaging_interval_achieved: bool | None = None
     calibration: float | None = None
     calibration_time: str | None = None
-    crest_factor: float | None = None
-    description: str | None = None
-    electrical_context: ElectricalContext | None = None
     enabled: bool | None = None
-    id: str | None = None
-    implementation: ImplementationType | None = None
-    lifetime_reading: float | None = None
-    lifetime_start_date_time: str | None = None
     links: Links | None = None
-    load_percent: float | None = None
     location: Location | None = None
-    lowest_reading: float | None = None
-    lowest_reading_time: str | None = None
-    manufacturer: str | None = None
-    max_allowable_operating_value: float | None = None
-    min_allowable_operating_value: float | None = None
-    model: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    part_number: str | None = None
-    peak_reading: float | None = None
-    peak_reading_time: str | None = None
-    phase_angle_degrees: float | None = None
-    physical_context: PhysicalContext | None = None
-    physical_sub_context: PhysicalSubContext | None = None
-    power_factor: float | None = None
-    precision: float | None = None
-    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
-    reactive_kvarh: float | None = Field(alias="ReactivekVARh", default=None)
-    reading: float | None = None
-    reading_accuracy: float | None = None
-    reading_basis: ReadingBasisType | None = None
-    reading_range_max: float | None = None
-    reading_range_min: float | None = None
-    reading_time: str | None = None
-    reading_type: ReadingType | None = None
-    reading_units: str | None = None
-    related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
-    sku: str | None = Field(alias="SKU", default=None)
-    sensing_frequency: float | None = None
-    sensing_interval: str | None = None
     sensor_group: RedundantGroup | None = None
-    sensor_reset_time: str | None = None
-    serial_number: str | None = None
-    spare_part_number: str | None = None
-    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
     status: Status | None = None
-    thd_percent: float | None = Field(alias="THDPercent", default=None)
     thresholds: Thresholds | None = None
     user_label: str | None = None
-    voltage_type: VoltageType | None = None
 
 
 class SensorArrayExcerpt(RedfishModel):

@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
@@ -39,28 +39,12 @@ class Heater(RedfishModel):
     status: Status | None = None
 
 
-class HeaterOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Heater.v1_0_2.Heater")
+class HeaterOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    assembly: IdRef | None = None
-    description: str | None = None
-    hot_pluggable: bool | None = None
-    id: str | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
-    manufacturer: str | None = None
-    metrics: IdRef | None = None
-    model: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    part_number: str | None = None
-    physical_context: PhysicalContext | None = None
-    serial_number: str | None = None
-    spare_part_number: str | None = None
     status: Status | None = None
 
 

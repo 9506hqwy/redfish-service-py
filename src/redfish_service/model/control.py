@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext, PhysicalSubContext
 from .resource import Location, Status
@@ -61,43 +61,16 @@ class Control(RedfishModel):
     status: Status | None = None
 
 
-class ControlOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Control.v1_5_2.Control")
-    accuracy: float | None = None
+class ControlOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    allowable_max: float | None = None
-    allowable_min: float | None = None
-    allowable_numeric_values: list[float] | None = None
-    associated_sensors: list[IdRef] | None = None
-    associated_sensors_odata_count: int | None = Field(
-        alias="AssociatedSensors@odata.count", default=None
-    )
     control_delay_seconds: float | None = None
     control_loop: ControlLoop | None = None
     control_mode: ControlMode | None = None
-    control_type: ControlType | None = None
     dead_band: float | None = None
-    default_set_point: float | None = None
-    description: str | None = None
-    id: str | None = None
-    implementation: ImplementationType | None = None
-    increment: float | None = None
     location: Location | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    physical_context: PhysicalContext | None = None
-    physical_sub_context: PhysicalSubContext | None = None
-    related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
     sensor: SensorExcerpt | None = None
     set_point: float | None = None
-    set_point_accuracy: float | None = None
-    set_point_type: SetPointType | None = None
-    set_point_units: str | None = None
-    set_point_update_time: str | None = None
     setting_max: float | None = None
     setting_min: float | None = None
     status: Status | None = None

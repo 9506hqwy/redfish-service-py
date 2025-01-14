@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 
 
 class Actions(RedfishModel):
@@ -58,14 +58,9 @@ class AllowDenyOnCreate(RedfishModel):
     stateful_session: bool | None = None
 
 
-class AllowDenyOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#AllowDeny.v1_0_3.AllowDeny")
+class AllowDenyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     allow_type: AllowType | None = None
-    description: str | None = None
     destination_port_lower: int | None = None
     destination_port_upper: int | None = None
     direction: DataDirection | None = None
@@ -73,8 +68,6 @@ class AllowDenyOnUpdate(RedfishModel):
     ip_address_lower: str | None = Field(alias="IPAddressLower", default=None)
     ip_address_type: IpAddressType | None = Field(alias="IPAddressType", default=None)
     ip_address_upper: str | None = Field(alias="IPAddressUpper", default=None)
-    id: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     source_port_lower: int | None = None
     source_port_upper: int | None = None

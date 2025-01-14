@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .account_service import MfaBypass
 from .odata_v4 import IdRef
 from .values import AccountTypes
@@ -96,22 +96,11 @@ class ExternalAccountProviderOnCreate(RedfishModel):
     timeout_seconds: int | None = None
 
 
-class ExternalAccountProviderOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider"
-    )
-    account_provider_type: AccountProviderTypes | None = None
+class ExternalAccountProviderOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     authentication: Authentication | None = None
-    certificates: IdRef | None = None
-    description: str | None = None
-    id: str | None = None
     ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
     links: Links | None = None
-    name: str | None = None
     oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
     oem: dict[str, Any] | None = None
     priority: int | None = None

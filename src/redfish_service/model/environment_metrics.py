@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .control import ControlSingleExcerpt
 from .sensor import (
     SensorEnergykWhExcerpt,
@@ -51,26 +51,14 @@ class EnvironmentMetrics(RedfishModel):
     temperature_celsius: SensorExcerpt | None = None
 
 
-class EnvironmentMetricsOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#EnvironmentMetrics.v1_3_2.EnvironmentMetrics"
-    )
+class EnvironmentMetricsOnUpdate(RedfishModelOnUpdate):
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
-    description: str | None = None
     dew_point_celsius: SensorExcerpt | None = None
     energy_joules: SensorExcerpt | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     fan_speeds_percent: list[SensorFanArrayExcerpt] | None = None
-    fan_speeds_percent_odata_count: int | None = Field(
-        alias="FanSpeedsPercent@odata.count", default=None
-    )
     humidity_percent: SensorExcerpt | None = None
-    id: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     power_limit_watts: ControlSingleExcerpt | None = None
     power_load_percent: SensorExcerpt | None = None

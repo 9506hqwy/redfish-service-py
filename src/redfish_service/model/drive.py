@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .protocol import Protocol
 from .resource import Identifier, IndicatorLed, Location, ResetType, Status
@@ -99,58 +99,24 @@ class Drive(RedfishModel):
     write_cache_enabled: bool | None = None
 
 
-class DriveOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Drive.v1_20_1.Drive")
+class DriveOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    assembly: IdRef | None = None
     asset_tag: str | None = None
     block_security_id_enabled: bool | None = Field(alias="BlockSecurityIDEnabled", default=None)
-    block_size_bytes: int | None = None
-    capable_speed_gbs: float | None = None
-    capacity_bytes: int | None = None
-    certificates: IdRef | None = None
     configuration_lock: ConfigurationLock | None = None
-    description: str | None = None
-    drive_form_factor: FormFactor | None = None
-    encryption_ability: EncryptionAbility | None = None
-    encryption_status: EncryptionStatus | None = None
-    environment_metrics: IdRef | None = None
-    failure_predicted: bool | None = None
-    firmware_version: str | None = None
     hotspare_replacement_mode: HotspareReplacementModeType | None = None
     hotspare_type: HotspareType | None = None
-    id: str | None = None
     identifiers: list[Identifier] | None = None
     indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
     links: Links | None = None
     location: list[Location] | None = None
     location_indicator_active: bool | None = None
-    manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
-    media_type: MediaType | None = None
-    metrics: IdRef | None = None
-    model: str | None = None
-    multipath: bool | None = None
     nvme: Nvme | None = Field(alias="NVMe", default=None)
-    name: str | None = None
-    negotiated_speed_gbs: float | None = None
     oem: dict[str, Any] | None = None
     operations: list[Operations] | None = None
-    part_number: str | None = None
     physical_location: Location | None = None
-    predicted_media_life_left_percent: float | None = None
-    protocol: Protocol | None = None
     ready_to_remove: bool | None = None
-    revision: str | None = None
-    rotation_speed_rpm: float | None = Field(alias="RotationSpeedRPM", default=None)
-    sku: str | None = Field(alias="SKU", default=None)
-    serial_number: str | None = None
-    slot_capable_protocols: list[Protocol] | None = None
-    slot_form_factor: FormFactor | None = None
-    spare_part_number: str | None = None
     status: Status | None = None
     status_indicator: StatusIndicator | None = None
     target_configuration_lock_level: TargetConfigurationLockLevel | None = None

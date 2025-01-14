@@ -10,3 +10,9 @@ class RedfishModel(BaseModel):
     )
 
     extra_fields: dict[str, Any] = Field(exclude=True, default={})
+
+
+class RedfishModelOnUpdate(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=to_pascal, extra="allow", populate_by_name=True, strict=True
+    )

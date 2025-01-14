@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -63,15 +63,8 @@ class PowerDomainOnCreate(RedfishModel):
     status: Status | None = None
 
 
-class PowerDomainOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#PowerDomain.v1_2_2.PowerDomain")
+class PowerDomainOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
-    id: str | None = None
     links: Links | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None

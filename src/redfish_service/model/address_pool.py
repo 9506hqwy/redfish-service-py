@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
 
@@ -50,18 +50,11 @@ class AddressPoolOnCreate(RedfishModel):
     status: Status | None = None
 
 
-class AddressPoolOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#AddressPool.v1_3_0.AddressPool")
+class AddressPoolOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
     ethernet: Ethernet | None = None
     gen_z: GenZ | None = None
-    id: str | None = None
     links: Links | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
 

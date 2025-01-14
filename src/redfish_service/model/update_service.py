@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .key import EcdsaCurveType, SshKeyType
 from .odata_v4 import IdRef
 from .resource import Status
@@ -138,34 +138,15 @@ class UpdateService(RedfishModel):
     )
 
 
-class UpdateServiceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#UpdateService.v1_14_1.UpdateService"
-    )
+class UpdateServiceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    client_certificates: IdRef | None = None
-    description: str | None = None
-    firmware_inventory: IdRef | None = None
-    http_push_uri: str | None = None
     http_push_uri_options: HttpPushUriOptions | None = None
     http_push_uri_options_busy: bool | None = None
     http_push_uri_targets: list[str] | None = None
     http_push_uri_targets_busy: bool | None = None
-    id: str | None = None
-    max_image_size_bytes: int | None = None
-    multipart_http_push_uri: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    public_identity_ssh_key: IdRef | None = Field(alias="PublicIdentitySSHKey", default=None)
-    remote_server_certificates: IdRef | None = None
-    remote_server_ssh_keys: IdRef | None = Field(alias="RemoteServerSSHKeys", default=None)
     service_enabled: bool | None = None
-    software_inventory: IdRef | None = None
     status: Status | None = None
-    supported_update_image_formats: list[SupportedUpdateImageFormatType] | None = None
     verify_remote_server_certificate: bool | None = None
     verify_remote_server_ssh_key: bool | None = Field(
         alias="VerifyRemoteServerSSHKey", default=None

@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 
 
 class Actions(RedfishModel):
@@ -52,17 +52,8 @@ class VlanNetworkInterfaceOnCreate(RedfishModel):
     vlan_priority: int | None = Field(alias="VLANPriority", default=None)
 
 
-class VlanNetworkInterfaceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(
-        alias="@odata.type", default="#VLanNetworkInterface.v1_3_1.VLanNetworkInterface"
-    )
+class VlanNetworkInterfaceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    description: str | None = None
-    id: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     vlan_enable: bool | None = Field(alias="VLANEnable", default=None)
     vlan_id: int | None = Field(alias="VLANId", default=None)

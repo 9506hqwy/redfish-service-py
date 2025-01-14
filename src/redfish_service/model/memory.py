@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .control import ControlRangeExcerpt
 from .odata_v4 import IdRef
 from .resource import Location, ResetType, Status
@@ -230,106 +230,29 @@ class Memory(RedfishModel):
     volatile_size_mib: int | None = Field(alias="VolatileSizeMiB", default=None)
 
 
-class MemoryOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Memory.v1_20_0.Memory")
+class MemoryOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    allocation_alignment_mib: int | None = Field(alias="AllocationAlignmentMiB", default=None)
-    allocation_increment_mib: int | None = Field(alias="AllocationIncrementMiB", default=None)
-    allowed_speeds_mhz: list[int] | None = Field(alias="AllowedSpeedsMHz", default=None)
-    assembly: IdRef | None = None
-    base_module_type: BaseModuleType | None = None
-    bus_width_bits: int | None = None
     cxl: Cxl | None = Field(alias="CXL", default=None)
-    cache_level: int | None = None
-    cache_size_mib: int | None = Field(alias="CacheSizeMiB", default=None)
-    capacity_mib: int | None = Field(alias="CapacityMiB", default=None)
-    certificates: IdRef | None = None
-    configuration_locked: bool | None = None
-    data_width_bits: int | None = None
-    description: str | None = None
-    device_id: str | None = Field(alias="DeviceID", default=None)
-    device_locator: str | None = None
     enabled: bool | None = None
-    environment_metrics: IdRef | None = None
-    error_correction: ErrorCorrection | None = None
-    firmware_api_version: str | None = None
-    firmware_revision: str | None = None
-    function_classes: list[str] | None = None
     health_data: HealthData | None = None
-    id: str | None = None
-    is_rank_spare_enabled: bool | None = None
-    is_spare_device_enabled: bool | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
-    log: IdRef | None = None
-    logical_size_mib: int | None = Field(alias="LogicalSizeMiB", default=None)
-    manufacturer: str | None = None
-    max_tdp_milli_watts: list[int] | None = Field(alias="MaxTDPMilliWatts", default=None)
     measurements: list[MeasurementBlock] | None = None
-    memory_device_type: MemoryDeviceType | None = None
     memory_location: MemoryLocation | None = None
-    memory_media: list[MemoryMedia] | None = None
-    memory_subsystem_controller_manufacturer_id: str | None = Field(
-        alias="MemorySubsystemControllerManufacturerID", default=None
-    )
-    memory_subsystem_controller_product_id: str | None = Field(
-        alias="MemorySubsystemControllerProductID", default=None
-    )
-    memory_type: MemoryType | None = None
-    metrics: IdRef | None = None
-    model: str | None = None
-    module_manufacturer_id: str | None = Field(alias="ModuleManufacturerID", default=None)
-    module_product_id: str | None = Field(alias="ModuleProductID", default=None)
-    name: str | None = None
     non_volatile_size_limit_mib: int | None = Field(alias="NonVolatileSizeLimitMiB", default=None)
-    non_volatile_size_mib: int | None = Field(alias="NonVolatileSizeMiB", default=None)
     oem: dict[str, Any] | None = None
-    operating_memory_modes: list[OperatingMemoryModes] | None = None
-    operating_speed_mhz: int | None = None
     operating_speed_range_mhz: ControlRangeExcerpt | None = Field(
         alias="OperatingSpeedRangeMHz", default=None
     )
-    part_number: str | None = None
-    persistent_region_number_limit: int | None = None
-    persistent_region_size_limit_mib: int | None = Field(
-        alias="PersistentRegionSizeLimitMiB", default=None
-    )
-    persistent_region_size_max_mib: int | None = Field(
-        alias="PersistentRegionSizeMaxMiB", default=None
-    )
     poison_list_max_media_error_records: int | None = None
-    power_management_ic_manufacturer_id: str | None = Field(
-        alias="PowerManagementICManufacturerID", default=None
-    )
-    power_management_ic_revision_id: str | None = Field(
-        alias="PowerManagementICRevisionID", default=None
-    )
     power_management_policy: PowerManagementPolicy | None = None
-    rank_count: int | None = None
     regions: list[RegionSet] | None = None
     security_capabilities: SecurityCapabilities | None = None
     security_state: SecurityStates | None = None
     security_states: SecurityStateInfo | None = None
-    serial_number: str | None = None
-    spare_device_count: int | None = None
-    spare_part_number: str | None = None
     status: Status | None = None
-    subsystem_device_id: str | None = Field(alias="SubsystemDeviceID", default=None)
-    subsystem_vendor_id: str | None = Field(alias="SubsystemVendorID", default=None)
-    vendor_id: str | None = Field(alias="VendorID", default=None)
-    volatile_region_number_limit: int | None = None
-    volatile_region_size_limit_mib: int | None = Field(
-        alias="VolatileRegionSizeLimitMiB", default=None
-    )
-    volatile_region_size_max_mib: int | None = Field(
-        alias="VolatileRegionSizeMaxMiB", default=None
-    )
     volatile_size_limit_mib: int | None = Field(alias="VolatileSizeLimitMiB", default=None)
-    volatile_size_mib: int | None = Field(alias="VolatileSizeMiB", default=None)
 
 
 class MemoryClassification(StrEnum):

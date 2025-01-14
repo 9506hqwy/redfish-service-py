@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 
 
@@ -69,31 +69,13 @@ class CertificateOnCreate(RedfishModel):
     valid_not_before: str | None = None
 
 
-class CertificateOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Certificate.v1_9_0.Certificate")
+class CertificateOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    certificate_string: str | None = None
-    certificate_type: CertificateType | None = None
-    certificate_usage_types: list[CertificateUsageType] | None = None
-    description: str | None = None
-    fingerprint: str | None = None
-    fingerprint_hash_algorithm: str | None = None
-    id: str | None = None
     issuer: Identifier | None = None
-    key_usage: list[KeyUsage] | None = None
     links: Links | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
     spdm: Spdm | None = Field(alias="SPDM", default=None)
-    serial_number: str | None = None
-    signature_algorithm: str | None = None
     subject: Identifier | None = None
-    uefi_signature_owner: str | None = None
-    valid_not_after: str | None = None
-    valid_not_before: str | None = None
 
 
 class CertificateType(StrEnum):

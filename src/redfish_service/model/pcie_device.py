@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Location, Status
 
@@ -116,38 +116,17 @@ class PcieDevice(RedfishModel):
     uuid: str | None = Field(alias="UUID", default=None)
 
 
-class PcieDeviceOnUpdate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#PCIeDevice.v1_16_0.PCIeDevice")
+class PcieDeviceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    assembly: IdRef | None = None
     asset_tag: str | None = None
     cxl_device: CxlDevice | None = Field(alias="CXLDevice", default=None)
-    cxl_logical_devices: IdRef | None = Field(alias="CXLLogicalDevices", default=None)
-    description: str | None = None
-    device_type: DeviceType | None = None
-    environment_metrics: IdRef | None = None
-    firmware_version: str | None = None
-    id: str | None = None
     links: Links | None = None
     location_indicator_active: bool | None = None
-    manufacturer: str | None = None
-    model: str | None = None
-    name: str | None = None
     oem: dict[str, Any] | None = None
-    pcie_functions: IdRef | None = Field(alias="PCIeFunctions", default=None)
     pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
-    part_number: str | None = None
     ready_to_remove: bool | None = None
-    sku: str | None = Field(alias="SKU", default=None)
-    serial_number: str | None = None
     slot: Slot | None = None
-    spare_part_number: str | None = None
-    staged_version: str | None = None
     status: Status | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
 
 
 class PcieErrors(RedfishModel):
