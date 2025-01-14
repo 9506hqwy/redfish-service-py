@@ -12,20 +12,20 @@ from .resource import Status
 
 class Actions(RedfishModel):
     spdm_get_signed_measurements: SpdmGetSignedMeasurements | None = Field(
-        alias="#ComponentIntegrity.SPDMGetSignedMeasurements", default=None
+        serialization_alias="#ComponentIntegrity.SPDMGetSignedMeasurements", default=None
     )
     tpm_get_signed_measurements: TpmGetSignedMeasurements | None = Field(
-        alias="#ComponentIntegrity.TPMGetSignedMeasurements", default=None
+        serialization_alias="#ComponentIntegrity.TPMGetSignedMeasurements", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class ComponentIntegrity(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ComponentIntegrity.v1_3_0.ComponentIntegrity"
+        serialization_alias="@odata.type", default="#ComponentIntegrity.v1_3_0.ComponentIntegrity"
     )
     actions: Actions | None = None
     component_integrity_enabled: bool | None = None
@@ -37,10 +37,10 @@ class ComponentIntegrity(RedfishModel):
     links: Links | None = None
     name: str
     oem: dict[str, Any] | None = None
-    spdm: SpdMinfo | None = Field(alias="SPDM", default=None)
+    spdm: SpdMinfo | None = Field(serialization_alias="SPDM", default=None)
     status: Status | None = None
-    tpm: TpMinfo | None = Field(alias="TPM", default=None)
-    target_component_uri: str = Field(alias="TargetComponentURI")
+    tpm: TpMinfo | None = Field(serialization_alias="TPM", default=None)
+    target_component_uri: str = Field(serialization_alias="TargetComponentURI")
 
 
 class ComponentIntegrityOnUpdate(RedfishModelOnUpdate):
@@ -48,9 +48,9 @@ class ComponentIntegrityOnUpdate(RedfishModelOnUpdate):
     component_integrity_enabled: bool | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
-    spdm: SpdMinfo | None = Field(alias="SPDM", default=None)
+    spdm: SpdMinfo | None = Field(serialization_alias="SPDM", default=None)
     status: Status | None = None
-    tpm: TpMinfo | None = Field(alias="TPM", default=None)
+    tpm: TpMinfo | None = Field(serialization_alias="TPM", default=None)
 
 
 class ComponentIntegrityType(StrEnum):
@@ -74,7 +74,7 @@ class DmtFmeasurementTypes(StrEnum):
 class Links(RedfishModel):
     components_protected: list[IdRef] | None = None
     components_protected_odata_count: int | None = Field(
-        alias="ComponentsProtected@odata.count", default=None
+        serialization_alias="ComponentsProtected@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -84,8 +84,8 @@ class MeasurementSpecification(StrEnum):
 
 
 class SpdmGetSignedMeasurements(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SpdMcommunication(RedfishModel):
@@ -156,8 +156,8 @@ class SpdmGetSignedMeasurementsRequest(RedfishModel):
 
 
 class TpmGetSignedMeasurements(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class TpMauth(RedfishModel):
@@ -184,13 +184,13 @@ class TpMsingleMeasurement(RedfishModel):
     last_updated: str | None = None
     measurement: str | None = None
     measurement_hash_algorithm: str | None = None
-    pcr: int | None = Field(alias="PCR", default=None)
+    pcr: int | None = Field(serialization_alias="PCR", default=None)
 
 
 class TpmGetSignedMeasurementsRequest(RedfishModel):
     certificate: IdRef
     nonce: str | None = None
-    pcr_selection: str = Field(alias="PCRSelection")
+    pcr_selection: str = Field(serialization_alias="PCRSelection")
     scheme: str
 
 

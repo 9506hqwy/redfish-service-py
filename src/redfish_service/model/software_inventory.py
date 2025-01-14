@@ -19,7 +19,7 @@ class AdditionalVersions(RedfishModel):
     bootloader: str | None = None
     kernel: str | None = None
     microcode: str | None = None
-    os_distribution: str | None = Field(alias="OSDistribution", default=None)
+    os_distribution: str | None = Field(serialization_alias="OSDistribution", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -37,11 +37,11 @@ class ReleaseType(StrEnum):
 
 
 class SoftwareInventory(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#SoftwareInventory.v1_10_2.SoftwareInventory"
+        serialization_alias="@odata.type", default="#SoftwareInventory.v1_10_2.SoftwareInventory"
     )
     actions: Actions | None = None
     additional_versions: AdditionalVersions | None = None
@@ -54,7 +54,9 @@ class SoftwareInventory(RedfishModel):
     name: str
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     release_date: str | None = None
     release_type: ReleaseType | None = None
     software_id: str | None = None

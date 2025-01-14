@@ -312,11 +312,14 @@ class PropetyInfo:
                     ty = f"#{owner.name}.v{x}_{y}_{z}.{owner.name}"
                 else:
                     ty = f"#{owner.name}.{owner.name}"
-                w.write(f'        = Field(alias="{self.name}", default="{ty}")')
+                # use `serialization_alias`
+                # because `populate_by_name` does not work when use `alias`
+                # with property name that contains `@`.
+                w.write(f'        = Field(serialization_alias="{self.name}", default="{ty}")')
             elif nonable:
-                w.write(f'        = Field(alias="{self.name}", default=None)')
+                w.write(f'        = Field(serialization_alias="{self.name}", default=None)')
             else:
-                w.write(f'        = Field(alias="{self.name}")')
+                w.write(f'        = Field(serialization_alias="{self.name}")')
         elif nonable:
             w.write(" = None")
 

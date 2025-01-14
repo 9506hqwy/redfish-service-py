@@ -34,17 +34,19 @@ class CoolantType(StrEnum):
 
 
 class CoolingLoop(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#CoolingLoop.v1_0_3.CoolingLoop")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#CoolingLoop.v1_0_3.CoolingLoop"
+    )
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None
     coolant_level_percent: SensorExcerpt | None = None
     coolant_level_status: Health | None = None
     coolant_quality: Health | None = None
-    cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
+    cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
     description: str | None = None
     id: str
     links: Links | None = None
@@ -64,7 +66,7 @@ class CoolingLoopOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None
-    cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
+    cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
     links: Links | None = None
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
@@ -77,5 +79,7 @@ class Links(RedfishModel):
     chassis: IdRef | None = None
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
-    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

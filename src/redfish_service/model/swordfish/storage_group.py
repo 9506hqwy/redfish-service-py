@@ -18,8 +18,12 @@ class AccessCapability(StrEnum):
 
 
 class Actions(RedfishModel):
-    expose_volumes: ExposeVolumes | None = Field(alias="#StorageGroup.ExposeVolumes", default=None)
-    hide_volumes: HideVolumes | None = Field(alias="#StorageGroup.HideVolumes", default=None)
+    expose_volumes: ExposeVolumes | None = Field(
+        serialization_alias="#StorageGroup.ExposeVolumes", default=None
+    )
+    hide_volumes: HideVolumes | None = Field(
+        serialization_alias="#StorageGroup.HideVolumes", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -31,40 +35,48 @@ class AuthenticationMethod(StrEnum):
 
 
 class ChapInformation(RedfishModel):
-    chap_password: str | None = Field(alias="CHAPPassword", default=None)
-    chap_user: str | None = Field(alias="CHAPUser", default=None)
-    initiator_chap_password: str | None = Field(alias="InitiatorCHAPPassword", default=None)
-    initiator_chap_user: str | None = Field(alias="InitiatorCHAPUser", default=None)
-    target_chap_password: str | None = Field(alias="TargetCHAPPassword", default=None)
-    target_chap_user: str | None = Field(alias="TargetCHAPUser", default=None)
+    chap_password: str | None = Field(serialization_alias="CHAPPassword", default=None)
+    chap_user: str | None = Field(serialization_alias="CHAPUser", default=None)
+    initiator_chap_password: str | None = Field(
+        serialization_alias="InitiatorCHAPPassword", default=None
+    )
+    initiator_chap_user: str | None = Field(serialization_alias="InitiatorCHAPUser", default=None)
+    target_chap_password: str | None = Field(
+        serialization_alias="TargetCHAPPassword", default=None
+    )
+    target_chap_user: str | None = Field(serialization_alias="TargetCHAPUser", default=None)
     target_password: str | None = None
 
 
 class DhchapInformation(RedfishModel):
-    local_dhchap_auth_secret: str | None = Field(alias="LocalDHCHAPAuthSecret", default=None)
-    peer_dhchap_auth_secret: str | None = Field(alias="PeerDHCHAPAuthSecret", default=None)
+    local_dhchap_auth_secret: str | None = Field(
+        serialization_alias="LocalDHCHAPAuthSecret", default=None
+    )
+    peer_dhchap_auth_secret: str | None = Field(
+        serialization_alias="PeerDHCHAPAuthSecret", default=None
+    )
 
 
 class ExposeVolumes(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class HideVolumes(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class Links(RedfishModel):
     child_storage_groups: list[StorageGroup] | None = None
     child_storage_groups_odata_count: int | None = Field(
-        alias="ChildStorageGroups@odata.count", default=None
+        serialization_alias="ChildStorageGroups@odata.count", default=None
     )
     class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
     parent_storage_groups: list[StorageGroup] | None = None
     parent_storage_groups_odata_count: int | None = Field(
-        alias="ParentStorageGroups@odata.count", default=None
+        serialization_alias="ParentStorageGroups@odata.count", default=None
     )
 
 
@@ -75,19 +87,23 @@ class MappedVolume(RedfishModel):
 
 
 class StorageGroup(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#StorageGroup.v1_6_0.StorageGroup")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#StorageGroup.v1_6_0.StorageGroup"
+    )
     access_state: AccessState | None = None
     actions: Actions | None = None
     authentication_method: AuthenticationMethod | None = None
     chap_info: list[ChapInformation] | None = None
     client_endpoint_groups: list[IdRef] | None = None
     client_endpoint_groups_odata_count: int | None = Field(
-        alias="ClientEndpointGroups@odata.count", default=None
+        serialization_alias="ClientEndpointGroups@odata.count", default=None
     )
-    dh_chap_info: list[DhchapInformation] | None = Field(alias="DHChapInfo", default=None)
+    dh_chap_info: list[DhchapInformation] | None = Field(
+        serialization_alias="DHChapInfo", default=None
+    )
     description: str | None = None
     id: str
     identifier: Identifier | None = None
@@ -99,24 +115,26 @@ class StorageGroup(RedfishModel):
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
     replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
+        serialization_alias="ReplicaTargets@odata.count", default=None
     )
     server_endpoint_groups: list[IdRef] | None = None
     server_endpoint_groups_odata_count: int | None = Field(
-        alias="ServerEndpointGroups@odata.count", default=None
+        serialization_alias="ServerEndpointGroups@odata.count", default=None
     )
     status: Status | None = None
     volumes: list[IdRef] | None = None
-    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
+    volumes_odata_count: int | None = Field(
+        serialization_alias="Volumes@odata.count", default=None
+    )
     volumes_are_exposed: bool | None = None
 
 
 class StorageGroupOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#StorageGroup.v1_6_0.StorageGroup"
+        serialization_alias="@odata.type", default="#StorageGroup.v1_6_0.StorageGroup"
     )
     access_state: AccessState | None = None
     actions: Actions | None = None
@@ -124,9 +142,11 @@ class StorageGroupOnCreate(RedfishModel):
     chap_info: list[ChapInformation] | None = None
     client_endpoint_groups: list[IdRef] | None = None
     client_endpoint_groups_odata_count: int | None = Field(
-        alias="ClientEndpointGroups@odata.count", default=None
+        serialization_alias="ClientEndpointGroups@odata.count", default=None
     )
-    dh_chap_info: list[DhchapInformation] | None = Field(alias="DHChapInfo", default=None)
+    dh_chap_info: list[DhchapInformation] | None = Field(
+        serialization_alias="DHChapInfo", default=None
+    )
     description: str | None = None
     id: str | None = None
     identifier: Identifier | None = None
@@ -138,15 +158,17 @@ class StorageGroupOnCreate(RedfishModel):
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
     replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
+        serialization_alias="ReplicaTargets@odata.count", default=None
     )
     server_endpoint_groups: list[IdRef] | None = None
     server_endpoint_groups_odata_count: int | None = Field(
-        alias="ServerEndpointGroups@odata.count", default=None
+        serialization_alias="ServerEndpointGroups@odata.count", default=None
     )
     status: Status | None = None
     volumes: list[IdRef] | None = None
-    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
+    volumes_odata_count: int | None = Field(
+        serialization_alias="Volumes@odata.count", default=None
+    )
     volumes_are_exposed: bool | None = None
 
 
@@ -156,7 +178,9 @@ class StorageGroupOnUpdate(RedfishModelOnUpdate):
     authentication_method: AuthenticationMethod | None = None
     chap_info: list[ChapInformation] | None = None
     client_endpoint_groups: list[IdRef] | None = None
-    dh_chap_info: list[DhchapInformation] | None = Field(alias="DHChapInfo", default=None)
+    dh_chap_info: list[DhchapInformation] | None = Field(
+        serialization_alias="DHChapInfo", default=None
+    )
     identifier: Identifier | None = None
     links: Links | None = None
     mapped_volumes: list[MappedVolume] | None = None

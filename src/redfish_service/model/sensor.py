@@ -13,9 +13,11 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
-    reset_metrics: ResetMetrics | None = Field(alias="#Sensor.ResetMetrics", default=None)
+    reset_metrics: ResetMetrics | None = Field(
+        serialization_alias="#Sensor.ResetMetrics", default=None
+    )
     reset_to_defaults: ResetToDefaults | None = Field(
-        alias="#Sensor.ResetToDefaults", default=None
+        serialization_alias="#Sensor.ResetToDefaults", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -49,7 +51,7 @@ class ImplementationType(StrEnum):
 class Links(RedfishModel):
     associated_controls: list[IdRef] | None = None
     associated_controls_odata_count: int | None = Field(
-        alias="AssociatedControls@odata.count", default=None
+        serialization_alias="AssociatedControls@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -88,26 +90,26 @@ class ReadingType(StrEnum):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class Sensor(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Sensor.v1_10_1.Sensor")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_10_1.Sensor")
     accuracy: float | None = None
     actions: Actions | None = None
     adjusted_max_allowable_operating_value: float | None = None
     adjusted_min_allowable_operating_value: float | None = None
-    apparent_va: float | None = Field(alias="ApparentVA", default=None)
-    apparent_kvah: float | None = Field(alias="ApparentkVAh", default=None)
+    apparent_va: float | None = Field(serialization_alias="ApparentVA", default=None)
+    apparent_kvah: float | None = Field(serialization_alias="ApparentkVAh", default=None)
     average_reading: float | None = None
     averaging_interval: str | None = None
     averaging_interval_achieved: bool | None = None
@@ -140,8 +142,8 @@ class Sensor(RedfishModel):
     physical_sub_context: PhysicalSubContext | None = None
     power_factor: float | None = None
     precision: float | None = None
-    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
-    reactive_kvarh: float | None = Field(alias="ReactivekVARh", default=None)
+    reactive_var: float | None = Field(serialization_alias="ReactiveVAR", default=None)
+    reactive_kvarh: float | None = Field(serialization_alias="ReactivekVARh", default=None)
     reading: float | None = None
     reading_accuracy: float | None = None
     reading_basis: ReadingBasisType | None = None
@@ -151,17 +153,19 @@ class Sensor(RedfishModel):
     reading_type: ReadingType | None = None
     reading_units: str | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
-    sku: str | None = Field(alias="SKU", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     sensing_frequency: float | None = None
     sensing_interval: str | None = None
     sensor_group: RedundantGroup | None = None
     sensor_reset_time: str | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
-    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
+    speed_rpm: float | None = Field(serialization_alias="SpeedRPM", default=None)
     status: Status | None = None
-    thd_percent: float | None = Field(alias="THDPercent", default=None)
+    thd_percent: float | None = Field(serialization_alias="THDPercent", default=None)
     thresholds: Thresholds | None = None
     user_label: str | None = None
     voltage_type: VoltageType | None = None
@@ -194,14 +198,14 @@ class SensorCurrentExcerpt(RedfishModel):
     crest_factor: float | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    thd_percent: float | None = Field(alias="THDPercent", default=None)
+    thd_percent: float | None = Field(serialization_alias="THDPercent", default=None)
 
 
 class SensorEnergykWhExcerpt(RedfishModel):
-    apparent_kvah: float | None = Field(alias="ApparentkVAh", default=None)
+    apparent_kvah: float | None = Field(serialization_alias="ApparentkVAh", default=None)
     data_source_uri: str | None = None
     lifetime_reading: float | None = None
-    reactive_kvarh: float | None = Field(alias="ReactivekVARh", default=None)
+    reactive_kvarh: float | None = Field(serialization_alias="ReactivekVARh", default=None)
     reading: float | None = None
     sensor_reset_time: str | None = None
 
@@ -217,46 +221,46 @@ class SensorFanArrayExcerpt(RedfishModel):
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
     reading: float | None = None
-    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
+    speed_rpm: float | None = Field(serialization_alias="SpeedRPM", default=None)
 
 
 class SensorFanExcerpt(RedfishModel):
     data_source_uri: str | None = None
     reading: float | None = None
-    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
+    speed_rpm: float | None = Field(serialization_alias="SpeedRPM", default=None)
 
 
 class SensorPowerArrayExcerpt(RedfishModel):
-    apparent_va: float | None = Field(alias="ApparentVA", default=None)
+    apparent_va: float | None = Field(serialization_alias="ApparentVA", default=None)
     data_source_uri: str | None = None
     phase_angle_degrees: float | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
     power_factor: float | None = None
-    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
+    reactive_var: float | None = Field(serialization_alias="ReactiveVAR", default=None)
     reading: float | None = None
 
 
 class SensorPowerExcerpt(RedfishModel):
-    apparent_va: float | None = Field(alias="ApparentVA", default=None)
+    apparent_va: float | None = Field(serialization_alias="ApparentVA", default=None)
     data_source_uri: str | None = None
     phase_angle_degrees: float | None = None
     power_factor: float | None = None
-    reactive_var: float | None = Field(alias="ReactiveVAR", default=None)
+    reactive_var: float | None = Field(serialization_alias="ReactiveVAR", default=None)
     reading: float | None = None
 
 
 class SensorPumpExcerpt(RedfishModel):
     data_source_uri: str | None = None
     reading: float | None = None
-    speed_rpm: float | None = Field(alias="SpeedRPM", default=None)
+    speed_rpm: float | None = Field(serialization_alias="SpeedRPM", default=None)
 
 
 class SensorVoltageExcerpt(RedfishModel):
     crest_factor: float | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    thd_percent: float | None = Field(alias="THDPercent", default=None)
+    thd_percent: float | None = Field(serialization_alias="THDPercent", default=None)
 
 
 class Threshold(RedfishModel):

@@ -19,15 +19,21 @@ from .sensor import (
 
 
 class Actions(RedfishModel):
-    breaker_control: BreakerControl | None = Field(alias="#Circuit.BreakerControl", default=None)
-    power_control: PowerControl | None = Field(alias="#Circuit.PowerControl", default=None)
-    reset_metrics: ResetMetrics | None = Field(alias="#Circuit.ResetMetrics", default=None)
+    breaker_control: BreakerControl | None = Field(
+        serialization_alias="#Circuit.BreakerControl", default=None
+    )
+    power_control: PowerControl | None = Field(
+        serialization_alias="#Circuit.PowerControl", default=None
+    )
+    reset_metrics: ResetMetrics | None = Field(
+        serialization_alias="#Circuit.ResetMetrics", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class BreakerControl(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class BreakerControlRequest(RedfishModel):
@@ -41,10 +47,10 @@ class BreakerStates(StrEnum):
 
 
 class Circuit(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Circuit.v1_8_1.Circuit")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Circuit.v1_8_1.Circuit")
     actions: Actions | None = None
     breaker_state: BreakerStates | None = None
     circuit_type: CircuitType | None = None
@@ -55,13 +61,13 @@ class Circuit(RedfishModel):
     electrical_consumer_names: list[str] | None = None
     electrical_context: ElectricalContext | None = None
     electrical_source_manager_uri: str | None = Field(
-        alias="ElectricalSourceManagerURI", default=None
+        serialization_alias="ElectricalSourceManagerURI", default=None
     )
     electrical_source_name: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     frequency_hz: SensorExcerpt | None = None
     id: str
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location_indicator_active: bool | None = None
     name: str
@@ -101,12 +107,12 @@ class CircuitOnUpdate(RedfishModelOnUpdate):
     current_amps: SensorCurrentExcerpt | None = None
     electrical_consumer_names: list[str] | None = None
     electrical_source_manager_uri: str | None = Field(
-        alias="ElectricalSourceManagerURI", default=None
+        serialization_alias="ElectricalSourceManagerURI", default=None
     )
     electrical_source_name: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     frequency_hz: SensorExcerpt | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
@@ -157,11 +163,13 @@ class Links(RedfishModel):
     branch_circuit: IdRef | None = None
     distribution_circuits: list[IdRef] | None = None
     distribution_circuits_odata_count: int | None = Field(
-        alias="DistributionCircuits@odata.count", default=None
+        serialization_alias="DistributionCircuits@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     outlets: list[IdRef] | None = None
-    outlets_odata_count: int | None = Field(alias="Outlets@odata.count", default=None)
+    outlets_odata_count: int | None = Field(
+        serialization_alias="Outlets@odata.count", default=None
+    )
     power_outlet: IdRef | None = None
     source_circuit: IdRef | None = None
 
@@ -238,8 +246,8 @@ class PlugType(StrEnum):
 
 
 class PowerControl(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class PowerControlRequest(RedfishModel):
@@ -268,8 +276,8 @@ class CircuitPowerState(StrEnum):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class VoltageSensors(RedfishModel):

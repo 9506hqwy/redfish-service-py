@@ -28,18 +28,26 @@ class Actions(RedfishModel):
 
 
 class ChapConnectionKey(RedfishModel):
-    chap_password: str | None = Field(alias="CHAPPassword", default=None)
-    chap_username: str | None = Field(alias="CHAPUsername", default=None)
-    initiator_chap_password: str | None = Field(alias="InitiatorCHAPPassword", default=None)
-    initiator_chap_username: str | None = Field(alias="InitiatorCHAPUsername", default=None)
-    target_chap_password: str | None = Field(alias="TargetCHAPPassword", default=None)
+    chap_password: str | None = Field(serialization_alias="CHAPPassword", default=None)
+    chap_username: str | None = Field(serialization_alias="CHAPUsername", default=None)
+    initiator_chap_password: str | None = Field(
+        serialization_alias="InitiatorCHAPPassword", default=None
+    )
+    initiator_chap_username: str | None = Field(
+        serialization_alias="InitiatorCHAPUsername", default=None
+    )
+    target_chap_password: str | None = Field(
+        serialization_alias="TargetCHAPPassword", default=None
+    )
 
 
 class Connection(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Connection.v1_3_2.Connection")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#Connection.v1_3_2.Connection"
+    )
     actions: Actions | None = None
     connection_keys: ConnectionKey | None = None
     connection_type: ConnectionType | None = None
@@ -55,10 +63,12 @@ class Connection(RedfishModel):
 
 
 class ConnectionOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Connection.v1_3_2.Connection")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Connection.v1_3_2.Connection"
+    )
     actions: Actions | None = None
     connection_keys: ConnectionKey | None = None
     connection_type: ConnectionType | None = None
@@ -85,8 +95,8 @@ class ConnectionOnUpdate(RedfishModelOnUpdate):
 
 
 class ConnectionKey(RedfishModel):
-    chap: ChapConnectionKey | None = Field(alias="CHAP", default=None)
-    dhchap: DhchapKey | None = Field(alias="DHCHAP", default=None)
+    chap: ChapConnectionKey | None = Field(serialization_alias="CHAP", default=None)
+    dhchap: DhchapKey | None = Field(serialization_alias="DHCHAP", default=None)
     gen_z: GenZConnectionKey | None = None
 
 
@@ -96,8 +106,12 @@ class ConnectionType(StrEnum):
 
 
 class DhchapKey(RedfishModel):
-    local_dhchap_auth_secret: str | None = Field(alias="LocalDHCHAPAuthSecret", default=None)
-    peer_dhchap_auth_secret: str | None = Field(alias="PeerDHCHAPAuthSecret", default=None)
+    local_dhchap_auth_secret: str | None = Field(
+        serialization_alias="LocalDHCHAPAuthSecret", default=None
+    )
+    peer_dhchap_auth_secret: str | None = Field(
+        serialization_alias="PeerDHCHAPAuthSecret", default=None
+    )
 
 
 class GenZConnectionKey(RedfishModel):
@@ -110,20 +124,20 @@ class GenZConnectionKey(RedfishModel):
 class Links(RedfishModel):
     initiator_endpoint_groups: list[IdRef] | None = None
     initiator_endpoint_groups_odata_count: int | None = Field(
-        alias="InitiatorEndpointGroups@odata.count", default=None
+        serialization_alias="InitiatorEndpointGroups@odata.count", default=None
     )
     initiator_endpoints: list[IdRef] | None = None
     initiator_endpoints_odata_count: int | None = Field(
-        alias="InitiatorEndpoints@odata.count", default=None
+        serialization_alias="InitiatorEndpoints@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     target_endpoint_groups: list[IdRef] | None = None
     target_endpoint_groups_odata_count: int | None = Field(
-        alias="TargetEndpointGroups@odata.count", default=None
+        serialization_alias="TargetEndpointGroups@odata.count", default=None
     )
     target_endpoints: list[IdRef] | None = None
     target_endpoints_odata_count: int | None = Field(
-        alias="TargetEndpoints@odata.count", default=None
+        serialization_alias="TargetEndpoints@odata.count", default=None
     )
 
 
@@ -142,5 +156,5 @@ class MemoryRegionInfo(RedfishModel):
 class VolumeInfo(RedfishModel):
     access_capabilities: list[AccessCapability] | None = None
     access_state: AccessState | None = None
-    lun: int | None = Field(alias="LUN", default=None)
+    lun: int | None = Field(serialization_alias="LUN", default=None)
     volume: IdRef | None = None

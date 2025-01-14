@@ -16,23 +16,25 @@ class Actions(RedfishModel):
 
 class MemoryChunk(RedfishModel):
     chunk_link: IdRef | None = None
-    chunk_offset_mib: int | None = Field(alias="ChunkOffsetMiB", default=None)
+    chunk_offset_mib: int | None = Field(serialization_alias="ChunkOffsetMiB", default=None)
 
 
 class MemoryExtent(RedfishModel):
-    extent_offset_mib: int | None = Field(alias="ExtentOffsetMiB", default=None)
-    extent_size_mib: int | None = Field(alias="ExtentSizeMiB", default=None)
+    extent_offset_mib: int | None = Field(serialization_alias="ExtentOffsetMiB", default=None)
+    extent_size_mib: int | None = Field(serialization_alias="ExtentSizeMiB", default=None)
     sequence_number: int | None = None
     tag: str | None = None
 
 
 class MemoryRegion(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion"
+    )
     actions: Actions | None = None
-    block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
+    block_size_mib: int | None = Field(serialization_alias="BlockSizeMiB", default=None)
     description: str | None = None
     extents_count: int | None = None
     hardware_managed_coherency_region: bool | None = None
@@ -42,9 +44,11 @@ class MemoryRegion(RedfishModel):
     name: str
     non_volatile_region: bool | None = None
     oem: dict[str, Any] | None = None
-    region_base_offset_mib: int | None = Field(alias="RegionBaseOffsetMiB", default=None)
+    region_base_offset_mib: int | None = Field(
+        serialization_alias="RegionBaseOffsetMiB", default=None
+    )
     region_number: int | None = None
-    region_size_mib: int | None = Field(alias="RegionSizeMiB", default=None)
+    region_size_mib: int | None = Field(serialization_alias="RegionSizeMiB", default=None)
     region_type: RegionType
     sanitize_on_release: bool | None = None
     shareable_region: bool | None = None
@@ -52,14 +56,14 @@ class MemoryRegion(RedfishModel):
 
 
 class MemoryRegionOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion"
+        serialization_alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion"
     )
     actions: Actions | None = None
-    block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
+    block_size_mib: int | None = Field(serialization_alias="BlockSizeMiB", default=None)
     description: str | None = None
     extents_count: int | None = None
     hardware_managed_coherency_region: bool | None = None
@@ -69,9 +73,11 @@ class MemoryRegionOnCreate(RedfishModel):
     name: str | None = None
     non_volatile_region: bool | None = None
     oem: dict[str, Any] | None = None
-    region_base_offset_mib: int | None = Field(alias="RegionBaseOffsetMiB", default=None)
+    region_base_offset_mib: int | None = Field(
+        serialization_alias="RegionBaseOffsetMiB", default=None
+    )
     region_number: int | None = None
-    region_size_mib: int | None = Field(alias="RegionSizeMiB", default=None)
+    region_size_mib: int | None = Field(serialization_alias="RegionSizeMiB", default=None)
     region_type: RegionType | None = None
     sanitize_on_release: bool | None = None
     shareable_region: bool | None = None
@@ -80,7 +86,7 @@ class MemoryRegionOnCreate(RedfishModel):
 
 class MemoryRegionOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    block_size_mib: int | None = Field(alias="BlockSizeMiB", default=None)
+    block_size_mib: int | None = Field(serialization_alias="BlockSizeMiB", default=None)
     memory_chunks: list[MemoryChunk] | None = None
     memory_extents: list[MemoryExtent] | None = None
     oem: dict[str, Any] | None = None

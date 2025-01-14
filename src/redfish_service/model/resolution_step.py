@@ -11,13 +11,15 @@ from .action_info import Parameters
 
 class ResolutionStep(RedfishModel):
     action_parameters: list[Parameters] | None = None
-    action_uri: str | None = Field(alias="ActionURI", default=None)
+    action_uri: str | None = Field(serialization_alias="ActionURI", default=None)
     oem: dict[str, Any] | None = None
     priority: int | None = None
     resolution_type: ResolutionType | None = None
     retry_count: int | None = None
     retry_interval_seconds: int | None = None
-    target_component_uri: str | None = Field(alias="TargetComponentURI", default=None)
+    target_component_uri: str | None = Field(
+        serialization_alias="TargetComponentURI", default=None
+    )
 
 
 class ResolutionType(StrEnum):

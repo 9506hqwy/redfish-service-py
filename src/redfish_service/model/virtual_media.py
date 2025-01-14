@@ -11,8 +11,12 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    eject_media: EjectMedia | None = Field(alias="#VirtualMedia.EjectMedia", default=None)
-    insert_media: InsertMedia | None = Field(alias="#VirtualMedia.InsertMedia", default=None)
+    eject_media: EjectMedia | None = Field(
+        serialization_alias="#VirtualMedia.EjectMedia", default=None
+    )
+    insert_media: InsertMedia | None = Field(
+        serialization_alias="#VirtualMedia.InsertMedia", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -24,8 +28,8 @@ class ConnectedVia(StrEnum):
 
 
 class EjectMedia(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class EjectPolicy(StrEnum):
@@ -37,8 +41,8 @@ class EjectPolicy(StrEnum):
 
 
 class InsertMedia(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class InsertMediaRequest(RedfishModel):
@@ -76,10 +80,12 @@ class TransferProtocolType(StrEnum):
 
 
 class VirtualMedia(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#VirtualMedia.v1_6_4.VirtualMedia")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#VirtualMedia.v1_6_4.VirtualMedia"
+    )
     actions: Actions | None = None
     certificates: IdRef | None = None
     client_certificates: IdRef | None = None

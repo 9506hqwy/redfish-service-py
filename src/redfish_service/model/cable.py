@@ -15,10 +15,10 @@ class Actions(RedfishModel):
 
 
 class Cable(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Cable.v1_2_3.Cable")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Cable.v1_2_3.Cable")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -37,7 +37,7 @@ class Cable(RedfishModel):
     name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
     upstream_connector_types: list[ConnectorType] | None = None
@@ -48,10 +48,12 @@ class Cable(RedfishModel):
 
 
 class CableOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Cable.v1_2_3.Cable")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Cable.v1_2_3.Cable"
+    )
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -70,7 +72,7 @@ class CableOnCreate(RedfishModel):
     name: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
     upstream_connector_types: list[ConnectorType] | None = None
@@ -95,7 +97,7 @@ class CableOnUpdate(RedfishModelOnUpdate):
     model: str | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
     upstream_connector_types: list[ConnectorType] | None = None
@@ -153,24 +155,26 @@ class ConnectorType(StrEnum):
 class Links(RedfishModel):
     downstream_chassis: list[IdRef] | None = None
     downstream_chassis_odata_count: int | None = Field(
-        alias="DownstreamChassis@odata.count", default=None
+        serialization_alias="DownstreamChassis@odata.count", default=None
     )
     downstream_ports: list[IdRef] | None = None
     downstream_ports_odata_count: int | None = Field(
-        alias="DownstreamPorts@odata.count", default=None
+        serialization_alias="DownstreamPorts@odata.count", default=None
     )
     downstream_resources: list[IdRef] | None = None
     downstream_resources_odata_count: int | None = Field(
-        alias="DownstreamResources@odata.count", default=None
+        serialization_alias="DownstreamResources@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     upstream_chassis: list[IdRef] | None = None
     upstream_chassis_odata_count: int | None = Field(
-        alias="UpstreamChassis@odata.count", default=None
+        serialization_alias="UpstreamChassis@odata.count", default=None
     )
     upstream_ports: list[IdRef] | None = None
-    upstream_ports_odata_count: int | None = Field(alias="UpstreamPorts@odata.count", default=None)
+    upstream_ports_odata_count: int | None = Field(
+        serialization_alias="UpstreamPorts@odata.count", default=None
+    )
     upstream_resources: list[IdRef] | None = None
     upstream_resources_odata_count: int | None = Field(
-        alias="UpstreamResources@odata.count", default=None
+        serialization_alias="UpstreamResources@odata.count", default=None
     )

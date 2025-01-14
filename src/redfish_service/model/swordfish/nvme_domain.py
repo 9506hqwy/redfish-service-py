@@ -15,37 +15,45 @@ class Actions(RedfishModel):
 
 class DomainContents(RedfishModel):
     controllers: list[IdRef] | None = None
-    controllers_odata_count: int | None = Field(alias="Controllers@odata.count", default=None)
+    controllers_odata_count: int | None = Field(
+        serialization_alias="Controllers@odata.count", default=None
+    )
     namespaces: list[IdRef] | None = None
-    namespaces_odata_count: int | None = Field(alias="Namespaces@odata.count", default=None)
+    namespaces_odata_count: int | None = Field(
+        serialization_alias="Namespaces@odata.count", default=None
+    )
 
 
 class Links(RedfishModel):
     associated_domains: list[IdRef] | None = None
     associated_domains_odata_count: int | None = Field(
-        alias="AssociatedDomains@odata.count", default=None
+        serialization_alias="AssociatedDomains@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class NvmeDomain(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#NVMeDomain.v1_2_0.NVMeDomain")
-    ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#NVMeDomain.v1_2_0.NVMeDomain"
+    )
+    ana_group_id: float | None = Field(serialization_alias="ANAGroupId", default=None)
     actions: Actions | None = None
     available_firmware_images: list[IdRef] | None = None
     available_firmware_images_odata_count: int | None = Field(
-        alias="AvailableFirmwareImages@odata.count", default=None
+        serialization_alias="AvailableFirmwareImages@odata.count", default=None
     )
     description: str | None = None
     domain_contents: DomainContents | None = None
     domain_members: list[IdRef] | None = None
-    domain_members_odata_count: int | None = Field(alias="DomainMembers@odata.count", default=None)
+    domain_members_odata_count: int | None = Field(
+        serialization_alias="DomainMembers@odata.count", default=None
+    )
     firmware_images: list[IdRef] | None = None
     firmware_images_odata_count: int | None = Field(
-        alias="FirmwareImages@odata.count", default=None
+        serialization_alias="FirmwareImages@odata.count", default=None
     )
     id: str
     links: Links | None = None
@@ -59,23 +67,27 @@ class NvmeDomain(RedfishModel):
 
 
 class NvmeDomainOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#NVMeDomain.v1_2_0.NVMeDomain")
-    ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#NVMeDomain.v1_2_0.NVMeDomain"
+    )
+    ana_group_id: float | None = Field(serialization_alias="ANAGroupId", default=None)
     actions: Actions | None = None
     available_firmware_images: list[IdRef] | None = None
     available_firmware_images_odata_count: int | None = Field(
-        alias="AvailableFirmwareImages@odata.count", default=None
+        serialization_alias="AvailableFirmwareImages@odata.count", default=None
     )
     description: str | None = None
     domain_contents: DomainContents | None = None
     domain_members: list[IdRef] | None = None
-    domain_members_odata_count: int | None = Field(alias="DomainMembers@odata.count", default=None)
+    domain_members_odata_count: int | None = Field(
+        serialization_alias="DomainMembers@odata.count", default=None
+    )
     firmware_images: list[IdRef] | None = None
     firmware_images_odata_count: int | None = Field(
-        alias="FirmwareImages@odata.count", default=None
+        serialization_alias="FirmwareImages@odata.count", default=None
     )
     id: str | None = None
     links: Links | None = None

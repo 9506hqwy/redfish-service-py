@@ -9,16 +9,18 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    change_password: ChangePassword | None = Field(alias="#Bios.ChangePassword", default=None)
-    reset_bios: ResetBios | None = Field(alias="#Bios.ResetBios", default=None)
+    change_password: ChangePassword | None = Field(
+        serialization_alias="#Bios.ChangePassword", default=None
+    )
+    reset_bios: ResetBios | None = Field(serialization_alias="#Bios.ResetBios", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Bios(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Bios.v1_2_3.Bios")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Bios.v1_2_3.Bios")
     actions: Actions | None = None
     attribute_registry: str | None = None
     attributes: dict[str, Any] | None = None
@@ -38,8 +40,8 @@ class BiosOnUpdate(RedfishModelOnUpdate):
 
 
 class ChangePassword(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ChangePasswordRequest(RedfishModel):
@@ -53,10 +55,10 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     software_images: list[IdRef] | None = None
     software_images_odata_count: int | None = Field(
-        alias="SoftwareImages@odata.count", default=None
+        serialization_alias="SoftwareImages@odata.count", default=None
     )
 
 
 class ResetBios(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

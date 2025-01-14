@@ -15,45 +15,47 @@ from ..swordfish.storage_replica_info import ReplicaInfo, ReplicaType, ReplicaUp
 
 
 class Alua(RedfishModel):
-    ana_group_id: float | None = Field(alias="ANAGroupId", default=None)
+    ana_group_id: float | None = Field(serialization_alias="ANAGroupId", default=None)
 
 
 class Actions(RedfishModel):
     assign_replica_target: AssignReplicaTarget | None = Field(
-        alias="#Volume.AssignReplicaTarget", default=None
+        serialization_alias="#Volume.AssignReplicaTarget", default=None
     )
     change_raid_layout: ChangeRaidLayout | None = Field(
-        alias="#Volume.ChangeRAIDLayout", default=None
+        serialization_alias="#Volume.ChangeRAIDLayout", default=None
     )
     check_consistency: CheckConsistency | None = Field(
-        alias="#Volume.CheckConsistency", default=None
+        serialization_alias="#Volume.CheckConsistency", default=None
     )
     create_replica_target: CreateReplicaTarget | None = Field(
-        alias="#Volume.CreateReplicaTarget", default=None
+        serialization_alias="#Volume.CreateReplicaTarget", default=None
     )
-    force_enable: ForceEnable | None = Field(alias="#Volume.ForceEnable", default=None)
-    initialize: Initialize | None = Field(alias="#Volume.Initialize", default=None)
+    force_enable: ForceEnable | None = Field(
+        serialization_alias="#Volume.ForceEnable", default=None
+    )
+    initialize: Initialize | None = Field(serialization_alias="#Volume.Initialize", default=None)
     remove_replica_relationship: RemoveReplicaRelationship | None = Field(
-        alias="#Volume.RemoveReplicaRelationship", default=None
+        serialization_alias="#Volume.RemoveReplicaRelationship", default=None
     )
     resume_replication: ResumeReplication | None = Field(
-        alias="#Volume.ResumeReplication", default=None
+        serialization_alias="#Volume.ResumeReplication", default=None
     )
     reverse_replication_relationship: ReverseReplicationRelationship | None = Field(
-        alias="#Volume.ReverseReplicationRelationship", default=None
+        serialization_alias="#Volume.ReverseReplicationRelationship", default=None
     )
     split_replication: SplitReplication | None = Field(
-        alias="#Volume.SplitReplication", default=None
+        serialization_alias="#Volume.SplitReplication", default=None
     )
     suspend_replication: SuspendReplication | None = Field(
-        alias="#Volume.SuspendReplication", default=None
+        serialization_alias="#Volume.SuspendReplication", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class AssignReplicaTarget(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class AssignReplicaTargetRequest(RedfishModel):
@@ -63,25 +65,25 @@ class AssignReplicaTargetRequest(RedfishModel):
 
 
 class ChangeRaidLayout(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ChangeRaidLayoutRequest(RedfishModel):
     drives: list[IdRef] | None = None
     media_span_count: int | None = None
-    raid_type: RaidType | None = Field(alias="RAIDType", default=None)
+    raid_type: RaidType | None = Field(serialization_alias="RAIDType", default=None)
     strip_size_bytes: int | None = None
 
 
 class CheckConsistency(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class CreateReplicaTarget(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class CreateReplicaTargetRequest(RedfishModel):
@@ -98,13 +100,13 @@ class EncryptionTypes(StrEnum):
 
 
 class ForceEnable(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class Initialize(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class InitializeMethod(StrEnum):
@@ -124,9 +126,13 @@ class InitializeType(StrEnum):
 
 
 class LbaFormat(RedfishModel):
-    lba_data_size_bytes: int | None = Field(alias="LBADataSizeBytes", default=None)
-    lba_format_type: LbaFormatType | None = Field(alias="LBAFormatType", default=None)
-    lba_metadata_size_bytes: int | None = Field(alias="LBAMetadataSizeBytes", default=None)
+    lba_data_size_bytes: int | None = Field(serialization_alias="LBADataSizeBytes", default=None)
+    lba_format_type: LbaFormatType | None = Field(
+        serialization_alias="LBAFormatType", default=None
+    )
+    lba_metadata_size_bytes: int | None = Field(
+        serialization_alias="LBAMetadataSizeBytes", default=None
+    )
     relative_performance: LbaRelativePerformanceType | None = None
 
 
@@ -159,26 +165,28 @@ class LbaRelativePerformanceType(StrEnum):
 class Links(RedfishModel):
     cache_data_volumes: list[IdRef] | None = None
     cache_data_volumes_odata_count: int | None = Field(
-        alias="CacheDataVolumes@odata.count", default=None
+        serialization_alias="CacheDataVolumes@odata.count", default=None
     )
     cache_volume_source: IdRef | None = None
     class_of_service: IdRef | None = None
     client_endpoints: list[IdRef] | None = None
     client_endpoints_odata_count: int | None = Field(
-        alias="ClientEndpoints@odata.count", default=None
+        serialization_alias="ClientEndpoints@odata.count", default=None
     )
     consistency_groups: list[IdRef] | None = None
     consistency_groups_odata_count: int | None = Field(
-        alias="ConsistencyGroups@odata.count", default=None
+        serialization_alias="ConsistencyGroups@odata.count", default=None
     )
     controllers: list[IdRef] | None = None
-    controllers_odata_count: int | None = Field(alias="Controllers@odata.count", default=None)
+    controllers_odata_count: int | None = Field(
+        serialization_alias="Controllers@odata.count", default=None
+    )
     dedicated_spare_drives: list[IdRef] | None = None
     dedicated_spare_drives_odata_count: int | None = Field(
-        alias="DedicatedSpareDrives@odata.count", default=None
+        serialization_alias="DedicatedSpareDrives@odata.count", default=None
     )
     drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    drives_odata_count: int | None = Field(serialization_alias="Drives@odata.count", default=None)
     journaling_media: IdRef | None = None
     oem: dict[str, Any] | None = None
     owning_storage_resource: IdRef | None = None
@@ -186,34 +194,36 @@ class Links(RedfishModel):
     providing_storage_pool: IdRef | None = None
     server_endpoints: list[IdRef] | None = None
     server_endpoints_odata_count: int | None = Field(
-        alias="ServerEndpoints@odata.count", default=None
+        serialization_alias="ServerEndpoints@odata.count", default=None
     )
     spare_resource_sets: list[IdRef] | None = None
     spare_resource_sets_odata_count: int | None = Field(
-        alias="SpareResourceSets@odata.count", default=None
+        serialization_alias="SpareResourceSets@odata.count", default=None
     )
     storage_groups: list[IdRef] | None = None
-    storage_groups_odata_count: int | None = Field(alias="StorageGroups@odata.count", default=None)
+    storage_groups_odata_count: int | None = Field(
+        serialization_alias="StorageGroups@odata.count", default=None
+    )
 
 
 class NvmeNamespaceProperties(RedfishModel):
-    formatted_lba_size: str | None = Field(alias="FormattedLBASize", default=None)
+    formatted_lba_size: str | None = Field(serialization_alias="FormattedLBASize", default=None)
     is_shareable: bool | None = None
-    lba_format: LbaFormat | None = Field(alias="LBAFormat", default=None)
-    lba_formats: list[LbaFormat] | None = Field(alias="LBAFormats", default=None)
+    lba_format: LbaFormat | None = Field(serialization_alias="LBAFormat", default=None)
+    lba_formats: list[LbaFormat] | None = Field(serialization_alias="LBAFormats", default=None)
     lba_formats_supported: list[LbaFormatType] | None = Field(
-        alias="LBAFormatsSupported", default=None
+        serialization_alias="LBAFormatsSupported", default=None
     )
     metadata_transferred_at_end_of_data_lba: bool | None = Field(
-        alias="MetadataTransferredAtEndOfDataLBA", default=None
+        serialization_alias="MetadataTransferredAtEndOfDataLBA", default=None
     )
-    nvme_version: str | None = Field(alias="NVMeVersion", default=None)
+    nvme_version: str | None = Field(serialization_alias="NVMeVersion", default=None)
     namespace_features: NamespaceFeatures | None = None
     namespace_id: str | None = None
     namespace_type: NamespaceType | None = None
-    number_lba_formats: int | None = Field(alias="NumberLBAFormats", default=None)
+    number_lba_formats: int | None = Field(serialization_alias="NumberLBAFormats", default=None)
     supports_io_performance_hints: bool | None = Field(
-        alias="SupportsIOPerformanceHints", default=None
+        serialization_alias="SupportsIOPerformanceHints", default=None
     )
     supports_multiple_namespace_attachments: bool | None = None
     type: NamespaceType | None = None
@@ -222,12 +232,14 @@ class NvmeNamespaceProperties(RedfishModel):
 class NamespaceFeatures(RedfishModel):
     supports_atomic_transaction_size: bool | None = None
     supports_deallocated_or_unwritten_lb_error: bool | None = Field(
-        alias="SupportsDeallocatedOrUnwrittenLBError", default=None
+        serialization_alias="SupportsDeallocatedOrUnwrittenLBError", default=None
     )
     supports_io_performance_hints: bool | None = Field(
-        alias="SupportsIOPerformanceHints", default=None
+        serialization_alias="SupportsIOPerformanceHints", default=None
     )
-    supports_nguid_reuse: bool | None = Field(alias="SupportsNGUIDReuse", default=None)
+    supports_nguid_reuse: bool | None = Field(
+        serialization_alias="SupportsNGUIDReuse", default=None
+    )
     supports_thin_provisioning: bool | None = None
 
 
@@ -289,8 +301,8 @@ class ReadCachePolicyType(StrEnum):
 
 
 class RemoveReplicaRelationship(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RemoveReplicaRelationshipRequest(RedfishModel):
@@ -299,8 +311,8 @@ class RemoveReplicaRelationshipRequest(RedfishModel):
 
 
 class ResumeReplication(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResumeReplicationRequest(RedfishModel):
@@ -308,8 +320,8 @@ class ResumeReplicationRequest(RedfishModel):
 
 
 class ReverseReplicationRelationship(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ReverseReplicationRelationshipRequest(RedfishModel):
@@ -317,8 +329,8 @@ class ReverseReplicationRelationshipRequest(RedfishModel):
 
 
 class SplitReplication(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SplitReplicationRequest(RedfishModel):
@@ -326,8 +338,8 @@ class SplitReplicationRequest(RedfishModel):
 
 
 class SuspendReplication(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SuspendReplicationRequest(RedfishModel):
@@ -335,11 +347,11 @@ class SuspendReplicationRequest(RedfishModel):
 
 
 class Volume(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Volume.v1_10_1.Volume")
-    alua: Alua | None = Field(alias="ALUA", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Volume.v1_10_1.Volume")
+    alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
@@ -348,18 +360,22 @@ class Volume(RedfishModel):
     capacity_bytes: int | None = None
     capacity_sources: list[IdRef] | None = None
     capacity_sources_odata_count: int | None = Field(
-        alias="CapacitySources@odata.count", default=None
+        serialization_alias="CapacitySources@odata.count", default=None
     )
     compressed: bool | None = None
     connections: list[IdRef] | None = None
-    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
+    connections_odata_count: int | None = Field(
+        serialization_alias="Connections@odata.count", default=None
+    )
     deduplicated: bool | None = None
     description: str | None = None
     display_name: str | None = None
     encrypted: bool | None = None
     encryption_types: list[EncryptionTypes] | None = None
-    io_perf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_perf_mode_enabled: bool | None = Field(
+        serialization_alias="IOPerfModeEnabled", default=None
+    )
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
     identifiers: list[Identifier] | None = None
     initialize_method: InitializeMethod | None = None
@@ -373,14 +389,16 @@ class Volume(RedfishModel):
     metrics: IdRef | None = None
     model: str | None = None
     nvme_namespace_properties: NvmeNamespaceProperties | None = Field(
-        alias="NVMeNamespaceProperties", default=None
+        serialization_alias="NVMeNamespaceProperties", default=None
     )
     name: str
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None
-    optimum_io_size_bytes: int | None = Field(alias="OptimumIOSizeBytes", default=None)
+    optimum_io_size_bytes: int | None = Field(
+        serialization_alias="OptimumIOSizeBytes", default=None
+    )
     provisioning_policy: ProvisioningPolicy | None = None
-    raid_type: RaidType | None = Field(alias="RAIDType", default=None)
+    raid_type: RaidType | None = Field(serialization_alias="RAIDType", default=None)
     read_cache_policy: ReadCachePolicyType | None = None
     recoverable_capacity_source_count: int | None = None
     remaining_capacity_percent: int | None = None
@@ -388,7 +406,7 @@ class Volume(RedfishModel):
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
     replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
+        serialization_alias="ReplicaTargets@odata.count", default=None
     )
     replication_enabled: bool | None = None
     status: Status | None = None
@@ -402,11 +420,13 @@ class Volume(RedfishModel):
 
 
 class VolumeOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Volume.v1_10_1.Volume")
-    alua: Alua | None = Field(alias="ALUA", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Volume.v1_10_1.Volume"
+    )
+    alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
@@ -415,18 +435,22 @@ class VolumeOnCreate(RedfishModel):
     capacity_bytes: int | None = None
     capacity_sources: list[IdRef] | None = None
     capacity_sources_odata_count: int | None = Field(
-        alias="CapacitySources@odata.count", default=None
+        serialization_alias="CapacitySources@odata.count", default=None
     )
     compressed: bool | None = None
     connections: list[IdRef] | None = None
-    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
+    connections_odata_count: int | None = Field(
+        serialization_alias="Connections@odata.count", default=None
+    )
     deduplicated: bool | None = None
     description: str | None = None
     display_name: str | None = None
     encrypted: bool | None = None
     encryption_types: list[EncryptionTypes] | None = None
-    io_perf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_perf_mode_enabled: bool | None = Field(
+        serialization_alias="IOPerfModeEnabled", default=None
+    )
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str | None = None
     identifiers: list[Identifier] | None = None
     initialize_method: InitializeMethod | None = None
@@ -440,14 +464,16 @@ class VolumeOnCreate(RedfishModel):
     metrics: IdRef | None = None
     model: str | None = None
     nvme_namespace_properties: NvmeNamespaceProperties | None = Field(
-        alias="NVMeNamespaceProperties", default=None
+        serialization_alias="NVMeNamespaceProperties", default=None
     )
     name: str | None = None
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None
-    optimum_io_size_bytes: int | None = Field(alias="OptimumIOSizeBytes", default=None)
+    optimum_io_size_bytes: int | None = Field(
+        serialization_alias="OptimumIOSizeBytes", default=None
+    )
     provisioning_policy: ProvisioningPolicy | None = None
-    raid_type: RaidType | None = Field(alias="RAIDType", default=None)
+    raid_type: RaidType | None = Field(serialization_alias="RAIDType", default=None)
     read_cache_policy: ReadCachePolicyType | None = None
     recoverable_capacity_source_count: int | None = None
     remaining_capacity_percent: int | None = None
@@ -455,7 +481,7 @@ class VolumeOnCreate(RedfishModel):
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
     replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
+        serialization_alias="ReplicaTargets@odata.count", default=None
     )
     replication_enabled: bool | None = None
     status: Status | None = None
@@ -469,7 +495,7 @@ class VolumeOnCreate(RedfishModel):
 
 
 class VolumeOnUpdate(RedfishModelOnUpdate):
-    alua: Alua | None = Field(alias="ALUA", default=None)
+    alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
     capacity: Capacity | None = None
@@ -480,14 +506,16 @@ class VolumeOnUpdate(RedfishModelOnUpdate):
     display_name: str | None = None
     encrypted: bool | None = None
     encryption_types: list[EncryptionTypes] | None = None
-    io_perf_mode_enabled: bool | None = Field(alias="IOPerfModeEnabled", default=None)
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_perf_mode_enabled: bool | None = Field(
+        serialization_alias="IOPerfModeEnabled", default=None
+    )
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     identifiers: list[Identifier] | None = None
     is_boot_capable: bool | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
     nvme_namespace_properties: NvmeNamespaceProperties | None = Field(
-        alias="NVMeNamespaceProperties", default=None
+        serialization_alias="NVMeNamespaceProperties", default=None
     )
     oem: dict[str, Any] | None = None
     operations: list[Operation] | None = None

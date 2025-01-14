@@ -10,13 +10,13 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    reset_keys: ResetKeys | None = Field(alias="#SecureBoot.ResetKeys", default=None)
+    reset_keys: ResetKeys | None = Field(serialization_alias="#SecureBoot.ResetKeys", default=None)
     oem: dict[str, Any] | None = None
 
 
 class ResetKeys(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetKeysRequest(RedfishModel):
@@ -30,10 +30,12 @@ class ResetKeysType(StrEnum):
 
 
 class SecureBoot(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#SecureBoot.v1_1_2.SecureBoot")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#SecureBoot.v1_1_2.SecureBoot"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str

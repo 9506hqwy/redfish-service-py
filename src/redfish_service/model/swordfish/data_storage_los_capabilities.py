@@ -16,11 +16,11 @@ class Actions(RedfishModel):
 
 
 class DataStorageLosCapabilities(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type",
+        serialization_alias="@odata.type",
         default="#DataStorageLoSCapabilities.v1_2_2.DataStorageLoSCapabilities",
     )
     actions: Actions | None = None
@@ -33,7 +33,7 @@ class DataStorageLosCapabilities(RedfishModel):
     supported_access_capabilities: list[StorageAccessCapability] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
-        alias="SupportedLinesOfService@odata.count", default=None
+        serialization_alias="SupportedLinesOfService@odata.count", default=None
     )
     supported_provisioning_policies: list[ProvisioningPolicy] | None = None
     supported_recovery_time_objectives: list[RecoveryAccessScope] | None = None

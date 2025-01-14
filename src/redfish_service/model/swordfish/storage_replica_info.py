@@ -40,7 +40,9 @@ class ReplicaInfo(RedfishModel):
     consistency_status: ConsistencyStatus | None = None
     consistency_type: ConsistencyType | None = None
     data_protection_line_of_service: IdRef | None = None
-    failed_copy_stops_host_io: bool | None = Field(alias="FailedCopyStopsHostIO", default=None)
+    failed_copy_stops_host_io: bool | None = Field(
+        serialization_alias="FailedCopyStopsHostIO", default=None
+    )
     percent_synced: int | None = None
     remote_source_replica: str | None = None
     replica: IdRef | None = None
@@ -149,11 +151,11 @@ class ReplicaUpdateMode(StrEnum):
 
 
 class StorageReplicaInfo(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#StorageReplicaInfo.v1_4_0.StorageReplicaInfo"
+        serialization_alias="@odata.type", default="#StorageReplicaInfo.v1_4_0.StorageReplicaInfo"
     )
     actions: Actions | None = None
     description: str | None = None

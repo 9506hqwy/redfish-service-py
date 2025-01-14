@@ -13,15 +13,16 @@ class Actions(RedfishModel):
 
 
 class StorageServiceMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#StorageServiceMetrics.v1_0_1.StorageServiceMetrics"
+        serialization_alias="@odata.type",
+        default="#StorageServiceMetrics.v1_0_1.StorageServiceMetrics",
     )
     actions: Actions | None = None
     description: str | None = None
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
     name: str
     oem: dict[str, Any] | None = None

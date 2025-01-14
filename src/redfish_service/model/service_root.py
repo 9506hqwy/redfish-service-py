@@ -9,8 +9,8 @@ from .odata_v4 import IdRef
 
 
 class DeepOperations(RedfishModel):
-    deep_patch: bool | None = Field(alias="DeepPATCH", default=None)
-    deep_post: bool | None = Field(alias="DeepPOST", default=None)
+    deep_patch: bool | None = Field(serialization_alias="DeepPATCH", default=None)
+    deep_post: bool | None = Field(serialization_alias="DeepPOST", default=None)
     max_levels: int | None = None
 
 
@@ -35,17 +35,21 @@ class ProtocolFeaturesSupported(RedfishModel):
     filter_query: bool | None = None
     filter_query_comparison_operations: bool | None = None
     filter_query_compound_operations: bool | None = None
-    multiple_http_requests: bool | None = Field(alias="MultipleHTTPRequests", default=None)
+    multiple_http_requests: bool | None = Field(
+        serialization_alias="MultipleHTTPRequests", default=None
+    )
     only_member_query: bool | None = None
     select_query: bool | None = None
     top_skip_query: bool | None = None
 
 
 class ServiceRoot(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ServiceRoot.v1_17_0.ServiceRoot")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ServiceRoot.v1_17_0.ServiceRoot"
+    )
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None
     cables: IdRef | None = None
@@ -64,7 +68,7 @@ class ServiceRoot(RedfishModel):
     license_service: IdRef | None = None
     links: Links
     managers: IdRef | None = None
-    nvme_domains: IdRef | None = Field(alias="NVMeDomains", default=None)
+    nvme_domains: IdRef | None = Field(serialization_alias="NVMeDomains", default=None)
     name: str
     oem: dict[str, Any] | None = None
     power_equipment: IdRef | None = None
@@ -84,6 +88,6 @@ class ServiceRoot(RedfishModel):
     tasks: IdRef | None = None
     telemetry_service: IdRef | None = None
     thermal_equipment: IdRef | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     update_service: IdRef | None = None
     vendor: str | None = None

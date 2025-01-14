@@ -28,23 +28,23 @@ class AnaCharacteristics(RedfishModel):
 
 class Actions(RedfishModel):
     attach_namespaces: AttachNamespaces | None = Field(
-        alias="#StorageController.AttachNamespaces", default=None
+        serialization_alias="#StorageController.AttachNamespaces", default=None
     )
     detach_namespaces: DetachNamespaces | None = Field(
-        alias="#StorageController.DetachNamespaces", default=None
+        serialization_alias="#StorageController.DetachNamespaces", default=None
     )
     security_receive: SecurityReceive | None = Field(
-        alias="#StorageController.SecurityReceive", default=None
+        serialization_alias="#StorageController.SecurityReceive", default=None
     )
     security_send: SecuritySend | None = Field(
-        alias="#StorageController.SecuritySend", default=None
+        serialization_alias="#StorageController.SecuritySend", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class AttachNamespaces(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class AttachNamespacesRequest(RedfishModel):
@@ -52,14 +52,16 @@ class AttachNamespacesRequest(RedfishModel):
 
 
 class CacheSummary(RedfishModel):
-    persistent_cache_size_mib: int | None = Field(alias="PersistentCacheSizeMiB", default=None)
+    persistent_cache_size_mib: int | None = Field(
+        serialization_alias="PersistentCacheSizeMiB", default=None
+    )
     status: Status | None = None
-    total_cache_size_mib: int | None = Field(alias="TotalCacheSizeMiB", default=None)
+    total_cache_size_mib: int | None = Field(serialization_alias="TotalCacheSizeMiB", default=None)
 
 
 class DetachNamespaces(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class DetachNamespacesRequest(RedfishModel):
@@ -69,44 +71,52 @@ class DetachNamespacesRequest(RedfishModel):
 class Links(RedfishModel):
     attached_volumes: list[IdRef] | None = None
     attached_volumes_odata_count: int | None = Field(
-        alias="AttachedVolumes@odata.count", default=None
+        serialization_alias="AttachedVolumes@odata.count", default=None
     )
     batteries: list[IdRef] | None = None
-    batteries_odata_count: int | None = Field(alias="Batteries@odata.count", default=None)
+    batteries_odata_count: int | None = Field(
+        serialization_alias="Batteries@odata.count", default=None
+    )
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     nvme_discovered_subsystems: list[IdRef] | None = Field(
-        alias="NVMeDiscoveredSubsystems", default=None
+        serialization_alias="NVMeDiscoveredSubsystems", default=None
     )
     nvme_discovered_subsystems_odata_count: int | None = Field(
-        alias="NVMeDiscoveredSubsystems@odata.count", default=None
+        serialization_alias="NVMeDiscoveredSubsystems@odata.count", default=None
     )
     network_device_functions: list[IdRef] | None = None
     network_device_functions_odata_count: int | None = Field(
-        alias="NetworkDeviceFunctions@odata.count", default=None
+        serialization_alias="NetworkDeviceFunctions@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )
 
 
 class NvmeControllerAttributes(RedfishModel):
     reports_namespace_granularity: bool | None = None
-    reports_uuid_list: bool | None = Field(alias="ReportsUUIDList", default=None)
+    reports_uuid_list: bool | None = Field(serialization_alias="ReportsUUIDList", default=None)
     supports128_bit_host_id: bool | None = None
     supports_endurance_groups: bool | None = None
     supports_exceeding_power_of_non_operational_state: bool | None = None
-    supports_nvm_sets: bool | None = Field(alias="SupportsNVMSets", default=None)
+    supports_nvm_sets: bool | None = Field(serialization_alias="SupportsNVMSets", default=None)
     supports_predictable_latency_mode: bool | None = None
     supports_read_recovery_levels: bool | None = None
     supports_reservations: bool | None = None
-    supports_sq_associations: bool | None = Field(alias="SupportsSQAssociations", default=None)
+    supports_sq_associations: bool | None = Field(
+        serialization_alias="SupportsSQAssociations", default=None
+    )
     supports_traffic_based_keep_alive: bool | None = None
 
 
 class NvmeControllerProperties(RedfishModel):
     ana_characteristics: list[AnaCharacteristics] | None = Field(
-        alias="ANACharacteristics", default=None
+        serialization_alias="ANACharacteristics", default=None
     )
     allocated_completion_queues: int | None = None
     allocated_submission_queues: int | None = None
@@ -114,12 +124,12 @@ class NvmeControllerProperties(RedfishModel):
     max_attached_namespaces: int | None = None
     max_queue_size: int | None = None
     nvme_controller_attributes: NvmeControllerAttributes | None = Field(
-        alias="NVMeControllerAttributes", default=None
+        serialization_alias="NVMeControllerAttributes", default=None
     )
     nvme_smart_critical_warnings: NvmeSmartCriticalWarnings | None = Field(
-        alias="NVMeSMARTCriticalWarnings", default=None
+        serialization_alias="NVMeSMARTCriticalWarnings", default=None
     )
-    nvme_version: str | None = Field(alias="NVMeVersion", default=None)
+    nvme_version: str | None = Field(serialization_alias="NVMeVersion", default=None)
 
 
 class NvmeControllerType(StrEnum):
@@ -131,7 +141,7 @@ class NvmeControllerType(StrEnum):
 class NvmeSmartCriticalWarnings(RedfishModel):
     media_in_read_only: bool | None = None
     overall_subsystem_degraded: bool | None = None
-    pmr_unreliable: bool | None = Field(alias="PMRUnreliable", default=None)
+    pmr_unreliable: bool | None = Field(serialization_alias="PMRUnreliable", default=None)
     power_backup_failed: bool | None = None
     spare_capacity_worn_out: bool | None = None
 
@@ -143,8 +153,8 @@ class Rates(RedfishModel):
 
 
 class SecurityReceive(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SecurityReceiveRequest(RedfishModel):
@@ -154,8 +164,8 @@ class SecurityReceiveRequest(RedfishModel):
 
 
 class SecuritySend(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SecuritySendRequest(RedfishModel):
@@ -165,11 +175,11 @@ class SecuritySendRequest(RedfishModel):
 
 
 class StorageController(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#StorageController.v1_8_0.StorageController"
+        serialization_alias="@odata.type", default="#StorageController.v1_8_0.StorageController"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -189,20 +199,22 @@ class StorageController(RedfishModel):
     metrics: IdRef | None = None
     model: str | None = None
     nvme_controller_properties: NvmeControllerProperties | None = Field(
-        alias="NVMeControllerProperties", default=None
+        serialization_alias="NVMeControllerProperties", default=None
     )
     name: str
     oem: dict[str, Any] | None = None
-    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
+    pcie_interface: PcieInterface | None = Field(serialization_alias="PCIeInterface", default=None)
     part_number: str | None = None
     ports: IdRef | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     speed_gbps: float | None = None
     status: Status | None = None
     supported_controller_protocols: list[Protocol] | None = None
     supported_device_protocols: list[Protocol] | None = None
-    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(
+        serialization_alias="SupportedRAIDTypes", default=None
+    )
 
 
 class StorageControllerOnUpdate(RedfishModelOnUpdate):
@@ -215,8 +227,8 @@ class StorageControllerOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     measurements: list[MeasurementBlock] | None = None
     nvme_controller_properties: NvmeControllerProperties | None = Field(
-        alias="NVMeControllerProperties", default=None
+        serialization_alias="NVMeControllerProperties", default=None
     )
     oem: dict[str, Any] | None = None
-    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
+    pcie_interface: PcieInterface | None = Field(serialization_alias="PCIeInterface", default=None)
     status: Status | None = None

@@ -15,7 +15,7 @@ class Actions(RedfishModel):
 
 
 class Redundancy(RedfishModel):
-    odata_id: str = Field(alias="@odata.id")
+    odata_id: str = Field(serialization_alias="@odata.id")
     actions: Actions | None = None
     max_num_supported: int | None = None
     member_id: str
@@ -25,7 +25,9 @@ class Redundancy(RedfishModel):
     oem: dict[str, Any] | None = None
     redundancy_enabled: bool | None = None
     redundancy_set: list[IdRef]
-    redundancy_set_odata_count: int | None = Field(alias="RedundancySet@odata.count", default=None)
+    redundancy_set_odata_count: int | None = Field(
+        serialization_alias="RedundancySet@odata.count", default=None
+    )
     status: Status
 
 
@@ -50,7 +52,7 @@ class RedundantGroup(RedfishModel):
     min_needed_in_group: int | None = None
     redundancy_group: list[IdRef]
     redundancy_group_odata_count: int | None = Field(
-        alias="RedundancyGroup@odata.count", default=None
+        serialization_alias="RedundancyGroup@odata.count", default=None
     )
     redundancy_type: RedundancyType | None = None
     status: Status

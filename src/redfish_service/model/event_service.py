@@ -14,19 +14,21 @@ from .resource import Health, Status
 
 class Actions(RedfishModel):
     submit_test_event: SubmitTestEvent | None = Field(
-        alias="#EventService.SubmitTestEvent", default=None
+        serialization_alias="#EventService.SubmitTestEvent", default=None
     )
     test_event_subscription: TestEventSubscription | None = Field(
-        alias="#EventService.TestEventSubscription", default=None
+        serialization_alias="#EventService.TestEventSubscription", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class EventService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#EventService.v1_10_2.EventService")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#EventService.v1_10_2.EventService"
+    )
     actions: Actions | None = None
     delivery_retry_attempts: int | None = None
     delivery_retry_interval_seconds: int | None = None
@@ -41,9 +43,9 @@ class EventService(RedfishModel):
     oem: dict[str, Any] | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
-    smtp: Smtp | None = Field(alias="SMTP", default=None)
+    smtp: Smtp | None = Field(serialization_alias="SMTP", default=None)
     sse_filter_properties_supported: SseFilterPropertiesSupported | None = Field(
-        alias="SSEFilterPropertiesSupported", default=None
+        serialization_alias="SSEFilterPropertiesSupported", default=None
     )
     server_sent_event_uri: str | None = None
     service_enabled: bool | None = None
@@ -58,9 +60,9 @@ class EventServiceOnUpdate(RedfishModelOnUpdate):
     delivery_retry_attempts: int | None = None
     delivery_retry_interval_seconds: int | None = None
     oem: dict[str, Any] | None = None
-    smtp: Smtp | None = Field(alias="SMTP", default=None)
+    smtp: Smtp | None = Field(serialization_alias="SMTP", default=None)
     sse_filter_properties_supported: SseFilterPropertiesSupported | None = Field(
-        alias="SSEFilterPropertiesSupported", default=None
+        serialization_alias="SSEFilterPropertiesSupported", default=None
     )
     service_enabled: bool | None = None
     status: Status | None = None
@@ -105,8 +107,8 @@ class SseFilterPropertiesSupported(RedfishModel):
 
 
 class SubmitTestEvent(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SubmitTestEventRequest(RedfishModel):
@@ -123,5 +125,5 @@ class SubmitTestEventRequest(RedfishModel):
 
 
 class TestEventSubscription(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

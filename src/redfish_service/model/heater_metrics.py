@@ -9,15 +9,19 @@ from .sensor import SensorArrayExcerpt, SensorPowerExcerpt
 
 
 class Actions(RedfishModel):
-    reset_metrics: ResetMetrics | None = Field(alias="#HeaterMetrics.ResetMetrics", default=None)
+    reset_metrics: ResetMetrics | None = Field(
+        serialization_alias="#HeaterMetrics.ResetMetrics", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class HeaterMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#HeaterMetrics.v1_0_2.HeaterMetrics")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#HeaterMetrics.v1_0_2.HeaterMetrics"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str
@@ -28,10 +32,10 @@ class HeaterMetrics(RedfishModel):
     runtime_heating_time_seconds: int | None = None
     temperature_readings_celsius: list[SensorArrayExcerpt] | None = None
     temperature_readings_celsius_odata_count: int | None = Field(
-        alias="TemperatureReadingsCelsius@odata.count", default=None
+        serialization_alias="TemperatureReadingsCelsius@odata.count", default=None
     )
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

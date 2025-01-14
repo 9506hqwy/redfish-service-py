@@ -51,33 +51,37 @@ class FunctionType(StrEnum):
 
 
 class Links(RedfishModel):
-    cxl_logical_device: IdRef | None = Field(alias="CXLLogicalDevice", default=None)
+    cxl_logical_device: IdRef | None = Field(serialization_alias="CXLLogicalDevice", default=None)
     drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    drives_odata_count: int | None = Field(serialization_alias="Drives@odata.count", default=None)
     ethernet_interfaces: list[IdRef] | None = None
     ethernet_interfaces_odata_count: int | None = Field(
-        alias="EthernetInterfaces@odata.count", default=None
+        serialization_alias="EthernetInterfaces@odata.count", default=None
     )
     memory_domains: list[IdRef] | None = None
-    memory_domains_odata_count: int | None = Field(alias="MemoryDomains@odata.count", default=None)
+    memory_domains_odata_count: int | None = Field(
+        serialization_alias="MemoryDomains@odata.count", default=None
+    )
     network_device_functions: list[IdRef] | None = None
     network_device_functions_odata_count: int | None = Field(
-        alias="NetworkDeviceFunctions@odata.count", default=None
+        serialization_alias="NetworkDeviceFunctions@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
-    pcie_device: IdRef | None = Field(alias="PCIeDevice", default=None)
+    pcie_device: IdRef | None = Field(serialization_alias="PCIeDevice", default=None)
     processor: IdRef | None = None
     storage_controllers: list[IdRef] | None = None
     storage_controllers_odata_count: int | None = Field(
-        alias="StorageControllers@odata.count", default=None
+        serialization_alias="StorageControllers@odata.count", default=None
     )
 
 
 class PcieFunction(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#PCIeFunction.v1_6_0.PCIeFunction")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#PCIeFunction.v1_6_0.PCIeFunction"
+    )
     actions: Actions | None = None
     bus_number: str | None = None
     class_code: str | None = None

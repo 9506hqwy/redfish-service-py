@@ -14,16 +14,16 @@ from .sensor import SensorExcerpt
 
 class Actions(RedfishModel):
     reset_to_defaults: ResetToDefaults | None = Field(
-        alias="#Control.ResetToDefaults", default=None
+        serialization_alias="#Control.ResetToDefaults", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class Control(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Control.v1_5_2.Control")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_5_2.Control")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None
@@ -31,7 +31,7 @@ class Control(RedfishModel):
     allowable_numeric_values: list[float] | None = None
     associated_sensors: list[IdRef] | None = None
     associated_sensors_odata_count: int | None = Field(
-        alias="AssociatedSensors@odata.count", default=None
+        serialization_alias="AssociatedSensors@odata.count", default=None
     )
     control_delay_seconds: float | None = None
     control_loop: ControlLoop | None = None
@@ -49,7 +49,9 @@ class Control(RedfishModel):
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     sensor: SensorExcerpt | None = None
     set_point: float | None = None
     set_point_accuracy: float | None = None
@@ -152,8 +154,8 @@ class ImplementationType(StrEnum):
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetPointType(StrEnum):

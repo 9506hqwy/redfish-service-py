@@ -12,17 +12,17 @@ from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#NetworkAdapter.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#NetworkAdapter.Reset", default=None)
     reset_settings_to_default: ResetSettingsToDefault | None = Field(
-        alias="#NetworkAdapter.ResetSettingsToDefault", default=None
+        serialization_alias="#NetworkAdapter.ResetSettingsToDefault", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class ControllerCapabilities(RedfishModel):
     data_center_bridging: DataCenterBridging | None = None
-    npar: NicPartitioning | None = Field(alias="NPAR", default=None)
-    npiv: Npiv | None = Field(alias="NPIV", default=None)
+    npar: NicPartitioning | None = Field(serialization_alias="NPAR", default=None)
+    npiv: Npiv | None = Field(serialization_alias="NPIV", default=None)
     network_device_function_count: int | None = None
     network_port_count: int | None = None
     virtualization_offload: VirtualizationOffload | None = None
@@ -32,18 +32,22 @@ class ControllerLinks(RedfishModel):
     active_software_image: IdRef | None = None
     network_device_functions: list[IdRef] | None = None
     network_device_functions_odata_count: int | None = Field(
-        alias="NetworkDeviceFunctions@odata.count", default=None
+        serialization_alias="NetworkDeviceFunctions@odata.count", default=None
     )
     network_ports: list[IdRef] | None = None
-    network_ports_odata_count: int | None = Field(alias="NetworkPorts@odata.count", default=None)
+    network_ports_odata_count: int | None = Field(
+        serialization_alias="NetworkPorts@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
-    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
-    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
+    pcie_devices: list[IdRef] | None = Field(serialization_alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(
+        serialization_alias="PCIeDevices@odata.count", default=None
+    )
     ports: list[IdRef] | None = None
-    ports_odata_count: int | None = Field(alias="Ports@odata.count", default=None)
+    ports_odata_count: int | None = Field(serialization_alias="Ports@odata.count", default=None)
     software_images: list[IdRef] | None = None
     software_images_odata_count: int | None = Field(
-        alias="SoftwareImages@odata.count", default=None
+        serialization_alias="SoftwareImages@odata.count", default=None
     )
 
 
@@ -53,7 +57,7 @@ class Controllers(RedfishModel):
     identifiers: list[Identifier] | None = None
     links: ControllerLinks | None = None
     location: Location | None = None
-    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
+    pcie_interface: PcieInterface | None = Field(serialization_alias="PCIeInterface", default=None)
 
 
 class DataCenterBridging(RedfishModel):
@@ -66,10 +70,12 @@ class Npiv(RedfishModel):
 
 
 class NetworkAdapter(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#NetworkAdapter.v1_11_0.NetworkAdapter")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#NetworkAdapter.v1_11_0.NetworkAdapter"
+    )
     actions: Actions | None = None
     assembly: IdRef | None = None
     certificates: IdRef | None = None
@@ -78,7 +84,7 @@ class NetworkAdapter(RedfishModel):
     environment_metrics: IdRef | None = None
     id: str
     identifiers: list[Identifier] | None = None
-    lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
+    lldp_enabled: bool | None = Field(serialization_alias="LLDPEnabled", default=None)
     location: Location | None = None
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
@@ -91,7 +97,7 @@ class NetworkAdapter(RedfishModel):
     part_number: str | None = None
     ports: IdRef | None = None
     processors: IdRef | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
 
@@ -100,7 +106,7 @@ class NetworkAdapterOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     controllers: list[Controllers] | None = None
     identifiers: list[Identifier] | None = None
-    lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
+    lldp_enabled: bool | None = Field(serialization_alias="LLDPEnabled", default=None)
     location: Location | None = None
     measurements: list[MeasurementBlock] | None = None
     oem: dict[str, Any] | None = None
@@ -113,8 +119,8 @@ class NicPartitioning(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -122,12 +128,12 @@ class ResetRequest(RedfishModel):
 
 
 class ResetSettingsToDefault(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class Sriov(RedfishModel):
-    sriovvepa_capable: bool | None = Field(alias="SRIOVVEPACapable", default=None)
+    sriovvepa_capable: bool | None = Field(serialization_alias="SRIOVVEPACapable", default=None)
 
 
 class VirtualFunction(RedfishModel):
@@ -137,5 +143,5 @@ class VirtualFunction(RedfishModel):
 
 
 class VirtualizationOffload(RedfishModel):
-    sriov: Sriov | None = Field(alias="SRIOV", default=None)
+    sriov: Sriov | None = Field(serialization_alias="SRIOV", default=None)
     virtual_function: VirtualFunction | None = None

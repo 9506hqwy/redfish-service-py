@@ -12,12 +12,12 @@ from .resource import IndicatorLed, Location, Status
 
 
 class Fan(RedfishModel):
-    odata_id: str = Field(alias="@odata.id")
+    odata_id: str = Field(serialization_alias="@odata.id")
     actions: FanActions | None = None
     assembly: IdRef | None = None
     fan_name: str | None = None
     hot_pluggable: bool | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     location: Location | None = None
     lower_threshold_critical: int | None = None
     lower_threshold_fatal: int | None = None
@@ -34,9 +34,13 @@ class Fan(RedfishModel):
     reading: int | None = None
     reading_units: ReadingUnits | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     sensor_number: int | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
@@ -56,7 +60,7 @@ class ReadingUnits(StrEnum):
 
 
 class Temperature(RedfishModel):
-    odata_id: str = Field(alias="@odata.id")
+    odata_id: str = Field(serialization_alias="@odata.id")
     actions: TemperatureActions | None = None
     adjusted_max_allowable_operating_value: int | None = None
     adjusted_min_allowable_operating_value: int | None = None
@@ -76,7 +80,9 @@ class Temperature(RedfishModel):
     physical_context: PhysicalContext | None = None
     reading_celsius: float | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     sensor_number: int | None = None
     status: Status | None = None
     upper_threshold_critical: float | None = None
@@ -90,22 +96,26 @@ class TemperatureActions(RedfishModel):
 
 
 class Thermal(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Thermal.v1_7_3.Thermal")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Thermal.v1_7_3.Thermal")
     actions: ThermalActions | None = None
     description: str | None = None
     fans: list[Fan] | None = None
-    fans_odata_count: int | None = Field(alias="Fans@odata.count", default=None)
+    fans_odata_count: int | None = Field(serialization_alias="Fans@odata.count", default=None)
     id: str
     name: str
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
     status: Status | None = None
     temperatures: list[Temperature] | None = None
-    temperatures_odata_count: int | None = Field(alias="Temperatures@odata.count", default=None)
+    temperatures_odata_count: int | None = Field(
+        serialization_alias="Temperatures@odata.count", default=None
+    )
 
 
 class ThermalOnUpdate(RedfishModelOnUpdate):

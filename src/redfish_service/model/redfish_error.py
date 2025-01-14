@@ -7,12 +7,12 @@ from .message import Message
 
 
 class RedfishError(RedfishModel):
-    error: RedfishErrorContents = Field(alias="error")
+    error: RedfishErrorContents = Field(serialization_alias="error")
 
 
 class RedfishErrorContents(RedfishModel):
-    code: str = Field(alias="code")
-    message: str = Field(alias="message")
+    code: str = Field(serialization_alias="code")
+    message: str = Field(serialization_alias="message")
     message_extended_info: list[Message] | None = Field(
-        alias="@Message.ExtendedInfo", default=None
+        serialization_alias="@Message.ExtendedInfo", default=None
     )

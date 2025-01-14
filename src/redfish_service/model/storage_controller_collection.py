@@ -9,15 +9,18 @@ from .odata_v4 import IdRef
 
 
 class StorageControllerCollection(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#StorageControllerCollection.StorageControllerCollection"
+        serialization_alias="@odata.type",
+        default="#StorageControllerCollection.StorageControllerCollection",
     )
     description: str | None = None
     members: list[IdRef]
-    members_odata_count: int = Field(alias="Members@odata.count")
-    members_odata_next_link: str | None = Field(alias="Members@odata.nextLink", default=None)
+    members_odata_count: int = Field(serialization_alias="Members@odata.count")
+    members_odata_next_link: str | None = Field(
+        serialization_alias="Members@odata.nextLink", default=None
+    )
     name: str
     oem: dict[str, Any] | None = None

@@ -13,23 +13,23 @@ from .values import AccountTypes
 
 class Actions(RedfishModel):
     change_password: ChangePassword | None = Field(
-        alias="#ManagerAccount.ChangePassword", default=None
+        serialization_alias="#ManagerAccount.ChangePassword", default=None
     )
     clear_secret_key: ClearSecretKey | None = Field(
-        alias="#ManagerAccount.ClearSecretKey", default=None
+        serialization_alias="#ManagerAccount.ClearSecretKey", default=None
     )
     generate_secret_key: GenerateSecretKey | None = Field(
-        alias="#ManagerAccount.GenerateSecretKey", default=None
+        serialization_alias="#ManagerAccount.GenerateSecretKey", default=None
     )
     verify_time_based_one_time_password: VerifyTimeBasedOneTimePassword | None = Field(
-        alias="#ManagerAccount.VerifyTimeBasedOneTimePassword", default=None
+        serialization_alias="#ManagerAccount.VerifyTimeBasedOneTimePassword", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class ChangePassword(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ChangePasswordRequest(RedfishModel):
@@ -38,13 +38,13 @@ class ChangePasswordRequest(RedfishModel):
 
 
 class ClearSecretKey(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class GenerateSecretKey(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class Links(RedfishModel):
@@ -53,10 +53,12 @@ class Links(RedfishModel):
 
 
 class ManagerAccount(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount"
+    )
     account_expiration: str | None = None
     account_types: list[AccountTypes]
     actions: Actions | None = None
@@ -69,9 +71,11 @@ class ManagerAccount(RedfishModel):
     keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
-    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
+    mfa_bypass: MfaBypass | None = Field(serialization_alias="MFABypass", default=None)
     name: str
-    oem_account_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
+    oem_account_types: list[str] | None = Field(
+        serialization_alias="OEMAccountTypes", default=None
+    )
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None
     password: str | None = None
@@ -79,18 +83,18 @@ class ManagerAccount(RedfishModel):
     password_expiration: str | None = None
     phone_number: str | None = None
     role_id: str | None = None
-    snmp: SnmpUserInfo | None = Field(alias="SNMP", default=None)
+    snmp: SnmpUserInfo | None = Field(serialization_alias="SNMP", default=None)
     secret_key_set: bool | None = None
     strict_account_types: bool | None = None
     user_name: str | None = None
 
 
 class ManagerAccountOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount"
+        serialization_alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount"
     )
     account_expiration: str | None = None
     account_types: list[AccountTypes] | None = None
@@ -104,9 +108,11 @@ class ManagerAccountOnCreate(RedfishModel):
     keys: IdRef | None = None
     links: Links | None = None
     locked: bool | None = None
-    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
+    mfa_bypass: MfaBypass | None = Field(serialization_alias="MFABypass", default=None)
     name: str | None = None
-    oem_account_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
+    oem_account_types: list[str] | None = Field(
+        serialization_alias="OEMAccountTypes", default=None
+    )
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None
     password: str | None = None
@@ -114,7 +120,7 @@ class ManagerAccountOnCreate(RedfishModel):
     password_expiration: str | None = None
     phone_number: str | None = None
     role_id: str
-    snmp: SnmpUserInfo | None = Field(alias="SNMP", default=None)
+    snmp: SnmpUserInfo | None = Field(serialization_alias="SNMP", default=None)
     secret_key_set: bool | None = None
     strict_account_types: bool | None = None
     user_name: str
@@ -128,8 +134,10 @@ class ManagerAccountOnUpdate(RedfishModelOnUpdate):
     enabled: bool | None = None
     links: Links | None = None
     locked: bool | None = None
-    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
-    oem_account_types: list[str] | None = Field(alias="OEMAccountTypes", default=None)
+    mfa_bypass: MfaBypass | None = Field(serialization_alias="MFABypass", default=None)
+    oem_account_types: list[str] | None = Field(
+        serialization_alias="OEMAccountTypes", default=None
+    )
     oem: dict[str, Any] | None = None
     one_time_passcode_delivery_address: str | None = None
     password: str | None = None
@@ -137,7 +145,7 @@ class ManagerAccountOnUpdate(RedfishModelOnUpdate):
     password_expiration: str | None = None
     phone_number: str | None = None
     role_id: str | None = None
-    snmp: SnmpUserInfo | None = Field(alias="SNMP", default=None)
+    snmp: SnmpUserInfo | None = Field(serialization_alias="SNMP", default=None)
     strict_account_types: bool | None = None
     user_name: str | None = None
 
@@ -170,8 +178,8 @@ class SnmpUserInfo(RedfishModel):
 
 
 class VerifyTimeBasedOneTimePassword(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class VerifyTimeBasedOneTimePasswordRequest(RedfishModel):

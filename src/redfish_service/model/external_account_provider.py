@@ -43,11 +43,12 @@ class AuthenticationTypes(StrEnum):
 
 
 class ExternalAccountProvider(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider"
+        serialization_alias="@odata.type",
+        default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider",
     )
     account_provider_type: AccountProviderTypes | None = None
     actions: Actions | None = None
@@ -55,26 +56,29 @@ class ExternalAccountProvider(RedfishModel):
     certificates: IdRef | None = None
     description: str | None = None
     id: str
-    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
+    ldap_service: LdapService | None = Field(serialization_alias="LDAPService", default=None)
     links: Links | None = None
     name: str
-    oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
+    oauth2_service: Oauth2Service | None = Field(serialization_alias="OAuth2Service", default=None)
     oem: dict[str, Any] | None = None
     priority: int | None = None
     remote_role_mapping: list[RoleMapping] | None = None
     retries: int | None = None
     service_addresses: list[str] | None = None
     service_enabled: bool | None = None
-    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
+    tacacs_plus_service: TacacsPlusService | None = Field(
+        serialization_alias="TACACSplusService", default=None
+    )
     timeout_seconds: int | None = None
 
 
 class ExternalAccountProviderOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider"
+        serialization_alias="@odata.type",
+        default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider",
     )
     account_provider_type: AccountProviderTypes | None = None
     actions: Actions | None = None
@@ -82,33 +86,37 @@ class ExternalAccountProviderOnCreate(RedfishModel):
     certificates: IdRef | None = None
     description: str | None = None
     id: str | None = None
-    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
+    ldap_service: LdapService | None = Field(serialization_alias="LDAPService", default=None)
     links: Links | None = None
     name: str | None = None
-    oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
+    oauth2_service: Oauth2Service | None = Field(serialization_alias="OAuth2Service", default=None)
     oem: dict[str, Any] | None = None
     priority: int | None = None
     remote_role_mapping: list[RoleMapping] | None = None
     retries: int | None = None
     service_addresses: list[str] | None = None
     service_enabled: bool | None = None
-    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
+    tacacs_plus_service: TacacsPlusService | None = Field(
+        serialization_alias="TACACSplusService", default=None
+    )
     timeout_seconds: int | None = None
 
 
 class ExternalAccountProviderOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     authentication: Authentication | None = None
-    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
+    ldap_service: LdapService | None = Field(serialization_alias="LDAPService", default=None)
     links: Links | None = None
-    oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
+    oauth2_service: Oauth2Service | None = Field(serialization_alias="OAuth2Service", default=None)
     oem: dict[str, Any] | None = None
     priority: int | None = None
     remote_role_mapping: list[RoleMapping] | None = None
     retries: int | None = None
     service_addresses: list[str] | None = None
     service_enabled: bool | None = None
-    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
+    tacacs_plus_service: TacacsPlusService | None = Field(
+        serialization_alias="TACACSplusService", default=None
+    )
     timeout_seconds: int | None = None
 
 
@@ -117,7 +125,7 @@ class LdapSearchSettings(RedfishModel):
     email_attribute: str | None = None
     group_name_attribute: str | None = None
     groups_attribute: str | None = None
-    ssh_key_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
+    ssh_key_attribute: str | None = Field(serialization_alias="SSHKeyAttribute", default=None)
     username_attribute: str | None = None
 
 
@@ -139,15 +147,19 @@ class Oauth2Service(RedfishModel):
     audience: list[str] | None = None
     issuer: str | None = None
     mode: Oauth2Mode | None = None
-    oauth_service_signing_keys: str | None = Field(alias="OAuthServiceSigningKeys", default=None)
+    oauth_service_signing_keys: str | None = Field(
+        serialization_alias="OAuthServiceSigningKeys", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class RoleMapping(RedfishModel):
     local_account_types: list[AccountTypes] | None = None
-    local_oem_account_types: list[str] | None = Field(alias="LocalOEMAccountTypes", default=None)
+    local_oem_account_types: list[str] | None = Field(
+        serialization_alias="LocalOEMAccountTypes", default=None
+    )
     local_role: str | None = None
-    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
+    mfa_bypass: MfaBypass | None = Field(serialization_alias="MFABypass", default=None)
     oem: dict[str, Any] | None = None
     remote_group: str | None = None
     remote_user: str | None = None

@@ -13,10 +13,10 @@ from .resource import Health, Status
 
 class Actions(RedfishModel):
     resume_subscription: ResumeSubscription | None = Field(
-        alias="#EventDestination.ResumeSubscription", default=None
+        serialization_alias="#EventDestination.ResumeSubscription", default=None
     )
     suspend_subscription: SuspendSubscription | None = Field(
-        alias="#EventDestination.SuspendSubscription", default=None
+        serialization_alias="#EventDestination.SuspendSubscription", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -29,11 +29,11 @@ class DeliveryRetryPolicy(StrEnum):
 
 
 class EventDestination(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#EventDestination.v1_15_0.EventDestination"
+        serialization_alias="@odata.type", default="#EventDestination.v1_15_0.EventDestination"
     )
     actions: Actions | None = None
     backup_destinations: list[str] | None = None
@@ -54,20 +54,22 @@ class EventDestination(RedfishModel):
     message_ids: list[str] | None = None
     metric_report_definitions: list[IdRef] | None = None
     metric_report_definitions_odata_count: int | None = Field(
-        alias="MetricReportDefinitions@odata.count", default=None
+        serialization_alias="MetricReportDefinitions@odata.count", default=None
     )
     name: str
-    oem_protocol: str | None = Field(alias="OEMProtocol", default=None)
-    oem_subscription_type: str | None = Field(alias="OEMSubscriptionType", default=None)
+    oem_protocol: str | None = Field(serialization_alias="OEMProtocol", default=None)
+    oem_subscription_type: str | None = Field(
+        serialization_alias="OEMSubscriptionType", default=None
+    )
     oem: dict[str, Any] | None = None
     origin_resources: list[IdRef] | None = None
     origin_resources_odata_count: int | None = Field(
-        alias="OriginResources@odata.count", default=None
+        serialization_alias="OriginResources@odata.count", default=None
     )
     protocol: EventDestinationProtocol | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
-    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
+    snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
     send_heartbeat: bool | None = None
     severities: list[Health] | None = None
     status: Status | None = None
@@ -78,11 +80,11 @@ class EventDestination(RedfishModel):
 
 
 class EventDestinationOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#EventDestination.v1_15_0.EventDestination"
+        serialization_alias="@odata.type", default="#EventDestination.v1_15_0.EventDestination"
     )
     actions: Actions | None = None
     backup_destinations: list[str] | None = None
@@ -103,20 +105,22 @@ class EventDestinationOnCreate(RedfishModel):
     message_ids: list[str] | None = None
     metric_report_definitions: list[IdRef] | None = None
     metric_report_definitions_odata_count: int | None = Field(
-        alias="MetricReportDefinitions@odata.count", default=None
+        serialization_alias="MetricReportDefinitions@odata.count", default=None
     )
     name: str | None = None
-    oem_protocol: str | None = Field(alias="OEMProtocol", default=None)
-    oem_subscription_type: str | None = Field(alias="OEMSubscriptionType", default=None)
+    oem_protocol: str | None = Field(serialization_alias="OEMProtocol", default=None)
+    oem_subscription_type: str | None = Field(
+        serialization_alias="OEMSubscriptionType", default=None
+    )
     oem: dict[str, Any] | None = None
     origin_resources: list[IdRef] | None = None
     origin_resources_odata_count: int | None = Field(
-        alias="OriginResources@odata.count", default=None
+        serialization_alias="OriginResources@odata.count", default=None
     )
     protocol: EventDestinationProtocol
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
-    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
+    snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
     send_heartbeat: bool | None = None
     severities: list[Health] | None = None
     status: Status | None = None
@@ -133,7 +137,7 @@ class EventDestinationOnUpdate(RedfishModelOnUpdate):
     delivery_retry_policy: DeliveryRetryPolicy | None = None
     http_headers: list[dict[str, Any]] | None = None
     oem: dict[str, Any] | None = None
-    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
+    snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
     status: Status | None = None
     syslog_filters: list[SyslogFilter] | None = None
     verify_certificate: bool | None = None
@@ -159,8 +163,8 @@ class EventFormatType(StrEnum):
 
 
 class ResumeSubscription(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResumeSubscriptionRequest(RedfishModel):
@@ -206,8 +210,8 @@ class SubscriptionType(StrEnum):
 
 
 class SuspendSubscription(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SyslogFacility(StrEnum):

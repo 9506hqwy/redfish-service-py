@@ -16,20 +16,20 @@ from .sensor import (
 
 class Actions(RedfishModel):
     reset_metrics: ResetMetrics | None = Field(
-        alias="#EnvironmentMetrics.ResetMetrics", default=None
+        serialization_alias="#EnvironmentMetrics.ResetMetrics", default=None
     )
     reset_to_defaults: ResetToDefaults | None = Field(
-        alias="#EnvironmentMetrics.ResetToDefaults", default=None
+        serialization_alias="#EnvironmentMetrics.ResetToDefaults", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class EnvironmentMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#EnvironmentMetrics.v1_3_2.EnvironmentMetrics"
+        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_3_2.EnvironmentMetrics"
     )
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
@@ -39,7 +39,7 @@ class EnvironmentMetrics(RedfishModel):
     energyk_wh: SensorEnergykWhExcerpt | None = None
     fan_speeds_percent: list[SensorFanArrayExcerpt] | None = None
     fan_speeds_percent_odata_count: int | None = Field(
-        alias="FanSpeedsPercent@odata.count", default=None
+        serialization_alias="FanSpeedsPercent@odata.count", default=None
     )
     humidity_percent: SensorExcerpt | None = None
     id: str
@@ -67,10 +67,10 @@ class EnvironmentMetricsOnUpdate(RedfishModelOnUpdate):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

@@ -23,7 +23,9 @@ class CollectionCapabilities(RedfishModel):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     target_collection: IdRef
 
 

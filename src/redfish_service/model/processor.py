@@ -14,9 +14,9 @@ from .software_inventory import AdditionalVersions, MeasurementBlock
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#Processor.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#Processor.Reset", default=None)
     reset_to_defaults: ResetToDefaults | None = Field(
-        alias="#Processor.ResetToDefaults", default=None
+        serialization_alias="#Processor.ResetToDefaults", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -41,7 +41,9 @@ class Fpga(RedfishModel):
     host_interface: ProcessorInterface | None = None
     model: str | None = None
     oem: dict[str, Any] | None = None
-    pcie_virtual_functions: int | None = Field(alias="PCIeVirtualFunctions", default=None)
+    pcie_virtual_functions: int | None = Field(
+        serialization_alias="PCIeVirtualFunctions", default=None
+    )
     programmable_from_host: bool | None = None
     reconfiguration_slots: list[FpgaReconfigurationSlot] | None = None
 
@@ -50,7 +52,7 @@ class FpgaReconfigurationSlot(RedfishModel):
     acceleration_function: IdRef | None = None
     programmable_from_host: bool | None = None
     slot_id: str | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
 
 
 class FpgaType(StrEnum):
@@ -76,74 +78,84 @@ class Links(RedfishModel):
     chassis: IdRef | None = None
     connected_processors: list[IdRef] | None = None
     connected_processors_odata_count: int | None = Field(
-        alias="ConnectedProcessors@odata.count", default=None
+        serialization_alias="ConnectedProcessors@odata.count", default=None
     )
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     fabric_adapters: list[IdRef] | None = None
     fabric_adapters_odata_count: int | None = Field(
-        alias="FabricAdapters@odata.count", default=None
+        serialization_alias="FabricAdapters@odata.count", default=None
     )
     graphics_controller: IdRef | None = None
     memory: list[IdRef] | None = None
-    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    memory_odata_count: int | None = Field(serialization_alias="Memory@odata.count", default=None)
     network_device_functions: list[IdRef] | None = None
     network_device_functions_odata_count: int | None = Field(
-        alias="NetworkDeviceFunctions@odata.count", default=None
+        serialization_alias="NetworkDeviceFunctions@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
-    pcie_device: IdRef | None = Field(alias="PCIeDevice", default=None)
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_device: IdRef | None = Field(serialization_alias="PCIeDevice", default=None)
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )
 
 
 class MemorySummary(RedfishModel):
-    ecc_mode_enabled: bool | None = Field(alias="ECCModeEnabled", default=None)
+    ecc_mode_enabled: bool | None = Field(serialization_alias="ECCModeEnabled", default=None)
     metrics: IdRef | None = None
-    total_cache_size_mib: int | None = Field(alias="TotalCacheSizeMiB", default=None)
-    total_memory_size_mib: int | None = Field(alias="TotalMemorySizeMiB", default=None)
+    total_cache_size_mib: int | None = Field(serialization_alias="TotalCacheSizeMiB", default=None)
+    total_memory_size_mib: int | None = Field(
+        serialization_alias="TotalMemorySizeMiB", default=None
+    )
 
 
 class Processor(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Processor.v1_20_1.Processor")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#Processor.v1_20_1.Processor"
+    )
     acceleration_functions: IdRef | None = None
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     applied_operating_config: IdRef | None = None
     assembly: IdRef | None = None
-    base_speed_mhz: int | None = Field(alias="BaseSpeedMHz", default=None)
+    base_speed_mhz: int | None = Field(serialization_alias="BaseSpeedMHz", default=None)
     base_speed_priority_state: BaseSpeedPriorityState | None = None
     cache_memory: IdRef | None = None
     certificates: IdRef | None = None
     description: str | None = None
     enabled: bool | None = None
     environment_metrics: IdRef | None = None
-    fpga: Fpga | None = Field(alias="FPGA", default=None)
+    fpga: Fpga | None = Field(serialization_alias="FPGA", default=None)
     family: str | None = None
     firmware_version: str | None = None
-    high_speed_core_ids: list[int] | None = Field(alias="HighSpeedCoreIDs", default=None)
+    high_speed_core_ids: list[int] | None = Field(
+        serialization_alias="HighSpeedCoreIDs", default=None
+    )
     id: str
     instruction_set: InstructionSet | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
     manufacturer: str | None = None
-    max_speed_mhz: int | None = Field(alias="MaxSpeedMHz", default=None)
-    max_tdp_watts: int | None = Field(alias="MaxTDPWatts", default=None)
+    max_speed_mhz: int | None = Field(serialization_alias="MaxSpeedMHz", default=None)
+    max_tdp_watts: int | None = Field(serialization_alias="MaxTDPWatts", default=None)
     measurements: list[MeasurementBlock] | None = None
     memory_summary: MemorySummary | None = None
     metrics: IdRef | None = None
-    min_speed_mhz: int | None = Field(alias="MinSpeedMHz", default=None)
+    min_speed_mhz: int | None = Field(serialization_alias="MinSpeedMHz", default=None)
     model: str | None = None
     name: str
     oem: dict[str, Any] | None = None
     operating_configs: IdRef | None = None
-    operating_speed_mhz: int | None = Field(alias="OperatingSpeedMHz", default=None)
+    operating_speed_mhz: int | None = Field(serialization_alias="OperatingSpeedMHz", default=None)
     operating_speed_range_mhz: ControlRangeExcerpt | None = Field(
-        alias="OperatingSpeedRangeMHz", default=None
+        serialization_alias="OperatingSpeedRangeMHz", default=None
     )
     part_number: str | None = None
     ports: IdRef | None = None
@@ -157,19 +169,19 @@ class Processor(RedfishModel):
     serial_number: str | None = None
     socket: str | None = None
     spare_part_number: str | None = None
-    speed_limit_mhz: int | None = Field(alias="SpeedLimitMHz", default=None)
+    speed_limit_mhz: int | None = Field(serialization_alias="SpeedLimitMHz", default=None)
     speed_locked: bool | None = None
     status: Status | None = None
     sub_processors: IdRef | None = None
     system_interface: ProcessorInterface | None = None
-    tdp_watts: int | None = Field(alias="TDPWatts", default=None)
+    tdp_watts: int | None = Field(serialization_alias="TDPWatts", default=None)
     throttle_causes: list[ThrottleCause] | None = None
     throttled: bool | None = None
     total_cores: int | None = None
     total_enabled_cores: int | None = None
     total_threads: int | None = None
     turbo_state: TurboState | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     version: str | None = None
 
 
@@ -178,7 +190,7 @@ class ProcessorOnUpdate(RedfishModelOnUpdate):
     additional_firmware_versions: AdditionalVersions | None = None
     applied_operating_config: IdRef | None = None
     enabled: bool | None = None
-    fpga: Fpga | None = Field(alias="FPGA", default=None)
+    fpga: Fpga | None = Field(serialization_alias="FPGA", default=None)
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
@@ -186,11 +198,11 @@ class ProcessorOnUpdate(RedfishModelOnUpdate):
     memory_summary: MemorySummary | None = None
     oem: dict[str, Any] | None = None
     operating_speed_range_mhz: ControlRangeExcerpt | None = Field(
-        alias="OperatingSpeedRangeMHz", default=None
+        serialization_alias="OperatingSpeedRangeMHz", default=None
     )
     processor_id: ProcessorId | None = None
     processor_memory: list[ProcessorMemory] | None = None
-    speed_limit_mhz: int | None = Field(alias="SpeedLimitMHz", default=None)
+    speed_limit_mhz: int | None = Field(serialization_alias="SpeedLimitMHz", default=None)
     speed_locked: bool | None = None
     status: Status | None = None
     system_interface: ProcessorInterface | None = None
@@ -219,14 +231,14 @@ class ProcessorId(RedfishModel):
 class ProcessorInterface(RedfishModel):
     ethernet: EthernetInterface | None = None
     interface_type: SystemInterfaceType | None = None
-    pcie: PcieInterface | None = Field(alias="PCIe", default=None)
+    pcie: PcieInterface | None = Field(serialization_alias="PCIe", default=None)
 
 
 class ProcessorMemory(RedfishModel):
-    capacity_mib: int | None = Field(alias="CapacityMiB", default=None)
+    capacity_mib: int | None = Field(serialization_alias="CapacityMiB", default=None)
     integrated_memory: bool | None = None
     memory_type: ProcessorMemoryType | None = None
-    speed_mhz: int | None = Field(alias="SpeedMHz", default=None)
+    speed_mhz: int | None = Field(serialization_alias="SpeedMHz", default=None)
 
 
 class ProcessorMemoryType(StrEnum):
@@ -274,8 +286,8 @@ class ProcessorType(StrEnum):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -283,8 +295,8 @@ class ResetRequest(RedfishModel):
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SystemInterfaceType(StrEnum):

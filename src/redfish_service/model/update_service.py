@@ -13,13 +13,17 @@ from .resource import Status
 
 class Actions(RedfishModel):
     generate_ssh_identity_key_pair: GenerateSshIdentityKeyPair | None = Field(
-        alias="#UpdateService.GenerateSSHIdentityKeyPair", default=None
+        serialization_alias="#UpdateService.GenerateSSHIdentityKeyPair", default=None
     )
     remove_ssh_identity_key_pair: RemoveSshIdentityKeyPair | None = Field(
-        alias="#UpdateService.RemoveSSHIdentityKeyPair", default=None
+        serialization_alias="#UpdateService.RemoveSSHIdentityKeyPair", default=None
     )
-    simple_update: SimpleUpdate | None = Field(alias="#UpdateService.SimpleUpdate", default=None)
-    start_update: StartUpdate | None = Field(alias="#UpdateService.StartUpdate", default=None)
+    simple_update: SimpleUpdate | None = Field(
+        serialization_alias="#UpdateService.SimpleUpdate", default=None
+    )
+    start_update: StartUpdate | None = Field(
+        serialization_alias="#UpdateService.StartUpdate", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -33,8 +37,8 @@ class ApplyTime(StrEnum):
 
 
 class GenerateSshIdentityKeyPair(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class GenerateSshIdentityKeyPairRequest(RedfishModel):
@@ -55,18 +59,18 @@ class HttpPushUriOptions(RedfishModel):
 
 
 class RemoveSshIdentityKeyPair(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SimpleUpdate(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SimpleUpdateRequest(RedfishModel):
     force_update: bool | None = None
-    image_uri: str = Field(alias="ImageURI")
+    image_uri: str = Field(serialization_alias="ImageURI")
     password: str | None = None
     targets: list[str] | None = None
     transfer_protocol: TransferProtocolType | None = None
@@ -74,8 +78,8 @@ class SimpleUpdateRequest(RedfishModel):
 
 
 class StartUpdate(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SupportedUpdateImageFormatType(StrEnum):
@@ -107,10 +111,12 @@ class UpdateParameters(RedfishModel):
 
 
 class UpdateService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#UpdateService.v1_14_1.UpdateService")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#UpdateService.v1_14_1.UpdateService"
+    )
     actions: Actions | None = None
     client_certificates: IdRef | None = None
     description: str | None = None
@@ -125,16 +131,20 @@ class UpdateService(RedfishModel):
     multipart_http_push_uri: str | None = None
     name: str
     oem: dict[str, Any] | None = None
-    public_identity_ssh_key: IdRef | None = Field(alias="PublicIdentitySSHKey", default=None)
+    public_identity_ssh_key: IdRef | None = Field(
+        serialization_alias="PublicIdentitySSHKey", default=None
+    )
     remote_server_certificates: IdRef | None = None
-    remote_server_ssh_keys: IdRef | None = Field(alias="RemoteServerSSHKeys", default=None)
+    remote_server_ssh_keys: IdRef | None = Field(
+        serialization_alias="RemoteServerSSHKeys", default=None
+    )
     service_enabled: bool | None = None
     software_inventory: IdRef | None = None
     status: Status | None = None
     supported_update_image_formats: list[SupportedUpdateImageFormatType] | None = None
     verify_remote_server_certificate: bool | None = None
     verify_remote_server_ssh_key: bool | None = Field(
-        alias="VerifyRemoteServerSSHKey", default=None
+        serialization_alias="VerifyRemoteServerSSHKey", default=None
     )
 
 
@@ -149,5 +159,5 @@ class UpdateServiceOnUpdate(RedfishModelOnUpdate):
     status: Status | None = None
     verify_remote_server_certificate: bool | None = None
     verify_remote_server_ssh_key: bool | None = Field(
-        alias="VerifyRemoteServerSSHKey", default=None
+        serialization_alias="VerifyRemoteServerSSHKey", default=None
     )

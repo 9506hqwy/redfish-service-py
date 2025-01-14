@@ -6,4 +6,4 @@ from . import RedfishModel
 
 
 class IdRef(RedfishModel):
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)

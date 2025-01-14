@@ -12,17 +12,17 @@ from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
-    calibrate: Calibrate | None = Field(alias="#Battery.Calibrate", default=None)
-    reset: Reset | None = Field(alias="#Battery.Reset", default=None)
-    self_test: SelfTest | None = Field(alias="#Battery.SelfTest", default=None)
+    calibrate: Calibrate | None = Field(serialization_alias="#Battery.Calibrate", default=None)
+    reset: Reset | None = Field(serialization_alias="#Battery.Reset", default=None)
+    self_test: SelfTest | None = Field(serialization_alias="#Battery.SelfTest", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Battery(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Battery.v1_3_0.Battery")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Battery.v1_3_0.Battery")
     actions: Actions | None = None
     assembly: IdRef | None = None
     capacity_actual_amp_hours: float | None = None
@@ -67,8 +67,8 @@ class BatteryOnUpdate(RedfishModelOnUpdate):
 
 
 class Calibrate(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ChargeState(StrEnum):
@@ -79,17 +79,17 @@ class ChargeState(StrEnum):
 
 class Links(RedfishModel):
     memory: list[IdRef] | None = None
-    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    memory_odata_count: int | None = Field(serialization_alias="Memory@odata.count", default=None)
     oem: dict[str, Any] | None = None
     storage_controllers: list[IdRef] | None = None
     storage_controllers_odata_count: int | None = Field(
-        alias="StorageControllers@odata.count", default=None
+        serialization_alias="StorageControllers@odata.count", default=None
     )
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -97,5 +97,5 @@ class ResetRequest(RedfishModel):
 
 
 class SelfTest(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

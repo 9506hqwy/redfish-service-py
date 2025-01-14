@@ -12,7 +12,9 @@ class Actions(RedfishModel):
 
 
 class MessageRegistry(RedfishModel):
-    odata_type: str = Field(alias="@odata.type", default="#MessageRegistry.v1_6_3.MessageRegistry")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#MessageRegistry.v1_6_3.MessageRegistry"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str

@@ -28,7 +28,7 @@ class NvmeSmartMetrics(RedfishModel):
     data_units_read: int | None = None
     data_units_written: int | None = None
     eg_critical_warning_summary: EgCriticalWarningSummary | None = Field(
-        alias="EGCriticalWarningSummary", default=None
+        serialization_alias="EGCriticalWarningSummary", default=None
     )
     host_read_commands: int | None = None
     host_write_commands: int | None = None
@@ -47,22 +47,25 @@ class NvmeSmartMetrics(RedfishModel):
 
 
 class StorageControllerMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#StorageControllerMetrics.v1_0_3.StorageControllerMetrics"
+        serialization_alias="@odata.type",
+        default="#StorageControllerMetrics.v1_0_3.StorageControllerMetrics",
     )
     actions: Actions | None = None
-    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(
+        serialization_alias="CorrectableECCErrorCount", default=None
+    )
     correctable_parity_error_count: int | None = None
     description: str | None = None
     id: str
-    nvme_smart: NvmeSmartMetrics | None = Field(alias="NVMeSMART", default=None)
+    nvme_smart: NvmeSmartMetrics | None = Field(serialization_alias="NVMeSMART", default=None)
     name: str
     oem: dict[str, Any] | None = None
     state_change_count: int | None = None
     uncorrectable_ecc_error_count: int | None = Field(
-        alias="UncorrectableECCErrorCount", default=None
+        serialization_alias="UncorrectableECCErrorCount", default=None
     )
     uncorrectable_parity_error_count: int | None = None

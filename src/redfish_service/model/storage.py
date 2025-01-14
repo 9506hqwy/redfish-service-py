@@ -16,16 +16,16 @@ from .swordfish.volume import RaidType
 
 class Actions(RedfishModel):
     rekey_external_key: RekeyExternalKey | None = Field(
-        alias="#Storage.RekeyExternalKey", default=None
+        serialization_alias="#Storage.RekeyExternalKey", default=None
     )
     reset_to_defaults: ResetToDefaults | None = Field(
-        alias="#Storage.ResetToDefaults", default=None
+        serialization_alias="#Storage.ResetToDefaults", default=None
     )
     set_controller_password: SetControllerPassword | None = Field(
-        alias="#Storage.SetControllerPassword", default=None
+        serialization_alias="#Storage.SetControllerPassword", default=None
     )
     set_encryption_key: SetEncryptionKey | None = Field(
-        alias="#Storage.SetEncryptionKey", default=None
+        serialization_alias="#Storage.SetEncryptionKey", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -38,9 +38,11 @@ class AutoVolumeCreate(StrEnum):
 
 
 class CacheSummary(RedfishModel):
-    persistent_cache_size_mib: int | None = Field(alias="PersistentCacheSizeMiB", default=None)
+    persistent_cache_size_mib: int | None = Field(
+        serialization_alias="PersistentCacheSizeMiB", default=None
+    )
     status: Status | None = None
-    total_cache_size_mib: int | None = Field(alias="TotalCacheSizeMiB", default=None)
+    total_cache_size_mib: int | None = Field(serialization_alias="TotalCacheSizeMiB", default=None)
 
 
 class ConfigLockOptions(StrEnum):
@@ -73,22 +75,24 @@ class HotspareActivationPolicy(StrEnum):
 
 class Links(RedfishModel):
     enclosures: list[IdRef] | None = None
-    enclosures_odata_count: int | None = Field(alias="Enclosures@odata.count", default=None)
+    enclosures_odata_count: int | None = Field(
+        serialization_alias="Enclosures@odata.count", default=None
+    )
     hosting_storage_systems: list[IdRef] | None = None
     hosting_storage_systems_odata_count: int | None = Field(
-        alias="HostingStorageSystems@odata.count", default=None
+        serialization_alias="HostingStorageSystems@odata.count", default=None
     )
     nvme_of_discovery_subsystems: list[IdRef] | None = Field(
-        alias="NVMeoFDiscoverySubsystems", default=None
+        serialization_alias="NVMeoFDiscoverySubsystems", default=None
     )
     nvme_of_discovery_subsystems_odata_count: int | None = Field(
-        alias="NVMeoFDiscoverySubsystems@odata.count", default=None
+        serialization_alias="NVMeoFDiscoverySubsystems@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     simple_storage: IdRef | None = None
     storage_services: list[IdRef] | None = None
     storage_services_odata_count: int | None = Field(
-        alias="StorageServices@odata.count", default=None
+        serialization_alias="StorageServices@odata.count", default=None
     )
 
 
@@ -97,7 +101,7 @@ class NvmeConfigurationLockState(RedfishModel):
     firmware_image_download: ConfigLockOptions | None = None
     lockdown: ConfigLockOptions | None = None
     security_send: ConfigLockOptions | None = None
-    vpd_write: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
+    vpd_write: ConfigLockOptions | None = Field(serialization_alias="VPDWrite", default=None)
 
 
 class NvmeSubsystemProperties(RedfishModel):
@@ -113,13 +117,13 @@ class Rates(RedfishModel):
 
 
 class RekeyExternalKey(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetToDefaultsRequest(RedfishModel):
@@ -132,8 +136,8 @@ class ResetToDefaultsType(StrEnum):
 
 
 class SetControllerPassword(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetControllerPasswordRequest(RedfishModel):
@@ -143,8 +147,8 @@ class SetControllerPasswordRequest(RedfishModel):
 
 
 class SetEncryptionKey(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetEncryptionKeyRequest(RedfishModel):
@@ -154,10 +158,10 @@ class SetEncryptionKeyRequest(RedfishModel):
 
 
 class Storage(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Storage.v1_17_1.Storage")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_17_1.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     configuration_lock: ConfigurationLock | None = None
@@ -166,7 +170,7 @@ class Storage(RedfishModel):
     controllers: IdRef | None = None
     description: str | None = None
     drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    drives_odata_count: int | None = Field(serialization_alias="Drives@odata.count", default=None)
     encryption_mode: EncryptionMode | None = None
     endpoint_groups: IdRef | None = None
     file_systems: IdRef | None = None
@@ -176,16 +180,18 @@ class Storage(RedfishModel):
     links: Links | None = None
     local_encryption_key_identifier: str | None = None
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
-        alias="NVMeSubsystemProperties", default=None
+        serialization_alias="NVMeSubsystemProperties", default=None
     )
     name: str
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
     status: Status | None = None
     storage_controllers: list[StorageController] | None = None
     storage_controllers_odata_count: int | None = Field(
-        alias="StorageControllers@odata.count", default=None
+        serialization_alias="StorageControllers@odata.count", default=None
     )
     storage_groups: IdRef | None = None
     storage_pools: IdRef | None = None
@@ -202,7 +208,7 @@ class StorageOnUpdate(RedfishModelOnUpdate):
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
-        alias="NVMeSubsystemProperties", default=None
+        serialization_alias="NVMeSubsystemProperties", default=None
     )
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
@@ -211,7 +217,7 @@ class StorageOnUpdate(RedfishModelOnUpdate):
 
 
 class StorageController(RedfishModel):
-    odata_id: str = Field(alias="@odata.id")
+    odata_id: str = Field(serialization_alias="@odata.id")
     actions: StorageControllerActions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -228,16 +234,18 @@ class StorageController(RedfishModel):
     model: str | None = None
     name: str | None = None
     oem: dict[str, Any] | None = None
-    pcie_interface: PcieInterface | None = Field(alias="PCIeInterface", default=None)
+    pcie_interface: PcieInterface | None = Field(serialization_alias="PCIeInterface", default=None)
     part_number: str | None = None
     ports: IdRef | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     speed_gbps: float | None = None
     status: Status | None = None
     supported_controller_protocols: list[Protocol] | None = None
     supported_device_protocols: list[Protocol] | None = None
-    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(
+        serialization_alias="SupportedRAIDTypes", default=None
+    )
 
 
 class StorageControllerActions(RedfishModel):
@@ -246,13 +254,17 @@ class StorageControllerActions(RedfishModel):
 
 class StorageControllerLinks(RedfishModel):
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )
     storage_services: list[IdRef] | None = None
     storage_services_odata_count: int | None = Field(
-        alias="StorageServices@odata.count", default=None
+        serialization_alias="StorageServices@odata.count", default=None
     )
 
 

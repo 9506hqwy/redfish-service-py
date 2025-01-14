@@ -9,7 +9,7 @@ from . import RedfishModel
 
 class Actions(RedfishModel):
     reset_metrics: ResetMetrics | None = Field(
-        alias="#ManagerDiagnosticData.ResetMetrics", default=None
+        serialization_alias="#ManagerDiagnosticData.ResetMetrics", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -24,26 +24,29 @@ class BootTimeStatistics(RedfishModel):
 
 class I2cBusStatistics(RedfishModel):
     bus_error_count: int | None = None
-    i2c_bus_name: str | None = Field(alias="I2CBusName", default=None)
-    nack_count: int | None = Field(alias="NACKCount", default=None)
+    i2c_bus_name: str | None = Field(serialization_alias="I2CBusName", default=None)
+    nack_count: int | None = Field(serialization_alias="NACKCount", default=None)
     total_transaction_count: int | None = None
 
 
 class ManagerDiagnosticData(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ManagerDiagnosticData.v1_2_3.ManagerDiagnosticData"
+        serialization_alias="@odata.type",
+        default="#ManagerDiagnosticData.v1_2_3.ManagerDiagnosticData",
     )
     actions: Actions | None = None
     boot_time_statistics: BootTimeStatistics | None = None
     description: str | None = None
-    free_storage_space_kib: int | None = Field(alias="FreeStorageSpaceKiB", default=None)
-    i2c_buses: list[I2cBusStatistics] | None = Field(alias="I2CBuses", default=None)
+    free_storage_space_kib: int | None = Field(
+        serialization_alias="FreeStorageSpaceKiB", default=None
+    )
+    i2c_buses: list[I2cBusStatistics] | None = Field(serialization_alias="I2CBuses", default=None)
     id: str
     memory_ecc_statistics: MemoryEccStatistics | None = Field(
-        alias="MemoryECCStatistics", default=None
+        serialization_alias="MemoryECCStatistics", default=None
     )
     memory_statistics: MemoryStatistics | None = None
     name: str
@@ -54,9 +57,11 @@ class ManagerDiagnosticData(RedfishModel):
 
 
 class MemoryEccStatistics(RedfishModel):
-    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(
+        serialization_alias="CorrectableECCErrorCount", default=None
+    )
     uncorrectable_ecc_error_count: int | None = Field(
-        alias="UncorrectableECCErrorCount", default=None
+        serialization_alias="UncorrectableECCErrorCount", default=None
     )
 
 
@@ -85,5 +90,5 @@ class ProcessorStatistics(RedfishModel):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

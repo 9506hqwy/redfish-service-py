@@ -16,10 +16,10 @@ class Actions(RedfishModel):
 
 
 class Fan(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Fan.v1_5_2.Fan")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Fan.v1_5_2.Fan")
     actions: Actions | None = None
     assembly: IdRef | None = None
     description: str | None = None
@@ -59,6 +59,6 @@ class FanOnUpdate(RedfishModelOnUpdate):
 class Links(RedfishModel):
     cooling_chassis: list[IdRef] | None = None
     cooling_chassis_odata_count: int | None = Field(
-        alias="CoolingChassis@odata.count", default=None
+        serialization_alias="CoolingChassis@odata.count", default=None
     )
     oem: dict[str, Any] | None = None

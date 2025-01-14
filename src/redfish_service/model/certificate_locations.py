@@ -13,11 +13,12 @@ class Actions(RedfishModel):
 
 
 class CertificateLocations(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#CertificateLocations.v1_0_4.CertificateLocations"
+        serialization_alias="@odata.type",
+        default="#CertificateLocations.v1_0_4.CertificateLocations",
     )
     actions: Actions | None = None
     description: str | None = None
@@ -29,5 +30,7 @@ class CertificateLocations(RedfishModel):
 
 class Links(RedfishModel):
     certificates: list[IdRef] | None = None
-    certificates_odata_count: int | None = Field(alias="Certificates@odata.count", default=None)
+    certificates_odata_count: int | None = Field(
+        serialization_alias="Certificates@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

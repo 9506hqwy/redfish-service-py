@@ -13,24 +13,34 @@ from .sensor import SensorEnergykWhExcerpt, SensorPowerExcerpt
 
 
 class Actions(RedfishModel):
-    power_control: PowerControl | None = Field(alias="#OutletGroup.PowerControl", default=None)
-    reset_metrics: ResetMetrics | None = Field(alias="#OutletGroup.ResetMetrics", default=None)
+    power_control: PowerControl | None = Field(
+        serialization_alias="#OutletGroup.PowerControl", default=None
+    )
+    reset_metrics: ResetMetrics | None = Field(
+        serialization_alias="#OutletGroup.ResetMetrics", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     outlet_groups: list[IdRef] | None = None
-    outlet_groups_odata_count: int | None = Field(alias="OutletGroups@odata.count", default=None)
+    outlet_groups_odata_count: int | None = Field(
+        serialization_alias="OutletGroups@odata.count", default=None
+    )
     outlets: list[IdRef] | None = None
-    outlets_odata_count: int | None = Field(alias="Outlets@odata.count", default=None)
+    outlets_odata_count: int | None = Field(
+        serialization_alias="Outlets@odata.count", default=None
+    )
 
 
 class OutletGroup(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#OutletGroup.v1_2_0.OutletGroup")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#OutletGroup.v1_2_0.OutletGroup"
+    )
     actions: Actions | None = None
     configuration_locked: bool | None = None
     created_by: str | None = None
@@ -55,10 +65,12 @@ class OutletGroup(RedfishModel):
 
 
 class OutletGroupOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#OutletGroup.v1_2_0.OutletGroup")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#OutletGroup.v1_2_0.OutletGroup"
+    )
     actions: Actions | None = None
     configuration_locked: bool | None = None
     created_by: str | None = None
@@ -105,8 +117,8 @@ class OutletGroupType(StrEnum):
 
 
 class PowerControl(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class PowerControlRequest(RedfishModel):
@@ -114,5 +126,5 @@ class PowerControlRequest(RedfishModel):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

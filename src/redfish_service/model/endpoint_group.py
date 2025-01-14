@@ -23,15 +23,19 @@ class Actions(RedfishModel):
 
 
 class EndpointGroup(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#EndpointGroup.v1_3_4.EndpointGroup")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#EndpointGroup.v1_3_4.EndpointGroup"
+    )
     access_state: AccessState | None = None
     actions: Actions | None = None
     description: str | None = None
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     group_type: GroupType | None = None
     id: str
     identifier: Identifier | None = None
@@ -43,17 +47,19 @@ class EndpointGroup(RedfishModel):
 
 
 class EndpointGroupOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#EndpointGroup.v1_3_4.EndpointGroup"
+        serialization_alias="@odata.type", default="#EndpointGroup.v1_3_4.EndpointGroup"
     )
     access_state: AccessState | None = None
     actions: Actions | None = None
     description: str | None = None
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     group_type: GroupType | None = None
     id: str | None = None
     identifier: Identifier | None = None
@@ -85,7 +91,11 @@ class GroupType(StrEnum):
 
 class Links(RedfishModel):
     connections: list[IdRef] | None = None
-    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
+    connections_odata_count: int | None = Field(
+        serialization_alias="Connections@odata.count", default=None
+    )
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

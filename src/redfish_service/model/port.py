@@ -12,8 +12,8 @@ from .resource import Location, ResetType, Status
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#Port.Reset", default=None)
-    reset_ppb: ResetPpb | None = Field(alias="#Port.ResetPPB", default=None)
+    reset: Reset | None = Field(serialization_alias="#Port.Reset", default=None)
+    reset_ppb: ResetPpb | None = Field(serialization_alias="#Port.ResetPPB", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -24,10 +24,10 @@ class Cxl(RedfishModel):
     current_port_configuration_state: CurrentPortConfigurationState | None = None
     max_logical_device_count: int | None = None
     qos_telemetry_capabilities: QosTelemetryCapabilities | None = Field(
-        alias="QoSTelemetryCapabilities", default=None
+        serialization_alias="QoSTelemetryCapabilities", default=None
     )
     supported_cxl_modes: list[ConnectedDeviceMode] | None = Field(
-        alias="SupportedCXLModes", default=None
+        serialization_alias="SupportedCXLModes", default=None
     )
     temporary_throughput_reduction_enabled: bool | None = None
 
@@ -76,16 +76,16 @@ class CurrentPortConfigurationState(StrEnum):
 
 class EthernetProperties(RedfishModel):
     associated_mac_addresses: list[str] | None = Field(
-        alias="AssociatedMACAddresses", default=None
+        serialization_alias="AssociatedMACAddresses", default=None
     )
-    eee_enabled: bool | None = Field(alias="EEEEnabled", default=None)
+    eee_enabled: bool | None = Field(serialization_alias="EEEEnabled", default=None)
     flow_control_configuration: FlowControl | None = None
     flow_control_status: FlowControl | None = None
-    lldp_enabled: bool | None = Field(alias="LLDPEnabled", default=None)
-    lldp_receive: LldpReceive | None = Field(alias="LLDPReceive", default=None)
-    lldp_transmit: LldpTransmit | None = Field(alias="LLDPTransmit", default=None)
+    lldp_enabled: bool | None = Field(serialization_alias="LLDPEnabled", default=None)
+    lldp_receive: LldpReceive | None = Field(serialization_alias="LLDPReceive", default=None)
+    lldp_transmit: LldpTransmit | None = Field(serialization_alias="LLDPTransmit", default=None)
     supported_ethernet_capabilities: list[SupportedEthernetCapabilities] | None = None
-    wake_on_lan_enabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
+    wake_on_lan_enabled: bool | None = Field(serialization_alias="WakeOnLANEnabled", default=None)
 
 
 class FiberConnectionType(StrEnum):
@@ -118,9 +118,9 @@ class FunctionMinBandwidth(RedfishModel):
 
 
 class GenZ(RedfishModel):
-    lprt: IdRef | None = Field(alias="LPRT", default=None)
-    mprt: IdRef | None = Field(alias="MPRT", default=None)
-    vcat: IdRef | None = Field(alias="VCAT", default=None)
+    lprt: IdRef | None = Field(serialization_alias="LPRT", default=None)
+    mprt: IdRef | None = Field(serialization_alias="MPRT", default=None)
+    vcat: IdRef | None = Field(serialization_alias="VCAT", default=None)
 
 
 class Ieee802IdSubtype(StrEnum):
@@ -136,17 +136,29 @@ class Ieee802IdSubtype(StrEnum):
 
 
 class InfiniBandProperties(RedfishModel):
-    associated_node_guids: list[str] | None = Field(alias="AssociatedNodeGUIDs", default=None)
-    associated_port_guids: list[str] | None = Field(alias="AssociatedPortGUIDs", default=None)
-    associated_system_guids: list[str] | None = Field(alias="AssociatedSystemGUIDs", default=None)
+    associated_node_guids: list[str] | None = Field(
+        serialization_alias="AssociatedNodeGUIDs", default=None
+    )
+    associated_port_guids: list[str] | None = Field(
+        serialization_alias="AssociatedPortGUIDs", default=None
+    )
+    associated_system_guids: list[str] | None = Field(
+        serialization_alias="AssociatedSystemGUIDs", default=None
+    )
 
 
 class LldpReceive(RedfishModel):
     chassis_id: str | None = None
     chassis_id_subtype: Ieee802IdSubtype | None = None
-    management_address_ipv4: str | None = Field(alias="ManagementAddressIPv4", default=None)
-    management_address_ipv6: str | None = Field(alias="ManagementAddressIPv6", default=None)
-    management_address_mac: str | None = Field(alias="ManagementAddressMAC", default=None)
+    management_address_ipv4: str | None = Field(
+        serialization_alias="ManagementAddressIPv4", default=None
+    )
+    management_address_ipv6: str | None = Field(
+        serialization_alias="ManagementAddressIPv6", default=None
+    )
+    management_address_mac: str | None = Field(
+        serialization_alias="ManagementAddressMAC", default=None
+    )
     management_vlan_id: int | None = None
     port_id: str | None = None
     port_id_subtype: Ieee802IdSubtype | None = None
@@ -170,9 +182,15 @@ class LldpSystemCapabilities(StrEnum):
 class LldpTransmit(RedfishModel):
     chassis_id: str | None = None
     chassis_id_subtype: Ieee802IdSubtype | None = None
-    management_address_ipv4: str | None = Field(alias="ManagementAddressIPv4", default=None)
-    management_address_ipv6: str | None = Field(alias="ManagementAddressIPv6", default=None)
-    management_address_mac: str | None = Field(alias="ManagementAddressMAC", default=None)
+    management_address_ipv4: str | None = Field(
+        serialization_alias="ManagementAddressIPv4", default=None
+    )
+    management_address_ipv6: str | None = Field(
+        serialization_alias="ManagementAddressIPv6", default=None
+    )
+    management_address_mac: str | None = Field(
+        serialization_alias="ManagementAddressMAC", default=None
+    )
     management_vlan_id: int | None = None
     port_id: str | None = None
     port_id_subtype: Ieee802IdSubtype | None = None
@@ -212,25 +230,25 @@ class LinkStatus(StrEnum):
 class Links(RedfishModel):
     associated_endpoints: list[IdRef] | None = None
     associated_endpoints_odata_count: int | None = Field(
-        alias="AssociatedEndpoints@odata.count", default=None
+        serialization_alias="AssociatedEndpoints@odata.count", default=None
     )
     cables: list[IdRef] | None = None
-    cables_odata_count: int | None = Field(alias="Cables@odata.count", default=None)
+    cables_odata_count: int | None = Field(serialization_alias="Cables@odata.count", default=None)
     connected_ports: list[IdRef] | None = None
     connected_ports_odata_count: int | None = Field(
-        alias="ConnectedPorts@odata.count", default=None
+        serialization_alias="ConnectedPorts@odata.count", default=None
     )
     connected_switch_ports: list[IdRef] | None = None
     connected_switch_ports_odata_count: int | None = Field(
-        alias="ConnectedSwitchPorts@odata.count", default=None
+        serialization_alias="ConnectedSwitchPorts@odata.count", default=None
     )
     connected_switches: list[IdRef] | None = None
     connected_switches_odata_count: int | None = Field(
-        alias="ConnectedSwitches@odata.count", default=None
+        serialization_alias="ConnectedSwitches@odata.count", default=None
     )
     ethernet_interfaces: list[IdRef] | None = None
     ethernet_interfaces_odata_count: int | None = Field(
-        alias="EthernetInterfaces@odata.count", default=None
+        serialization_alias="EthernetInterfaces@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -241,13 +259,13 @@ class MediumType(StrEnum):
 
 
 class Port(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Port.v1_14_0.Port")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_14_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
-    cxl: Cxl | None = Field(alias="CXL", default=None)
+    cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
     capable_protocol_versions: list[str] | None = None
     current_protocol_version: str | None = None
     current_speed_gbps: float | None = None
@@ -280,7 +298,7 @@ class Port(RedfishModel):
     port_protocol: Protocol | None = None
     port_type: PortType | None = None
     remote_port_id: str | None = None
-    sfp: Sfp | None = Field(alias="SFP", default=None)
+    sfp: Sfp | None = Field(serialization_alias="SFP", default=None)
     signal_detected: bool | None = None
     status: Status | None = None
     width: int | None = None
@@ -288,7 +306,7 @@ class Port(RedfishModel):
 
 class PortOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    cxl: Cxl | None = Field(alias="CXL", default=None)
+    cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
     enabled: bool | None = None
     ethernet: EthernetProperties | None = None
     fibre_channel: FibreChannelProperties | None = None
@@ -305,7 +323,7 @@ class PortOnUpdate(RedfishModelOnUpdate):
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
     port_type: PortType | None = None
-    sfp: Sfp | None = Field(alias="SFP", default=None)
+    sfp: Sfp | None = Field(serialization_alias="SFP", default=None)
     status: Status | None = None
 
 
@@ -349,13 +367,13 @@ class QosTelemetryCapabilities(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetPpb(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -370,9 +388,11 @@ class Sfp(RedfishModel):
     part_number: str | None = None
     serial_number: str | None = None
     status: Status | None = None
-    supported_sfp_types: list[SfpType] | None = Field(alias="SupportedSFPTypes", default=None)
+    supported_sfp_types: list[SfpType] | None = Field(
+        serialization_alias="SupportedSFPTypes", default=None
+    )
     type: SfpType | None = None
-    vendor_oui: str | None = Field(alias="VendorOUI", default=None)
+    vendor_oui: str | None = Field(serialization_alias="VendorOUI", default=None)
     version: str | None = None
 
 

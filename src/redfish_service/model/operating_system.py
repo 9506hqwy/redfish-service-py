@@ -16,7 +16,7 @@ class Actions(RedfishModel):
 
 
 class ContainerEngine(RedfishModel):
-    management_ur_is: list[str] | None = Field(alias="ManagementURIs", default=None)
+    management_ur_is: list[str] | None = Field(serialization_alias="ManagementURIs", default=None)
     supported_image_types: list[ImageTypes] | None = None
     type: ContainerEngineTypes | None = None
     version: str | None = None
@@ -41,10 +41,12 @@ class Links(RedfishModel):
 
 
 class OperatingSystem(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#OperatingSystem.v1_0_2.OperatingSystem")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#OperatingSystem.v1_0_2.OperatingSystem"
+    )
     actions: Actions | None = None
     applications: IdRef | None = None
     container_engines: list[ContainerEngine] | None = None
@@ -75,7 +77,7 @@ class OperatingSystemTypes(StrEnum):
 
 
 class VirtualMachineEngine(RedfishModel):
-    management_ur_is: list[str] | None = Field(alias="ManagementURIs", default=None)
+    management_ur_is: list[str] | None = Field(serialization_alias="ManagementURIs", default=None)
     supported_image_types: list[VirtualMachineImageTypes] | None = None
     type: VirtualMachineEngineTypes | None = None
     version: str | None = None

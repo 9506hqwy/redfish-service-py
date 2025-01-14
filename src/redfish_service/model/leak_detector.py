@@ -15,10 +15,12 @@ class Actions(RedfishModel):
 
 
 class LeakDetector(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#LeakDetector.v1_2_0.LeakDetector")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#LeakDetector.v1_2_0.LeakDetector"
+    )
     actions: Actions | None = None
     description: str | None = None
     detector_state: Health | None = None
@@ -32,7 +34,7 @@ class LeakDetector(RedfishModel):
     part_number: str | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     sensing_frequency: float | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None

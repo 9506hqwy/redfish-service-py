@@ -19,11 +19,11 @@ class Links(RedfishModel):
 
 
 class NetworkInterface(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#NetworkInterface.v1_2_2.NetworkInterface"
+        serialization_alias="@odata.type", default="#NetworkInterface.v1_2_2.NetworkInterface"
     )
     actions: Actions | None = None
     description: str | None = None

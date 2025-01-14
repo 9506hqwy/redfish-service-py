@@ -27,35 +27,36 @@ class HttpsProtocol(RedfishModel):
 
 
 class ManagerNetworkProtocol(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ManagerNetworkProtocol.v1_10_1.ManagerNetworkProtocol"
+        serialization_alias="@odata.type",
+        default="#ManagerNetworkProtocol.v1_10_1.ManagerNetworkProtocol",
     )
     actions: Actions | None = None
-    dhcp: Protocol | None = Field(alias="DHCP", default=None)
-    dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)
+    dhcp: Protocol | None = Field(serialization_alias="DHCP", default=None)
+    dhcpv6: Protocol | None = Field(serialization_alias="DHCPv6", default=None)
     description: str | None = None
-    fqdn: str | None = Field(alias="FQDN", default=None)
-    ftp: Protocol | None = Field(alias="FTP", default=None)
-    ftps: Protocol | None = Field(alias="FTPS", default=None)
-    http: Protocol | None = Field(alias="HTTP", default=None)
-    https: HttpsProtocol | None = Field(alias="HTTPS", default=None)
+    fqdn: str | None = Field(serialization_alias="FQDN", default=None)
+    ftp: Protocol | None = Field(serialization_alias="FTP", default=None)
+    ftps: Protocol | None = Field(serialization_alias="FTPS", default=None)
+    http: Protocol | None = Field(serialization_alias="HTTP", default=None)
+    https: HttpsProtocol | None = Field(serialization_alias="HTTPS", default=None)
     host_name: str | None = None
-    ipmi: Protocol | None = Field(alias="IPMI", default=None)
+    ipmi: Protocol | None = Field(serialization_alias="IPMI", default=None)
     id: str
-    kvmip: Protocol | None = Field(alias="KVMIP", default=None)
-    ntp: NtpProtocol | None = Field(alias="NTP", default=None)
+    kvmip: Protocol | None = Field(serialization_alias="KVMIP", default=None)
+    ntp: NtpProtocol | None = Field(serialization_alias="NTP", default=None)
     name: str
     oem: dict[str, Any] | None = None
     proxy: ProxyConfiguration | None = None
-    rdp: Protocol | None = Field(alias="RDP", default=None)
-    rfb: Protocol | None = Field(alias="RFB", default=None)
-    sftp: Protocol | None = Field(alias="SFTP", default=None)
-    snmp: SnmpProtocol | None = Field(alias="SNMP", default=None)
-    ssdp: SsdProtocol | None = Field(alias="SSDP", default=None)
-    ssh: Protocol | None = Field(alias="SSH", default=None)
+    rdp: Protocol | None = Field(serialization_alias="RDP", default=None)
+    rfb: Protocol | None = Field(serialization_alias="RFB", default=None)
+    sftp: Protocol | None = Field(serialization_alias="SFTP", default=None)
+    snmp: SnmpProtocol | None = Field(serialization_alias="SNMP", default=None)
+    ssdp: SsdProtocol | None = Field(serialization_alias="SSDP", default=None)
+    ssh: Protocol | None = Field(serialization_alias="SSH", default=None)
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
@@ -63,30 +64,30 @@ class ManagerNetworkProtocol(RedfishModel):
 
 class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    dhcp: Protocol | None = Field(alias="DHCP", default=None)
-    dhcpv6: Protocol | None = Field(alias="DHCPv6", default=None)
-    ftp: Protocol | None = Field(alias="FTP", default=None)
-    ftps: Protocol | None = Field(alias="FTPS", default=None)
-    http: Protocol | None = Field(alias="HTTP", default=None)
-    https: HttpsProtocol | None = Field(alias="HTTPS", default=None)
-    ipmi: Protocol | None = Field(alias="IPMI", default=None)
-    kvmip: Protocol | None = Field(alias="KVMIP", default=None)
-    ntp: NtpProtocol | None = Field(alias="NTP", default=None)
+    dhcp: Protocol | None = Field(serialization_alias="DHCP", default=None)
+    dhcpv6: Protocol | None = Field(serialization_alias="DHCPv6", default=None)
+    ftp: Protocol | None = Field(serialization_alias="FTP", default=None)
+    ftps: Protocol | None = Field(serialization_alias="FTPS", default=None)
+    http: Protocol | None = Field(serialization_alias="HTTP", default=None)
+    https: HttpsProtocol | None = Field(serialization_alias="HTTPS", default=None)
+    ipmi: Protocol | None = Field(serialization_alias="IPMI", default=None)
+    kvmip: Protocol | None = Field(serialization_alias="KVMIP", default=None)
+    ntp: NtpProtocol | None = Field(serialization_alias="NTP", default=None)
     oem: dict[str, Any] | None = None
     proxy: ProxyConfiguration | None = None
-    rdp: Protocol | None = Field(alias="RDP", default=None)
-    rfb: Protocol | None = Field(alias="RFB", default=None)
-    sftp: Protocol | None = Field(alias="SFTP", default=None)
-    snmp: SnmpProtocol | None = Field(alias="SNMP", default=None)
-    ssdp: SsdProtocol | None = Field(alias="SSDP", default=None)
-    ssh: Protocol | None = Field(alias="SSH", default=None)
+    rdp: Protocol | None = Field(serialization_alias="RDP", default=None)
+    rfb: Protocol | None = Field(serialization_alias="RFB", default=None)
+    sftp: Protocol | None = Field(serialization_alias="SFTP", default=None)
+    snmp: SnmpProtocol | None = Field(serialization_alias="SNMP", default=None)
+    ssdp: SsdProtocol | None = Field(serialization_alias="SSDP", default=None)
+    ssh: Protocol | None = Field(serialization_alias="SSH", default=None)
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
 
 
 class NtpProtocol(RedfishModel):
-    ntp_servers: list[str] | None = Field(alias="NTPServers", default=None)
+    ntp_servers: list[str] | None = Field(serialization_alias="NTPServers", default=None)
     network_supplied_servers: list[str] | None = None
     port: int | None = None
     protocol_enabled: bool | None = None
@@ -108,8 +109,10 @@ class ProxyConfiguration(RedfishModel):
     exclude_addresses: list[str] | None = None
     password: str | None = None
     password_set: bool | None = None
-    proxy_auto_config_uri: str | None = Field(alias="ProxyAutoConfigURI", default=None)
-    proxy_server_uri: str | None = Field(alias="ProxyServerURI", default=None)
+    proxy_auto_config_uri: str | None = Field(
+        serialization_alias="ProxyAutoConfigURI", default=None
+    )
+    proxy_server_uri: str | None = Field(serialization_alias="ProxyServerURI", default=None)
     username: str | None = None
 
 
@@ -127,11 +130,15 @@ class SnmpAuthenticationProtocols(StrEnum):
 class SnmpCommunity(RedfishModel):
     access_mode: SnmpCommunityAccessMode | None = None
     community_string: str | None = None
-    ipv4_address_range_lower: str | None = Field(alias="IPv4AddressRangeLower", default=None)
-    ipv4_address_range_upper: str | None = Field(alias="IPv4AddressRangeUpper", default=None)
+    ipv4_address_range_lower: str | None = Field(
+        serialization_alias="IPv4AddressRangeLower", default=None
+    )
+    ipv4_address_range_upper: str | None = Field(
+        serialization_alias="IPv4AddressRangeUpper", default=None
+    )
     name: str | None = None
     restrict_community_to_ipv4_address_range: bool | None = Field(
-        alias="RestrictCommunityToIPv4AddressRange", default=None
+        serialization_alias="RestrictCommunityToIPv4AddressRange", default=None
     )
 
 
@@ -153,9 +160,9 @@ class SnmpProtocol(RedfishModel):
     authentication_protocol: SnmpAuthenticationProtocols | None = None
     community_access_mode: SnmpCommunityAccessMode | None = None
     community_strings: list[SnmpCommunity] | None = None
-    enable_snmpv1: bool | None = Field(alias="EnableSNMPv1", default=None)
-    enable_snmpv2c: bool | None = Field(alias="EnableSNMPv2c", default=None)
-    enable_snmpv3: bool | None = Field(alias="EnableSNMPv3", default=None)
+    enable_snmpv1: bool | None = Field(serialization_alias="EnableSNMPv1", default=None)
+    enable_snmpv2c: bool | None = Field(serialization_alias="EnableSNMPv2c", default=None)
+    enable_snmpv3: bool | None = Field(serialization_alias="EnableSNMPv3", default=None)
     encryption_protocol: SnmpEncryptionProtocols | None = None
     engine_id: EngineId | None = None
     hide_community_strings: bool | None = None
@@ -165,8 +172,10 @@ class SnmpProtocol(RedfishModel):
 
 
 class SsdProtocol(RedfishModel):
-    notify_ipv6_scope: NotifyIpv6Scope | None = Field(alias="NotifyIPv6Scope", default=None)
+    notify_ipv6_scope: NotifyIpv6Scope | None = Field(
+        serialization_alias="NotifyIPv6Scope", default=None
+    )
     notify_multicast_interval_seconds: int | None = None
-    notify_ttl: int | None = Field(alias="NotifyTTL", default=None)
+    notify_ttl: int | None = Field(serialization_alias="NotifyTTL", default=None)
     port: int | None = None
     protocol_enabled: bool | None = None

@@ -13,20 +13,20 @@ from .resource import Status
 
 class Actions(RedfishModel):
     generate_ssh_identity_key_pair: GenerateSshIdentityKeyPair | None = Field(
-        alias="#AggregationSource.GenerateSSHIdentityKeyPair", default=None
+        serialization_alias="#AggregationSource.GenerateSSHIdentityKeyPair", default=None
     )
     remove_ssh_identity_key_pair: RemoveSshIdentityKeyPair | None = Field(
-        alias="#AggregationSource.RemoveSSHIdentityKeyPair", default=None
+        serialization_alias="#AggregationSource.RemoveSSHIdentityKeyPair", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class AggregationSource(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
+        serialization_alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
     )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
@@ -37,18 +37,18 @@ class AggregationSource(RedfishModel):
     name: str
     oem: dict[str, Any] | None = None
     password: str | None = None
-    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
-    ssh_settings: SshSettingsType | None = Field(alias="SSHSettings", default=None)
+    snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
+    ssh_settings: SshSettingsType | None = Field(serialization_alias="SSHSettings", default=None)
     status: Status | None = None
     user_name: str | None = None
 
 
 class AggregationSourceOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
+        serialization_alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
     )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
@@ -59,8 +59,8 @@ class AggregationSourceOnCreate(RedfishModel):
     name: str | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
-    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
-    ssh_settings: SshSettingsType | None = Field(alias="SSHSettings", default=None)
+    snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
+    ssh_settings: SshSettingsType | None = Field(serialization_alias="SSHSettings", default=None)
     status: Status | None = None
     user_name: str | None = None
 
@@ -72,8 +72,8 @@ class AggregationSourceOnUpdate(RedfishModelOnUpdate):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
-    snmp: SnmpSettings | None = Field(alias="SNMP", default=None)
-    ssh_settings: SshSettingsType | None = Field(alias="SSHSettings", default=None)
+    snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
+    ssh_settings: SshSettingsType | None = Field(serialization_alias="SSHSettings", default=None)
     status: Status | None = None
     user_name: str | None = None
 
@@ -84,8 +84,8 @@ class AggregationType(StrEnum):
 
 
 class GenerateSshIdentityKeyPair(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class GenerateSshIdentityKeyPairRequest(RedfishModel):
@@ -99,13 +99,13 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     resources_accessed: list[IdRef] | None = None
     resources_accessed_odata_count: int | None = Field(
-        alias="ResourcesAccessed@odata.count", default=None
+        serialization_alias="ResourcesAccessed@odata.count", default=None
     )
 
 
 class RemoveSshIdentityKeyPair(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SnmpAuthenticationProtocols(StrEnum):

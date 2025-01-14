@@ -22,7 +22,7 @@ class Manifest(RedfishModel):
 
 
 class Stanza(RedfishModel):
-    oem_stanza_type: str | None = Field(alias="OEMStanzaType", default=None)
+    oem_stanza_type: str | None = Field(serialization_alias="OEMStanzaType", default=None)
     request: dict[str, Any] | None = None
     response: dict[str, Any] | None = None
     stanza_id: str | None = None

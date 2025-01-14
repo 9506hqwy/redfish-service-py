@@ -13,11 +13,11 @@ class Actions(RedfishModel):
 
 
 class ServiceConditions(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ServiceConditions.v1_0_1.ServiceConditions"
+        serialization_alias="@odata.type", default="#ServiceConditions.v1_0_1.ServiceConditions"
     )
     actions: Actions | None = None
     conditions: list[Condition] | None = None

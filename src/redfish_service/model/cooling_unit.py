@@ -23,10 +23,12 @@ class CoolingEquipmentType(StrEnum):
 
 
 class CoolingUnit(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#CoolingUnit.v1_1_2.CoolingUnit")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#CoolingUnit.v1_1_2.CoolingUnit"
+    )
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -76,8 +78,12 @@ class CoolingUnitOnUpdate(RedfishModelOnUpdate):
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
-    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
+    chassis_odata_count: int | None = Field(
+        serialization_alias="Chassis@odata.count", default=None
+    )
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
-    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

@@ -12,15 +12,15 @@ from .software_inventory import MeasurementBlock
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#Chassis.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#Chassis.Reset", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Chassis(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Chassis.v1_25_2.Chassis")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_25_2.Chassis")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -32,7 +32,7 @@ class Chassis(RedfishModel):
     doors: Doors | None = None
     drives: IdRef | None = None
     electrical_source_manager_ur_is: list[str] | None = Field(
-        alias="ElectricalSourceManagerURIs", default=None
+        serialization_alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
     environment_metrics: IdRef | None = None
@@ -40,12 +40,12 @@ class Chassis(RedfishModel):
     fabric_adapters: IdRef | None = None
     heating_cooling_equipment_names: list[str] | None = None
     heating_cooling_manager_ur_is: list[str] | None = Field(
-        alias="HeatingCoolingManagerURIs", default=None
+        serialization_alias="HeatingCoolingManagerURIs", default=None
     )
     height_mm: float | None = None
     hot_pluggable: bool | None = None
     id: str
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
@@ -61,8 +61,8 @@ class Chassis(RedfishModel):
     name: str
     network_adapters: IdRef | None = None
     oem: dict[str, Any] | None = None
-    pcie_devices: IdRef | None = Field(alias="PCIeDevices", default=None)
-    pcie_slots: IdRef | None = Field(alias="PCIeSlots", default=None)
+    pcie_devices: IdRef | None = Field(serialization_alias="PCIeDevices", default=None)
+    pcie_slots: IdRef | None = Field(serialization_alias="PCIeSlots", default=None)
     part_number: str | None = None
     physical_security: PhysicalSecurity | None = None
     power: IdRef | None = None
@@ -71,7 +71,7 @@ class Chassis(RedfishModel):
     powered_by_parent: bool | None = None
     processors: IdRef | None = None
     replaceable: bool | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     sensors: IdRef | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
@@ -81,17 +81,19 @@ class Chassis(RedfishModel):
     thermal_managed_by_parent: bool | None = None
     thermal_subsystem: IdRef | None = None
     trusted_components: IdRef | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     version: str | None = None
     weight_kg: float | None = None
     width_mm: float | None = None
 
 
 class ChassisOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Chassis.v1_25_2.Chassis")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Chassis.v1_25_2.Chassis"
+    )
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -103,7 +105,7 @@ class ChassisOnCreate(RedfishModel):
     doors: Doors | None = None
     drives: IdRef | None = None
     electrical_source_manager_ur_is: list[str] | None = Field(
-        alias="ElectricalSourceManagerURIs", default=None
+        serialization_alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
     environment_metrics: IdRef | None = None
@@ -111,12 +113,12 @@ class ChassisOnCreate(RedfishModel):
     fabric_adapters: IdRef | None = None
     heating_cooling_equipment_names: list[str] | None = None
     heating_cooling_manager_ur_is: list[str] | None = Field(
-        alias="HeatingCoolingManagerURIs", default=None
+        serialization_alias="HeatingCoolingManagerURIs", default=None
     )
     height_mm: float | None = None
     hot_pluggable: bool | None = None
     id: str | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
@@ -132,8 +134,8 @@ class ChassisOnCreate(RedfishModel):
     name: str | None = None
     network_adapters: IdRef | None = None
     oem: dict[str, Any] | None = None
-    pcie_devices: IdRef | None = Field(alias="PCIeDevices", default=None)
-    pcie_slots: IdRef | None = Field(alias="PCIeSlots", default=None)
+    pcie_devices: IdRef | None = Field(serialization_alias="PCIeDevices", default=None)
+    pcie_slots: IdRef | None = Field(serialization_alias="PCIeSlots", default=None)
     part_number: str | None = None
     physical_security: PhysicalSecurity | None = None
     power: IdRef | None = None
@@ -142,7 +144,7 @@ class ChassisOnCreate(RedfishModel):
     powered_by_parent: bool | None = None
     processors: IdRef | None = None
     replaceable: bool | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     sensors: IdRef | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
@@ -152,7 +154,7 @@ class ChassisOnCreate(RedfishModel):
     thermal_managed_by_parent: bool | None = None
     thermal_subsystem: IdRef | None = None
     trusted_components: IdRef | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     version: str | None = None
     weight_kg: float | None = None
     width_mm: float | None = None
@@ -164,15 +166,15 @@ class ChassisOnUpdate(RedfishModelOnUpdate):
     doors: Doors | None = None
     drives: IdRef | None = None
     electrical_source_manager_ur_is: list[str] | None = Field(
-        alias="ElectricalSourceManagerURIs", default=None
+        serialization_alias="ElectricalSourceManagerURIs", default=None
     )
     electrical_source_names: list[str] | None = None
     environmental_class: EnvironmentalClass | None = None
     heating_cooling_equipment_names: list[str] | None = None
     heating_cooling_manager_ur_is: list[str] | None = Field(
-        alias="HeatingCoolingManagerURIs", default=None
+        serialization_alias="HeatingCoolingManagerURIs", default=None
     )
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
@@ -254,53 +256,75 @@ class IntrusionSensorReArm(StrEnum):
 
 class Links(RedfishModel):
     cables: list[IdRef] | None = None
-    cables_odata_count: int | None = Field(alias="Cables@odata.count", default=None)
+    cables_odata_count: int | None = Field(serialization_alias="Cables@odata.count", default=None)
     computer_systems: list[IdRef] | None = None
     computer_systems_odata_count: int | None = Field(
-        alias="ComputerSystems@odata.count", default=None
+        serialization_alias="ComputerSystems@odata.count", default=None
     )
     connected_cooling_loops: list[IdRef] | None = None
     connected_cooling_loops_odata_count: int | None = Field(
-        alias="ConnectedCoolingLoops@odata.count", default=None
+        serialization_alias="ConnectedCoolingLoops@odata.count", default=None
     )
     contained_by: IdRef | None = None
     contains: list[IdRef] | None = None
-    contains_odata_count: int | None = Field(alias="Contains@odata.count", default=None)
+    contains_odata_count: int | None = Field(
+        serialization_alias="Contains@odata.count", default=None
+    )
     cooled_by: list[IdRef] | None = None
-    cooled_by_odata_count: int | None = Field(alias="CooledBy@odata.count", default=None)
+    cooled_by_odata_count: int | None = Field(
+        serialization_alias="CooledBy@odata.count", default=None
+    )
     cooling_units: list[IdRef] | None = None
-    cooling_units_odata_count: int | None = Field(alias="CoolingUnits@odata.count", default=None)
+    cooling_units_odata_count: int | None = Field(
+        serialization_alias="CoolingUnits@odata.count", default=None
+    )
     drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    drives_odata_count: int | None = Field(serialization_alias="Drives@odata.count", default=None)
     facility: IdRef | None = None
     fans: list[IdRef] | None = None
-    fans_odata_count: int | None = Field(alias="Fans@odata.count", default=None)
+    fans_odata_count: int | None = Field(serialization_alias="Fans@odata.count", default=None)
     managed_by: list[IdRef] | None = None
-    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     managers_in_chassis: list[IdRef] | None = None
     managers_in_chassis_odata_count: int | None = Field(
-        alias="ManagersInChassis@odata.count", default=None
+        serialization_alias="ManagersInChassis@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
-    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
-    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
+    pcie_devices: list[IdRef] | None = Field(serialization_alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(
+        serialization_alias="PCIeDevices@odata.count", default=None
+    )
     power_distribution: IdRef | None = None
     power_outlets: list[IdRef] | None = None
-    power_outlets_odata_count: int | None = Field(alias="PowerOutlets@odata.count", default=None)
+    power_outlets_odata_count: int | None = Field(
+        serialization_alias="PowerOutlets@odata.count", default=None
+    )
     power_supplies: list[IdRef] | None = None
-    power_supplies_odata_count: int | None = Field(alias="PowerSupplies@odata.count", default=None)
+    power_supplies_odata_count: int | None = Field(
+        serialization_alias="PowerSupplies@odata.count", default=None
+    )
     powered_by: list[IdRef] | None = None
-    powered_by_odata_count: int | None = Field(alias="PoweredBy@odata.count", default=None)
+    powered_by_odata_count: int | None = Field(
+        serialization_alias="PoweredBy@odata.count", default=None
+    )
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )
     resource_blocks: list[IdRef] | None = None
     resource_blocks_odata_count: int | None = Field(
-        alias="ResourceBlocks@odata.count", default=None
+        serialization_alias="ResourceBlocks@odata.count", default=None
     )
     storage: list[IdRef] | None = None
-    storage_odata_count: int | None = Field(alias="Storage@odata.count", default=None)
+    storage_odata_count: int | None = Field(
+        serialization_alias="Storage@odata.count", default=None
+    )
     switches: list[IdRef] | None = None
-    switches_odata_count: int | None = Field(alias="Switches@odata.count", default=None)
+    switches_odata_count: int | None = Field(
+        serialization_alias="Switches@odata.count", default=None
+    )
 
 
 class PhysicalSecurity(RedfishModel):
@@ -310,8 +334,8 @@ class PhysicalSecurity(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):

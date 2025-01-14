@@ -17,10 +17,14 @@ class Actions(RedfishModel):
 
 class PcieLinks(RedfishModel):
     oem: dict[str, Any] | None = None
-    pcie_device: list[IdRef] | None = Field(alias="PCIeDevice", default=None)
-    pcie_device_odata_count: int | None = Field(alias="PCIeDevice@odata.count", default=None)
+    pcie_device: list[IdRef] | None = Field(serialization_alias="PCIeDevice", default=None)
+    pcie_device_odata_count: int | None = Field(
+        serialization_alias="PCIeDevice@odata.count", default=None
+    )
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )
 
 
 class PcieSlot(RedfishModel):
@@ -30,16 +34,18 @@ class PcieSlot(RedfishModel):
     location: Location | None = None
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
-    pcie_type: PcieTypes | None = Field(alias="PCIeType", default=None)
+    pcie_type: PcieTypes | None = Field(serialization_alias="PCIeType", default=None)
     slot_type: SlotTypes | None = None
     status: Status | None = None
 
 
 class PcieSlots(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#PCIeSlots.v1_6_1.PCIeSlots")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#PCIeSlots.v1_6_1.PCIeSlots"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str

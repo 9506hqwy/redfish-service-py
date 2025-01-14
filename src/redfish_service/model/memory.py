@@ -14,31 +14,35 @@ from .software_inventory import MeasurementBlock
 
 class Actions(RedfishModel):
     disable_master_passphrase: DisableMasterPassphrase | None = Field(
-        alias="#Memory.DisableMasterPassphrase", default=None
+        serialization_alias="#Memory.DisableMasterPassphrase", default=None
     )
     disable_passphrase: DisablePassphrase | None = Field(
-        alias="#Memory.DisablePassphrase", default=None
+        serialization_alias="#Memory.DisablePassphrase", default=None
     )
     freeze_security_state: FreezeSecurityState | None = Field(
-        alias="#Memory.FreezeSecurityState", default=None
+        serialization_alias="#Memory.FreezeSecurityState", default=None
     )
     inject_persistent_poison: InjectPersistentPoison | None = Field(
-        alias="#Memory.InjectPersistentPoison", default=None
+        serialization_alias="#Memory.InjectPersistentPoison", default=None
     )
-    overwrite_unit: OverwriteUnit | None = Field(alias="#Memory.OverwriteUnit", default=None)
-    reset: Reset | None = Field(alias="#Memory.Reset", default=None)
+    overwrite_unit: OverwriteUnit | None = Field(
+        serialization_alias="#Memory.OverwriteUnit", default=None
+    )
+    reset: Reset | None = Field(serialization_alias="#Memory.Reset", default=None)
     reset_to_defaults: ResetToDefaults | None = Field(
-        alias="#Memory.ResetToDefaults", default=None
+        serialization_alias="#Memory.ResetToDefaults", default=None
     )
-    scan_media: ScanMedia | None = Field(alias="#Memory.ScanMedia", default=None)
+    scan_media: ScanMedia | None = Field(serialization_alias="#Memory.ScanMedia", default=None)
     secure_erase_unit: SecureEraseUnit | None = Field(
-        alias="#Memory.SecureEraseUnit", default=None
+        serialization_alias="#Memory.SecureEraseUnit", default=None
     )
     set_master_passphrase: SetMasterPassphrase | None = Field(
-        alias="#Memory.SetMasterPassphrase", default=None
+        serialization_alias="#Memory.SetMasterPassphrase", default=None
     )
-    set_passphrase: SetPassphrase | None = Field(alias="#Memory.SetPassphrase", default=None)
-    unlock_unit: UnlockUnit | None = Field(alias="#Memory.UnlockUnit", default=None)
+    set_passphrase: SetPassphrase | None = Field(
+        serialization_alias="#Memory.SetPassphrase", default=None
+    )
+    unlock_unit: UnlockUnit | None = Field(serialization_alias="#Memory.UnlockUnit", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -59,14 +63,16 @@ class BaseModuleType(StrEnum):
 class Cxl(RedfishModel):
     label_storage_size_bytes: int | None = None
     staged_non_volatile_size_mib: int | None = Field(
-        alias="StagedNonVolatileSizeMiB", default=None
+        serialization_alias="StagedNonVolatileSizeMiB", default=None
     )
-    staged_volatile_size_mib: int | None = Field(alias="StagedVolatileSizeMiB", default=None)
+    staged_volatile_size_mib: int | None = Field(
+        serialization_alias="StagedVolatileSizeMiB", default=None
+    )
 
 
 class DisableMasterPassphrase(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class DisableMasterPassphraseRequest(RedfishModel):
@@ -75,8 +81,8 @@ class DisableMasterPassphraseRequest(RedfishModel):
 
 
 class DisablePassphrase(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class DisablePassphraseRequest(RedfishModel):
@@ -92,8 +98,8 @@ class ErrorCorrection(StrEnum):
 
 
 class FreezeSecurityState(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class HealthData(RedfishModel):
@@ -101,8 +107,8 @@ class HealthData(RedfishModel):
 
 
 class InjectPersistentPoison(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class InjectPersistentPoisonRequest(RedfishModel):
@@ -111,44 +117,56 @@ class InjectPersistentPoisonRequest(RedfishModel):
 
 class Links(RedfishModel):
     batteries: list[IdRef] | None = None
-    batteries_odata_count: int | None = Field(alias="Batteries@odata.count", default=None)
+    batteries_odata_count: int | None = Field(
+        serialization_alias="Batteries@odata.count", default=None
+    )
     chassis: IdRef | None = None
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     memory_media_sources: list[IdRef] | None = None
     memory_media_sources_odata_count: int | None = Field(
-        alias="MemoryMediaSources@odata.count", default=None
+        serialization_alias="MemoryMediaSources@odata.count", default=None
     )
     memory_region_media_sources: list[IdRef] | None = None
     memory_region_media_sources_odata_count: int | None = Field(
-        alias="MemoryRegionMediaSources@odata.count", default=None
+        serialization_alias="MemoryRegionMediaSources@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )
 
 
 class Memory(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Memory.v1_20_0.Memory")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_20_0.Memory")
     actions: Actions | None = None
-    allocation_alignment_mib: int | None = Field(alias="AllocationAlignmentMiB", default=None)
-    allocation_increment_mib: int | None = Field(alias="AllocationIncrementMiB", default=None)
-    allowed_speeds_mhz: list[int] | None = Field(alias="AllowedSpeedsMHz", default=None)
+    allocation_alignment_mib: int | None = Field(
+        serialization_alias="AllocationAlignmentMiB", default=None
+    )
+    allocation_increment_mib: int | None = Field(
+        serialization_alias="AllocationIncrementMiB", default=None
+    )
+    allowed_speeds_mhz: list[int] | None = Field(
+        serialization_alias="AllowedSpeedsMHz", default=None
+    )
     assembly: IdRef | None = None
     base_module_type: BaseModuleType | None = None
     bus_width_bits: int | None = None
-    cxl: Cxl | None = Field(alias="CXL", default=None)
+    cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
     cache_level: int | None = None
-    cache_size_mib: int | None = Field(alias="CacheSizeMiB", default=None)
-    capacity_mib: int | None = Field(alias="CapacityMiB", default=None)
+    cache_size_mib: int | None = Field(serialization_alias="CacheSizeMiB", default=None)
+    capacity_mib: int | None = Field(serialization_alias="CapacityMiB", default=None)
     certificates: IdRef | None = None
     configuration_locked: bool | None = None
     data_width_bits: int | None = None
     description: str | None = None
-    device_id: str | None = Field(alias="DeviceID", default=None)
+    device_id: str | None = Field(serialization_alias="DeviceID", default=None)
     device_locator: str | None = None
     enabled: bool | None = None
     environment_metrics: IdRef | None = None
@@ -164,47 +182,55 @@ class Memory(RedfishModel):
     location: Location | None = None
     location_indicator_active: bool | None = None
     log: IdRef | None = None
-    logical_size_mib: int | None = Field(alias="LogicalSizeMiB", default=None)
+    logical_size_mib: int | None = Field(serialization_alias="LogicalSizeMiB", default=None)
     manufacturer: str | None = None
-    max_tdp_milli_watts: list[int] | None = Field(alias="MaxTDPMilliWatts", default=None)
+    max_tdp_milli_watts: list[int] | None = Field(
+        serialization_alias="MaxTDPMilliWatts", default=None
+    )
     measurements: list[MeasurementBlock] | None = None
     memory_device_type: MemoryDeviceType | None = None
     memory_location: MemoryLocation | None = None
     memory_media: list[MemoryMedia] | None = None
     memory_subsystem_controller_manufacturer_id: str | None = Field(
-        alias="MemorySubsystemControllerManufacturerID", default=None
+        serialization_alias="MemorySubsystemControllerManufacturerID", default=None
     )
     memory_subsystem_controller_product_id: str | None = Field(
-        alias="MemorySubsystemControllerProductID", default=None
+        serialization_alias="MemorySubsystemControllerProductID", default=None
     )
     memory_type: MemoryType | None = None
     metrics: IdRef | None = None
     model: str | None = None
-    module_manufacturer_id: str | None = Field(alias="ModuleManufacturerID", default=None)
-    module_product_id: str | None = Field(alias="ModuleProductID", default=None)
+    module_manufacturer_id: str | None = Field(
+        serialization_alias="ModuleManufacturerID", default=None
+    )
+    module_product_id: str | None = Field(serialization_alias="ModuleProductID", default=None)
     name: str
-    non_volatile_size_limit_mib: int | None = Field(alias="NonVolatileSizeLimitMiB", default=None)
-    non_volatile_size_mib: int | None = Field(alias="NonVolatileSizeMiB", default=None)
+    non_volatile_size_limit_mib: int | None = Field(
+        serialization_alias="NonVolatileSizeLimitMiB", default=None
+    )
+    non_volatile_size_mib: int | None = Field(
+        serialization_alias="NonVolatileSizeMiB", default=None
+    )
     oem: dict[str, Any] | None = None
     operating_memory_modes: list[OperatingMemoryModes] | None = None
     operating_speed_mhz: int | None = None
     operating_speed_range_mhz: ControlRangeExcerpt | None = Field(
-        alias="OperatingSpeedRangeMHz", default=None
+        serialization_alias="OperatingSpeedRangeMHz", default=None
     )
     part_number: str | None = None
     persistent_region_number_limit: int | None = None
     persistent_region_size_limit_mib: int | None = Field(
-        alias="PersistentRegionSizeLimitMiB", default=None
+        serialization_alias="PersistentRegionSizeLimitMiB", default=None
     )
     persistent_region_size_max_mib: int | None = Field(
-        alias="PersistentRegionSizeMaxMiB", default=None
+        serialization_alias="PersistentRegionSizeMaxMiB", default=None
     )
     poison_list_max_media_error_records: int | None = None
     power_management_ic_manufacturer_id: str | None = Field(
-        alias="PowerManagementICManufacturerID", default=None
+        serialization_alias="PowerManagementICManufacturerID", default=None
     )
     power_management_ic_revision_id: str | None = Field(
-        alias="PowerManagementICRevisionID", default=None
+        serialization_alias="PowerManagementICRevisionID", default=None
     )
     power_management_policy: PowerManagementPolicy | None = None
     rank_count: int | None = None
@@ -216,23 +242,25 @@ class Memory(RedfishModel):
     spare_device_count: int | None = None
     spare_part_number: str | None = None
     status: Status | None = None
-    subsystem_device_id: str | None = Field(alias="SubsystemDeviceID", default=None)
-    subsystem_vendor_id: str | None = Field(alias="SubsystemVendorID", default=None)
-    vendor_id: str | None = Field(alias="VendorID", default=None)
+    subsystem_device_id: str | None = Field(serialization_alias="SubsystemDeviceID", default=None)
+    subsystem_vendor_id: str | None = Field(serialization_alias="SubsystemVendorID", default=None)
+    vendor_id: str | None = Field(serialization_alias="VendorID", default=None)
     volatile_region_number_limit: int | None = None
     volatile_region_size_limit_mib: int | None = Field(
-        alias="VolatileRegionSizeLimitMiB", default=None
+        serialization_alias="VolatileRegionSizeLimitMiB", default=None
     )
     volatile_region_size_max_mib: int | None = Field(
-        alias="VolatileRegionSizeMaxMiB", default=None
+        serialization_alias="VolatileRegionSizeMaxMiB", default=None
     )
-    volatile_size_limit_mib: int | None = Field(alias="VolatileSizeLimitMiB", default=None)
-    volatile_size_mib: int | None = Field(alias="VolatileSizeMiB", default=None)
+    volatile_size_limit_mib: int | None = Field(
+        serialization_alias="VolatileSizeLimitMiB", default=None
+    )
+    volatile_size_mib: int | None = Field(serialization_alias="VolatileSizeMiB", default=None)
 
 
 class MemoryOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    cxl: Cxl | None = Field(alias="CXL", default=None)
+    cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
     enabled: bool | None = None
     health_data: HealthData | None = None
     links: Links | None = None
@@ -240,10 +268,12 @@ class MemoryOnUpdate(RedfishModelOnUpdate):
     location_indicator_active: bool | None = None
     measurements: list[MeasurementBlock] | None = None
     memory_location: MemoryLocation | None = None
-    non_volatile_size_limit_mib: int | None = Field(alias="NonVolatileSizeLimitMiB", default=None)
+    non_volatile_size_limit_mib: int | None = Field(
+        serialization_alias="NonVolatileSizeLimitMiB", default=None
+    )
     oem: dict[str, Any] | None = None
     operating_speed_range_mhz: ControlRangeExcerpt | None = Field(
-        alias="OperatingSpeedRangeMHz", default=None
+        serialization_alias="OperatingSpeedRangeMHz", default=None
     )
     poison_list_max_media_error_records: int | None = None
     power_management_policy: PowerManagementPolicy | None = None
@@ -252,7 +282,9 @@ class MemoryOnUpdate(RedfishModelOnUpdate):
     security_state: SecurityStates | None = None
     security_states: SecurityStateInfo | None = None
     status: Status | None = None
-    volatile_size_limit_mib: int | None = Field(alias="VolatileSizeLimitMiB", default=None)
+    volatile_size_limit_mib: int | None = Field(
+        serialization_alias="VolatileSizeLimitMiB", default=None
+    )
 
 
 class MemoryClassification(StrEnum):
@@ -328,8 +360,8 @@ class OperatingMemoryModes(StrEnum):
 
 
 class OverwriteUnit(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class OverwriteUnitRequest(RedfishModel):
@@ -339,7 +371,7 @@ class OverwriteUnitRequest(RedfishModel):
 
 class PowerManagementPolicy(RedfishModel):
     average_power_budget_milli_watts: int | None = None
-    max_tdp_milli_watts: int | None = Field(alias="MaxTDPMilliWatts", default=None)
+    max_tdp_milli_watts: int | None = Field(serialization_alias="MaxTDPMilliWatts", default=None)
     peak_power_budget_milli_watts: int | None = None
     policy_enabled: bool | None = None
 
@@ -347,16 +379,16 @@ class PowerManagementPolicy(RedfishModel):
 class RegionSet(RedfishModel):
     master_passphrase_enabled: bool | None = None
     memory_classification: MemoryClassification | None = None
-    offset_mib: int | None = Field(alias="OffsetMiB", default=None)
+    offset_mib: int | None = Field(serialization_alias="OffsetMiB", default=None)
     passphrase_enabled: bool | None = None
     passphrase_state: bool | None = None
     region_id: str | None = None
-    size_mib: int | None = Field(alias="SizeMiB", default=None)
+    size_mib: int | None = Field(serialization_alias="SizeMiB", default=None)
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -364,13 +396,13 @@ class ResetRequest(RedfishModel):
 
 
 class ResetToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ScanMedia(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ScanMediaRequest(RedfishModel):
@@ -380,8 +412,8 @@ class ScanMediaRequest(RedfishModel):
 
 
 class SecureEraseUnit(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SecureEraseUnitRequest(RedfishModel):
@@ -413,8 +445,8 @@ class SecurityStates(StrEnum):
 
 
 class SetMasterPassphrase(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetMasterPassphraseRequest(RedfishModel):
@@ -423,8 +455,8 @@ class SetMasterPassphraseRequest(RedfishModel):
 
 
 class SetPassphrase(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetPassphraseRequest(RedfishModel):
@@ -433,8 +465,8 @@ class SetPassphraseRequest(RedfishModel):
 
 
 class UnlockUnit(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class UnlockUnitRequest(RedfishModel):

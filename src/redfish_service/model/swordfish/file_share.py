@@ -18,12 +18,14 @@ class Actions(RedfishModel):
 
 
 class FileShare(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#FileShare.v1_3_0.FileShare")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#FileShare.v1_3_0.FileShare"
+    )
     actions: Actions | None = None
-    ca_supported: bool | None = Field(alias="CASupported", default=None)
+    ca_supported: bool | None = Field(serialization_alias="CASupported", default=None)
     default_access_capabilities: list[StorageAccessCapability] | None = None
     description: str | None = None
     ethernet_interfaces: IdRef | None = None
@@ -46,12 +48,14 @@ class FileShare(RedfishModel):
 
 
 class FileShareOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#FileShare.v1_3_0.FileShare")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#FileShare.v1_3_0.FileShare"
+    )
     actions: Actions | None = None
-    ca_supported: bool | None = Field(alias="CASupported", default=None)
+    ca_supported: bool | None = Field(serialization_alias="CASupported", default=None)
     default_access_capabilities: list[StorageAccessCapability] | None = None
     description: str | None = None
     ethernet_interfaces: IdRef | None = None
@@ -75,7 +79,7 @@ class FileShareOnCreate(RedfishModel):
 
 class FileShareOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    ca_supported: bool | None = Field(alias="CASupported", default=None)
+    ca_supported: bool | None = Field(serialization_alias="CASupported", default=None)
     file_share_quota_type: QuotaType | None = None
     file_share_total_quota_bytes: int | None = None
     links: Links | None = None

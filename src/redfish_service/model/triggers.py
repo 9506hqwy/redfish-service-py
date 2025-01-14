@@ -29,7 +29,7 @@ class DiscreteTriggerConditionEnum(StrEnum):
 class Links(RedfishModel):
     metric_report_definitions: list[IdRef] | None = None
     metric_report_definitions_odata_count: int | None = Field(
-        alias="MetricReportDefinitions@odata.count", default=None
+        serialization_alias="MetricReportDefinitions@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -72,10 +72,10 @@ class TriggerActionMessage(StrEnum):
 
 
 class Triggers(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Triggers.v1_4_0.Triggers")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Triggers.v1_4_0.Triggers")
     actions: Actions | None = None
     description: str | None = None
     discrete_trigger_condition: DiscreteTriggerConditionEnum | None = None
@@ -99,10 +99,12 @@ class Triggers(RedfishModel):
 
 
 class TriggersOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Triggers.v1_4_0.Triggers")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Triggers.v1_4_0.Triggers"
+    )
     actions: Actions | None = None
     description: str | None = None
     discrete_trigger_condition: DiscreteTriggerConditionEnum | None = None

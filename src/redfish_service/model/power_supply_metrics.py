@@ -19,17 +19,17 @@ from .sensor import (
 
 class Actions(RedfishModel):
     reset_metrics: ResetMetrics | None = Field(
-        alias="#PowerSupplyMetrics.ResetMetrics", default=None
+        serialization_alias="#PowerSupplyMetrics.ResetMetrics", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class PowerSupplyMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#PowerSupplyMetrics.v1_1_2.PowerSupplyMetrics"
+        serialization_alias="@odata.type", default="#PowerSupplyMetrics.v1_1_2.PowerSupplyMetrics"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -37,7 +37,7 @@ class PowerSupplyMetrics(RedfishModel):
     fan_speed_percent: SensorFanExcerpt | None = None
     fan_speeds_percent: list[SensorFanArrayExcerpt] | None = None
     fan_speeds_percent_odata_count: int | None = Field(
-        alias="FanSpeedsPercent@odata.count", default=None
+        serialization_alias="FanSpeedsPercent@odata.count", default=None
     )
     frequency_hz: SensorExcerpt | None = None
     id: str
@@ -49,18 +49,20 @@ class PowerSupplyMetrics(RedfishModel):
     output_power_watts: SensorPowerExcerpt | None = None
     rail_current_amps: list[SensorCurrentExcerpt] | None = None
     rail_current_amps_odata_count: int | None = Field(
-        alias="RailCurrentAmps@odata.count", default=None
+        serialization_alias="RailCurrentAmps@odata.count", default=None
     )
     rail_power_watts: list[SensorPowerExcerpt] | None = None
     rail_power_watts_odata_count: int | None = Field(
-        alias="RailPowerWatts@odata.count", default=None
+        serialization_alias="RailPowerWatts@odata.count", default=None
     )
     rail_voltage: list[SensorVoltageExcerpt] | None = None
-    rail_voltage_odata_count: int | None = Field(alias="RailVoltage@odata.count", default=None)
+    rail_voltage_odata_count: int | None = Field(
+        serialization_alias="RailVoltage@odata.count", default=None
+    )
     status: Status | None = None
     temperature_celsius: SensorExcerpt | None = None
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)

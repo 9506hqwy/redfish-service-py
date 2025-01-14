@@ -9,10 +9,12 @@ from . import RedfishModel
 
 
 class ActionInfo(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ActionInfo.v1_4_2.ActionInfo")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ActionInfo.v1_4_2.ActionInfo"
+    )
     description: str | None = None
     id: str
     name: str

@@ -34,22 +34,24 @@ class CompositionStatus(RedfishModel):
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
-    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
+    chassis_odata_count: int | None = Field(
+        serialization_alias="Chassis@odata.count", default=None
+    )
     computer_systems: list[IdRef] | None = None
     computer_systems_odata_count: int | None = Field(
-        alias="ComputerSystems@odata.count", default=None
+        serialization_alias="ComputerSystems@odata.count", default=None
     )
     consuming_resource_blocks: list[IdRef] | None = None
     consuming_resource_blocks_odata_count: int | None = Field(
-        alias="ConsumingResourceBlocks@odata.count", default=None
+        serialization_alias="ConsumingResourceBlocks@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     supplying_resource_blocks: list[IdRef] | None = None
     supplying_resource_blocks_odata_count: int | None = Field(
-        alias="SupplyingResourceBlocks@odata.count", default=None
+        serialization_alias="SupplyingResourceBlocks@odata.count", default=None
     )
     zones: list[IdRef] | None = None
-    zones_odata_count: int | None = Field(alias="Zones@odata.count", default=None)
+    zones_odata_count: int | None = Field(serialization_alias="Zones@odata.count", default=None)
 
 
 class PoolType(StrEnum):
@@ -59,85 +61,99 @@ class PoolType(StrEnum):
 
 
 class ResourceBlock(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ResourceBlock.v1_4_3.ResourceBlock")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ResourceBlock.v1_4_3.ResourceBlock"
+    )
     actions: Actions | None = None
     client: str | None = None
     composition_status: CompositionStatus
     computer_systems: list[IdRef] | None = None
     computer_systems_odata_count: int | None = Field(
-        alias="ComputerSystems@odata.count", default=None
+        serialization_alias="ComputerSystems@odata.count", default=None
     )
     description: str | None = None
     drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    drives_odata_count: int | None = Field(serialization_alias="Drives@odata.count", default=None)
     ethernet_interfaces: list[IdRef] | None = None
     ethernet_interfaces_odata_count: int | None = Field(
-        alias="EthernetInterfaces@odata.count", default=None
+        serialization_alias="EthernetInterfaces@odata.count", default=None
     )
     id: str
     links: Links | None = None
     memory: list[IdRef] | None = None
-    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    memory_odata_count: int | None = Field(serialization_alias="Memory@odata.count", default=None)
     name: str
     network_interfaces: list[IdRef] | None = None
     network_interfaces_odata_count: int | None = Field(
-        alias="NetworkInterfaces@odata.count", default=None
+        serialization_alias="NetworkInterfaces@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     pool: PoolType | None = None
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )
     resource_block_type: list[ResourceBlockType]
     simple_storage: list[IdRef] | None = None
-    simple_storage_odata_count: int | None = Field(alias="SimpleStorage@odata.count", default=None)
+    simple_storage_odata_count: int | None = Field(
+        serialization_alias="SimpleStorage@odata.count", default=None
+    )
     status: Status | None = None
     storage: list[IdRef] | None = None
-    storage_odata_count: int | None = Field(alias="Storage@odata.count", default=None)
+    storage_odata_count: int | None = Field(
+        serialization_alias="Storage@odata.count", default=None
+    )
 
 
 class ResourceBlockOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#ResourceBlock.v1_4_3.ResourceBlock"
+        serialization_alias="@odata.type", default="#ResourceBlock.v1_4_3.ResourceBlock"
     )
     actions: Actions | None = None
     client: str | None = None
     composition_status: CompositionStatus | None = None
     computer_systems: list[IdRef] | None = None
     computer_systems_odata_count: int | None = Field(
-        alias="ComputerSystems@odata.count", default=None
+        serialization_alias="ComputerSystems@odata.count", default=None
     )
     description: str | None = None
     drives: list[IdRef] | None = None
-    drives_odata_count: int | None = Field(alias="Drives@odata.count", default=None)
+    drives_odata_count: int | None = Field(serialization_alias="Drives@odata.count", default=None)
     ethernet_interfaces: list[IdRef] | None = None
     ethernet_interfaces_odata_count: int | None = Field(
-        alias="EthernetInterfaces@odata.count", default=None
+        serialization_alias="EthernetInterfaces@odata.count", default=None
     )
     id: str | None = None
     links: Links | None = None
     memory: list[IdRef] | None = None
-    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    memory_odata_count: int | None = Field(serialization_alias="Memory@odata.count", default=None)
     name: str | None = None
     network_interfaces: list[IdRef] | None = None
     network_interfaces_odata_count: int | None = Field(
-        alias="NetworkInterfaces@odata.count", default=None
+        serialization_alias="NetworkInterfaces@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     pool: PoolType | None = None
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )
     resource_block_type: list[ResourceBlockType] | None = None
     simple_storage: list[IdRef] | None = None
-    simple_storage_odata_count: int | None = Field(alias="SimpleStorage@odata.count", default=None)
+    simple_storage_odata_count: int | None = Field(
+        serialization_alias="SimpleStorage@odata.count", default=None
+    )
     status: Status | None = None
     storage: list[IdRef] | None = None
-    storage_odata_count: int | None = Field(alias="Storage@odata.count", default=None)
+    storage_odata_count: int | None = Field(
+        serialization_alias="Storage@odata.count", default=None
+    )
 
 
 class ResourceBlockOnUpdate(RedfishModelOnUpdate):

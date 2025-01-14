@@ -11,11 +11,12 @@ from .resource import Status
 
 
 class AccelerationFunction(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#AccelerationFunction.v1_0_5.AccelerationFunction"
+        serialization_alias="@odata.type",
+        default="#AccelerationFunction.v1_0_5.AccelerationFunction",
     )
     acceleration_function_type: AccelerationFunctionType | None = None
     actions: Actions | None = None
@@ -28,7 +29,7 @@ class AccelerationFunction(RedfishModel):
     oem: dict[str, Any] | None = None
     power_watts: int | None = None
     status: Status | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     version: str | None = None
 
 
@@ -49,7 +50,11 @@ class Actions(RedfishModel):
 
 class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )

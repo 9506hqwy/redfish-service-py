@@ -15,10 +15,12 @@ class Actions(RedfishModel):
 
 
 class ContainerImage(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ContainerImage.v1_0_1.ContainerImage")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ContainerImage.v1_0_1.ContainerImage"
+    )
     actions: Actions | None = None
     create_time: str | None = None
     description: str | None = None
@@ -41,6 +43,8 @@ class ImageTypes(StrEnum):
 
 class Links(RedfishModel):
     containers: list[IdRef] | None = None
-    containers_odata_count: int | None = Field(alias="Containers@odata.count", default=None)
+    containers_odata_count: int | None = Field(
+        serialization_alias="Containers@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     software_image: IdRef | None = None

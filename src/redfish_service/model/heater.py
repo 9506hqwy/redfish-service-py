@@ -15,10 +15,10 @@ class Actions(RedfishModel):
 
 
 class Heater(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Heater.v1_0_2.Heater")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Heater.v1_0_2.Heater")
     actions: Actions | None = None
     assembly: IdRef | None = None
     description: str | None = None
@@ -50,17 +50,21 @@ class HeaterOnUpdate(RedfishModelOnUpdate):
 
 class Links(RedfishModel):
     managers: list[IdRef] | None = None
-    managers_odata_count: int | None = Field(alias="Managers@odata.count", default=None)
+    managers_odata_count: int | None = Field(
+        serialization_alias="Managers@odata.count", default=None
+    )
     memory: list[IdRef] | None = None
-    memory_odata_count: int | None = Field(alias="Memory@odata.count", default=None)
+    memory_odata_count: int | None = Field(serialization_alias="Memory@odata.count", default=None)
     network_adapters: list[IdRef] | None = None
     network_adapters_odata_count: int | None = Field(
-        alias="NetworkAdapters@odata.count", default=None
+        serialization_alias="NetworkAdapters@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )
     storage_controllers: list[IdRef] | None = None
     storage_controllers_odata_count: int | None = Field(
-        alias="StorageControllers@odata.count", default=None
+        serialization_alias="StorageControllers@odata.count", default=None
     )

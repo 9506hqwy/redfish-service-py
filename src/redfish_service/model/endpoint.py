@@ -29,17 +29,17 @@ class ConnectedEntity(RedfishModel):
 
 
 class Endpoint(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Endpoint.v1_8_2.Endpoint")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Endpoint.v1_8_2.Endpoint")
     actions: Actions | None = None
     connected_entities: list[ConnectedEntity] | None = None
     description: str | None = None
     endpoint_protocol: Protocol | None = None
     host_reservation_memory_bytes: int | None = None
     ip_transport_details: list[IpTransportDetails] | None = Field(
-        alias="IPTransportDetails", default=None
+        serialization_alias="IPTransportDetails", default=None
     )
     id: str
     identifiers: list[Identifier] | None = None
@@ -48,22 +48,26 @@ class Endpoint(RedfishModel):
     oem: dict[str, Any] | None = None
     pci_id: PciId | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
     status: Status | None = None
 
 
 class EndpointOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Endpoint.v1_8_2.Endpoint")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Endpoint.v1_8_2.Endpoint"
+    )
     actions: Actions | None = None
     connected_entities: list[ConnectedEntity] | None = None
     description: str | None = None
     endpoint_protocol: Protocol | None = None
     host_reservation_memory_bytes: int | None = None
     ip_transport_details: list[IpTransportDetails] | None = Field(
-        alias="IPTransportDetails", default=None
+        serialization_alias="IPTransportDetails", default=None
     )
     id: str | None = None
     identifiers: list[Identifier] | None = None
@@ -72,7 +76,9 @@ class EndpointOnCreate(RedfishModel):
     oem: dict[str, Any] | None = None
     pci_id: PciId | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
     status: Status | None = None
 
 
@@ -80,7 +86,7 @@ class EndpointOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     connected_entities: list[ConnectedEntity] | None = None
     ip_transport_details: list[IpTransportDetails] | None = Field(
-        alias="IPTransportDetails", default=None
+        serialization_alias="IPTransportDetails", default=None
     )
     identifiers: list[Identifier] | None = None
     links: Links | None = None
@@ -118,47 +124,53 @@ class EntityType(StrEnum):
 
 
 class Gcid(RedfishModel):
-    cid: str | None = Field(alias="CID", default=None)
-    sid: str | None = Field(alias="SID", default=None)
+    cid: str | None = Field(serialization_alias="CID", default=None)
+    sid: str | None = Field(serialization_alias="SID", default=None)
 
 
 class GenZ(RedfishModel):
     access_key: str | None = None
-    gcid: Gcid | None = Field(alias="GCID", default=None)
+    gcid: Gcid | None = Field(serialization_alias="GCID", default=None)
     region_key: str | None = None
 
 
 class IpTransportDetails(RedfishModel):
-    ipv4_address: Ipv4Address | None = Field(alias="IPv4Address", default=None)
-    ipv6_address: Ipv6Address | None = Field(alias="IPv6Address", default=None)
+    ipv4_address: Ipv4Address | None = Field(serialization_alias="IPv4Address", default=None)
+    ipv6_address: Ipv6Address | None = Field(serialization_alias="IPv6Address", default=None)
     port: int | None = None
     transport_protocol: Protocol | None = None
 
 
 class Links(RedfishModel):
     address_pools: list[IdRef] | None = None
-    address_pools_odata_count: int | None = Field(alias="AddressPools@odata.count", default=None)
+    address_pools_odata_count: int | None = Field(
+        serialization_alias="AddressPools@odata.count", default=None
+    )
     connected_ports: list[IdRef] | None = None
     connected_ports_odata_count: int | None = Field(
-        alias="ConnectedPorts@odata.count", default=None
+        serialization_alias="ConnectedPorts@odata.count", default=None
     )
     connections: list[IdRef] | None = None
-    connections_odata_count: int | None = Field(alias="Connections@odata.count", default=None)
+    connections_odata_count: int | None = Field(
+        serialization_alias="Connections@odata.count", default=None
+    )
     local_ports: list[IdRef] | None = None
-    local_ports_odata_count: int | None = Field(alias="LocalPorts@odata.count", default=None)
+    local_ports_odata_count: int | None = Field(
+        serialization_alias="LocalPorts@odata.count", default=None
+    )
     mutually_exclusive_endpoints: list[IdRef] | None = None
     mutually_exclusive_endpoints_odata_count: int | None = Field(
-        alias="MutuallyExclusiveEndpoints@odata.count", default=None
+        serialization_alias="MutuallyExclusiveEndpoints@odata.count", default=None
     )
     network_device_function: list[IdRef] | None = None
     network_device_function_odata_count: int | None = Field(
-        alias="NetworkDeviceFunction@odata.count", default=None
+        serialization_alias="NetworkDeviceFunction@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     ports: list[IdRef] | None = None
-    ports_odata_count: int | None = Field(alias="Ports@odata.count", default=None)
+    ports_odata_count: int | None = Field(serialization_alias="Ports@odata.count", default=None)
     zones: list[IdRef] | None = None
-    zones_odata_count: int | None = Field(alias="Zones@odata.count", default=None)
+    zones_odata_count: int | None = Field(serialization_alias="Zones@odata.count", default=None)
 
 
 class PciId(RedfishModel):

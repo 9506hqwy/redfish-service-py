@@ -11,12 +11,12 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
-    clear_log: ClearLog | None = Field(alias="#LogService.ClearLog", default=None)
+    clear_log: ClearLog | None = Field(serialization_alias="#LogService.ClearLog", default=None)
     collect_diagnostic_data: CollectDiagnosticData | None = Field(
-        alias="#LogService.CollectDiagnosticData", default=None
+        serialization_alias="#LogService.CollectDiagnosticData", default=None
     )
     push_diagnostic_data: PushDiagnosticData | None = Field(
-        alias="#LogService.PushDiagnosticData", default=None
+        serialization_alias="#LogService.PushDiagnosticData", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -29,24 +29,26 @@ class AutoClearResolvedEntries(StrEnum):
 
 
 class ClearLog(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ClearLogRequest(RedfishModel):
-    log_entries_etag: str | None = Field(alias="LogEntriesETag", default=None)
+    log_entries_etag: str | None = Field(serialization_alias="LogEntriesETag", default=None)
 
 
 class CollectDiagnosticData(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class CollectDiagnosticDataRequest(RedfishModel):
     diagnostic_data_type: LogDiagnosticDataTypes
-    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(
+        serialization_alias="OEMDiagnosticDataType", default=None
+    )
     password: str | None = None
-    target_uri: str | None = Field(alias="TargetURI", default=None)
+    target_uri: str | None = Field(serialization_alias="TargetURI", default=None)
     transfer_protocol: TransferProtocolType | None = None
     user_name: str | None = None
 
@@ -55,7 +57,9 @@ class DiagnosticDataDetails(RedfishModel):
     diagnostic_data_type: LogDiagnosticDataTypes | None = None
     estimated_duration: str | None = None
     estimated_size_bytes: int | None = None
-    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(
+        serialization_alias="OEMDiagnosticDataType", default=None
+    )
 
 
 class LogDiagnosticDataTypes(StrEnum):
@@ -83,13 +87,15 @@ class LogPurpose(StrEnum):
 
 
 class LogService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#LogService.v1_7_0.LogService")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#LogService.v1_7_0.LogService"
+    )
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None
-    auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
+    auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
     date_time: str | None = None
     date_time_local_offset: str | None = None
     description: str | None = None
@@ -100,7 +106,7 @@ class LogService(RedfishModel):
     log_purposes: list[LogPurpose] | None = None
     max_number_of_records: int | None = None
     name: str
-    oem_log_purpose: str | None = Field(alias="OEMLogPurpose", default=None)
+    oem_log_purpose: str | None = Field(serialization_alias="OEMLogPurpose", default=None)
     oem: dict[str, Any] | None = None
     over_write_policy: OverWritePolicy | None = None
     overflow: bool | None = None
@@ -113,7 +119,7 @@ class LogService(RedfishModel):
 class LogServiceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None
-    auto_dst_enabled: bool | None = Field(alias="AutoDSTEnabled", default=None)
+    auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
     date_time: str | None = None
     date_time_local_offset: str | None = None
     diagnostic_data_details: list[DiagnosticDataDetails] | None = None
@@ -130,14 +136,14 @@ class OverWritePolicy(StrEnum):
 
 
 class PushDiagnosticData(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class PushDiagnosticDataRequest(RedfishModel):
-    additional_data_uri: str = Field(alias="AdditionalDataURI")
+    additional_data_uri: str = Field(serialization_alias="AdditionalDataURI")
     password: str | None = None
-    target_uri: str = Field(alias="TargetURI")
+    target_uri: str = Field(serialization_alias="TargetURI")
     transfer_protocol: TransferProtocolType | None = None
     user_name: str | None = None
 

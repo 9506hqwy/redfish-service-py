@@ -36,11 +36,11 @@ class DataSanitizationPolicy(StrEnum):
 
 
 class DataSecurityLosCapabilities(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type",
+        serialization_alias="@odata.type",
         default="#DataSecurityLoSCapabilities.v1_2_0.DataSecurityLoSCapabilities",
     )
     actions: Actions | None = None
@@ -56,7 +56,7 @@ class DataSecurityLosCapabilities(RedfishModel):
     supported_host_authentication_types: list[AuthenticationType] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
-        alias="SupportedLinesOfService@odata.count", default=None
+        serialization_alias="SupportedLinesOfService@odata.count", default=None
     )
     supported_media_encryption_strengths: list[KeySize] | None = None
     supported_secure_channel_protocols: list[SecureChannelProtocol] | None = None

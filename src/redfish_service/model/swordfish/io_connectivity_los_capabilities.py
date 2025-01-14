@@ -15,11 +15,11 @@ class Actions(RedfishModel):
 
 
 class IoConnectivityLosCapabilities(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type",
+        serialization_alias="@odata.type",
         default="#IOConnectivityLoSCapabilities.v1_2_0.IOConnectivityLoSCapabilities",
     )
     actions: Actions | None = None
@@ -27,13 +27,13 @@ class IoConnectivityLosCapabilities(RedfishModel):
     id: str
     identifier: Identifier | None = None
     max_supported_bytes_per_second: int | None = None
-    max_supported_iops: int | None = Field(alias="MaxSupportedIOPS", default=None)
+    max_supported_iops: int | None = Field(serialization_alias="MaxSupportedIOPS", default=None)
     name: str
     oem: dict[str, Any] | None = None
     supported_access_protocols: list[Protocol] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
-        alias="SupportedLinesOfService@odata.count", default=None
+        serialization_alias="SupportedLinesOfService@odata.count", default=None
     )
 
 
@@ -41,7 +41,7 @@ class IoConnectivityLosCapabilitiesOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     identifier: Identifier | None = None
     max_supported_bytes_per_second: int | None = None
-    max_supported_iops: int | None = Field(alias="MaxSupportedIOPS", default=None)
+    max_supported_iops: int | None = Field(serialization_alias="MaxSupportedIOPS", default=None)
     oem: dict[str, Any] | None = None
     supported_access_protocols: list[Protocol] | None = None
     supported_lines_of_service: list[IdRef] | None = None

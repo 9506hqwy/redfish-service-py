@@ -18,10 +18,10 @@ class Actions(RedfishModel):
 
 
 class Pump(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Pump.v1_1_0.Pump")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Pump.v1_1_0.Pump")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None

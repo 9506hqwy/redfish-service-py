@@ -35,29 +35,31 @@ class LinkStatus(StrEnum):
 
 
 class NetDevFuncMaxBwAlloc(RedfishModel):
-    max_bw_alloc_percent: int | None = Field(alias="MaxBWAllocPercent", default=None)
+    max_bw_alloc_percent: int | None = Field(serialization_alias="MaxBWAllocPercent", default=None)
     network_device_function: IdRef | None = None
 
 
 class NetDevFuncMinBwAlloc(RedfishModel):
-    min_bw_alloc_percent: int | None = Field(alias="MinBWAllocPercent", default=None)
+    min_bw_alloc_percent: int | None = Field(serialization_alias="MinBWAllocPercent", default=None)
     network_device_function: IdRef | None = None
 
 
 class NetworkPort(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#NetworkPort.v1_4_3.NetworkPort")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#NetworkPort.v1_4_3.NetworkPort"
+    )
     actions: Actions | None = None
     active_link_technology: LinkNetworkTechnology | None = None
     associated_network_addresses: list[str] | None = None
     current_link_speed_mbps: int | None = None
     description: str | None = None
-    eee_enabled: bool | None = Field(alias="EEEEnabled", default=None)
-    fc_fabric_name: str | None = Field(alias="FCFabricName", default=None)
+    eee_enabled: bool | None = Field(serialization_alias="EEEEnabled", default=None)
+    fc_fabric_name: str | None = Field(serialization_alias="FCFabricName", default=None)
     fc_port_connection_type: PortConnectionType | None = Field(
-        alias="FCPortConnectionType", default=None
+        serialization_alias="FCPortConnectionType", default=None
     )
     flow_control_configuration: FlowControl | None = None
     flow_control_status: FlowControl | None = None
@@ -66,39 +68,39 @@ class NetworkPort(RedfishModel):
     max_frame_size: int | None = None
     name: str
     net_dev_func_max_bw_alloc: list[NetDevFuncMaxBwAlloc] | None = Field(
-        alias="NetDevFuncMaxBWAlloc", default=None
+        serialization_alias="NetDevFuncMaxBWAlloc", default=None
     )
     net_dev_func_min_bw_alloc: list[NetDevFuncMinBwAlloc] | None = Field(
-        alias="NetDevFuncMinBWAlloc", default=None
+        serialization_alias="NetDevFuncMinBWAlloc", default=None
     )
     number_discovered_remote_ports: int | None = None
     oem: dict[str, Any] | None = None
     physical_port_number: str | None = None
-    port_maximum_mtu: int | None = Field(alias="PortMaximumMTU", default=None)
+    port_maximum_mtu: int | None = Field(serialization_alias="PortMaximumMTU", default=None)
     signal_detected: bool | None = None
     status: Status | None = None
     supported_ethernet_capabilities: list[SupportedEthernetCapabilities] | None = None
     supported_link_capabilities: list[SupportedLinkCapabilities] | None = None
     vendor_id: str | None = None
-    wake_on_lan_enabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
+    wake_on_lan_enabled: bool | None = Field(serialization_alias="WakeOnLANEnabled", default=None)
 
 
 class NetworkPortOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     active_link_technology: LinkNetworkTechnology | None = None
     current_link_speed_mbps: int | None = None
-    eee_enabled: bool | None = Field(alias="EEEEnabled", default=None)
+    eee_enabled: bool | None = Field(serialization_alias="EEEEnabled", default=None)
     flow_control_configuration: FlowControl | None = None
     net_dev_func_max_bw_alloc: list[NetDevFuncMaxBwAlloc] | None = Field(
-        alias="NetDevFuncMaxBWAlloc", default=None
+        serialization_alias="NetDevFuncMaxBWAlloc", default=None
     )
     net_dev_func_min_bw_alloc: list[NetDevFuncMinBwAlloc] | None = Field(
-        alias="NetDevFuncMinBWAlloc", default=None
+        serialization_alias="NetDevFuncMinBWAlloc", default=None
     )
     oem: dict[str, Any] | None = None
     status: Status | None = None
     supported_link_capabilities: list[SupportedLinkCapabilities] | None = None
-    wake_on_lan_enabled: bool | None = Field(alias="WakeOnLANEnabled", default=None)
+    wake_on_lan_enabled: bool | None = Field(serialization_alias="WakeOnLANEnabled", default=None)
 
 
 class PortConnectionType(StrEnum):

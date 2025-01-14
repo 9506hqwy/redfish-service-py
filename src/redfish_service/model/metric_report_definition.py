@@ -31,7 +31,9 @@ class CollectionTimeScope(StrEnum):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     triggers: list[IdRef] | None = None
-    triggers_odata_count: int | None = Field(alias="Triggers@odata.count", default=None)
+    triggers_odata_count: int | None = Field(
+        serialization_alias="Triggers@odata.count", default=None
+    )
 
 
 class Metric(RedfishModel):
@@ -44,11 +46,12 @@ class Metric(RedfishModel):
 
 
 class MetricReportDefinition(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#MetricReportDefinition.v1_4_6.MetricReportDefinition"
+        serialization_alias="@odata.type",
+        default="#MetricReportDefinition.v1_4_6.MetricReportDefinition",
     )
     actions: Actions | None = None
     append_limit: int | None = None
@@ -73,11 +76,12 @@ class MetricReportDefinition(RedfishModel):
 
 
 class MetricReportDefinitionOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#MetricReportDefinition.v1_4_6.MetricReportDefinition"
+        serialization_alias="@odata.type",
+        default="#MetricReportDefinition.v1_4_6.MetricReportDefinition",
     )
     actions: Actions | None = None
     append_limit: int | None = None

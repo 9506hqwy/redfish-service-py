@@ -14,7 +14,7 @@ class Actions(RedfishModel):
 
 
 class SpdmAlgorithmSet(RedfishModel):
-    aead: list[str] | None = Field(alias="AEAD", default=None)
+    aead: list[str] | None = Field(serialization_alias="AEAD", default=None)
     base_asym: list[str] | None = None
     base_hash: list[str] | None = None
 
@@ -36,28 +36,30 @@ class SpdmPolicy(RedfishModel):
 
 
 class SecurityPolicy(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#SecurityPolicy.v1_0_2.SecurityPolicy")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#SecurityPolicy.v1_0_2.SecurityPolicy"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str
     name: str
     oem: dict[str, Any] | None = None
     override_parent_manager: bool | None = None
-    spdm: SpdmPolicy | None = Field(alias="SPDM", default=None)
+    spdm: SpdmPolicy | None = Field(serialization_alias="SPDM", default=None)
     status: Status | None = None
-    tls: TlsCommunication | None = Field(alias="TLS", default=None)
+    tls: TlsCommunication | None = Field(serialization_alias="TLS", default=None)
 
 
 class SecurityPolicyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     oem: dict[str, Any] | None = None
     override_parent_manager: bool | None = None
-    spdm: SpdmPolicy | None = Field(alias="SPDM", default=None)
+    spdm: SpdmPolicy | None = Field(serialization_alias="SPDM", default=None)
     status: Status | None = None
-    tls: TlsCommunication | None = Field(alias="TLS", default=None)
+    tls: TlsCommunication | None = Field(serialization_alias="TLS", default=None)
 
 
 class TlsAlgorithmSet(RedfishModel):

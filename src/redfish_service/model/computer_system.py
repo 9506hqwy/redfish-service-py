@@ -13,28 +13,32 @@ from .software_inventory import MeasurementBlock
 
 class Actions(RedfishModel):
     add_resource_block: AddResourceBlock | None = Field(
-        alias="#ComputerSystem.AddResourceBlock", default=None
+        serialization_alias="#ComputerSystem.AddResourceBlock", default=None
     )
-    decommission: Decommission | None = Field(alias="#ComputerSystem.Decommission", default=None)
+    decommission: Decommission | None = Field(
+        serialization_alias="#ComputerSystem.Decommission", default=None
+    )
     remove_resource_block: RemoveResourceBlock | None = Field(
-        alias="#ComputerSystem.RemoveResourceBlock", default=None
+        serialization_alias="#ComputerSystem.RemoveResourceBlock", default=None
     )
-    reset: Reset | None = Field(alias="#ComputerSystem.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#ComputerSystem.Reset", default=None)
     set_default_boot_order: SetDefaultBootOrder | None = Field(
-        alias="#ComputerSystem.SetDefaultBootOrder", default=None
+        serialization_alias="#ComputerSystem.SetDefaultBootOrder", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class AddResourceBlock(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class AddResourceBlockRequest(RedfishModel):
-    computer_system_etag: str | None = Field(alias="ComputerSystemETag", default=None)
+    computer_system_etag: str | None = Field(
+        serialization_alias="ComputerSystemETag", default=None
+    )
     resource_block: IdRef
-    resource_block_etag: str | None = Field(alias="ResourceBlockETag", default=None)
+    resource_block_etag: str | None = Field(serialization_alias="ResourceBlockETag", default=None)
 
 
 class AutomaticRetryConfig(StrEnum):
@@ -129,10 +133,12 @@ class CompositionUseCase(StrEnum):
 
 
 class ComputerSystem(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem"
+    )
     actions: Actions | None = None
     asset_tag: str | None = None
     bios: IdRef | None = None
@@ -152,7 +158,7 @@ class ComputerSystem(RedfishModel):
     hosting_roles: list[HostingRole] | None = None
     id: str
     idle_power_saver: IdlePowerSaver | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     key_management: KeyManagement | None = None
     last_reset_cause: LastResetCauses | None = None
     last_reset_time: str | None = None
@@ -170,10 +176,14 @@ class ComputerSystem(RedfishModel):
     network_interfaces: IdRef | None = None
     oem: dict[str, Any] | None = None
     operating_system: IdRef | None = None
-    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
-    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_devices: list[IdRef] | None = Field(serialization_alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(
+        serialization_alias="PCIeDevices@odata.count", default=None
+    )
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )
     part_number: str | None = None
     power_cycle_delay_seconds: float | None = None
     power_mode: PowerMode | None = None
@@ -184,8 +194,10 @@ class ComputerSystem(RedfishModel):
     processor_summary: ProcessorSummary | None = None
     processors: IdRef | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
-    sku: str | None = Field(alias="SKU", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     secure_boot: IdRef | None = None
     serial_console: HostSerialConsole | None = None
     serial_number: str | None = None
@@ -195,18 +207,18 @@ class ComputerSystem(RedfishModel):
     sub_model: str | None = None
     system_type: SystemType | None = None
     trusted_modules: list[TrustedModules] | None = None
-    usb_controllers: IdRef | None = Field(alias="USBControllers", default=None)
-    uuid: str | None = Field(alias="UUID", default=None)
+    usb_controllers: IdRef | None = Field(serialization_alias="USBControllers", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     virtual_media: IdRef | None = None
     virtual_media_config: VirtualMediaConfig | None = None
 
 
 class ComputerSystemOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -227,7 +239,7 @@ class ComputerSystemOnCreate(RedfishModel):
     hosting_roles: list[HostingRole] | None = None
     id: str | None = None
     idle_power_saver: IdlePowerSaver | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     key_management: KeyManagement | None = None
     last_reset_cause: LastResetCauses | None = None
     last_reset_time: str | None = None
@@ -245,10 +257,14 @@ class ComputerSystemOnCreate(RedfishModel):
     network_interfaces: IdRef | None = None
     oem: dict[str, Any] | None = None
     operating_system: IdRef | None = None
-    pcie_devices: list[IdRef] | None = Field(alias="PCIeDevices", default=None)
-    pcie_devices_odata_count: int | None = Field(alias="PCIeDevices@odata.count", default=None)
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_devices: list[IdRef] | None = Field(serialization_alias="PCIeDevices", default=None)
+    pcie_devices_odata_count: int | None = Field(
+        serialization_alias="PCIeDevices@odata.count", default=None
+    )
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )
     part_number: str | None = None
     power_cycle_delay_seconds: float | None = None
     power_mode: PowerMode | None = None
@@ -259,8 +275,10 @@ class ComputerSystemOnCreate(RedfishModel):
     processor_summary: ProcessorSummary | None = None
     processors: IdRef | None = None
     redundancy: list[IdRef] | None = None
-    redundancy_odata_count: int | None = Field(alias="Redundancy@odata.count", default=None)
-    sku: str | None = Field(alias="SKU", default=None)
+    redundancy_odata_count: int | None = Field(
+        serialization_alias="Redundancy@odata.count", default=None
+    )
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     secure_boot: IdRef | None = None
     serial_console: HostSerialConsole | None = None
     serial_number: str | None = None
@@ -270,8 +288,8 @@ class ComputerSystemOnCreate(RedfishModel):
     sub_model: str | None = None
     system_type: SystemType | None = None
     trusted_modules: list[TrustedModules] | None = None
-    usb_controllers: IdRef | None = Field(alias="USBControllers", default=None)
-    uuid: str | None = Field(alias="UUID", default=None)
+    usb_controllers: IdRef | None = Field(serialization_alias="USBControllers", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     virtual_media: IdRef | None = None
     virtual_media_config: VirtualMediaConfig | None = None
 
@@ -287,7 +305,7 @@ class ComputerSystemOnUpdate(RedfishModelOnUpdate):
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
     idle_power_saver: IdlePowerSaver | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     key_management: KeyManagement | None = None
     links: Links | None = None
     location_indicator_active: bool | None = None
@@ -307,14 +325,18 @@ class ComputerSystemOnUpdate(RedfishModelOnUpdate):
 
 
 class Decommission(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class DecommissionRequest(RedfishModel):
-    computer_system_etag: str | None = Field(alias="ComputerSystemETag", default=None)
+    computer_system_etag: str | None = Field(
+        serialization_alias="ComputerSystemETag", default=None
+    )
     decommission_types: list[DecommissionType]
-    oem_decommission_types: list[str] | None = Field(alias="OEMDecommissionTypes", default=None)
+    oem_decommission_types: list[str] | None = Field(
+        serialization_alias="OEMDecommissionTypes", default=None
+    )
     require_secure_erase: bool | None = None
 
 
@@ -341,9 +363,9 @@ class HostGraphicalConsole(RedfishModel):
 
 
 class HostSerialConsole(RedfishModel):
-    ipmi: SerialConsoleProtocol | None = Field(alias="IPMI", default=None)
+    ipmi: SerialConsoleProtocol | None = Field(serialization_alias="IPMI", default=None)
     max_concurrent_sessions: int | None = None
-    ssh: SerialConsoleProtocol | None = Field(alias="SSH", default=None)
+    ssh: SerialConsoleProtocol | None = Field(serialization_alias="SSH", default=None)
     telnet: SerialConsoleProtocol | None = None
 
 
@@ -405,8 +427,8 @@ class KmipServer(RedfishModel):
 
 
 class KeyManagement(RedfishModel):
-    kmip_certificates: IdRef | None = Field(alias="KMIPCertificates", default=None)
-    kmip_servers: list[KmipServer] | None = Field(alias="KMIPServers", default=None)
+    kmip_certificates: IdRef | None = Field(serialization_alias="KMIPCertificates", default=None)
+    kmip_servers: list[KmipServer] | None = Field(serialization_alias="KMIPServers", default=None)
 
 
 class LastResetCauses(StrEnum):
@@ -424,40 +446,50 @@ class LastResetCauses(StrEnum):
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
-    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
+    chassis_odata_count: int | None = Field(
+        serialization_alias="Chassis@odata.count", default=None
+    )
     consuming_computer_systems: list[IdRef] | None = None
     consuming_computer_systems_odata_count: int | None = Field(
-        alias="ConsumingComputerSystems@odata.count", default=None
+        serialization_alias="ConsumingComputerSystems@odata.count", default=None
     )
     cooled_by: list[IdRef] | None = None
-    cooled_by_odata_count: int | None = Field(alias="CooledBy@odata.count", default=None)
+    cooled_by_odata_count: int | None = Field(
+        serialization_alias="CooledBy@odata.count", default=None
+    )
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     hosting_computer_system: IdRef | None = None
     managed_by: list[IdRef] | None = None
-    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     offloaded_network_device_functions: list[IdRef] | None = None
     offloaded_network_device_functions_odata_count: int | None = Field(
-        alias="OffloadedNetworkDeviceFunctions@odata.count", default=None
+        serialization_alias="OffloadedNetworkDeviceFunctions@odata.count", default=None
     )
     powered_by: list[IdRef] | None = None
-    powered_by_odata_count: int | None = Field(alias="PoweredBy@odata.count", default=None)
+    powered_by_odata_count: int | None = Field(
+        serialization_alias="PoweredBy@odata.count", default=None
+    )
     resource_blocks: list[IdRef] | None = None
     resource_blocks_odata_count: int | None = Field(
-        alias="ResourceBlocks@odata.count", default=None
+        serialization_alias="ResourceBlocks@odata.count", default=None
     )
     supplying_computer_systems: list[IdRef] | None = None
     supplying_computer_systems_odata_count: int | None = Field(
-        alias="SupplyingComputerSystems@odata.count", default=None
+        serialization_alias="SupplyingComputerSystems@odata.count", default=None
     )
     trusted_components: list[IdRef] | None = None
     trusted_components_odata_count: int | None = Field(
-        alias="TrustedComponents@odata.count", default=None
+        serialization_alias="TrustedComponents@odata.count", default=None
     )
     virtual_machines: list[IdRef] | None = None
     virtual_machines_odata_count: int | None = Field(
-        alias="VirtualMachines@odata.count", default=None
+        serialization_alias="VirtualMachines@odata.count", default=None
     )
 
 
@@ -472,9 +504,11 @@ class MemorySummary(RedfishModel):
     memory_mirroring: MemoryMirroring | None = None
     metrics: IdRef | None = None
     status: Status | None = None
-    total_system_memory_gib: float | None = Field(alias="TotalSystemMemoryGiB", default=None)
+    total_system_memory_gib: float | None = Field(
+        serialization_alias="TotalSystemMemoryGiB", default=None
+    )
     total_system_persistent_memory_gib: float | None = Field(
-        alias="TotalSystemPersistentMemoryGiB", default=None
+        serialization_alias="TotalSystemPersistentMemoryGiB", default=None
     )
 
 
@@ -506,19 +540,21 @@ class ProcessorSummary(RedfishModel):
 
 
 class RemoveResourceBlock(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RemoveResourceBlockRequest(RedfishModel):
-    computer_system_etag: str | None = Field(alias="ComputerSystemETag", default=None)
+    computer_system_etag: str | None = Field(
+        serialization_alias="ComputerSystemETag", default=None
+    )
     resource_block: IdRef
-    resource_block_etag: str | None = Field(alias="ResourceBlockETag", default=None)
+    resource_block_etag: str | None = Field(serialization_alias="ResourceBlockETag", default=None)
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -530,12 +566,14 @@ class SerialConsoleProtocol(RedfishModel):
     hot_key_sequence_display: str | None = None
     port: int | None = None
     service_enabled: bool | None = None
-    shared_with_manager_cli: bool | None = Field(alias="SharedWithManagerCLI", default=None)
+    shared_with_manager_cli: bool | None = Field(
+        serialization_alias="SharedWithManagerCLI", default=None
+    )
 
 
 class SetDefaultBootOrder(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class StopBootOnFault(StrEnum):

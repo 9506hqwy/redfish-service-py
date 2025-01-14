@@ -19,20 +19,22 @@ class ClientType(StrEnum):
 
 class ManagedResource(RedfishModel):
     includes_subordinates: bool | None = None
-    managed_resource_uri: str | None = Field(alias="ManagedResourceURI", default=None)
+    managed_resource_uri: str | None = Field(
+        serialization_alias="ManagedResourceURI", default=None
+    )
     prefer_exclusive: bool | None = None
 
 
 class RegisteredClient(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#RegisteredClient.v1_1_2.RegisteredClient"
+        serialization_alias="@odata.type", default="#RegisteredClient.v1_1_2.RegisteredClient"
     )
     actions: Actions | None = None
     client_type: ClientType
-    client_uri: str | None = Field(alias="ClientURI", default=None)
+    client_uri: str | None = Field(serialization_alias="ClientURI", default=None)
     context: str | None = None
     created_date: str | None = None
     description: str | None = None
@@ -45,15 +47,15 @@ class RegisteredClient(RedfishModel):
 
 
 class RegisteredClientOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#RegisteredClient.v1_1_2.RegisteredClient"
+        serialization_alias="@odata.type", default="#RegisteredClient.v1_1_2.RegisteredClient"
     )
     actions: Actions | None = None
     client_type: ClientType
-    client_uri: str | None = Field(alias="ClientURI", default=None)
+    client_uri: str | None = Field(serialization_alias="ClientURI", default=None)
     context: str | None = None
     created_date: str | None = None
     description: str | None = None
@@ -68,7 +70,7 @@ class RegisteredClientOnCreate(RedfishModel):
 class RegisteredClientOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     client_type: ClientType | None = None
-    client_uri: str | None = Field(alias="ClientURI", default=None)
+    client_uri: str | None = Field(serialization_alias="ClientURI", default=None)
     context: str | None = None
     expiration_date: str | None = None
     managed_resources: list[ManagedResource] | None = None

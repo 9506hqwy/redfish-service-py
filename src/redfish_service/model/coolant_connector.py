@@ -17,17 +17,17 @@ class Actions(RedfishModel):
 
 
 class CoolantConnector(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#CoolantConnector.v1_0_2.CoolantConnector"
+        serialization_alias="@odata.type", default="#CoolantConnector.v1_0_2.CoolantConnector"
     )
     actions: Actions | None = None
     coolant: Coolant | None = None
     coolant_connector_type: CoolantConnectorType | None = None
     cooling_loop_name: str | None = None
-    cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
+    cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
     delta_pressurek_pa: SensorExcerpt | None = None
     delta_temperature_celsius: SensorExcerpt | None = None
     description: str | None = None
@@ -52,7 +52,7 @@ class CoolantConnectorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     coolant: Coolant | None = None
     cooling_loop_name: str | None = None
-    cooling_manager_uri: str | None = Field(alias="CoolingManagerURI", default=None)
+    cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
     links: Links | None = None
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
@@ -70,7 +70,7 @@ class CoolantConnectorType(StrEnum):
 class Links(RedfishModel):
     connected_chassis: list[IdRef] | None = None
     connected_chassis_odata_count: int | None = Field(
-        alias="ConnectedChassis@odata.count", default=None
+        serialization_alias="ConnectedChassis@odata.count", default=None
     )
     connected_cooling_loop: IdRef | None = None
     connected_cooling_unit: IdRef | None = None

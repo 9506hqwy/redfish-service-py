@@ -108,8 +108,10 @@ class PartLocation(RedfishModel):
 class PhysicalAddress(RedfishModel):
     city: str | None = None
     country: str | None = None
-    iso_country_code: str | None = Field(alias="ISOCountryCode", default=None)
-    iso_subdivision_code: str | None = Field(alias="ISOSubdivisionCode", default=None)
+    iso_country_code: str | None = Field(serialization_alias="ISOCountryCode", default=None)
+    iso_subdivision_code: str | None = Field(
+        serialization_alias="ISOSubdivisionCode", default=None
+    )
     postal_code: str | None = None
     state_or_province: str | None = None
     street_address: str | None = None
@@ -133,7 +135,7 @@ class PostalAddress(RedfishModel):
     district: str | None = None
     division: str | None = None
     floor: str | None = None
-    gps_coords: str | None = Field(alias="GPSCoords", default=None)
+    gps_coords: str | None = Field(serialization_alias="GPSCoords", default=None)
     house_number: int | None = None
     house_number_suffix: str | None = None
     landmark: str | None = None
@@ -141,7 +143,7 @@ class PostalAddress(RedfishModel):
     location: str | None = None
     name: str | None = None
     neighborhood: str | None = None
-    po_box: str | None = Field(alias="POBox", default=None)
+    po_box: str | None = Field(serialization_alias="POBox", default=None)
     place_type: str | None = None
     postal_code: str | None = None
     road: str | None = None
@@ -183,7 +185,7 @@ class Reference(StrEnum):
 
 
 class ReferenceableMember(RedfishModel):
-    odata_id: str = Field(alias="@odata.id")
+    odata_id: str = Field(serialization_alias="@odata.id")
     member_id: str
     oem: dict[str, Any] | None = None
 
@@ -204,10 +206,12 @@ class ResetType(StrEnum):
 
 
 class Resource(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Resource.v1_20_0.Resource")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#Resource.v1_20_0.Resource"
+    )
     description: str | None = None
     id: str
     name: str
@@ -215,11 +219,11 @@ class Resource(RedfishModel):
 
 
 class ResourceCollection(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ResourceCollection.v1_20_0.ResourceCollection"
+        serialization_alias="@odata.type", default="#ResourceCollection.v1_20_0.ResourceCollection"
     )
     description: str | None = None
     name: str

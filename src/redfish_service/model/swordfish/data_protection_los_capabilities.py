@@ -16,11 +16,11 @@ class Actions(RedfishModel):
 
 
 class DataProtectionLosCapabilities(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type",
+        serialization_alias="@odata.type",
         default="#DataProtectionLoSCapabilities.v1_2_0.DataProtectionLoSCapabilities",
     )
     actions: Actions | None = None
@@ -32,7 +32,7 @@ class DataProtectionLosCapabilities(RedfishModel):
     oem: dict[str, Any] | None = None
     supported_lines_of_service: list[IdRef] | None = None
     supported_lines_of_service_odata_count: int | None = Field(
-        alias="SupportedLinesOfService@odata.count", default=None
+        serialization_alias="SupportedLinesOfService@odata.count", default=None
     )
     supported_min_lifetimes: list[str] | None = None
     supported_recovery_geographic_objectives: list[FailureDomainScope] | None = None
@@ -69,7 +69,7 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     supported_replica_options: list[IdRef] | None = None
     supported_replica_options_odata_count: int | None = Field(
-        alias="SupportedReplicaOptions@odata.count", default=None
+        serialization_alias="SupportedReplicaOptions@odata.count", default=None
     )
 
 

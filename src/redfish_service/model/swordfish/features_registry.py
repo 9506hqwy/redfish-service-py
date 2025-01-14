@@ -17,16 +17,18 @@ class FeatureMap(RedfishModel):
     description: str | None = None
     feature_name: str | None = None
     resources: list[IdRef] | None = None
-    resources_odata_count: int | None = Field(alias="Resources@odata.count", default=None)
+    resources_odata_count: int | None = Field(
+        serialization_alias="Resources@odata.count", default=None
+    )
     version: str | None = None
 
 
 class FeaturesRegistry(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#FeaturesRegistry.v1_2_1.FeaturesRegistry"
+        serialization_alias="@odata.type", default="#FeaturesRegistry.v1_2_1.FeaturesRegistry"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -36,7 +38,9 @@ class FeaturesRegistry(RedfishModel):
     id: str
     language: str
     name: str
-    oem_features_used: list[str] | None = Field(alias="OEMFeaturesUsed", default=None)
+    oem_features_used: list[str] | None = Field(
+        serialization_alias="OEMFeaturesUsed", default=None
+    )
     oem: dict[str, Any] | None = None
     owning_entity: str
     registry_prefix: str

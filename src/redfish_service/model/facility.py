@@ -15,10 +15,10 @@ class Actions(RedfishModel):
 
 
 class Facility(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Facility.v1_4_2.Facility")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Facility.v1_4_2.Facility")
     actions: Actions | None = None
     ambient_metrics: IdRef | None = None
     description: str | None = None
@@ -34,10 +34,12 @@ class Facility(RedfishModel):
 
 
 class FacilityOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Facility.v1_4_2.Facility")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Facility.v1_4_2.Facility"
+    )
     actions: Actions | None = None
     ambient_metrics: IdRef | None = None
     description: str | None = None
@@ -68,39 +70,51 @@ class FacilityType(StrEnum):
 
 
 class Links(RedfishModel):
-    cdus: list[IdRef] | None = Field(alias="CDUs", default=None)
-    cdus_odata_count: int | None = Field(alias="CDUs@odata.count", default=None)
+    cdus: list[IdRef] | None = Field(serialization_alias="CDUs", default=None)
+    cdus_odata_count: int | None = Field(serialization_alias="CDUs@odata.count", default=None)
     contained_by_facility: IdRef | None = None
     contains_chassis: list[IdRef] | None = None
     contains_chassis_odata_count: int | None = Field(
-        alias="ContainsChassis@odata.count", default=None
+        serialization_alias="ContainsChassis@odata.count", default=None
     )
     contains_facilities: list[IdRef] | None = None
     contains_facilities_odata_count: int | None = Field(
-        alias="ContainsFacilities@odata.count", default=None
+        serialization_alias="ContainsFacilities@odata.count", default=None
     )
     cooling_loops: list[IdRef] | None = None
-    cooling_loops_odata_count: int | None = Field(alias="CoolingLoops@odata.count", default=None)
+    cooling_loops_odata_count: int | None = Field(
+        serialization_alias="CoolingLoops@odata.count", default=None
+    )
     electrical_buses: list[IdRef] | None = None
     electrical_buses_odata_count: int | None = Field(
-        alias="ElectricalBuses@odata.count", default=None
+        serialization_alias="ElectricalBuses@odata.count", default=None
     )
-    floor_pd_us: list[IdRef] | None = Field(alias="FloorPDUs", default=None)
-    floor_pd_us_odata_count: int | None = Field(alias="FloorPDUs@odata.count", default=None)
+    floor_pd_us: list[IdRef] | None = Field(serialization_alias="FloorPDUs", default=None)
+    floor_pd_us_odata_count: int | None = Field(
+        serialization_alias="FloorPDUs@odata.count", default=None
+    )
     immersion_units: list[IdRef] | None = None
     immersion_units_odata_count: int | None = Field(
-        alias="ImmersionUnits@odata.count", default=None
+        serialization_alias="ImmersionUnits@odata.count", default=None
     )
     managed_by: list[IdRef] | None = None
-    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     power_shelves: list[IdRef] | None = None
-    power_shelves_odata_count: int | None = Field(alias="PowerShelves@odata.count", default=None)
-    rack_pd_us: list[IdRef] | None = Field(alias="RackPDUs", default=None)
-    rack_pd_us_odata_count: int | None = Field(alias="RackPDUs@odata.count", default=None)
+    power_shelves_odata_count: int | None = Field(
+        serialization_alias="PowerShelves@odata.count", default=None
+    )
+    rack_pd_us: list[IdRef] | None = Field(serialization_alias="RackPDUs", default=None)
+    rack_pd_us_odata_count: int | None = Field(
+        serialization_alias="RackPDUs@odata.count", default=None
+    )
     switchgear: list[IdRef] | None = None
-    switchgear_odata_count: int | None = Field(alias="Switchgear@odata.count", default=None)
+    switchgear_odata_count: int | None = Field(
+        serialization_alias="Switchgear@odata.count", default=None
+    )
     transfer_switches: list[IdRef] | None = None
     transfer_switches_odata_count: int | None = Field(
-        alias="TransferSwitches@odata.count", default=None
+        serialization_alias="TransferSwitches@odata.count", default=None
     )

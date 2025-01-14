@@ -11,7 +11,7 @@ from .sensor import SensorVoltageExcerpt
 
 class Actions(RedfishModel):
     clear_current_period: ClearCurrentPeriod | None = Field(
-        alias="#ProcessorMetrics.ClearCurrentPeriod", default=None
+        serialization_alias="#ProcessorMetrics.ClearCurrentPeriod", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -36,8 +36,8 @@ class CacheMetricsTotal(RedfishModel):
 
 
 class ClearCurrentPeriod(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class CoreMetrics(RedfishModel):
@@ -46,7 +46,7 @@ class CoreMetrics(RedfishModel):
     core_id: str | None = None
     correctable_core_error_count: int | None = None
     correctable_other_error_count: int | None = None
-    io_stall_count: float | None = Field(alias="IOStallCount", default=None)
+    io_stall_count: float | None = Field(serialization_alias="IOStallCount", default=None)
     instructions_per_cycle: float | None = None
     memory_stall_count: float | None = None
     uncorrectable_core_error_count: int | None = None
@@ -55,28 +55,34 @@ class CoreMetrics(RedfishModel):
 
 
 class CurrentPeriod(RedfishModel):
-    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(
+        serialization_alias="CorrectableECCErrorCount", default=None
+    )
     uncorrectable_ecc_error_count: int | None = Field(
-        alias="UncorrectableECCErrorCount", default=None
+        serialization_alias="UncorrectableECCErrorCount", default=None
     )
 
 
 class LifeTime(RedfishModel):
-    correctable_ecc_error_count: int | None = Field(alias="CorrectableECCErrorCount", default=None)
+    correctable_ecc_error_count: int | None = Field(
+        serialization_alias="CorrectableECCErrorCount", default=None
+    )
     uncorrectable_ecc_error_count: int | None = Field(
-        alias="UncorrectableECCErrorCount", default=None
+        serialization_alias="UncorrectableECCErrorCount", default=None
     )
 
 
 class ProcessorMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ProcessorMetrics.v1_6_4.ProcessorMetrics"
+        serialization_alias="@odata.type", default="#ProcessorMetrics.v1_6_4.ProcessorMetrics"
     )
     actions: Actions | None = None
-    average_frequency_mhz: float | None = Field(alias="AverageFrequencyMHz", default=None)
+    average_frequency_mhz: float | None = Field(
+        serialization_alias="AverageFrequencyMHz", default=None
+    )
     bandwidth_percent: float | None = None
     cache: list[CacheMetrics] | None = None
     cache_metrics_total: CacheMetricsTotal | None = None
@@ -92,8 +98,8 @@ class ProcessorMetrics(RedfishModel):
     local_memory_bandwidth_bytes: int | None = None
     name: str
     oem: dict[str, Any] | None = None
-    operating_speed_mhz: int | None = Field(alias="OperatingSpeedMHz", default=None)
-    pcie_errors: PcieErrors | None = Field(alias="PCIeErrors", default=None)
+    operating_speed_mhz: int | None = Field(serialization_alias="OperatingSpeedMHz", default=None)
+    pcie_errors: PcieErrors | None = Field(serialization_alias="PCIeErrors", default=None)
     power_limit_throttle_duration: str | None = None
     remote_memory_bandwidth_bytes: int | None = None
     temperature_celsius: float | None = None

@@ -14,10 +14,12 @@ class Actions(RedfishModel):
 
 
 class BootOption(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#BootOption.v1_0_6.BootOption")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#BootOption.v1_0_6.BootOption"
+    )
     actions: Actions | None = None
     alias: BootSource | None = None
     boot_option_enabled: bool | None = None
@@ -28,15 +30,19 @@ class BootOption(RedfishModel):
     name: str
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     uefi_device_path: str | None = None
 
 
 class BootOptionOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#BootOption.v1_0_6.BootOption")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#BootOption.v1_0_6.BootOption"
+    )
     actions: Actions | None = None
     alias: BootSource | None = None
     boot_option_enabled: bool | None = None
@@ -47,7 +53,9 @@ class BootOptionOnCreate(RedfishModel):
     name: str | None = None
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     uefi_device_path: str | None = None
 
 

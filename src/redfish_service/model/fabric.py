@@ -15,10 +15,10 @@ class Actions(RedfishModel):
 
 
 class Fabric(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Fabric.v1_3_2.Fabric")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Fabric.v1_3_2.Fabric")
     actions: Actions | None = None
     address_pools: IdRef | None = None
     connections: IdRef | None = None
@@ -33,7 +33,7 @@ class Fabric(RedfishModel):
     oem: dict[str, Any] | None = None
     status: Status | None = None
     switches: IdRef | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     zones: IdRef | None = None
 
 
@@ -42,7 +42,7 @@ class FabricOnUpdate(RedfishModelOnUpdate):
     links: Links | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
 
 
 class Links(RedfishModel):

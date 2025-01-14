@@ -9,7 +9,9 @@ from .sensor import SensorArrayExcerpt, SensorEnergykWhExcerpt, SensorExcerpt, S
 
 
 class Actions(RedfishModel):
-    reset_metrics: ResetMetrics | None = Field(alias="#ThermalMetrics.ResetMetrics", default=None)
+    reset_metrics: ResetMetrics | None = Field(
+        serialization_alias="#ThermalMetrics.ResetMetrics", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -19,8 +21,8 @@ class HeaterSummary(RedfishModel):
 
 
 class ResetMetrics(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class TemperatureSummary(RedfishModel):
@@ -31,10 +33,12 @@ class TemperatureSummary(RedfishModel):
 
 
 class ThermalMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#ThermalMetrics.v1_3_2.ThermalMetrics")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#ThermalMetrics.v1_3_2.ThermalMetrics"
+    )
     actions: Actions | None = None
     air_flow_cubic_meters_per_minute: SensorExcerpt | None = None
     delta_pressurek_pa: SensorExcerpt | None = None
@@ -47,6 +51,6 @@ class ThermalMetrics(RedfishModel):
     power_watts: SensorPowerExcerpt | None = None
     temperature_readings_celsius: list[SensorArrayExcerpt] | None = None
     temperature_readings_celsius_odata_count: int | None = Field(
-        alias="TemperatureReadingsCelsius@odata.count", default=None
+        serialization_alias="TemperatureReadingsCelsius@odata.count", default=None
     )
     temperature_summary_celsius: TemperatureSummary | None = None

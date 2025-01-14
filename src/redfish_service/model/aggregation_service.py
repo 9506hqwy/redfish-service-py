@@ -10,19 +10,19 @@ from .resource import ResetType, Status
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#AggregationService.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#AggregationService.Reset", default=None)
     set_default_boot_order: SetDefaultBootOrder | None = Field(
-        alias="#AggregationService.SetDefaultBootOrder", default=None
+        serialization_alias="#AggregationService.SetDefaultBootOrder", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class AggregationService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#AggregationService.v1_0_3.AggregationService"
+        serialization_alias="@odata.type", default="#AggregationService.v1_0_3.AggregationService"
     )
     actions: Actions | None = None
     aggregates: IdRef | None = None
@@ -44,20 +44,20 @@ class AggregationServiceOnUpdate(RedfishModelOnUpdate):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
     batch_size: int | None = None
     delay_between_batches_in_seconds: int | None = None
     reset_type: ResetType | None = None
-    target_ur_is: list[IdRef] = Field(alias="TargetURIs")
+    target_ur_is: list[IdRef] = Field(serialization_alias="TargetURIs")
 
 
 class SetDefaultBootOrder(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetDefaultBootOrderRequest(RedfishModel):

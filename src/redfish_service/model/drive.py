@@ -14,11 +14,13 @@ from .swordfish.volume import OperationType
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#Drive.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#Drive.Reset", default=None)
     revert_to_original_factory_state: RevertToOriginalFactoryState | None = Field(
-        alias="#Drive.RevertToOriginalFactoryState", default=None
+        serialization_alias="#Drive.RevertToOriginalFactoryState", default=None
     )
-    secure_erase: SecureErase | None = Field(alias="#Drive.SecureErase", default=None)
+    secure_erase: SecureErase | None = Field(
+        serialization_alias="#Drive.SecureErase", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -42,14 +44,16 @@ class DataSanitizationType(StrEnum):
 
 
 class Drive(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Drive.v1_20_1.Drive")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Drive.v1_20_1.Drive")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
-    block_security_id_enabled: bool | None = Field(alias="BlockSecurityIDEnabled", default=None)
+    block_security_id_enabled: bool | None = Field(
+        serialization_alias="BlockSecurityIDEnabled", default=None
+    )
     block_size_bytes: int | None = None
     capable_speed_gbs: float | None = None
     capacity_bytes: int | None = None
@@ -66,7 +70,7 @@ class Drive(RedfishModel):
     hotspare_type: HotspareType | None = None
     id: str
     identifiers: list[Identifier] | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location: list[Location] | None = None
     location_indicator_active: bool | None = None
@@ -76,7 +80,7 @@ class Drive(RedfishModel):
     metrics: IdRef | None = None
     model: str | None = None
     multipath: bool | None = None
-    nvme: Nvme | None = Field(alias="NVMe", default=None)
+    nvme: Nvme | None = Field(serialization_alias="NVMe", default=None)
     name: str
     negotiated_speed_gbs: float | None = None
     oem: dict[str, Any] | None = None
@@ -87,8 +91,8 @@ class Drive(RedfishModel):
     protocol: Protocol | None = None
     ready_to_remove: bool | None = None
     revision: str | None = None
-    rotation_speed_rpm: float | None = Field(alias="RotationSpeedRPM", default=None)
-    sku: str | None = Field(alias="SKU", default=None)
+    rotation_speed_rpm: float | None = Field(serialization_alias="RotationSpeedRPM", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     slot_capable_protocols: list[Protocol] | None = None
     slot_form_factor: FormFactor | None = None
@@ -102,17 +106,19 @@ class Drive(RedfishModel):
 class DriveOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     asset_tag: str | None = None
-    block_security_id_enabled: bool | None = Field(alias="BlockSecurityIDEnabled", default=None)
+    block_security_id_enabled: bool | None = Field(
+        serialization_alias="BlockSecurityIDEnabled", default=None
+    )
     configuration_lock: ConfigurationLock | None = None
     hotspare_replacement_mode: HotspareReplacementModeType | None = None
     hotspare_type: HotspareType | None = None
     identifiers: list[Identifier] | None = None
-    indicator_led: IndicatorLed | None = Field(alias="IndicatorLED", default=None)
+    indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     links: Links | None = None
     location: list[Location] | None = None
     location_indicator_active: bool | None = None
     measurements: list[MeasurementBlock] | None = None
-    nvme: Nvme | None = Field(alias="NVMe", default=None)
+    nvme: Nvme | None = Field(serialization_alias="NVMe", default=None)
     oem: dict[str, Any] | None = None
     operations: list[Operations] | None = None
     physical_location: Location | None = None
@@ -174,23 +180,31 @@ class Links(RedfishModel):
     active_software_image: IdRef | None = None
     chassis: IdRef | None = None
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     network_device_functions: list[IdRef] | None = None
     network_device_functions_odata_count: int | None = Field(
-        alias="NetworkDeviceFunctions@odata.count", default=None
+        serialization_alias="NetworkDeviceFunctions@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
-    pcie_functions: list[IdRef] | None = Field(alias="PCIeFunctions", default=None)
-    pcie_functions_odata_count: int | None = Field(alias="PCIeFunctions@odata.count", default=None)
+    pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
+    pcie_functions_odata_count: int | None = Field(
+        serialization_alias="PCIeFunctions@odata.count", default=None
+    )
     software_images: list[IdRef] | None = None
     software_images_odata_count: int | None = Field(
-        alias="SoftwareImages@odata.count", default=None
+        serialization_alias="SoftwareImages@odata.count", default=None
     )
     storage: IdRef | None = None
     storage_pools: list[IdRef] | None = None
-    storage_pools_odata_count: int | None = Field(alias="StoragePools@odata.count", default=None)
+    storage_pools_odata_count: int | None = Field(
+        serialization_alias="StoragePools@odata.count", default=None
+    )
     volumes: list[IdRef] | None = None
-    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
+    volumes_odata_count: int | None = Field(
+        serialization_alias="Volumes@odata.count", default=None
+    )
 
 
 class MediaType(StrEnum):
@@ -208,7 +222,7 @@ class NvmeConfigurationLockState(RedfishModel):
     firmware_image_download: ConfigLockOptions | None = None
     lockdown: ConfigLockOptions | None = None
     security_send: ConfigLockOptions | None = None
-    vpd_write: ConfigLockOptions | None = Field(alias="VPDWrite", default=None)
+    vpd_write: ConfigLockOptions | None = Field(serialization_alias="VPDWrite", default=None)
 
 
 class Operations(RedfishModel):
@@ -219,8 +233,8 @@ class Operations(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):
@@ -228,17 +242,17 @@ class ResetRequest(RedfishModel):
 
 
 class RevertToOriginalFactoryState(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RevertToOriginalFactoryStateRequest(RedfishModel):
-    physical_secure_id: str | None = Field(alias="PhysicalSecureID", default=None)
+    physical_secure_id: str | None = Field(serialization_alias="PhysicalSecureID", default=None)
 
 
 class SecureErase(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SecureEraseRequest(RedfishModel):

@@ -12,10 +12,12 @@ class Actions(RedfishModel):
 
 
 class JsonSchemaFile(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#JsonSchemaFile.v1_1_5.JsonSchemaFile")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#JsonSchemaFile.v1_1_5.JsonSchemaFile"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str
@@ -23,7 +25,7 @@ class JsonSchemaFile(RedfishModel):
     location: list[Location]
     name: str
     oem: dict[str, Any] | None = None
-    schema_value: str = Field(alias="Schema")
+    schema_value: str = Field(serialization_alias="Schema")
 
 
 class Location(RedfishModel):

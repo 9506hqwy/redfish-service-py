@@ -13,25 +13,25 @@ from ..swordfish.storage_replica_info import ReplicaInfo, ReplicaType, ReplicaUp
 
 class Actions(RedfishModel):
     assign_replica_target: AssignReplicaTarget | None = Field(
-        alias="#ConsistencyGroup.AssignReplicaTarget", default=None
+        serialization_alias="#ConsistencyGroup.AssignReplicaTarget", default=None
     )
     create_replica_target: CreateReplicaTarget | None = Field(
-        alias="#ConsistencyGroup.CreateReplicaTarget", default=None
+        serialization_alias="#ConsistencyGroup.CreateReplicaTarget", default=None
     )
     remove_replica_relationship: RemoveReplicaRelationship | None = Field(
-        alias="#ConsistencyGroup.RemoveReplicaRelationship", default=None
+        serialization_alias="#ConsistencyGroup.RemoveReplicaRelationship", default=None
     )
     resume_replication: ResumeReplication | None = Field(
-        alias="#ConsistencyGroup.ResumeReplication", default=None
+        serialization_alias="#ConsistencyGroup.ResumeReplication", default=None
     )
     reverse_replication_relationship: ReverseReplicationRelationship | None = Field(
-        alias="#ConsistencyGroup.ReverseReplicationRelationship", default=None
+        serialization_alias="#ConsistencyGroup.ReverseReplicationRelationship", default=None
     )
     split_replication: SplitReplication | None = Field(
-        alias="#ConsistencyGroup.SplitReplication", default=None
+        serialization_alias="#ConsistencyGroup.SplitReplication", default=None
     )
     suspend_replication: SuspendReplication | None = Field(
-        alias="#ConsistencyGroup.SuspendReplication", default=None
+        serialization_alias="#ConsistencyGroup.SuspendReplication", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -45,8 +45,8 @@ class ApplicationConsistencyMethod(StrEnum):
 
 
 class AssignReplicaTarget(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class AssignReplicaTargetRequest(RedfishModel):
@@ -56,11 +56,11 @@ class AssignReplicaTargetRequest(RedfishModel):
 
 
 class ConsistencyGroup(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#ConsistencyGroup.v1_1_1.ConsistencyGroup"
+        serialization_alias="@odata.type", default="#ConsistencyGroup.v1_1_1.ConsistencyGroup"
     )
     actions: Actions | None = None
     consistency_method: ApplicationConsistencyMethod | None = None
@@ -75,11 +75,13 @@ class ConsistencyGroup(RedfishModel):
     replica_info: ReplicaInfo | None = None
     replica_targets: list[IdRef] | None = None
     replica_targets_odata_count: int | None = Field(
-        alias="ReplicaTargets@odata.count", default=None
+        serialization_alias="ReplicaTargets@odata.count", default=None
     )
     status: Status | None = None
     volumes: list[IdRef] | None = None
-    volumes_odata_count: int | None = Field(alias="Volumes@odata.count", default=None)
+    volumes_odata_count: int | None = Field(
+        serialization_alias="Volumes@odata.count", default=None
+    )
 
 
 class ConsistencyGroupOnUpdate(RedfishModelOnUpdate):
@@ -99,8 +101,8 @@ class ConsistencyType(StrEnum):
 
 
 class CreateReplicaTarget(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class CreateReplicaTargetRequest(RedfishModel):
@@ -115,8 +117,8 @@ class Links(RedfishModel):
 
 
 class RemoveReplicaRelationship(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RemoveReplicaRelationshipRequest(RedfishModel):
@@ -125,8 +127,8 @@ class RemoveReplicaRelationshipRequest(RedfishModel):
 
 
 class ResumeReplication(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResumeReplicationRequest(RedfishModel):
@@ -134,8 +136,8 @@ class ResumeReplicationRequest(RedfishModel):
 
 
 class ReverseReplicationRelationship(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ReverseReplicationRelationshipRequest(RedfishModel):
@@ -143,8 +145,8 @@ class ReverseReplicationRelationshipRequest(RedfishModel):
 
 
 class SplitReplication(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SplitReplicationRequest(RedfishModel):
@@ -152,8 +154,8 @@ class SplitReplicationRequest(RedfishModel):
 
 
 class SuspendReplication(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SuspendReplicationRequest(RedfishModel):

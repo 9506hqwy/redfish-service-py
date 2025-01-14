@@ -19,11 +19,12 @@ class Actions(RedfishModel):
 
 
 class DataSecurityLineOfService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#DataSecurityLineOfService.v1_1_1.DataSecurityLineOfService"
+        serialization_alias="@odata.type",
+        default="#DataSecurityLineOfService.v1_1_1.DataSecurityLineOfService",
     )
     actions: Actions | None = None
     antivirus_engine_provider: str | None = None

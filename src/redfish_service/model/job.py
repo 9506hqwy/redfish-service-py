@@ -17,10 +17,10 @@ class Actions(RedfishModel):
 
 
 class Job(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Job.v1_2_4.Job")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Job.v1_2_4.Job")
     actions: Actions | None = None
     created_by: str | None = None
     description: str | None = None
@@ -44,10 +44,10 @@ class Job(RedfishModel):
 
 
 class JobOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Job.v1_2_4.Job")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(serialization_alias="@odata.type", default="#Job.v1_2_4.Job")
     actions: Actions | None = None
     created_by: str | None = None
     description: str | None = None
@@ -100,7 +100,7 @@ class JobState(StrEnum):
 class Links(RedfishModel):
     created_resources: list[IdRef] | None = None
     created_resources_odata_count: int | None = Field(
-        alias="CreatedResources@odata.count", default=None
+        serialization_alias="CreatedResources@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 

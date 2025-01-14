@@ -18,7 +18,7 @@ class Actions(RedfishModel):
 class Links(RedfishModel):
     created_resources: list[IdRef] | None = None
     created_resources_odata_count: int | None = Field(
-        alias="CreatedResources@odata.count", default=None
+        serialization_alias="CreatedResources@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -31,10 +31,10 @@ class Payload(RedfishModel):
 
 
 class Task(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Task.v1_7_4.Task")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Task.v1_7_4.Task")
     actions: Actions | None = None
     description: str | None = None
     end_time: str | None = None

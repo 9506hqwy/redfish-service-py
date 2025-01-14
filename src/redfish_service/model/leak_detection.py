@@ -16,10 +16,12 @@ class Actions(RedfishModel):
 
 
 class LeakDetection(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#LeakDetection.v1_1_0.LeakDetection")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#LeakDetection.v1_1_0.LeakDetection"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str
@@ -32,7 +34,9 @@ class LeakDetection(RedfishModel):
 
 class LeakDetectorGroup(RedfishModel):
     detectors: list[LeakDetectorArrayExcerpt] | None = None
-    detectors_odata_count: int | None = Field(alias="Detectors@odata.count", default=None)
+    detectors_odata_count: int | None = Field(
+        serialization_alias="Detectors@odata.count", default=None
+    )
     group_name: str | None = None
     humidity_percent: SensorExcerpt | None = None
     status: Status

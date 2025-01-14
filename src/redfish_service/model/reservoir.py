@@ -18,10 +18,12 @@ class Actions(RedfishModel):
 
 
 class Reservoir(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Reservoir.v1_0_2.Reservoir")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#Reservoir.v1_0_2.Reservoir"
+    )
     actions: Actions | None = None
     assembly: IdRef | None = None
     capacity_liters: float | None = None

@@ -22,7 +22,7 @@ class ServiceRootService(Service[ServiceRoot]):
             raise ResourceNotFoundError("ServiceRoot", "ServiceRoot")
 
         if account_service:
-            i.account_service = IdRef.model_validate({"odata_id": account_service.odata_id})
+            i.account_service = IdRef(odata_id=account_service.odata_id)
 
         req: Request = cast(Request, kwargs["request"])
         i.odata_id = req.url.path

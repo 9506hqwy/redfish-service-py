@@ -12,23 +12,26 @@ from .resource import Status
 
 class Actions(RedfishModel):
     clear_metric_reports: ClearMetricReports | None = Field(
-        alias="#TelemetryService.ClearMetricReports", default=None
+        serialization_alias="#TelemetryService.ClearMetricReports", default=None
     )
     reset_metric_report_definitions_to_defaults: ResetMetricReportDefinitionsToDefaults | None = (
-        Field(alias="#TelemetryService.ResetMetricReportDefinitionsToDefaults", default=None)
+        Field(
+            serialization_alias="#TelemetryService.ResetMetricReportDefinitionsToDefaults",
+            default=None,
+        )
     )
     reset_triggers_to_defaults: ResetTriggersToDefaults | None = Field(
-        alias="#TelemetryService.ResetTriggersToDefaults", default=None
+        serialization_alias="#TelemetryService.ResetTriggersToDefaults", default=None
     )
     submit_test_metric_report: SubmitTestMetricReport | None = Field(
-        alias="#TelemetryService.SubmitTestMetricReport", default=None
+        serialization_alias="#TelemetryService.SubmitTestMetricReport", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class ClearMetricReports(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class CollectionFunction(StrEnum):
@@ -47,18 +50,18 @@ class MetricValue(RedfishModel):
 
 
 class ResetMetricReportDefinitionsToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetTriggersToDefaults(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SubmitTestMetricReport(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SubmitTestMetricReportRequest(RedfishModel):
@@ -68,11 +71,11 @@ class SubmitTestMetricReportRequest(RedfishModel):
 
 
 class TelemetryService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#TelemetryService.v1_3_4.TelemetryService"
+        serialization_alias="@odata.type", default="#TelemetryService.v1_3_4.TelemetryService"
     )
     actions: Actions | None = None
     description: str | None = None

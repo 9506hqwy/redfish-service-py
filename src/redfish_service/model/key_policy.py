@@ -13,31 +13,35 @@ class Actions(RedfishModel):
 
 
 class KeyPolicy(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#KeyPolicy.v1_0_1.KeyPolicy")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#KeyPolicy.v1_0_1.KeyPolicy"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str
     is_default: bool | None = None
     key_policy_type: KeyPolicyType | None = None
-    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(serialization_alias="NVMeoF", default=None)
     name: str
     oem: dict[str, Any] | None = None
 
 
 class KeyPolicyOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#KeyPolicy.v1_0_1.KeyPolicy")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#KeyPolicy.v1_0_1.KeyPolicy"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str | None = None
     is_default: bool | None = None
     key_policy_type: KeyPolicyType | None = None
-    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(serialization_alias="NVMeoF", default=None)
     name: str | None = None
     oem: dict[str, Any] | None = None
 
@@ -45,7 +49,7 @@ class KeyPolicyOnCreate(RedfishModel):
 class KeyPolicyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     is_default: bool | None = None
-    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(serialization_alias="NVMeoF", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -56,10 +60,10 @@ class KeyPolicyType(StrEnum):
 class NvmeOf(RedfishModel):
     cipher_suite_allow_list: list[NvmeOfCipherSuiteType] | None = None
     dh_group_allow_list: list[NvmeOfDhGroupType] | None = Field(
-        alias="DHGroupAllowList", default=None
+        serialization_alias="DHGroupAllowList", default=None
     )
     oem_security_protocol_allow_list: list[str] | None = Field(
-        alias="OEMSecurityProtocolAllowList", default=None
+        serialization_alias="OEMSecurityProtocolAllowList", default=None
     )
     secure_hash_allow_list: list[NvmeOfSecureHashType] | None = None
     security_protocol_allow_list: list[NvmeOfSecurityProtocolType] | None = None

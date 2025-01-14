@@ -22,10 +22,12 @@ class AccountProviderTypes(StrEnum):
 
 
 class AccountService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#AccountService.v1_16_0.AccountService")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#AccountService.v1_16_0.AccountService"
+    )
     account_lockout_counter_reset_after: int | None = None
     account_lockout_counter_reset_enabled: bool | None = None
     account_lockout_duration: int | None = None
@@ -36,15 +38,17 @@ class AccountService(RedfishModel):
     additional_external_account_providers: IdRef | None = None
     auth_failure_logging_threshold: int | None = None
     description: str | None = None
-    http_basic_auth: BasicAuthState | None = Field(alias="HTTPBasicAuth", default=None)
+    http_basic_auth: BasicAuthState | None = Field(
+        serialization_alias="HTTPBasicAuth", default=None
+    )
     id: str
-    ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
+    ldap: ExternalAccountProvider | None = Field(serialization_alias="LDAP", default=None)
     local_account_auth: LocalAccountAuth | None = None
     max_password_length: int | None = None
     min_password_length: int | None = None
     multi_factor_auth: MultiFactorAuth | None = None
     name: str
-    oauth2: ExternalAccountProvider | None = Field(alias="OAuth2", default=None)
+    oauth2: ExternalAccountProvider | None = Field(serialization_alias="OAuth2", default=None)
     oem: dict[str, Any] | None = None
     outbound_connections: IdRef | None = None
     password_expiration_days: int | None = None
@@ -57,9 +61,11 @@ class AccountService(RedfishModel):
     status: Status | None = None
     supported_account_types: list[AccountTypes] | None = None
     supported_oem_account_types: list[str] | None = Field(
-        alias="SupportedOEMAccountTypes", default=None
+        serialization_alias="SupportedOEMAccountTypes", default=None
     )
-    tacacs_plus: ExternalAccountProvider | None = Field(alias="TACACSplus", default=None)
+    tacacs_plus: ExternalAccountProvider | None = Field(
+        serialization_alias="TACACSplus", default=None
+    )
 
 
 class AccountServiceOnUpdate(RedfishModelOnUpdate):
@@ -70,20 +76,24 @@ class AccountServiceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     active_directory: ExternalAccountProvider | None = None
     auth_failure_logging_threshold: int | None = None
-    http_basic_auth: BasicAuthState | None = Field(alias="HTTPBasicAuth", default=None)
-    ldap: ExternalAccountProvider | None = Field(alias="LDAP", default=None)
+    http_basic_auth: BasicAuthState | None = Field(
+        serialization_alias="HTTPBasicAuth", default=None
+    )
+    ldap: ExternalAccountProvider | None = Field(serialization_alias="LDAP", default=None)
     local_account_auth: LocalAccountAuth | None = None
     max_password_length: int | None = None
     min_password_length: int | None = None
     multi_factor_auth: MultiFactorAuth | None = None
-    oauth2: ExternalAccountProvider | None = Field(alias="OAuth2", default=None)
+    oauth2: ExternalAccountProvider | None = Field(serialization_alias="OAuth2", default=None)
     oem: dict[str, Any] | None = None
     outbound_connections: IdRef | None = None
     password_expiration_days: int | None = None
     require_change_password_action: bool | None = None
     service_enabled: bool | None = None
     status: Status | None = None
-    tacacs_plus: ExternalAccountProvider | None = Field(alias="TACACSplus", default=None)
+    tacacs_plus: ExternalAccountProvider | None = Field(
+        serialization_alias="TACACSplus", default=None
+    )
 
 
 class Actions(RedfishModel):
@@ -131,15 +141,17 @@ class ExternalAccountProvider(RedfishModel):
     account_provider_type: AccountProviderTypes | None = None
     authentication: Authentication | None = None
     certificates: IdRef | None = None
-    ldap_service: LdapService | None = Field(alias="LDAPService", default=None)
-    oauth2_service: Oauth2Service | None = Field(alias="OAuth2Service", default=None)
+    ldap_service: LdapService | None = Field(serialization_alias="LDAPService", default=None)
+    oauth2_service: Oauth2Service | None = Field(serialization_alias="OAuth2Service", default=None)
     password_set: bool | None = None
     priority: int | None = None
     remote_role_mapping: list[RoleMapping] | None = None
     retries: int | None = None
     service_addresses: list[str] | None = None
     service_enabled: bool | None = None
-    tacacs_plus_service: TacacsPlusService | None = Field(alias="TACACSplusService", default=None)
+    tacacs_plus_service: TacacsPlusService | None = Field(
+        serialization_alias="TACACSplusService", default=None
+    )
     timeout_seconds: int | None = None
 
 
@@ -154,7 +166,7 @@ class LdapSearchSettings(RedfishModel):
     email_attribute: str | None = None
     group_name_attribute: str | None = None
     groups_attribute: str | None = None
-    ssh_key_attribute: str | None = Field(alias="SSHKeyAttribute", default=None)
+    ssh_key_attribute: str | None = Field(serialization_alias="SSHKeyAttribute", default=None)
     username_attribute: str | None = None
 
 
@@ -196,7 +208,7 @@ class MultiFactorAuth(RedfishModel):
     google_authenticator: GoogleAuthenticator | None = None
     microsoft_authenticator: MicrosoftAuthenticator | None = None
     one_time_passcode: OneTimePasscode | None = None
-    secur_id: SecurId | None = Field(alias="SecurID", default=None)
+    secur_id: SecurId | None = Field(serialization_alias="SecurID", default=None)
     time_based_one_time_password: TimeBasedOneTimePassword | None = None
 
 
@@ -209,7 +221,9 @@ class Oauth2Service(RedfishModel):
     audience: list[str] | None = None
     issuer: str | None = None
     mode: Oauth2Mode | None = None
-    oauth_service_signing_keys: str | None = Field(alias="OAuthServiceSigningKeys", default=None)
+    oauth_service_signing_keys: str | None = Field(
+        serialization_alias="OAuthServiceSigningKeys", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -219,9 +233,11 @@ class OneTimePasscode(RedfishModel):
 
 class RoleMapping(RedfishModel):
     local_account_types: list[AccountTypes] | None = None
-    local_oem_account_types: list[str] | None = Field(alias="LocalOEMAccountTypes", default=None)
+    local_oem_account_types: list[str] | None = Field(
+        serialization_alias="LocalOEMAccountTypes", default=None
+    )
     local_role: str | None = None
-    mfa_bypass: MfaBypass | None = Field(alias="MFABypass", default=None)
+    mfa_bypass: MfaBypass | None = Field(serialization_alias="MFABypass", default=None)
     oem: dict[str, Any] | None = None
     remote_group: str | None = None
     remote_user: str | None = None
@@ -233,7 +249,7 @@ class SecurId(RedfishModel):
     client_secret: str | None = None
     client_secret_set: bool | None = None
     enabled: bool | None = None
-    server_uri: str | None = Field(alias="ServerURI", default=None)
+    server_uri: str | None = Field(serialization_alias="ServerURI", default=None)
 
 
 class TacacsPlusPasswordExchangeProtocol(StrEnum):

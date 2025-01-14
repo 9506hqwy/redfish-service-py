@@ -10,18 +10,18 @@ from .odata_v4 import IdRef
 
 
 class Actions(RedfishModel):
-    install: Install | None = Field(alias="#LicenseService.Install", default=None)
+    install: Install | None = Field(serialization_alias="#LicenseService.Install", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Install(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class InstallRequest(RedfishModel):
     authorized_devices: list[IdRef] | None = None
-    license_file_uri: str = Field(alias="LicenseFileURI")
+    license_file_uri: str = Field(serialization_alias="LicenseFileURI")
     password: str | None = None
     target_services: list[IdRef] | None = None
     transfer_protocol: TransferProtocolType | None = None
@@ -29,10 +29,12 @@ class InstallRequest(RedfishModel):
 
 
 class LicenseService(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#LicenseService.v1_1_2.LicenseService")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#LicenseService.v1_1_2.LicenseService"
+    )
     actions: Actions | None = None
     description: str | None = None
     id: str

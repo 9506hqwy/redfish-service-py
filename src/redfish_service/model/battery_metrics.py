@@ -14,13 +14,17 @@ class Actions(RedfishModel):
 
 
 class BatteryMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#BatteryMetrics.v1_0_4.BatteryMetrics")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#BatteryMetrics.v1_0_4.BatteryMetrics"
+    )
     actions: Actions | None = None
     cell_voltages: list[SensorVoltageExcerpt] | None = None
-    cell_voltages_odata_count: int | None = Field(alias="CellVoltages@odata.count", default=None)
+    cell_voltages_odata_count: int | None = Field(
+        serialization_alias="CellVoltages@odata.count", default=None
+    )
     charge_percent: SensorExcerpt | None = None
     description: str | None = None
     discharge_cycles: float | None = None
@@ -31,11 +35,11 @@ class BatteryMetrics(RedfishModel):
     oem: dict[str, Any] | None = None
     output_current_amps: list[SensorCurrentExcerpt] | None = None
     output_current_amps_odata_count: int | None = Field(
-        alias="OutputCurrentAmps@odata.count", default=None
+        serialization_alias="OutputCurrentAmps@odata.count", default=None
     )
     output_voltages: list[SensorVoltageExcerpt] | None = None
     output_voltages_odata_count: int | None = Field(
-        alias="OutputVoltages@odata.count", default=None
+        serialization_alias="OutputVoltages@odata.count", default=None
     )
     status: Status | None = None
     stored_charge_amp_hours: SensorExcerpt | None = None

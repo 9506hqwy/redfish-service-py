@@ -19,12 +19,14 @@ class Links(RedfishModel):
 
 
 class Session(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Session.v1_7_2.Session")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Session.v1_7_2.Session")
     actions: Actions | None = None
-    client_origin_ip_address: str | None = Field(alias="ClientOriginIPAddress", default=None)
+    client_origin_ip_address: str | None = Field(
+        serialization_alias="ClientOriginIPAddress", default=None
+    )
     context: str | None = None
     created_time: str | None = None
     description: str | None = None
@@ -41,12 +43,16 @@ class Session(RedfishModel):
 
 
 class SessionOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Session.v1_7_2.Session")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#Session.v1_7_2.Session"
+    )
     actions: Actions | None = None
-    client_origin_ip_address: str | None = Field(alias="ClientOriginIPAddress", default=None)
+    client_origin_ip_address: str | None = Field(
+        serialization_alias="ClientOriginIPAddress", default=None
+    )
     context: str | None = None
     created_time: str | None = None
     description: str | None = None

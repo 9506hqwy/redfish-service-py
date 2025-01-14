@@ -10,15 +10,17 @@ from .resource import ResetType, Status
 
 
 class Actions(RedfishModel):
-    reset: Reset | None = Field(alias="#Container.Reset", default=None)
+    reset: Reset | None = Field(serialization_alias="#Container.Reset", default=None)
     oem: dict[str, Any] | None = None
 
 
 class Container(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Container.v1_0_1.Container")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#Container.v1_0_1.Container"
+    )
     actions: Actions | None = None
     description: str | None = None
     ethernet_interfaces: IdRef | None = None
@@ -34,7 +36,7 @@ class Container(RedfishModel):
 
 
 class Limits(RedfishModel):
-    cpu_count: float | None = Field(alias="CPUCount", default=None)
+    cpu_count: float | None = Field(serialization_alias="CPUCount", default=None)
     memory_bytes: int | None = None
 
 
@@ -49,8 +51,8 @@ class MountPoint(RedfishModel):
 
 
 class Reset(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class ResetRequest(RedfishModel):

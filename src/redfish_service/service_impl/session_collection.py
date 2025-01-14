@@ -22,9 +22,7 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         if i is None:
             raise ResourceNotFoundError("SessionCollection", "SessionCollection")
 
-        i.members = [
-            IdRef.model_validate({"odata_id": s.odata_id}) for s in instances.enum_by_type(Session)
-        ]
+        i.members = [IdRef(odata_id=s.odata_id) for s in instances.enum_by_type(Session)]
         i.members_odata_count = len(i.members)
 
         req: Request = cast(Request, kwargs["request"])
@@ -48,13 +46,11 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         id = uuid.uuid4()
         token = uuid.uuid4()
 
-        session = Session.model_validate(
-            {
-                "odata_id": f"{req.url.path}/{id}",
-                "id": str(id),
-                "name": str(id),
-                "user_name": body.user_name,
-            }
+        session = Session(
+            odata_id=f"{req.url.path}/{id}",
+            id=str(id),
+            name=str(id),
+            user_name=body.user_name,
         )
         session.extra_fields["token"] = str(token)
         instances.add(session)

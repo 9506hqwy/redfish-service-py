@@ -11,20 +11,22 @@ from .resource import Identifier, Status
 
 
 class Actions(RedfishModel):
-    add_endpoint: AddEndpoint | None = Field(alias="#Zone.AddEndpoint", default=None)
-    remove_endpoint: RemoveEndpoint | None = Field(alias="#Zone.RemoveEndpoint", default=None)
+    add_endpoint: AddEndpoint | None = Field(serialization_alias="#Zone.AddEndpoint", default=None)
+    remove_endpoint: RemoveEndpoint | None = Field(
+        serialization_alias="#Zone.RemoveEndpoint", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class AddEndpoint(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class AddEndpointRequest(RedfishModel):
     endpoint: IdRef
-    endpoint_etag: str | None = Field(alias="EndpointETag", default=None)
-    zone_etag: str | None = Field(alias="ZoneETag", default=None)
+    endpoint_etag: str | None = Field(serialization_alias="EndpointETag", default=None)
+    zone_etag: str | None = Field(serialization_alias="ZoneETag", default=None)
 
 
 class ExternalAccessibility(StrEnum):
@@ -36,42 +38,48 @@ class ExternalAccessibility(StrEnum):
 
 class Links(RedfishModel):
     address_pools: list[IdRef] | None = None
-    address_pools_odata_count: int | None = Field(alias="AddressPools@odata.count", default=None)
+    address_pools_odata_count: int | None = Field(
+        serialization_alias="AddressPools@odata.count", default=None
+    )
     contained_by_zones: list[IdRef] | None = None
     contained_by_zones_odata_count: int | None = Field(
-        alias="ContainedByZones@odata.count", default=None
+        serialization_alias="ContainedByZones@odata.count", default=None
     )
     contains_zones: list[IdRef] | None = None
-    contains_zones_odata_count: int | None = Field(alias="ContainsZones@odata.count", default=None)
+    contains_zones_odata_count: int | None = Field(
+        serialization_alias="ContainsZones@odata.count", default=None
+    )
     endpoints: list[IdRef] | None = None
-    endpoints_odata_count: int | None = Field(alias="Endpoints@odata.count", default=None)
+    endpoints_odata_count: int | None = Field(
+        serialization_alias="Endpoints@odata.count", default=None
+    )
     involved_switches: list[IdRef] | None = None
     involved_switches_odata_count: int | None = Field(
-        alias="InvolvedSwitches@odata.count", default=None
+        serialization_alias="InvolvedSwitches@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     resource_blocks: list[IdRef] | None = None
     resource_blocks_odata_count: int | None = Field(
-        alias="ResourceBlocks@odata.count", default=None
+        serialization_alias="ResourceBlocks@odata.count", default=None
     )
 
 
 class RemoveEndpoint(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RemoveEndpointRequest(RedfishModel):
     endpoint: IdRef
-    endpoint_etag: str | None = Field(alias="EndpointETag", default=None)
-    zone_etag: str | None = Field(alias="ZoneETag", default=None)
+    endpoint_etag: str | None = Field(serialization_alias="EndpointETag", default=None)
+    zone_etag: str | None = Field(serialization_alias="ZoneETag", default=None)
 
 
 class Zone(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Zone.v1_6_3.Zone")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Zone.v1_6_3.Zone")
     actions: Actions | None = None
     default_routing_enabled: bool | None = None
     description: str | None = None
@@ -86,10 +94,10 @@ class Zone(RedfishModel):
 
 
 class ZoneOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Zone.v1_6_3.Zone")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(serialization_alias="@odata.type", default="#Zone.v1_6_3.Zone")
     actions: Actions | None = None
     default_routing_enabled: bool | None = None
     description: str | None = None

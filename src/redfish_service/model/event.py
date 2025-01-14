@@ -31,13 +31,13 @@ class DiagnosticDataTypes(StrEnum):
 
 
 class Event(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_type: str = Field(alias="@odata.type", default="#Event.v1_11_0.Event")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_11_0.Event")
     actions: Actions | None = None
     context: str | None = None
     description: str | None = None
     events: list[EventRecord]
-    events_odata_count: int | None = Field(alias="Events@odata.count", default=None)
+    events_odata_count: int | None = Field(serialization_alias="Events@odata.count", default=None)
     id: str
     name: str
     oem: dict[str, Any] | None = None
@@ -46,8 +46,8 @@ class Event(RedfishModel):
 class EventRecord(RedfishModel):
     actions: EventRecordActions | None = None
     additional_data_size_bytes: int | None = None
-    additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
-    cper: Cper | None = Field(alias="CPER", default=None)
+    additional_data_uri: str | None = Field(serialization_alias="AdditionalDataURI", default=None)
+    cper: Cper | None = Field(serialization_alias="CPER", default=None)
     context: str | None = None
     diagnostic_data: str | None = None
     diagnostic_data_type: DiagnosticDataTypes | None = None
@@ -61,7 +61,9 @@ class EventRecord(RedfishModel):
     message_args: list[str] | None = None
     message_id: str
     message_severity: Health | None = None
-    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(
+        serialization_alias="OEMDiagnosticDataType", default=None
+    )
     oem: dict[str, Any] | None = None
     origin_of_condition: IdRef | None = None
     resolution: str | None = None

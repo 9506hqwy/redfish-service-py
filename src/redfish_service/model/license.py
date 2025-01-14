@@ -27,21 +27,21 @@ class ContactInfo(RedfishModel):
 
 
 class License(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#License.v1_1_3.License")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#License.v1_1_3.License")
     actions: Actions | None = None
     authorization_scope: AuthorizationScope | None = None
     contact: ContactInfo | None = None
     description: str | None = None
-    download_uri: str | None = Field(alias="DownloadURI", default=None)
+    download_uri: str | None = Field(serialization_alias="DownloadURI", default=None)
     entitlement_id: str | None = None
     expiration_date: str | None = None
     grace_period_days: int | None = None
     id: str
     install_date: str | None = None
-    license_info_uri: str | None = Field(alias="LicenseInfoURI", default=None)
+    license_info_uri: str | None = Field(serialization_alias="LicenseInfoURI", default=None)
     license_origin: LicenseOrigin | None = None
     license_string: str | None = None
     license_type: LicenseType | None = None
@@ -54,27 +54,29 @@ class License(RedfishModel):
     remaining_duration: str | None = None
     remaining_use_count: int | None = None
     removable: bool | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
 
 
 class LicenseOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#License.v1_1_3.License")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#License.v1_1_3.License"
+    )
     actions: Actions | None = None
     authorization_scope: AuthorizationScope | None = None
     contact: ContactInfo | None = None
     description: str | None = None
-    download_uri: str | None = Field(alias="DownloadURI", default=None)
+    download_uri: str | None = Field(serialization_alias="DownloadURI", default=None)
     entitlement_id: str | None = None
     expiration_date: str | None = None
     grace_period_days: int | None = None
     id: str | None = None
     install_date: str | None = None
-    license_info_uri: str | None = Field(alias="LicenseInfoURI", default=None)
+    license_info_uri: str | None = Field(serialization_alias="LicenseInfoURI", default=None)
     license_origin: LicenseOrigin | None = None
     license_string: str | None = None
     license_type: LicenseType | None = None
@@ -87,7 +89,7 @@ class LicenseOnCreate(RedfishModel):
     remaining_duration: str | None = None
     remaining_use_count: int | None = None
     removable: bool | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     status: Status | None = None
 
@@ -106,10 +108,10 @@ class LicenseType(StrEnum):
 class Links(RedfishModel):
     authorized_devices: list[IdRef] | None = None
     authorized_devices_odata_count: int | None = Field(
-        alias="AuthorizedDevices@odata.count", default=None
+        serialization_alias="AuthorizedDevices@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
     target_services: list[IdRef] | None = None
     target_services_odata_count: int | None = Field(
-        alias="TargetServices@odata.count", default=None
+        serialization_alias="TargetServices@odata.count", default=None
     )

@@ -16,19 +16,21 @@ class Actions(RedfishModel):
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     on_hand_spares: list[IdRef] | None = None
-    on_hand_spares_odata_count: int | None = Field(alias="OnHandSpares@odata.count", default=None)
+    on_hand_spares_odata_count: int | None = Field(
+        serialization_alias="OnHandSpares@odata.count", default=None
+    )
     replacement_spare_sets: list[SpareResourceSet] | None = None
     replacement_spare_sets_odata_count: int | None = Field(
-        alias="ReplacementSpareSets@odata.count", default=None
+        serialization_alias="ReplacementSpareSets@odata.count", default=None
     )
 
 
 class SpareResourceSet(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#SpareResourceSet.v1_0_2.SpareResourceSet"
+        serialization_alias="@odata.type", default="#SpareResourceSet.v1_0_2.SpareResourceSet"
     )
     actions: Actions | None = None
     description: str | None = None

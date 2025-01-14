@@ -13,30 +13,32 @@ class Actions(RedfishModel):
 
 
 class DriveMetrics(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#DriveMetrics.v1_2_1.DriveMetrics")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#DriveMetrics.v1_2_1.DriveMetrics"
+    )
     actions: Actions | None = None
     bad_block_count: int | None = None
     correctable_io_read_error_count: int | None = Field(
-        alias="CorrectableIOReadErrorCount", default=None
+        serialization_alias="CorrectableIOReadErrorCount", default=None
     )
     correctable_io_write_error_count: int | None = Field(
-        alias="CorrectableIOWriteErrorCount", default=None
+        serialization_alias="CorrectableIOWriteErrorCount", default=None
     )
     description: str | None = None
     id: str
-    nvme_smart: NvmeSmartMetrics | None = Field(alias="NVMeSMART", default=None)
+    nvme_smart: NvmeSmartMetrics | None = Field(serialization_alias="NVMeSMART", default=None)
     name: str
     native_command_queue_depth: int | None = None
     oem: dict[str, Any] | None = None
     power_on_hours: float | None = None
-    read_io_kibytes: int | None = Field(alias="ReadIOKiBytes", default=None)
+    read_io_kibytes: int | None = Field(serialization_alias="ReadIOKiBytes", default=None)
     uncorrectable_io_read_error_count: int | None = Field(
-        alias="UncorrectableIOReadErrorCount", default=None
+        serialization_alias="UncorrectableIOReadErrorCount", default=None
     )
     uncorrectable_io_write_error_count: int | None = Field(
-        alias="UncorrectableIOWriteErrorCount", default=None
+        serialization_alias="UncorrectableIOWriteErrorCount", default=None
     )
-    write_io_kibytes: int | None = Field(alias="WriteIOKiBytes", default=None)
+    write_io_kibytes: int | None = Field(serialization_alias="WriteIOKiBytes", default=None)

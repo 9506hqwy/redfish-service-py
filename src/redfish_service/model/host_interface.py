@@ -28,10 +28,12 @@ class CredentialBootstrapping(RedfishModel):
 
 
 class HostInterface(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#HostInterface.v1_3_2.HostInterface")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#HostInterface.v1_3_2.HostInterface"
+    )
     actions: Actions | None = None
     auth_none_role_id: str | None = None
     authentication_modes: list[AuthenticationMode] | None = None
@@ -77,7 +79,7 @@ class Links(RedfishModel):
     auth_none_role: IdRef | None = None
     computer_systems: list[IdRef] | None = None
     computer_systems_odata_count: int | None = Field(
-        alias="ComputerSystems@odata.count", default=None
+        serialization_alias="ComputerSystems@odata.count", default=None
     )
     credential_bootstrapping_role: IdRef | None = None
     firmware_auth_role: IdRef | None = None

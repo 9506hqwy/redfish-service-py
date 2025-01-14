@@ -28,44 +28,44 @@ class EcdsaCurveType(StrEnum):
 
 
 class Key(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#Key.v1_4_1.Key")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Key.v1_4_1.Key")
     actions: Actions | None = None
     description: str | None = None
     id: str
     key_string: str | None = None
     key_type: KeyType | None = None
-    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(serialization_alias="NVMeoF", default=None)
     name: str
     oem: dict[str, Any] | None = None
-    ssh: SshType | None = Field(alias="SSH", default=None)
+    ssh: SshType | None = Field(serialization_alias="SSH", default=None)
     user_description: str | None = None
 
 
 class KeyOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#Key.v1_4_1.Key")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(serialization_alias="@odata.type", default="#Key.v1_4_1.Key")
     actions: Actions | None = None
     description: str | None = None
     id: str | None = None
     key_string: str | None = None
     key_type: KeyType | None = None
-    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(serialization_alias="NVMeoF", default=None)
     name: str | None = None
     oem: dict[str, Any] | None = None
-    ssh: SshType | None = Field(alias="SSH", default=None)
+    ssh: SshType | None = Field(serialization_alias="SSH", default=None)
     user_description: str | None = None
 
 
 class KeyOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    nvme_of: NvmeOf | None = Field(alias="NVMeoF", default=None)
+    nvme_of: NvmeOf | None = Field(serialization_alias="NVMeoF", default=None)
     oem: dict[str, Any] | None = None
-    ssh: SshType | None = Field(alias="SSH", default=None)
+    ssh: SshType | None = Field(serialization_alias="SSH", default=None)
     user_description: str | None = None
 
 
@@ -76,8 +76,10 @@ class KeyType(StrEnum):
 
 class NvmeOf(RedfishModel):
     host_key_id: str | None = None
-    nqn: str | None = Field(alias="NQN", default=None)
-    oem_security_protocol_type: str | None = Field(alias="OEMSecurityProtocolType", default=None)
+    nqn: str | None = Field(serialization_alias="NQN", default=None)
+    oem_security_protocol_type: str | None = Field(
+        serialization_alias="OEMSecurityProtocolType", default=None
+    )
     secure_hash_allow_list: list[NvmeOfSecureHashType] | None = None
     security_protocol_type: NvmeOfSecurityProtocolType | None = None
 

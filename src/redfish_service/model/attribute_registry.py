@@ -14,7 +14,7 @@ class Actions(RedfishModel):
 
 class AttributeRegistry(RedfishModel):
     odata_type: str = Field(
-        alias="@odata.type", default="#AttributeRegistry.v1_3_9.AttributeRegistry"
+        serialization_alias="@odata.type", default="#AttributeRegistry.v1_3_9.AttributeRegistry"
     )
     actions: Actions | None = None
     description: str | None = None

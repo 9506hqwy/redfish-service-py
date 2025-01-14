@@ -13,26 +13,30 @@ from .resource import Location, Status
 
 class Actions(RedfishModel):
     transfer_control: TransferControl | None = Field(
-        alias="#PowerDistribution.TransferControl", default=None
+        serialization_alias="#PowerDistribution.TransferControl", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
-    chassis_odata_count: int | None = Field(alias="Chassis@odata.count", default=None)
+    chassis_odata_count: int | None = Field(
+        serialization_alias="Chassis@odata.count", default=None
+    )
     facility: IdRef | None = None
     managed_by: list[IdRef] | None = None
-    managed_by_odata_count: int | None = Field(alias="ManagedBy@odata.count", default=None)
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
 class PowerDistribution(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#PowerDistribution.v1_4_0.PowerDistribution"
+        serialization_alias="@odata.type", default="#PowerDistribution.v1_4_0.PowerDistribution"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -54,7 +58,7 @@ class PowerDistribution(RedfishModel):
     outlet_groups: IdRef | None = None
     outlets: IdRef | None = None
     part_number: str | None = None
-    power_capacity_va: int | None = Field(alias="PowerCapacityVA", default=None)
+    power_capacity_va: int | None = Field(serialization_alias="PowerCapacityVA", default=None)
     power_supplies: IdRef | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     production_date: str | None = None
@@ -64,7 +68,7 @@ class PowerDistribution(RedfishModel):
     subfeeds: IdRef | None = None
     transfer_configuration: TransferConfiguration | None = None
     transfer_criteria: TransferCriteria | None = None
-    uuid: str | None = Field(alias="UUID", default=None)
+    uuid: str | None = Field(serialization_alias="UUID", default=None)
     user_label: str | None = None
     version: str | None = None
 
@@ -107,19 +111,19 @@ class TransferConfiguration(RedfishModel):
 
 
 class TransferControl(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class TransferCriteria(RedfishModel):
     over_nominal_frequency_hz: float | None = None
     over_voltage_rms_percentage: float | None = Field(
-        alias="OverVoltageRMSPercentage", default=None
+        serialization_alias="OverVoltageRMSPercentage", default=None
     )
     transfer_sensitivity: TransferSensitivityType | None = None
     under_nominal_frequency_hz: float | None = None
     under_voltage_rms_percentage: float | None = Field(
-        alias="UnderVoltageRMSPercentage", default=None
+        serialization_alias="UnderVoltageRMSPercentage", default=None
     )
 
 

@@ -15,23 +15,27 @@ from ..swordfish.volume import RaidType
 
 
 class Actions(RedfishModel):
-    add_drives: AddDrives | None = Field(alias="#StoragePool.AddDrives", default=None)
-    remove_drives: RemoveDrives | None = Field(alias="#StoragePool.RemoveDrives", default=None)
+    add_drives: AddDrives | None = Field(
+        serialization_alias="#StoragePool.AddDrives", default=None
+    )
+    remove_drives: RemoveDrives | None = Field(
+        serialization_alias="#StoragePool.RemoveDrives", default=None
+    )
     set_compression_state: SetCompressionState | None = Field(
-        alias="#StoragePool.SetCompressionState", default=None
+        serialization_alias="#StoragePool.SetCompressionState", default=None
     )
     set_deduplication_state: SetDeduplicationState | None = Field(
-        alias="#StoragePool.SetDeduplicationState", default=None
+        serialization_alias="#StoragePool.SetDeduplicationState", default=None
     )
     set_encryption_state: SetEncryptionState | None = Field(
-        alias="#StoragePool.SetEncryptionState", default=None
+        serialization_alias="#StoragePool.SetEncryptionState", default=None
     )
     oem: dict[str, Any] | None = None
 
 
 class AddDrives(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class AddDrivesRequest(RedfishModel):
@@ -54,14 +58,14 @@ class EndGrpLifetime(RedfishModel):
 class Links(RedfishModel):
     dedicated_spare_drives: list[IdRef] | None = None
     dedicated_spare_drives_odata_count: int | None = Field(
-        alias="DedicatedSpareDrives@odata.count", default=None
+        serialization_alias="DedicatedSpareDrives@odata.count", default=None
     )
     default_class_of_service: IdRef | None = None
     oem: dict[str, Any] | None = None
     owning_storage_resource: IdRef | None = None
     spare_resource_sets: list[IdRef] | None = None
     spare_resource_sets_odata_count: int | None = Field(
-        alias="SpareResourceSets@odata.count", default=None
+        serialization_alias="SpareResourceSets@odata.count", default=None
     )
 
 
@@ -76,7 +80,7 @@ class NvmePoolType(StrEnum):
 
 
 class NvmeProperties(RedfishModel):
-    nvme_pool_type: NvmePoolType | None = Field(alias="NVMePoolType", default=None)
+    nvme_pool_type: NvmePoolType | None = Field(serialization_alias="NVMePoolType", default=None)
 
 
 class NvmeSetProperties(RedfishModel):
@@ -85,7 +89,7 @@ class NvmeSetProperties(RedfishModel):
     random4k_read_typical_nano_seconds: int | None = None
     set_identifier: str | None = None
     unallocated_nvm_namespace_capacity_bytes: int | None = Field(
-        alias="UnallocatedNVMNamespaceCapacityBytes", default=None
+        serialization_alias="UnallocatedNVMNamespaceCapacityBytes", default=None
     )
 
 
@@ -97,8 +101,8 @@ class PoolType(StrEnum):
 
 
 class RemoveDrives(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RemoveDrivesRequest(RedfishModel):
@@ -106,8 +110,8 @@ class RemoveDrivesRequest(RedfishModel):
 
 
 class SetCompressionState(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetCompressionStateRequest(RedfishModel):
@@ -115,8 +119,8 @@ class SetCompressionStateRequest(RedfishModel):
 
 
 class SetDeduplicationState(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetDeduplicationStateRequest(RedfishModel):
@@ -124,8 +128,8 @@ class SetDeduplicationStateRequest(RedfishModel):
 
 
 class SetEncryptionState(RedfishModel):
-    target: str | None = Field(alias="target", default=None)
-    title: str | None = Field(alias="title", default=None)
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class SetEncryptionStateRequest(RedfishModel):
@@ -133,10 +137,12 @@ class SetEncryptionStateRequest(RedfishModel):
 
 
 class StoragePool(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool"
+    )
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
     allocated_volumes: IdRef | None = None
@@ -144,7 +150,7 @@ class StoragePool(RedfishModel):
     capacity: Capacity | None = None
     capacity_sources: list[IdRef] | None = None
     capacity_sources_odata_count: int | None = Field(
-        alias="CapacitySources@odata.count", default=None
+        serialization_alias="CapacitySources@odata.count", default=None
     )
     classes_of_service: IdRef | None = None
     compressed: bool | None = None
@@ -158,7 +164,7 @@ class StoragePool(RedfishModel):
     description: str | None = None
     encrypted: bool | None = None
     encryption_enabled: bool | None = None
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
     identifier: Identifier | None = None
     links: Links | None = None
@@ -166,10 +172,14 @@ class StoragePool(RedfishModel):
     max_block_size_bytes: int | None = None
     metrics: IdRef | None = None
     nvme_endurance_group_properties: NvmeEnduranceGroupProperties | None = Field(
-        alias="NVMeEnduranceGroupProperties", default=None
+        serialization_alias="NVMeEnduranceGroupProperties", default=None
     )
-    nvme_properties: NvmeProperties | None = Field(alias="NVMeProperties", default=None)
-    nvme_set_properties: NvmeSetProperties | None = Field(alias="NVMeSetProperties", default=None)
+    nvme_properties: NvmeProperties | None = Field(
+        serialization_alias="NVMeProperties", default=None
+    )
+    nvme_set_properties: NvmeSetProperties | None = Field(
+        serialization_alias="NVMeSetProperties", default=None
+    )
     name: str
     oem: dict[str, Any] | None = None
     pool_type: list[PoolType] | None = None
@@ -179,14 +189,18 @@ class StoragePool(RedfishModel):
     status: Status | None = None
     supported_pool_types: list[PoolType] | None = None
     supported_provisioning_policies: list[ProvisioningPolicy] | None = None
-    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(
+        serialization_alias="SupportedRAIDTypes", default=None
+    )
 
 
 class StoragePoolOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool"
+    )
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
     allocated_volumes: IdRef | None = None
@@ -194,7 +208,7 @@ class StoragePoolOnCreate(RedfishModel):
     capacity: Capacity | None = None
     capacity_sources: list[IdRef] | None = None
     capacity_sources_odata_count: int | None = Field(
-        alias="CapacitySources@odata.count", default=None
+        serialization_alias="CapacitySources@odata.count", default=None
     )
     classes_of_service: IdRef | None = None
     compressed: bool | None = None
@@ -208,7 +222,7 @@ class StoragePoolOnCreate(RedfishModel):
     description: str | None = None
     encrypted: bool | None = None
     encryption_enabled: bool | None = None
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str | None = None
     identifier: Identifier | None = None
     links: Links | None = None
@@ -216,10 +230,14 @@ class StoragePoolOnCreate(RedfishModel):
     max_block_size_bytes: int | None = None
     metrics: IdRef | None = None
     nvme_endurance_group_properties: NvmeEnduranceGroupProperties | None = Field(
-        alias="NVMeEnduranceGroupProperties", default=None
+        serialization_alias="NVMeEnduranceGroupProperties", default=None
     )
-    nvme_properties: NvmeProperties | None = Field(alias="NVMeProperties", default=None)
-    nvme_set_properties: NvmeSetProperties | None = Field(alias="NVMeSetProperties", default=None)
+    nvme_properties: NvmeProperties | None = Field(
+        serialization_alias="NVMeProperties", default=None
+    )
+    nvme_set_properties: NvmeSetProperties | None = Field(
+        serialization_alias="NVMeSetProperties", default=None
+    )
     name: str | None = None
     oem: dict[str, Any] | None = None
     pool_type: list[PoolType] | None = None
@@ -229,7 +247,9 @@ class StoragePoolOnCreate(RedfishModel):
     status: Status | None = None
     supported_pool_types: list[PoolType] | None = None
     supported_provisioning_policies: list[ProvisioningPolicy] | None = None
-    supported_raid_types: list[RaidType] | None = Field(alias="SupportedRAIDTypes", default=None)
+    supported_raid_types: list[RaidType] | None = Field(
+        serialization_alias="SupportedRAIDTypes", default=None
+    )
 
 
 class StoragePoolOnUpdate(RedfishModelOnUpdate):
@@ -247,15 +267,19 @@ class StoragePoolOnUpdate(RedfishModelOnUpdate):
     default_encryption_behavior: bool | None = None
     encrypted: bool | None = None
     encryption_enabled: bool | None = None
-    io_statistics: IoStatistics | None = Field(alias="IOStatistics", default=None)
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     identifier: Identifier | None = None
     links: Links | None = None
     low_space_warning_threshold_percents: list[int] | None = None
     nvme_endurance_group_properties: NvmeEnduranceGroupProperties | None = Field(
-        alias="NVMeEnduranceGroupProperties", default=None
+        serialization_alias="NVMeEnduranceGroupProperties", default=None
     )
-    nvme_properties: NvmeProperties | None = Field(alias="NVMeProperties", default=None)
-    nvme_set_properties: NvmeSetProperties | None = Field(alias="NVMeSetProperties", default=None)
+    nvme_properties: NvmeProperties | None = Field(
+        serialization_alias="NVMeProperties", default=None
+    )
+    nvme_set_properties: NvmeSetProperties | None = Field(
+        serialization_alias="NVMeSetProperties", default=None
+    )
     oem: dict[str, Any] | None = None
     recoverable_capacity_source_count: int | None = None
     replication_enabled: bool | None = None

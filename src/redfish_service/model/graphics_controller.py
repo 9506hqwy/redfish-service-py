@@ -14,11 +14,11 @@ class Actions(RedfishModel):
 
 
 class GraphicsController(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#GraphicsController.v1_0_2.GraphicsController"
+        serialization_alias="@odata.type", default="#GraphicsController.v1_0_2.GraphicsController"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -34,7 +34,7 @@ class GraphicsController(RedfishModel):
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     ports: IdRef | None = None
-    sku: str | None = Field(alias="SKU", default=None)
+    sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
@@ -52,6 +52,8 @@ class GraphicsControllerOnUpdate(RedfishModelOnUpdate):
 
 class Links(RedfishModel):
     oem: dict[str, Any] | None = None
-    pcie_device: IdRef | None = Field(alias="PCIeDevice", default=None)
+    pcie_device: IdRef | None = Field(serialization_alias="PCIeDevice", default=None)
     processors: list[IdRef] | None = None
-    processors_odata_count: int | None = Field(alias="Processors@odata.count", default=None)
+    processors_odata_count: int | None = Field(
+        serialization_alias="Processors@odata.count", default=None
+    )

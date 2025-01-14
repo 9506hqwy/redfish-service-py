@@ -20,9 +20,7 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         if i is None:
             raise ResourceNotFoundError("RoleCollection", "RoleCollection")
 
-        i.members = [
-            IdRef.model_validate({"odata_id": s.odata_id}) for s in instances.enum_by_type(Role)
-        ]
+        i.members = [IdRef(odata_id=s.odata_id) for s in instances.enum_by_type(Role)]
         i.members_odata_count = len(i.members)
 
         req: Request = cast(Request, kwargs["request"])
@@ -35,15 +33,7 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         req: Request = cast(Request, kwargs["request"])
         res: Response = cast(Response, kwargs["response"])
 
-        id = body.role_id
-
-        role = Role.model_validate(
-            {
-                "odata_id": f"{req.url.path}/{id}",
-                "id": str(id),
-                "name": str(id),
-            }
-        )
+        role = Role(odata_id=f"{req.url.path}/{body.role_id}", id=body.role_id, name=body.role_id)
         instances.add(role)
 
         res.headers["Location"] = role.odata_id

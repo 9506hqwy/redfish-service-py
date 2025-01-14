@@ -48,11 +48,11 @@ class MetricDataType(StrEnum):
 
 
 class MetricDefinition(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
+        serialization_alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
     )
     accuracy: float | None = None
     actions: Actions | None = None
@@ -73,7 +73,9 @@ class MetricDefinition(RedfishModel):
     metric_type: MetricType | None = None
     min_reading_range: float | None = None
     name: str
-    oem_calculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
+    oem_calculation_algorithm: str | None = Field(
+        serialization_alias="OEMCalculationAlgorithm", default=None
+    )
     oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     precision: int | None = None
@@ -84,11 +86,11 @@ class MetricDefinition(RedfishModel):
 
 
 class MetricDefinitionOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
+        serialization_alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
     )
     accuracy: float | None = None
     actions: Actions | None = None
@@ -109,7 +111,9 @@ class MetricDefinitionOnCreate(RedfishModel):
     metric_type: MetricType | None = None
     min_reading_range: float | None = None
     name: str | None = None
-    oem_calculation_algorithm: str | None = Field(alias="OEMCalculationAlgorithm", default=None)
+    oem_calculation_algorithm: str | None = Field(
+        serialization_alias="OEMCalculationAlgorithm", default=None
+    )
     oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     precision: int | None = None

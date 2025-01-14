@@ -39,10 +39,12 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
     origin_of_condition: IdRef | None = None
     related_item: list[IdRef] | None = None
-    related_item_odata_count: int | None = Field(alias="RelatedItem@odata.count", default=None)
+    related_item_odata_count: int | None = Field(
+        serialization_alias="RelatedItem@odata.count", default=None
+    )
     related_log_entries: list[IdRef] | None = None
     related_log_entries_odata_count: int | None = Field(
-        alias="RelatedLogEntries@odata.count", default=None
+        serialization_alias="RelatedLogEntries@odata.count", default=None
     )
 
 
@@ -56,15 +58,17 @@ class LogDiagnosticDataTypes(StrEnum):
 
 
 class LogEntry(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str = Field(alias="@odata.id")
-    odata_type: str = Field(alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str = Field(serialization_alias="@odata.id")
+    odata_type: str = Field(
+        serialization_alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry"
+    )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
-    additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
-    cper: Cper | None = Field(alias="CPER", default=None)
-    cxl_entry_type: CxlEntryType | None = Field(alias="CXLEntryType", default=None)
+    additional_data_uri: str | None = Field(serialization_alias="AdditionalDataURI", default=None)
+    cper: Cper | None = Field(serialization_alias="CPER", default=None)
+    cxl_entry_type: CxlEntryType | None = Field(serialization_alias="CXLEntryType", default=None)
     created: str | None = None
     description: str | None = None
     diagnostic_data: str | None = None
@@ -85,7 +89,9 @@ class LogEntry(RedfishModel):
     message_id: str | None = None
     modified: str | None = None
     name: str
-    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(
+        serialization_alias="OEMDiagnosticDataType", default=None
+    )
     oem: dict[str, Any] | None = None
     oem_log_entry_code: str | None = None
     oem_record_format: str | None = None
@@ -107,15 +113,17 @@ class LogEntry(RedfishModel):
 
 
 class LogEntryOnCreate(RedfishModel):
-    odata_context: str | None = Field(alias="@odata.context", default=None)
-    odata_etag: str | None = Field(alias="@odata.etag", default=None)
-    odata_id: str | None = Field(alias="@odata.id", default=None)
-    odata_type: str | None = Field(alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry")
+    odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
+    odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
+    odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
+    odata_type: str | None = Field(
+        serialization_alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry"
+    )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
-    additional_data_uri: str | None = Field(alias="AdditionalDataURI", default=None)
-    cper: Cper | None = Field(alias="CPER", default=None)
-    cxl_entry_type: CxlEntryType | None = Field(alias="CXLEntryType", default=None)
+    additional_data_uri: str | None = Field(serialization_alias="AdditionalDataURI", default=None)
+    cper: Cper | None = Field(serialization_alias="CPER", default=None)
+    cxl_entry_type: CxlEntryType | None = Field(serialization_alias="CXLEntryType", default=None)
     created: str | None = None
     description: str | None = None
     diagnostic_data: str | None = None
@@ -136,7 +144,9 @@ class LogEntryOnCreate(RedfishModel):
     message_id: str | None = None
     modified: str | None = None
     name: str | None = None
-    oem_diagnostic_data_type: str | None = Field(alias="OEMDiagnosticDataType", default=None)
+    oem_diagnostic_data_type: str | None = Field(
+        serialization_alias="OEMDiagnosticDataType", default=None
+    )
     oem: dict[str, Any] | None = None
     oem_log_entry_code: str | None = None
     oem_record_format: str | None = None
@@ -159,7 +169,7 @@ class LogEntryOnCreate(RedfishModel):
 
 class LogEntryOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
-    cper: Cper | None = Field(alias="CPER", default=None)
+    cper: Cper | None = Field(serialization_alias="CPER", default=None)
     links: Links | None = None
     oem: dict[str, Any] | None = None
     resolution_steps: list[ResolutionStep] | None = None

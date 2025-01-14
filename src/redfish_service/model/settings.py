@@ -44,7 +44,7 @@ class PreferredApplyTime(RedfishModel):
 
 
 class Settings(RedfishModel):
-    etag: str | None = Field(alias="ETag", default=None)
+    etag: str | None = Field(serialization_alias="ETag", default=None)
     maintenance_window_resource: IdRef | None = None
     messages: list[Message] | None = None
     settings_object: IdRef | None = None
