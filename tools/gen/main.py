@@ -1165,6 +1165,22 @@ def write_routers_init(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> 
         swordfish.write("\n")
 
         for c in classall:
+            doman = c.domain
+            if isinstance(c, ClassInfo) and c.impl_info:
+                c = c.impl_info
+
+            if doman == "swordfish":
+                swordfish.write(f"from ...model.{c.module_path} import {c.cls_name}\n")
+            else:
+                redfish.write(f"from ..model.{c.module_path} import {c.cls_name}\n")
+
+        redfish.write("from ..service import find_service\n")
+        redfish.write("\n")
+
+        swordfish.write("from ...service import find_service\n")
+        swordfish.write("\n")
+
+        for c in classall:
             if c.domain == "swordfish":
                 swordfish.write(f"from . import {c.module}\n")
             else:
@@ -1180,9 +1196,13 @@ def write_routers_init(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> 
 
         for c in classall:
             if c.domain == "swordfish":
-                swordfish.write(f"    app.include_router({c.module}.router)\n")
+                swordfish.write(f"    if find_service({c.cls_name}):\n")
+                swordfish.write(f"        app.include_router({c.module}.router)\n")
+                swordfish.write("\n")
             else:
-                redfish.write(f"    app.include_router({c.module}.router)\n")
+                redfish.write(f"    if find_service({c.cls_name}):\n")
+                redfish.write(f"        app.include_router({c.module}.router)\n")
+                redfish.write("\n")
 
 
 def main() -> int:
