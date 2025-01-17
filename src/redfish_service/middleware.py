@@ -7,6 +7,11 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from .exception import GeneralErrorError, PreconditionFailedError
 
+FASTAPI_PATH: Final[list[str]] = [
+    "/docs",
+    "/openapi.json",
+]
+
 
 class AcceptHeaderMiddleware:
     HEADER_NAME: Final[str] = "Accept"
@@ -17,6 +22,10 @@ class AcceptHeaderMiddleware:
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        if scope["path"] in FASTAPI_PATH:
             await self.app(scope, receive, send)
             return
 
@@ -42,6 +51,10 @@ class ContentTypeHeaderMiddleware:
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        if scope["path"] in FASTAPI_PATH:
             await self.app(scope, receive, send)
             return
 
@@ -71,6 +84,10 @@ class OdataVersionHeaderMiddleware:
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        if scope["path"] in FASTAPI_PATH:
             await self.app(scope, receive, send)
             return
 
