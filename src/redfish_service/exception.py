@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import Any
 
 from .model.redfish_error import RedfishError as Error
 
@@ -62,7 +63,8 @@ class MalformedJsonError(RedfishError):
 
 
 class OperationNotAllowedError(RedfishError):
-    def __init__(self) -> None:
+    def __init__(self, service: Any) -> None:
+        self.service = service
         info = {
             "error": {
                 "code": "Base.1.19.0.OperationNotAllowed",

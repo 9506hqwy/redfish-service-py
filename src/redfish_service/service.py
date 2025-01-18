@@ -33,18 +33,18 @@ class Service[T: RedfishModel](Protocol):
     def respond(self, ty: type[RedfishModel]) -> bool: ...
 
     def delete(self, **kwargs: dict[str, Any]) -> None:
-        raise OperationNotAllowedError
+        raise OperationNotAllowedError(self)
 
     def get(self, **kwargs: dict[str, Any]) -> T:
-        raise OperationNotAllowedError
+        raise OperationNotAllowedError(self)
 
     def patch(self, **kwargs: dict[str, Any]) -> T:
-        raise OperationNotAllowedError
+        raise OperationNotAllowedError(self)
 
     def action(self, **kwargs: dict[str, Any]) -> RedfishError:
-        raise OperationNotAllowedError
+        raise OperationNotAllowedError(self)
 
 
 class ServiceCollection[T: RedfishModel, I: RedfishModel](Service[T], Protocol):
     def post(self, **kwargs: dict[str, Any]) -> I:
-        raise OperationNotAllowedError
+        raise OperationNotAllowedError(self)

@@ -3,6 +3,7 @@ from typing import Final
 
 from starlette.datastructures import Headers, MutableHeaders
 from starlette.responses import JSONResponse
+from starlette.routing import Match, Route, Router
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from .exception import GeneralErrorError, PreconditionFailedError
@@ -40,6 +41,39 @@ class AcceptHeaderMiddleware:
                 return
 
         await self.app(scope, receive, send)
+
+
+class AllowHeaderMiddleware:
+    HEADER_NAME: Final[str] = "Allow"
+
+    def __init__(self, app: ASGIApp, router: Router) -> None:
+        self.app = app
+        self.router = router
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        if scope["path"] in FASTAPI_PATH:
+            await self.app(scope, receive, send)
+            return
+
+        async def decorated_send(message: Message) -> None:
+            if message["type"] == "http.response.start":
+                headers = MutableHeaders(scope=message)
+                if not headers.get(self.HEADER_NAME, None):
+                    headers.append(self.HEADER_NAME, ",".join(methods))
+
+            await send(message)
+
+        methods: set[str] = set()
+        for route in (r for r in self.router.routes if isinstance(r, Route)):
+            match, _ = route.matches(scope)
+            if match != Match.NONE and route.methods:
+                methods.update(route.methods)
+
+        await self.app(scope, receive, decorated_send)
 
 
 class ContentTypeHeaderMiddleware:
