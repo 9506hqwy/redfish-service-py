@@ -10,6 +10,7 @@ coverage_html/
 dist/
 doc/
 logs/
+reports/
 *.egg-info/
 
 .coverage

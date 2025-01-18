@@ -34,6 +34,7 @@ build-backend = "hatchling.build"
 [dependency-groups]
 dev = [
   "mypy>=1.11.2",
+  "redfish-protocol-validator>=1.2.6",
   "redfish-service-validator>=2.4.9",
   "ruff>=0.6.4",
 ]

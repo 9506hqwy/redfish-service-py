@@ -38,6 +38,12 @@ Start up service.
 uv run redfish-service
 ```
 
+Validate protocol after running service.
+
+```sh
+uv run rf_protocol_validator -u admin -p admin -r http://127.0.0.1:8000
+```
+
 Validate service after running service.
 
 ```sh
