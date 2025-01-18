@@ -31,7 +31,7 @@ class AcceptHeaderMiddleware:
 
         headers = Headers(scope=scope)
         if v := headers.getlist(self.HEADER_NAME):
-            if all((s not in v for s in self.SUPPORTED_MIMES)):
+            if not supported_headers(self.SUPPORTED_MIMES, v):
                 exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
                 res = JSONResponse(
                     exc.error.model_dump(exclude_none=True), status_code=exc.status_code
@@ -64,7 +64,7 @@ class ContentTypeHeaderMiddleware:
 
         headers = Headers(scope=scope)
         if v := headers.getlist(self.HEADER_NAME):
-            if all((s not in v for s in self.SUPPORTED_MIMES)):
+            if not supported_headers(self.SUPPORTED_MIMES, v):
                 exc = GeneralErrorError(HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
                 res = JSONResponse(
                     exc.error.model_dump(exclude_none=True), status_code=exc.status_code
@@ -99,8 +99,8 @@ class OdataVersionHeaderMiddleware:
             await send(message)
 
         headers = Headers(scope=scope)
-        if v := headers.get(self.HEADER_NAME):
-            if v not in self.SUPPORTED_VETRSIONS:
+        if v := headers.getlist(self.HEADER_NAME):
+            if not supported_headers(self.SUPPORTED_VETRSIONS, v):
                 exc = PreconditionFailedError()
                 res = JSONResponse(
                     exc.error.model_dump(exclude_none=True), status_code=exc.status_code
@@ -109,3 +109,12 @@ class OdataVersionHeaderMiddleware:
                 return
 
         await self.app(scope, receive, decorated_send)
+
+
+def supported_headers(supported: list[str], values: list[str]) -> bool:
+    for value in values:
+        for v in value.split(";"):
+            if v and any((s for s in supported if s == v.strip())):
+                return True
+
+    return False
