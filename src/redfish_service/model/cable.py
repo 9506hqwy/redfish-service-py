@@ -18,7 +18,7 @@ class Cable(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Cable.v1_2_3.Cable")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Cable.v1_2_4.Cable")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -52,7 +52,7 @@ class CableOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Cable.v1_2_3.Cable"
+        serialization_alias="@odata.type", default="#Cable.v1_2_4.Cable"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

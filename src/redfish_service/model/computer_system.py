@@ -137,7 +137,7 @@ class ComputerSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_23_1.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -218,7 +218,7 @@ class ComputerSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_23_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_23_1.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None

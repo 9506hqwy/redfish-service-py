@@ -47,7 +47,7 @@ class Drive(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Drive.v1_20_1.Drive")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Drive.v1_21_0.Drive")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -66,6 +66,7 @@ class Drive(RedfishModel):
     environment_metrics: IdRef | None = None
     failure_predicted: bool | None = None
     firmware_version: str | None = None
+    hardware_version: str | None = None
     hotspare_replacement_mode: HotspareReplacementModeType | None = None
     hotspare_type: HotspareType | None = None
     id: str

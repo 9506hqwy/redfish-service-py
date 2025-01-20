@@ -13,6 +13,7 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    set_mode: SetMode | None = Field(serialization_alias="#CoolingUnit.SetMode", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -27,7 +28,7 @@ class CoolingUnit(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolingUnit.v1_1_2.CoolingUnit"
+        serialization_alias="@odata.type", default="#CoolingUnit.v1_2_0.CoolingUnit"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -76,6 +77,11 @@ class CoolingUnitOnUpdate(RedfishModelOnUpdate):
     user_label: str | None = None
 
 
+class CoolingUnitMode(StrEnum):
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class Links(RedfishModel):
     chassis: list[IdRef] | None = None
     chassis_odata_count: int | None = Field(
@@ -87,3 +93,12 @@ class Links(RedfishModel):
         serialization_alias="ManagedBy@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
+
+
+class SetMode(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class SetModeRequest(RedfishModel):
+    mode: CoolingUnitMode | None = None

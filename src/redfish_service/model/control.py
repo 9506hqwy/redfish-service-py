@@ -23,7 +23,7 @@ class Control(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_5_2.Control")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_6_0.Control")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None
@@ -145,6 +145,7 @@ class ControlType(StrEnum):
     VALVE = "Valve"
     PERCENT = "Percent"
     DUTY_CYCLE = "DutyCycle"
+    LIQUID_FLOW_LPM = "LiquidFlowLPM"
 
 
 class ImplementationType(StrEnum):

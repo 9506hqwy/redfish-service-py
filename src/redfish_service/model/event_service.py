@@ -27,7 +27,7 @@ class EventService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EventService.v1_10_2.EventService"
+        serialization_alias="@odata.type", default="#EventService.v1_10_3.EventService"
     )
     actions: Actions | None = None
     delivery_retry_attempts: int | None = None

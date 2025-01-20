@@ -57,7 +57,7 @@ class EthernetInterface(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EthernetInterface.v1_12_2.EthernetInterface"
+        serialization_alias="@odata.type", default="#EthernetInterface.v1_12_3.EthernetInterface"
     )
     actions: Actions | None = None
     auto_neg: bool | None = None
@@ -121,7 +121,7 @@ class EthernetInterfaceOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#EthernetInterface.v1_12_2.EthernetInterface"
+        serialization_alias="@odata.type", default="#EthernetInterface.v1_12_3.EthernetInterface"
     )
     actions: Actions | None = None
     auto_neg: bool | None = None

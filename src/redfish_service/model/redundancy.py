@@ -48,6 +48,7 @@ class RedundancyType(StrEnum):
 
 
 class RedundantGroup(RedfishModel):
+    group_name: str | None = None
     max_supported_in_group: int | None = None
     min_needed_in_group: int | None = None
     redundancy_group: list[IdRef]

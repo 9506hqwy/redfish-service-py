@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.cooling_unit import CoolingUnit, CoolingUnitOnUpdate
+from ..model.cooling_unit import CoolingUnit, CoolingUnitOnUpdate, SetModeRequest
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service
 
@@ -43,6 +44,25 @@ async def patch1(
     return cast(CoolingUnit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Actions/CoolingUnit.SetMode",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_mode1(
+    cooling_unit_id: str, request: Request, response: Response, body: SetModeRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetMode",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}",
     response_model_exclude_none=True,
@@ -79,6 +99,25 @@ async def patch2(
     return cast(CoolingUnit, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Actions/CoolingUnit.SetMode",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_mode2(
+    cooling_unit_id: str, request: Request, response: Response, body: SetModeRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetMode",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}",
     response_model_exclude_none=True,
@@ -113,3 +152,22 @@ async def patch3(
         "body": body,
     }
     return cast(CoolingUnit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Actions/CoolingUnit.SetMode",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_mode3(
+    cooling_unit_id: str, request: Request, response: Response, body: SetModeRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetMode",
+    }
+    return s.action(**b)

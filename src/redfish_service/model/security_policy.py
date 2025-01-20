@@ -40,7 +40,7 @@ class SecurityPolicy(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SecurityPolicy.v1_0_2.SecurityPolicy"
+        serialization_alias="@odata.type", default="#SecurityPolicy.v1_0_3.SecurityPolicy"
     )
     actions: Actions | None = None
     description: str | None = None

@@ -19,11 +19,12 @@ class LeakDetector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LeakDetector.v1_2_0.LeakDetector"
+        serialization_alias="@odata.type", default="#LeakDetector.v1_3_0.LeakDetector"
     )
     actions: Actions | None = None
     description: str | None = None
     detector_state: Health | None = None
+    enabled: bool | None = None
     id: str
     leak_detector_type: LeakDetectorType | None = None
     location: Location | None = None
@@ -44,6 +45,7 @@ class LeakDetector(RedfishModel):
 
 class LeakDetectorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
+    enabled: bool | None = None
     location: Location | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None

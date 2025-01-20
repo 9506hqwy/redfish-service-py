@@ -24,7 +24,7 @@ class CertificateService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CertificateService.v1_0_5.CertificateService"
+        serialization_alias="@odata.type", default="#CertificateService.v1_0_6.CertificateService"
     )
     actions: Actions | None = None
     certificate_locations: IdRef | None = None
@@ -43,10 +43,10 @@ class GenerateCsrRequest(RedfishModel):
     alternative_names: list[str] | None = None
     certificate_collection: IdRef
     challenge_password: str | None = None
-    city: str
+    city: str | None = None
     common_name: str
     contact_person: str | None = None
-    country: str
+    country: str | None = None
     email: str | None = None
     given_name: str | None = None
     initials: str | None = None
@@ -54,9 +54,9 @@ class GenerateCsrRequest(RedfishModel):
     key_curve_id: str | None = None
     key_pair_algorithm: str | None = None
     key_usage: list[KeyUsage] | None = None
-    organization: str
-    organizational_unit: str
-    state: str
+    organization: str | None = None
+    organizational_unit: str | None = None
+    state: str | None = None
     surname: str | None = None
     unstructured_name: str | None = None
 

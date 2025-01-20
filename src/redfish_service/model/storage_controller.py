@@ -121,6 +121,7 @@ class NvmeControllerProperties(RedfishModel):
     allocated_completion_queues: int | None = None
     allocated_submission_queues: int | None = None
     controller_type: NvmeControllerType | None = None
+    discovery_transport_service_id: int | None = None
     max_attached_namespaces: int | None = None
     max_queue_size: int | None = None
     nvme_controller_attributes: NvmeControllerAttributes | None = Field(
@@ -179,7 +180,7 @@ class StorageController(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StorageController.v1_8_0.StorageController"
+        serialization_alias="@odata.type", default="#StorageController.v1_9_0.StorageController"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

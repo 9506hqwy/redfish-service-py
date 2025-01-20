@@ -20,7 +20,7 @@ class Chassis(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_25_2.Chassis")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_26_0.Chassis")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -46,6 +46,7 @@ class Chassis(RedfishModel):
     hot_pluggable: bool | None = None
     id: str
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
+    leak_detectors: IdRef | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
@@ -92,7 +93,7 @@ class ChassisOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Chassis.v1_25_2.Chassis"
+        serialization_alias="@odata.type", default="#Chassis.v1_26_0.Chassis"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -119,6 +120,7 @@ class ChassisOnCreate(RedfishModel):
     hot_pluggable: bool | None = None
     id: str | None = None
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
+    leak_detectors: IdRef | None = None
     links: Links | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None

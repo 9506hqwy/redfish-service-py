@@ -74,6 +74,18 @@ class HotspareActivationPolicy(StrEnum):
 
 
 class Links(RedfishModel):
+    block_security_id_unsupported_drives: list[IdRef] | None = Field(
+        serialization_alias="BlockSecurityIDUnsupportedDrives", default=None
+    )
+    block_security_id_unsupported_drives_odata_count: int | None = Field(
+        serialization_alias="BlockSecurityIDUnsupportedDrives@odata.count", default=None
+    )
+    block_security_id_update_unsuccessful_drives: list[IdRef] | None = Field(
+        serialization_alias="BlockSecurityIDUpdateUnsuccessfulDrives", default=None
+    )
+    block_security_id_update_unsuccessful_drives_odata_count: int | None = Field(
+        serialization_alias="BlockSecurityIDUpdateUnsuccessfulDrives@odata.count", default=None
+    )
     enclosures: list[IdRef] | None = None
     enclosures_odata_count: int | None = Field(
         serialization_alias="Enclosures@odata.count", default=None
@@ -161,9 +173,12 @@ class Storage(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_17_1.Storage")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_18_0.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
+    block_security_id_policy: bool | None = Field(
+        serialization_alias="BlockSecurityIDPolicy", default=None
+    )
     configuration_lock: ConfigurationLock | None = None
     connections: IdRef | None = None
     consistency_groups: IdRef | None = None
@@ -179,6 +194,7 @@ class Storage(RedfishModel):
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     local_encryption_key_identifier: str | None = None
+    metrics: IdRef | None = None
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
         serialization_alias="NVMeSubsystemProperties", default=None
     )
@@ -202,6 +218,9 @@ class Storage(RedfishModel):
 class StorageOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
+    block_security_id_policy: bool | None = Field(
+        serialization_alias="BlockSecurityIDPolicy", default=None
+    )
     configuration_lock: ConfigurationLock | None = None
     encryption_mode: EncryptionMode | None = None
     hotspare_activation_policy: HotspareActivationPolicy | None = None

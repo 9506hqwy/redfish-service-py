@@ -95,7 +95,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_16_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_17_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -191,3 +191,4 @@ class SlotType(StrEnum):
     OCP3_SMALL = "OCP3Small"
     OCP3_LARGE = "OCP3Large"
     U2 = "U2"
+    EDSFF = "EDSFF"

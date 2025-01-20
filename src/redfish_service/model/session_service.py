@@ -18,8 +18,10 @@ class SessionService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SessionService.v1_1_9.SessionService"
+        serialization_alias="@odata.type", default="#SessionService.v1_2_0.SessionService"
     )
+    absolute_session_timeout: int | None = None
+    absolute_session_timeout_enabled: bool | None = None
     actions: Actions | None = None
     description: str | None = None
     id: str
@@ -32,6 +34,8 @@ class SessionService(RedfishModel):
 
 
 class SessionServiceOnUpdate(RedfishModelOnUpdate):
+    absolute_session_timeout: int | None = None
+    absolute_session_timeout_enabled: bool | None = None
     actions: Actions | None = None
     oem: dict[str, Any] | None = None
     service_enabled: bool | None = None

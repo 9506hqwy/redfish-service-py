@@ -32,7 +32,7 @@ class HostInterface(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#HostInterface.v1_3_2.HostInterface"
+        serialization_alias="@odata.type", default="#HostInterface.v1_3_3.HostInterface"
     )
     actions: Actions | None = None
     auth_none_role_id: str | None = None

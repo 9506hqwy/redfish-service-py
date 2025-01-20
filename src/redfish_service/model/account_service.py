@@ -26,7 +26,7 @@ class AccountService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AccountService.v1_16_0.AccountService"
+        serialization_alias="@odata.type", default="#AccountService.v1_17_0.AccountService"
     )
     account_lockout_counter_reset_after: int | None = None
     account_lockout_counter_reset_enabled: bool | None = None
@@ -38,6 +38,7 @@ class AccountService(RedfishModel):
     additional_external_account_providers: IdRef | None = None
     auth_failure_logging_threshold: int | None = None
     description: str | None = None
+    enforce_password_history_count: int | None = None
     http_basic_auth: BasicAuthState | None = Field(
         serialization_alias="HTTPBasicAuth", default=None
     )
@@ -76,6 +77,7 @@ class AccountServiceOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     active_directory: ExternalAccountProvider | None = None
     auth_failure_logging_threshold: int | None = None
+    enforce_password_history_count: int | None = None
     http_basic_auth: BasicAuthState | None = Field(
         serialization_alias="HTTPBasicAuth", default=None
     )

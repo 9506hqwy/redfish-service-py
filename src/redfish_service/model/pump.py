@@ -10,10 +10,11 @@ from .control import ControlSingleLoopExcerpt
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
-from .sensor import SensorPumpExcerpt
+from .sensor import SensorExcerpt, SensorPumpExcerpt
 
 
 class Actions(RedfishModel):
+    set_mode: SetMode | None = Field(serialization_alias="#Pump.SetMode", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -21,7 +22,7 @@ class Pump(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Pump.v1_1_0.Pump")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Pump.v1_2_0.Pump")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -29,6 +30,7 @@ class Pump(RedfishModel):
     filters: IdRef | None = None
     firmware_version: str | None = None
     id: str
+    inlet_pressurek_pa: SensorExcerpt | None = None
     location: Location | None = None
     location_indicator_active: bool | None = None
     manufacturer: str | None = None
@@ -60,6 +62,20 @@ class PumpOnUpdate(RedfishModelOnUpdate):
     user_label: str | None = None
 
 
+class PumpMode(StrEnum):
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class PumpType(StrEnum):
     LIQUID = "Liquid"
     COMPRESSOR = "Compressor"
+
+
+class SetMode(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class SetModeRequest(RedfishModel):
+    mode: PumpMode | None = None

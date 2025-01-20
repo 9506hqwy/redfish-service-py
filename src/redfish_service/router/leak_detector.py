@@ -184,3 +184,47 @@ async def patch4(
         "body": body,
     }
     return cast(LeakDetector, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/Chassis/{chassis_id}/LeakDetectors/{leak_detector_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/LeakDetectors/{leak_detector_id}",
+    response_model_exclude_none=True,
+)
+async def get5(
+    chassis_id: str, leak_detector_id: str, request: Request, response: Response
+) -> LeakDetector:
+    s: Service = get_service(LeakDetector, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "leak_detector_id": leak_detector_id,
+        "request": request,
+        "response": response,
+    }
+    return cast(LeakDetector, s.get(**b))
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/LeakDetectors/{leak_detector_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch5(
+    chassis_id: str,
+    leak_detector_id: str,
+    request: Request,
+    response: Response,
+    body: LeakDetectorOnUpdate,
+) -> LeakDetector:
+    s: Service = get_service(LeakDetector, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "leak_detector_id": leak_detector_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(LeakDetector, s.patch(**b))

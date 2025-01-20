@@ -33,7 +33,8 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         req: Request = cast(Request, kwargs["request"])
         res: Response = cast(Response, kwargs["response"])
 
-        role = Role(odata_id=f"{req.url.path}/{body.role_id}", id=body.role_id, name=body.role_id)
+        id = body.role_id
+        role = Role(odata_id=f"{req.url.path}/{id}", id=id, name=id, role_id=id)
         instances.add(role)
 
         res.headers["Location"] = role.odata_id

@@ -6,6 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
+from .control import ControlSingleLoopExcerpt
 from .cooling_loop import Coolant
 from .odata_v4 import IdRef
 from .resource import Status
@@ -21,16 +22,19 @@ class CoolantConnector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolantConnector.v1_0_2.CoolantConnector"
+        serialization_alias="@odata.type", default="#CoolantConnector.v1_1_0.CoolantConnector"
     )
     actions: Actions | None = None
     coolant: Coolant | None = None
     coolant_connector_type: CoolantConnectorType | None = None
     cooling_loop_name: str | None = None
     cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
+    delta_pressure_controlk_pa: ControlSingleLoopExcerpt | None = None
     delta_pressurek_pa: SensorExcerpt | None = None
     delta_temperature_celsius: SensorExcerpt | None = None
+    delta_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
     description: str | None = None
+    flow_control_liters_per_minute: ControlSingleLoopExcerpt | None = None
     flow_liters_per_minute: SensorExcerpt | None = None
     heat_removedk_w: SensorExcerpt | None = None
     id: str
@@ -42,10 +46,12 @@ class CoolantConnector(RedfishModel):
     rated_flow_pressurek_pa: float | None = None
     rated_pressurek_pa: float | None = None
     return_pressurek_pa: SensorExcerpt | None = None
+    return_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
     return_temperature_celsius: SensorExcerpt | None = None
     status: Status | None = None
     supply_pressurek_pa: SensorExcerpt | None = None
     supply_temperature_celsius: SensorExcerpt | None = None
+    supply_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
 
 
 class CoolantConnectorOnUpdate(RedfishModelOnUpdate):

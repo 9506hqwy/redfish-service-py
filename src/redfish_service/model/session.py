@@ -22,7 +22,7 @@ class Session(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Session.v1_7_2.Session")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Session.v1_8_0.Session")
     actions: Actions | None = None
     client_origin_ip_address: str | None = Field(
         serialization_alias="ClientOriginIPAddress", default=None
@@ -30,6 +30,7 @@ class Session(RedfishModel):
     context: str | None = None
     created_time: str | None = None
     description: str | None = None
+    expiration_time: str | None = None
     id: str
     links: Links | None = None
     name: str
@@ -47,7 +48,7 @@ class SessionOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Session.v1_7_2.Session"
+        serialization_alias="@odata.type", default="#Session.v1_8_0.Session"
     )
     actions: Actions | None = None
     client_origin_ip_address: str | None = Field(
@@ -56,6 +57,7 @@ class SessionOnCreate(RedfishModel):
     context: str | None = None
     created_time: str | None = None
     description: str | None = None
+    expiration_time: str | None = None
     id: str | None = None
     links: Links | None = None
     name: str | None = None

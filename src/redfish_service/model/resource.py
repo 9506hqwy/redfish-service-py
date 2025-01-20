@@ -15,6 +15,7 @@ class Condition(RedfishModel):
     message: str | None = None
     message_args: list[str] | None = None
     message_id: str
+    oem: dict[str, Any] | None = None
     origin_of_condition: IdRef | None = None
     resolution: str | None = None
     resolution_steps: list[ResolutionStep] | None = None
@@ -203,6 +204,7 @@ class ResetType(StrEnum):
     SUSPEND = "Suspend"
     PAUSE = "Pause"
     RESUME = "Resume"
+    FULL_POWER_CYCLE = "FullPowerCycle"
 
 
 class Resource(RedfishModel):
@@ -210,7 +212,7 @@ class Resource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Resource.v1_20_0.Resource"
+        serialization_alias="@odata.type", default="#Resource.v1_21_0.Resource"
     )
     description: str | None = None
     id: str
@@ -223,7 +225,7 @@ class ResourceCollection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ResourceCollection.v1_20_0.ResourceCollection"
+        serialization_alias="@odata.type", default="#ResourceCollection.v1_21_0.ResourceCollection"
     )
     description: str | None = None
     name: str

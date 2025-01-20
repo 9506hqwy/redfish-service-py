@@ -123,6 +123,12 @@ class GenZ(RedfishModel):
     vcat: IdRef | None = Field(serialization_alias="VCAT", default=None)
 
 
+class HostDeviceType(StrEnum):
+    NONE = "None"
+    SYSTEM = "System"
+    MANAGER = "Manager"
+
+
 class Ieee802IdSubtype(StrEnum):
     CHASSIS_COMP = "ChassisComp"
     IF_ALIAS = "IfAlias"
@@ -262,7 +268,7 @@ class Port(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_14_0.Port")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_15_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
@@ -277,6 +283,7 @@ class Port(RedfishModel):
     function_max_bandwidth: list[FunctionMaxBandwidth] | None = None
     function_min_bandwidth: list[FunctionMinBandwidth] | None = None
     gen_z: GenZ | None = None
+    host_device: HostDeviceType | None = None
     id: str
     infini_band: InfiniBandProperties | None = None
     interface_enabled: bool | None = None
@@ -313,6 +320,7 @@ class PortOnUpdate(RedfishModelOnUpdate):
     function_max_bandwidth: list[FunctionMaxBandwidth] | None = None
     function_min_bandwidth: list[FunctionMinBandwidth] | None = None
     gen_z: GenZ | None = None
+    host_device: HostDeviceType | None = None
     infini_band: InfiniBandProperties | None = None
     interface_enabled: bool | None = None
     link_configuration: list[LinkConfiguration] | None = None

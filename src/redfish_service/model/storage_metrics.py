@@ -5,33 +5,27 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
-from .odata_v4 import IdRef
-from .redundancy import RedundantGroup
-from .resource import Status
+from .swordfish.io_statistics import IoStatistics
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
-class ThermalSubsystem(RedfishModel):
+class StorageMetrics(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ThermalSubsystem.v1_3_3.ThermalSubsystem"
+        serialization_alias="@odata.type", default="#StorageMetrics.v1_0_0.StorageMetrics"
     )
     actions: Actions | None = None
-    coolant_connector_redundancy: list[RedundantGroup] | None = None
-    coolant_connectors: IdRef | None = None
+    compression_savings_bytes: int | None = None
+    deduplication_savings_bytes: int | None = None
     description: str | None = None
-    fan_redundancy: list[RedundantGroup] | None = None
-    fans: IdRef | None = None
-    heaters: IdRef | None = None
+    io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
-    leak_detection: IdRef | None = None
     name: str
     oem: dict[str, Any] | None = None
-    pumps: IdRef | None = None
-    status: Status | None = None
-    thermal_metrics: IdRef | None = None
+    state_change_count: float | None = None
+    thin_provisioning_savings_bytes: int | None = None

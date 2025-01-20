@@ -24,7 +24,24 @@ class AccessState(StrEnum):
 
 
 class Actions(RedfishModel):
+    add_volume_info: AddVolumeInfo | None = Field(
+        serialization_alias="#Connection.AddVolumeInfo", default=None
+    )
+    remove_volume_info: RemoveVolumeInfo | None = Field(
+        serialization_alias="#Connection.RemoveVolumeInfo", default=None
+    )
     oem: dict[str, Any] | None = None
+
+
+class AddVolumeInfo(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class AddVolumeInfoRequest(RedfishModel):
+    access_capabilities: list[AccessCapability] | None = None
+    lun: int | None = Field(serialization_alias="LUN", default=None)
+    volume: IdRef
 
 
 class ChapConnectionKey(RedfishModel):
@@ -46,7 +63,7 @@ class Connection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Connection.v1_3_2.Connection"
+        serialization_alias="@odata.type", default="#Connection.v1_4_0.Connection"
     )
     actions: Actions | None = None
     connection_keys: ConnectionKey | None = None
@@ -67,7 +84,7 @@ class ConnectionOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Connection.v1_3_2.Connection"
+        serialization_alias="@odata.type", default="#Connection.v1_4_0.Connection"
     )
     actions: Actions | None = None
     connection_keys: ConnectionKey | None = None
@@ -151,6 +168,16 @@ class MemoryRegionInfo(RedfishModel):
     access_capabilities: list[AccessCapability] | None = None
     access_state: AccessState | None = None
     memory_region: IdRef | None = None
+
+
+class RemoveVolumeInfo(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class RemoveVolumeInfoRequest(RedfishModel):
+    lun: int | None = Field(serialization_alias="LUN", default=None)
+    volume: IdRef
 
 
 class VolumeInfo(RedfishModel):

@@ -212,6 +212,7 @@ from ..model.storage_collection import StorageCollection
 from ..model.storage_controller import StorageController
 from ..model.storage_controller_collection import StorageControllerCollection
 from ..model.storage_controller_metrics import StorageControllerMetrics
+from ..model.storage_metrics import StorageMetrics
 from ..model.switch import Switch
 from ..model.switch_collection import SwitchCollection
 from ..model.switch_metrics import SwitchMetrics
@@ -454,6 +455,7 @@ from . import (
     storage_controller,
     storage_controller_collection,
     storage_controller_metrics,
+    storage_metrics,
     switch,
     switch_collection,
     switch_metrics,
@@ -1121,6 +1123,9 @@ def include_router(app: FastAPI) -> None:
 
     if find_service(StorageControllerMetrics):
         app.include_router(storage_controller_metrics.router)
+
+    if find_service(StorageMetrics):
+        app.include_router(storage_metrics.router)
 
     if find_service(Switch):
         app.include_router(switch.router)

@@ -38,6 +38,14 @@ class CommandShell(RedfishModel):
     service_enabled: bool | None = None
 
 
+class DateTimeSource(StrEnum):
+    RTC = "RTC"
+    FIRMWARE = "Firmware"
+    HOST = "Host"
+    NTP = "NTP"
+    PTP = "PTP"
+
+
 class DaylightSavingTime(RedfishModel):
     end_date_time: str | None = None
     offset_minutes: int | None = None
@@ -100,7 +108,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_19_2.Manager")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_20_0.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
@@ -108,6 +116,7 @@ class Manager(RedfishModel):
     command_shell: CommandShell | None = None
     date_time: str | None = None
     date_time_local_offset: str | None = None
+    date_time_source: DateTimeSource | None = None
     daylight_saving_time: DaylightSavingTime | None = None
     dedicated_network_ports: IdRef | None = None
     description: str | None = None
@@ -162,6 +171,7 @@ class ManagerOnUpdate(RedfishModelOnUpdate):
     command_shell: CommandShell | None = None
     date_time: str | None = None
     date_time_local_offset: str | None = None
+    date_time_source: DateTimeSource | None = None
     daylight_saving_time: DaylightSavingTime | None = None
     dedicated_network_ports: IdRef | None = None
     graphical_console: GraphicalConsole | None = None

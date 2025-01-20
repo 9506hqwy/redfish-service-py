@@ -24,7 +24,7 @@ class PowerSubsystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerSubsystem.v1_1_2.PowerSubsystem"
+        serialization_alias="@odata.type", default="#PowerSubsystem.v1_1_3.PowerSubsystem"
     )
     actions: Actions | None = None
     allocation: PowerAllocation | None = None
