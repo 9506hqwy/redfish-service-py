@@ -19,6 +19,7 @@ from .middleware import (
     AcceptHeaderMiddleware,
     AllowHeaderMiddleware,
     ContentTypeHeaderMiddleware,
+    IfMatchHeaderMiddleware,
     OdataVersionHeaderMiddleware,
 )
 from .router import swordfish
@@ -30,6 +31,7 @@ app = FastAPI()
 app.add_middleware(AcceptHeaderMiddleware)
 app.add_middleware(AllowHeaderMiddleware, app.router)
 app.add_middleware(ContentTypeHeaderMiddleware)
+app.add_middleware(IfMatchHeaderMiddleware)
 app.add_middleware(OdataVersionHeaderMiddleware)
 redfish.include_router(app)
 swordfish.include_router(app)

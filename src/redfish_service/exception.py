@@ -88,6 +88,19 @@ class PreconditionFailedError(RedfishError):
         super().__init__(HTTPStatus.PRECONDITION_FAILED, error)
 
 
+class PreconditionRequiredError(RedfishError):
+    def __init__(self) -> None:
+        info = {
+            "error": {
+                "code": "Base.1.19.0.PreconditionRequired",
+                "message": "A precondition header or annotation is required"
+                + " to change this resource.",
+            }
+        }
+        error = Error.model_validate(info)
+        super().__init__(HTTPStatus.PRECONDITION_REQUIRED, error)
+
+
 class ResourceAtUriUnauthorizedError(RedfishError):
     def __init__(self, uri: str, message: str):
         info = {

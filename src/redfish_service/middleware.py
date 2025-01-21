@@ -2,11 +2,13 @@ from http import HTTPStatus
 from typing import Final
 
 from starlette.datastructures import Headers, MutableHeaders
-from starlette.responses import JSONResponse
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.requests import Request
+from starlette.responses import JSONResponse, Response
 from starlette.routing import Match, Route, Router
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
-from .exception import GeneralErrorError, PreconditionFailedError
+from .exception import GeneralErrorError, PreconditionFailedError, PreconditionRequiredError
 
 FASTAPI_PATH: Final[list[str]] = [
     "/docs",
@@ -107,6 +109,18 @@ class ContentTypeHeaderMiddleware:
                 return
 
         await self.app(scope, receive, send)
+
+
+class IfMatchHeaderMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
+        if request.method in ["PATCH", "PUT"]:
+            if not request.headers.get("If-Match", None):
+                exc = PreconditionRequiredError()
+                return JSONResponse(
+                    exc.error.model_dump(exclude_none=True), status_code=exc.status_code
+                )
+
+        return await call_next(request)
 
 
 class OdataVersionHeaderMiddleware:
