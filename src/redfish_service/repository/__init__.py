@@ -2,6 +2,7 @@ from ..model.account_service import AccountService
 from ..model.role_collection import RoleCollection
 from ..model.service_root import ServiceRoot
 from ..model.session_collection import SessionCollection
+from ..util import create_etag
 from .instance import instances
 
 PATH_REDFISH = "/redfish/v1/"
@@ -11,8 +12,11 @@ PATH_SESSION_COLLECTION = f"{PATH_REDFISH}SessionService/Sessions"
 
 
 def init_instances() -> None:
+    etag = create_etag()
+
     account_service = AccountService.model_validate(
         {
+            "odata_etag": etag,
             "odata_id": PATH_ACCOUNT_SERVICE,
             "id": "AccountService",
             "name": "Account Service",
@@ -25,6 +29,7 @@ def init_instances() -> None:
 
     role_collection = RoleCollection.model_validate(
         {
+            "odata_etag": etag,
             "odata_id": PATH_ROLE_COLLECTION,
             "members": [],
             "members_odata_count": 0,
@@ -35,6 +40,7 @@ def init_instances() -> None:
 
     service_root = ServiceRoot.model_validate(
         {
+            "odata_etag": etag,
             "odata_id": PATH_REDFISH,
             "id": "ServiceRoot",
             "name": "Service Root",
@@ -49,6 +55,7 @@ def init_instances() -> None:
 
     session_collection = SessionCollection.model_validate(
         {
+            "odata_etag": etag,
             "odata_id": PATH_SESSION_COLLECTION,
             "members": [],
             "members_odata_count": 0,

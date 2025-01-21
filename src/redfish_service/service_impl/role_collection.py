@@ -9,6 +9,7 @@ from ..model.role import Role, RoleOnCreate
 from ..model.role_collection import RoleCollection
 from ..repository import instances
 from ..service import ServiceCollection
+from ..util import create_etag
 
 
 class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
@@ -16,28 +17,37 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         return ty == RoleCollection
 
     def get(self, **kwargs: dict[str, Any]) -> RoleCollection:
-        i = instances.find_by_type(RoleCollection)
-        if i is None:
-            raise ResourceNotFoundError("RoleCollection", "RoleCollection")
-
+        i = self._get_by_type()
         i.members = [IdRef(odata_id=s.odata_id) for s in instances.enum_by_type(Role)]
         i.members_odata_count = len(i.members)
 
-        req: Request = cast(Request, kwargs["request"])
+        req = cast(Request, kwargs["request"])
         i.odata_id = req.url.path
 
         return i
 
     def post(self, **kwargs: dict[str, Any]) -> Role:
-        body: RoleOnCreate = cast(RoleOnCreate, kwargs.get("body"))
-        req: Request = cast(Request, kwargs["request"])
-        res: Response = cast(Response, kwargs["response"])
+        body = cast(RoleOnCreate, kwargs.get("body"))
+        req = cast(Request, kwargs["request"])
+        res = cast(Response, kwargs["response"])
 
+        collection = self._get_by_type()
+
+        etag = create_etag()
         id = body.role_id
-        role = Role(odata_id=f"{req.url.path}/{id}", id=id, name=id, role_id=id)
+        role = Role(odata_etag=etag, odata_id=f"{req.url.path}/{id}", id=id, name=id, role_id=id)
+
         instances.add(role)
+        collection.odata_etag = etag
 
         res.headers["Location"] = role.odata_id
         res.status_code = HTTPStatus.CREATED
 
         return role
+
+    def _get_by_type(self) -> RoleCollection:
+        i = instances.find_by_type(RoleCollection)
+        if i is None:
+            raise ResourceNotFoundError("RoleCollection", "RoleCollection")
+
+        return i

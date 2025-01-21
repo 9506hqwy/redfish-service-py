@@ -5,8 +5,10 @@ from fastapi import Response
 
 from ..exception import ResourceNotFoundError
 from ..model.session import Session
+from ..model.session_collection import SessionCollection
 from ..repository import instances
 from ..service import Service
+from ..util import create_etag
 
 
 class SessionService(Service[Session]):
@@ -17,8 +19,13 @@ class SessionService(Service[Session]):
         session_id = cast(str, kwargs.get("session_id"))
         res: Response = cast(Response, kwargs["response"])
 
+        collection = self._get_collection()
+
+        etag = create_etag()
         s = self._get_by_id(session_id)
+
         instances.remove(s)
+        collection.odata_etag = etag
 
         res.status_code = HTTPStatus.NO_CONTENT
 
@@ -32,3 +39,10 @@ class SessionService(Service[Session]):
             raise ResourceNotFoundError("Session", id)
 
         return s
+
+    def _get_collection(self) -> SessionCollection:
+        i = instances.find_by_type(SessionCollection)
+        if i is None:
+            raise ResourceNotFoundError("SessionCollection", "SessionCollection")
+
+        return i

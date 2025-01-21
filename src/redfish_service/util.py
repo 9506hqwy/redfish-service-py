@@ -1,10 +1,16 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from datetime import datetime
+
 from fastapi import Request
 
 from .exception import InvalidURIError
 from .model import RedfishModel
 from .service import Service, ServiceCollection, find_service, find_service_collection
+
+
+def create_etag() -> str:
+    return f"{datetime.now().timestamp()!s}"
 
 
 def get_service[T: RedfishModel](ty: type[T], req: Request) -> Service:

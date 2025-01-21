@@ -5,8 +5,10 @@ from fastapi import Response
 
 from ..exception import ResourceNotFoundError
 from ..model.role import Role, RoleOnUpdate
+from ..model.role_collection import RoleCollection
 from ..repository import instances
 from ..service import Service
+from ..util import create_etag
 
 
 class RoleService(Service[Role]):
@@ -15,10 +17,15 @@ class RoleService(Service[Role]):
 
     def delete(self, **kwargs: dict[str, Any]) -> None:
         role_id = cast(str, kwargs.get("role_id"))
-        res: Response = cast(Response, kwargs["response"])
+        res = cast(Response, kwargs["response"])
 
+        collection = self._get_collection()
+
+        etag = create_etag()
         r = self._get_by_id(role_id)
+
         instances.remove(r)
+        collection.odata_etag = etag
 
         res.status_code = HTTPStatus.NO_CONTENT
 
@@ -33,6 +40,8 @@ class RoleService(Service[Role]):
         r = self._get_by_id(role_id)
 
         # TODO: check
+        etag = create_etag()
+        r.odata_etag = etag
         r.assigned_privileges = updated.assigned_privileges
         r.oem_privileges = updated.oem_privileges
 
@@ -44,3 +53,10 @@ class RoleService(Service[Role]):
             raise ResourceNotFoundError("Role", id)
 
         return r
+
+    def _get_collection(self) -> RoleCollection:
+        i = instances.find_by_type(RoleCollection)
+        if i is None:
+            raise ResourceNotFoundError("RoleCollection", "RoleCollection")
+
+        return i

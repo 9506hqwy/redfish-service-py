@@ -11,6 +11,7 @@ from ..model.session import Session, SessionOnCreate
 from ..model.session_collection import SessionCollection
 from ..repository import instances
 from ..service import ServiceCollection
+from ..util import create_etag
 
 
 class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
@@ -18,10 +19,7 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         return ty == SessionCollection
 
     def get(self, **kwargs: dict[str, Any]) -> SessionCollection:
-        i = instances.find_by_type(SessionCollection)
-        if i is None:
-            raise ResourceNotFoundError("SessionCollection", "SessionCollection")
-
+        i = self._get_by_type()
         i.members = [IdRef(odata_id=s.odata_id) for s in instances.enum_by_type(Session)]
         i.members_odata_count = len(i.members)
 
@@ -31,9 +29,9 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         return i
 
     def post(self, **kwargs: dict[str, Any]) -> Session:
-        body: SessionOnCreate = cast(SessionOnCreate, kwargs.get("body"))
-        req: Request = cast(Request, kwargs["request"])
-        res: Response = cast(Response, kwargs["response"])
+        body = cast(SessionOnCreate, kwargs.get("body"))
+        req = cast(Request, kwargs["request"])
+        res = cast(Response, kwargs["response"])
 
         if body.user_name is None or body.password is None:
             uri = req.url.path
@@ -43,20 +41,33 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
             uri = req.url.path
             raise ResourceAtUriUnauthorizedError(uri, "Invalid username or password")
 
+        collection = self._get_by_type()
+
+        etag = create_etag()
         id = uuid.uuid4()
         token = uuid.uuid4()
 
         session = Session(
+            odata_etag=etag,
             odata_id=f"{req.url.path}/{id}",
             id=str(id),
             name=str(id),
             user_name=body.user_name,
         )
         session.extra_fields["token"] = str(token)
+
         instances.add(session)
+        collection.odata_etag = etag
 
         res.headers["Location"] = session.odata_id
         res.headers["X-Auth-Token"] = cast(str, session.extra_fields["token"])
         res.status_code = HTTPStatus.CREATED
 
         return session
+
+    def _get_by_type(self) -> SessionCollection:
+        i = instances.find_by_type(SessionCollection)
+        if i is None:
+            raise ResourceNotFoundError("SessionCollection", "SessionCollection")
+
+        return i
