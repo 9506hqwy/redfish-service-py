@@ -17,12 +17,16 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         return ty == RoleCollection
 
     def get(self, **kwargs: dict[str, Any]) -> RoleCollection:
+        res = cast(Response, kwargs["response"])
+
         i = self._get_by_type()
         i.members = [IdRef(odata_id=s.odata_id) for s in instances.enum_by_type(Role)]
         i.members_odata_count = len(i.members)
 
         req = cast(Request, kwargs["request"])
         i.odata_id = req.url.path
+
+        res.headers["ETag"] = f'"{i.odata_etag}"'
 
         return i
 
@@ -40,6 +44,7 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         instances.add(role)
         collection.odata_etag = etag
 
+        res.headers["ETag"] = f'"{etag}"'
         res.headers["Location"] = role.odata_id
         res.status_code = HTTPStatus.CREATED
 

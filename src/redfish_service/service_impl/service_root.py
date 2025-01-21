@@ -1,6 +1,6 @@
 from typing import Any, cast
 
-from fastapi import Request
+from fastapi import Request, Response
 
 from ..exception import ResourceNotFoundError
 from ..model.account_service import AccountService
@@ -24,7 +24,10 @@ class ServiceRootService(Service[ServiceRoot]):
         if account_service:
             i.account_service = IdRef(odata_id=account_service.odata_id)
 
-        req: Request = cast(Request, kwargs["request"])
+        req = cast(Request, kwargs["request"])
         i.odata_id = req.url.path
+
+        res = cast(Response, kwargs["response"])
+        res.headers["ETag"] = f'"{i.odata_etag}"'
 
         return i

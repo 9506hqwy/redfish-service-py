@@ -30,8 +30,14 @@ class SessionService(Service[Session]):
         res.status_code = HTTPStatus.NO_CONTENT
 
     def get(self, **kwargs: dict[str, Any]) -> Session:
+        res = cast(Response, kwargs["response"])
+
         session_id = cast(str, kwargs.get("session_id"))
-        return self._get_by_id(session_id)
+        r = self._get_by_id(session_id)
+
+        res.headers["ETag"] = f'"{r.odata_etag}"'
+
+        return r
 
     def _get_by_id(self, id: str) -> Session:
         s = next((s for s in instances.enum_by_type(Session) if s.id == id), None)

@@ -19,12 +19,16 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         return ty == SessionCollection
 
     def get(self, **kwargs: dict[str, Any]) -> SessionCollection:
+        res = cast(Response, kwargs["response"])
+
         i = self._get_by_type()
         i.members = [IdRef(odata_id=s.odata_id) for s in instances.enum_by_type(Session)]
         i.members_odata_count = len(i.members)
 
         req: Request = cast(Request, kwargs["request"])
         i.odata_id = req.url.path
+
+        res.headers["ETag"] = f'"{i.odata_etag}"'
 
         return i
 
@@ -59,6 +63,7 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         instances.add(session)
         collection.odata_etag = etag
 
+        res.headers["ETag"] = f'"{etag}"'
         res.headers["Location"] = session.odata_id
         res.headers["X-Auth-Token"] = cast(str, session.extra_fields["token"])
         res.status_code = HTTPStatus.CREATED

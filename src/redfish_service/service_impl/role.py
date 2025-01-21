@@ -30,10 +30,18 @@ class RoleService(Service[Role]):
         res.status_code = HTTPStatus.NO_CONTENT
 
     def get(self, **kwargs: dict[str, Any]) -> Role:
+        res = cast(Response, kwargs["response"])
+
         role_id = cast(str, kwargs.get("role_id"))
-        return self._get_by_id(role_id)
+        r = self._get_by_id(role_id)
+
+        res.headers["ETag"] = f'"{r.odata_etag}"'
+
+        return r
 
     def patch(self, **kwargs: dict[str, Any]) -> Role:
+        res = cast(Response, kwargs["response"])
+
         role_id = cast(str, kwargs.get("role_id"))
         updated = cast(RoleOnUpdate, kwargs.get("body"))
 
@@ -44,6 +52,8 @@ class RoleService(Service[Role]):
         r.odata_etag = etag
         r.assigned_privileges = updated.assigned_privileges
         r.oem_privileges = updated.oem_privileges
+
+        res.headers["ETag"] = f'"{etag}"'
 
         return r
 
