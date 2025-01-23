@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.license import License
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -25,4 +25,6 @@ async def delete1(license_id: str, request: Request, response: Response) -> None
 async def get1(license_id: str, request: Request, response: Response) -> License:
     s: Service = get_service(License, request)
     b: dict[str, Any] = {"license_id": license_id, "request": request, "response": response}
-    return cast(License, s.get(**b))
+    m = cast(License, s.get(**b))
+    set_link_header(m, response)
+    return m

@@ -10,7 +10,7 @@ from ..model.composition_service import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -20,7 +20,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> CompositionService:
     s: Service = get_service(CompositionService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CompositionService, s.get(**b))
+    m = cast(CompositionService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/CompositionService", response_model_exclude_none=True)

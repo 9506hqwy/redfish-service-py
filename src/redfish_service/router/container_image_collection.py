@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.container_image_collection import ContainerImageCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -26,7 +26,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(ContainerImageCollection, s.get(**b))
+    m = cast(ContainerImageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -47,7 +49,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(ContainerImageCollection, s.get(**b))
+    m = cast(ContainerImageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -68,4 +72,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(ContainerImageCollection, s.get(**b))
+    m = cast(ContainerImageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

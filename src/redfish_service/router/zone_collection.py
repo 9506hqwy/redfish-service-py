@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.zone import Zone, ZoneOnCreate
 from ..model.zone_collection import ZoneCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> ZoneCollection:
     s: Service = get_service(ZoneCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-    return cast(ZoneCollection, s.get(**b))
+    m = cast(ZoneCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Fabrics/{fabric_id}/Zones", response_model_exclude_none=True)
@@ -38,7 +40,9 @@ async def post1(fabric_id: str, request: Request, response: Response, body: Zone
 async def get2(request: Request, response: Response) -> ZoneCollection:
     s: Service = get_service(ZoneCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(ZoneCollection, s.get(**b))
+    m = cast(ZoneCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/CompositionService/ResourceZones", response_model_exclude_none=True)

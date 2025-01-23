@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.allow_deny import AllowDeny, AllowDenyOnCreate
 from ..model.allow_deny_collection import AllowDenyCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -34,7 +34,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(AllowDenyCollection, s.get(**b))
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -89,7 +91,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(AllowDenyCollection, s.get(**b))
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -144,7 +148,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(AllowDenyCollection, s.get(**b))
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -201,7 +207,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(AllowDenyCollection, s.get(**b))
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -258,7 +266,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(AllowDenyCollection, s.get(**b))
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -315,7 +325,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(AllowDenyCollection, s.get(**b))
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

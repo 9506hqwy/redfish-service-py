@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.task import Task
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -23,7 +23,9 @@ async def delete1(task_id: str, request: Request, response: Response) -> None:
 async def get1(task_id: str, request: Request, response: Response) -> Task:
     s: Service = get_service(Task, request)
     b: dict[str, Any] = {"task_id": task_id, "request": request, "response": response}
-    return cast(Task, s.get(**b))
+    m = cast(Task, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.delete(
@@ -55,4 +57,6 @@ async def get2(task_id: str, task_id2: str, request: Request, response: Response
         "request": request,
         "response": response,
     }
-    return cast(Task, s.get(**b))
+    m = cast(Task, s.get(**b))
+    set_link_header(m, response)
+    return m

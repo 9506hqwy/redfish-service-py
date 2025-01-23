@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.storage_metrics import StorageMetrics
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,7 +14,9 @@ router = APIRouter()
 async def get1(storage_id: str, request: Request, response: Response) -> StorageMetrics:
     s: Service = get_service(StorageMetrics, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(StorageMetrics, s.get(**b))
+    m = cast(StorageMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -35,7 +37,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(StorageMetrics, s.get(**b))
+    m = cast(StorageMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -56,7 +60,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(StorageMetrics, s.get(**b))
+    m = cast(StorageMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -82,7 +88,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(StorageMetrics, s.get(**b))
+    m = cast(StorageMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -103,7 +111,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(StorageMetrics, s.get(**b))
+    m = cast(StorageMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -129,4 +139,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(StorageMetrics, s.get(**b))
+    m = cast(StorageMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m

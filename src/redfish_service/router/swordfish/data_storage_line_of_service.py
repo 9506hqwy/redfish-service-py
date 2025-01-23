@@ -8,7 +8,7 @@ from ...model.swordfish.data_storage_line_of_service import (
     DataStorageLineOfServiceOnUpdate,
 )
 from ...service import Service
-from ...util import get_service
+from ...util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -55,7 +55,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(DataStorageLineOfService, s.get(**b))
+    m = cast(DataStorageLineOfService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -127,7 +129,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(DataStorageLineOfService, s.get(**b))
+    m = cast(DataStorageLineOfService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

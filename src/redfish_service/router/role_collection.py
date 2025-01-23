@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.role import Role, RoleOnCreate
 from ..model.role_collection import RoleCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> RoleCollection:
     s: Service = get_service(RoleCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(RoleCollection, s.get(**b))
+    m = cast(RoleCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/AccountService/Roles", response_model_exclude_none=True)
@@ -39,7 +41,9 @@ async def post1(request: Request, response: Response, body: RoleOnCreate) -> Rol
 async def get2(manager_id: str, request: Request, response: Response) -> RoleCollection:
     s: Service = get_service(RoleCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(RoleCollection, s.get(**b))
+    m = cast(RoleCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

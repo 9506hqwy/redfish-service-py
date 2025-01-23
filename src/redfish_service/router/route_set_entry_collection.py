@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.route_set_entry import RouteSetEntry, RouteSetEntryOnCreate
 from ..model.route_set_entry_collection import RouteSetEntryCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -36,7 +36,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -95,7 +97,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -154,7 +158,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -213,7 +219,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -266,7 +274,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -317,7 +327,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -372,7 +384,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -427,7 +441,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -484,7 +500,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -543,7 +561,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(RouteSetEntryCollection, s.get(**b))
+    m = cast(RouteSetEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

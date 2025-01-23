@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.job import Job, JobOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -23,7 +23,9 @@ async def delete1(job_id: str, request: Request, response: Response) -> None:
 async def get1(job_id: str, request: Request, response: Response) -> Job:
     s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response}
-    return cast(Job, s.get(**b))
+    m = cast(Job, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/JobService/Jobs/{job_id}", response_model_exclude_none=True)
@@ -63,7 +65,9 @@ async def get2(job_id: str, job_id2: str, request: Request, response: Response) 
         "request": request,
         "response": response,
     }
-    return cast(Job, s.get(**b))
+    m = cast(Job, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

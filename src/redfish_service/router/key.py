@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.key import Key, KeyOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -23,7 +23,9 @@ async def delete1(key_id: str, request: Request, response: Response) -> None:
 async def get1(key_id: str, request: Request, response: Response) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/KeyService/NVMeoFSecrets/{key_id}", response_model_exclude_none=True)
@@ -53,7 +55,9 @@ async def delete2(key_id: str, request: Request, response: Response) -> None:
 async def get2(key_id: str, request: Request, response: Response) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -85,7 +89,9 @@ async def delete3(key_id: str, request: Request, response: Response) -> None:
 async def get3(key_id: str, request: Request, response: Response) -> Key:
     s: Service = get_service(Key, request)
     b: dict[str, Any] = {"key_id": key_id, "request": request, "response": response}
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -132,7 +138,9 @@ async def get4(manager_account_id: str, key_id: str, request: Request, response:
         "request": request,
         "response": response,
     }
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -192,7 +200,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -256,7 +266,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -312,7 +324,9 @@ async def get7(aggregation_source_id: str, request: Request, response: Response)
         "request": request,
         "response": response,
     }
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -363,7 +377,9 @@ async def get8(aggregation_source_id: str, request: Request, response: Response)
         "request": request,
         "response": response,
     }
-    return cast(Key, s.get(**b))
+    m = cast(Key, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

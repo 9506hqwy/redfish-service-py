@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.fan import Fan, FanOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -26,7 +26,9 @@ async def get1(chassis_id: str, fan_id: str, request: Request, response: Respons
         "request": request,
         "response": response,
     }
-    return cast(Fan, s.get(**b))
+    m = cast(Fan, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

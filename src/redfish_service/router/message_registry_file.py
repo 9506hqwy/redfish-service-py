@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.message_registry_file import MessageRegistryFile
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -20,4 +20,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(MessageRegistryFile, s.get(**b))
+    m = cast(MessageRegistryFile, s.get(**b))
+    set_link_header(m, response)
+    return m

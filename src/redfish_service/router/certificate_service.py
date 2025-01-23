@@ -10,7 +10,7 @@ from ..model.certificate_service import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -20,7 +20,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> CertificateService:
     s: Service = get_service(CertificateService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateService, s.get(**b))
+    m = cast(CertificateService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

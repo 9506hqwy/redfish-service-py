@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.storage_controller_collection import StorageControllerCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ async def get1(
 ) -> StorageControllerCollection:
     s: Service = get_service(StorageControllerCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(StorageControllerCollection, s.get(**b))
+    m = cast(StorageControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -37,7 +39,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(StorageControllerCollection, s.get(**b))
+    m = cast(StorageControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -58,7 +62,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(StorageControllerCollection, s.get(**b))
+    m = cast(StorageControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -84,7 +90,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(StorageControllerCollection, s.get(**b))
+    m = cast(StorageControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -105,7 +113,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(StorageControllerCollection, s.get(**b))
+    m = cast(StorageControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -131,4 +141,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(StorageControllerCollection, s.get(**b))
+    m = cast(StorageControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

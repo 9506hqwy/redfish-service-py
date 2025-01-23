@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.address_pool import AddressPool, AddressPoolOnCreate
 from ..model.address_pool_collection import AddressPoolCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> AddressPoolCollection:
     s: Service = get_service(AddressPoolCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-    return cast(AddressPoolCollection, s.get(**b))
+    m = cast(AddressPoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Fabrics/{fabric_id}/AddressPools", response_model_exclude_none=True)

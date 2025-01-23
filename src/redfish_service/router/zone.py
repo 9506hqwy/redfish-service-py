@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.zone import AddEndpointRequest, RemoveEndpointRequest, Zone, ZoneOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -34,7 +34,9 @@ async def get1(fabric_id: str, zone_id: str, request: Request, response: Respons
         "request": request,
         "response": response,
     }
-    return cast(Zone, s.get(**b))
+    m = cast(Zone, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/Fabrics/{fabric_id}/Zones/{zone_id}", response_model_exclude_none=True)
@@ -112,7 +114,9 @@ async def delete2(zone_id: str, request: Request, response: Response) -> None:
 async def get2(zone_id: str, request: Request, response: Response) -> Zone:
     s: Service = get_service(Zone, request)
     b: dict[str, Any] = {"zone_id": zone_id, "request": request, "response": response}
-    return cast(Zone, s.get(**b))
+    m = cast(Zone, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

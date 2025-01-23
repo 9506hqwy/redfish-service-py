@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.port_collection import PortCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -25,7 +25,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -51,7 +53,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -77,7 +81,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -98,7 +104,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -119,7 +127,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -140,7 +150,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -161,7 +173,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -182,7 +196,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -203,7 +219,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -224,7 +242,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -245,7 +265,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -271,7 +293,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -297,7 +321,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -318,7 +344,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -339,7 +367,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -367,7 +397,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -395,7 +427,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -421,7 +455,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -447,7 +483,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -473,7 +511,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -499,7 +539,9 @@ async def get21(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -525,7 +567,9 @@ async def get22(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -551,7 +595,9 @@ async def get23(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -577,7 +623,9 @@ async def get24(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -598,7 +646,9 @@ async def get25(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -619,7 +669,9 @@ async def get26(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -647,7 +699,9 @@ async def get27(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -675,7 +729,9 @@ async def get28(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -701,7 +757,9 @@ async def get29(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -727,7 +785,9 @@ async def get30(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -753,7 +813,9 @@ async def get31(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -779,7 +841,9 @@ async def get32(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -805,7 +869,9 @@ async def get33(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -826,7 +892,9 @@ async def get34(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -847,7 +915,9 @@ async def get35(
         "request": request,
         "response": response,
     }
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get("/redfish/v1/Managers/{manager_id}/USBPorts", response_model_exclude_none=True)
@@ -855,7 +925,9 @@ async def get35(
 async def get36(manager_id: str, request: Request, response: Response) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -867,7 +939,9 @@ async def get36(manager_id: str, request: Request, response: Response) -> PortCo
 async def get37(manager_id: str, request: Request, response: Response) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -879,4 +953,6 @@ async def get37(manager_id: str, request: Request, response: Response) -> PortCo
 async def get38(manager_id: str, request: Request, response: Response) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(PortCollection, s.get(**b))
+    m = cast(PortCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

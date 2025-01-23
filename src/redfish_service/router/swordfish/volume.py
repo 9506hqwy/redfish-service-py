@@ -18,7 +18,7 @@ from ...model.swordfish.volume import (
     VolumeOnUpdate,
 )
 from ...service import Service
-from ...util import get_service
+from ...util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -61,7 +61,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -373,7 +375,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -693,7 +697,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1005,7 +1011,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1333,7 +1341,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1645,7 +1655,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1965,7 +1977,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2277,7 +2291,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2588,7 +2604,9 @@ async def get9(storage_id: str, volume_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2871,7 +2889,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3207,7 +3227,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3559,7 +3581,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3895,7 +3919,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4235,7 +4261,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4543,7 +4571,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4855,7 +4885,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5183,7 +5215,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5495,7 +5529,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5813,7 +5849,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6105,7 +6143,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(Volume, s.get(**b))
+    m = cast(Volume, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

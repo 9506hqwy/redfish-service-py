@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.switch import ResetRequest, Switch, SwitchOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -25,7 +25,9 @@ async def get1(fabric_id: str, switch_id: str, request: Request, response: Respo
         "request": request,
         "response": response,
     }
-    return cast(Switch, s.get(**b))
+    m = cast(Switch, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

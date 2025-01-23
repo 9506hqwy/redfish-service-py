@@ -11,7 +11,7 @@ from ..model.certificate import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -52,7 +52,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -156,7 +158,9 @@ async def get2(certificate_id: str, request: Request, response: Response) -> Cer
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -245,7 +249,9 @@ async def get3(certificate_id: str, request: Request, response: Response) -> Cer
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -340,7 +346,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -444,7 +452,9 @@ async def get5(certificate_id: str, request: Request, response: Response) -> Cer
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -533,7 +543,9 @@ async def get6(certificate_id: str, request: Request, response: Response) -> Cer
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -638,7 +650,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -754,7 +768,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -856,7 +872,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -968,7 +986,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1084,7 +1104,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1186,7 +1208,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1288,7 +1312,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1390,7 +1416,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1510,7 +1538,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1636,7 +1666,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1762,7 +1794,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1892,7 +1926,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2028,7 +2064,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2150,7 +2188,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2260,7 +2300,9 @@ async def get21(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2370,7 +2412,9 @@ async def get22(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2490,7 +2534,9 @@ async def get23(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2616,7 +2662,9 @@ async def get24(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2742,7 +2790,9 @@ async def get25(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2860,7 +2910,9 @@ async def get26(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2986,7 +3038,9 @@ async def get27(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3116,7 +3170,9 @@ async def get28(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3248,7 +3304,9 @@ async def get29(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3378,7 +3436,9 @@ async def get30(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3510,7 +3570,9 @@ async def get31(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3636,7 +3698,9 @@ async def get32(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3766,7 +3830,9 @@ async def get33(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3898,7 +3964,9 @@ async def get34(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4028,7 +4096,9 @@ async def get35(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4160,7 +4230,9 @@ async def get36(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4290,7 +4362,9 @@ async def get37(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4426,7 +4500,9 @@ async def get38(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4566,7 +4642,9 @@ async def get39(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4708,7 +4786,9 @@ async def get40(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4848,7 +4928,9 @@ async def get41(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -4986,7 +5068,9 @@ async def get42(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5116,7 +5200,9 @@ async def get43(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5252,7 +5338,9 @@ async def get44(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5392,7 +5480,9 @@ async def get45(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5534,7 +5624,9 @@ async def get46(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5674,7 +5766,9 @@ async def get47(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5804,7 +5898,9 @@ async def get48(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -5920,7 +6016,9 @@ async def get49(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6036,7 +6134,9 @@ async def get50(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6160,7 +6260,9 @@ async def get51(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6290,7 +6392,9 @@ async def get52(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6422,7 +6526,9 @@ async def get53(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6556,7 +6662,9 @@ async def get54(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6698,7 +6806,9 @@ async def get55(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6830,7 +6940,9 @@ async def get56(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -6964,7 +7076,9 @@ async def get57(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7102,7 +7216,9 @@ async def get58(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7228,7 +7344,9 @@ async def get59(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7354,7 +7472,9 @@ async def get60(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7484,7 +7604,9 @@ async def get61(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7620,7 +7742,9 @@ async def get62(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7756,7 +7880,9 @@ async def get63(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -7892,7 +8018,9 @@ async def get64(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8008,7 +8136,9 @@ async def get65(certificate_id: str, request: Request, response: Response) -> Ce
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8097,7 +8227,9 @@ async def get66(certificate_id: str, request: Request, response: Response) -> Ce
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8192,7 +8324,9 @@ async def get67(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8294,7 +8428,9 @@ async def get68(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8414,7 +8550,9 @@ async def get69(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8540,7 +8678,9 @@ async def get70(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8656,7 +8796,9 @@ async def get71(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8758,7 +8900,9 @@ async def get72(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8860,7 +9004,9 @@ async def get73(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -8962,7 +9108,9 @@ async def get74(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -9064,7 +9212,9 @@ async def get75(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -9166,7 +9316,9 @@ async def get76(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -9278,7 +9430,9 @@ async def get77(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -9394,7 +9548,9 @@ async def get78(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -9504,7 +9660,9 @@ async def get79(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -9624,7 +9782,9 @@ async def get80(
         "request": request,
         "response": response,
     }
-    return cast(Certificate, s.get(**b))
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

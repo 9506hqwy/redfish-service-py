@@ -6,7 +6,7 @@ from ...authenticate import authenticate
 from ...model.swordfish.storage_pool import StoragePool, StoragePoolOnCreate
 from ...model.swordfish.storage_pool_collection import StoragePoolCollection
 from ...service import Service, ServiceCollection
-from ...util import get_service, get_service_collection
+from ...util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -28,7 +28,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -71,7 +73,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -124,7 +128,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -179,7 +185,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -229,7 +237,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -282,7 +292,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -319,7 +331,9 @@ async def post6(
 async def get7(storage_id: str, request: Request, response: Response) -> StoragePoolCollection:
     s: Service = get_service(StoragePoolCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Storage/{storage_id}/StoragePools", response_model_exclude_none=True)
@@ -358,7 +372,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -411,7 +427,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -462,7 +480,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -512,7 +532,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -565,7 +587,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -615,7 +639,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -668,7 +694,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -725,7 +753,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -784,7 +814,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -837,7 +869,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -894,7 +928,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(StoragePoolCollection, s.get(**b))
+    m = cast(StoragePoolCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

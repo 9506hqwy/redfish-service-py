@@ -6,7 +6,7 @@ from ...authenticate import authenticate
 from ...model.swordfish.hosted_storage_services import HostedStorageServices
 from ...model.swordfish.storage_service import StorageService, StorageServiceOnCreate
 from ...service import Service, ServiceCollection
-from ...util import get_service, get_service_collection
+from ...util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -26,7 +26,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(HostedStorageServices, s.get(**b))
+    m = cast(HostedStorageServices, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

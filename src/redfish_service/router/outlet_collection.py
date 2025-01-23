@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.outlet_collection import OutletCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -26,7 +26,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(OutletCollection, s.get(**b))
+    m = cast(OutletCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -46,7 +48,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(OutletCollection, s.get(**b))
+    m = cast(OutletCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -66,7 +70,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(OutletCollection, s.get(**b))
+    m = cast(OutletCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -86,4 +92,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(OutletCollection, s.get(**b))
+    m = cast(OutletCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.memory_collection import MemoryCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,7 +18,9 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-    return cast(MemoryCollection, s.get(**b))
+    m = cast(MemoryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -39,7 +41,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(MemoryCollection, s.get(**b))
+    m = cast(MemoryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Memory", response_model_exclude_none=True)
@@ -47,7 +51,9 @@ async def get2(
 async def get3(chassis_id: str, request: Request, response: Response) -> MemoryCollection:
     s: Service = get_service(MemoryCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(MemoryCollection, s.get(**b))
+    m = cast(MemoryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -68,7 +74,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(MemoryCollection, s.get(**b))
+    m = cast(MemoryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -89,4 +97,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(MemoryCollection, s.get(**b))
+    m = cast(MemoryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

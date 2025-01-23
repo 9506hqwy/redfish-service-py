@@ -9,7 +9,7 @@ from ..model.external_account_provider import (
 )
 from ..model.external_account_provider_collection import ExternalAccountProviderCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -23,7 +23,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ExternalAccountProviderCollection:
     s: Service = get_service(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(ExternalAccountProviderCollection, s.get(**b))
+    m = cast(ExternalAccountProviderCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -54,7 +56,9 @@ async def get2(
 ) -> ExternalAccountProviderCollection:
     s: Service = get_service(ExternalAccountProviderCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(ExternalAccountProviderCollection, s.get(**b))
+    m = cast(ExternalAccountProviderCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

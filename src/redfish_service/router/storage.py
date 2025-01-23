@@ -12,7 +12,7 @@ from ..model.storage import (
     StorageOnUpdate,
 )
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -22,7 +22,9 @@ router = APIRouter()
 async def get1(storage_id: str, request: Request, response: Response) -> Storage:
     s: Service = get_service(Storage, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(Storage, s.get(**b))
+    m = cast(Storage, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/Storage/{storage_id}", response_model_exclude_none=True)
@@ -115,7 +117,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Storage, s.get(**b))
+    m = cast(Storage, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -231,7 +235,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(Storage, s.get(**b))
+    m = cast(Storage, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -352,7 +358,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Storage, s.get(**b))
+    m = cast(Storage, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -476,7 +484,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Storage, s.get(**b))
+    m = cast(Storage, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -597,7 +607,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Storage, s.get(**b))
+    m = cast(Storage, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

@@ -8,7 +8,7 @@ from ..model.manager_network_protocol import (
     ManagerNetworkProtocolOnUpdate,
 )
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,7 +18,9 @@ router = APIRouter()
 async def get1(manager_id: str, request: Request, response: Response) -> ManagerNetworkProtocol:
     s: Service = get_service(ManagerNetworkProtocol, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(ManagerNetworkProtocol, s.get(**b))
+    m = cast(ManagerNetworkProtocol, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

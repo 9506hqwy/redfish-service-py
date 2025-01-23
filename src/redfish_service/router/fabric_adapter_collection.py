@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.fabric_adapter_collection import FabricAdapterCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(FabricAdapterCollection, s.get(**b))
+    m = cast(FabricAdapterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -45,7 +47,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(FabricAdapterCollection, s.get(**b))
+    m = cast(FabricAdapterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -66,7 +70,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(FabricAdapterCollection, s.get(**b))
+    m = cast(FabricAdapterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/FabricAdapters", response_model_exclude_none=True)
@@ -74,4 +80,6 @@ async def get3(
 async def get4(chassis_id: str, request: Request, response: Response) -> FabricAdapterCollection:
     s: Service = get_service(FabricAdapterCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(FabricAdapterCollection, s.get(**b))
+    m = cast(FabricAdapterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

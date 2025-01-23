@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.operating_system import OperatingSystem
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -22,7 +22,9 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-    return cast(OperatingSystem, s.get(**b))
+    m = cast(OperatingSystem, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -43,7 +45,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(OperatingSystem, s.get(**b))
+    m = cast(OperatingSystem, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -64,4 +68,6 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(OperatingSystem, s.get(**b))
+    m = cast(OperatingSystem, s.get(**b))
+    set_link_header(m, response)
+    return m

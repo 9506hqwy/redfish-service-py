@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.facility import Facility, FacilityOnCreate
 from ..model.facility_collection import FacilityCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> FacilityCollection:
     s: Service = get_service(FacilityCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(FacilityCollection, s.get(**b))
+    m = cast(FacilityCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Facilities", response_model_exclude_none=True)

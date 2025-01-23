@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.session import Session
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -25,4 +25,6 @@ async def delete1(session_id: str, request: Request, response: Response) -> None
 async def get1(session_id: str, request: Request, response: Response) -> Session:
     s: Service = get_service(Session, request)
     b: dict[str, Any] = {"session_id": session_id, "request": request, "response": response}
-    return cast(Session, s.get(**b))
+    m = cast(Session, s.get(**b))
+    set_link_header(m, response)
+    return m

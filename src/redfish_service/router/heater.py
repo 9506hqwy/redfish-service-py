@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.heater import Heater, HeaterOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -26,7 +26,9 @@ async def get1(chassis_id: str, heater_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-    return cast(Heater, s.get(**b))
+    m = cast(Heater, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

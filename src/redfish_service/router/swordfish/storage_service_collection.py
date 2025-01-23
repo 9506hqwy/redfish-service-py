@@ -6,7 +6,7 @@ from ...authenticate import authenticate
 from ...model.swordfish.storage_service import StorageService, StorageServiceOnCreate
 from ...model.swordfish.storage_service_collection import StorageServiceCollection
 from ...service import Service, ServiceCollection
-from ...util import get_service, get_service_collection
+from ...util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> StorageServiceCollection:
     s: Service = get_service(StorageServiceCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(StorageServiceCollection, s.get(**b))
+    m = cast(StorageServiceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/StorageServices", response_model_exclude_none=True)
@@ -45,7 +47,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(StorageServiceCollection, s.get(**b))
+    m = cast(StorageServiceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.ethernet_interface import EthernetInterface, EthernetInterfaceOnCreate
 from ..model.ethernet_interface_collection import EthernetInterfaceCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -22,7 +22,9 @@ async def get1(
 ) -> EthernetInterfaceCollection:
     s: Service = get_service(EthernetInterfaceCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -64,7 +66,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -109,7 +113,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -151,7 +157,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -199,7 +207,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -246,7 +256,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -289,7 +301,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -337,7 +351,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -390,7 +406,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterfaceCollection, s.get(**b))
+    m = cast(EthernetInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

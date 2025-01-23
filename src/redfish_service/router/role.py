@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.role import Role, RoleOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -23,7 +23,9 @@ async def delete1(role_id: str, request: Request, response: Response) -> None:
 async def get1(role_id: str, request: Request, response: Response) -> Role:
     s: Service = get_service(Role, request)
     b: dict[str, Any] = {"role_id": role_id, "request": request, "response": response}
-    return cast(Role, s.get(**b))
+    m = cast(Role, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/AccountService/Roles/{role_id}", response_model_exclude_none=True)
@@ -71,7 +73,9 @@ async def get2(manager_id: str, role_id: str, request: Request, response: Respon
         "request": request,
         "response": response,
     }
-    return cast(Role, s.get(**b))
+    m = cast(Role, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

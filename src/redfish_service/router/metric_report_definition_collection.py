@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.metric_report_definition import MetricReportDefinition, MetricReportDefinitionOnCreate
 from ..model.metric_report_definition_collection import MetricReportDefinitionCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -20,7 +20,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> MetricReportDefinitionCollection:
     s: Service = get_service(MetricReportDefinitionCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(MetricReportDefinitionCollection, s.get(**b))
+    m = cast(MetricReportDefinitionCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

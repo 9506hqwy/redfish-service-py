@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.software_inventory import SoftwareInventory, SoftwareInventoryOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -27,7 +27,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(SoftwareInventory, s.get(**b))
+    m = cast(SoftwareInventory, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -68,7 +70,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(SoftwareInventory, s.get(**b))
+    m = cast(SoftwareInventory, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

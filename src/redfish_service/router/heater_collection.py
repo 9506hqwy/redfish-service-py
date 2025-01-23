@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.heater_collection import HeaterCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,4 +18,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> HeaterCollection:
     s: Service = get_service(HeaterCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(HeaterCollection, s.get(**b))
+    m = cast(HeaterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

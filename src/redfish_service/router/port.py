@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.port import Port, PortOnUpdate, ResetRequest
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -30,7 +30,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -109,7 +111,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -192,7 +196,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -273,7 +279,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -346,7 +354,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -419,7 +429,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -492,7 +504,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -565,7 +579,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -638,7 +654,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -711,7 +729,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -790,7 +810,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -873,7 +895,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -950,7 +974,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1031,7 +1057,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1120,7 +1148,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1207,7 +1237,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1290,7 +1322,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1373,7 +1407,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1456,7 +1492,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1539,7 +1577,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1622,7 +1662,9 @@ async def get21(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1699,7 +1741,9 @@ async def get22(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1780,7 +1824,9 @@ async def get23(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1869,7 +1915,9 @@ async def get24(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1956,7 +2004,9 @@ async def get25(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2039,7 +2089,9 @@ async def get26(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2122,7 +2174,9 @@ async def get27(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2205,7 +2259,9 @@ async def get28(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2282,7 +2338,9 @@ async def get29(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2355,7 +2413,9 @@ async def get30(
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2423,7 +2483,9 @@ async def get31(manager_id: str, port_id: str, request: Request, response: Respo
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2480,7 +2542,9 @@ async def get32(manager_id: str, port_id: str, request: Request, response: Respo
         "request": request,
         "response": response,
     }
-    return cast(Port, s.get(**b))
+    m = cast(Port, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

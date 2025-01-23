@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.metric_report import MetricReport
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -40,4 +40,6 @@ async def get1(metric_report_id: str, request: Request, response: Response) -> M
         "request": request,
         "response": response,
     }
-    return cast(MetricReport, s.get(**b))
+    m = cast(MetricReport, s.get(**b))
+    set_link_header(m, response)
+    return m

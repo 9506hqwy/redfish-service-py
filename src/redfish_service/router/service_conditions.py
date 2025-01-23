@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.service_conditions import ServiceConditions
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,4 +14,6 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ServiceConditions:
     s: Service = get_service(ServiceConditions, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(ServiceConditions, s.get(**b))
+    m = cast(ServiceConditions, s.get(**b))
+    set_link_header(m, response)
+    return m

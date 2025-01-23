@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.battery import Battery, BatteryOnUpdate, ResetRequest
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -27,7 +27,9 @@ async def get1(chassis_id: str, battery_id: str, request: Request, response: Res
         "request": request,
         "response": response,
     }
-    return cast(Battery, s.get(**b))
+    m = cast(Battery, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

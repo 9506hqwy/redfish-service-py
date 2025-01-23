@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.key import Key, KeyOnCreate
 from ..model.key_collection import KeyCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> KeyCollection:
     s: Service = get_service(KeyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(KeyCollection, s.get(**b))
+    m = cast(KeyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/KeyService/NVMeoFSecrets", response_model_exclude_none=True)
@@ -33,7 +35,9 @@ async def post1(request: Request, response: Response, body: KeyOnCreate) -> Key:
 async def get2(request: Request, response: Response) -> KeyCollection:
     s: Service = get_service(KeyCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(KeyCollection, s.get(**b))
+    m = cast(KeyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/UpdateService/RemoteServerSSHKeys", response_model_exclude_none=True)
@@ -62,7 +66,9 @@ async def get3(manager_account_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-    return cast(KeyCollection, s.get(**b))
+    m = cast(KeyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -105,7 +111,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(KeyCollection, s.get(**b))
+    m = cast(KeyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -150,7 +158,9 @@ async def get5(aggregation_source_id: str, request: Request, response: Response)
         "request": request,
         "response": response,
     }
-    return cast(KeyCollection, s.get(**b))
+    m = cast(KeyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.endpoint_group import EndpointGroup, EndpointGroupOnCreate
 from ..model.endpoint_group_collection import EndpointGroupCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(storage_id: str, request: Request, response: Response) -> EndpointGroupCollection:
     s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(EndpointGroupCollection, s.get(**b))
+    m = cast(EndpointGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Storage/{storage_id}/EndpointGroups", response_model_exclude_none=True)
@@ -55,7 +57,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(EndpointGroupCollection, s.get(**b))
+    m = cast(EndpointGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -102,7 +106,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(EndpointGroupCollection, s.get(**b))
+    m = cast(EndpointGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -132,7 +138,9 @@ async def post3(
 async def get4(fabric_id: str, request: Request, response: Response) -> EndpointGroupCollection:
     s: Service = get_service(EndpointGroupCollection, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-    return cast(EndpointGroupCollection, s.get(**b))
+    m = cast(EndpointGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Fabrics/{fabric_id}/EndpointGroups", response_model_exclude_none=True)

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.leak_detection import LeakDetection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -20,7 +20,9 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> LeakDetection:
     s: Service = get_service(LeakDetection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(LeakDetection, s.get(**b))
+    m = cast(LeakDetection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -38,7 +40,9 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Le
         "request": request,
         "response": response,
     }
-    return cast(LeakDetection, s.get(**b))
+    m = cast(LeakDetection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -56,7 +60,9 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Le
         "request": request,
         "response": response,
     }
-    return cast(LeakDetection, s.get(**b))
+    m = cast(LeakDetection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -74,4 +80,6 @@ async def get4(cooling_unit_id: str, request: Request, response: Response) -> Le
         "request": request,
         "response": response,
     }
-    return cast(LeakDetection, s.get(**b))
+    m = cast(LeakDetection, s.get(**b))
+    set_link_header(m, response)
+    return m

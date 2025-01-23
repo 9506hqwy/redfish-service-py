@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.vcat_entry import VcatEntry, VcatEntryOnCreate
 from ..model.vcat_entry_collection import VcatEntryCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -30,7 +30,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -81,7 +83,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -131,7 +135,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -179,7 +185,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -234,7 +242,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -291,7 +301,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -346,7 +358,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -403,7 +417,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -460,7 +476,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -515,7 +533,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -566,7 +586,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -616,7 +638,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -664,7 +688,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -713,7 +739,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -764,7 +792,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -814,7 +844,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -862,7 +894,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -917,7 +951,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -974,7 +1010,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1029,7 +1067,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1086,7 +1126,9 @@ async def get21(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1143,7 +1185,9 @@ async def get22(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1198,7 +1242,9 @@ async def get23(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1249,7 +1295,9 @@ async def get24(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1299,7 +1347,9 @@ async def get25(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1347,7 +1397,9 @@ async def get26(
         "request": request,
         "response": response,
     }
-    return cast(VcatEntryCollection, s.get(**b))
+    m = cast(VcatEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.log_entry import LogEntry, LogEntryOnCreate
 from ..model.log_entry_collection import LogEntryCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -29,7 +29,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -77,7 +79,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -130,7 +134,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -185,7 +191,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -235,7 +243,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -270,7 +280,9 @@ async def post5(
 async def get6(request: Request, response: Response) -> LogEntryCollection:
     s: Service = get_service(LogEntryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/JobService/Log/Entries", response_model_exclude_none=True)
@@ -287,7 +299,9 @@ async def post6(request: Request, response: Response, body: LogEntryOnCreate) ->
 async def get7(request: Request, response: Response) -> LogEntryCollection:
     s: Service = get_service(LogEntryCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/TelemetryService/LogService/Entries", response_model_exclude_none=True)
@@ -319,7 +333,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -372,7 +388,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(LogEntryCollection, s.get(**b))
+    m = cast(LogEntryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

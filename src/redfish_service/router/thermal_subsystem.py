@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.thermal_subsystem import ThermalSubsystem
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,4 +14,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> ThermalSubsystem:
     s: Service = get_service(ThermalSubsystem, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(ThermalSubsystem, s.get(**b))
+    m = cast(ThermalSubsystem, s.get(**b))
+    set_link_header(m, response)
+    return m

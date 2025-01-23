@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.power import Power, PowerOnUpdate, PowerSupplyResetRequest
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> Power:
     s: Service = get_service(Power, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(Power, s.get(**b))
+    m = cast(Power, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/Chassis/{chassis_id}/Power", response_model_exclude_none=True)

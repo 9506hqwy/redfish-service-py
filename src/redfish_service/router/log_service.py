@@ -12,7 +12,7 @@ from ..model.log_service import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -35,7 +35,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -151,7 +153,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -272,7 +276,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -401,7 +407,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -525,7 +533,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -628,7 +638,9 @@ async def push_diagnostic_data5(
 async def get6(request: Request, response: Response) -> LogService:
     s: Service = get_service(LogService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/JobService/Log", response_model_exclude_none=True)
@@ -695,7 +707,9 @@ async def push_diagnostic_data6(
 async def get7(request: Request, response: Response) -> LogService:
     s: Service = get_service(LogService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/TelemetryService/LogService", response_model_exclude_none=True)
@@ -776,7 +790,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -897,7 +913,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(LogService, s.get(**b))
+    m = cast(LogService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

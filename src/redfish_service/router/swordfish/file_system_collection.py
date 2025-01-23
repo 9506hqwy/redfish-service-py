@@ -6,7 +6,7 @@ from ...authenticate import authenticate
 from ...model.swordfish.file_system import FileSystem, FileSystemOnCreate
 from ...model.swordfish.file_system_collection import FileSystemCollection
 from ...service import Service, ServiceCollection
-from ...util import get_service, get_service_collection
+from ...util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -28,7 +28,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(FileSystemCollection, s.get(**b))
+    m = cast(FileSystemCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -58,7 +60,9 @@ async def post1(
 async def get2(storage_id: str, request: Request, response: Response) -> FileSystemCollection:
     s: Service = get_service(FileSystemCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(FileSystemCollection, s.get(**b))
+    m = cast(FileSystemCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Storage/{storage_id}/FileSystems", response_model_exclude_none=True)

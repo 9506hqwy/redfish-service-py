@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.vlan_network_interface import VlanNetworkInterface, VlanNetworkInterfaceOnCreate
 from ..model.vlan_network_interface_collection import VlanNetworkInterfaceCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -34,7 +34,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -84,7 +86,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -132,7 +136,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -180,7 +186,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -233,7 +241,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -283,7 +293,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -336,7 +348,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(VlanNetworkInterfaceCollection, s.get(**b))
+    m = cast(VlanNetworkInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

@@ -10,7 +10,7 @@ from ...model.swordfish.storage_service import (
     StorageServiceOnUpdate,
 )
 from ...service import Service
-from ...util import get_service
+from ...util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -38,7 +38,9 @@ async def get1(storage_service_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-    return cast(StorageService, s.get(**b))
+    m = cast(StorageService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/StorageServices/{storage_service_id}", response_model_exclude_none=True)
@@ -111,7 +113,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(StorageService, s.get(**b))
+    m = cast(StorageService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

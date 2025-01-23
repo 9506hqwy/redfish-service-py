@@ -11,7 +11,7 @@ from ..model.circuit import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -34,7 +34,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -126,7 +128,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -218,7 +222,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -310,7 +316,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -402,7 +410,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -494,7 +504,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -586,7 +598,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -678,7 +692,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -770,7 +786,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -862,7 +880,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -954,7 +974,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1046,7 +1068,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1138,7 +1162,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1230,7 +1256,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1322,7 +1350,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1414,7 +1444,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(Circuit, s.get(**b))
+    m = cast(Circuit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

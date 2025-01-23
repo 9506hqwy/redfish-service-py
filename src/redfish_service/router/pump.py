@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.pump import Pump, PumpOnUpdate, SetModeRequest
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -27,7 +27,9 @@ async def get1(cooling_unit_id: str, pump_id: str, request: Request, response: R
         "request": request,
         "response": response,
     }
-    return cast(Pump, s.get(**b))
+    m = cast(Pump, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -85,7 +87,9 @@ async def get2(cooling_unit_id: str, pump_id: str, request: Request, response: R
         "request": request,
         "response": response,
     }
-    return cast(Pump, s.get(**b))
+    m = cast(Pump, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -143,7 +147,9 @@ async def get3(cooling_unit_id: str, pump_id: str, request: Request, response: R
         "request": request,
         "response": response,
     }
-    return cast(Pump, s.get(**b))
+    m = cast(Pump, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -201,7 +207,9 @@ async def get4(chassis_id: str, pump_id: str, request: Request, response: Respon
         "request": request,
         "response": response,
     }
-    return cast(Pump, s.get(**b))
+    m = cast(Pump, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

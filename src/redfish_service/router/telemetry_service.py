@@ -10,7 +10,7 @@ from ..model.telemetry_service import (
     TelemetryServiceOnUpdate,
 )
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -20,7 +20,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> TelemetryService:
     s: Service = get_service(TelemetryService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(TelemetryService, s.get(**b))
+    m = cast(TelemetryService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/TelemetryService", response_model_exclude_none=True)

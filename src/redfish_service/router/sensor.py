@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.sensor import Sensor, SensorOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(chassis_id: str, sensor_id: str, request: Request, response: Resp
         "request": request,
         "response": response,
     }
-    return cast(Sensor, s.get(**b))
+    m = cast(Sensor, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -63,7 +65,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Sensor, s.get(**b))
+    m = cast(Sensor, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -107,7 +111,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(Sensor, s.get(**b))
+    m = cast(Sensor, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -151,7 +157,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Sensor, s.get(**b))
+    m = cast(Sensor, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -195,7 +203,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Sensor, s.get(**b))
+    m = cast(Sensor, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -239,7 +249,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Sensor, s.get(**b))
+    m = cast(Sensor, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

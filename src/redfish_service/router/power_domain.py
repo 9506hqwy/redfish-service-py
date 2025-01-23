@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.power_domain import PowerDomain, PowerDomainOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -46,7 +46,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(PowerDomain, s.get(**b))
+    m = cast(PowerDomain, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

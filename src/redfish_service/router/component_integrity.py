@@ -11,7 +11,7 @@ from ..model.component_integrity import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -31,7 +31,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(ComponentIntegrity, s.get(**b))
+    m = cast(ComponentIntegrity, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

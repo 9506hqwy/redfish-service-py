@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.virtual_media_collection import VirtualMediaCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,7 +14,9 @@ router = APIRouter()
 async def get1(manager_id: str, request: Request, response: Response) -> VirtualMediaCollection:
     s: Service = get_service(VirtualMediaCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(VirtualMediaCollection, s.get(**b))
+    m = cast(VirtualMediaCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -32,7 +34,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(VirtualMediaCollection, s.get(**b))
+    m = cast(VirtualMediaCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -53,7 +57,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(VirtualMediaCollection, s.get(**b))
+    m = cast(VirtualMediaCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -74,4 +80,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(VirtualMediaCollection, s.get(**b))
+    m = cast(VirtualMediaCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

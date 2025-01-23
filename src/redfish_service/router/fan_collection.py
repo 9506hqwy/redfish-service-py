@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.fan_collection import FanCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,4 +18,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> FanCollection:
     s: Service = get_service(FanCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(FanCollection, s.get(**b))
+    m = cast(FanCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

@@ -1,8 +1,9 @@
 from __future__ import annotations  # PEP563 Forward References
 
 from datetime import datetime
+from typing import cast
 
-from fastapi import Request
+from fastapi import Request, Response
 
 from .exception import InvalidURIError
 from .model import RedfishModel
@@ -25,3 +26,9 @@ def get_service_collection[T: RedfishModel](ty: type[T], req: Request) -> Servic
         return s
 
     raise InvalidURIError(req.url.path)
+
+
+def set_link_header[T: RedfishModel](model: T, res: Response) -> None:
+    if ty := getattr(model, "odata_type", None):
+        name = cast(str, ty)[1:]
+        res.headers.append("Link", f"</redfish/v1/JsonSchemas/{name}.json>; rel=describedby")

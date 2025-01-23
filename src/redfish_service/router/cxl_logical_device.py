@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.cxl_logical_device import CxlLogicalDevice, CxlLogicalDeviceOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -33,7 +33,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(CxlLogicalDevice, s.get(**b))
+    m = cast(CxlLogicalDevice, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

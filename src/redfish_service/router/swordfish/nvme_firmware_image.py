@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ...authenticate import authenticate
 from ...model.swordfish.nvme_firmware_image import NvmeFirmwareImage
 from ...service import Service
-from ...util import get_service
+from ...util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -46,4 +46,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(NvmeFirmwareImage, s.get(**b))
+    m = cast(NvmeFirmwareImage, s.get(**b))
+    set_link_header(m, response)
+    return m

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.storage_collection import StorageCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,7 +14,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> StorageCollection:
     s: Service = get_service(StorageCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(StorageCollection, s.get(**b))
+    m = cast(StorageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get("/redfish/v1/Systems/{computer_system_id}/Storage", response_model_exclude_none=True)
@@ -26,7 +28,9 @@ async def get2(computer_system_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-    return cast(StorageCollection, s.get(**b))
+    m = cast(StorageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -44,7 +48,9 @@ async def get3(resource_block_id: str, request: Request, response: Response) -> 
         "request": request,
         "response": response,
     }
-    return cast(StorageCollection, s.get(**b))
+    m = cast(StorageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -65,7 +71,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(StorageCollection, s.get(**b))
+    m = cast(StorageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -81,7 +89,9 @@ async def get5(resource_block_id: str, request: Request, response: Response) -> 
         "request": request,
         "response": response,
     }
-    return cast(StorageCollection, s.get(**b))
+    m = cast(StorageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -102,4 +112,6 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(StorageCollection, s.get(**b))
+    m = cast(StorageCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

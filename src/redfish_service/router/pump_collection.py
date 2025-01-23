@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.pump_collection import PumpCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -22,7 +22,9 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Pu
         "request": request,
         "response": response,
     }
-    return cast(PumpCollection, s.get(**b))
+    m = cast(PumpCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -40,7 +42,9 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Pu
         "request": request,
         "response": response,
     }
-    return cast(PumpCollection, s.get(**b))
+    m = cast(PumpCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -58,7 +62,9 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Pu
         "request": request,
         "response": response,
     }
-    return cast(PumpCollection, s.get(**b))
+    m = cast(PumpCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -70,4 +76,6 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Pu
 async def get4(chassis_id: str, request: Request, response: Response) -> PumpCollection:
     s: Service = get_service(PumpCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(PumpCollection, s.get(**b))
+    m = cast(PumpCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

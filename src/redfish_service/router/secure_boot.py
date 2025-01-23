@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.secure_boot import ResetKeysRequest, SecureBoot, SecureBootOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(computer_system_id: str, request: Request, response: Response) ->
         "request": request,
         "response": response,
     }
-    return cast(SecureBoot, s.get(**b))
+    m = cast(SecureBoot, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -81,7 +83,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(SecureBoot, s.get(**b))
+    m = cast(SecureBoot, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -149,7 +153,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(SecureBoot, s.get(**b))
+    m = cast(SecureBoot, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

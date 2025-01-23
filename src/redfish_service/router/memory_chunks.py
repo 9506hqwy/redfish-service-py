@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.memory_chunks import MemoryChunks, MemoryChunksOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -56,7 +56,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(MemoryChunks, s.get(**b))
+    m = cast(MemoryChunks, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -130,7 +132,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(MemoryChunks, s.get(**b))
+    m = cast(MemoryChunks, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -208,7 +212,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(MemoryChunks, s.get(**b))
+    m = cast(MemoryChunks, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -288,7 +294,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(MemoryChunks, s.get(**b))
+    m = cast(MemoryChunks, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

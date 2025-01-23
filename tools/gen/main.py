@@ -936,7 +936,7 @@ def write_imports_router_to(
     w.write(
         f"from {parent}model.redfish_error import RedfishError\n"
         f"from {parent}service import Service, ServiceCollection\n"
-        f"from {parent}util import get_service, get_service_collection\n"
+        f"from {parent}util import get_service, get_service_collection, set_link_header\n"
     )
     w.write(f"from {parent}authenticate import authenticate\n")
     w.write("\n")
@@ -1037,7 +1037,9 @@ def write_routers(
                                 f"async def get{index}({args}) -> {c.cls_name}:\n",
                                 f"    s: Service = get_service({c.cls_name}, request)\n",
                                 f"    b: dict[str, Any] = {{{body}}}\n",
-                                f"    return cast({c.cls_name}, s.get(**b))\n",
+                                f"    m = cast({c.cls_name}, s.get(**b))\n",
+                                "    set_link_header(m, response)\n",
+                                "    return m\n",
                             ]
                         )
 

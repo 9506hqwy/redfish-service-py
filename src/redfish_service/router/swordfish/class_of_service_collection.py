@@ -6,7 +6,7 @@ from ...authenticate import authenticate
 from ...model.swordfish.class_of_service_collection import ClassOfServiceCollection
 from ...model.swordfish.line_of_service import LineOfService, LineOfServiceOnCreate
 from ...service import Service, ServiceCollection
-from ...util import get_service, get_service_collection
+from ...util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -28,7 +28,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(ClassOfServiceCollection, s.get(**b))
+    m = cast(ClassOfServiceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -71,7 +73,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(ClassOfServiceCollection, s.get(**b))
+    m = cast(ClassOfServiceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

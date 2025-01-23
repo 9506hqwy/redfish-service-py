@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.certificate import Certificate, CertificateOnCreate
 from ..model.certificate_collection import CertificateCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -28,7 +28,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -62,7 +64,9 @@ async def post1(
 async def get2(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -84,7 +88,9 @@ async def post2(request: Request, response: Response, body: CertificateOnCreate)
 async def get3(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/AccountService/LDAP/Certificates", response_model_exclude_none=True)
@@ -115,7 +121,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -154,7 +162,9 @@ async def post4(
 async def get5(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -183,7 +193,9 @@ async def post5(request: Request, response: Response, body: CertificateOnCreate)
 async def get6(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -219,7 +231,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -260,7 +274,9 @@ async def post7(
 async def get8(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -296,7 +312,9 @@ async def post8(
 async def get9(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -339,7 +357,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -380,7 +400,9 @@ async def post10(
 async def get11(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -416,7 +438,9 @@ async def post11(
 async def get12(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -452,7 +476,9 @@ async def post12(
 async def get13(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -492,7 +518,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -534,7 +562,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -582,7 +612,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -630,7 +662,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -683,7 +717,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -738,7 +774,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -787,7 +825,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -829,7 +869,9 @@ async def get21(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -869,7 +911,9 @@ async def get22(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -911,7 +955,9 @@ async def get23(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -959,7 +1005,9 @@ async def get24(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1007,7 +1055,9 @@ async def get25(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1055,7 +1105,9 @@ async def get26(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1103,7 +1155,9 @@ async def get27(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1156,7 +1210,9 @@ async def get28(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1206,7 +1262,9 @@ async def get29(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1259,7 +1317,9 @@ async def get30(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1309,7 +1369,9 @@ async def get31(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1357,7 +1419,9 @@ async def get32(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1410,7 +1474,9 @@ async def get33(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1460,7 +1526,9 @@ async def get34(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1513,7 +1581,9 @@ async def get35(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1563,7 +1633,9 @@ async def get36(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1616,7 +1688,9 @@ async def get37(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1671,7 +1745,9 @@ async def get38(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1728,7 +1804,9 @@ async def get39(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1785,7 +1863,9 @@ async def get40(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1842,7 +1922,9 @@ async def get41(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1894,7 +1976,9 @@ async def get42(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -1947,7 +2031,9 @@ async def get43(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2002,7 +2088,9 @@ async def get44(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2059,7 +2147,9 @@ async def get45(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2116,7 +2206,9 @@ async def get46(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2173,7 +2265,9 @@ async def get47(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2225,7 +2319,9 @@ async def get48(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2256,7 +2352,9 @@ async def post48(
 async def get49(chassis_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Chassis/{chassis_id}/Certificates", response_model_exclude_none=True)
@@ -2296,7 +2394,9 @@ async def get50(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2346,7 +2446,9 @@ async def get51(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2391,7 +2493,9 @@ async def get52(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2441,7 +2545,9 @@ async def get53(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2496,7 +2602,9 @@ async def get54(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2549,7 +2657,9 @@ async def get55(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2599,7 +2709,9 @@ async def get56(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2654,7 +2766,9 @@ async def get57(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2706,7 +2820,9 @@ async def get58(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2754,7 +2870,9 @@ async def get59(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2802,7 +2920,9 @@ async def get60(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2855,7 +2975,9 @@ async def get61(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2910,7 +3032,9 @@ async def get62(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -2965,7 +3089,9 @@ async def get63(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3020,7 +3146,9 @@ async def get64(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3059,7 +3187,9 @@ async def post64(
 async def get65(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3080,7 +3210,9 @@ async def post65(request: Request, response: Response, body: CertificateOnCreate
 async def get66(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/UpdateService/ClientCertificates", response_model_exclude_none=True)
@@ -3099,7 +3231,9 @@ async def post66(request: Request, response: Response, body: CertificateOnCreate
 async def get67(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Managers/{manager_id}/Certificates", response_model_exclude_none=True)
@@ -3137,7 +3271,9 @@ async def get68(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3180,7 +3316,9 @@ async def get69(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3228,7 +3366,9 @@ async def get70(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3269,7 +3409,9 @@ async def post70(
 async def get71(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3305,7 +3447,9 @@ async def post71(
 async def get72(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3341,7 +3485,9 @@ async def post72(
 async def get73(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3377,7 +3523,9 @@ async def post73(
 async def get74(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3413,7 +3561,9 @@ async def post74(
 async def get75(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3449,7 +3599,9 @@ async def post75(
 async def get76(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3492,7 +3644,9 @@ async def get77(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3539,7 +3693,9 @@ async def get78(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3581,7 +3737,9 @@ async def get79(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -3624,7 +3782,9 @@ async def get80(
         "request": request,
         "response": response,
     }
-    return cast(CertificateCollection, s.get(**b))
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

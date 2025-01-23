@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.outlet_group import OutletGroup, OutletGroupOnCreate
 from ..model.outlet_group_collection import OutletGroupCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -28,7 +28,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(OutletGroupCollection, s.get(**b))
+    m = cast(OutletGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -70,7 +72,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(OutletGroupCollection, s.get(**b))
+    m = cast(OutletGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -112,7 +116,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(OutletGroupCollection, s.get(**b))
+    m = cast(OutletGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -154,7 +160,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(OutletGroupCollection, s.get(**b))
+    m = cast(OutletGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

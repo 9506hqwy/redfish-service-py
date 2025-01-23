@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.triggers import Triggers, TriggersOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -29,7 +29,9 @@ async def delete1(triggers_id: str, request: Request, response: Response) -> Non
 async def get1(triggers_id: str, request: Request, response: Response) -> Triggers:
     s: Service = get_service(Triggers, request)
     b: dict[str, Any] = {"triggers_id": triggers_id, "request": request, "response": response}
-    return cast(Triggers, s.get(**b))
+    m = cast(Triggers, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

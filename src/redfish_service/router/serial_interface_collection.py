@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.serial_interface_collection import SerialInterfaceCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -16,4 +16,6 @@ router = APIRouter()
 async def get1(manager_id: str, request: Request, response: Response) -> SerialInterfaceCollection:
     s: Service = get_service(SerialInterfaceCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(SerialInterfaceCollection, s.get(**b))
+    m = cast(SerialInterfaceCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

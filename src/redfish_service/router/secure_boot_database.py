@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.secure_boot_database import ResetKeysRequest, SecureBootDatabase
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -29,7 +29,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(SecureBootDatabase, s.get(**b))
+    m = cast(SecureBootDatabase, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -79,7 +81,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(SecureBootDatabase, s.get(**b))
+    m = cast(SecureBootDatabase, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -131,7 +135,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(SecureBootDatabase, s.get(**b))
+    m = cast(SecureBootDatabase, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

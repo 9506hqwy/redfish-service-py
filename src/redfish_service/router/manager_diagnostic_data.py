@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.manager_diagnostic_data import ManagerDiagnosticData
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,4 +18,6 @@ router = APIRouter()
 async def get1(manager_id: str, request: Request, response: Response) -> ManagerDiagnosticData:
     s: Service = get_service(ManagerDiagnosticData, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(ManagerDiagnosticData, s.get(**b))
+    m = cast(ManagerDiagnosticData, s.get(**b))
+    set_link_header(m, response)
+    return m

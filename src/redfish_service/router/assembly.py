@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.assembly import Assembly, AssemblyOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -15,7 +15,9 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
@@ -52,7 +54,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -94,7 +98,9 @@ async def get3(chassis_id: str, drive_id: str, request: Request, response: Respo
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -134,7 +140,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -180,7 +188,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -231,7 +241,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -280,7 +292,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -326,7 +340,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -377,7 +393,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -425,7 +443,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -469,7 +489,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -518,7 +540,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -564,7 +588,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -613,7 +639,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -659,7 +687,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -703,7 +733,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -747,7 +779,9 @@ async def get17(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -791,7 +825,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -835,7 +871,9 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -884,7 +922,9 @@ async def get20(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -937,7 +977,9 @@ async def get21(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -985,7 +1027,9 @@ async def get22(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1034,7 +1078,9 @@ async def get23(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1087,7 +1133,9 @@ async def get24(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1140,7 +1188,9 @@ async def get25(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1193,7 +1243,9 @@ async def get26(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1250,7 +1302,9 @@ async def get27(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1300,7 +1354,9 @@ async def get28(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1349,7 +1405,9 @@ async def get29(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1402,7 +1460,9 @@ async def get30(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1455,7 +1515,9 @@ async def get31(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1508,7 +1570,9 @@ async def get32(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1565,7 +1629,9 @@ async def get33(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1620,7 +1686,9 @@ async def get34(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1673,7 +1741,9 @@ async def get35(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1730,7 +1800,9 @@ async def get36(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1785,7 +1857,9 @@ async def get37(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1836,7 +1910,9 @@ async def get38(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1887,7 +1963,9 @@ async def get39(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1938,7 +2016,9 @@ async def get40(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -1991,7 +2071,9 @@ async def get41(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2046,7 +2128,9 @@ async def get42(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2099,7 +2183,9 @@ async def get43(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2150,7 +2236,9 @@ async def get44(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2203,7 +2291,9 @@ async def get45(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2258,7 +2348,9 @@ async def get46(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2306,7 +2398,9 @@ async def get47(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2350,7 +2444,9 @@ async def get48(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2392,7 +2488,9 @@ async def get49(chassis_id: str, fan_id: str, request: Request, response: Respon
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2430,7 +2528,9 @@ async def get50(chassis_id: str, fan_id: str, request: Request, response: Respon
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2470,7 +2570,9 @@ async def get51(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2514,7 +2616,9 @@ async def get52(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2558,7 +2662,9 @@ async def get53(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2596,7 +2702,9 @@ async def get54(chassis_id: str, header_id: str, request: Request, response: Res
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2633,7 +2741,9 @@ async def get55(cooling_unit_id: str, request: Request, response: Response) -> A
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2669,7 +2779,9 @@ async def get56(cooling_unit_id: str, request: Request, response: Response) -> A
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2705,7 +2817,9 @@ async def get57(cooling_unit_id: str, request: Request, response: Response) -> A
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2744,7 +2858,9 @@ async def get58(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2788,7 +2904,9 @@ async def get59(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2832,7 +2950,9 @@ async def get60(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2876,7 +2996,9 @@ async def get61(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2920,7 +3042,9 @@ async def get62(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -2964,7 +3088,9 @@ async def get63(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3008,7 +3134,9 @@ async def get64(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3053,7 +3181,9 @@ async def get65(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3100,7 +3230,9 @@ async def get66(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3146,7 +3278,9 @@ async def get67(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3191,7 +3325,9 @@ async def get68(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3238,7 +3374,9 @@ async def get69(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3284,7 +3422,9 @@ async def get70(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3329,7 +3469,9 @@ async def get71(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -3376,7 +3518,9 @@ async def get72(
         "request": request,
         "response": response,
     }
-    return cast(Assembly, s.get(**b))
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

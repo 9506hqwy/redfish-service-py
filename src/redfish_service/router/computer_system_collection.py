@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.computer_system import ComputerSystem, ComputerSystemOnCreate
 from ..model.computer_system_collection import ComputerSystemCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> ComputerSystemCollection:
     s: Service = get_service(ComputerSystemCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(ComputerSystemCollection, s.get(**b))
+    m = cast(ComputerSystemCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Systems", response_model_exclude_none=True)

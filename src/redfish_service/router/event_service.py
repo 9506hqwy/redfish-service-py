@@ -10,7 +10,7 @@ from ..model.event_service import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -20,7 +20,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> EventService:
     s: Service = get_service(EventService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(EventService, s.get(**b))
+    m = cast(EventService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/EventService", response_model_exclude_none=True)

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.filter_collection import FilterCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -27,7 +27,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -43,7 +45,9 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Fi
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -64,7 +68,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -85,7 +91,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -103,7 +111,9 @@ async def get5(cooling_unit_id: str, request: Request, response: Response) -> Fi
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -124,7 +134,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -145,7 +157,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -163,7 +177,9 @@ async def get8(cooling_unit_id: str, request: Request, response: Response) -> Fi
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -184,7 +200,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -205,4 +223,6 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(FilterCollection, s.get(**b))
+    m = cast(FilterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.json_schema_file import JsonSchemaFile
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,4 +18,6 @@ async def get1(json_schema_file_id: str, request: Request, response: Response) -
         "request": request,
         "response": response,
     }
-    return cast(JsonSchemaFile, s.get(**b))
+    m = cast(JsonSchemaFile, s.get(**b))
+    set_link_header(m, response)
+    return m

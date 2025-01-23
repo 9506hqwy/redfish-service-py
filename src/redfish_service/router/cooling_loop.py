@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.cooling_loop import CoolingLoop, CoolingLoopOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -23,7 +23,9 @@ async def get1(cooling_loop_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-    return cast(CoolingLoop, s.get(**b))
+    m = cast(CoolingLoop, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

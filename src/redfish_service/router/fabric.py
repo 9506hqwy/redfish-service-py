@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.fabric import Fabric, FabricOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -15,7 +15,9 @@ router = APIRouter()
 async def get1(fabric_id: str, request: Request, response: Response) -> Fabric:
     s: Service = get_service(Fabric, request)
     b: dict[str, Any] = {"fabric_id": fabric_id, "request": request, "response": response}
-    return cast(Fabric, s.get(**b))
+    m = cast(Fabric, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/Fabrics/{fabric_id}", response_model_exclude_none=True)

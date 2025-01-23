@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.network_port import NetworkPort, NetworkPortOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -33,7 +33,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(NetworkPort, s.get(**b))
+    m = cast(NetworkPort, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

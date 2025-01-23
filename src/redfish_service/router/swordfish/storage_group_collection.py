@@ -6,7 +6,7 @@ from ...authenticate import authenticate
 from ...model.swordfish.storage_group import StorageGroup, StorageGroupOnCreate
 from ...model.swordfish.storage_group_collection import StorageGroupCollection
 from ...service import Service, ServiceCollection
-from ...util import get_service, get_service_collection
+from ...util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -28,7 +28,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(StorageGroupCollection, s.get(**b))
+    m = cast(StorageGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -71,7 +73,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(StorageGroupCollection, s.get(**b))
+    m = cast(StorageGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(
@@ -106,7 +110,9 @@ async def post2(
 async def get3(storage_id: str, request: Request, response: Response) -> StorageGroupCollection:
     s: Service = get_service(StorageGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(StorageGroupCollection, s.get(**b))
+    m = cast(StorageGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Storage/{storage_id}/StorageGroups", response_model_exclude_none=True)
@@ -145,7 +151,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(StorageGroupCollection, s.get(**b))
+    m = cast(StorageGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

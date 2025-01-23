@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.control import Control, ControlOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(chassis_id: str, control_id: str, request: Request, response: Res
         "request": request,
         "response": response,
     }
-    return cast(Control, s.get(**b))
+    m = cast(Control, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

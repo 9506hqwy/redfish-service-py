@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.usb_controller_collection import UsbControllerCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,4 +24,6 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(UsbControllerCollection, s.get(**b))
+    m = cast(UsbControllerCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

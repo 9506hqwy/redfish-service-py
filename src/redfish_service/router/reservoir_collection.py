@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.reservoir_collection import ReservoirCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Re
         "request": request,
         "response": response,
     }
-    return cast(ReservoirCollection, s.get(**b))
+    m = cast(ReservoirCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -42,7 +44,9 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Re
         "request": request,
         "response": response,
     }
-    return cast(ReservoirCollection, s.get(**b))
+    m = cast(ReservoirCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -60,4 +64,6 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Re
         "request": request,
         "response": response,
     }
-    return cast(ReservoirCollection, s.get(**b))
+    m = cast(ReservoirCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.network_adapter_collection import NetworkAdapterCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,4 +14,6 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> NetworkAdapterCollection:
     s: Service = get_service(NetworkAdapterCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(NetworkAdapterCollection, s.get(**b))
+    m = cast(NetworkAdapterCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

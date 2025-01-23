@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.account_service import AccountService, AccountServiceOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -15,7 +15,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> AccountService:
     s: Service = get_service(AccountService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(AccountService, s.get(**b))
+    m = cast(AccountService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/AccountService", response_model_exclude_none=True)
@@ -37,7 +39,9 @@ async def patch1(
 async def get2(manager_id: str, request: Request, response: Response) -> AccountService:
     s: Service = get_service(AccountService, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    return cast(AccountService, s.get(**b))
+    m = cast(AccountService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

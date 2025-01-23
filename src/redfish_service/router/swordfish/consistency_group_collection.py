@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ...model.swordfish.consistency_group_collection import ConsistencyGroupCollection
 from ...service import Service
-from ...util import get_service
+from ...util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -18,7 +18,9 @@ async def get1(
 ) -> ConsistencyGroupCollection:
     s: Service = get_service(ConsistencyGroupCollection, request)
     b: dict[str, Any] = {"storage_id": storage_id, "request": request, "response": response}
-    return cast(ConsistencyGroupCollection, s.get(**b))
+    m = cast(ConsistencyGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -39,7 +41,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(ConsistencyGroupCollection, s.get(**b))
+    m = cast(ConsistencyGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -59,7 +63,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(ConsistencyGroupCollection, s.get(**b))
+    m = cast(ConsistencyGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -80,4 +86,6 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(ConsistencyGroupCollection, s.get(**b))
+    m = cast(ConsistencyGroupCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

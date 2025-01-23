@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.endpoint import Endpoint, EndpointOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -39,7 +39,9 @@ async def get1(fabric_id: str, endpoint_id: str, request: Request, response: Res
         "request": request,
         "response": response,
     }
-    return cast(Endpoint, s.get(**b))
+    m = cast(Endpoint, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -96,7 +98,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(Endpoint, s.get(**b))
+    m = cast(Endpoint, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -153,7 +157,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(Endpoint, s.get(**b))
+    m = cast(Endpoint, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.session_service import SessionService, SessionServiceOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -15,7 +15,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> SessionService:
     s: Service = get_service(SessionService, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(SessionService, s.get(**b))
+    m = cast(SessionService, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch("/redfish/v1/SessionService", response_model_exclude_none=True)

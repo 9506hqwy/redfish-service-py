@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.cooling_unit import CoolingUnit, CoolingUnitOnUpdate, SetModeRequest
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(cooling_unit_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-    return cast(CoolingUnit, s.get(**b))
+    m = cast(CoolingUnit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -78,7 +80,9 @@ async def get2(cooling_unit_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-    return cast(CoolingUnit, s.get(**b))
+    m = cast(CoolingUnit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -133,7 +137,9 @@ async def get3(cooling_unit_id: str, request: Request, response: Response) -> Co
         "request": request,
         "response": response,
     }
-    return cast(CoolingUnit, s.get(**b))
+    m = cast(CoolingUnit, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

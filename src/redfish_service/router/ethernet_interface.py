@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.ethernet_interface import EthernetInterface, EthernetInterfaceOnUpdate
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -46,7 +46,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -108,7 +110,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -170,7 +174,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -242,7 +248,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -306,7 +314,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -378,7 +388,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -442,7 +454,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -514,7 +528,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -588,7 +604,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(
@@ -666,7 +684,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(EthernetInterface, s.get(**b))
+    m = cast(EthernetInterface, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.processor_collection import ProcessorCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -24,7 +24,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -45,7 +47,9 @@ async def get2(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -71,7 +75,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -92,7 +98,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -118,7 +126,9 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -139,7 +149,9 @@ async def get6(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -165,7 +177,9 @@ async def get7(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -193,7 +207,9 @@ async def get8(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -214,7 +230,9 @@ async def get9(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -240,7 +258,9 @@ async def get10(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -261,7 +281,9 @@ async def get11(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -287,7 +309,9 @@ async def get12(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -315,7 +339,9 @@ async def get13(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -336,7 +362,9 @@ async def get14(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -362,7 +390,9 @@ async def get15(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -390,7 +420,9 @@ async def get16(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Processors", response_model_exclude_none=True)
@@ -398,7 +430,9 @@ async def get16(
 async def get17(chassis_id: str, request: Request, response: Response) -> ProcessorCollection:
     s: Service = get_service(ProcessorCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -419,7 +453,9 @@ async def get18(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -441,4 +477,6 @@ async def get19(
         "request": request,
         "response": response,
     }
-    return cast(ProcessorCollection, s.get(**b))
+    m = cast(ProcessorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

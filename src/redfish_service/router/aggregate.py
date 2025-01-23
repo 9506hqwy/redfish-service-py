@@ -11,7 +11,7 @@ from ..model.aggregate import (
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -35,7 +35,9 @@ async def delete1(aggregate_id: str, request: Request, response: Response) -> No
 async def get1(aggregate_id: str, request: Request, response: Response) -> Aggregate:
     s: Service = get_service(Aggregate, request)
     b: dict[str, Any] = {"aggregate_id": aggregate_id, "request": request, "response": response}
-    return cast(Aggregate, s.get(**b))
+    m = cast(Aggregate, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post(

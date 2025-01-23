@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.power_domain import PowerDomain, PowerDomainOnCreate
 from ..model.power_domain_collection import PowerDomainCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(facility_id: str, request: Request, response: Response) -> PowerDomainCollection:
     s: Service = get_service(PowerDomainCollection, request)
     b: dict[str, Any] = {"facility_id": facility_id, "request": request, "response": response}
-    return cast(PowerDomainCollection, s.get(**b))
+    m = cast(PowerDomainCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/Facilities/{facility_id}/PowerDomains", response_model_exclude_none=True)

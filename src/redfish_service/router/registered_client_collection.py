@@ -6,7 +6,7 @@ from ..authenticate import authenticate
 from ..model.registered_client import RegisteredClient, RegisteredClientOnCreate
 from ..model.registered_client_collection import RegisteredClientCollection
 from ..service import Service, ServiceCollection
-from ..util import get_service, get_service_collection
+from ..util import get_service, get_service_collection, set_link_header
 
 router = APIRouter()
 
@@ -16,7 +16,9 @@ router = APIRouter()
 async def get1(request: Request, response: Response) -> RegisteredClientCollection:
     s: Service = get_service(RegisteredClientCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
-    return cast(RegisteredClientCollection, s.get(**b))
+    m = cast(RegisteredClientCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.post("/redfish/v1/RegisteredClients", response_model_exclude_none=True)

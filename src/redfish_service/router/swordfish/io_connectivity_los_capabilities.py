@@ -8,7 +8,7 @@ from ...model.swordfish.io_connectivity_los_capabilities import (
     IoConnectivityLosCapabilitiesOnUpdate,
 )
 from ...service import Service
-from ...util import get_service
+from ...util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -30,7 +30,9 @@ async def get1(
         "request": request,
         "response": response,
     }
-    return cast(IoConnectivityLosCapabilities, s.get(**b))
+    m = cast(IoConnectivityLosCapabilities, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.patch(

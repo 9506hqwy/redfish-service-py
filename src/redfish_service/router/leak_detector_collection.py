@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Response
 
 from ..model.leak_detector_collection import LeakDetectorCollection
 from ..service import Service
-from ..util import get_service
+from ..util import get_service, set_link_header
 
 router = APIRouter()
 
@@ -14,7 +14,9 @@ router = APIRouter()
 async def get1(chassis_id: str, request: Request, response: Response) -> LeakDetectorCollection:
     s: Service = get_service(LeakDetectorCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(LeakDetectorCollection, s.get(**b))
+    m = cast(LeakDetectorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -28,7 +30,9 @@ async def get1(chassis_id: str, request: Request, response: Response) -> LeakDet
 async def get2(chassis_id: str, request: Request, response: Response) -> LeakDetectorCollection:
     s: Service = get_service(LeakDetectorCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
-    return cast(LeakDetectorCollection, s.get(**b))
+    m = cast(LeakDetectorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -48,7 +52,9 @@ async def get3(
         "request": request,
         "response": response,
     }
-    return cast(LeakDetectorCollection, s.get(**b))
+    m = cast(LeakDetectorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -68,7 +74,9 @@ async def get4(
         "request": request,
         "response": response,
     }
-    return cast(LeakDetectorCollection, s.get(**b))
+    m = cast(LeakDetectorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
 
 
 @router.get(
@@ -88,4 +96,6 @@ async def get5(
         "request": request,
         "response": response,
     }
-    return cast(LeakDetectorCollection, s.get(**b))
+    m = cast(LeakDetectorCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
