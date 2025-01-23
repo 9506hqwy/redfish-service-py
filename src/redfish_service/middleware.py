@@ -78,6 +78,18 @@ class AllowHeaderMiddleware:
         await self.app(scope, receive, decorated_send)
 
 
+class CacheControlHeaderMiddleware(BaseHTTPMiddleware):
+    HEADER_NAME: Final[str] = "Cache-Control"
+
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
+        res = await call_next(request)
+
+        if not res.headers.get(self.HEADER_NAME, None):
+            res.headers.append(self.HEADER_NAME, "no-cache")
+
+        return res
+
+
 class ContentTypeHeaderMiddleware:
     HEADER_NAME: Final[str] = "Content-Type"
     SUPPORTED_MIMES: Final[list[str]] = ["application/json"]

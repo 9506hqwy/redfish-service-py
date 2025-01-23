@@ -18,6 +18,7 @@ from .exception import RedfishError as RedfishException
 from .middleware import (
     AcceptHeaderMiddleware,
     AllowHeaderMiddleware,
+    CacheControlHeaderMiddleware,
     ContentTypeHeaderMiddleware,
     IfMatchHeaderMiddleware,
     OdataVersionHeaderMiddleware,
@@ -30,6 +31,7 @@ from .router import swordfish
 app = FastAPI()
 app.add_middleware(AcceptHeaderMiddleware)
 app.add_middleware(AllowHeaderMiddleware, app.router)
+app.add_middleware(CacheControlHeaderMiddleware)
 app.add_middleware(ContentTypeHeaderMiddleware)
 app.add_middleware(IfMatchHeaderMiddleware)
 app.add_middleware(OdataVersionHeaderMiddleware)
