@@ -1,4 +1,6 @@
 from ..model.account_service import AccountService
+from ..model.privileges import PrivilegeType
+from ..model.role import Role
 from ..model.role_collection import RoleCollection
 from ..model.service_root import ServiceRoot
 from ..model.session_collection import SessionCollection
@@ -37,6 +39,58 @@ def init_instances() -> None:
         }
     )
     instances.add(role_collection)
+
+    role_admin = Role.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": f"{PATH_ROLE_COLLECTION}/Administrator",
+            "assigned_privileges": [
+                PrivilegeType.LOGIN,
+                PrivilegeType.CONFIGURE_MANAGER,
+                PrivilegeType.CONFIGURE_USERS,
+                PrivilegeType.CONFIGURE_COMPONENTS,
+                PrivilegeType.CONFIGURE_SELF,
+            ],
+            "id": "Administrator",
+            "is_predefined": True,
+            "name": "Administrator",
+            "role_id": "Administrator",
+        }
+    )
+    instances.add(role_admin)
+
+    role_operator = Role.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": f"{PATH_ROLE_COLLECTION}/Operator",
+            "assigned_privileges": [
+                PrivilegeType.LOGIN,
+                PrivilegeType.CONFIGURE_COMPONENTS,
+                PrivilegeType.CONFIGURE_SELF,
+            ],
+            "id": "Operator",
+            "is_predefined": True,
+            "name": "Operator",
+            "role_id": "Operator",
+        }
+    )
+    instances.add(role_operator)
+
+    role_readonly = Role.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": f"{PATH_ROLE_COLLECTION}/ReadOnly",
+            "assigned_privileges": [
+                PrivilegeType.LOGIN,
+                PrivilegeType.CONFIGURE_SELF,
+            ],
+            "id": "ReadOnly",
+            "is_predefined": True,
+            "name": "ReadOnly",
+            "role_id": "ReadOnly",
+        }
+    )
+    instances.add(role_readonly)
 
     service_root = ServiceRoot.model_validate(
         {
