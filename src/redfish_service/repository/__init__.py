@@ -1,14 +1,18 @@
 from ..model.account_service import AccountService
+from ..model.manager_account import ManagerAccount
+from ..model.manager_account_collection import ManagerAccountCollection
 from ..model.privileges import PrivilegeType
 from ..model.role import Role
 from ..model.role_collection import RoleCollection
 from ..model.service_root import ServiceRoot
 from ..model.session_collection import SessionCollection
+from ..model.values import AccountTypes
 from ..util import create_etag
 from .instance import instances
 
 PATH_REDFISH = "/redfish/v1/"
 PATH_ACCOUNT_SERVICE = f"{PATH_REDFISH}AccountService"
+PATH_ACCOUNT_COLLECTION = f"{PATH_REDFISH}AccountService/Accounts"
 PATH_ROLE_COLLECTION = f"{PATH_REDFISH}AccountService/Roles"
 PATH_SESSION_COLLECTION = f"{PATH_REDFISH}SessionService/Sessions"
 
@@ -20,6 +24,9 @@ def init_instances() -> None:
         {
             "odata_etag": etag,
             "odata_id": PATH_ACCOUNT_SERVICE,
+            "accounts": {
+                "odata_id": PATH_ACCOUNT_COLLECTION,
+            },
             "id": "AccountService",
             "name": "Account Service",
             "roles": {
@@ -28,6 +35,29 @@ def init_instances() -> None:
         }
     )
     instances.add(account_service)
+
+    account_collection = ManagerAccountCollection.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": PATH_ACCOUNT_COLLECTION,
+            "members": [],
+            "members_odata_count": 0,
+            "name": "Account Collection",
+        }
+    )
+    instances.add(account_collection)
+
+    account_admin = ManagerAccount.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": f"{PATH_ACCOUNT_COLLECTION}/admin",
+            "account_types": [AccountTypes.REDFISH],
+            "id": "admin",
+            "name": "admin",
+        }
+    )
+    account_admin.extra_fields["password"] = "admin"  # noqa: S105
+    instances.add(account_admin)
 
     role_collection = RoleCollection.model_validate(
         {

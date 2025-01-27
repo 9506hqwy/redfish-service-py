@@ -7,6 +7,7 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseModel
 
 from .exception import ResourceAtUriUnauthorizedError
+from .model.manager_account import ManagerAccount
 from .model.session import Session
 from .repository import instances
 
@@ -38,8 +39,11 @@ def check_token_auth(token: str) -> bool:
 
 
 def check_basic_auth(username: str, password: str) -> bool:
-    # TODO: account management
-    return username == "admin" and password == "admin"  # noqa: S105
+    for account in instances.enum_by_type(ManagerAccount):
+        if account.name == username and account.extra_fields["password"] == password:
+            return True
+
+    return False
 
 
 def authenticate(f: Callable) -> Callable:
