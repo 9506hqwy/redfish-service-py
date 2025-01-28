@@ -12,7 +12,7 @@ def test_root() -> None:
 
 def test_odata() -> None:
     response = client.get("/redfish/v1/odata")
-    assert response.status_code == 501
+    assert response.status_code == 200
 
 
 def test_metadata() -> None:

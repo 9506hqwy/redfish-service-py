@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import cast
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
@@ -13,6 +14,7 @@ from .exception import (
     InvalidURIError,
     MalformedJsonError,
     OperationNotAllowedError,
+    ResourceNotFoundError,
 )
 from .exception import RedfishError as RedfishException
 from .middleware import (
@@ -23,6 +25,9 @@ from .middleware import (
     IfMatchHeaderMiddleware,
     OdataVersionHeaderMiddleware,
 )
+from .model.service_root import ServiceRoot
+from .odata import OdataService, OdataServiceValue
+from .repository import instances
 from .router import swordfish
 
 ## TODO: 7 Service requests
@@ -89,8 +94,18 @@ async def root() -> dict[str, str]:
 
 
 @app.get("/redfish/v1/odata", response_model_exclude_none=True)
-async def odata() -> dict[str, str]:
-    raise InternalErrorError(HTTPStatus.NOT_IMPLEMENTED)
+async def odata() -> OdataService:
+    root = instances.find_by_type(ServiceRoot)
+    if root is None:
+        raise ResourceNotFoundError("ServiceRoot", "ServiceRoot")
+
+    response = OdataService(odata_context="/redfish/v1/$metadata", value=[])
+    response.value.append(OdataServiceValue(name="Service", url=root.odata_id))
+
+    if id := root.account_service:
+        response.value.append(OdataServiceValue(name="Account", url=cast(str, id.odata_id)))
+
+    return response
 
 
 @app.get("/redfish/v1/$metadata", response_model_exclude_none=True)
