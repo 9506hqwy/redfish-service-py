@@ -14,6 +14,7 @@ from .odata import OdataMetadata
 FASTAPI_PATH: Final[list[str]] = [
     "/docs",
     "/openapi.json",
+    "/redoc",
 ]
 
 REDFISH_XML_PATH: Final[list[str]] = [
