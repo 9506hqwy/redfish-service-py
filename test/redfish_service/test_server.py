@@ -17,7 +17,7 @@ def test_odata() -> None:
 
 def test_metadata() -> None:
     response = client.get("/redfish/v1/$metadata")
-    assert response.status_code == 501
+    assert response.status_code == 200
 
 
 def test_404() -> None:

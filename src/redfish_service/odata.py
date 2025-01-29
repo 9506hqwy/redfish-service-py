@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from fastapi import Response
 from pydantic import BaseModel, Field
 
 from .model import RedfishModel
@@ -14,3 +15,7 @@ class OdataServiceValue(BaseModel):
     name: str = Field(serialization_alias="name")
     kind: str = Field(serialization_alias="kind", default="Singleton")
     url: str = Field(serialization_alias="url")
+
+
+class OdataMetadata(Response):
+    media_type = "application/xml"

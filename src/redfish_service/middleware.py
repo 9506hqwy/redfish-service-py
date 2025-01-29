@@ -9,16 +9,22 @@ from starlette.routing import Match, Route, Router
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from .exception import GeneralErrorError, PreconditionFailedError, PreconditionRequiredError
+from .odata import OdataMetadata
 
 FASTAPI_PATH: Final[list[str]] = [
     "/docs",
     "/openapi.json",
 ]
 
+REDFISH_XML_PATH: Final[list[str]] = [
+    "/redfish/v1/$metadata",
+]
+
 
 class AcceptHeaderMiddleware:
     HEADER_NAME: Final[str] = "Accept"
-    SUPPORTED_MIMES: Final[list[str]] = ["*/*", "application/*", "application/json"]
+    SUPPORTED_JSON_MIMES: Final[list[str]] = ["*/*", "application/*", "application/json"]
+    SUPPORTED_XML_MIMES: Final[list[str]] = ["*/*", "application/*", "application/xml"]
 
     def __init__(self, app: ASGIApp) -> None:
         self.app = app
@@ -28,13 +34,23 @@ class AcceptHeaderMiddleware:
             await self.app(scope, receive, send)
             return
 
-        if scope["path"] in FASTAPI_PATH:
+        path = scope["path"]
+        if path in FASTAPI_PATH:
             await self.app(scope, receive, send)
             return
 
         headers = Headers(scope=scope)
-        if v := headers.getlist(self.HEADER_NAME):
-            if not supported_headers(self.SUPPORTED_MIMES, v):
+
+        if path in REDFISH_XML_PATH:
+            if v := headers.getlist(self.HEADER_NAME):
+                if not supported_headers(self.SUPPORTED_XML_MIMES, v):
+                    exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
+                    err = OdataMetadata(status_code=exc.status_code)
+                    await err(scope, receive, send)
+                    return
+
+        elif v := headers.getlist(self.HEADER_NAME):
+            if not supported_headers(self.SUPPORTED_JSON_MIMES, v):
                 exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
                 res = JSONResponse(
                     exc.error.model_dump(exclude_none=True), status_code=exc.status_code

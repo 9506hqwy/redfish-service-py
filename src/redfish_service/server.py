@@ -1,4 +1,3 @@
-from http import HTTPStatus
 from typing import cast
 
 from fastapi import FastAPI
@@ -26,7 +25,7 @@ from .middleware import (
     OdataVersionHeaderMiddleware,
 )
 from .model.service_root import ServiceRoot
-from .odata import OdataService, OdataServiceValue
+from .odata import OdataMetadata, OdataService, OdataServiceValue
 from .repository import instances
 from .router import swordfish
 
@@ -109,5 +108,36 @@ async def odata() -> OdataService:
 
 
 @app.get("/redfish/v1/$metadata", response_model_exclude_none=True)
-async def metadata() -> dict[str, str]:
-    raise InternalErrorError(HTTPStatus.NOT_IMPLEMENTED)
+async def metadata() -> OdataMetadata:
+    # TODO:
+    models: list[str] = [
+        "AccountService.v1_17_0.AccountService",
+        "ManagerAccount.v1_13_0.ManagerAccount",
+        "ManagerAccountCollection.ManagerAccountCollection",
+        "Role.v1_3_3.Role",
+        "RoleCollection.RoleCollection",
+        "ServiceRoot.v1_17_0.ServiceRoot",
+        "Session.v1_8_0.Session",
+        "SessionCollection.SessionCollection",
+    ]
+
+    content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    content += '<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">\n'
+    for model in models:
+        m = model.split(".")
+        content += f'  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/{m[0]}_v1.xml">\n'
+        content += f'    <edmx:Include Namespace="{m[0]}"/>\n'
+        if len(m) > 2:
+            content += f'    <edmx:Include Namespace="{m[0]}.{m[1]}"/>\n'
+        content += "  </edmx:Reference>\n"
+
+    content += "  <edmx:DataServices>\n"
+    content += '    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Service">\n'
+    content += (
+        '      <EntityContainer Name="Service" Extends="ServiceRoot.v1_17_0.ServiceContainer"/>\n'
+    )
+    content += "    </Schema>\n"
+    content += "  </edmx:DataServices>\n"
+
+    content += "</edmx:Edmx>\n"
+    return OdataMetadata(content=content)
