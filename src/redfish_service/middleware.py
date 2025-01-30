@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import Final
 
 from starlette.datastructures import Headers, MutableHeaders
-from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.middleware.base import BaseHTTPMiddleware, DispatchFunction, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Match, Route, Router
@@ -78,6 +78,8 @@ class AllowHeaderMiddleware:
             await self.app(scope, receive, send)
             return
 
+        methods = get_methods(scope, self.router)
+
         async def decorated_send(message: Message) -> None:
             if message["type"] == "http.response.start":
                 headers = MutableHeaders(scope=message)
@@ -85,12 +87,6 @@ class AllowHeaderMiddleware:
                     headers.append(self.HEADER_NAME, ",".join(methods))
 
             await send(message)
-
-        methods: set[str] = set()
-        for route in (r for r in self.router.routes if isinstance(r, Route)):
-            match, _ = route.matches(scope)
-            if match != Match.NONE and route.methods:
-                methods.update(route.methods)
 
         await self.app(scope, receive, decorated_send)
 
@@ -141,8 +137,16 @@ class ContentTypeHeaderMiddleware:
 
 
 class IfMatchHeaderMiddleware(BaseHTTPMiddleware):
+    def __init__(
+        self, app: ASGIApp, router: Router, dispatch: DispatchFunction | None = None
+    ) -> None:
+        self.router = router
+        super().__init__(app, dispatch)
+
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
-        if request.method in ["PATCH", "PUT"]:
+        methods = get_methods(request.scope, self.router)
+
+        if methods in ["PATCH", "PUT"] and request.method in ["PATCH", "PUT"]:
             if not request.headers.get("If-Match", None):
                 exc = PreconditionRequiredError()
                 return JSONResponse(
@@ -186,6 +190,16 @@ class OdataVersionHeaderMiddleware:
                 return
 
         await self.app(scope, receive, decorated_send)
+
+
+def get_methods(scope: Scope, router: Router) -> set[str]:
+    methods: set[str] = set()
+    for route in (r for r in router.routes if isinstance(r, Route)):
+        match, _ = route.matches(scope)
+        if match != Match.NONE and route.methods:
+            methods.update(route.methods)
+
+    return methods
 
 
 def supported_headers(supported: list[str], values: list[str]) -> bool:
