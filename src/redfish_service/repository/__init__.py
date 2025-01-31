@@ -36,29 +36,6 @@ def init_instances() -> None:
     )
     instances.add(account_service)
 
-    account_collection = ManagerAccountCollection.model_validate(
-        {
-            "odata_etag": etag,
-            "odata_id": PATH_ACCOUNT_COLLECTION,
-            "members": [],
-            "members_odata_count": 0,
-            "name": "Account Collection",
-        }
-    )
-    instances.add(account_collection)
-
-    account_admin = ManagerAccount.model_validate(
-        {
-            "odata_etag": etag,
-            "odata_id": f"{PATH_ACCOUNT_COLLECTION}/admin",
-            "account_types": [AccountTypes.REDFISH],
-            "id": "admin",
-            "name": "admin",
-        }
-    )
-    account_admin.extra_fields["password"] = "admin"  # noqa: S105
-    instances.add(account_admin)
-
     role_collection = RoleCollection.model_validate(
         {
             "odata_etag": etag,
@@ -121,6 +98,30 @@ def init_instances() -> None:
         }
     )
     instances.add(role_readonly)
+
+    account_collection = ManagerAccountCollection.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": PATH_ACCOUNT_COLLECTION,
+            "members": [],
+            "members_odata_count": 0,
+            "name": "Account Collection",
+        }
+    )
+    instances.add(account_collection)
+
+    account_admin = ManagerAccount.model_validate(
+        {
+            "odata_etag": etag,
+            "odata_id": f"{PATH_ACCOUNT_COLLECTION}/admin",
+            "account_types": [AccountTypes.REDFISH],
+            "id": "admin",
+            "name": "admin",
+            "role_id": role_admin.id,
+        }
+    )
+    account_admin.extra_fields["password"] = "admin"  # noqa: S105
+    instances.add(account_admin)
 
     service_root = ServiceRoot.model_validate(
         {

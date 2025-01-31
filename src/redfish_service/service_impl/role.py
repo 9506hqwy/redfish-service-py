@@ -3,7 +3,7 @@ from typing import Any, cast
 
 from fastapi import Response
 
-from ..exception import ResourceNotFoundError
+from ..exception import GeneralErrorError, ResourceNotFoundError
 from ..model.role import Role, RoleOnUpdate
 from ..model.role_collection import RoleCollection
 from ..repository import instances
@@ -46,6 +46,8 @@ class RoleService(Service[Role]):
         updated = cast(RoleOnUpdate, kwargs.get("body"))
 
         r = self._get_by_id(role_id)
+        if r.is_predefined:
+            raise GeneralErrorError(HTTPStatus.BAD_REQUEST)
 
         # TODO: check
         etag = create_etag()
