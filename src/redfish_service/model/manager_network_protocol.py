@@ -32,7 +32,7 @@ class ManagerNetworkProtocol(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#ManagerNetworkProtocol.v1_10_1.ManagerNetworkProtocol",
+        default="#ManagerNetworkProtocol.v1_11_0.ManagerNetworkProtocol",
     )
     actions: Actions | None = None
     dhcp: Protocol | None = Field(serialization_alias="DHCP", default=None)
@@ -60,6 +60,7 @@ class ManagerNetworkProtocol(RedfishModel):
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
+    mdns: Protocol | None = Field(serialization_alias="mDNS", default=None)
 
 
 class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
@@ -84,6 +85,7 @@ class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
+    mdns: Protocol | None = Field(serialization_alias="mDNS", default=None)
 
 
 class NtpProtocol(RedfishModel):

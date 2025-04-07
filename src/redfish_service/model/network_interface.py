@@ -23,7 +23,7 @@ class NetworkInterface(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#NetworkInterface.v1_2_2.NetworkInterface"
+        serialization_alias="@odata.type", default="#NetworkInterface.v1_2_3.NetworkInterface"
     )
     actions: Actions | None = None
     description: str | None = None

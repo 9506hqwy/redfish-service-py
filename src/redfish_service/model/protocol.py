@@ -45,3 +45,4 @@ class Protocol(StrEnum):
     UPI = "UPI"
     QPI = "QPI"
     EMMC = "eMMC"
+    UEC = "UEC"

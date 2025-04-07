@@ -7,6 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
+from .protocol import Protocol
 from .resource import Status
 from .vlan_network_interface import Vlan
 
@@ -43,6 +44,7 @@ class DataDirection(StrEnum):
 
 
 class Ethernet(RedfishModel):
+    additional_protocols: list[Protocol] | None = None
     ethernet_interfaces: IdRef | None = None
     mac_address: str | None = Field(serialization_alias="MACAddress", default=None)
     mtu_size: int | None = Field(serialization_alias="MTUSize", default=None)
@@ -128,7 +130,7 @@ class NetworkDeviceFunction(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#NetworkDeviceFunction.v1_9_2.NetworkDeviceFunction",
+        default="#NetworkDeviceFunction.v1_10_0.NetworkDeviceFunction",
     )
     actions: Actions | None = None
     allow_deny: IdRef | None = None

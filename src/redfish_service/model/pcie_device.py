@@ -15,6 +15,8 @@ class Actions(RedfishModel):
 
 
 class CxlDevice(RedfishModel):
+    capable_protocol_versions: list[CxlProtocolVersion] | None = None
+    current_protocol_version: CxlProtocolVersion | None = None
     device_type: CxlDeviceType | None = None
     dynamic_capacity: CxlDynamicCapacity | None = None
     egress_port_congestion_support: bool | None = None
@@ -48,6 +50,14 @@ class CxlDynamicCapacityPolicies(StrEnum):
     CONTIGUOUS = "Contiguous"
     PRESCRIPTIVE = "Prescriptive"
     TAG_BASED = "TagBased"
+
+
+class CxlProtocolVersion(StrEnum):
+    CX_L1_1 = "CXL1_1"
+    CX_L2_0 = "CXL2_0"
+    CX_L3_0 = "CXL3_0"
+    CX_L3_1 = "CXL3_1"
+    CX_L3_2 = "CXL3_2"
 
 
 class CxlRegionBlockSizes(RedfishModel):
@@ -95,7 +105,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_17_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_18_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

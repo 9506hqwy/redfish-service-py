@@ -210,6 +210,7 @@ class LinkConfiguration(RedfishModel):
     auto_speed_negotiation_enabled: bool | None = None
     capable_link_speed_gbps: list[float] | None = None
     configured_network_links: list[ConfiguredNetworkLink] | None = None
+    link_network_technology: LinkNetworkTechnology | None = None
 
 
 class LinkNetworkTechnology(StrEnum):
@@ -268,11 +269,13 @@ class Port(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_15_0.Port")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_16_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
     capable_protocol_versions: list[str] | None = None
+    configured_speed_gbps: float | None = None
+    configured_width: int | None = None
     current_protocol_version: str | None = None
     current_speed_gbps: float | None = None
     description: str | None = None
@@ -314,6 +317,8 @@ class Port(RedfishModel):
 class PortOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
+    configured_speed_gbps: float | None = None
+    configured_width: int | None = None
     enabled: bool | None = None
     ethernet: EthernetProperties | None = None
     fibre_channel: FibreChannelProperties | None = None

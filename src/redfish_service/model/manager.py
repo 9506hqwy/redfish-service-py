@@ -22,6 +22,9 @@ class Actions(RedfishModel):
     reset_to_defaults: ResetToDefaults | None = Field(
         serialization_alias="#Manager.ResetToDefaults", default=None
     )
+    update_security_mode: UpdateSecurityMode | None = Field(
+        serialization_alias="#Manager.UpdateSecurityMode", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -108,7 +111,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_20_0.Manager")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_21_0.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
@@ -137,6 +140,7 @@ class Manager(RedfishModel):
     model: str | None = None
     name: str
     network_protocol: IdRef | None = None
+    oem_security_mode: str | None = Field(serialization_alias="OEMSecurityMode", default=None)
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     power_state: PowerState | None = None
@@ -146,6 +150,7 @@ class Manager(RedfishModel):
     )
     remote_account_service: IdRef | None = None
     remote_redfish_service_uri: str | None = None
+    security_mode: SecurityModeTypes | None = None
     security_policy: IdRef | None = None
     serial_console: SerialConsole | None = None
     serial_interfaces: IdRef | None = None
@@ -232,6 +237,16 @@ class ResetToDefaultsType(StrEnum):
     PRESERVE_NETWORK = "PreserveNetwork"
 
 
+class SecurityModeTypes(StrEnum):
+    FIP_S_140_2 = "FIPS_140_2"
+    FIP_S_140_3 = "FIPS_140_3"
+    CNS_A_1_0 = "CNSA_1_0"
+    CNS_A_2_0 = "CNSA_2_0"
+    SUITE_B = "SuiteB"
+    OEM = "OEM"
+    DEFAULT = "Default"
+
+
 class SerialConnectTypesSupported(StrEnum):
     SSH = "SSH"
     TELNET = "Telnet"
@@ -243,3 +258,13 @@ class SerialConsole(RedfishModel):
     connect_types_supported: list[SerialConnectTypesSupported] | None = None
     max_concurrent_sessions: int | None = None
     service_enabled: bool | None = None
+
+
+class UpdateSecurityMode(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class UpdateSecurityModeRequest(RedfishModel):
+    oem_security_mode: str | None = Field(serialization_alias="OEMSecurityMode", default=None)
+    security_mode: SecurityModeTypes

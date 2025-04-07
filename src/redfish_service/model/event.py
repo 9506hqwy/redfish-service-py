@@ -32,7 +32,7 @@ class DiagnosticDataTypes(StrEnum):
 
 class Event(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_11_0.Event")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_11_1.Event")
     actions: Actions | None = None
     context: str | None = None
     description: str | None = None

@@ -55,7 +55,7 @@ class TrustedComponent(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#TrustedComponent.v1_3_1.TrustedComponent"
+        serialization_alias="@odata.type", default="#TrustedComponent.v1_3_2.TrustedComponent"
     )
     actions: Actions | None = None
     certificates: IdRef | None = None

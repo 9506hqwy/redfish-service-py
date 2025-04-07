@@ -26,7 +26,7 @@ class AccountService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AccountService.v1_17_0.AccountService"
+        serialization_alias="@odata.type", default="#AccountService.v1_18_0.AccountService"
     )
     account_lockout_counter_reset_after: int | None = None
     account_lockout_counter_reset_enabled: bool | None = None
@@ -53,6 +53,8 @@ class AccountService(RedfishModel):
     oem: dict[str, Any] | None = None
     outbound_connections: IdRef | None = None
     password_expiration_days: int | None = None
+    password_guidance_message: str | None = None
+    password_guidance_message_id: str | None = None
     privilege_map: IdRef | None = None
     require_change_password_action: bool | None = None
     restricted_oem_privileges: list[str] | None = None

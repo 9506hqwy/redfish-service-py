@@ -48,6 +48,7 @@ class CollectDiagnosticDataRequest(RedfishModel):
         serialization_alias="OEMDiagnosticDataType", default=None
     )
     password: str | None = None
+    target_device: IdRef | None = None
     target_uri: str | None = Field(serialization_alias="TargetURI", default=None)
     transfer_protocol: TransferProtocolType | None = None
     user_name: str | None = None
@@ -67,6 +68,7 @@ class LogDiagnosticDataTypes(StrEnum):
     PRE_OS = "PreOS"
     OS = "OS"
     OEM = "OEM"
+    DEVICE = "Device"
 
 
 class LogEntryTypes(StrEnum):
@@ -91,7 +93,7 @@ class LogService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LogService.v1_7_0.LogService"
+        serialization_alias="@odata.type", default="#LogService.v1_8_0.LogService"
     )
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None

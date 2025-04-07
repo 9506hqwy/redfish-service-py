@@ -180,7 +180,7 @@ class StorageController(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StorageController.v1_9_0.StorageController"
+        serialization_alias="@odata.type", default="#StorageController.v1_9_1.StorageController"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

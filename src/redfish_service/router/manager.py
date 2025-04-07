@@ -10,6 +10,7 @@ from ..model.manager import (
     ModifyRedundancySetRequest,
     ResetRequest,
     ResetToDefaultsRequest,
+    UpdateSecurityModeRequest,
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
@@ -114,5 +115,24 @@ async def reset_to_defaults1(
         "response": response,
         "body": body,
         "action": "ResetToDefaults",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/Actions/Manager.UpdateSecurityMode",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def update_security_mode1(
+    manager_id: str, request: Request, response: Response, body: UpdateSecurityModeRequest
+) -> RedfishError:
+    s: Service = get_service(Manager, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UpdateSecurityMode",
     }
     return s.action(**b)

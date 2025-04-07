@@ -35,6 +35,7 @@ class ProtocolFeaturesSupported(RedfishModel):
     filter_query: bool | None = None
     filter_query_comparison_operations: bool | None = None
     filter_query_compound_operations: bool | None = None
+    include_origin_of_condition_query: bool | None = None
     multiple_http_requests: bool | None = Field(
         serialization_alias="MultipleHTTPRequests", default=None
     )
@@ -48,7 +49,7 @@ class ServiceRoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ServiceRoot.v1_17_0.ServiceRoot"
+        serialization_alias="@odata.type", default="#ServiceRoot.v1_18_0.ServiceRoot"
     )
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None

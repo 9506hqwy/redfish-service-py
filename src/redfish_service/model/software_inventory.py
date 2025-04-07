@@ -16,7 +16,9 @@ class Actions(RedfishModel):
 
 
 class AdditionalVersions(RedfishModel):
+    boot_parameters: str | None = None
     bootloader: str | None = None
+    factory_configuration: str | None = None
     kernel: str | None = None
     microcode: str | None = None
     os_distribution: str | None = Field(serialization_alias="OSDistribution", default=None)
@@ -41,7 +43,7 @@ class SoftwareInventory(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SoftwareInventory.v1_10_2.SoftwareInventory"
+        serialization_alias="@odata.type", default="#SoftwareInventory.v1_11_0.SoftwareInventory"
     )
     actions: Actions | None = None
     additional_versions: AdditionalVersions | None = None

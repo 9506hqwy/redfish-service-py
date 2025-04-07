@@ -26,7 +26,7 @@ class PowerEquipment(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerEquipment.v1_2_2.PowerEquipment"
+        serialization_alias="@odata.type", default="#PowerEquipment.v1_2_3.PowerEquipment"
     )
     actions: Actions | None = None
     description: str | None = None

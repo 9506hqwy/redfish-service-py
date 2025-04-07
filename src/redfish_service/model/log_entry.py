@@ -55,6 +55,7 @@ class LogDiagnosticDataTypes(StrEnum):
     OEM = "OEM"
     CPER = "CPER"
     CPER_SECTION = "CPERSection"
+    DEVICE = "Device"
 
 
 class LogEntry(RedfishModel):
@@ -62,7 +63,7 @@ class LogEntry(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry"
+        serialization_alias="@odata.type", default="#LogEntry.v1_18_0.LogEntry"
     )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
@@ -117,7 +118,7 @@ class LogEntryOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#LogEntry.v1_17_0.LogEntry"
+        serialization_alias="@odata.type", default="#LogEntry.v1_18_0.LogEntry"
     )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None

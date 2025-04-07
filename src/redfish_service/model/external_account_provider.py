@@ -48,7 +48,7 @@ class ExternalAccountProvider(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider",
+        default="#ExternalAccountProvider.v1_8_1.ExternalAccountProvider",
     )
     account_provider_type: AccountProviderTypes | None = None
     actions: Actions | None = None
@@ -78,7 +78,7 @@ class ExternalAccountProviderOnCreate(RedfishModel):
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
         serialization_alias="@odata.type",
-        default="#ExternalAccountProvider.v1_8_0.ExternalAccountProvider",
+        default="#ExternalAccountProvider.v1_8_1.ExternalAccountProvider",
     )
     account_provider_type: AccountProviderTypes | None = None
     actions: Actions | None = None

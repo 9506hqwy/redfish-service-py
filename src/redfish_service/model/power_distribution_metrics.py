@@ -21,10 +21,11 @@ class PowerDistributionMetrics(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#PowerDistributionMetrics.v1_3_2.PowerDistributionMetrics",
+        default="#PowerDistributionMetrics.v1_4_0.PowerDistributionMetrics",
     )
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
+    ambient_temperature_celsius: SensorExcerpt | None = None
     description: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     humidity_percent: SensorExcerpt | None = None
