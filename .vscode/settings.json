@@ -1,13 +1,26 @@
 {
     "autoDocstring.docstringFormat": "sphinx",
-    "coverage-gutters.showLineCoverage": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "[markdown]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.markdownlint": "explicit"
+        },
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
     "mypy-type-checker.args": [
-        "--enable-incomplete-feature=NewGenericSyntax"
+        "--config-file=pyproject.toml"
     ],
+    "mypy-type-checker.importStrategy": "fromEnvironment",
     "[python]": {
-        "editor.defaultFormatter": "charliermarsh.ruff",
-        "editor.formatOnSave": true
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "python.testing.pytestEnabled": true,
-    "python.testing.unittestEnabled": false
+    "python.testing.unittestEnabled": false,
+    "ruff.organizeImports": true
 }

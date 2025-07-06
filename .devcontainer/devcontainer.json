@@ -2,7 +2,7 @@
     // Dev Container's Name.
     "name": "Python 3",
     // Base Container Image.
-    "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
     // For running using Podman.
     // https://github.com/microsoft/vscode-remote-release/issues/4443
     "runArgs": [
@@ -12,14 +12,30 @@
         "label=disable",
         "seccomp=unconfined"
     ],
-    // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "pip install uv && uv sync --all-groups && pip install httpx pytest pytest-cov",
+    // Set container's environment variables.
+    "containerEnv": {
+        "UV_LINK_MODE": "copy"
+    },
+    // Use 'onCreateCommand' to run commands after the container is created.
+    "onCreateCommand": "/bin/bash ${containerWorkspaceFolder}/.devcontainer/on-create.sh",
     // Uncomment to connect as root instead.
     //"remoteUser": "root",
     // Use default container `USER`,
     // because of avoid reject directory creating by container startup user.
     "containerUser": "vscode",
     // Expose FastAPI port.
-    "appPort": [8000],
-    "forwardPorts": [8000]
+    "appPort": [
+        8000
+    ],
+    "forwardPorts": [
+        8000
+    ],
+    // Customize vscode.
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": ".venv/bin/python"
+            }
+        }
+    }
 }

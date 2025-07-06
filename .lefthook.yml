@@ -1,0 +1,21 @@
+pre-commit:
+  jobs:
+    - name: Python Format
+      glob: "*.py"
+      run: uv run ruff format --check
+
+    - name: Python Lint
+      glob: "*.py"
+      run: uv run ruff check
+
+    - name: Python Type
+      glob: "*.py"
+      run: uv run mypy ./src
+
+    - name: Python Test
+      glob: "*.py"
+      run: uv run pytest
+
+    - name: Actions Lint
+      glob: ".github/workflows/*.yml"
+      run: actionlint

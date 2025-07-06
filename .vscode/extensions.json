@@ -1,12 +1,14 @@
 {
     "recommendations": [
         "charliermarsh.ruff",
+        "davidanson.vscode-markdownlint",
+        "editorconfig.editorconfig",
+        "github.vscode-github-actions",
         "ms-python.python",
-        "ms-python.debugpy",
         "ms-python.mypy-type-checker",
-        "ms-python.vscode-pylance",
-        "ms-vscode-remote.remote-containers",
         "njpwerner.autodocstring",
-        "tamasfe.even-better-toml"
+        "tamasfe.even-better-toml",
+        "timonwong.shellcheck",
+        "yzhang.markdown-all-in-one"
     ]
 }

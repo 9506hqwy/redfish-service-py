@@ -1,12 +1,10 @@
 [project]
 name = "redfish-service"
 version = "0.1.0"
-authors = [
-  {name="9506hqwy"},
-]
+authors = [{ name = "9506hqwy" }]
 description = "Redfish Service"
 readme = "README.md"
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 classifiers = [
   # https://pypi.org/classifiers/
   "Development Status :: 1 - Planning",
@@ -29,29 +27,28 @@ redfish-service = "redfish_service.cli:main"
 Homepage = "https://github.com/9506hqwy/redfish-service-py"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.7.19,<0.8.0"]
+build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-  "mypy>=1.11.2",
+  "mypy>=1.16.1",
+  "pip-licenses>=5.0.0",
   "redfish-protocol-validator>=1.2.6",
   "redfish-service-validator>=2.4.9",
-  "ruff>=0.6.4",
+  "ruff>=0.12.2",
 ]
-doc = [
-  "sphinx>=7.4.7",
-]
+doc = ["sphinx>=8.2.3"]
 test = [
   "httpx>=0.28.1",
-  "pytest-cov>=5.0.0",
-  "pytest>=8.3.2",
-  "tox-uv>=1.11.3",
-  "tox>=4.18.1",
+  "pytest-cov>=6.2.1",
+  "pytest>=8.4.1",
+  "tox-uv>=1.26.1",
+  "tox>=4.27.0",
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/redfish_service"]
+[tool.uv.build-backend]
+module-name = "redfish_service"
 
 [tool.mypy]
 disallow_subclassing_any = true
@@ -73,10 +70,30 @@ pythonpath = "src"
 line-length = 99
 
 [tool.ruff.lint]
-select = ["F", "E", "W", "I", "N", "S", "RUF"]
+# https://docs.astral.sh/ruff/rules/
+extend-select = [
+  "ANN", # flake8-annotations (ANN)
+  "S",   # flake8-bandit (S)
+  "PYI", # flake8-pyi (PYI)
+  "I",   # isort (I)
+  "N",   # pep8-naming (N)
+  "E",   # pycodestyle (E)
+  "W",   # pycodestyle (W)
+  "D",   # pydocstyle (D)
+  "F",   # Pyflakes (F)
+  "PL",  # Pylint (PL)
+  "RUF", # Ruff-specific rules (RUF)
+]
+ignore = [
+  "D203", # incorrect-blank-line-before-class (D203)
+  "D213", # multi-line-summary-second-line (D213)
+]
 
 [tool.ruff.lint.per-file-ignores]
-"test/*" = ["S101"]
+"test/*" = [
+  "S101", # assert (S101)
+  "D",    # pydocstyle (D)
+]
 
 [tool.tox]
 legacy_tox_ini = """
@@ -94,7 +111,7 @@ deps =
   pytest
   pytest-cov
 commands =
-  pytest --cov-append --cov=src -v
+  pytest --cov-append --cov-branch --cov=src -v
 
 [testenv:format]
 deps = ruff
