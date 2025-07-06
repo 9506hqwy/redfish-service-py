@@ -142,7 +142,7 @@ class ClassInfo:
     def set_module(self, module: str) -> None:
         self._module = module
 
-    def write_to(self, w: Any) -> None:
+    def write_to(self, w: Any) -> None:  # noqa: ANN401
         w.write(f"class {self.cls_name}({self.base_name}):\n")
         for p in self.properties:
             p.write_to(w, self)
@@ -246,14 +246,13 @@ class EnumInfo:
     def set_module(self, module: str) -> None:
         self._module = module
 
-    def write_to(self, w: Any) -> None:
+    def write_to(self, w: Any) -> None:  # noqa: ANN401
         w.write(f"class {self.cls_name}(StrEnum):\n")
         for v in self.properties:
             w.write(f'    {get_variant_name(v)} = "{v}"')
             if any(re.finditer(r"(password|token)", v.lower())):
                 w.write("  # noqa: S105")
             w.write("\n")
-        return None
 
     def __hash__(self) -> int:
         return (self.schema_path, self.name).__hash__()
@@ -290,16 +289,16 @@ class PropetyInfo:
         ty = self.type if isinstance(self.type, str) else self.type.type_name
         return f"list[{ty}]" if self.array else ty
 
-    def write_to(self, w: Any, owner: ClassInfo) -> None:
+    def write_to(self, w: Any, owner: ClassInfo) -> None:  # noqa: ANN401
         return self._write_to(w, owner, self.nonable)
 
-    def write_on_create_to(self, w: Any, owner: ClassInfo) -> None:
+    def write_on_create_to(self, w: Any, owner: ClassInfo) -> None:  # noqa: ANN401
         return self._write_to(w, owner, self.nonable_on_create)
 
-    def write_on_update_to(self, w: Any, owner: ClassInfo) -> None:
+    def write_on_update_to(self, w: Any, owner: ClassInfo) -> None:  # noqa: ANN401
         return self._write_to(w, owner, True)
 
-    def _write_to(self, w: Any, owner: ClassInfo, nonable: bool) -> None:
+    def _write_to(self, w: Any, owner: ClassInfo, nonable: bool) -> None:  # noqa: ANN401
         w.write(f"    {self.property_name}: {self.type_name}")
         if nonable:
             w.write(" | None")
@@ -503,7 +502,7 @@ def load_classes(redfish_path: Path, swordfish_path: Path) -> list[ClassInfo | E
     return classes
 
 
-def load_properties(
+def load_properties(  # noqa: PLR0912, PLR0915
     targets: list[ClassInfo | EnumInfo], classall: list[ClassInfo | EnumInfo]
 ) -> None:
     for target in targets:
@@ -680,7 +679,7 @@ def resolve_property_type(
 
     if (any_of := definition.get("anyOf", None)) is not None:
         nonable = any((a for a in any_of if has_null(a)))
-        if nonable and len(any_of) == 2:
+        if nonable and len(any_of) == 2:  # noqa: PLR2004
             ref = next((a["$ref"] for a in any_of if "$ref" in a))
             return get_from_ref(ref, nonable)
 
@@ -777,7 +776,7 @@ def write_base_classes(out_path: Path) -> None:
         pass
 
 
-def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
+def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:  # noqa: PLR0912
     out_path = out_path / "model"
 
     count = 0
@@ -841,7 +840,10 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
 
 
 def write_imports_to(
-    domaon: str, classall: list[ClassInfo | EnumInfo], module: str, w: Any
+    domaon: str,
+    classall: list[ClassInfo | EnumInfo],
+    module: str,
+    w: Any,  # noqa: ANN401
 ) -> None:
     w.write("from __future__ import annotations  # PEP563 Forward References\n")
     w.write("\n")
@@ -879,8 +881,11 @@ def write_imports_to(
             w.write(f"from {parent}{i.module_path} import {i.cls_name}\n")
 
 
-def write_imports_router_to(
-    domaon: str, classall: list[ClassInfo | EnumInfo], module: str, w: Any
+def write_imports_router_to(  # noqa: PLR0912
+    domaon: str,
+    classall: list[ClassInfo | EnumInfo],
+    module: str,
+    w: Any,  # noqa: ANN401
 ) -> None:
     w.write("from typing import Any, cast\n")
     w.write("\n")
@@ -944,7 +949,7 @@ def write_imports_router_to(
     w.write("router = APIRouter()\n")
 
 
-def write_routers(
+def write_routers(  # noqa: PLR0912, PLR0915
     out_path: Path, classall: list[ClassInfo | EnumInfo]
 ) -> list[ClassInfo | EnumInfo]:
     out_path = out_path / "router"
@@ -995,7 +1000,7 @@ def write_routers(
                         for p in re.findall(r"{[^}]+}", url):
                             name = get_snake_case(p.strip("{}"))
                             params.append(name)
-                            url = url.replace(p, f"{{{name}}}")
+                            url = url.replace(p, f"{{{name}}}")  # noqa: PLW2901
 
                         args_list = [f"{p}: str" for p in params]
                         body_list = [f'"{p}": {p}' for p in params]
@@ -1169,7 +1174,7 @@ def write_routers_init(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> 
         for c in classall:
             doman = c.domain
             if isinstance(c, ClassInfo) and c.impl_info:
-                c = c.impl_info
+                c = c.impl_info  # noqa: PLW2901
 
             if doman == "swordfish":
                 swordfish.write(f"from ...model.{c.module_path} import {c.cls_name}\n")
@@ -1207,7 +1212,7 @@ def write_routers_init(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> 
                 redfish.write("\n")
 
 
-def main() -> int:
+def main() -> int:  # noqa: PLR0912
     redfish_path = Path(sys.argv[1])
     if not redfish_path.is_dir():
         raise Exception(f"'{redfish_path}' is not directory.")

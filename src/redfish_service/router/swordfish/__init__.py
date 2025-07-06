@@ -81,7 +81,7 @@ from . import (
 )
 
 
-def include_router(app: FastAPI) -> None:
+def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
     if find_service(CapacitySource):
         app.include_router(capacity.router)
 

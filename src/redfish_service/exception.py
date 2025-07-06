@@ -5,13 +5,13 @@ from .model.redfish_error import RedfishError as Error
 
 
 class RedfishError(Exception):
-    def __init__(self, status_code: int, error: Error):
+    def __init__(self, status_code: int, error: Error) -> None:
         self.status_code = status_code
         self.error = error
 
 
 class GeneralErrorError(RedfishError):
-    def __init__(self, status_code: int = HTTPStatus.INTERNAL_SERVER_ERROR):
+    def __init__(self, status_code: int = HTTPStatus.INTERNAL_SERVER_ERROR) -> None:
         info = {
             "error": {
                 "code": "Base.1.19.0.GeneralError",
@@ -25,7 +25,7 @@ class GeneralErrorError(RedfishError):
 
 
 class InvalidURIError(RedfishError):
-    def __init__(self, uri: str):
+    def __init__(self, uri: str) -> None:
         info = {
             "error": {
                 "code": "Base.1.19.0.InvalidURI",
@@ -37,7 +37,7 @@ class InvalidURIError(RedfishError):
 
 
 class InternalErrorError(RedfishError):
-    def __init__(self, status_code: int = HTTPStatus.INTERNAL_SERVER_ERROR):
+    def __init__(self, status_code: int = HTTPStatus.INTERNAL_SERVER_ERROR) -> None:
         info = {
             "error": {
                 "code": "Base.1.19.0.InternalError",
@@ -50,7 +50,7 @@ class InternalErrorError(RedfishError):
 
 
 class MalformedJsonError(RedfishError):
-    def __init__(self, status_code: int = HTTPStatus.UNPROCESSABLE_ENTITY):
+    def __init__(self, status_code: int = HTTPStatus.UNPROCESSABLE_ENTITY) -> None:
         info = {
             "error": {
                 "code": "Base.1.19.0.MalformedJSON",
@@ -63,7 +63,7 @@ class MalformedJsonError(RedfishError):
 
 
 class OperationNotAllowedError(RedfishError):
-    def __init__(self, service: Any) -> None:
+    def __init__(self, service: Any) -> None:  # noqa: ANN401
         self.service = service
         info = {
             "error": {
@@ -102,7 +102,7 @@ class PreconditionRequiredError(RedfishError):
 
 
 class ResourceAtUriUnauthorizedError(RedfishError):
-    def __init__(self, uri: str, message: str):
+    def __init__(self, uri: str, message: str) -> None:
         info = {
             "error": {
                 "code": "Base.1.19.0.ResourceAtUriUnauthorized",
@@ -115,7 +115,7 @@ class ResourceAtUriUnauthorizedError(RedfishError):
 
 
 class ResourceNotFoundError(RedfishError):
-    def __init__(self, type: str, id: str):
+    def __init__(self, type: str, id: str) -> None:
         info = {
             "error": {
                 "code": "Base.1.19.0.ResourceNotFound",

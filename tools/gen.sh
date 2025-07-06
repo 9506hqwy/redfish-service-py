@@ -11,11 +11,11 @@ DSP8010_URL="https://www.dmtf.org/sites/default/files/standards/documents/${DSP8
 SWORDFISH_FILE="Swordfish_v${SWORDFISH_VERSION}.zip"
 SWORDFISH_URL="https://www.snia.org/sites/default/files/technical-work/swordfish/release/v${SWORDFISH_VERSION}/zip/${SWORDFISH_FILE}"
 
-APP_ROOT="$(dirname $0)/.."
-APP_ROOT=$(cd $APP_ROOT; pwd)
+APP_ROOT="$(dirname "$0")/.."
+APP_ROOT=$(cd "$APP_ROOT"; pwd)
 OUTPUT_DIR="${APP_ROOT}/src/redfish_service"
 
-WORK_DIR=`mktemp -d`
+WORK_DIR=$(mktemp -d)
 trap 'rm -rf ${WORK_DIR}' EXIT
 
 pushd "${WORK_DIR}"

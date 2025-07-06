@@ -127,7 +127,7 @@ async def metadata() -> OdataMetadata:
         m = model.split(".")
         content += f'  <edmx:Reference Uri="http://redfish.dmtf.org/schemas/v1/{m[0]}_v1.xml">\n'
         content += f'    <edmx:Include Namespace="{m[0]}"/>\n'
-        if len(m) > 2:
+        if len(m) > 2:  # noqa: PLR2004
             content += f'    <edmx:Include Namespace="{m[0]}.{m[1]}"/>\n'
         content += "  </edmx:Reference>\n"
 

@@ -48,7 +48,7 @@ def check_basic_auth(username: str, password: str) -> bool:
 
 def authenticate(f: Callable) -> Callable:
     @wraps(f)
-    async def wrapper(*args: list[Any], **kwds: dict[str, Any]) -> Any:
+    async def wrapper(*args: list[Any], **kwds: dict[str, Any]) -> Any:  # noqa: ANN401
         req = cast(Request, kwds.get("request"))
         auth = cast(Any, kwds.pop("auth"))
 
