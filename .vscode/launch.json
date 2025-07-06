@@ -8,9 +8,13 @@
             "program": "${file}",
             "console": "integratedTerminal",
             // https://code.visualstudio.com/docs/python/debugging#_purpose
-            "purpose": ["debug-test"],
+            "purpose": [
+                "debug-test"
+            ],
             // https://docs.pytest.org/en/7.1.x/example/simple.html
-            "env": {"PYTEST_ADDOPTS": "--no-cov"}
+            "env": {
+                "PYTEST_ADDOPTS": "--no-cov"
+            }
         },
         {
             "name": "Python: Serve",
@@ -18,7 +22,7 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "redfish_service.service:app",
+                "redfish_service.server:app",
                 "--reload"
             ],
         }
