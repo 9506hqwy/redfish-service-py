@@ -19,7 +19,7 @@ class ThermalEquipment(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ThermalEquipment.v1_1_2.ThermalEquipment"
+        serialization_alias="@odata.type", default="#ThermalEquipment.v1_2_0.ThermalEquipment"
     )
     actions: Actions | None = None
     cdus: IdRef | None = Field(serialization_alias="CDUs", default=None)
@@ -31,4 +31,5 @@ class ThermalEquipment(RedfishModel):
     immersion_units: IdRef | None = None
     name: str
     oem: dict[str, Any] | None = None
+    rp_us: IdRef | None = Field(serialization_alias="RPUs", default=None)
     status: Status | None = None

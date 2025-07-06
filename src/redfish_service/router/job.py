@@ -3,7 +3,8 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.job import Job, JobOnUpdate
+from ..model.job import Job, JobOnUpdate, ResubmitRequest
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service, set_link_header
 
@@ -34,6 +35,24 @@ async def patch1(job_id: str, request: Request, response: Response, body: JobOnU
     s: Service = get_service(Job, request)
     b: dict[str, Any] = {"job_id": job_id, "request": request, "response": response, "body": body}
     return cast(Job, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/JobService/Jobs/{job_id}/Actions/Job.Resubmit", response_model_exclude_none=True
+)
+@authenticate
+async def resubmit1(
+    job_id: str, request: Request, response: Response, body: ResubmitRequest
+) -> RedfishError:
+    s: Service = get_service(Job, request)
+    b: dict[str, Any] = {
+        "job_id": job_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Resubmit",
+    }
+    return s.action(**b)
 
 
 @router.delete(
@@ -86,3 +105,23 @@ async def patch2(
         "body": body,
     }
     return cast(Job, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/JobService/Jobs/{job_id}/Steps/{job_id2}/Actions/Job.Resubmit",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def resubmit2(
+    job_id: str, job_id2: str, request: Request, response: Response, body: ResubmitRequest
+) -> RedfishError:
+    s: Service = get_service(Job, request)
+    b: dict[str, Any] = {
+        "job_id": job_id,
+        "job_id2": job_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Resubmit",
+    }
+    return s.action(**b)

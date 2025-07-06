@@ -13,3 +13,4 @@ class AccountTypes(StrEnum):
     KVMIP = "KVMIP"
     VIRTUAL_MEDIA = "VirtualMedia"
     WEB_UI = "WebUI"
+    CONTROL_PANEL = "ControlPanel"

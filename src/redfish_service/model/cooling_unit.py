@@ -21,6 +21,7 @@ class CoolingEquipmentType(StrEnum):
     CDU = "CDU"
     HEAT_EXCHANGER = "HeatExchanger"
     IMMERSION_UNIT = "ImmersionUnit"
+    RPU = "RPU"
 
 
 class CoolingUnit(RedfishModel):
@@ -28,7 +29,7 @@ class CoolingUnit(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolingUnit.v1_2_0.CoolingUnit"
+        serialization_alias="@odata.type", default="#CoolingUnit.v1_3_0.CoolingUnit"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

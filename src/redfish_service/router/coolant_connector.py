@@ -422,3 +422,49 @@ async def patch9(
         "body": body,
     }
     return cast(CoolantConnector, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+async def get10(
+    cooling_unit_id: str, coolant_connector_id: str, request: Request, response: Response
+) -> CoolantConnector:
+    s: Service = get_service(CoolantConnector, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CoolantConnector, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/PrimaryCoolantConnectors/{coolant_connector_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch10(
+    cooling_unit_id: str,
+    coolant_connector_id: str,
+    request: Request,
+    response: Response,
+    body: CoolantConnectorOnUpdate,
+) -> CoolantConnector:
+    s: Service = get_service(CoolantConnector, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "coolant_connector_id": coolant_connector_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(CoolantConnector, s.patch(**b))

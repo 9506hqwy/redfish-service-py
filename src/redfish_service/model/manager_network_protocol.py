@@ -32,7 +32,7 @@ class ManagerNetworkProtocol(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#ManagerNetworkProtocol.v1_11_0.ManagerNetworkProtocol",
+        default="#ManagerNetworkProtocol.v1_12_0.ManagerNetworkProtocol",
     )
     actions: Actions | None = None
     dhcp: Protocol | None = Field(serialization_alias="DHCP", default=None)
@@ -47,6 +47,7 @@ class ManagerNetworkProtocol(RedfishModel):
     ipmi: Protocol | None = Field(serialization_alias="IPMI", default=None)
     id: str
     kvmip: Protocol | None = Field(serialization_alias="KVMIP", default=None)
+    modbus: ModbusProtocol | None = None
     ntp: NtpProtocol | None = Field(serialization_alias="NTP", default=None)
     name: str
     oem: dict[str, Any] | None = None
@@ -73,6 +74,7 @@ class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     https: HttpsProtocol | None = Field(serialization_alias="HTTPS", default=None)
     ipmi: Protocol | None = Field(serialization_alias="IPMI", default=None)
     kvmip: Protocol | None = Field(serialization_alias="KVMIP", default=None)
+    modbus: ModbusProtocol | None = None
     ntp: NtpProtocol | None = Field(serialization_alias="NTP", default=None)
     oem: dict[str, Any] | None = None
     proxy: ProxyConfiguration | None = None
@@ -86,6 +88,17 @@ class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
     mdns: Protocol | None = Field(serialization_alias="mDNS", default=None)
+
+
+class ModbusProtocol(RedfishModel):
+    allowed_clients: list[str] | None = None
+    maximum_connected_clients: int | None = None
+    number_of_connected_clients: int | None = None
+    port: int | None = None
+    protocol_enabled: bool | None = None
+    read_only: bool | None = None
+    restrict_access_to_allowed_clients: bool | None = None
+    server_id: int | None = None
 
 
 class NtpProtocol(RedfishModel):

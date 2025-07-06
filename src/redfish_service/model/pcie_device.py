@@ -88,6 +88,12 @@ class Links(RedfishModel):
     chassis_odata_count: int | None = Field(
         serialization_alias="Chassis@odata.count", default=None
     )
+    connected_pcie_ports: list[IdRef] | None = Field(
+        serialization_alias="ConnectedPCIePorts", default=None
+    )
+    connected_pcie_ports_odata_count: int | None = Field(
+        serialization_alias="ConnectedPCIePorts@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
     pcie_functions_odata_count: int | None = Field(
@@ -105,7 +111,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_18_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_19_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

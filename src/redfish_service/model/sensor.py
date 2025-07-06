@@ -87,6 +87,13 @@ class ReadingType(StrEnum):
     PERCENT = "Percent"
     ABSOLUTE_HUMIDITY = "AbsoluteHumidity"
     HEAT = "Heat"
+    LINEAR_POSITION = "LinearPosition"
+    LINEAR_VELOCITY = "LinearVelocity"
+    LINEAR_ACCELERATION = "LinearAcceleration"
+    ROTATIONAL_POSITION = "RotationalPosition"
+    ROTATIONAL_VELOCITY = "RotationalVelocity"
+    ROTATIONAL_ACCELERATION = "RotationalAcceleration"
+    VALVE = "Valve"
 
 
 class ResetMetrics(RedfishModel):
@@ -103,7 +110,7 @@ class Sensor(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_10_1.Sensor")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_11_0.Sensor")
     accuracy: float | None = None
     actions: Actions | None = None
     adjusted_max_allowable_operating_value: float | None = None
@@ -180,6 +187,9 @@ class SensorOnUpdate(RedfishModelOnUpdate):
     links: Links | None = None
     location: Location | None = None
     oem: dict[str, Any] | None = None
+    physical_context: PhysicalContext | None = None
+    physical_sub_context: PhysicalSubContext | None = None
+    related_item: list[IdRef] | None = None
     sensor_group: RedundantGroup | None = None
     status: Status | None = None
     thresholds: Thresholds | None = None

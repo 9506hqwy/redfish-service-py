@@ -5,6 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.storage import (
+    ImportForeignDrivesRequest,
     ResetToDefaultsRequest,
     SetControllerPasswordRequest,
     SetEncryptionKeyRequest,
@@ -40,6 +41,25 @@ async def patch1(
         "body": body,
     }
     return cast(Storage, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Storage/{storage_id}/Actions/Storage.ImportForeignDrives",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def import_foreign_drives1(
+    storage_id: str, request: Request, response: Response, body: ImportForeignDrivesRequest
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ImportForeignDrives",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -143,6 +163,30 @@ async def patch2(
         "body": body,
     }
     return cast(Storage, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.ImportForeignDrives",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def import_foreign_drives2(
+    computer_system_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: ImportForeignDrivesRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ImportForeignDrives",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -261,6 +305,30 @@ async def patch3(
         "body": body,
     }
     return cast(Storage, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Actions/Storage.ImportForeignDrives",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def import_foreign_drives3(
+    resource_block_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: ImportForeignDrivesRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ImportForeignDrives",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -389,6 +457,32 @@ async def patch4(
 
 
 @router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.ImportForeignDrives",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def import_foreign_drives4(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: ImportForeignDrivesRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ImportForeignDrives",
+    }
+    return s.action(**b)
+
+
+@router.post(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.ResetToDefaults",
     response_model_exclude_none=True,
 )
@@ -510,6 +604,30 @@ async def patch5(
         "body": body,
     }
     return cast(Storage, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Actions/Storage.ImportForeignDrives",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def import_foreign_drives5(
+    resource_block_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: ImportForeignDrivesRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ImportForeignDrives",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -635,6 +753,32 @@ async def patch6(
         "body": body,
     }
     return cast(Storage, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.ImportForeignDrives",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def import_foreign_drives6(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: ImportForeignDrivesRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ImportForeignDrives",
+    }
+    return s.action(**b)
 
 
 @router.post(

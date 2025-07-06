@@ -130,7 +130,7 @@ class NetworkDeviceFunction(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#NetworkDeviceFunction.v1_10_0.NetworkDeviceFunction",
+        default="#NetworkDeviceFunction.v1_11_0.NetworkDeviceFunction",
     )
     actions: Actions | None = None
     allow_deny: IdRef | None = None
@@ -162,6 +162,7 @@ class NetworkDeviceFunction(RedfishModel):
     physical_port_assignment: IdRef | None = None
     savi_enabled: bool | None = Field(serialization_alias="SAVIEnabled", default=None)
     status: Status | None = None
+    virtual_function_allocation: int | None = None
     virtual_functions_enabled: bool | None = None
     i_scsi_boot: IScsiBoot | None = Field(serialization_alias="iSCSIBoot", default=None)
 
@@ -180,6 +181,7 @@ class NetworkDeviceFunctionOnUpdate(RedfishModelOnUpdate):
     oem: dict[str, Any] | None = None
     savi_enabled: bool | None = Field(serialization_alias="SAVIEnabled", default=None)
     status: Status | None = None
+    virtual_function_allocation: int | None = None
     i_scsi_boot: IScsiBoot | None = Field(serialization_alias="iSCSIBoot", default=None)
 
 

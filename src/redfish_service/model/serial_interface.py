@@ -53,6 +53,12 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class Modbus(RedfishModel):
+    read_only: bool | None = None
+    role: Role | None = None
+    server_id: int | None = None
+
+
 class Parity(StrEnum):
     NONE = "None"
     EVEN = "Even"
@@ -65,6 +71,14 @@ class PinOut(StrEnum):
     CISCO = "Cisco"
     CYCLADES = "Cyclades"
     DIGI = "Digi"
+    MODBUS2_WIRE = "Modbus2Wire"
+    MODBUS4_WIRE = "Modbus4Wire"
+    MODBUS_RS232 = "ModbusRs232"
+
+
+class Role(StrEnum):
+    CLIENT = "Client"
+    SERVER = "Server"
 
 
 class SerialInterface(RedfishModel):
@@ -72,7 +86,7 @@ class SerialInterface(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SerialInterface.v1_2_1.SerialInterface"
+        serialization_alias="@odata.type", default="#SerialInterface.v1_3_0.SerialInterface"
     )
     actions: Actions | None = None
     bit_rate: BitRate | None = None
@@ -83,6 +97,7 @@ class SerialInterface(RedfishModel):
     id: str
     interface_enabled: bool | None = None
     links: Links | None = None
+    modbus: Modbus | None = None
     name: str
     oem: dict[str, Any] | None = None
     parity: Parity | None = None
@@ -98,6 +113,7 @@ class SerialInterfaceOnUpdate(RedfishModelOnUpdate):
     flow_control: FlowControl | None = None
     interface_enabled: bool | None = None
     links: Links | None = None
+    modbus: Modbus | None = None
     oem: dict[str, Any] | None = None
     parity: Parity | None = None
     stop_bits: StopBits | None = None

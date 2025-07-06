@@ -49,10 +49,11 @@ class ServiceRoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ServiceRoot.v1_18_0.ServiceRoot"
+        serialization_alias="@odata.type", default="#ServiceRoot.v1_19_0.ServiceRoot"
     )
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None
+    automation_nodes: IdRef | None = None
     cables: IdRef | None = None
     certificate_service: IdRef | None = None
     chassis: IdRef | None = None

@@ -86,6 +86,10 @@ class Links(RedfishModel):
     manager_for_chassis_odata_count: int | None = Field(
         serialization_alias="ManagerForChassis@odata.count", default=None
     )
+    manager_for_fabrics: list[IdRef] | None = None
+    manager_for_fabrics_odata_count: int | None = Field(
+        serialization_alias="ManagerForFabrics@odata.count", default=None
+    )
     manager_for_managers: list[IdRef] | None = None
     manager_for_managers_odata_count: int | None = Field(
         serialization_alias="ManagerForManagers@odata.count", default=None
@@ -111,7 +115,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_21_0.Manager")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_22_0.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
@@ -201,6 +205,7 @@ class ManagerType(StrEnum):
     RACK_MANAGER = "RackManager"
     AUXILIARY_CONTROLLER = "AuxiliaryController"
     SERVICE = "Service"
+    FABRIC_MANAGER = "FabricManager"
 
 
 class ModifyRedundancySet(RedfishModel):

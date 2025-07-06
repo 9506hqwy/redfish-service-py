@@ -15,6 +15,9 @@ from ..model.allow_deny_collection import AllowDenyCollection
 from ..model.application import Application
 from ..model.application_collection import ApplicationCollection
 from ..model.assembly import Assembly
+from ..model.automation_instrumentation import AutomationInstrumentation
+from ..model.automation_node import AutomationNode
+from ..model.automation_node_collection import AutomationNodeCollection
 from ..model.battery import Battery
 from ..model.battery_collection import BatteryCollection
 from ..model.battery_metrics import BatteryMetrics
@@ -90,6 +93,10 @@ from ..model.host_interface import HostInterface
 from ..model.host_interface_collection import HostInterfaceCollection
 from ..model.job import Job
 from ..model.job_collection import JobCollection
+from ..model.job_document import JobDocument
+from ..model.job_document_collection import JobDocumentCollection
+from ..model.job_executor import JobExecutor
+from ..model.job_executor_collection import JobExecutorCollection
 from ..model.job_service import JobService
 from ..model.json_schema_file import JsonSchemaFile
 from ..model.json_schema_file_collection import JsonSchemaFileCollection
@@ -220,6 +227,8 @@ from ..model.swordfish.volume import Volume
 from ..model.task import Task
 from ..model.task_collection import TaskCollection
 from ..model.task_service import TaskService
+from ..model.telemetry_data import TelemetryData
+from ..model.telemetry_data_collection import TelemetryDataCollection
 from ..model.telemetry_service import TelemetryService
 from ..model.thermal import Thermal
 from ..model.thermal_equipment import ThermalEquipment
@@ -230,12 +239,17 @@ from ..model.triggers_collection import TriggersCollection
 from ..model.trusted_component import TrustedComponent
 from ..model.trusted_component_collection import TrustedComponentCollection
 from ..model.update_service import UpdateService
+from ..model.update_service_capabilities import UpdateServiceCapabilities
 from ..model.usb_controller import UsbController
 from ..model.usb_controller_collection import UsbControllerCollection
 from ..model.vcat_entry import VcatEntry
 from ..model.vcat_entry_collection import VcatEntryCollection
+from ..model.virtual_cxl_switch import VirtualCxlSwitch
+from ..model.virtual_cxl_switch_collection import VirtualCxlSwitchCollection
 from ..model.virtual_media import VirtualMedia
 from ..model.virtual_media_collection import VirtualMediaCollection
+from ..model.virtual_pci2pci_bridge import VirtualPci2pciBridge
+from ..model.virtual_pci2pci_bridge_collection import VirtualPci2pciBridgeCollection
 from ..model.vlan_network_interface import VlanNetworkInterface
 from ..model.vlan_network_interface_collection import VlanNetworkInterfaceCollection
 from ..model.volume_collection import VolumeCollection
@@ -258,6 +272,9 @@ from . import (
     application,
     application_collection,
     assembly,
+    automation_instrumentation,
+    automation_node,
+    automation_node_collection,
     battery,
     battery_collection,
     battery_metrics,
@@ -333,6 +350,10 @@ from . import (
     host_interface_collection,
     job,
     job_collection,
+    job_document,
+    job_document_collection,
+    job_executor,
+    job_executor_collection,
     job_service,
     json_schema_file,
     json_schema_file_collection,
@@ -462,6 +483,8 @@ from . import (
     task,
     task_collection,
     task_service,
+    telemetry_data,
+    telemetry_data_collection,
     telemetry_service,
     thermal,
     thermal_equipment,
@@ -472,12 +495,17 @@ from . import (
     trusted_component,
     trusted_component_collection,
     update_service,
+    update_service_capabilities,
     usb_controller,
     usb_controller_collection,
     vcat_entry,
     vcat_entry_collection,
+    virtual_cxl_switch,
+    virtual_cxl_switch_collection,
     virtual_media,
     virtual_media_collection,
+    virtual_pci2pci_bridge,
+    virtual_pci2pci_bridge_collection,
     vlan_network_interface,
     vlan_network_interface_collection,
     volume,
@@ -532,6 +560,15 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
 
     if find_service(Assembly):
         app.include_router(assembly.router)
+
+    if find_service(AutomationInstrumentation):
+        app.include_router(automation_instrumentation.router)
+
+    if find_service(AutomationNode):
+        app.include_router(automation_node.router)
+
+    if find_service(AutomationNodeCollection):
+        app.include_router(automation_node_collection.router)
 
     if find_service(Battery):
         app.include_router(battery.router)
@@ -757,6 +794,18 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
 
     if find_service(JobCollection):
         app.include_router(job_collection.router)
+
+    if find_service(JobDocument):
+        app.include_router(job_document.router)
+
+    if find_service(JobDocumentCollection):
+        app.include_router(job_document_collection.router)
+
+    if find_service(JobExecutor):
+        app.include_router(job_executor.router)
+
+    if find_service(JobExecutorCollection):
+        app.include_router(job_executor_collection.router)
 
     if find_service(JobService):
         app.include_router(job_service.router)
@@ -1145,6 +1194,12 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
     if find_service(TaskService):
         app.include_router(task_service.router)
 
+    if find_service(TelemetryData):
+        app.include_router(telemetry_data.router)
+
+    if find_service(TelemetryDataCollection):
+        app.include_router(telemetry_data_collection.router)
+
     if find_service(TelemetryService):
         app.include_router(telemetry_service.router)
 
@@ -1175,6 +1230,9 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
     if find_service(UpdateService):
         app.include_router(update_service.router)
 
+    if find_service(UpdateServiceCapabilities):
+        app.include_router(update_service_capabilities.router)
+
     if find_service(UsbController):
         app.include_router(usb_controller.router)
 
@@ -1187,11 +1245,23 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
     if find_service(VcatEntryCollection):
         app.include_router(vcat_entry_collection.router)
 
+    if find_service(VirtualCxlSwitch):
+        app.include_router(virtual_cxl_switch.router)
+
+    if find_service(VirtualCxlSwitchCollection):
+        app.include_router(virtual_cxl_switch_collection.router)
+
     if find_service(VirtualMedia):
         app.include_router(virtual_media.router)
 
     if find_service(VirtualMediaCollection):
         app.include_router(virtual_media_collection.router)
+
+    if find_service(VirtualPci2pciBridge):
+        app.include_router(virtual_pci2pci_bridge.router)
+
+    if find_service(VirtualPci2pciBridgeCollection):
+        app.include_router(virtual_pci2pci_bridge_collection.router)
 
     if find_service(VlanNetworkInterface):
         app.include_router(vlan_network_interface.router)

@@ -7,10 +7,12 @@ from pydantic import Field
 from . import RedfishModel, RedfishModelOnUpdate
 from .control import ControlSingleExcerpt
 from .sensor import (
+    SensorCurrentExcerpt,
     SensorEnergykWhExcerpt,
     SensorExcerpt,
     SensorFanArrayExcerpt,
     SensorPowerExcerpt,
+    SensorVoltageExcerpt,
 )
 
 
@@ -29,11 +31,12 @@ class EnvironmentMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_4_0.EnvironmentMetrics"
+        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_5_0.EnvironmentMetrics"
     )
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
     ambient_temperature_celsius: SensorExcerpt | None = None
+    current_amps: SensorCurrentExcerpt | None = None
     description: str | None = None
     dew_point_celsius: SensorExcerpt | None = None
     energy_joules: SensorExcerpt | None = None
@@ -50,12 +53,14 @@ class EnvironmentMetrics(RedfishModel):
     power_load_percent: SensorExcerpt | None = None
     power_watts: SensorPowerExcerpt | None = None
     temperature_celsius: SensorExcerpt | None = None
+    voltage: SensorVoltageExcerpt | None = None
 
 
 class EnvironmentMetricsOnUpdate(RedfishModelOnUpdate):
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
     ambient_temperature_celsius: SensorExcerpt | None = None
+    current_amps: SensorCurrentExcerpt | None = None
     dew_point_celsius: SensorExcerpt | None = None
     energy_joules: SensorExcerpt | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
@@ -66,6 +71,7 @@ class EnvironmentMetricsOnUpdate(RedfishModelOnUpdate):
     power_load_percent: SensorExcerpt | None = None
     power_watts: SensorPowerExcerpt | None = None
     temperature_celsius: SensorExcerpt | None = None
+    voltage: SensorVoltageExcerpt | None = None
 
 
 class ResetMetrics(RedfishModel):

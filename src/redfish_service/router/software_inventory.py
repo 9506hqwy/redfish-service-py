@@ -3,7 +3,12 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.software_inventory import SoftwareInventory, SoftwareInventoryOnUpdate
+from ..model.redfish_error import RedfishError
+from ..model.software_inventory import (
+    ActivateRequest,
+    SoftwareInventory,
+    SoftwareInventoryOnUpdate,
+)
 from ..service import Service
 from ..util import get_service, set_link_header
 
@@ -53,6 +58,25 @@ async def patch1(
     return cast(SoftwareInventory, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/UpdateService/SoftwareInventory/{software_inventory_id}/Actions/SoftwareInventory.Activate",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def activate1(
+    software_inventory_id: str, request: Request, response: Response, body: ActivateRequest
+) -> RedfishError:
+    s: Service = get_service(SoftwareInventory, request)
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Activate",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}",
     response_model_exclude_none=True,
@@ -94,3 +118,22 @@ async def patch2(
         "body": body,
     }
     return cast(SoftwareInventory, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}/Actions/SoftwareInventory.Activate",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def activate2(
+    software_inventory_id: str, request: Request, response: Response, body: ActivateRequest
+) -> RedfishError:
+    s: Service = get_service(SoftwareInventory, request)
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Activate",
+    }
+    return s.action(**b)

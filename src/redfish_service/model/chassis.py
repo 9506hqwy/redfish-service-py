@@ -20,7 +20,7 @@ class Chassis(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_26_0.Chassis")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_27_0.Chassis")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -93,7 +93,7 @@ class ChassisOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Chassis.v1_26_0.Chassis"
+        serialization_alias="@odata.type", default="#Chassis.v1_27_0.Chassis"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -257,6 +257,10 @@ class IntrusionSensorReArm(StrEnum):
 
 
 class Links(RedfishModel):
+    automation_nodes: list[IdRef] | None = None
+    automation_nodes_odata_count: int | None = Field(
+        serialization_alias="AutomationNodes@odata.count", default=None
+    )
     cables: list[IdRef] | None = None
     cables_odata_count: int | None = Field(serialization_alias="Cables@odata.count", default=None)
     computer_systems: list[IdRef] | None = None

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.update_service import (
+    ActivateRequest,
     GenerateSshIdentityKeyPairRequest,
     SimpleUpdateRequest,
     UpdateService,
@@ -34,6 +35,21 @@ async def patch1(
     s: Service = get_service(UpdateService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(UpdateService, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/UpdateService/Actions/UpdateService.Activate", response_model_exclude_none=True
+)
+@authenticate
+async def activate1(request: Request, response: Response, body: ActivateRequest) -> RedfishError:
+    s: Service = get_service(UpdateService, request)
+    b: dict[str, Any] = {
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Activate",
+    }
+    return s.action(**b)
 
 
 @router.post(

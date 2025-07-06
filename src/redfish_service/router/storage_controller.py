@@ -19,20 +19,20 @@ router = APIRouter()
 
 
 @router.get(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 async def get1(
-    storage_id: str, controller_id: str, request: Request, response: Response
+    storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> StorageController:
     s: Service = get_service(StorageController, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -42,13 +42,13 @@ async def get1(
 
 
 @router.patch(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch1(
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: StorageControllerOnUpdate,
@@ -56,7 +56,7 @@ async def patch1(
     s: Service = get_service(StorageController, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -65,13 +65,13 @@ async def patch1(
 
 
 @router.post(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.AttachNamespaces",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.AttachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def attach_namespaces1(
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: AttachNamespacesRequest,
@@ -79,7 +79,7 @@ async def attach_namespaces1(
     s: Service = get_service(StorageController, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -89,13 +89,13 @@ async def attach_namespaces1(
 
 
 @router.post(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.DetachNamespaces",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.DetachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def detach_namespaces1(
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: DetachNamespacesRequest,
@@ -103,7 +103,7 @@ async def detach_namespaces1(
     s: Service = get_service(StorageController, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -113,13 +113,13 @@ async def detach_namespaces1(
 
 
 @router.post(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecurityReceive",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecurityReceive",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_receive1(
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecurityReceiveRequest,
@@ -127,7 +127,7 @@ async def security_receive1(
     s: Service = get_service(StorageController, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -137,13 +137,13 @@ async def security_receive1(
 
 
 @router.post(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecuritySend",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecuritySend",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_send1(
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecuritySendRequest,
@@ -151,7 +151,7 @@ async def security_send1(
     s: Service = get_service(StorageController, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -161,17 +161,17 @@ async def security_send1(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 async def get2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageController:
@@ -179,7 +179,7 @@ async def get2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -189,14 +189,14 @@ async def get2(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: StorageControllerOnUpdate,
@@ -205,7 +205,7 @@ async def patch2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -214,14 +214,14 @@ async def patch2(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.AttachNamespaces",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.AttachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def attach_namespaces2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: AttachNamespacesRequest,
@@ -230,7 +230,7 @@ async def attach_namespaces2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -240,14 +240,14 @@ async def attach_namespaces2(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.DetachNamespaces",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.DetachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def detach_namespaces2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: DetachNamespacesRequest,
@@ -256,7 +256,7 @@ async def detach_namespaces2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -266,14 +266,14 @@ async def detach_namespaces2(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecurityReceive",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecurityReceive",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_receive2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecurityReceiveRequest,
@@ -282,7 +282,7 @@ async def security_receive2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -292,14 +292,14 @@ async def security_receive2(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecuritySend",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecuritySend",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_send2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecuritySendRequest,
@@ -308,7 +308,7 @@ async def security_send2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -318,17 +318,17 @@ async def security_send2(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 async def get3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageController:
@@ -336,7 +336,7 @@ async def get3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -346,14 +346,14 @@ async def get3(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: StorageControllerOnUpdate,
@@ -362,7 +362,7 @@ async def patch3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -371,14 +371,14 @@ async def patch3(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.AttachNamespaces",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.AttachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def attach_namespaces3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: AttachNamespacesRequest,
@@ -387,7 +387,7 @@ async def attach_namespaces3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -397,14 +397,14 @@ async def attach_namespaces3(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.DetachNamespaces",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.DetachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def detach_namespaces3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: DetachNamespacesRequest,
@@ -413,7 +413,7 @@ async def detach_namespaces3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -423,14 +423,14 @@ async def detach_namespaces3(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecurityReceive",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecurityReceive",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_receive3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecurityReceiveRequest,
@@ -439,7 +439,7 @@ async def security_receive3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -449,14 +449,14 @@ async def security_receive3(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecuritySend",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecuritySend",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_send3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecuritySendRequest,
@@ -465,7 +465,7 @@ async def security_send3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -475,18 +475,18 @@ async def security_send3(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 async def get4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageController:
@@ -495,7 +495,7 @@ async def get4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -505,7 +505,7 @@ async def get4(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -513,7 +513,7 @@ async def patch4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: StorageControllerOnUpdate,
@@ -523,7 +523,7 @@ async def patch4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -532,7 +532,7 @@ async def patch4(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.AttachNamespaces",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.AttachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -540,7 +540,7 @@ async def attach_namespaces4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: AttachNamespacesRequest,
@@ -550,7 +550,7 @@ async def attach_namespaces4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -560,7 +560,7 @@ async def attach_namespaces4(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.DetachNamespaces",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.DetachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -568,7 +568,7 @@ async def detach_namespaces4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: DetachNamespacesRequest,
@@ -578,7 +578,7 @@ async def detach_namespaces4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -588,7 +588,7 @@ async def detach_namespaces4(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecurityReceive",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecurityReceive",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -596,7 +596,7 @@ async def security_receive4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecurityReceiveRequest,
@@ -606,7 +606,7 @@ async def security_receive4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -616,7 +616,7 @@ async def security_receive4(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecuritySend",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecuritySend",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -624,7 +624,7 @@ async def security_send4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecuritySendRequest,
@@ -634,7 +634,7 @@ async def security_send4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -644,17 +644,17 @@ async def security_send4(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 async def get5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageController:
@@ -662,7 +662,7 @@ async def get5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -672,14 +672,14 @@ async def get5(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: StorageControllerOnUpdate,
@@ -688,7 +688,7 @@ async def patch5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -697,14 +697,14 @@ async def patch5(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.AttachNamespaces",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.AttachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def attach_namespaces5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: AttachNamespacesRequest,
@@ -713,7 +713,7 @@ async def attach_namespaces5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -723,14 +723,14 @@ async def attach_namespaces5(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.DetachNamespaces",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.DetachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
 async def detach_namespaces5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: DetachNamespacesRequest,
@@ -739,7 +739,7 @@ async def detach_namespaces5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -749,14 +749,14 @@ async def detach_namespaces5(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecurityReceive",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecurityReceive",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_receive5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecurityReceiveRequest,
@@ -765,7 +765,7 @@ async def security_receive5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -775,14 +775,14 @@ async def security_receive5(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecuritySend",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecuritySend",
     response_model_exclude_none=True,
 )
 @authenticate
 async def security_send5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecuritySendRequest,
@@ -791,7 +791,7 @@ async def security_send5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -801,18 +801,18 @@ async def security_send5(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 async def get6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageController:
@@ -821,7 +821,7 @@ async def get6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -831,7 +831,7 @@ async def get6(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -839,7 +839,7 @@ async def patch6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: StorageControllerOnUpdate,
@@ -849,7 +849,7 @@ async def patch6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -858,7 +858,7 @@ async def patch6(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.AttachNamespaces",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.AttachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -866,7 +866,7 @@ async def attach_namespaces6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: AttachNamespacesRequest,
@@ -876,7 +876,7 @@ async def attach_namespaces6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -886,7 +886,7 @@ async def attach_namespaces6(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.DetachNamespaces",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.DetachNamespaces",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -894,7 +894,7 @@ async def detach_namespaces6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: DetachNamespacesRequest,
@@ -904,7 +904,7 @@ async def detach_namespaces6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -914,7 +914,7 @@ async def detach_namespaces6(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecurityReceive",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecurityReceive",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -922,7 +922,7 @@ async def security_receive6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecurityReceiveRequest,
@@ -932,7 +932,7 @@ async def security_receive6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -942,7 +942,7 @@ async def security_receive6(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Actions/StorageController.SecuritySend",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Actions/StorageController.SecuritySend",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -950,7 +950,7 @@ async def security_send6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: SecuritySendRequest,
@@ -960,7 +960,7 @@ async def security_send6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,

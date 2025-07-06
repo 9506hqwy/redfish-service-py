@@ -5,6 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.telemetry_service import (
+    CollectTelemetryDataRequest,
     SubmitTestMetricReportRequest,
     TelemetryService,
     TelemetryServiceOnUpdate,
@@ -33,6 +34,24 @@ async def patch1(
     s: Service = get_service(TelemetryService, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(TelemetryService, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/TelemetryService/Actions/TelemetryService.CollectTelemetryData",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def collect_telemetry_data1(
+    request: Request, response: Response, body: CollectTelemetryDataRequest
+) -> RedfishError:
+    s: Service = get_service(TelemetryService, request)
+    b: dict[str, Any] = {
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "CollectTelemetryData",
+    }
+    return s.action(**b)
 
 
 @router.post(

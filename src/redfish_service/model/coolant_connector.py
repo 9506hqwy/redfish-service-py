@@ -22,7 +22,7 @@ class CoolantConnector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolantConnector.v1_1_0.CoolantConnector"
+        serialization_alias="@odata.type", default="#CoolantConnector.v1_2_0.CoolantConnector"
     )
     actions: Actions | None = None
     coolant: Coolant | None = None
@@ -46,12 +46,14 @@ class CoolantConnector(RedfishModel):
     rated_flow_pressurek_pa: float | None = None
     rated_pressurek_pa: float | None = None
     return_pressurek_pa: SensorExcerpt | None = None
-    return_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
     return_temperature_celsius: SensorExcerpt | None = None
+    return_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
     status: Status | None = None
     supply_pressurek_pa: SensorExcerpt | None = None
     supply_temperature_celsius: SensorExcerpt | None = None
     supply_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
+    valve_position_control_percent: ControlSingleLoopExcerpt | None = None
+    valve_position_percent: SensorExcerpt | None = None
 
 
 class CoolantConnectorOnUpdate(RedfishModelOnUpdate):

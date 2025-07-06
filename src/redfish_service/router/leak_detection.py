@@ -83,3 +83,23 @@ async def get4(cooling_unit_id: str, request: Request, response: Response) -> Le
     m = cast(LeakDetection, s.get(**b))
     set_link_header(m, response)
     return m
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/LeakDetection",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/LeakDetection",
+    response_model_exclude_none=True,
+)
+async def get5(cooling_unit_id: str, request: Request, response: Response) -> LeakDetection:
+    s: Service = get_service(LeakDetection, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(LeakDetection, s.get(**b))
+    set_link_header(m, response)
+    return m

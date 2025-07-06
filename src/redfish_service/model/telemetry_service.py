@@ -8,11 +8,18 @@ from pydantic import Field
 from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .resource import Status
+from .telemetry_data import TelemetryDataTypes
 
 
 class Actions(RedfishModel):
     clear_metric_reports: ClearMetricReports | None = Field(
         serialization_alias="#TelemetryService.ClearMetricReports", default=None
+    )
+    clear_telemetry_data: ClearTelemetryData | None = Field(
+        serialization_alias="#TelemetryService.ClearTelemetryData", default=None
+    )
+    collect_telemetry_data: CollectTelemetryData | None = Field(
+        serialization_alias="#TelemetryService.CollectTelemetryData", default=None
     )
     reset_metric_report_definitions_to_defaults: ResetMetricReportDefinitionsToDefaults | None = (
         Field(
@@ -32,6 +39,24 @@ class Actions(RedfishModel):
 class ClearMetricReports(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ClearTelemetryData(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class CollectTelemetryData(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class CollectTelemetryDataRequest(RedfishModel):
+    oem_telemetry_data_type: str | None = Field(
+        serialization_alias="OEMTelemetryDataType", default=None
+    )
+    target_devices: list[IdRef] | None = None
+    telemetry_data_type: TelemetryDataTypes
 
 
 class CollectionFunction(StrEnum):
@@ -75,7 +100,7 @@ class TelemetryService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#TelemetryService.v1_3_4.TelemetryService"
+        serialization_alias="@odata.type", default="#TelemetryService.v1_4_0.TelemetryService"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -91,6 +116,11 @@ class TelemetryService(RedfishModel):
     service_enabled: bool | None = None
     status: Status | None = None
     supported_collection_functions: list[CollectionFunction] | None = None
+    supported_oem_telemetry_data_types: list[str] | None = Field(
+        serialization_alias="SupportedOEMTelemetryDataTypes", default=None
+    )
+    supported_telemetry_data_types: list[TelemetryDataTypes] | None = None
+    telemetry_data: IdRef | None = None
     triggers: IdRef | None = None
 
 

@@ -192,6 +192,66 @@ async def set_mode3(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}",
+    response_model_exclude_none=True,
+)
+async def get4(cooling_unit_id: str, pump_id: str, request: Request, response: Response) -> Pump:
+    s: Service = get_service(Pump, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Pump, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch4(
+    cooling_unit_id: str, pump_id: str, request: Request, response: Response, body: PumpOnUpdate
+) -> Pump:
+    s: Service = get_service(Pump, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Pump, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Actions/Pump.SetMode",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_mode4(
+    cooling_unit_id: str, pump_id: str, request: Request, response: Response, body: SetModeRequest
+) -> RedfishError:
+    s: Service = get_service(Pump, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetMode",
+    }
+    return s.action(**b)
+
+
+@router.get(
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}",
     response_model_exclude_none=True,
 )
@@ -199,7 +259,7 @@ async def set_mode3(
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}",
     response_model_exclude_none=True,
 )
-async def get4(chassis_id: str, pump_id: str, request: Request, response: Response) -> Pump:
+async def get5(chassis_id: str, pump_id: str, request: Request, response: Response) -> Pump:
     s: Service = get_service(Pump, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
@@ -217,7 +277,7 @@ async def get4(chassis_id: str, pump_id: str, request: Request, response: Respon
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch4(
+async def patch5(
     chassis_id: str, pump_id: str, request: Request, response: Response, body: PumpOnUpdate
 ) -> Pump:
     s: Service = get_service(Pump, request)
@@ -236,7 +296,7 @@ async def patch4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def set_mode4(
+async def set_mode5(
     chassis_id: str, pump_id: str, request: Request, response: Response, body: SetModeRequest
 ) -> RedfishError:
     s: Service = get_service(Pump, request)

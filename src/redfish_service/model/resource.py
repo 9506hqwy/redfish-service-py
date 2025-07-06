@@ -11,6 +11,7 @@ from .resolution_step import ResolutionStep
 
 
 class Condition(RedfishModel):
+    condition_type: ConditionType | None = None
     log_entry: IdRef | None = None
     message: str | None = None
     message_args: list[str] | None = None
@@ -23,6 +24,12 @@ class Condition(RedfishModel):
     timestamp: str | None = None
     user_authentication_source: str | None = None
     username: str | None = None
+
+
+class ConditionType(StrEnum):
+    ALERT = "Alert"
+    INFORMATIONAL = "Informational"
+    SUBSYSTEM = "Subsystem"
 
 
 class ContactInfo(RedfishModel):
@@ -212,7 +219,7 @@ class Resource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Resource.v1_21_0.Resource"
+        serialization_alias="@odata.type", default="#Resource.v1_22_0.Resource"
     )
     description: str | None = None
     id: str
@@ -225,7 +232,7 @@ class ResourceCollection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ResourceCollection.v1_21_0.ResourceCollection"
+        serialization_alias="@odata.type", default="#ResourceCollection.v1_22_0.ResourceCollection"
     )
     description: str | None = None
     name: str

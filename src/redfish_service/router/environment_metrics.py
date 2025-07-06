@@ -198,17 +198,17 @@ async def patch4(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get5(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
@@ -216,7 +216,7 @@ async def get5(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -226,14 +226,14 @@ async def get5(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch5(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: EnvironmentMetricsOnUpdate,
@@ -242,7 +242,7 @@ async def patch5(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -654,18 +654,18 @@ async def patch13(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get14(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
@@ -674,7 +674,7 @@ async def get14(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -684,7 +684,7 @@ async def get14(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -692,7 +692,7 @@ async def patch14(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: EnvironmentMetricsOnUpdate,
@@ -702,7 +702,7 @@ async def patch14(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -711,17 +711,17 @@ async def patch14(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get15(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
@@ -729,7 +729,7 @@ async def get15(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -739,14 +739,14 @@ async def get15(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch15(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: EnvironmentMetricsOnUpdate,
@@ -755,7 +755,7 @@ async def patch15(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -905,17 +905,17 @@ async def patch18(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get19(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
@@ -923,7 +923,7 @@ async def get19(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -933,14 +933,14 @@ async def get19(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch19(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: EnvironmentMetricsOnUpdate,
@@ -949,7 +949,7 @@ async def patch19(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -1220,18 +1220,18 @@ async def patch24(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get25(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> EnvironmentMetrics:
@@ -1240,7 +1240,7 @@ async def get25(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -1250,7 +1250,7 @@ async def get25(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1258,7 +1258,7 @@ async def patch25(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: EnvironmentMetricsOnUpdate,
@@ -1268,7 +1268,7 @@ async def patch25(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -1646,20 +1646,20 @@ async def patch34(
 
 
 @router.get(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get35(
-    storage_id: str, controller_id: str, request: Request, response: Response
+    storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> EnvironmentMetrics:
     s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -1669,13 +1669,13 @@ async def get35(
 
 
 @router.patch(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/EnvironmentMetrics",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch35(
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
     body: EnvironmentMetricsOnUpdate,
@@ -1683,7 +1683,7 @@ async def patch35(
     s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -1908,20 +1908,24 @@ async def patch39(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get40(
-    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+    computer_system_id: str,
+    graphics_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1932,13 +1936,13 @@ async def get40(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch40(
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1947,7 +1951,7 @@ async def patch40(
     s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1957,20 +1961,24 @@ async def patch40(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get41(
-    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+    computer_system_id: str,
+    usb_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> EnvironmentMetrics:
     s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1981,13 +1989,13 @@ async def get41(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch41(
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1996,7 +2004,7 @@ async def patch41(
     s: Service = get_service(EnvironmentMetrics, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2544,17 +2552,17 @@ async def patch51(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get52(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2563,7 +2571,7 @@ async def get52(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2574,14 +2582,14 @@ async def get52(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch52(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2591,7 +2599,7 @@ async def patch52(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2601,17 +2609,17 @@ async def patch52(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get53(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2620,7 +2628,7 @@ async def get53(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2631,14 +2639,14 @@ async def get53(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch53(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2648,7 +2656,7 @@ async def patch53(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -3057,17 +3065,17 @@ async def patch60(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get61(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -3076,7 +3084,7 @@ async def get61(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -3087,14 +3095,14 @@ async def get61(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch61(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -3104,7 +3112,7 @@ async def patch61(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -3114,17 +3122,17 @@ async def patch61(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 async def get62(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -3133,7 +3141,7 @@ async def get62(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -3144,14 +3152,14 @@ async def get62(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/EnvironmentMetrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/EnvironmentMetrics",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch62(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -3161,7 +3169,7 @@ async def patch62(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -3519,6 +3527,44 @@ async def get70(cooling_unit_id: str, request: Request, response: Response) -> E
 )
 @authenticate
 async def patch70(
+    cooling_unit_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
+) -> EnvironmentMetrics:
+    s: Service = get_service(EnvironmentMetrics, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(EnvironmentMetrics, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/EnvironmentMetrics",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/EnvironmentMetrics",
+    response_model_exclude_none=True,
+)
+async def get71(cooling_unit_id: str, request: Request, response: Response) -> EnvironmentMetrics:
+    s: Service = get_service(EnvironmentMetrics, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(EnvironmentMetrics, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/EnvironmentMetrics",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch71(
     cooling_unit_id: str, request: Request, response: Response, body: EnvironmentMetricsOnUpdate
 ) -> EnvironmentMetrics:
     s: Service = get_service(EnvironmentMetrics, request)

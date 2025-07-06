@@ -22,15 +22,17 @@ class Battery(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Battery.v1_3_0.Battery")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Battery.v1_4_0.Battery")
     actions: Actions | None = None
     assembly: IdRef | None = None
+    battery_chemistry_type: BatteryChemistryType | None = None
     capacity_actual_amp_hours: float | None = None
     capacity_actual_watt_hours: float | None = None
     capacity_rated_amp_hours: float | None = None
     capacity_rated_watt_hours: float | None = None
     charge_state: ChargeState | None = None
     description: str | None = None
+    energy_storage_type: EnergyStorageType | None = None
     firmware_version: str | None = None
     hot_pluggable: bool | None = None
     id: str
@@ -66,6 +68,12 @@ class BatteryOnUpdate(RedfishModelOnUpdate):
     status: Status | None = None
 
 
+class BatteryChemistryType(StrEnum):
+    LEAD_ACID = "LeadAcid"
+    LITHIUM_ION = "LithiumIon"
+    NICKEL_CADMIUM = "NickelCadmium"
+
+
 class Calibrate(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -75,6 +83,11 @@ class ChargeState(StrEnum):
     IDLE = "Idle"
     CHARGING = "Charging"
     DISCHARGING = "Discharging"
+
+
+class EnergyStorageType(StrEnum):
+    BATTERY = "Battery"
+    SUPERCAPACITOR = "Supercapacitor"
 
 
 class Links(RedfishModel):

@@ -7,7 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
-from .resource import Status
+from .resource import Location, Status
 
 
 class Actions(RedfishModel):
@@ -55,7 +55,7 @@ class TrustedComponent(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#TrustedComponent.v1_3_2.TrustedComponent"
+        serialization_alias="@odata.type", default="#TrustedComponent.v1_4_0.TrustedComponent"
     )
     actions: Actions | None = None
     certificates: IdRef | None = None
@@ -63,6 +63,7 @@ class TrustedComponent(RedfishModel):
     firmware_version: str | None = None
     id: str
     links: Links | None = None
+    location: Location | None = None
     manufacturer: str | None = None
     model: str | None = None
     name: str
@@ -79,6 +80,7 @@ class TrustedComponent(RedfishModel):
 class TrustedComponentOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     links: Links | None = None
+    location: Location | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
     tpm: Tpm | None = Field(serialization_alias="TPM", default=None)

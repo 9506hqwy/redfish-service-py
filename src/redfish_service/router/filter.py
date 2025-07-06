@@ -11,6 +11,46 @@ router = APIRouter()
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+async def get1(chassis_id: str, filter_id: str, request: Request, response: Response) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Filter, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch1(
+    chassis_id: str, filter_id: str, request: Request, response: Response, body: FilterOnUpdate
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Filter, s.patch(**b))
+
+
+@router.get(
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
@@ -18,7 +58,7 @@ router = APIRouter()
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get1(
+async def get2(
     chassis_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -39,7 +79,7 @@ async def get1(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch1(
+async def patch2(
     chassis_id: str,
     pump_id: str,
     filter_id: str,
@@ -67,7 +107,7 @@ async def patch1(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get2(
+async def get3(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -87,7 +127,7 @@ async def get2(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch2(
+async def patch3(
     cooling_unit_id: str,
     filter_id: str,
     request: Request,
@@ -113,7 +153,7 @@ async def patch2(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get3(
+async def get4(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -131,61 +171,12 @@ async def get3(
 
 @router.patch(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch3(
-    cooling_unit_id: str,
-    reservoir_id: str,
-    filter_id: str,
-    request: Request,
-    response: Response,
-    body: FilterOnUpdate,
-) -> Filter:
-    s: Service = get_service(Filter, request)
-    b: dict[str, Any] = {
-        "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
-        "filter_id": filter_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Filter, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
-    response_model_exclude_none=True,
-)
-async def get4(
-    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
-) -> Filter:
-    s: Service = get_service(Filter, request)
-    b: dict[str, Any] = {
-        "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
-        "filter_id": filter_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Filter, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch4(
     cooling_unit_id: str,
-    pump_id: str,
+    reservoir_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -194,7 +185,7 @@ async def patch4(
     s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -204,19 +195,20 @@ async def patch4(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
 async def get5(
-    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -227,12 +219,60 @@ async def get5(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch5(
     cooling_unit_id: str,
+    pump_id: str,
+    filter_id: str,
+    request: Request,
+    response: Response,
+    body: FilterOnUpdate,
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Filter, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+async def get6(
+    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Filter, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch6(
+    cooling_unit_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -257,7 +297,7 @@ async def patch5(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get6(
+async def get7(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -278,7 +318,7 @@ async def get6(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch6(
+async def patch7(
     cooling_unit_id: str,
     reservoir_id: str,
     filter_id: str,
@@ -306,7 +346,7 @@ async def patch6(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get7(
+async def get8(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -327,7 +367,7 @@ async def get7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch7(
+async def patch8(
     cooling_unit_id: str,
     pump_id: str,
     filter_id: str,
@@ -355,7 +395,7 @@ async def patch7(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get8(
+async def get9(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -375,7 +415,7 @@ async def get8(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch8(
+async def patch9(
     cooling_unit_id: str,
     filter_id: str,
     request: Request,
@@ -401,7 +441,7 @@ async def patch8(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get9(
+async def get10(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -422,7 +462,7 @@ async def get9(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch9(
+async def patch10(
     cooling_unit_id: str,
     reservoir_id: str,
     filter_id: str,
@@ -450,7 +490,7 @@ async def patch9(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
     response_model_exclude_none=True,
 )
-async def get10(
+async def get11(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Filter:
     s: Service = get_service(Filter, request)
@@ -471,7 +511,151 @@ async def get10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch10(
+async def patch11(
+    cooling_unit_id: str,
+    pump_id: str,
+    filter_id: str,
+    request: Request,
+    response: Response,
+    body: FilterOnUpdate,
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Filter, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+async def get12(
+    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Filter, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch12(
+    cooling_unit_id: str,
+    filter_id: str,
+    request: Request,
+    response: Response,
+    body: FilterOnUpdate,
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Filter, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+async def get13(
+    cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Filter, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch13(
+    cooling_unit_id: str,
+    reservoir_id: str,
+    filter_id: str,
+    request: Request,
+    response: Response,
+    body: FilterOnUpdate,
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "reservoir_id": reservoir_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Filter, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+async def get14(
+    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
+) -> Filter:
+    s: Service = get_service(Filter, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Filter, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch14(
     cooling_unit_id: str,
     pump_id: str,
     filter_id: str,

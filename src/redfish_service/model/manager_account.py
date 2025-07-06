@@ -57,7 +57,7 @@ class ManagerAccount(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount"
+        serialization_alias="@odata.type", default="#ManagerAccount.v1_14_0.ManagerAccount"
     )
     account_expiration: str | None = None
     account_types: list[AccountTypes]
@@ -94,7 +94,7 @@ class ManagerAccountOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ManagerAccount.v1_13_0.ManagerAccount"
+        serialization_alias="@odata.type", default="#ManagerAccount.v1_14_0.ManagerAccount"
     )
     account_expiration: str | None = None
     account_types: list[AccountTypes] | None = None

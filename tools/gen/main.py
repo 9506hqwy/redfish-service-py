@@ -21,7 +21,7 @@ ALIAS_CLASS_NAMES: dict[str, dict[str, str]] = {
 }
 
 # pydantic.BaseModel properties.
-BASE_MODEL_PROPERTIES: list[str] = ["schema"]
+BASE_MODEL_PROPERTIES: list[str] = ["schema", "validate"]
 
 # define common values because of avoiding circular reference.
 CIRCULAR_REFERENCE_VALUES: list[str] = ["AccountTypes"]
@@ -1195,11 +1195,11 @@ def write_routers_init(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> 
 
         redfish.write("\n")
         redfish.write("\n")
-        redfish.write("def include_router(app: FastAPI) -> None:\n")
+        redfish.write("def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915\n")
 
         swordfish.write("\n")
         swordfish.write("\n")
-        swordfish.write("def include_router(app: FastAPI) -> None:\n")
+        swordfish.write("def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915\n")
 
         for c in classall:
             if c.domain == "swordfish":

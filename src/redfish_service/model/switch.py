@@ -18,8 +18,16 @@ class Actions(RedfishModel):
 
 class Cxl(RedfishModel):
     max_vc_ss_supported: int | None = Field(serialization_alias="MaxVCSsSupported", default=None)
+    number_of_boundv_pp_bs: int | None = Field(
+        serialization_alias="NumberOfBoundvPPBs", default=None
+    )
+    pbr_capable: bool | None = Field(serialization_alias="PBRCapable", default=None)
+    total_hdm_decoders: int | None = Field(serialization_alias="TotalHDMDecoders", default=None)
     total_numberv_pp_bs: int | None = Field(serialization_alias="TotalNumbervPPBs", default=None)
     vcs: VcsSwitch | None = Field(serialization_alias="VCS", default=None)
+    virtual_cxl_switches: IdRef | None = Field(
+        serialization_alias="VirtualCXLSwitches", default=None
+    )
 
 
 class Links(RedfishModel):
@@ -49,7 +57,7 @@ class Switch(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Switch.v1_9_3.Switch")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Switch.v1_10_0.Switch")
     actions: Actions | None = None
     asset_tag: str | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)

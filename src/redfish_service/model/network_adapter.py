@@ -74,7 +74,7 @@ class NetworkAdapter(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#NetworkAdapter.v1_11_0.NetworkAdapter"
+        serialization_alias="@odata.type", default="#NetworkAdapter.v1_12_1.NetworkAdapter"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -133,6 +133,7 @@ class ResetSettingsToDefault(RedfishModel):
 
 
 class Sriov(RedfishModel):
+    sriov_enabled: bool | None = Field(serialization_alias="SRIOVEnabled", default=None)
     sriovvepa_capable: bool | None = Field(serialization_alias="SRIOVVEPACapable", default=None)
 
 

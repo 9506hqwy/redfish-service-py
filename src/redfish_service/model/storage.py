@@ -15,6 +15,9 @@ from .swordfish.volume import RaidType
 
 
 class Actions(RedfishModel):
+    import_foreign_drives: ImportForeignDrives | None = Field(
+        serialization_alias="#Storage.ImportForeignDrives", default=None
+    )
     rekey_external_key: RekeyExternalKey | None = Field(
         serialization_alias="#Storage.RekeyExternalKey", default=None
     )
@@ -71,6 +74,17 @@ class HotspareActivationPolicy(StrEnum):
     ON_DRIVE_FAILURE = "OnDriveFailure"
     ON_DRIVE_PREDICTED_FAILURE = "OnDrivePredictedFailure"
     OEM = "OEM"
+
+
+class ImportForeignDrives(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ImportForeignDrivesRequest(RedfishModel):
+    controller_password: str | None = None
+    drive_encryption_key: str
+    drive_encryption_key_identifier: str | None = None
 
 
 class Links(RedfishModel):
@@ -173,7 +187,7 @@ class Storage(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_18_0.Storage")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_19_0.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     block_security_id_policy: bool | None = Field(

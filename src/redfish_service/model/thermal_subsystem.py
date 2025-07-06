@@ -19,7 +19,7 @@ class ThermalSubsystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ThermalSubsystem.v1_3_3.ThermalSubsystem"
+        serialization_alias="@odata.type", default="#ThermalSubsystem.v1_4_0.ThermalSubsystem"
     )
     actions: Actions | None = None
     coolant_connector_redundancy: list[RedundantGroup] | None = None
@@ -27,6 +27,7 @@ class ThermalSubsystem(RedfishModel):
     description: str | None = None
     fan_redundancy: list[RedundantGroup] | None = None
     fans: IdRef | None = None
+    filters: IdRef | None = None
     heaters: IdRef | None = None
     id: str
     leak_detection: IdRef | None = None

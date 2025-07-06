@@ -10,20 +10,20 @@ router = APIRouter()
 
 
 @router.get(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 async def get1(
-    storage_id: str, controller_id: str, request: Request, response: Response
+    storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> StorageControllerMetrics:
     s: Service = get_service(StorageControllerMetrics, request)
     b: dict[str, Any] = {
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -33,17 +33,17 @@ async def get1(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 async def get2(
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
@@ -51,7 +51,7 @@ async def get2(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -61,17 +61,17 @@ async def get2(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 async def get3(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
@@ -79,7 +79,7 @@ async def get3(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -89,18 +89,18 @@ async def get3(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 async def get4(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
@@ -109,7 +109,7 @@ async def get4(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -119,17 +119,17 @@ async def get4(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 async def get5(
     resource_block_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
@@ -137,7 +137,7 @@ async def get5(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -147,18 +147,18 @@ async def get5(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{controller_id}/Metrics",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Metrics",
     response_model_exclude_none=True,
 )
 async def get6(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
-    controller_id: str,
+    storage_controller_id: str,
     request: Request,
     response: Response,
 ) -> StorageControllerMetrics:
@@ -167,7 +167,7 @@ async def get6(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "storage_id": storage_id,
-        "controller_id": controller_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }

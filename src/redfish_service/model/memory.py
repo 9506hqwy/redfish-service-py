@@ -58,6 +58,7 @@ class BaseModuleType(StrEnum):
     S_O_DIM_M_16B = "SO_DIMM_16b"
     S_O_DIM_M_32B = "SO_DIMM_32b"
     DIE = "Die"
+    CAMM = "CAMM"
 
 
 class Cxl(RedfishModel):
@@ -144,7 +145,7 @@ class Memory(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_20_0.Memory")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_21_0.Memory")
     actions: Actions | None = None
     allocation_alignment_mib: int | None = Field(
         serialization_alias="AllocationAlignmentMiB", default=None
@@ -328,6 +329,7 @@ class MemoryDeviceType(StrEnum):
     DDR5 = "DDR5"
     OEM = "OEM"
     LPDD_R5_SDRAM = "LPDDR5_SDRAM"
+    DD_R5_MRDIMM = "DDR5_MRDIMM"
 
 
 class MemoryLocation(RedfishModel):

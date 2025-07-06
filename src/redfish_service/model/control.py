@@ -23,7 +23,7 @@ class Control(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_6_0.Control")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_7_0.Control")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None
@@ -55,6 +55,7 @@ class Control(RedfishModel):
     sensor: SensorExcerpt | None = None
     set_point: float | None = None
     set_point_accuracy: float | None = None
+    set_point_error: float | None = None
     set_point_type: SetPointType | None = None
     set_point_units: str | None = None
     set_point_update_time: str | None = None
@@ -84,7 +85,6 @@ class ControlExcerpt(RedfishModel):
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    reading_units: str | None = None
 
 
 class ControlLoop(RedfishModel):
@@ -101,6 +101,17 @@ class ControlMode(StrEnum):
     DISABLED = "Disabled"
 
 
+class ControlNodeExcerpt(RedfishModel):
+    allowable_max: float | None = None
+    allowable_min: float | None = None
+    control_mode: ControlMode | None = None
+    data_source_uri: str | None = None
+    reading: float | None = None
+    reading_units: str | None = None
+    set_point: float | None = None
+    set_point_units: str | None = None
+
+
 class ControlRangeExcerpt(RedfishModel):
     allowable_max: float | None = None
     allowable_min: float | None = None
@@ -108,7 +119,6 @@ class ControlRangeExcerpt(RedfishModel):
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    reading_units: str | None = None
     setting_max: float | None = None
     setting_min: float | None = None
 
@@ -120,7 +130,6 @@ class ControlSingleExcerpt(RedfishModel):
     data_source_uri: str | None = None
     default_set_point: float | None = None
     reading: float | None = None
-    reading_units: str | None = None
     set_point: float | None = None
 
 
@@ -131,7 +140,6 @@ class ControlSingleLoopExcerpt(RedfishModel):
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
     reading: float | None = None
-    reading_units: str | None = None
     set_point: float | None = None
 
 
@@ -145,6 +153,12 @@ class ControlType(StrEnum):
     VALVE = "Valve"
     PERCENT = "Percent"
     DUTY_CYCLE = "DutyCycle"
+    LINEAR_POSITION = "LinearPosition"
+    LINEAR_VELOCITY = "LinearVelocity"
+    LINEAR_ACCELERATION = "LinearAcceleration"
+    ROTATIONAL_POSITION = "RotationalPosition"
+    ROTATIONAL_VELOCITY = "RotationalVelocity"
+    ROTATIONAL_ACCELERATION = "RotationalAcceleration"
     LIQUID_FLOW_LPM = "LiquidFlowLPM"
 
 
@@ -162,3 +176,4 @@ class ResetToDefaults(RedfishModel):
 class SetPointType(StrEnum):
     SINGLE = "Single"
     RANGE = "Range"
+    MONITOR = "Monitor"

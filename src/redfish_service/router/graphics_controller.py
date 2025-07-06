@@ -11,17 +11,17 @@ router = APIRouter()
 
 
 @router.delete(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete1(
-    computer_system_id: str, controller_id: str, request: Request, response: Response
+    computer_system_id: str, graphics_controller_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(GraphicsController, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "request": request,
         "response": response,
     }
@@ -29,20 +29,20 @@ async def delete1(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}",
     response_model_exclude_none=True,
 )
 async def get1(
-    computer_system_id: str, controller_id: str, request: Request, response: Response
+    computer_system_id: str, graphics_controller_id: str, request: Request, response: Response
 ) -> GraphicsController:
     s: Service = get_service(GraphicsController, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "request": request,
         "response": response,
     }
@@ -52,13 +52,13 @@ async def get1(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch1(
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     request: Request,
     response: Response,
     body: GraphicsControllerOnUpdate,
@@ -66,7 +66,7 @@ async def patch1(
     s: Service = get_service(GraphicsController, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "request": request,
         "response": response,
         "body": body,

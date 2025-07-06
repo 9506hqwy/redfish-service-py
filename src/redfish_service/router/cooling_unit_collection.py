@@ -37,3 +37,13 @@ async def get3(request: Request, response: Response) -> CoolingUnitCollection:
     m = cast(CoolingUnitCollection, s.get(**b))
     set_link_header(m, response)
     return m
+
+
+@router.get("/redfish/v1/ThermalEquipment/RPUs", response_model_exclude_none=True)
+@router.head("/redfish/v1/ThermalEquipment/RPUs", response_model_exclude_none=True)
+async def get4(request: Request, response: Response) -> CoolingUnitCollection:
+    s: Service = get_service(CoolingUnitCollection, request)
+    b: dict[str, Any] = {"request": request, "response": response}
+    m = cast(CoolingUnitCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

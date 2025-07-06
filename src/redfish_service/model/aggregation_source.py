@@ -26,7 +26,7 @@ class AggregationSource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
+        serialization_alias="@odata.type", default="#AggregationSource.v1_5_0.AggregationSource"
     )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
@@ -34,9 +34,11 @@ class AggregationSource(RedfishModel):
     host_name: str | None = None
     id: str
     links: Links | None = None
+    modbus_target_server_id: int | None = None
     name: str
     oem: dict[str, Any] | None = None
     password: str | None = None
+    port: int | None = None
     snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
     ssh_settings: SshSettingsType | None = Field(serialization_alias="SSHSettings", default=None)
     status: Status | None = None
@@ -48,7 +50,7 @@ class AggregationSourceOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#AggregationSource.v1_4_3.AggregationSource"
+        serialization_alias="@odata.type", default="#AggregationSource.v1_5_0.AggregationSource"
     )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
@@ -56,9 +58,11 @@ class AggregationSourceOnCreate(RedfishModel):
     host_name: str | None = None
     id: str | None = None
     links: Links | None = None
+    modbus_target_server_id: int | None = None
     name: str | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
+    port: int | None = None
     snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
     ssh_settings: SshSettingsType | None = Field(serialization_alias="SSHSettings", default=None)
     status: Status | None = None
@@ -70,8 +74,10 @@ class AggregationSourceOnUpdate(RedfishModelOnUpdate):
     aggregation_type: AggregationType | None = None
     host_name: str | None = None
     links: Links | None = None
+    modbus_target_server_id: int | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
+    port: int | None = None
     snmp: SnmpSettings | None = Field(serialization_alias="SNMP", default=None)
     ssh_settings: SshSettingsType | None = Field(serialization_alias="SSHSettings", default=None)
     status: Status | None = None

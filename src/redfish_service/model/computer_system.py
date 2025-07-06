@@ -137,7 +137,7 @@ class ComputerSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_24_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_25_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -156,6 +156,9 @@ class ComputerSystem(RedfishModel):
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
     hosting_roles: list[HostingRole] | None = None
+    ipmi_host_interface: IpmiHostInterface | None = Field(
+        serialization_alias="IPMIHostInterface", default=None
+    )
     id: str
     idle_power_saver: IdlePowerSaver | None = None
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
@@ -218,7 +221,7 @@ class ComputerSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_24_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_25_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -237,6 +240,9 @@ class ComputerSystemOnCreate(RedfishModel):
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
     hosting_roles: list[HostingRole] | None = None
+    ipmi_host_interface: IpmiHostInterface | None = Field(
+        serialization_alias="IPMIHostInterface", default=None
+    )
     id: str | None = None
     idle_power_saver: IdlePowerSaver | None = None
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
@@ -304,6 +310,9 @@ class ComputerSystemOnUpdate(RedfishModelOnUpdate):
     host_name: str | None = None
     host_watchdog_timer: WatchdogTimer | None = None
     hosted_services: HostedServices | None = None
+    ipmi_host_interface: IpmiHostInterface | None = Field(
+        serialization_alias="IPMIHostInterface", default=None
+    )
     idle_power_saver: IdlePowerSaver | None = None
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
     key_management: KeyManagement | None = None
@@ -383,6 +392,10 @@ class HostingRole(StrEnum):
     BARE_METAL_SERVER = "BareMetalServer"
     VIRTUAL_MACHINE_SERVER = "VirtualMachineServer"
     CONTAINER_SERVER = "ContainerServer"
+
+
+class IpmiHostInterface(RedfishModel):
+    service_enabled: bool | None = None
 
 
 class IdlePowerSaver(RedfishModel):

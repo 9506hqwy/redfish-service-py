@@ -12,6 +12,7 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    activate: Activate | None = Field(serialization_alias="#UpdateService.Activate", default=None)
     generate_ssh_identity_key_pair: GenerateSshIdentityKeyPair | None = Field(
         serialization_alias="#UpdateService.GenerateSSHIdentityKeyPair", default=None
     )
@@ -25,6 +26,15 @@ class Actions(RedfishModel):
         serialization_alias="#UpdateService.StartUpdate", default=None
     )
     oem: dict[str, Any] | None = None
+
+
+class Activate(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ActivateRequest(RedfishModel):
+    targets: list[IdRef]
 
 
 class ApplyTime(StrEnum):
@@ -72,6 +82,7 @@ class SimpleUpdateRequest(RedfishModel):
     force_update: bool | None = None
     image_uri: str = Field(serialization_alias="ImageURI")
     password: str | None = None
+    stage: bool | None = None
     targets: list[str] | None = None
     transfer_protocol: TransferProtocolType | None = None
     username: str | None = None
@@ -107,6 +118,7 @@ class TransferProtocolType(StrEnum):
 class UpdateParameters(RedfishModel):
     force_update: bool | None = None
     oem: dict[str, Any] | None = None
+    stage: bool | None = None
     targets: list[str] | None = None
 
 
@@ -115,7 +127,7 @@ class UpdateService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#UpdateService.v1_15_0.UpdateService"
+        serialization_alias="@odata.type", default="#UpdateService.v1_16_0.UpdateService"
     )
     actions: Actions | None = None
     client_certificates: IdRef | None = None
@@ -142,6 +154,7 @@ class UpdateService(RedfishModel):
     software_inventory: IdRef | None = None
     status: Status | None = None
     supported_update_image_formats: list[SupportedUpdateImageFormatType] | None = None
+    update_service_capabilities: IdRef | None = None
     verify_remote_server_certificate: bool | None = None
     verify_remote_server_ssh_key: bool | None = Field(
         serialization_alias="VerifyRemoteServerSSHKey", default=None

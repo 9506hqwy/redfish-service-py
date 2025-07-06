@@ -18,7 +18,7 @@ class ConnectionMethod(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ConnectionMethod.v1_1_1.ConnectionMethod"
+        serialization_alias="@odata.type", default="#ConnectionMethod.v1_2_0.ConnectionMethod"
     )
     actions: Actions | None = None
     connection_method_type: ConnectionMethodType | None = None
@@ -36,7 +36,7 @@ class ConnectionMethodOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ConnectionMethod.v1_1_1.ConnectionMethod"
+        serialization_alias="@odata.type", default="#ConnectionMethod.v1_2_0.ConnectionMethod"
     )
     actions: Actions | None = None
     connection_method_type: ConnectionMethodType | None = None
@@ -56,6 +56,8 @@ class ConnectionMethodType(StrEnum):
     IPMI20 = "IPMI20"
     NETCONF = "NETCONF"
     OEM = "OEM"
+    MODBUS_SERIAL = "ModbusSerial"
+    MODBUS_TCP = "ModbusTCP"
 
 
 class Links(RedfishModel):
@@ -64,6 +66,7 @@ class Links(RedfishModel):
         serialization_alias="AggregationSources@odata.count", default=None
     )
     oem: dict[str, Any] | None = None
+    serial_interface: IdRef | None = None
 
 
 class TunnelingProtocolType(StrEnum):

@@ -7,6 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
+from .resource import Status
 
 
 class Actions(RedfishModel):
@@ -20,7 +21,7 @@ class Certificate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Certificate.v1_9_0.Certificate"
+        serialization_alias="@odata.type", default="#Certificate.v1_10_0.Certificate"
     )
     actions: Actions | None = None
     certificate_string: str | None = None
@@ -35,9 +36,11 @@ class Certificate(RedfishModel):
     links: Links | None = None
     name: str
     oem: dict[str, Any] | None = None
+    password: str | None = None
     spdm: Spdm | None = Field(serialization_alias="SPDM", default=None)
     serial_number: str | None = None
     signature_algorithm: str | None = None
+    status: Status | None = None
     subject: Identifier | None = None
     uefi_signature_owner: str | None = None
     valid_not_after: str | None = None
@@ -49,7 +52,7 @@ class CertificateOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Certificate.v1_9_0.Certificate"
+        serialization_alias="@odata.type", default="#Certificate.v1_10_0.Certificate"
     )
     actions: Actions | None = None
     certificate_string: str | None = None
@@ -64,9 +67,11 @@ class CertificateOnCreate(RedfishModel):
     links: Links | None = None
     name: str | None = None
     oem: dict[str, Any] | None = None
+    password: str | None = None
     spdm: Spdm | None = Field(serialization_alias="SPDM", default=None)
     serial_number: str | None = None
     signature_algorithm: str | None = None
+    status: Status | None = None
     subject: Identifier | None = None
     uefi_signature_owner: str | None = None
     valid_not_after: str | None = None
@@ -78,7 +83,9 @@ class CertificateOnUpdate(RedfishModelOnUpdate):
     issuer: Identifier | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
+    password: str | None = None
     spdm: Spdm | None = Field(serialization_alias="SPDM", default=None)
+    status: Status | None = None
     subject: Identifier | None = None
 
 
@@ -86,6 +93,7 @@ class CertificateType(StrEnum):
     PEM = "PEM"
     PE_MCHAIN = "PEMchain"
     PKCS7 = "PKCS7"
+    PKCS12 = "PKCS12"
 
 
 class CertificateUsageType(StrEnum):

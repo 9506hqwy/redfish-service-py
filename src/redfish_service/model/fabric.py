@@ -18,7 +18,7 @@ class Fabric(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Fabric.v1_3_2.Fabric")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Fabric.v1_4_0.Fabric")
     actions: Actions | None = None
     address_pools: IdRef | None = None
     connections: IdRef | None = None
@@ -46,4 +46,8 @@ class FabricOnUpdate(RedfishModelOnUpdate):
 
 
 class Links(RedfishModel):
+    managed_by: list[IdRef] | None = None
+    managed_by_odata_count: int | None = Field(
+        serialization_alias="ManagedBy@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None

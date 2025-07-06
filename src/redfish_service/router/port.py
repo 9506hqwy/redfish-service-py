@@ -336,20 +336,24 @@ async def reset4(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 async def get5(
-    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+    computer_system_id: str,
+    graphics_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = get_service(Port, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -360,13 +364,13 @@ async def get5(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch5(
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -375,7 +379,7 @@ async def patch5(
     s: Service = get_service(Port, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -385,13 +389,13 @@ async def patch5(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/Actions/Port.Reset",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/Actions/Port.Reset",
     response_model_exclude_none=True,
 )
 @authenticate
 async def reset5(
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -400,7 +404,7 @@ async def reset5(
     s: Service = get_service(Port, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -411,20 +415,24 @@ async def reset5(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 async def get6(
-    computer_system_id: str, controller_id: str, port_id: str, request: Request, response: Response
+    computer_system_id: str,
+    usb_controller_id: str,
+    port_id: str,
+    request: Request,
+    response: Response,
 ) -> Port:
     s: Service = get_service(Port, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -435,13 +443,13 @@ async def get6(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch6(
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -450,7 +458,7 @@ async def patch6(
     s: Service = get_service(Port, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -460,13 +468,13 @@ async def patch6(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/Actions/Port.Reset",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/Actions/Port.Reset",
     response_model_exclude_none=True,
 )
 @authenticate
 async def reset6(
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -475,7 +483,7 @@ async def reset6(
     s: Service = get_service(Port, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1298,17 +1306,17 @@ async def reset16(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 async def get17(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1317,7 +1325,7 @@ async def get17(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1328,14 +1336,14 @@ async def get17(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch17(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1345,7 +1353,7 @@ async def patch17(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1355,14 +1363,14 @@ async def patch17(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/Actions/Port.Reset",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/Actions/Port.Reset",
     response_model_exclude_none=True,
 )
 @authenticate
 async def reset17(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1372,7 +1380,7 @@ async def reset17(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1383,17 +1391,17 @@ async def reset17(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 async def get18(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1402,7 +1410,7 @@ async def get18(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1413,14 +1421,14 @@ async def get18(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch18(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1430,7 +1438,7 @@ async def patch18(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -1440,14 +1448,14 @@ async def patch18(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/Actions/Port.Reset",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/Actions/Port.Reset",
     response_model_exclude_none=True,
 )
 @authenticate
 async def reset18(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -1457,7 +1465,7 @@ async def reset18(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2065,17 +2073,17 @@ async def reset25(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 async def get26(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2084,7 +2092,7 @@ async def get26(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2095,14 +2103,14 @@ async def get26(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch26(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2112,7 +2120,7 @@ async def patch26(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2122,14 +2130,14 @@ async def patch26(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports/{port_id}/Actions/Port.Reset",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports/{port_id}/Actions/Port.Reset",
     response_model_exclude_none=True,
 )
 @authenticate
 async def reset26(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2139,7 +2147,7 @@ async def reset26(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2150,17 +2158,17 @@ async def reset26(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 async def get27(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2169,7 +2177,7 @@ async def get27(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2180,14 +2188,14 @@ async def get27(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch27(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2197,7 +2205,7 @@ async def patch27(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,
@@ -2207,14 +2215,14 @@ async def patch27(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports/{port_id}/Actions/Port.Reset",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports/{port_id}/Actions/Port.Reset",
     response_model_exclude_none=True,
 )
 @authenticate
 async def reset27(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     port_id: str,
     request: Request,
     response: Response,
@@ -2224,7 +2232,7 @@ async def reset27(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "port_id": port_id,
         "request": request,
         "response": response,

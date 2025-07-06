@@ -8,6 +8,7 @@ from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, Status
+from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
@@ -18,9 +19,10 @@ class Filter(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Filter.v1_0_2.Filter")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Filter.v1_1_0.Filter")
     actions: Actions | None = None
     assembly: IdRef | None = None
+    delta_liquid_pressurek_pa: SensorExcerpt | None = None
     description: str | None = None
     hot_pluggable: bool | None = None
     id: str

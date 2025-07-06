@@ -19,9 +19,10 @@ class LeakDetector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LeakDetector.v1_3_0.LeakDetector"
+        serialization_alias="@odata.type", default="#LeakDetector.v1_4_0.LeakDetector"
     )
     actions: Actions | None = None
+    critical_reaction_type: ReactionType | None = None
     description: str | None = None
     detector_state: Health | None = None
     enabled: bool | None = None
@@ -35,21 +36,26 @@ class LeakDetector(RedfishModel):
     part_number: str | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
+    reaction_delay_seconds: int | None = None
     sku: str | None = Field(serialization_alias="SKU", default=None)
     sensing_frequency: float | None = None
     serial_number: str | None = None
     spare_part_number: str | None = None
     status: Status | None = None
     user_label: str | None = None
+    warning_reaction_type: ReactionType | None = None
 
 
 class LeakDetectorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
+    critical_reaction_type: ReactionType | None = None
     enabled: bool | None = None
     location: Location | None = None
     oem: dict[str, Any] | None = None
+    reaction_delay_seconds: int | None = None
     status: Status | None = None
     user_label: str | None = None
+    warning_reaction_type: ReactionType | None = None
 
 
 class LeakDetectorArrayExcerpt(RedfishModel):
@@ -68,3 +74,9 @@ class LeakDetectorExcerpt(RedfishModel):
 class LeakDetectorType(StrEnum):
     MOISTURE = "Moisture"
     FLOAT_SWITCH = "FloatSwitch"
+
+
+class ReactionType(StrEnum):
+    NONE = "None"
+    FORCE_OFF = "ForceOff"
+    GRACEFUL_SHUTDOWN = "GracefulShutdown"

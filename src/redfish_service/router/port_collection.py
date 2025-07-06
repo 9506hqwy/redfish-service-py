@@ -133,20 +133,20 @@ async def get5(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports",
+    "/redfish/v1/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 async def get6(
-    computer_system_id: str, controller_id: str, request: Request, response: Response
+    computer_system_id: str, graphics_controller_id: str, request: Request, response: Response
 ) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "request": request,
         "response": response,
     }
@@ -156,20 +156,20 @@ async def get6(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports",
+    "/redfish/v1/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 async def get7(
-    computer_system_id: str, controller_id: str, request: Request, response: Response
+    computer_system_id: str, usb_controller_id: str, request: Request, response: Response
 ) -> PortCollection:
     s: Service = get_service(PortCollection, request)
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "request": request,
         "response": response,
     }
@@ -489,17 +489,17 @@ async def get19(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 async def get20(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     request: Request,
     response: Response,
 ) -> PortCollection:
@@ -507,7 +507,7 @@ async def get20(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "request": request,
         "response": response,
     }
@@ -517,17 +517,17 @@ async def get20(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 async def get21(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     request: Request,
     response: Response,
 ) -> PortCollection:
@@ -535,7 +535,7 @@ async def get21(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "request": request,
         "response": response,
     }
@@ -791,17 +791,17 @@ async def get30(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{controller_id}/Ports",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/GraphicsControllers/{graphics_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 async def get31(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    graphics_controller_id: str,
     request: Request,
     response: Response,
 ) -> PortCollection:
@@ -809,7 +809,7 @@ async def get31(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "graphics_controller_id": graphics_controller_id,
         "request": request,
         "response": response,
     }
@@ -819,17 +819,17 @@ async def get31(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{controller_id}/Ports",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/USBControllers/{usb_controller_id}/Ports",
     response_model_exclude_none=True,
 )
 async def get32(
     resource_block_id: str,
     computer_system_id: str,
-    controller_id: str,
+    usb_controller_id: str,
     request: Request,
     response: Response,
 ) -> PortCollection:
@@ -837,7 +837,7 @@ async def get32(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
-        "controller_id": controller_id,
+        "usb_controller_id": usb_controller_id,
         "request": request,
         "response": response,
     }

@@ -51,7 +51,7 @@ class MetricReportDefinition(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#MetricReportDefinition.v1_4_6.MetricReportDefinition",
+        default="#MetricReportDefinition.v1_4_7.MetricReportDefinition",
     )
     actions: Actions | None = None
     append_limit: int | None = None
@@ -81,7 +81,7 @@ class MetricReportDefinitionOnCreate(RedfishModel):
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
         serialization_alias="@odata.type",
-        default="#MetricReportDefinition.v1_4_6.MetricReportDefinition",
+        default="#MetricReportDefinition.v1_4_7.MetricReportDefinition",
     )
     actions: Actions | None = None
     append_limit: int | None = None

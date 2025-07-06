@@ -52,7 +52,7 @@ class MetricDefinition(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
+        serialization_alias="@odata.type", default="#MetricDefinition.v1_3_5.MetricDefinition"
     )
     accuracy: float | None = None
     actions: Actions | None = None
@@ -90,7 +90,7 @@ class MetricDefinitionOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#MetricDefinition.v1_3_4.MetricDefinition"
+        serialization_alias="@odata.type", default="#MetricDefinition.v1_3_5.MetricDefinition"
     )
     accuracy: float | None = None
     actions: Actions | None = None
