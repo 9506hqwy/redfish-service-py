@@ -17,9 +17,10 @@ class VolumeMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#VolumeMetrics.v1_1_1.VolumeMetrics"
+        serialization_alias="@odata.type", default="#VolumeMetrics.v1_2_0.VolumeMetrics"
     )
     actions: Actions | None = None
+    compression_savings_bytes: int | None = None
     consistency_check_count: float | None = None
     consistency_check_error_count: float | None = None
     correctable_io_read_error_count: int | None = Field(
@@ -28,6 +29,7 @@ class VolumeMetrics(RedfishModel):
     correctable_io_write_error_count: int | None = Field(
         serialization_alias="CorrectableIOWriteErrorCount", default=None
     )
+    deduplication_savings_bytes: int | None = None
     description: str | None = None
     io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
@@ -35,6 +37,7 @@ class VolumeMetrics(RedfishModel):
     oem: dict[str, Any] | None = None
     rebuild_error_count: float | None = None
     state_change_count: float | None = None
+    thin_provisioning_savings_bytes: int | None = None
     uncorrectable_io_read_error_count: int | None = Field(
         serialization_alias="UncorrectableIOReadErrorCount", default=None
     )

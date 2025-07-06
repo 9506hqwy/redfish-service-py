@@ -45,7 +45,7 @@ class FileSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#FileSystem.v1_4_1.FileSystem"
+        serialization_alias="@odata.type", default="#FileSystem.v1_4_2.FileSystem"
     )
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
@@ -87,7 +87,7 @@ class FileSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#FileSystem.v1_4_1.FileSystem"
+        serialization_alias="@odata.type", default="#FileSystem.v1_4_2.FileSystem"
     )
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None

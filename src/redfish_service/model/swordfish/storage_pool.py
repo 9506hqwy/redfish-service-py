@@ -141,7 +141,7 @@ class StoragePool(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool"
+        serialization_alias="@odata.type", default="#StoragePool.v1_9_2.StoragePool"
     )
     actions: Actions | None = None
     allocated_pools: IdRef | None = None
@@ -199,7 +199,7 @@ class StoragePoolOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#StoragePool.v1_9_1.StoragePool"
+        serialization_alias="@odata.type", default="#StoragePool.v1_9_2.StoragePool"
     )
     actions: Actions | None = None
     allocated_pools: IdRef | None = None

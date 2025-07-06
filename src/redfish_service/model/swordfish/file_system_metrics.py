@@ -17,11 +17,14 @@ class FileSystemMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#FileSystemMetrics.v1_0_1.FileSystemMetrics"
+        serialization_alias="@odata.type", default="#FileSystemMetrics.v1_1_0.FileSystemMetrics"
     )
     actions: Actions | None = None
+    compression_savings_bytes: int | None = None
+    deduplication_savings_bytes: int | None = None
     description: str | None = None
     io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
     name: str
     oem: dict[str, Any] | None = None
+    thin_provisioning_savings_bytes: int | None = None

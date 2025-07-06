@@ -350,7 +350,7 @@ class Volume(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Volume.v1_10_1.Volume")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Volume.v1_10_2.Volume")
     alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
@@ -424,7 +424,7 @@ class VolumeOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Volume.v1_10_1.Volume"
+        serialization_alias="@odata.type", default="#Volume.v1_10_2.Volume"
     )
     alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
