@@ -39,10 +39,10 @@ class SessionService(Service[Session]):
 
         return r
 
-    def _get_by_id(self, id: str) -> Session:
-        s = next((s for s in instances.enum_by_type(Session) if s.id == id), None)
+    def _get_by_id(self, session_id: str) -> Session:
+        s = next((s for s in instances.enum_by_type(Session) if s.id == session_id), None)
         if s is None:
-            raise ResourceNotFoundError("Session", id)
+            raise ResourceNotFoundError("Session", session_id)
 
         return s
 

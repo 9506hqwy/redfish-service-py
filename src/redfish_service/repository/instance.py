@@ -1,9 +1,9 @@
-from typing import Generator
+from collections.abc import Generator
 
 from ..model import RedfishModel
 
 
-class Instances(object):
+class Instances:
     def __init__(self) -> None:
         self.instances: list[RedfishModel] = []
 

@@ -9,9 +9,10 @@ import itertools
 import json
 import re
 import sys
+from collections.abc import Callable, Generator
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Generator, TypeGuard, cast
+from typing import Any, TypeGuard, cast
 from urllib.parse import urlparse
 from warnings import warn
 
@@ -69,7 +70,7 @@ class ClassInfo:
     def id_ref(self) -> bool:
         if (any_of := self.definition.get("anyOf", None)) is not None:
             ids: list[str] = [d["$ref"] for d in any_of if "$ref" in d]
-            return any((i for i in ids if i.endswith("/idRef")))
+            return any(i for i in ids if i.endswith("/idRef"))
         return False
 
     @property
@@ -178,10 +179,10 @@ class ClassInfo:
         required: list[str],
         required_on_create: list[str],
     ) -> None:
-        type, array, nonable_type = resolve_property_type(classall, self, definition, True)
+        prop_type, array, nonable_type = resolve_property_type(classall, self, definition, True)
         nonable = nonable_type or (name not in required)
         nonable_on_create = nonable_type or (name not in required_on_create)
-        info = PropetyInfo(definition, name, type, array, nonable, nonable_on_create)
+        info = PropetyInfo(definition, name, prop_type, array, nonable, nonable_on_create)
         self.properties.append(info)
 
     def __hash__(self) -> int:
@@ -398,8 +399,8 @@ def get_property_name(name: str) -> str:
 
 
 def get_primitive_type_name(definition: dict[str, Any]) -> str | None:
-    if type := definition.get("type", None):
-        match type:
+    if ty := definition.get("type", None):
+        match ty:
             case "boolean":
                 return "bool"
             case "integer":
@@ -449,13 +450,11 @@ def iter_definitions(
 ) -> Generator[tuple[str, dict[str, Any]], None, None]:
     schema = json.loads(schema_path.read_text())
     if "definitions" in schema:
-        for name, defenition in schema["definitions"].items():
-            yield (name, defenition)
+        yield from schema["definitions"].items()
 
 
 def iter_schemas(base_path: Path) -> Generator[Path, None, None]:
-    for f in base_path.glob("*.json"):
-        yield f
+    yield from base_path.glob("*.json")
 
 
 def load_actions(classall: list[ClassInfo | EnumInfo]) -> None:
@@ -671,25 +670,25 @@ def resolve_property_type(
         info = resolve_ref(classes, source, ref)
         if prefer_idref and info.id_ref:
             info = next(
-                (c for c in classes if c.schema_path.name == "odata-v4.json" and c.name == "idRef")
+                c for c in classes if c.schema_path.name == "odata-v4.json" and c.name == "idRef"
             )
             info.reachable = True
 
         return (info, False, noneable)
 
     if (any_of := definition.get("anyOf", None)) is not None:
-        nonable = any((a for a in any_of if has_null(a)))
+        nonable = any(a for a in any_of if has_null(a))
         if nonable and len(any_of) == 2:  # noqa: PLR2004
-            ref = next((a["$ref"] for a in any_of if "$ref" in a))
+            ref = next(a["$ref"] for a in any_of if "$ref" in a)
             return get_from_ref(ref, nonable)
 
     if (ref := definition.get("$ref", None)) is not None:
         return get_from_ref(ref, False)
 
-    if (type := definition.get("type", None)) is not None:
-        match type:
+    if (ty := definition.get("type", None)) is not None:
+        match ty:
             case list():
-                types: list[str] = type
+                types: list[str] = ty
                 try:
                     index = types.index("null")
                     types.pop(index)
@@ -810,7 +809,7 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
                     if isinstance(c, ClassInfo) and c.raw:
                         continue
 
-                    if c.versioned and any((i for i in classes if func_match_newer(c)(i))):
+                    if c.versioned and any(i for i in classes if func_match_newer(c)(i)):
                         warn(f"Exist newer version '{c}'")
                         continue
 

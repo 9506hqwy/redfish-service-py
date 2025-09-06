@@ -22,9 +22,9 @@ class ManagerAccountService(Service[ManagerAccount]):
 
         return a
 
-    def _get_by_id(self, id: str) -> ManagerAccount:
-        a = next((a for a in instances.enum_by_type(ManagerAccount) if a.id == id), None)
+    def _get_by_id(self, account_id: str) -> ManagerAccount:
+        a = next((a for a in instances.enum_by_type(ManagerAccount) if a.id == account_id), None)
         if a is None:
-            raise ResourceNotFoundError("ManagerAccount", id)
+            raise ResourceNotFoundError("ManagerAccount", account_id)
 
         return a

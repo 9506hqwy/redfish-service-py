@@ -218,7 +218,7 @@ def get_methods(scope: Scope, router: Router) -> set[str]:
 def supported_headers(supported: list[str], values: list[str]) -> bool:
     for value in values:
         for v in value.split(";"):
-            if v and any((s for s in supported if s == v.strip())):
+            if v and any(s for s in supported if s == v.strip()):
                 return True
 
     return False

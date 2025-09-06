@@ -101,8 +101,8 @@ async def odata() -> OdataService:
     response = OdataService(odata_context="/redfish/v1/$metadata", value=[])
     response.value.append(OdataServiceValue(name="Service", url=root.odata_id))
 
-    if id := root.account_service:
-        response.value.append(OdataServiceValue(name="Account", url=cast(str, id.odata_id)))
+    if service := root.account_service:
+        response.value.append(OdataServiceValue(name="Account", url=cast(str, service.odata_id)))
 
     return response
 

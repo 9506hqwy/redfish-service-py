@@ -59,10 +59,10 @@ class RoleService(Service[Role]):
 
         return r
 
-    def _get_by_id(self, id: str) -> Role:
-        r = next((r for r in instances.enum_by_type(Role) if r.id == id), None)
+    def _get_by_id(self, role_id: str) -> Role:
+        r = next((r for r in instances.enum_by_type(Role) if r.id == role_id), None)
         if r is None:
-            raise ResourceNotFoundError("Role", id)
+            raise ResourceNotFoundError("Role", role_id)
 
         return r
 

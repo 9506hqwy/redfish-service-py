@@ -2,19 +2,19 @@ pre-commit:
   jobs:
     - name: Python Format
       glob: "*.py"
-      run: uv run ruff format --check
+      run: uv run tox -e format
 
     - name: Python Lint
       glob: "*.py"
-      run: uv run ruff check
+      run: uv run tox -e lint
 
     - name: Python Type
       glob: "*.py"
-      run: uv run mypy ./src
+      run: uv run tox -e type
 
     - name: Python Test
       glob: "*.py"
-      run: uv run pytest
+      run: uv run tox -e py312
 
     - name: Actions Lint
       glob: ".github/workflows/*.yml"

@@ -38,8 +38,14 @@ class RoleCollectionService(ServiceCollection[RoleCollection, Role]):
         collection = self._get_by_type()
 
         etag = create_etag()
-        id = body.role_id
-        role = Role(odata_etag=etag, odata_id=f"{req.url.path}/{id}", id=id, name=id, role_id=id)
+        role_id = body.role_id
+        role = Role(
+            odata_etag=etag,
+            odata_id=f"{req.url.path}/{role_id}",
+            id=role_id,
+            name=role_id,
+            role_id=role_id,
+        )
 
         instances.add(role)
         collection.odata_etag = etag

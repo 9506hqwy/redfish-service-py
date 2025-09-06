@@ -1,6 +1,7 @@
+.benchmarks/
 .mypy_cache/
 .pytest_cache/
-.ruff_cache
+.ruff_cache/
 .tox/
 .venv/
 __pycache__/
@@ -12,6 +13,9 @@ doc/
 logs/
 reports/
 *.egg-info/
+
+*.bin
+*.pstats
 
 .coverage
 pylock.toml

@@ -115,11 +115,14 @@ class ResourceAtUriUnauthorizedError(RedfishError):
 
 
 class ResourceNotFoundError(RedfishError):
-    def __init__(self, type: str, id: str) -> None:
+    def __init__(self, resource_type: str, resource_id: str) -> None:
+        message = (
+            f"The requested resource of type {resource_type} named {resource_id} was not found."
+        )
         info = {
             "error": {
                 "code": "Base.1.19.0.ResourceNotFound",
-                "message": f"The requested resource of type {type} named {id} was not found.",
+                "message": message,
             }
         }
         error = Error.model_validate(info)

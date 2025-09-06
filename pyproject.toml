@@ -27,24 +27,26 @@ redfish-service = "redfish_service.cli:main"
 Homepage = "https://github.com/9506hqwy/redfish-service-py"
 
 [build-system]
-requires = ["uv_build>=0.7.19,<0.8.0"]
+requires = ["uv_build>=0.8.14,<0.9.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-  "mypy>=1.16.1",
+  "mypy>=1.17.1",
   "pip-licenses>=5.0.0",
   "redfish-protocol-validator>=1.2.6",
   "redfish-service-validator>=2.4.9",
-  "ruff>=0.12.2",
+  "ruff>=0.12.11",
 ]
 doc = ["sphinx>=8.2.3"]
+profile = ["gprof2dot>=2025.4.14", "memray>=1.18.0"]
 test = [
   "httpx>=0.28.1",
+  "pytest-benchmark>=5.1.0",
   "pytest-cov>=6.2.1",
   "pytest>=8.4.1",
-  "tox-uv>=1.26.1",
-  "tox>=4.27.0",
+  "tox-uv>=1.28.0",
+  "tox>=4.29.0",
 ]
 
 [tool.uv.build-backend]
@@ -52,16 +54,21 @@ module-name = "redfish_service"
 
 [tool.mypy]
 disallow_subclassing_any = true
+disallow_untyped_calls = true
 disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
 implicit_optional = false
 strict_optional = true
-warn_no_return = true
 warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
 warn_return_any = true
 warn_unreachable = true
-warn_unused_ignores = true
 
 [tool.pytest.ini_options]
+addopts = "--benchmark-skip"
 # occur `no-data-collected` at coverage if removed.
 pythonpath = "src"
 
@@ -74,7 +81,11 @@ line-length = 99
 extend-select = [
   "ANN", # flake8-annotations (ANN)
   "S",   # flake8-bandit (S)
+  "A",   # flake8-builtins (A)
+  #"FIX", # flake8-fixme (FIX)
   "PYI", # flake8-pyi (PYI)
+  "Q",   # flake8-quotes (Q)
+  "PTH", # flake8-use-pathlib (PTH)
   "I",   # isort (I)
   "N",   # pep8-naming (N)
   "E",   # pycodestyle (E)
@@ -82,6 +93,7 @@ extend-select = [
   #"D",   # pydocstyle (D)
   "F",   # Pyflakes (F)
   "PL",  # Pylint (PL)
+  "UP",  # pyupgrade (UP)
   "RUF", # Ruff-specific rules (RUF)
 ]
 ignore = [
@@ -112,14 +124,14 @@ env_list =
 deps =
   httpx
   pytest
+  pytest-benchmark
   pytest-cov
 commands =
   pytest --cov-append --cov-branch --cov=src -v
 
 [testenv:format]
-deps = ruff
 commands =
-  ruff format --check
+  uv format --check
 
 [testenv:lint]
 deps = ruff

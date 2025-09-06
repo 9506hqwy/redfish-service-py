@@ -13,7 +13,7 @@
             ],
             // https://docs.pytest.org/en/7.1.x/example/simple.html
             "env": {
-                "PYTEST_ADDOPTS": "--no-cov"
+                "PYTEST_ADDOPTS": "--no-cov --benchmark-skip"
             }
         },
         {

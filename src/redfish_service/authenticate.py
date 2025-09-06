@@ -1,6 +1,7 @@
+from collections.abc import Callable
 from functools import wraps
 from inspect import Parameter, Signature, signature
-from typing import Any, Callable, cast
+from typing import Any, cast
 
 from fastapi import Depends, Request
 from fastapi.security import HTTPBasic, HTTPBasicCredentials

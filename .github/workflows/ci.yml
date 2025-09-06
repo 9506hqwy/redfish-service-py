@@ -6,96 +6,12 @@ on:
     tags-ignore: [ '**' ]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  build:
+  ubuntu:
+    uses: 9506hqwy/actions/.github/workflows/python-ci-ubuntu.yml@main
 
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Install Project Management Tool
-      run: pip install uv
-
-    - name: Install Test Libraries
-      run: uv sync --group test
-
-    - name: Run Tests
-      run: uv run tox
-
-    - name: Generate Coverage Report (Ubuntu)
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        mkdir ./artifacts
-
-        uv run coverage report > ./artifacts/Summary.txt
-        cat ./artifacts/Summary.txt
-
-        uv run coverage report --format=markdown > ./artifacts/SummaryGithub.md
-        cat ./artifacts/SummaryGithub.md > $GITHUB_STEP_SUMMARY
-
-        uv run coverage html --directory=./coverage_html
-        CUR_DIR=$(pwd)
-        pushd coverage_html
-        tar -zcf "${CUR_DIR}/artifacts/coverage.tar.gz" *
-        popd
-
-    - name: Generate Coverage Report (Windows)
-      if: matrix.os == 'windows-latest'
-      run: |
-        mkdir .\artifacts
-
-        uv run coverage report > .\artifacts\Summary.txt
-        Get-Content ".\artifacts\Summary.txt"
-
-        uv run coverage report --format=markdown > .\artifacts\SummaryGithub.md
-        Get-Content ".\artifacts\SummaryGithub.md" > $env:GITHUB_STEP_SUMMARY
-
-        uv run coverage html --directory=.\coverage_html
-        Compress-Archive -Path 'coverage_html\*' -DestinationPath ".\artifacts\coverage.zip"
-
-    - name: Create Artifacts (Ubuntu)
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        uv build
-
-        uv sync --group doc
-
-        REPOSITORY_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}
-        uv run sphinx-apidoc -F -f -a -H $REPOSITORY_NAME -A $GITHUB_REPOSITORY_OWNER -V latest -o doc src
-        pushd doc
-        uv run make html
-        popd
-
-        CUR_DIR=$(pwd)
-        pushd doc/_build/html/
-        tar -zcf "${CUR_DIR}/artifacts/help-${REPOSITORY_NAME}.tar.gz" *
-        popd
-
-    - name: Create Artifacts (Windows)
-      if: matrix.os == 'windows-latest'
-      run: |
-        uv build
-
-        uv sync --group doc
-
-        $REPOSITORY_NAME = ($env:GITHUB_REPOSITORY -Split '/')[1]
-        uv run sphinx-apidoc -F -f -a -H $REPOSITORY_NAME -A $env:GITHUB_REPOSITORY_OWNER -V latest -o doc src
-        pushd doc
-        uv run .\make.bat html
-        popd
-
-        Compress-Archive -Path 'doc\_build\html\*' -DestinationPath ".\artifacts\help-${REPOSITORY_NAME}.zip"
-
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: artifacts-${{ runner.os }}-${{ runner.arch }}-${{ github.run_number }}
-        path: |
-          artifacts
-          dist
-        retention-days: 1
+  windows:
+    uses: 9506hqwy/actions/.github/workflows/python-ci-windows.yml@main

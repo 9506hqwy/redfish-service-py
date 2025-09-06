@@ -48,14 +48,14 @@ class SessionCollectionService(ServiceCollection[SessionCollection, Session]):
         collection = self._get_by_type()
 
         etag = create_etag()
-        id = uuid.uuid4()
+        session_id = uuid.uuid4()
         token = uuid.uuid4()
 
         session = Session(
             odata_etag=etag,
-            odata_id=f"{req.url.path}/{id}",
-            id=str(id),
-            name=str(id),
+            odata_id=f"{req.url.path}/{session_id}",
+            id=str(session_id),
+            name=str(session_id),
             user_name=body.user_name,
         )
         session.extra_fields["token"] = str(token)

@@ -339,7 +339,7 @@ from . import (
     facility_collection,
     fan,
     fan_collection,
-    filter,
+    filter,  # noqa: A004
     filter_collection,
     graphics_controller,
     graphics_controller_collection,
@@ -365,7 +365,7 @@ from . import (
     leak_detection,
     leak_detector,
     leak_detector_collection,
-    license,
+    license,  # noqa: A004
     license_collection,
     license_service,
     log_entry,
