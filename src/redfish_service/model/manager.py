@@ -115,7 +115,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_22_0.Manager")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_23_0.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
@@ -148,6 +148,7 @@ class Manager(RedfishModel):
     oem: dict[str, Any] | None = None
     part_number: str | None = None
     power_state: PowerState | None = None
+    ready_to_remove: bool | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(
         serialization_alias="Redundancy@odata.count", default=None
@@ -189,6 +190,7 @@ class ManagerOnUpdate(RedfishModelOnUpdate):
     location_indicator_active: bool | None = None
     measurements: list[MeasurementBlock] | None = None
     oem: dict[str, Any] | None = None
+    ready_to_remove: bool | None = None
     redundancy: list[IdRef] | None = None
     serial_console: SerialConsole | None = None
     service_identification: str | None = None

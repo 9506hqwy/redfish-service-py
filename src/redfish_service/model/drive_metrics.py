@@ -17,7 +17,7 @@ class DriveMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#DriveMetrics.v1_2_1.DriveMetrics"
+        serialization_alias="@odata.type", default="#DriveMetrics.v1_3_0.DriveMetrics"
     )
     actions: Actions | None = None
     bad_block_count: int | None = None
@@ -29,6 +29,7 @@ class DriveMetrics(RedfishModel):
     )
     description: str | None = None
     id: str
+    lifetime_start_date_time: str | None = None
     nvme_smart: NvmeSmartMetrics | None = Field(serialization_alias="NVMeSMART", default=None)
     name: str
     native_command_queue_depth: int | None = None

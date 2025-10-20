@@ -17,6 +17,10 @@ class Actions(RedfishModel):
 class Redundancy(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     actions: Actions | None = None
+    active_redundancy_set: list[IdRef] | None = None
+    active_redundancy_set_odata_count: int | None = Field(
+        serialization_alias="ActiveRedundancySet@odata.count", default=None
+    )
     max_num_supported: int | None = None
     member_id: str
     min_num_needed: int | None = None
@@ -48,6 +52,10 @@ class RedundancyType(StrEnum):
 
 
 class RedundantGroup(RedfishModel):
+    active_redundancy_group: list[IdRef] | None = None
+    active_redundancy_group_odata_count: int | None = Field(
+        serialization_alias="ActiveRedundancyGroup@odata.count", default=None
+    )
     group_name: str | None = None
     max_supported_in_group: int | None = None
     min_needed_in_group: int | None = None

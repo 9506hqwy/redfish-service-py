@@ -7,11 +7,19 @@ from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
 from .physical_context import PhysicalContext, PhysicalSubContext
-from .resource import Health, Location, Status
+from .resource import Location, Status
 
 
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
+
+
+class DetectorState(StrEnum):
+    OK = "OK"
+    WARNING = "Warning"
+    CRITICAL = "Critical"
+    UNAVAILABLE = "Unavailable"
+    ABSENT = "Absent"
 
 
 class LeakDetector(RedfishModel):
@@ -19,12 +27,12 @@ class LeakDetector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LeakDetector.v1_4_0.LeakDetector"
+        serialization_alias="@odata.type", default="#LeakDetector.v1_5_0.LeakDetector"
     )
     actions: Actions | None = None
     critical_reaction_type: ReactionType | None = None
     description: str | None = None
-    detector_state: Health | None = None
+    detector_state: DetectorState | None = None
     enabled: bool | None = None
     id: str
     leak_detector_type: LeakDetectorType | None = None
@@ -60,7 +68,7 @@ class LeakDetectorOnUpdate(RedfishModelOnUpdate):
 
 class LeakDetectorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    detector_state: Health | None = None
+    detector_state: DetectorState | None = None
     device_name: str | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
@@ -68,7 +76,7 @@ class LeakDetectorArrayExcerpt(RedfishModel):
 
 class LeakDetectorExcerpt(RedfishModel):
     data_source_uri: str | None = None
-    detector_state: Health | None = None
+    detector_state: DetectorState | None = None
 
 
 class LeakDetectorType(StrEnum):

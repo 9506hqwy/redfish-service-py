@@ -27,3 +27,13 @@ async def get2(request: Request, response: Response) -> SoftwareInventoryCollect
     m = cast(SoftwareInventoryCollection, s.get(**b))
     set_link_header(m, response)
     return m
+
+
+@router.get("/redfish/v1/UpdateService/LocalImageStore", response_model_exclude_none=True)
+@router.head("/redfish/v1/UpdateService/LocalImageStore", response_model_exclude_none=True)
+async def get3(request: Request, response: Response) -> SoftwareInventoryCollection:
+    s: Service = get_service(SoftwareInventoryCollection, request)
+    b: dict[str, Any] = {"request": request, "response": response}
+    m = cast(SoftwareInventoryCollection, s.get(**b))
+    set_link_header(m, response)
+    return m

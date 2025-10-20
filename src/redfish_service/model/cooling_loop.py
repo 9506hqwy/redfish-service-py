@@ -38,7 +38,7 @@ class CoolingLoop(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolingLoop.v1_0_3.CoolingLoop"
+        serialization_alias="@odata.type", default="#CoolingLoop.v1_1_0.CoolingLoop"
     )
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
@@ -46,6 +46,7 @@ class CoolingLoop(RedfishModel):
     coolant_level_percent: SensorExcerpt | None = None
     coolant_level_status: Health | None = None
     coolant_quality: Health | None = None
+    cooling_loop_type: CoolingLoopType | None = None
     cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
     description: str | None = None
     id: str
@@ -66,6 +67,7 @@ class CoolingLoopOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     consuming_equipment_names: list[str] | None = None
     coolant: Coolant | None = None
+    cooling_loop_type: CoolingLoopType | None = None
     cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
     links: Links | None = None
     location_indicator_active: bool | None = None
@@ -73,6 +75,12 @@ class CoolingLoopOnUpdate(RedfishModelOnUpdate):
     status: Status | None = None
     supply_equipment_names: list[str] | None = None
     user_label: str | None = None
+
+
+class CoolingLoopType(StrEnum):
+    FWS = "FWS"
+    TCS = "TCS"
+    ROW_TCS = "RowTCS"
 
 
 class Links(RedfishModel):

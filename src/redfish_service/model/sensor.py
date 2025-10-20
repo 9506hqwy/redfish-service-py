@@ -110,7 +110,7 @@ class Sensor(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_11_0.Sensor")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_11_1.Sensor")
     accuracy: float | None = None
     actions: Actions | None = None
     adjusted_max_allowable_operating_value: float | None = None

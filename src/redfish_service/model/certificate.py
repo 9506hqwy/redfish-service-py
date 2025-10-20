@@ -11,6 +11,9 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    force_automatic_renew: ForceAutomaticRenew | None = Field(
+        serialization_alias="#Certificate.ForceAutomaticRenew", default=None
+    )
     rekey: Rekey | None = Field(serialization_alias="#Certificate.Rekey", default=None)
     renew: Renew | None = Field(serialization_alias="#Certificate.Renew", default=None)
     oem: dict[str, Any] | None = None
@@ -21,7 +24,7 @@ class Certificate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Certificate.v1_10_0.Certificate"
+        serialization_alias="@odata.type", default="#Certificate.v1_11_0.Certificate"
     )
     actions: Actions | None = None
     certificate_string: str | None = None
@@ -52,7 +55,7 @@ class CertificateOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Certificate.v1_10_0.Certificate"
+        serialization_alias="@odata.type", default="#Certificate.v1_11_0.Certificate"
     )
     actions: Actions | None = None
     certificate_string: str | None = None
@@ -108,6 +111,11 @@ class CertificateUsageType(StrEnum):
     IAK = "IAK"
     LAK = "LAK"
     EK = "EK"
+
+
+class ForceAutomaticRenew(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class Identifier(RedfishModel):

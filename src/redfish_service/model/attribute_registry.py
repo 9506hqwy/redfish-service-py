@@ -14,7 +14,7 @@ class Actions(RedfishModel):
 
 class AttributeRegistry(RedfishModel):
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AttributeRegistry.v1_3_9.AttributeRegistry"
+        serialization_alias="@odata.type", default="#AttributeRegistry.v1_4_0.AttributeRegistry"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -58,6 +58,7 @@ class Attributes(RedfishModel):
     min_length: int | None = None
     oem: dict[str, Any] | None = None
     read_only: bool | None = None
+    required_privileges: list[RequiredPrivileges] | None = None
     reset_required: bool | None = None
     scalar_increment: int | None = None
     type: AttributeType | None = None
@@ -159,6 +160,10 @@ class RegistryEntries(RedfishModel):
     attributes: list[Attributes] | None = None
     dependencies: list[Dependencies] | None = None
     menus: list[Menus] | None = None
+
+
+class RequiredPrivileges(RedfishModel):
+    privileges: list[str] | None = None
 
 
 class SupportedSystems(RedfishModel):

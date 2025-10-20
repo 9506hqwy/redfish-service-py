@@ -14,6 +14,9 @@ from .sensor import SensorExcerpt
 
 
 class Actions(RedfishModel):
+    valve_control: ValveControl | None = Field(
+        serialization_alias="#CoolantConnector.ValveControl", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -22,7 +25,7 @@ class CoolantConnector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolantConnector.v1_2_0.CoolantConnector"
+        serialization_alias="@odata.type", default="#CoolantConnector.v1_3_0.CoolantConnector"
     )
     actions: Actions | None = None
     coolant: Coolant | None = None
@@ -40,14 +43,20 @@ class CoolantConnector(RedfishModel):
     id: str
     links: Links | None = None
     location_indicator_active: bool | None = None
+    manufacturer: str | None = None
+    model: str | None = None
     name: str
     oem: dict[str, Any] | None = None
+    part_number: str | None = None
     rated_flow_liters_per_minute: float | None = None
     rated_flow_pressurek_pa: float | None = None
     rated_pressurek_pa: float | None = None
     return_pressurek_pa: SensorExcerpt | None = None
     return_temperature_celsius: SensorExcerpt | None = None
     return_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
+    sku: str | None = Field(serialization_alias="SKU", default=None)
+    serial_number: str | None = None
+    spare_part_number: str | None = None
     status: Status | None = None
     supply_pressurek_pa: SensorExcerpt | None = None
     supply_temperature_celsius: SensorExcerpt | None = None
@@ -83,3 +92,24 @@ class Links(RedfishModel):
     connected_cooling_loop: IdRef | None = None
     connected_cooling_unit: IdRef | None = None
     oem: dict[str, Any] | None = None
+
+
+class ValveControl(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ValveControlRequest(RedfishModel):
+    valve_state: ValveState | None = None
+    valve_state_reason: ValveStateReason | None = None
+
+
+class ValveState(StrEnum):
+    OPEN = "Open"
+    CLOSED = "Closed"
+
+
+class ValveStateReason(StrEnum):
+    NORMAL = "Normal"
+    NOT_IN_USE = "NotInUse"
+    LEAK_DETECTED = "LeakDetected"

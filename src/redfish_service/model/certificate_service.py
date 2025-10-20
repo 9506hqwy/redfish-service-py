@@ -4,8 +4,9 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
-from .certificate import CertificateType, KeyUsage
+from . import RedfishModel, RedfishModelOnUpdate
+from .certificate import CertificateType, CertificateUsageType, KeyUsage
+from .certificate_enrollment import EnrollmentProtocolType
 from .odata_v4 import IdRef
 
 
@@ -19,18 +20,35 @@ class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class AutomaticCertificateEnrollment(RedfishModel):
+    certificates_supported: list[CertificateUsageType] | None = None
+    enrollment_types: list[EnrollmentProtocolType] | None = None
+    service_enabled: bool | None = None
+
+
 class CertificateService(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CertificateService.v1_1_0.CertificateService"
+        serialization_alias="@odata.type", default="#CertificateService.v1_2_0.CertificateService"
     )
     actions: Actions | None = None
+    automatic_certificate_enrollment: AutomaticCertificateEnrollment | None = None
+    certificate_enrollments: IdRef | None = None
     certificate_locations: IdRef | None = None
     description: str | None = None
+    enrollment_ca_certificates: IdRef | None = Field(
+        serialization_alias="EnrollmentCACertificates", default=None
+    )
     id: str
     name: str
+    oem: dict[str, Any] | None = None
+
+
+class CertificateServiceOnUpdate(RedfishModelOnUpdate):
+    actions: Actions | None = None
+    automatic_certificate_enrollment: AutomaticCertificateEnrollment | None = None
     oem: dict[str, Any] | None = None
 
 

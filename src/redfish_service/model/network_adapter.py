@@ -74,7 +74,7 @@ class NetworkAdapter(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#NetworkAdapter.v1_12_1.NetworkAdapter"
+        serialization_alias="@odata.type", default="#NetworkAdapter.v1_13_0.NetworkAdapter"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -95,6 +95,7 @@ class NetworkAdapter(RedfishModel):
     network_ports: IdRef | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
+    port_splitting: PortSplitting | None = None
     ports: IdRef | None = None
     processors: IdRef | None = None
     sku: str | None = Field(serialization_alias="SKU", default=None)
@@ -110,12 +111,33 @@ class NetworkAdapterOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     measurements: list[MeasurementBlock] | None = None
     oem: dict[str, Any] | None = None
+    port_splitting: PortSplitting | None = None
     status: Status | None = None
 
 
 class NicPartitioning(RedfishModel):
     npar_capable: bool | None = None
     npar_enabled: bool | None = None
+
+
+class PortSplitting(RedfishModel):
+    current_configuration: list[PortSplittingSubconfiguration] | None = None
+    maximum_subports: int | None = None
+    maximum_subports_per_port: int | None = None
+    supported_configurations: list[PortSplittingSubconfigurationList] | None = None
+
+
+class PortSplittingSubconfiguration(RedfishModel):
+    ending_physical_port: int | None = None
+    first_subport_id: int | None = None
+    lanes: list[int] | None = None
+    link_speed_gbps: list[int] | None = None
+    starting_physical_port: int | None = None
+    subports_per_port: int | None = None
+
+
+class PortSplittingSubconfigurationList(RedfishModel):
+    subconfigurations: list[PortSplittingSubconfiguration] | None = None
 
 
 class Reset(RedfishModel):

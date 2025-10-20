@@ -79,8 +79,10 @@ class SimpleUpdate(RedfishModel):
 
 
 class SimpleUpdateRequest(RedfishModel):
+    exclude_targets: list[str] | None = None
     force_update: bool | None = None
     image_uri: str = Field(serialization_alias="ImageURI")
+    local_image: bool | None = None
     password: str | None = None
     stage: bool | None = None
     targets: list[str] | None = None
@@ -116,7 +118,9 @@ class TransferProtocolType(StrEnum):
 
 
 class UpdateParameters(RedfishModel):
+    exclude_targets: list[str] | None = None
     force_update: bool | None = None
+    local_image: bool | None = None
     oem: dict[str, Any] | None = None
     stage: bool | None = None
     targets: list[str] | None = None
@@ -127,7 +131,7 @@ class UpdateService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#UpdateService.v1_16_0.UpdateService"
+        serialization_alias="@odata.type", default="#UpdateService.v1_17_0.UpdateService"
     )
     actions: Actions | None = None
     client_certificates: IdRef | None = None
@@ -139,6 +143,9 @@ class UpdateService(RedfishModel):
     http_push_uri_targets: list[str] | None = None
     http_push_uri_targets_busy: bool | None = None
     id: str
+    local_image_store: IdRef | None = None
+    local_image_store_available_capacity_bytes: int | None = None
+    local_image_store_total_capacity_bytes: int | None = None
     max_image_size_bytes: int | None = None
     multipart_http_push_uri: str | None = None
     name: str

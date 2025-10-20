@@ -8,6 +8,7 @@ from ..model.computer_system import (
     ComputerSystem,
     ComputerSystemOnUpdate,
     DecommissionRequest,
+    ExportConfigurationRequest,
     RemoveResourceBlockRequest,
     ResetRequest,
 )
@@ -93,6 +94,25 @@ async def decommission1(
         "response": response,
         "body": body,
         "action": "Decommission",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Actions/ComputerSystem.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration1(
+    computer_system_id: str, request: Request, response: Response, body: ExportConfigurationRequest
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
     }
     return s.action(**b)
 
@@ -243,6 +263,30 @@ async def decommission2(
         "response": response,
         "body": body,
         "action": "Decommission",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration2(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
     }
     return s.action(**b)
 
@@ -403,6 +447,30 @@ async def decommission3(
         "response": response,
         "body": body,
         "action": "Decommission",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration3(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
     }
     return s.action(**b)
 

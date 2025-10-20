@@ -1059,3 +1059,64 @@ async def post20(
         "body": body,
     }
     return cast(Volume, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/AllocatedVolumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingVolumes",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/AllocatedVolumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingVolumes",
+    response_model_exclude_none=True,
+)
+async def get21(
+    storage_service_id: str,
+    storage_pool_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+) -> VolumeCollection:
+    s: Service = get_service(VolumeCollection, request)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "storage_pool_id": storage_pool_id,
+        "volume_id": volume_id,
+        "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(VolumeCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/AllocatedVolumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingVolumes",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/StorageServices/{storage_service_id}/StoragePools/{storage_pool_id}/AllocatedVolumes/{volume_id}/CapacitySources/{capacity_source_id}/ProvidingVolumes/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post21(
+    storage_service_id: str,
+    storage_pool_id: str,
+    volume_id: str,
+    capacity_source_id: str,
+    request: Request,
+    response: Response,
+    body: VolumeOnCreate,
+) -> Volume:
+    s: ServiceCollection = get_service_collection(VolumeCollection, request)
+    b: dict[str, Any] = {
+        "storage_service_id": storage_service_id,
+        "storage_pool_id": storage_pool_id,
+        "volume_id": volume_id,
+        "capacity_source_id": capacity_source_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Volume, s.post(**b))

@@ -28,6 +28,8 @@ from ..model.cable import Cable
 from ..model.cable_collection import CableCollection
 from ..model.certificate import Certificate
 from ..model.certificate_collection import CertificateCollection
+from ..model.certificate_enrollment import CertificateEnrollment
+from ..model.certificate_enrollment_collection import CertificateEnrollmentCollection
 from ..model.certificate_locations import CertificateLocations
 from ..model.certificate_service import CertificateService
 from ..model.chassis import Chassis
@@ -285,6 +287,8 @@ from . import (
     cable_collection,
     certificate,
     certificate_collection,
+    certificate_enrollment,
+    certificate_enrollment_collection,
     certificate_locations,
     certificate_service,
     chassis,
@@ -599,6 +603,12 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
 
     if find_service(CertificateCollection):
         app.include_router(certificate_collection.router)
+
+    if find_service(CertificateEnrollment):
+        app.include_router(certificate_enrollment.router)
+
+    if find_service(CertificateEnrollmentCollection):
+        app.include_router(certificate_enrollment_collection.router)
 
     if find_service(CertificateLocations):
         app.include_router(certificate_locations.router)

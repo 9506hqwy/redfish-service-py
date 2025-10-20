@@ -3,7 +3,12 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.cooling_unit import CoolingUnit, CoolingUnitOnUpdate, SetModeRequest
+from ..model.cooling_unit import (
+    CoolingUnit,
+    CoolingUnitOnUpdate,
+    ExportConfigurationRequest,
+    SetModeRequest,
+)
 from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service, set_link_header
@@ -44,6 +49,25 @@ async def patch1(
         "body": body,
     }
     return cast(CoolingUnit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Actions/CoolingUnit.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration1(
+    cooling_unit_id: str, request: Request, response: Response, body: ExportConfigurationRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -104,6 +128,25 @@ async def patch2(
 
 
 @router.post(
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Actions/CoolingUnit.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration2(
+    cooling_unit_id: str, request: Request, response: Response, body: ExportConfigurationRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
     "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Actions/CoolingUnit.SetMode",
     response_model_exclude_none=True,
 )
@@ -161,6 +204,25 @@ async def patch3(
 
 
 @router.post(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Actions/CoolingUnit.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration3(
+    cooling_unit_id: str, request: Request, response: Response, body: ExportConfigurationRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Actions/CoolingUnit.SetMode",
     response_model_exclude_none=True,
 )
@@ -212,6 +274,25 @@ async def patch4(
         "body": body,
     }
     return cast(CoolingUnit, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Actions/CoolingUnit.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration4(
+    cooling_unit_id: str, request: Request, response: Response, body: ExportConfigurationRequest
+) -> RedfishError:
+    s: Service = get_service(CoolingUnit, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
 
 
 @router.post(

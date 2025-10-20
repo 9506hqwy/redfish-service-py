@@ -17,7 +17,7 @@ class Assembly(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Assembly.v1_5_1.Assembly")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Assembly.v1_6_0.Assembly")
     actions: Actions | None = None
     assemblies: list[AssemblyData] | None = None
     assemblies_odata_count: int | None = Field(
@@ -54,6 +54,7 @@ class AssemblyData(RedfishModel):
     physical_context: PhysicalContext | None = None
     producer: str | None = None
     production_date: str | None = None
+    ready_to_remove: bool | None = None
     replaceable: bool | None = None
     sku: str | None = Field(serialization_alias="SKU", default=None)
     serial_number: str | None = None

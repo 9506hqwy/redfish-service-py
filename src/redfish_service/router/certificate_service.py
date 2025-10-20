@@ -5,6 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.certificate_service import (
     CertificateService,
+    CertificateServiceOnUpdate,
     GenerateCsrRequest,
     ReplaceCertificateRequest,
 )
@@ -23,6 +24,16 @@ async def get1(request: Request, response: Response) -> CertificateService:
     m = cast(CertificateService, s.get(**b))
     set_link_header(m, response)
     return m
+
+
+@router.patch("/redfish/v1/CertificateService", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    request: Request, response: Response, body: CertificateServiceOnUpdate
+) -> CertificateService:
+    s: Service = get_service(CertificateService, request)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body}
+    return cast(CertificateService, s.patch(**b))
 
 
 @router.post(

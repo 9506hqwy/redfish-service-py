@@ -5,7 +5,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
-from .pcie_device import PcieErrors
+from .pcie_device import PcieErrors, PcieMetrics
 
 
 class Actions(RedfishModel):
@@ -123,7 +123,7 @@ class PortMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PortMetrics.v1_7_0.PortMetrics"
+        serialization_alias="@odata.type", default="#PortMetrics.v1_8_0.PortMetrics"
     )
     actions: Actions | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
@@ -135,6 +135,7 @@ class PortMetrics(RedfishModel):
     networking: Networking | None = None
     oem: dict[str, Any] | None = None
     pcie_errors: PcieErrors | None = Field(serialization_alias="PCIeErrors", default=None)
+    pcie_metrics: PcieMetrics | None = Field(serialization_alias="PCIeMetrics", default=None)
     rx_bytes: int | None = Field(serialization_alias="RXBytes", default=None)
     rx_errors: int | None = Field(serialization_alias="RXErrors", default=None)
     sas: list[Sas] | None = Field(serialization_alias="SAS", default=None)
@@ -156,6 +157,7 @@ class Sas(RedfishModel):
 
 
 class Transceiver(RedfishModel):
+    by_lane: list[TransceiverLaneMetrics] | None = None
     rx_input_power_milli_watts: float | None = Field(
         serialization_alias="RXInputPowerMilliWatts", default=None
     )
@@ -167,3 +169,16 @@ class Transceiver(RedfishModel):
         serialization_alias="TXOutputPowerMilliWatts", default=None
     )
     wavelength_nanometers: str | None = None
+
+
+class TransceiverLaneMetrics(RedfishModel):
+    lane_id: int | None = None
+    rx_input_power_milli_watts: float | None = Field(
+        serialization_alias="RXInputPowerMilliWatts", default=None
+    )
+    tx_bias_current_milli_amps: float | None = Field(
+        serialization_alias="TXBiasCurrentMilliAmps", default=None
+    )
+    tx_output_power_milli_watts: float | None = Field(
+        serialization_alias="TXOutputPowerMilliWatts", default=None
+    )

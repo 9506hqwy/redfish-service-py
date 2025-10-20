@@ -18,6 +18,9 @@ class Actions(RedfishModel):
     decommission: Decommission | None = Field(
         serialization_alias="#ComputerSystem.Decommission", default=None
     )
+    export_configuration: ExportConfiguration | None = Field(
+        serialization_alias="#ComputerSystem.ExportConfiguration", default=None
+    )
     remove_resource_block: RemoveResourceBlock | None = Field(
         serialization_alias="#ComputerSystem.RemoveResourceBlock", default=None
     )
@@ -123,6 +126,14 @@ class BootSourceOverrideMode(StrEnum):
     UEFI = "UEFI"
 
 
+class Component(StrEnum):
+    ALL = "All"
+    MANAGER = "Manager"
+    BIOS = "BIOS"
+    NETWORK = "Network"
+    STORAGE = "Storage"
+
+
 class Composition(RedfishModel):
     use_cases: list[CompositionUseCase] | None = None
 
@@ -137,7 +148,7 @@ class ComputerSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_25_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_26_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -175,6 +186,9 @@ class ComputerSystem(RedfishModel):
     memory_domains: IdRef | None = None
     memory_summary: MemorySummary | None = None
     model: str | None = None
+    multipart_import_configuration_push_uri: str | None = Field(
+        serialization_alias="MultipartImportConfigurationPushURI", default=None
+    )
     name: str
     network_interfaces: IdRef | None = None
     oem: dict[str, Any] | None = None
@@ -221,7 +235,7 @@ class ComputerSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_25_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_26_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -259,6 +273,9 @@ class ComputerSystemOnCreate(RedfishModel):
     memory_domains: IdRef | None = None
     memory_summary: MemorySummary | None = None
     model: str | None = None
+    multipart_import_configuration_push_uri: str | None = Field(
+        serialization_alias="MultipartImportConfigurationPushURI", default=None
+    )
     name: str | None = None
     network_interfaces: IdRef | None = None
     oem: dict[str, Any] | None = None
@@ -360,6 +377,31 @@ class DecommissionType(StrEnum):
     TPM = "TPM"
 
 
+class ExportConfiguration(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ExportConfigurationRequest(RedfishModel):
+    components: list[Component]
+    encryption_passphrase: str | None = None
+    export_type: ExportType
+    oem_components: list[str] | None = Field(serialization_alias="OEMComponents", default=None)
+    security: ExportSecurity | None = None
+
+
+class ExportSecurity(StrEnum):
+    INCLUDE_SENSITIVE_DATA = "IncludeSensitiveData"
+    HASHED_DATA_ONLY = "HashedDataOnly"
+    EXCLUDE_SENSITIVE_DATA = "ExcludeSensitiveData"
+
+
+class ExportType(StrEnum):
+    NON_DESTRUCTIVE = "NonDestructive"
+    CLONE_WITHIN_FABRIC = "CloneWithinFabric"
+    REPLACEMENT = "Replacement"
+
+
 class GraphicalConnectTypesSupported(StrEnum):
     KVMIP = "KVMIP"
     OEM = "OEM"
@@ -377,6 +419,7 @@ class HostSerialConsole(RedfishModel):
     max_concurrent_sessions: int | None = None
     ssh: SerialConsoleProtocol | None = Field(serialization_alias="SSH", default=None)
     telnet: SerialConsoleProtocol | None = None
+    web_socket: WebSocketConsole | None = None
 
 
 class HostedServices(RedfishModel):
@@ -647,3 +690,9 @@ class WatchdogWarningActions(StrEnum):
     MESSAGING_INTERRUPT = "MessagingInterrupt"
     SCI = "SCI"
     OEM = "OEM"
+
+
+class WebSocketConsole(RedfishModel):
+    console_uri: str | None = Field(serialization_alias="ConsoleURI", default=None)
+    interactive: bool | None = None
+    service_enabled: bool | None = None

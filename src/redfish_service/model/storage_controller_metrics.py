@@ -52,7 +52,7 @@ class StorageControllerMetrics(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#StorageControllerMetrics.v1_0_3.StorageControllerMetrics",
+        default="#StorageControllerMetrics.v1_1_0.StorageControllerMetrics",
     )
     actions: Actions | None = None
     correctable_ecc_error_count: int | None = Field(
@@ -61,6 +61,7 @@ class StorageControllerMetrics(RedfishModel):
     correctable_parity_error_count: int | None = None
     description: str | None = None
     id: str
+    lifetime_start_date_time: str | None = None
     nvme_smart: NvmeSmartMetrics | None = Field(serialization_alias="NVMeSMART", default=None)
     name: str
     oem: dict[str, Any] | None = None

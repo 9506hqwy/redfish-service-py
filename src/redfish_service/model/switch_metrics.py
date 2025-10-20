@@ -48,12 +48,13 @@ class SwitchMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SwitchMetrics.v1_0_2.SwitchMetrics"
+        serialization_alias="@odata.type", default="#SwitchMetrics.v1_1_0.SwitchMetrics"
     )
     actions: Actions | None = None
     description: str | None = None
     id: str
     internal_memory_metrics: InternalMemoryMetrics | None = None
+    lifetime_start_date_time: str | None = None
     name: str
     oem: dict[str, Any] | None = None
     pcie_errors: PcieErrors | None = Field(serialization_alias="PCIeErrors", default=None)

@@ -120,6 +120,16 @@ class Links(RedfishModel):
     storage_services_odata_count: int | None = Field(
         serialization_alias="StorageServices@odata.count", default=None
     )
+    unassigned_volumes: list[IdRef] | None = None
+    unassigned_volumes_odata_count: int | None = Field(
+        serialization_alias="UnassignedVolumes@odata.count", default=None
+    )
+
+
+class Mpf(RedfishModel):
+    configured_physical_functions: int | None = None
+    maximum_supported_physical_functions: int | None = None
+    volume_assignment_policy: VolumeAssignmentPolicy | None = None
 
 
 class NvmeConfigurationLockState(RedfishModel):
@@ -187,7 +197,7 @@ class Storage(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_19_0.Storage")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_20_0.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     block_security_id_policy: bool | None = Field(
@@ -208,6 +218,7 @@ class Storage(RedfishModel):
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     local_encryption_key_identifier: str | None = None
+    mpf: Mpf | None = Field(serialization_alias="MPF", default=None)
     metrics: IdRef | None = None
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
         serialization_alias="NVMeSubsystemProperties", default=None
@@ -240,6 +251,7 @@ class StorageOnUpdate(RedfishModelOnUpdate):
     hotspare_activation_policy: HotspareActivationPolicy | None = None
     identifiers: list[Identifier] | None = None
     links: Links | None = None
+    mpf: Mpf | None = Field(serialization_alias="MPF", default=None)
     nvme_subsystem_properties: NvmeSubsystemProperties | None = Field(
         serialization_alias="NVMeSubsystemProperties", default=None
     )
@@ -303,3 +315,9 @@ class StorageControllerLinks(RedfishModel):
 
 class TargetConfigurationLockLevel(StrEnum):
     BASELINE = "Baseline"
+
+
+class VolumeAssignmentPolicy(StrEnum):
+    UNASSIGNED = "Unassigned"
+    SUPERVISOR = "Supervisor"
+    WEIGHTED_ROUND_ROBIN = "WeightedRoundRobin"

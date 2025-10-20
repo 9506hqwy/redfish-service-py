@@ -22,7 +22,7 @@ class Battery(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Battery.v1_4_0.Battery")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Battery.v1_5_0.Battery")
     actions: Actions | None = None
     assembly: IdRef | None = None
     battery_chemistry_type: BatteryChemistryType | None = None
@@ -52,6 +52,7 @@ class Battery(RedfishModel):
     production_date: str | None = None
     replaceable: bool | None = None
     serial_number: str | None = None
+    serviced_date: str | None = None
     spare_part_number: str | None = None
     state_of_health_percent: SensorExcerpt | None = None
     status: Status | None = None
@@ -64,6 +65,7 @@ class BatteryOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
+    serviced_date: str | None = None
     state_of_health_percent: SensorExcerpt | None = None
     status: Status | None = None
 

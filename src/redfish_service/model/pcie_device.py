@@ -111,7 +111,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_19_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_20_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -177,6 +177,32 @@ class PcieInterface(RedfishModel):
     max_pcie_type: PcieTypes | None = Field(serialization_alias="MaxPCIeType", default=None)
     oem: dict[str, Any] | None = None
     pcie_type: PcieTypes | None = Field(serialization_alias="PCIeType", default=None)
+
+
+class PcieMetrics(RedfishModel):
+    completion_credit_exhaustion_drops: int | None = None
+    np_credit_exhaustion_drops: int | None = Field(
+        serialization_alias="NPCreditExhaustionDrops", default=None
+    )
+    outbound_completion_tlp_bytes: int | None = Field(
+        serialization_alias="OutboundCompletionTLPBytes", default=None
+    )
+    outbound_completion_tlp_count: int | None = Field(
+        serialization_alias="OutboundCompletionTLPCount", default=None
+    )
+    outbound_read_tlp_bytes: int | None = Field(
+        serialization_alias="OutboundReadTLPBytes", default=None
+    )
+    outbound_read_tlp_count: int | None = Field(
+        serialization_alias="OutboundReadTLPCount", default=None
+    )
+    outbound_write_tlp_bytes: int | None = Field(
+        serialization_alias="OutboundWriteTLPBytes", default=None
+    )
+    outbound_write_tlp_count: int | None = Field(
+        serialization_alias="OutboundWriteTLPCount", default=None
+    )
+    tag_unavailability_drops: int | None = None
 
 
 class PcieTypes(StrEnum):

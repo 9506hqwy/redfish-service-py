@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import Field
 
-from . import RedfishModel
+from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .redundancy import RedundantGroup
 from .resource import Status
@@ -19,7 +19,7 @@ class ThermalSubsystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ThermalSubsystem.v1_4_0.ThermalSubsystem"
+        serialization_alias="@odata.type", default="#ThermalSubsystem.v1_5_0.ThermalSubsystem"
     )
     actions: Actions | None = None
     coolant_connector_redundancy: list[RedundantGroup] | None = None
@@ -27,6 +27,7 @@ class ThermalSubsystem(RedfishModel):
     description: str | None = None
     fan_redundancy: list[RedundantGroup] | None = None
     fans: IdRef | None = None
+    fans_full_speed_override_enable: bool | None = None
     filters: IdRef | None = None
     heaters: IdRef | None = None
     id: str
@@ -36,3 +37,12 @@ class ThermalSubsystem(RedfishModel):
     pumps: IdRef | None = None
     status: Status | None = None
     thermal_metrics: IdRef | None = None
+
+
+class ThermalSubsystemOnUpdate(RedfishModelOnUpdate):
+    actions: Actions | None = None
+    coolant_connector_redundancy: list[RedundantGroup] | None = None
+    fan_redundancy: list[RedundantGroup] | None = None
+    fans_full_speed_override_enable: bool | None = None
+    oem: dict[str, Any] | None = None
+    status: Status | None = None

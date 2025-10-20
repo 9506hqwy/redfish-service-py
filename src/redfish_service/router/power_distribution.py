@@ -3,7 +3,12 @@ from typing import Any, cast
 from fastapi import APIRouter, Request, Response
 
 from ..authenticate import authenticate
-from ..model.power_distribution import PowerDistribution, PowerDistributionOnUpdate
+from ..model.power_distribution import (
+    ExportConfigurationRequest,
+    PowerDistribution,
+    PowerDistributionOnUpdate,
+)
+from ..model.redfish_error import RedfishError
 from ..service import Service
 from ..util import get_service, set_link_header
 
@@ -50,6 +55,28 @@ async def patch1(
     return cast(PowerDistribution, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Actions/PowerDistribution.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration1(
+    power_distribution_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}",
     response_model_exclude_none=True,
@@ -91,6 +118,28 @@ async def patch2(
         "body": body,
     }
     return cast(PowerDistribution, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Actions/PowerDistribution.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration2(
+    power_distribution_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -136,6 +185,28 @@ async def patch3(
     return cast(PowerDistribution, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Actions/PowerDistribution.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration3(
+    power_distribution_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}",
     response_model_exclude_none=True,
@@ -177,6 +248,28 @@ async def patch4(
         "body": body,
     }
     return cast(PowerDistribution, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Actions/PowerDistribution.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration4(
+    power_distribution_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
 
 
 @router.get(
@@ -222,6 +315,28 @@ async def patch5(
     return cast(PowerDistribution, s.patch(**b))
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Actions/PowerDistribution.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration5(
+    power_distribution_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}",
     response_model_exclude_none=True,
@@ -263,3 +378,25 @@ async def patch6(
         "body": body,
     }
     return cast(PowerDistribution, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Actions/PowerDistribution.ExportConfiguration",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def export_configuration6(
+    power_distribution_id: str,
+    request: Request,
+    response: Response,
+    body: ExportConfigurationRequest,
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "ExportConfiguration",
+    }
+    return s.action(**b)

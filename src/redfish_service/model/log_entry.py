@@ -63,7 +63,7 @@ class LogEntry(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LogEntry.v1_19_0.LogEntry"
+        serialization_alias="@odata.type", default="#LogEntry.v1_20_0.LogEntry"
     )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
@@ -97,6 +97,7 @@ class LogEntry(RedfishModel):
     oem_log_entry_code: str | None = None
     oem_record_format: str | None = None
     oem_sensor_type: str | None = None
+    origin_of_condition_unavailable: bool | None = None
     originator: str | None = None
     originator_type: OriginatorTypes | None = None
     overflow_error_count: int | None = None
@@ -120,7 +121,7 @@ class LogEntryOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#LogEntry.v1_19_0.LogEntry"
+        serialization_alias="@odata.type", default="#LogEntry.v1_20_0.LogEntry"
     )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
@@ -154,6 +155,7 @@ class LogEntryOnCreate(RedfishModel):
     oem_log_entry_code: str | None = None
     oem_record_format: str | None = None
     oem_sensor_type: str | None = None
+    origin_of_condition_unavailable: bool | None = None
     originator: str | None = None
     originator_type: OriginatorTypes | None = None
     overflow_error_count: int | None = None

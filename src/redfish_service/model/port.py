@@ -62,6 +62,7 @@ class ConnectedDeviceType(StrEnum):
     TYPE2 = "Type2"
     TYPE3_SLD = "Type3SLD"
     TYPE3_MLD = "Type3MLD"
+    PBR_COMPONENT = "PBRComponent"
 
 
 class CurrentPortConfigurationState(StrEnum):
@@ -269,9 +270,10 @@ class Port(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_16_0.Port")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_17_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
+    associated_physical_port: int | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
     capable_protocol_versions: list[str] | None = None
     configured_speed_gbps: float | None = None
@@ -283,6 +285,7 @@ class Port(RedfishModel):
     environment_metrics: IdRef | None = None
     ethernet: EthernetProperties | None = None
     fibre_channel: FibreChannelProperties | None = None
+    first_lane: int | None = None
     function_max_bandwidth: list[FunctionMaxBandwidth] | None = None
     function_min_bandwidth: list[FunctionMinBandwidth] | None = None
     gen_z: GenZ | None = None
@@ -290,6 +293,7 @@ class Port(RedfishModel):
     id: str
     infini_band: InfiniBandProperties | None = None
     interface_enabled: bool | None = None
+    is_split: bool | None = None
     link_configuration: list[LinkConfiguration] | None = None
     link_network_technology: LinkNetworkTechnology | None = None
     link_state: LinkState | None = None

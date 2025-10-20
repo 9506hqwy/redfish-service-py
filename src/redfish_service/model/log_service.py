@@ -93,7 +93,7 @@ class LogService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LogService.v1_8_0.LogService"
+        serialization_alias="@odata.type", default="#LogService.v1_8_1.LogService"
     )
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None

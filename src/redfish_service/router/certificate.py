@@ -9862,3 +9862,94 @@ async def renew80(
         "action": "Renew",
     }
     return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete81(certificate_id: str, request: Request, response: Response) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get81(certificate_id: str, request: Request, response: Response) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch81(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey81(
+    certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew81(
+    certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)

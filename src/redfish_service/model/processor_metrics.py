@@ -77,7 +77,7 @@ class ProcessorMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ProcessorMetrics.v1_6_4.ProcessorMetrics"
+        serialization_alias="@odata.type", default="#ProcessorMetrics.v1_7_0.ProcessorMetrics"
     )
     actions: Actions | None = None
     average_frequency_mhz: float | None = Field(
@@ -95,6 +95,7 @@ class ProcessorMetrics(RedfishModel):
     frequency_ratio: float | None = None
     id: str
     kernel_percent: float | None = None
+    lifetime_start_date_time: str | None = None
     local_memory_bandwidth_bytes: int | None = None
     name: str
     oem: dict[str, Any] | None = None

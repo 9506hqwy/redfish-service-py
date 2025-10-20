@@ -98,6 +98,10 @@ class Links(RedfishModel):
     )
 
 
+class MpfProperties(RedfishModel):
+    is_supervisor: bool | None = None
+
+
 class NvmeControllerAttributes(RedfishModel):
     reports_namespace_granularity: bool | None = None
     reports_uuid_list: bool | None = Field(serialization_alias="ReportsUUIDList", default=None)
@@ -180,7 +184,7 @@ class StorageController(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StorageController.v1_9_1.StorageController"
+        serialization_alias="@odata.type", default="#StorageController.v1_10_0.StorageController"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -193,8 +197,10 @@ class StorageController(RedfishModel):
     firmware_version: str | None = None
     id: str
     identifiers: list[Identifier] | None = None
+    is_logical: bool | None = None
     links: Links | None = None
     location: Location | None = None
+    mpf_properties: MpfProperties | None = Field(serialization_alias="MPFProperties", default=None)
     manufacturer: str | None = None
     measurements: list[MeasurementBlock] | None = None
     metrics: IdRef | None = None
@@ -226,6 +232,7 @@ class StorageControllerOnUpdate(RedfishModelOnUpdate):
     identifiers: list[Identifier] | None = None
     links: Links | None = None
     location: Location | None = None
+    mpf_properties: MpfProperties | None = Field(serialization_alias="MPFProperties", default=None)
     measurements: list[MeasurementBlock] | None = None
     nvme_controller_properties: NvmeControllerProperties | None = Field(
         serialization_alias="NVMeControllerProperties", default=None

@@ -100,7 +100,7 @@ class TelemetryService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#TelemetryService.v1_4_0.TelemetryService"
+        serialization_alias="@odata.type", default="#TelemetryService.v1_4_1.TelemetryService"
     )
     actions: Actions | None = None
     description: str | None = None

@@ -13,8 +13,18 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    export_configuration: ExportConfiguration | None = Field(
+        serialization_alias="#CoolingUnit.ExportConfiguration", default=None
+    )
     set_mode: SetMode | None = Field(serialization_alias="#CoolingUnit.SetMode", default=None)
     oem: dict[str, Any] | None = None
+
+
+class Component(StrEnum):
+    ALL = "All"
+    MANAGER = "Manager"
+    MANAGER_ACCOUNTS = "ManagerAccounts"
+    COOLING_UNIT = "CoolingUnit"
 
 
 class CoolingEquipmentType(StrEnum):
@@ -29,7 +39,7 @@ class CoolingUnit(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolingUnit.v1_3_0.CoolingUnit"
+        serialization_alias="@odata.type", default="#CoolingUnit.v1_4_0.CoolingUnit"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -49,6 +59,9 @@ class CoolingUnit(RedfishModel):
     location: Location | None = None
     manufacturer: str | None = None
     model: str | None = None
+    multipart_import_configuration_push_uri: str | None = Field(
+        serialization_alias="MultipartImportConfigurationPushURI", default=None
+    )
     name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
@@ -56,6 +69,7 @@ class CoolingUnit(RedfishModel):
     production_date: str | None = None
     pump_redundancy: list[RedundantGroup] | None = None
     pumps: IdRef | None = None
+    rated_thermal_loss_to_air_watts: int | None = None
     reservoirs: IdRef | None = None
     secondary_coolant_connectors: IdRef | None = None
     serial_number: str | None = None
@@ -81,6 +95,30 @@ class CoolingUnitOnUpdate(RedfishModelOnUpdate):
 class CoolingUnitMode(StrEnum):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class ExportConfiguration(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ExportConfigurationRequest(RedfishModel):
+    components: list[Component]
+    encryption_passphrase: str | None = None
+    export_type: ExportType
+    oem_components: list[str] | None = Field(serialization_alias="OEMComponents", default=None)
+    security: ExportSecurity | None = None
+
+
+class ExportSecurity(StrEnum):
+    INCLUDE_SENSITIVE_DATA = "IncludeSensitiveData"
+    HASHED_DATA_ONLY = "HashedDataOnly"
+    EXCLUDE_SENSITIVE_DATA = "ExcludeSensitiveData"
+
+
+class ExportType(StrEnum):
+    CLONE = "Clone"
+    REPLACEMENT = "Replacement"
 
 
 class Links(RedfishModel):

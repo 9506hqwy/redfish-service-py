@@ -18,9 +18,10 @@ class BatteryMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#BatteryMetrics.v1_0_4.BatteryMetrics"
+        serialization_alias="@odata.type", default="#BatteryMetrics.v1_1_0.BatteryMetrics"
     )
     actions: Actions | None = None
+    c_rate: float | None = None
     cell_voltages: list[SensorVoltageExcerpt] | None = None
     cell_voltages_odata_count: int | None = Field(
         serialization_alias="CellVoltages@odata.count", default=None
@@ -28,6 +29,7 @@ class BatteryMetrics(RedfishModel):
     charge_percent: SensorExcerpt | None = None
     description: str | None = None
     discharge_cycles: float | None = None
+    e_rate: float | None = None
     id: str
     input_current_amps: SensorCurrentExcerpt | None = None
     input_voltage: SensorVoltageExcerpt | None = None

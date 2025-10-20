@@ -19,7 +19,7 @@ class Fan(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Fan.v1_5_2.Fan")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Fan.v1_6_0.Fan")
     actions: Actions | None = None
     assembly: IdRef | None = None
     description: str | None = None
@@ -36,6 +36,10 @@ class Fan(RedfishModel):
     part_number: str | None = None
     physical_context: PhysicalContext | None = None
     power_watts: SensorPowerExcerpt | None = None
+    rated_secondary_speed_rpm: int | None = Field(
+        serialization_alias="RatedSecondarySpeedRPM", default=None
+    )
+    rated_speed_rpm: int | None = Field(serialization_alias="RatedSpeedRPM", default=None)
     replaceable: bool | None = None
     secondary_speed_percent: SensorFanExcerpt | None = None
     serial_number: str | None = None

@@ -62,6 +62,10 @@ class Identifier(RedfishModel):
     durable_name_format: DurableNameFormat | None = None
 
 
+class ImportParameters(RedfishModel):
+    encryption_passphrase: str | None = None
+
+
 class IndicatorLed(StrEnum):
     LIT = "Lit"
     BLINKING = "Blinking"
@@ -127,9 +131,11 @@ class PhysicalAddress(RedfishModel):
 
 class Placement(RedfishModel):
     additional_info: str | None = None
+    facility_name: str | None = None
     rack: str | None = None
     rack_offset: int | None = None
     rack_offset_units: RackUnits | None = None
+    room: str | None = None
     row: str | None = None
 
 
@@ -219,7 +225,7 @@ class Resource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Resource.v1_22_0.Resource"
+        serialization_alias="@odata.type", default="#Resource.v1_23_0.Resource"
     )
     description: str | None = None
     id: str
@@ -232,7 +238,7 @@ class ResourceCollection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ResourceCollection.v1_22_0.ResourceCollection"
+        serialization_alias="@odata.type", default="#ResourceCollection.v1_23_0.ResourceCollection"
     )
     description: str | None = None
     name: str

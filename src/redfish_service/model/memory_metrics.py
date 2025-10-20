@@ -86,7 +86,7 @@ class MemoryMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MemoryMetrics.v1_7_3.MemoryMetrics"
+        serialization_alias="@odata.type", default="#MemoryMetrics.v1_8_0.MemoryMetrics"
     )
     actions: Actions | None = None
     bandwidth_percent: float | None = None
@@ -101,6 +101,7 @@ class MemoryMetrics(RedfishModel):
     health_data: HealthData | None = None
     id: str
     life_time: LifeTime | None = None
+    lifetime_start_date_time: str | None = None
     name: str
     oem: dict[str, Any] | None = None
     operating_speed_mhz: int | None = Field(serialization_alias="OperatingSpeedMHz", default=None)

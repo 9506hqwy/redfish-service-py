@@ -12,10 +12,44 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    export_configuration: ExportConfiguration | None = Field(
+        serialization_alias="#PowerDistribution.ExportConfiguration", default=None
+    )
     transfer_control: TransferControl | None = Field(
         serialization_alias="#PowerDistribution.TransferControl", default=None
     )
     oem: dict[str, Any] | None = None
+
+
+class Component(StrEnum):
+    ALL = "All"
+    MANAGER = "Manager"
+    MANAGER_ACCOUNTS = "ManagerAccounts"
+    POWER_DISTRIBUTION = "PowerDistribution"
+
+
+class ExportConfiguration(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ExportConfigurationRequest(RedfishModel):
+    components: list[Component]
+    encryption_passphrase: str | None = None
+    export_type: ExportType
+    oem_components: list[str] | None = Field(serialization_alias="OEMComponents", default=None)
+    security: ExportSecurity | None = None
+
+
+class ExportSecurity(StrEnum):
+    INCLUDE_SENSITIVE_DATA = "IncludeSensitiveData"
+    HASHED_DATA_ONLY = "HashedDataOnly"
+    EXCLUDE_SENSITIVE_DATA = "ExcludeSensitiveData"
+
+
+class ExportType(StrEnum):
+    CLONE = "Clone"
+    REPLACEMENT = "Replacement"
 
 
 class Links(RedfishModel):
@@ -36,7 +70,7 @@ class PowerDistribution(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerDistribution.v1_4_0.PowerDistribution"
+        serialization_alias="@odata.type", default="#PowerDistribution.v1_5_0.PowerDistribution"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -53,6 +87,9 @@ class PowerDistribution(RedfishModel):
     manufacturer: str | None = None
     metrics: IdRef | None = None
     model: str | None = None
+    multipart_import_configuration_push_uri: str | None = Field(
+        serialization_alias="MultipartImportConfigurationPushURI", default=None
+    )
     name: str
     oem: dict[str, Any] | None = None
     outlet_groups: IdRef | None = None

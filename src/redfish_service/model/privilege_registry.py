@@ -37,13 +37,16 @@ class OperationPrivilege(RedfishModel):
 
 class PrivilegeRegistry(RedfishModel):
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PrivilegeRegistry.v1_1_5.PrivilegeRegistry"
+        serialization_alias="@odata.type", default="#PrivilegeRegistry.v1_2_0.PrivilegeRegistry"
     )
     actions: Actions | None = None
     description: str | None = None
     id: str
     mappings: list[Mapping] | None = None
     name: str
+    oem_privilege_descriptions: list[str] | None = Field(
+        serialization_alias="OEMPrivilegeDescriptions", default=None
+    )
     oem_privileges_used: list[str] | None = Field(
         serialization_alias="OEMPrivilegesUsed", default=None
     )

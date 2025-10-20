@@ -20,7 +20,7 @@ class Chassis(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_27_0.Chassis")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_28_0.Chassis")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -43,6 +43,7 @@ class Chassis(RedfishModel):
         serialization_alias="HeatingCoolingManagerURIs", default=None
     )
     height_mm: float | None = None
+    height_rack_units: float | None = None
     hot_pluggable: bool | None = None
     id: str
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
@@ -71,6 +72,11 @@ class Chassis(RedfishModel):
     power_subsystem: IdRef | None = None
     powered_by_parent: bool | None = None
     processors: IdRef | None = None
+    rack_mount_capacity_units: float | None = None
+    rack_mount_depth_mm: float | None = None
+    rack_mount_width: RackMountWidth | None = None
+    rack_units: RackUnits | None = None
+    ready_to_remove: bool | None = None
     replaceable: bool | None = None
     sku: str | None = Field(serialization_alias="SKU", default=None)
     sensors: IdRef | None = None
@@ -93,7 +99,7 @@ class ChassisOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Chassis.v1_27_0.Chassis"
+        serialization_alias="@odata.type", default="#Chassis.v1_28_0.Chassis"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -117,6 +123,7 @@ class ChassisOnCreate(RedfishModel):
         serialization_alias="HeatingCoolingManagerURIs", default=None
     )
     height_mm: float | None = None
+    height_rack_units: float | None = None
     hot_pluggable: bool | None = None
     id: str | None = None
     indicator_led: IndicatorLed | None = Field(serialization_alias="IndicatorLED", default=None)
@@ -145,6 +152,11 @@ class ChassisOnCreate(RedfishModel):
     power_subsystem: IdRef | None = None
     powered_by_parent: bool | None = None
     processors: IdRef | None = None
+    rack_mount_capacity_units: float | None = None
+    rack_mount_depth_mm: float | None = None
+    rack_mount_width: RackMountWidth | None = None
+    rack_units: RackUnits | None = None
+    ready_to_remove: bool | None = None
     replaceable: bool | None = None
     sku: str | None = Field(serialization_alias="SKU", default=None)
     sensors: IdRef | None = None
@@ -183,6 +195,11 @@ class ChassisOnUpdate(RedfishModelOnUpdate):
     measurements: list[MeasurementBlock] | None = None
     oem: dict[str, Any] | None = None
     physical_security: PhysicalSecurity | None = None
+    rack_mount_capacity_units: float | None = None
+    rack_mount_depth_mm: float | None = None
+    rack_mount_width: RackMountWidth | None = None
+    rack_units: RackUnits | None = None
+    ready_to_remove: bool | None = None
     status: Status | None = None
 
 
@@ -337,6 +354,18 @@ class PhysicalSecurity(RedfishModel):
     intrusion_sensor: IntrusionSensor | None = None
     intrusion_sensor_number: int | None = None
     intrusion_sensor_re_arm: IntrusionSensorReArm | None = None
+
+
+class RackMountWidth(StrEnum):
+    OPEN_U = "OpenU"
+    EI_A_310 = "EIA_310"
+    EI_A_310_TELCO = "EIA_310_Telco"
+    HALF_WIDTH = "HalfWidth"
+
+
+class RackUnits(StrEnum):
+    OPEN_U = "OpenU"
+    EI_A_310 = "EIA_310"
 
 
 class Reset(RedfishModel):

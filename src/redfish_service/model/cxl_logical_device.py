@@ -11,6 +11,19 @@ from .resource import Identifier, Status
 
 
 class Actions(RedfishModel):
+    disable_passphrase: DisablePassphrase | None = Field(
+        serialization_alias="#CXLLogicalDevice.DisablePassphrase", default=None
+    )
+    freeze_security_state: FreezeSecurityState | None = Field(
+        serialization_alias="#CXLLogicalDevice.FreezeSecurityState", default=None
+    )
+    passphrase_secure_erase: PassphraseSecureErase | None = Field(
+        serialization_alias="#CXLLogicalDevice.PassphraseSecureErase", default=None
+    )
+    set_passphrase: SetPassphrase | None = Field(
+        serialization_alias="#CXLLogicalDevice.SetPassphrase", default=None
+    )
+    unlock: Unlock | None = Field(serialization_alias="#CXLLogicalDevice.Unlock", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -19,7 +32,7 @@ class CxlLogicalDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CXLLogicalDevice.v1_2_1.CXLLogicalDevice"
+        serialization_alias="@odata.type", default="#CXLLogicalDevice.v1_3_0.CXLLogicalDevice"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -57,6 +70,21 @@ class CxlSemantic(StrEnum):
     CX_LMEM = "CXLmem"
 
 
+class DisablePassphrase(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class DisablePassphraseRequest(RedfishModel):
+    passphrase: str
+    passphrase_type: PassphraseType
+
+
+class FreezeSecurityState(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class Links(RedfishModel):
     endpoints: list[IdRef] | None = None
     endpoints_odata_count: int | None = Field(
@@ -77,6 +105,21 @@ class Links(RedfishModel):
     )
 
 
+class PassphraseSecureErase(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class PassphraseSecureEraseRequest(RedfishModel):
+    passphrase: str
+    passphrase_type: PassphraseType
+
+
+class PassphraseType(StrEnum):
+    USER = "User"
+    MASTER = "Master"
+
+
 class Qos(RedfishModel):
     allocated_bandwidth: int | None = None
     limit_percent: int | None = None
@@ -85,3 +128,24 @@ class Qos(RedfishModel):
 class QosTelemetryCapabilities(RedfishModel):
     egress_port_backpressure_supported: bool | None = None
     temporary_throughput_reduction_supported: bool | None = None
+
+
+class SetPassphrase(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class SetPassphraseRequest(RedfishModel):
+    new_passphrase: str
+    passphrase: str
+    passphrase_type: PassphraseType
+
+
+class Unlock(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class UnlockRequest(RedfishModel):
+    passphrase: str
+    passphrase_type: PassphraseType

@@ -3812,3 +3812,31 @@ async def post80(
         "body": body,
     }
     return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates", response_model_exclude_none=True
+)
+@router.head(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates", response_model_exclude_none=True
+)
+async def get81(request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates", response_model_exclude_none=True
+)
+@router.post(
+    "/redfish/v1/CertificateService/EnrollmentCACertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post81(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body}
+    return cast(Certificate, s.post(**b))

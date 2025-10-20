@@ -66,7 +66,7 @@ class SoftwareInventory(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SoftwareInventory.v1_12_0.SoftwareInventory"
+        serialization_alias="@odata.type", default="#SoftwareInventory.v1_13_0.SoftwareInventory"
     )
     actions: Actions | None = None
     active: bool | None = None
@@ -74,6 +74,7 @@ class SoftwareInventory(RedfishModel):
     associated_physical_context: PhysicalContext | None = None
     description: str | None = None
     id: str
+    image_data_uri: str | None = Field(serialization_alias="ImageDataURI", default=None)
     links: Links | None = None
     lowest_supported_version: str | None = None
     manufacturer: str | None = None
@@ -87,6 +88,7 @@ class SoftwareInventory(RedfishModel):
     release_date: str | None = None
     release_type: ReleaseType | None = None
     reset_required_on_update: bool | None = None
+    size_bytes: int | None = None
     software_id: str | None = None
     staged: bool | None = None
     status: Status | None = None

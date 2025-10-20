@@ -117,7 +117,7 @@ class Processor(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Processor.v1_20_1.Processor"
+        serialization_alias="@odata.type", default="#Processor.v1_21_0.Processor"
     )
     acceleration_functions: IdRef | None = None
     actions: Actions | None = None
@@ -179,6 +179,7 @@ class Processor(RedfishModel):
     throttled: bool | None = None
     total_cores: int | None = None
     total_enabled_cores: int | None = None
+    total_enabled_threads: int | None = None
     total_threads: int | None = None
     turbo_state: TurboState | None = None
     uuid: str | None = Field(serialization_alias="UUID", default=None)
@@ -262,6 +263,7 @@ class ProcessorMemoryType(StrEnum):
     GDDR5 = "GDDR5"
     GDDR5_X = "GDDR5X"
     GDDR6 = "GDDR6"
+    GDDR7 = "GDDR7"
     DDR = "DDR"
     DDR2 = "DDR2"
     DDR3 = "DDR3"
