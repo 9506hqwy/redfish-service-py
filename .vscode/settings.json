@@ -13,6 +13,7 @@
         "--config-file=pyproject.toml"
     ],
     "mypy-type-checker.importStrategy": "fromEnvironment",
+    "mypy-type-checker.reportingScope": "workspace",
     "[python]": {
         "editor.codeActionsOnSave": {
             "source.fixAll.ruff": "explicit",
@@ -20,6 +21,9 @@
         },
         "editor.defaultFormatter": "charliermarsh.ruff"
     },
+    "python.analysis.ignore": [
+        "*"
+    ],
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
     "ruff.organizeImports": true
