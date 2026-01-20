@@ -9,7 +9,9 @@ DSP8010_FILE="DSP8010_${DSP8010_VERSION}.zip"
 DSP8010_URL="https://www.dmtf.org/sites/default/files/standards/documents/${DSP8010_FILE}"
 
 SWORDFISH_FILE="Swordfish_v${SWORDFISH_VERSION}.zip"
-SWORDFISH_URL="https://www.snia.org/sites/default/files/technical-work/swordfish/release/v${SWORDFISH_VERSION}/zip/${SWORDFISH_FILE}"
+# Cloudflare Bot Management prevents download file using curl.
+# So, locate file at top directory before executing this script.
+#SWORDFISH_URL="https://www.snia.org/sites/default/files/technical-work/swordfish/release/v${SWORDFISH_VERSION}/zip/${SWORDFISH_FILE}"
 
 APP_ROOT="$(dirname "$0")/.."
 APP_ROOT=$(cd "$APP_ROOT"; pwd)
@@ -30,7 +32,8 @@ mv ./redfish/*/json-schema/* ./spec/redfish
 # swordfish
 mkdir -p ./swordfish/schemas
 mkdir -p ./spec/swordfish
-curl -sSLO "${SWORDFISH_URL}"
+#curl -sSLO "${SWORDFISH_URL}"
+cp "${OLDPWD}/${SWORDFISH_FILE}" .
 unzip "${SWORDFISH_FILE}" -d ./swordfish
 unzip "swordfish/Swordfish_v${SWORDFISH_VERSION}_Schema.zip" -d ./swordfish/schemas
 mv ./swordfish/schemas/json-schema/* ./spec/swordfish
