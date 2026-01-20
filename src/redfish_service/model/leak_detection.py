@@ -20,7 +20,7 @@ class LeakDetection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LeakDetection.v1_1_0.LeakDetection"
+        serialization_alias="@odata.type", default="#LeakDetection.v1_2_0.LeakDetection"
     )
     actions: Actions | None = None
     description: str | None = None

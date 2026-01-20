@@ -8,6 +8,7 @@ from pydantic import Field
 from . import RedfishModel, RedfishModelOnUpdate
 from .physical_context import PhysicalContext, PhysicalSubContext
 from .resource import Location, Status
+from .sensor import SensorCurrentExcerpt, SensorVoltageExcerpt
 
 
 class Actions(RedfishModel):
@@ -27,10 +28,11 @@ class LeakDetector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LeakDetector.v1_5_0.LeakDetector"
+        serialization_alias="@odata.type", default="#LeakDetector.v1_6_0.LeakDetector"
     )
     actions: Actions | None = None
     critical_reaction_type: ReactionType | None = None
+    current_amps: SensorCurrentExcerpt | None = None
     description: str | None = None
     detector_state: DetectorState | None = None
     enabled: bool | None = None
@@ -51,18 +53,21 @@ class LeakDetector(RedfishModel):
     spare_part_number: str | None = None
     status: Status | None = None
     user_label: str | None = None
+    voltage: SensorVoltageExcerpt | None = None
     warning_reaction_type: ReactionType | None = None
 
 
 class LeakDetectorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     critical_reaction_type: ReactionType | None = None
+    current_amps: SensorCurrentExcerpt | None = None
     enabled: bool | None = None
     location: Location | None = None
     oem: dict[str, Any] | None = None
     reaction_delay_seconds: int | None = None
     status: Status | None = None
     user_label: str | None = None
+    voltage: SensorVoltageExcerpt | None = None
     warning_reaction_type: ReactionType | None = None
 
 

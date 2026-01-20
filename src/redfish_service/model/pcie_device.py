@@ -111,7 +111,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_20_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_21_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -162,6 +162,7 @@ class PcieErrors(RedfishModel):
     bad_tlp_count: int | None = Field(serialization_alias="BadTLPCount", default=None)
     correctable_error_count: int | None = None
     fatal_error_count: int | None = None
+    flow_control_timeout_errors: int | None = None
     l0_to_recovery_count: int | None = None
     nak_received_count: int | None = Field(serialization_alias="NAKReceivedCount", default=None)
     nak_sent_count: int | None = Field(serialization_alias="NAKSentCount", default=None)

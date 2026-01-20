@@ -155,6 +155,12 @@ class InfiniBandProperties(RedfishModel):
 
 
 class LldpReceive(RedfishModel):
+    additional_management_addresses_ipv4: list[str] | None = Field(
+        serialization_alias="AdditionalManagementAddressesIPv4", default=None
+    )
+    additional_management_addresses_ipv6: list[str] | None = Field(
+        serialization_alias="AdditionalManagementAddressesIPv6", default=None
+    )
     chassis_id: str | None = None
     chassis_id_subtype: Ieee802IdSubtype | None = None
     management_address_ipv4: str | None = Field(
@@ -187,6 +193,12 @@ class LldpSystemCapabilities(StrEnum):
 
 
 class LldpTransmit(RedfishModel):
+    additional_management_addresses_ipv4: list[str] | None = Field(
+        serialization_alias="AdditionalManagementAddressesIPv4", default=None
+    )
+    additional_management_addresses_ipv6: list[str] | None = Field(
+        serialization_alias="AdditionalManagementAddressesIPv6", default=None
+    )
     chassis_id: str | None = None
     chassis_id_subtype: Ieee802IdSubtype | None = None
     management_address_ipv4: str | None = Field(
@@ -240,6 +252,10 @@ class Links(RedfishModel):
     associated_endpoints_odata_count: int | None = Field(
         serialization_alias="AssociatedEndpoints@odata.count", default=None
     )
+    associated_physical_ports: list[IdRef] | None = None
+    associated_physical_ports_odata_count: int | None = Field(
+        serialization_alias="AssociatedPhysicalPorts@odata.count", default=None
+    )
     cables: list[IdRef] | None = None
     cables_odata_count: int | None = Field(serialization_alias="Cables@odata.count", default=None)
     connected_ports: list[IdRef] | None = None
@@ -270,7 +286,7 @@ class Port(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_17_0.Port")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_18_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
     associated_physical_port: int | None = None
@@ -293,6 +309,7 @@ class Port(RedfishModel):
     id: str
     infini_band: InfiniBandProperties | None = None
     interface_enabled: bool | None = None
+    is_aggregation: bool | None = None
     is_split: bool | None = None
     link_configuration: list[LinkConfiguration] | None = None
     link_network_technology: LinkNetworkTechnology | None = None
@@ -315,6 +332,7 @@ class Port(RedfishModel):
     sfp: Sfp | None = Field(serialization_alias="SFP", default=None)
     signal_detected: bool | None = None
     status: Status | None = None
+    ua_link: UaLink | None = Field(serialization_alias="UALink", default=None)
     width: int | None = None
 
 
@@ -342,6 +360,7 @@ class PortOnUpdate(RedfishModelOnUpdate):
     port_type: PortType | None = None
     sfp: Sfp | None = Field(serialization_alias="SFP", default=None)
     status: Status | None = None
+    ua_link: UaLink | None = Field(serialization_alias="UALink", default=None)
 
 
 class PortConnectionType(StrEnum):
@@ -400,6 +419,7 @@ class ResetRequest(RedfishModel):
 class Sfp(RedfishModel):
     date_code: str | None = None
     fiber_connection_type: FiberConnectionType | None = None
+    management_interface_type: TransceiverManagementInterfaceType | None = None
     manufacturer: str | None = None
     medium_type: MediumType | None = None
     part_number: str | None = None
@@ -427,8 +447,28 @@ class SfpType(StrEnum):
     MINI_SASHD = "MiniSASHD"
     QSFPDD = "QSFPDD"
     OSFP = "OSFP"
+    CDFP = "CDFP"
 
 
 class SupportedEthernetCapabilities(StrEnum):
     WAKE_ON_LAN = "WakeOnLAN"
     EEE = "EEE"
+
+
+class TransceiverManagementInterfaceType(StrEnum):
+    SFP = "SFP"
+    CMIS = "CMIS"
+
+
+class UaLink(RedfishModel):
+    authentication_mode_enabled: bool | None = None
+    generation: UaLinkGeneration | None = None
+    non_strict_ordering_mode_enabled: bool | None = None
+    upli_watchdog_timer_microseconds: int | None = Field(
+        serialization_alias="UPLIWatchdogTimerMicroseconds", default=None
+    )
+
+
+class UaLinkGeneration(StrEnum):
+    UA_LINK128_G = "UALink128G"
+    UA_LINK200_G = "UALink200G"

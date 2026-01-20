@@ -80,8 +80,10 @@ class PcieFunction(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeFunction.v1_6_0.PCIeFunction"
+        serialization_alias="@odata.type", default="#PCIeFunction.v1_7_0.PCIeFunction"
     )
+    ari_function_number: str | None = Field(serialization_alias="ARIFunctionNumber", default=None)
+    ari_mode_enabled: bool | None = Field(serialization_alias="ARIModeEnabled", default=None)
     actions: Actions | None = None
     bus_number: str | None = None
     class_code: str | None = None

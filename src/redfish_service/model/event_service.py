@@ -27,7 +27,7 @@ class EventService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EventService.v1_11_0.EventService"
+        serialization_alias="@odata.type", default="#EventService.v1_12_0.EventService"
     )
     actions: Actions | None = None
     delivery_retry_attempts: int | None = None
@@ -41,6 +41,7 @@ class EventService(RedfishModel):
     include_origin_of_condition_supported: bool | None = None
     name: str
     oem: dict[str, Any] | None = None
+    origin_resources_supported: bool | None = None
     registry_prefixes: list[str] | None = None
     resource_types: list[str] | None = None
     smtp: Smtp | None = Field(serialization_alias="SMTP", default=None)

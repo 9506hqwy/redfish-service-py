@@ -46,3 +46,4 @@ class Protocol(StrEnum):
     QPI = "QPI"
     EMMC = "eMMC"
     UET = "UET"
+    UA_LINK = "UALink"

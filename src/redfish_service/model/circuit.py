@@ -50,7 +50,7 @@ class Circuit(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Circuit.v1_8_1.Circuit")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Circuit.v1_9_0.Circuit")
     actions: Actions | None = None
     breaker_state: BreakerStates | None = None
     circuit_type: CircuitType | None = None
@@ -192,6 +192,8 @@ class NominalVoltageType(StrEnum):
     DC48_V = "DC48V"
     DC240_V = "DC240V"
     DC380_V = "DC380V"
+    DC400_V = "DC400V"
+    DC800_V = "DC800V"
     DC_NEG48_V = "DCNeg48V"
     DC16_V = "DC16V"
     DC12_V = "DC12V"

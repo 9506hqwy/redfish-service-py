@@ -11,7 +11,15 @@ from .resource import Status
 
 
 class Actions(RedfishModel):
+    delete_all_completed_tasks: DeleteAllCompletedTasks | None = Field(
+        serialization_alias="#TaskService.DeleteAllCompletedTasks", default=None
+    )
     oem: dict[str, Any] | None = None
+
+
+class DeleteAllCompletedTasks(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class OverWritePolicy(StrEnum):
@@ -24,7 +32,7 @@ class TaskService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#TaskService.v1_2_1.TaskService"
+        serialization_alias="@odata.type", default="#TaskService.v1_3_0.TaskService"
     )
     actions: Actions | None = None
     completed_task_over_write_policy: OverWritePolicy | None = None
@@ -37,6 +45,7 @@ class TaskService(RedfishModel):
     service_enabled: bool | None = None
     status: Status | None = None
     task_auto_delete_timeout_minutes: int | None = None
+    task_monitor_auto_expiry_seconds: int | None = None
     tasks: IdRef | None = None
 
 
@@ -46,3 +55,4 @@ class TaskServiceOnUpdate(RedfishModelOnUpdate):
     service_enabled: bool | None = None
     status: Status | None = None
     task_auto_delete_timeout_minutes: int | None = None
+    task_monitor_auto_expiry_seconds: int | None = None

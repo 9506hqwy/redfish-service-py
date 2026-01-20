@@ -110,7 +110,7 @@ class Sensor(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_11_1.Sensor")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_12_0.Sensor")
     accuracy: float | None = None
     actions: Actions | None = None
     adjusted_max_allowable_operating_value: float | None = None
@@ -133,6 +133,7 @@ class Sensor(RedfishModel):
     links: Links | None = None
     load_percent: float | None = None
     location: Location | None = None
+    lowest_interval_reading: float | None = None
     lowest_reading: float | None = None
     lowest_reading_time: str | None = None
     manufacturer: str | None = None
@@ -142,6 +143,7 @@ class Sensor(RedfishModel):
     name: str
     oem: dict[str, Any] | None = None
     part_number: str | None = None
+    peak_interval_reading: float | None = None
     peak_reading: float | None = None
     peak_reading_time: str | None = None
     phase_angle_degrees: float | None = None

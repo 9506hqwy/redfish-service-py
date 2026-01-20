@@ -123,7 +123,7 @@ class PortMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PortMetrics.v1_8_0.PortMetrics"
+        serialization_alias="@odata.type", default="#PortMetrics.v1_8_1.PortMetrics"
     )
     actions: Actions | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)

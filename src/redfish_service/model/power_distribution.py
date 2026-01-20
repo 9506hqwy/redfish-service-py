@@ -70,7 +70,7 @@ class PowerDistribution(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerDistribution.v1_5_0.PowerDistribution"
+        serialization_alias="@odata.type", default="#PowerDistribution.v1_6_0.PowerDistribution"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -96,6 +96,7 @@ class PowerDistribution(RedfishModel):
     outlets: IdRef | None = None
     part_number: str | None = None
     power_capacity_va: int | None = Field(serialization_alias="PowerCapacityVA", default=None)
+    power_distribution_redundancy: list[RedundantGroup] | None = None
     power_supplies: IdRef | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     production_date: str | None = None
@@ -117,6 +118,7 @@ class PowerDistributionOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     mains_redundancy: RedundantGroup | None = None
     oem: dict[str, Any] | None = None
+    power_distribution_redundancy: list[RedundantGroup] | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     status: Status | None = None
     transfer_configuration: TransferConfiguration | None = None

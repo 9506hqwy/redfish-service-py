@@ -130,7 +130,7 @@ class NetworkDeviceFunction(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#NetworkDeviceFunction.v1_11_0.NetworkDeviceFunction",
+        default="#NetworkDeviceFunction.v1_11_1.NetworkDeviceFunction",
     )
     actions: Actions | None = None
     allow_deny: IdRef | None = None

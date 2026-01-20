@@ -33,7 +33,7 @@ class EventDestination(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EventDestination.v1_15_1.EventDestination"
+        serialization_alias="@odata.type", default="#EventDestination.v1_16_0.EventDestination"
     )
     actions: Actions | None = None
     backup_destinations: list[str] | None = None
@@ -84,7 +84,7 @@ class EventDestinationOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#EventDestination.v1_15_1.EventDestination"
+        serialization_alias="@odata.type", default="#EventDestination.v1_16_0.EventDestination"
     )
     actions: Actions | None = None
     backup_destinations: list[str] | None = None
@@ -197,6 +197,7 @@ class SnmpSettings(RedfishModel):
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
     encryption_protocol: SnmpEncryptionProtocols | None = None
+    hide_community_strings: bool | None = None
     trap_community: str | None = None
 
 

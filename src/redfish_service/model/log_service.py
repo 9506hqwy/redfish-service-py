@@ -15,6 +15,9 @@ class Actions(RedfishModel):
     collect_diagnostic_data: CollectDiagnosticData | None = Field(
         serialization_alias="#LogService.CollectDiagnosticData", default=None
     )
+    download_raw_log: DownloadRawLog | None = Field(
+        serialization_alias="#LogService.DownloadRawLog", default=None
+    )
     push_diagnostic_data: PushDiagnosticData | None = Field(
         serialization_alias="#LogService.PushDiagnosticData", default=None
     )
@@ -63,6 +66,11 @@ class DiagnosticDataDetails(RedfishModel):
     )
 
 
+class DownloadRawLog(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class LogDiagnosticDataTypes(StrEnum):
     MANAGER = "Manager"
     PRE_OS = "PreOS"
@@ -93,7 +101,7 @@ class LogService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LogService.v1_8_1.LogService"
+        serialization_alias="@odata.type", default="#LogService.v1_9_0.LogService"
     )
     actions: Actions | None = None
     auto_clear_resolved_entries: AutoClearResolvedEntries | None = None

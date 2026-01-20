@@ -10,9 +10,34 @@ from ..util import get_service, set_link_header
 router = APIRouter()
 
 
+@router.get("/redfish/v1/Cables/{cable_id}/Assembly", response_model_exclude_none=True)
+@router.head("/redfish/v1/Cables/{cable_id}/Assembly", response_model_exclude_none=True)
+async def get1(cable_id: str, request: Request, response: Response) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {"cable_id": cable_id, "request": request, "response": response}
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch("/redfish/v1/Cables/{cable_id}/Assembly", response_model_exclude_none=True)
+@authenticate
+async def patch1(
+    cable_id: str, request: Request, response: Response, body: AssemblyOnUpdate
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "cable_id": cable_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
 @router.get("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
-async def get1(chassis_id: str, request: Request, response: Response) -> Assembly:
+async def get2(chassis_id: str, request: Request, response: Response) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
     m = cast(Assembly, s.get(**b))
@@ -22,7 +47,7 @@ async def get1(chassis_id: str, request: Request, response: Response) -> Assembl
 
 @router.patch("/redfish/v1/Chassis/{chassis_id}/Assembly", response_model_exclude_none=True)
 @authenticate
-async def patch1(
+async def patch2(
     chassis_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -43,7 +68,7 @@ async def patch1(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get2(
+async def get3(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -64,7 +89,7 @@ async def get2(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch2(
+async def patch3(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -90,7 +115,7 @@ async def patch2(
 @router.head(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Assembly", response_model_exclude_none=True
 )
-async def get3(chassis_id: str, drive_id: str, request: Request, response: Response) -> Assembly:
+async def get4(chassis_id: str, drive_id: str, request: Request, response: Response) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
@@ -107,7 +132,7 @@ async def get3(chassis_id: str, drive_id: str, request: Request, response: Respo
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Assembly", response_model_exclude_none=True
 )
 @authenticate
-async def patch3(
+async def patch4(
     chassis_id: str, drive_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -129,7 +154,7 @@ async def patch3(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get4(
+async def get5(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -150,7 +175,7 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch4(
+async def patch5(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -178,7 +203,7 @@ async def patch4(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get5(
+async def get6(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -198,7 +223,7 @@ async def get5(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch5(
+async def patch6(
     resource_block_id: str,
     drive_id: str,
     request: Request,
@@ -224,7 +249,7 @@ async def patch5(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get6(
+async def get7(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -251,7 +276,7 @@ async def get6(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch6(
+async def patch7(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -281,7 +306,7 @@ async def patch6(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get7(
+async def get8(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -302,7 +327,7 @@ async def get7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch7(
+async def patch8(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -330,7 +355,7 @@ async def patch7(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get8(
+async def get9(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -350,7 +375,7 @@ async def get8(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch8(
+async def patch9(
     resource_block_id: str,
     drive_id: str,
     request: Request,
@@ -376,7 +401,7 @@ async def patch8(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get9(
+async def get10(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -403,7 +428,7 @@ async def get9(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch9(
+async def patch10(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -433,7 +458,7 @@ async def patch9(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get10(
+async def get11(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -453,7 +478,7 @@ async def get10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch10(
+async def patch11(
     computer_system_id: str,
     memory_id: str,
     request: Request,
@@ -479,7 +504,7 @@ async def patch10(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get11(
+async def get12(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -496,62 +521,62 @@ async def get11(
 
 @router.patch(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch11(
-    resource_block_id: str,
-    memory_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "memory_id": memory_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get12(
-    resource_block_id: str,
-    computer_system_id: str,
-    memory_id: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "memory_id": memory_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch12(
     resource_block_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get13(
+    resource_block_id: str,
+    computer_system_id: str,
+    memory_id: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "memory_id": memory_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch13(
+    resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
     request: Request,
@@ -578,7 +603,7 @@ async def patch12(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get13(
+async def get14(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -598,7 +623,7 @@ async def get13(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch13(
+async def patch14(
     resource_block_id: str,
     memory_id: str,
     request: Request,
@@ -624,7 +649,7 @@ async def patch13(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get14(
+async def get15(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -649,7 +674,7 @@ async def get14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch14(
+async def patch15(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -677,7 +702,7 @@ async def patch14(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get15(
+async def get16(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -697,7 +722,7 @@ async def get15(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch15(
+async def patch16(
     chassis_id: str,
     network_adapter_id: str,
     request: Request,
@@ -723,7 +748,7 @@ async def patch15(
     "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get16(
+async def get17(
     chassis_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -743,7 +768,7 @@ async def get16(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch16(
+async def patch17(
     chassis_id: str,
     pcie_device_id: str,
     request: Request,
@@ -769,7 +794,7 @@ async def patch16(
     "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get17(
+async def get18(
     computer_system_id: str, pcie_device_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -789,7 +814,7 @@ async def get17(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch17(
+async def patch18(
     computer_system_id: str,
     pcie_device_id: str,
     request: Request,
@@ -815,7 +840,7 @@ async def patch17(
     "/redfish/v1/Chassis/{chassis_id}/Power/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get18(
+async def get19(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -835,7 +860,7 @@ async def get18(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch18(
+async def patch19(
     chassis_id: str,
     power_supply_id: str,
     request: Request,
@@ -861,7 +886,7 @@ async def patch18(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get19(
+async def get20(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -881,61 +906,9 @@ async def get19(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch19(
-    computer_system_id: str,
-    processor_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "processor_id": processor_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get20(
-    computer_system_id: str,
-    processor_id: str,
-    processor_id2: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "processor_id": processor_id,
-        "processor_id2": processor_id2,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def patch20(
     computer_system_id: str,
     processor_id: str,
-    processor_id2: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -944,7 +917,6 @@ async def patch20(
     b: dict[str, Any] = {
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
-        "processor_id2": processor_id2,
         "request": request,
         "response": response,
         "body": body,
@@ -953,18 +925,17 @@ async def patch20(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 async def get21(
     computer_system_id: str,
     processor_id: str,
     processor_id2: str,
-    processor_id3: str,
     request: Request,
     response: Response,
 ) -> Assembly:
@@ -973,7 +944,6 @@ async def get21(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
-        "processor_id3": processor_id3,
         "request": request,
         "response": response,
     }
@@ -983,7 +953,7 @@ async def get21(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -991,6 +961,61 @@ async def patch21(
     computer_system_id: str,
     processor_id: str,
     processor_id2: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get22(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch22(
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
     processor_id3: str,
     request: Request,
     response: Response,
@@ -1017,7 +1042,7 @@ async def patch21(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get22(
+async def get23(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -1037,61 +1062,9 @@ async def get22(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch22(
-    resource_block_id: str,
-    processor_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "processor_id": processor_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get23(
-    resource_block_id: str,
-    processor_id: str,
-    processor_id2: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "processor_id": processor_id,
-        "processor_id2": processor_id2,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def patch23(
     resource_block_id: str,
     processor_id: str,
-    processor_id2: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -1100,7 +1073,6 @@ async def patch23(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
-        "processor_id2": processor_id2,
         "request": request,
         "response": response,
         "body": body,
@@ -1109,18 +1081,17 @@ async def patch23(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 async def get24(
     resource_block_id: str,
     processor_id: str,
     processor_id2: str,
-    processor_id3: str,
     request: Request,
     response: Response,
 ) -> Assembly:
@@ -1129,7 +1100,6 @@ async def get24(
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
-        "processor_id3": processor_id3,
         "request": request,
         "response": response,
     }
@@ -1139,7 +1109,7 @@ async def get24(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1147,6 +1117,61 @@ async def patch24(
     resource_block_id: str,
     processor_id: str,
     processor_id2: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get25(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch25(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
     processor_id3: str,
     request: Request,
     response: Response,
@@ -1173,7 +1198,7 @@ async def patch24(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get25(
+async def get26(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -1195,61 +1220,6 @@ async def get25(
 
 @router.patch(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch25(
-    resource_block_id: str,
-    computer_system_id: str,
-    processor_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "processor_id": processor_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get26(
-    resource_block_id: str,
-    computer_system_id: str,
-    processor_id: str,
-    processor_id2: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "processor_id": processor_id,
-        "processor_id2": processor_id2,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1257,7 +1227,6 @@ async def patch26(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
-    processor_id2: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -1267,7 +1236,6 @@ async def patch26(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
-        "processor_id2": processor_id2,
         "request": request,
         "response": response,
         "body": body,
@@ -1276,11 +1244,11 @@ async def patch26(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 async def get27(
@@ -1288,7 +1256,6 @@ async def get27(
     computer_system_id: str,
     processor_id: str,
     processor_id2: str,
-    processor_id3: str,
     request: Request,
     response: Response,
 ) -> Assembly:
@@ -1298,7 +1265,6 @@ async def get27(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
-        "processor_id3": processor_id3,
         "request": request,
         "response": response,
     }
@@ -1308,7 +1274,7 @@ async def get27(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1317,6 +1283,65 @@ async def patch27(
     computer_system_id: str,
     processor_id: str,
     processor_id2: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get28(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch28(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
     processor_id3: str,
     request: Request,
     response: Response,
@@ -1344,7 +1369,7 @@ async def patch27(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get28(
+async def get29(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -1364,61 +1389,9 @@ async def get28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch28(
-    resource_block_id: str,
-    processor_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "processor_id": processor_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get29(
-    resource_block_id: str,
-    processor_id: str,
-    processor_id2: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "processor_id": processor_id,
-        "processor_id2": processor_id2,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def patch29(
     resource_block_id: str,
     processor_id: str,
-    processor_id2: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -1427,7 +1400,6 @@ async def patch29(
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
-        "processor_id2": processor_id2,
         "request": request,
         "response": response,
         "body": body,
@@ -1436,18 +1408,17 @@ async def patch29(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 async def get30(
     resource_block_id: str,
     processor_id: str,
     processor_id2: str,
-    processor_id3: str,
     request: Request,
     response: Response,
 ) -> Assembly:
@@ -1456,7 +1427,6 @@ async def get30(
         "resource_block_id": resource_block_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
-        "processor_id3": processor_id3,
         "request": request,
         "response": response,
     }
@@ -1466,7 +1436,7 @@ async def get30(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1474,6 +1444,61 @@ async def patch30(
     resource_block_id: str,
     processor_id: str,
     processor_id2: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get31(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch31(
+    resource_block_id: str,
+    processor_id: str,
+    processor_id2: str,
     processor_id3: str,
     request: Request,
     response: Response,
@@ -1500,7 +1525,7 @@ async def patch30(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get31(
+async def get32(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -1522,61 +1547,6 @@ async def get31(
 
 @router.patch(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch31(
-    resource_block_id: str,
-    computer_system_id: str,
-    processor_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "processor_id": processor_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get32(
-    resource_block_id: str,
-    computer_system_id: str,
-    processor_id: str,
-    processor_id2: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "processor_id": processor_id,
-        "processor_id2": processor_id2,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1584,7 +1554,6 @@ async def patch32(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
-    processor_id2: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -1594,7 +1563,6 @@ async def patch32(
         "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
-        "processor_id2": processor_id2,
         "request": request,
         "response": response,
         "body": body,
@@ -1603,11 +1571,11 @@ async def patch32(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 async def get33(
@@ -1615,7 +1583,6 @@ async def get33(
     computer_system_id: str,
     processor_id: str,
     processor_id2: str,
-    processor_id3: str,
     request: Request,
     response: Response,
 ) -> Assembly:
@@ -1625,7 +1592,6 @@ async def get33(
         "computer_system_id": computer_system_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
-        "processor_id3": processor_id3,
         "request": request,
         "response": response,
     }
@@ -1635,7 +1601,7 @@ async def get33(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1644,6 +1610,65 @@ async def patch33(
     computer_system_id: str,
     processor_id: str,
     processor_id2: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get34(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch34(
+    resource_block_id: str,
+    computer_system_id: str,
+    processor_id: str,
+    processor_id2: str,
     processor_id3: str,
     request: Request,
     response: Response,
@@ -1671,7 +1696,7 @@ async def patch33(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get34(
+async def get35(
     chassis_id: str,
     network_adapter_id: str,
     processor_id: str,
@@ -1696,66 +1721,10 @@ async def get34(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch34(
-    chassis_id: str,
-    network_adapter_id: str,
-    processor_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "chassis_id": chassis_id,
-        "network_adapter_id": network_adapter_id,
-        "processor_id": processor_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get35(
-    chassis_id: str,
-    network_adapter_id: str,
-    processor_id: str,
-    processor_id2: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "chassis_id": chassis_id,
-        "network_adapter_id": network_adapter_id,
-        "processor_id": processor_id,
-        "processor_id2": processor_id2,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def patch35(
     chassis_id: str,
     network_adapter_id: str,
     processor_id: str,
-    processor_id2: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -1765,7 +1734,6 @@ async def patch35(
         "chassis_id": chassis_id,
         "network_adapter_id": network_adapter_id,
         "processor_id": processor_id,
-        "processor_id2": processor_id2,
         "request": request,
         "response": response,
         "body": body,
@@ -1774,11 +1742,11 @@ async def patch35(
 
 
 @router.get(
-    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 async def get36(
@@ -1786,7 +1754,6 @@ async def get36(
     network_adapter_id: str,
     processor_id: str,
     processor_id2: str,
-    processor_id3: str,
     request: Request,
     response: Response,
 ) -> Assembly:
@@ -1796,7 +1763,6 @@ async def get36(
         "network_adapter_id": network_adapter_id,
         "processor_id": processor_id,
         "processor_id2": processor_id2,
-        "processor_id3": processor_id3,
         "request": request,
         "response": response,
     }
@@ -1806,7 +1772,7 @@ async def get36(
 
 
 @router.patch(
-    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1815,6 +1781,65 @@ async def patch36(
     network_adapter_id: str,
     processor_id: str,
     processor_id2: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get37(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
+    processor_id3: str,
+    request: Request,
+    response: Response,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "network_adapter_id": network_adapter_id,
+        "processor_id": processor_id,
+        "processor_id2": processor_id2,
+        "processor_id3": processor_id3,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Processors/{processor_id}/SubProcessors/{processor_id2}/SubProcessors/{processor_id3}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch37(
+    chassis_id: str,
+    network_adapter_id: str,
+    processor_id: str,
+    processor_id2: str,
     processor_id3: str,
     request: Request,
     response: Response,
@@ -1840,59 +1865,6 @@ async def patch36(
 )
 @router.head(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get37(
-    computer_system_id: str,
-    storage_id: str,
-    storage_controller_id: str,
-    request: Request,
-    response: Response,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "storage_id": storage_id,
-        "storage_controller_id": storage_controller_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch37(
-    computer_system_id: str,
-    storage_id: str,
-    storage_controller_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "storage_id": storage_id,
-        "storage_controller_id": storage_controller_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get38(
@@ -1916,7 +1888,7 @@ async def get38(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1941,15 +1913,15 @@ async def patch38(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get39(
-    resource_block_id: str,
+    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -1957,7 +1929,7 @@ async def get39(
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -1969,12 +1941,12 @@ async def get39(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch39(
-    resource_block_id: str,
+    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -1983,7 +1955,7 @@ async def patch39(
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -1994,11 +1966,11 @@ async def patch39(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get40(
@@ -2022,7 +1994,7 @@ async def get40(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2047,16 +2019,15 @@ async def patch40(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get41(
     resource_block_id: str,
-    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2065,7 +2036,6 @@ async def get41(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2077,13 +2047,12 @@ async def get41(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch41(
     resource_block_id: str,
-    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2093,7 +2062,6 @@ async def patch41(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2104,11 +2072,11 @@ async def patch41(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get42(
@@ -2134,7 +2102,7 @@ async def get42(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2161,15 +2129,16 @@ async def patch42(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get43(
     resource_block_id: str,
+    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2178,6 +2147,7 @@ async def get43(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2189,12 +2159,13 @@ async def get43(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch43(
     resource_block_id: str,
+    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2204,6 +2175,7 @@ async def patch43(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2214,11 +2186,11 @@ async def patch43(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get44(
@@ -2242,7 +2214,7 @@ async def get44(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2267,16 +2239,15 @@ async def patch44(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get45(
     resource_block_id: str,
-    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2285,7 +2256,6 @@ async def get45(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2297,13 +2267,12 @@ async def get45(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch45(
     resource_block_id: str,
-    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2313,7 +2282,6 @@ async def patch45(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2324,11 +2292,11 @@ async def patch45(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get46(
@@ -2354,7 +2322,7 @@ async def get46(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2381,18 +2349,25 @@ async def patch46(
 
 
 @router.get(
-    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get47(
-    storage_id: str, storage_controller_id: str, request: Request, response: Response
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    storage_controller_id: str,
+    request: Request,
+    response: Response,
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2404,11 +2379,13 @@ async def get47(
 
 
 @router.patch(
-    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch47(
+    resource_block_id: str,
+    computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2417,6 +2394,8 @@ async def patch47(
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
         "storage_id": storage_id,
         "storage_controller_id": storage_controller_id,
         "request": request,
@@ -2427,11 +2406,11 @@ async def patch47(
 
 
 @router.get(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get48(
@@ -2450,7 +2429,7 @@ async def get48(
 
 
 @router.patch(
-    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
+    "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2473,18 +2452,20 @@ async def patch48(
 
 
 @router.get(
-    "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get49(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
+async def get49(
+    storage_id: str, storage_controller_id: str, request: Request, response: Response
+) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
-        "chassis_id": chassis_id,
-        "fan_id": fan_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
     }
@@ -2494,17 +2475,21 @@ async def get49(chassis_id: str, fan_id: str, request: Request, response: Respon
 
 
 @router.patch(
-    "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
+    "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch49(
-    chassis_id: str, fan_id: str, request: Request, response: Response, body: AssemblyOnUpdate
+    storage_id: str,
+    storage_controller_id: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
-        "chassis_id": chassis_id,
-        "fan_id": fan_id,
+        "storage_id": storage_id,
+        "storage_controller_id": storage_controller_id,
         "request": request,
         "response": response,
         "body": body,
@@ -2513,11 +2498,11 @@ async def patch49(
 
 
 @router.get(
-    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
+    "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
+    "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get50(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
@@ -2534,7 +2519,7 @@ async def get50(chassis_id: str, fan_id: str, request: Request, response: Respon
 
 
 @router.patch(
-    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
+    "/redfish/v1/Chassis/{chassis_id}/Thermal/Fans/{fan_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2553,6 +2538,46 @@ async def patch50(
 
 
 @router.get(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get51(chassis_id: str, fan_id: str, request: Request, response: Response) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fan_id": fan_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Fans/{fan_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch51(
+    chassis_id: str, fan_id: str, request: Request, response: Response, body: AssemblyOnUpdate
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "fan_id": fan_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
@@ -2560,7 +2585,7 @@ async def patch50(
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get51(
+async def get52(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -2580,7 +2605,7 @@ async def get51(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch51(
+async def patch52(
     chassis_id: str,
     power_supply_id: str,
     request: Request,
@@ -2606,7 +2631,7 @@ async def patch51(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/PowerSupplies/{power_supply_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get52(
+async def get53(
     power_distribution_id: str, power_supply_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -2626,7 +2651,7 @@ async def get52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch52(
+async def patch53(
     power_distribution_id: str,
     power_supply_id: str,
     request: Request,
@@ -2652,7 +2677,7 @@ async def patch52(
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/Batteries/{battery_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get53(
+async def get54(
     chassis_id: str, battery_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -2672,7 +2697,7 @@ async def get53(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch53(
+async def patch54(
     chassis_id: str, battery_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -2694,7 +2719,7 @@ async def patch53(
     "/redfish/v1/Chassis/{chassis_id}/ThermalSubsystem/Heaters/{header_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get54(chassis_id: str, header_id: str, request: Request, response: Response) -> Assembly:
+async def get55(chassis_id: str, header_id: str, request: Request, response: Response) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "chassis_id": chassis_id,
@@ -2712,7 +2737,7 @@ async def get54(chassis_id: str, header_id: str, request: Request, response: Res
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch54(
+async def patch55(
     chassis_id: str, header_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -2734,44 +2759,6 @@ async def patch54(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get55(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "cooling_unit_id": cooling_unit_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch55(
-    cooling_unit_id: str, request: Request, response: Response, body: AssemblyOnUpdate
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "cooling_unit_id": cooling_unit_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
-    response_model_exclude_none=True,
-)
 async def get56(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
@@ -2785,7 +2772,7 @@ async def get56(cooling_unit_id: str, request: Request, response: Response) -> A
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2803,11 +2790,11 @@ async def patch56(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get57(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
@@ -2823,7 +2810,7 @@ async def get57(cooling_unit_id: str, request: Request, response: Response) -> A
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2841,6 +2828,44 @@ async def patch57(
 
 
 @router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get58(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch58(
+    cooling_unit_id: str, request: Request, response: Response, body: AssemblyOnUpdate
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
     "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
@@ -2848,7 +2873,7 @@ async def patch57(
     "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get58(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
+async def get59(cooling_unit_id: str, request: Request, response: Response) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
@@ -2865,7 +2890,7 @@ async def get58(cooling_unit_id: str, request: Request, response: Response) -> A
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch58(
+async def patch59(
     cooling_unit_id: str, request: Request, response: Response, body: AssemblyOnUpdate
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -2884,52 +2909,6 @@ async def patch58(
 )
 @router.head(
     "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
-    response_model_exclude_none=True,
-)
-async def get59(
-    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Assembly, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch59(
-    cooling_unit_id: str,
-    reservoir_id: str,
-    request: Request,
-    response: Response,
-    body: AssemblyOnUpdate,
-) -> Assembly:
-    s: Service = get_service(Assembly, request)
-    b: dict[str, Any] = {
-        "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Assembly, s.patch(**b))
-
-
-@router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get60(
@@ -2948,7 +2927,7 @@ async def get60(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2971,11 +2950,11 @@ async def patch60(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get61(
@@ -2994,7 +2973,7 @@ async def get61(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -3017,11 +2996,11 @@ async def patch61(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get62(
@@ -3040,7 +3019,7 @@ async def get62(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -3063,20 +3042,20 @@ async def patch62(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get63(
-    cooling_unit_id: str, pump_id: str, request: Request, response: Response
+    cooling_unit_id: str, reservoir_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "request": request,
         "response": response,
     }
@@ -3086,13 +3065,13 @@ async def get63(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch63(
     cooling_unit_id: str,
-    pump_id: str,
+    reservoir_id: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -3100,7 +3079,7 @@ async def patch63(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "request": request,
         "response": response,
         "body": body,
@@ -3109,11 +3088,11 @@ async def patch63(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get64(
@@ -3132,7 +3111,7 @@ async def get64(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -3155,11 +3134,11 @@ async def patch64(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get65(
@@ -3178,7 +3157,7 @@ async def get65(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -3201,11 +3180,11 @@ async def patch65(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get66(
@@ -3224,7 +3203,7 @@ async def get66(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -3247,20 +3226,20 @@ async def patch66(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get67(
-    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, pump_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "filter_id": filter_id,
+        "pump_id": pump_id,
         "request": request,
         "response": response,
     }
@@ -3270,13 +3249,13 @@ async def get67(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch67(
     cooling_unit_id: str,
-    filter_id: str,
+    pump_id: str,
     request: Request,
     response: Response,
     body: AssemblyOnUpdate,
@@ -3284,7 +3263,7 @@ async def patch67(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "filter_id": filter_id,
+        "pump_id": pump_id,
         "request": request,
         "response": response,
         "body": body,
@@ -3293,20 +3272,19 @@ async def patch67(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get68(
-    cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3317,13 +3295,12 @@ async def get68(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch68(
     cooling_unit_id: str,
-    reservoir_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -3332,7 +3309,6 @@ async def patch68(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3342,20 +3318,20 @@ async def patch68(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get69(
-    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3366,13 +3342,13 @@ async def get69(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch69(
     cooling_unit_id: str,
-    pump_id: str,
+    reservoir_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -3381,7 +3357,7 @@ async def patch69(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3391,19 +3367,20 @@ async def patch69(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get70(
-    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3414,12 +3391,13 @@ async def get70(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/CDUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch70(
     cooling_unit_id: str,
+    pump_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -3428,6 +3406,7 @@ async def patch70(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3437,20 +3416,19 @@ async def patch70(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get71(
-    cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3461,13 +3439,12 @@ async def get71(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch71(
     cooling_unit_id: str,
-    reservoir_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -3476,7 +3453,6 @@ async def patch71(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3486,20 +3462,20 @@ async def patch71(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get72(
-    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3510,13 +3486,13 @@ async def get72(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch72(
     cooling_unit_id: str,
-    pump_id: str,
+    reservoir_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -3525,7 +3501,7 @@ async def patch72(
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
-        "pump_id": pump_id,
+        "reservoir_id": reservoir_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3535,19 +3511,20 @@ async def patch72(
 
 
 @router.get(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 async def get73(
-    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+    cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
     b: dict[str, Any] = {
         "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
         "filter_id": filter_id,
         "request": request,
         "response": response,
@@ -3558,12 +3535,60 @@ async def get73(
 
 
 @router.patch(
-    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    "/redfish/v1/ThermalEquipment/ImmersionUnits/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch73(
     cooling_unit_id: str,
+    pump_id: str,
+    filter_id: str,
+    request: Request,
+    response: Response,
+    body: AssemblyOnUpdate,
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "pump_id": pump_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Assembly, s.patch(**b))
+
+
+@router.get(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    response_model_exclude_none=True,
+)
+async def get74(
+    cooling_unit_id: str, filter_id: str, request: Request, response: Response
+) -> Assembly:
+    s: Service = get_service(Assembly, request)
+    b: dict[str, Any] = {
+        "cooling_unit_id": cooling_unit_id,
+        "filter_id": filter_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Assembly, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Filters/{filter_id}/Assembly",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch74(
+    cooling_unit_id: str,
     filter_id: str,
     request: Request,
     response: Response,
@@ -3588,7 +3613,7 @@ async def patch73(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get74(
+async def get75(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -3609,7 +3634,7 @@ async def get74(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch74(
+async def patch75(
     cooling_unit_id: str,
     reservoir_id: str,
     filter_id: str,
@@ -3637,7 +3662,7 @@ async def patch74(
     "/redfish/v1/ThermalEquipment/HeatExchangers/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get75(
+async def get76(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -3658,7 +3683,7 @@ async def get75(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch75(
+async def patch76(
     cooling_unit_id: str,
     pump_id: str,
     filter_id: str,
@@ -3686,7 +3711,7 @@ async def patch75(
     "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get76(
+async def get77(
     cooling_unit_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -3706,7 +3731,7 @@ async def get76(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch76(
+async def patch77(
     cooling_unit_id: str,
     filter_id: str,
     request: Request,
@@ -3732,7 +3757,7 @@ async def patch76(
     "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Reservoirs/{reservoir_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get77(
+async def get78(
     cooling_unit_id: str, reservoir_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -3753,7 +3778,7 @@ async def get77(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch77(
+async def patch78(
     cooling_unit_id: str,
     reservoir_id: str,
     filter_id: str,
@@ -3781,7 +3806,7 @@ async def patch77(
     "/redfish/v1/ThermalEquipment/RPUs/{cooling_unit_id}/Pumps/{pump_id}/Filters/{filter_id}/Assembly",
     response_model_exclude_none=True,
 )
-async def get78(
+async def get79(
     cooling_unit_id: str, pump_id: str, filter_id: str, request: Request, response: Response
 ) -> Assembly:
     s: Service = get_service(Assembly, request)
@@ -3802,7 +3827,7 @@ async def get78(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch78(
+async def patch79(
     cooling_unit_id: str,
     pump_id: str,
     filter_id: str,

@@ -9,7 +9,7 @@ from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
 from .pcie_device import PcieInterface
 from .protocol import Protocol
-from .resource import Identifier, Location, Status
+from .resource import Identifier, Location, ResetType, Status
 from .software_inventory import MeasurementBlock
 from .swordfish.volume import RaidType
 
@@ -33,6 +33,7 @@ class Actions(RedfishModel):
     detach_namespaces: DetachNamespaces | None = Field(
         serialization_alias="#StorageController.DetachNamespaces", default=None
     )
+    reset: Reset | None = Field(serialization_alias="#StorageController.Reset", default=None)
     security_receive: SecurityReceive | None = Field(
         serialization_alias="#StorageController.SecurityReceive", default=None
     )
@@ -157,6 +158,15 @@ class Rates(RedfishModel):
     transformation_rate_percent: int | None = None
 
 
+class Reset(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ResetRequest(RedfishModel):
+    reset_type: ResetType | None = None
+
+
 class SecurityReceive(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -184,7 +194,7 @@ class StorageController(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StorageController.v1_10_0.StorageController"
+        serialization_alias="@odata.type", default="#StorageController.v1_11_0.StorageController"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

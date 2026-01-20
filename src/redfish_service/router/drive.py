@@ -6,9 +6,12 @@ from ..authenticate import authenticate
 from ..model.drive import (
     Drive,
     DriveOnUpdate,
+    FreezePersonalityRequest,
     ResetRequest,
     RevertToOriginalFactoryStateRequest,
     SecureEraseRequest,
+    SetPersonalityKeyRequest,
+    UnfreezePersonalityRequest,
 )
 from ..model.redfish_error import RedfishError
 from ..service import Service
@@ -64,6 +67,32 @@ async def patch1(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality1(
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -144,6 +173,58 @@ async def secure_erase1(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key1(
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality1(
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get("/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}", response_model_exclude_none=True)
 @router.head(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}", response_model_exclude_none=True
@@ -177,6 +258,30 @@ async def patch2(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality2(
+    chassis_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -243,6 +348,54 @@ async def secure_erase2(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key2(
+    chassis_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality2(
+    chassis_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
@@ -290,6 +443,32 @@ async def patch3(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality3(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -370,6 +549,58 @@ async def secure_erase3(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key3(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality3(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
@@ -414,6 +645,30 @@ async def patch4(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality4(
+    resource_block_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -484,6 +739,54 @@ async def secure_erase4(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key4(
+    resource_block_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality4(
+    resource_block_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
@@ -539,6 +842,34 @@ async def patch5(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality5(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -625,6 +956,62 @@ async def secure_erase5(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key5(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality5(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
@@ -672,6 +1059,32 @@ async def patch6(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality6(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -752,6 +1165,58 @@ async def secure_erase6(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key6(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality6(
+    resource_block_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
@@ -796,6 +1261,30 @@ async def patch7(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality7(
+    resource_block_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -866,6 +1355,54 @@ async def secure_erase7(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key7(
+    resource_block_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality7(
+    resource_block_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}",
     response_model_exclude_none=True,
@@ -921,6 +1458,34 @@ async def patch8(
         "body": body,
     }
     return cast(Drive, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.FreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def freeze_personality8(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: FreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "FreezePersonality",
+    }
+    return s.action(**b)
 
 
 @router.post(
@@ -1003,5 +1568,61 @@ async def secure_erase8(
         "response": response,
         "body": body,
         "action": "SecureErase",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.SetPersonalityKey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_personality_key8(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: SetPersonalityKeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Actions/Drive.UnfreezePersonality",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def unfreeze_personality8(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    drive_id: str,
+    request: Request,
+    response: Response,
+    body: UnfreezePersonalityRequest,
+) -> RedfishError:
+    s: Service = get_service(Drive, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "drive_id": drive_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "UnfreezePersonality",
     }
     return s.action(**b)

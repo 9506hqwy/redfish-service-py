@@ -117,7 +117,7 @@ class Processor(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Processor.v1_21_0.Processor"
+        serialization_alias="@odata.type", default="#Processor.v1_22_0.Processor"
     )
     acceleration_functions: IdRef | None = None
     actions: Actions | None = None
@@ -182,6 +182,7 @@ class Processor(RedfishModel):
     total_enabled_threads: int | None = None
     total_threads: int | None = None
     turbo_state: TurboState | None = None
+    ua_link: UaLink | None = Field(serialization_alias="UALink", default=None)
     uuid: str | None = Field(serialization_alias="UUID", default=None)
     version: str | None = None
 
@@ -207,6 +208,7 @@ class ProcessorOnUpdate(RedfishModelOnUpdate):
     speed_locked: bool | None = None
     status: Status | None = None
     system_interface: ProcessorInterface | None = None
+    ua_link: UaLink | None = Field(serialization_alias="UALink", default=None)
 
 
 class ProcessorArchitecture(StrEnum):
@@ -324,3 +326,7 @@ class ThrottleCause(StrEnum):
 class TurboState(StrEnum):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class UaLink(RedfishModel):
+    accelerator_id: int | None = Field(serialization_alias="AcceleratorID", default=None)

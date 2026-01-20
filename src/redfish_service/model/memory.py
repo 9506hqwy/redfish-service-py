@@ -145,7 +145,7 @@ class Memory(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_22_0.Memory")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_23_0.Memory")
     actions: Actions | None = None
     allocation_alignment_mib: int | None = Field(
         serialization_alias="AllocationAlignmentMiB", default=None
@@ -234,6 +234,7 @@ class Memory(RedfishModel):
         serialization_alias="PowerManagementICRevisionID", default=None
     )
     power_management_policy: PowerManagementPolicy | None = None
+    production_date: str | None = None
     rank_count: int | None = None
     regions: list[RegionSet] | None = None
     security_capabilities: SecurityCapabilities | None = None

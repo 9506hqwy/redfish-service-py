@@ -311,11 +311,102 @@ async def renew3(
 
 
 @router.delete(
+    "/redfish/v1/AccountService/OAuth2/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete4(certificate_id: str, request: Request, response: Response) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/AccountService/OAuth2/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/AccountService/OAuth2/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get4(certificate_id: str, request: Request, response: Response) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/AccountService/OAuth2/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch4(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/AccountService/OAuth2/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey4(
+    certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/AccountService/OAuth2/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew4(
+    certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
     "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete4(
+async def delete5(
     external_account_provider_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -336,7 +427,7 @@ async def delete4(
     "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get4(
+async def get5(
     external_account_provider_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -356,7 +447,7 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch4(
+async def patch5(
     external_account_provider_id: str,
     certificate_id: str,
     request: Request,
@@ -379,7 +470,7 @@ async def patch4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey4(
+async def rekey5(
     external_account_provider_id: str,
     certificate_id: str,
     request: Request,
@@ -403,7 +494,7 @@ async def rekey4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew4(
+async def renew5(
     external_account_provider_id: str,
     certificate_id: str,
     request: Request,
@@ -427,97 +518,6 @@ async def renew4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete5(certificate_id: str, request: Request, response: Response) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get5(certificate_id: str, request: Request, response: Response) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch5(
-    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey5(
-    certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew5(
-    certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def delete6(certificate_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
@@ -529,11 +529,11 @@ async def delete6(certificate_id: str, request: Request, response: Response) -> 
 
 
 @router.get(
-    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get6(certificate_id: str, request: Request, response: Response) -> Certificate:
@@ -549,7 +549,7 @@ async def get6(certificate_id: str, request: Request, response: Response) -> Cer
 
 
 @router.patch(
-    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -567,7 +567,7 @@ async def patch6(
 
 
 @router.post(
-    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -586,7 +586,7 @@ async def rekey6(
 
 
 @router.post(
-    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -605,11 +605,102 @@ async def renew6(
 
 
 @router.delete(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete7(certificate_id: str, request: Request, response: Response) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get7(certificate_id: str, request: Request, response: Response) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch7(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey7(
+    certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew7(
+    certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete7(
+async def delete8(
     manager_id: str,
     manager_account_id: str,
     certificate_id: str,
@@ -635,7 +726,7 @@ async def delete7(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get7(
+async def get8(
     manager_id: str,
     manager_account_id: str,
     certificate_id: str,
@@ -660,7 +751,7 @@ async def get7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch7(
+async def patch8(
     manager_id: str,
     manager_account_id: str,
     certificate_id: str,
@@ -685,7 +776,7 @@ async def patch7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey7(
+async def rekey8(
     manager_id: str,
     manager_account_id: str,
     certificate_id: str,
@@ -711,7 +802,7 @@ async def rekey7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew7(
+async def renew8(
     manager_id: str,
     manager_account_id: str,
     certificate_id: str,
@@ -737,110 +828,6 @@ async def renew7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete8(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get8(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch8(
-    manager_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey8(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew8(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def delete9(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
@@ -855,11 +842,11 @@ async def delete9(
 
 
 @router.get(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get9(
@@ -878,7 +865,7 @@ async def get9(
 
 
 @router.patch(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -901,7 +888,7 @@ async def patch9(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -921,7 +908,7 @@ async def rekey9(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -941,11 +928,115 @@ async def renew9(
 
 
 @router.delete(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete10(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get10(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch10(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey10(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew10(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete11(
     manager_id: str,
     external_account_provider_id: str,
     certificate_id: str,
@@ -971,7 +1062,7 @@ async def delete10(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get10(
+async def get11(
     manager_id: str,
     external_account_provider_id: str,
     certificate_id: str,
@@ -996,7 +1087,7 @@ async def get10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch10(
+async def patch11(
     manager_id: str,
     external_account_provider_id: str,
     certificate_id: str,
@@ -1021,7 +1112,7 @@ async def patch10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey10(
+async def rekey11(
     manager_id: str,
     external_account_provider_id: str,
     certificate_id: str,
@@ -1047,7 +1138,7 @@ async def rekey10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew10(
+async def renew11(
     manager_id: str,
     external_account_provider_id: str,
     certificate_id: str,
@@ -1073,110 +1164,6 @@ async def renew10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete11(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get11(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch11(
-    manager_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey11(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew11(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def delete12(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
@@ -1191,11 +1178,11 @@ async def delete12(
 
 
 @router.get(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get12(
@@ -1214,7 +1201,7 @@ async def get12(
 
 
 @router.patch(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1237,7 +1224,7 @@ async def patch12(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1257,7 +1244,7 @@ async def rekey12(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1277,7 +1264,7 @@ async def renew12(
 
 
 @router.delete(
-    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1295,11 +1282,11 @@ async def delete13(
 
 
 @router.get(
-    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get13(
@@ -1318,7 +1305,7 @@ async def get13(
 
 
 @router.patch(
-    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1341,7 +1328,7 @@ async def patch13(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1361,7 +1348,7 @@ async def rekey13(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1381,11 +1368,115 @@ async def renew13(
 
 
 @router.delete(
-    "/redfish/v1/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete14(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get14(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch14(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey14(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew14(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete15(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -1406,7 +1497,7 @@ async def delete14(
     "/redfish/v1/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get14(
+async def get15(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -1426,7 +1517,7 @@ async def get14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch14(
+async def patch15(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -1449,7 +1540,7 @@ async def patch14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey14(
+async def rekey15(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -1473,134 +1564,7 @@ async def rekey14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew14(
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RenewRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def delete15(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get15(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch15(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey15(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RekeyRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def renew15(
-    resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -1609,7 +1573,6 @@ async def renew15(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
         "request": request,
@@ -1621,7 +1584,7 @@ async def renew15(
 
 
 @router.delete(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1644,11 +1607,11 @@ async def delete16(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get16(
@@ -1672,7 +1635,7 @@ async def get16(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1697,7 +1660,7 @@ async def patch16(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1723,7 +1686,7 @@ async def rekey16(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -1749,11 +1712,139 @@ async def renew16(
 
 
 @router.delete(
-    "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete17(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get17(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch17(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey17(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew17(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete18(
     computer_system_id: str,
     database_id: str,
     certificate_id: str,
@@ -1779,7 +1870,7 @@ async def delete17(
     "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get17(
+async def get18(
     computer_system_id: str,
     database_id: str,
     certificate_id: str,
@@ -1804,7 +1895,7 @@ async def get17(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch17(
+async def patch18(
     computer_system_id: str,
     database_id: str,
     certificate_id: str,
@@ -1829,7 +1920,7 @@ async def patch17(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey17(
+async def rekey18(
     computer_system_id: str,
     database_id: str,
     certificate_id: str,
@@ -1855,144 +1946,7 @@ async def rekey17(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew17(
-    computer_system_id: str,
-    database_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RenewRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "database_id": database_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def delete18(
-    resource_block_id: str,
-    computer_system_id: str,
-    database_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "database_id": database_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get18(
-    resource_block_id: str,
-    computer_system_id: str,
-    database_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "database_id": database_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch18(
-    resource_block_id: str,
-    computer_system_id: str,
-    database_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "database_id": database_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey18(
-    resource_block_id: str,
-    computer_system_id: str,
-    database_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RekeyRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "database_id": database_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def renew18(
-    resource_block_id: str,
     computer_system_id: str,
     database_id: str,
     certificate_id: str,
@@ -2002,7 +1956,6 @@ async def renew18(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "database_id": database_id,
         "certificate_id": certificate_id,
@@ -2015,7 +1968,7 @@ async def renew18(
 
 
 @router.delete(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2040,11 +1993,11 @@ async def delete19(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get19(
@@ -2070,7 +2023,7 @@ async def get19(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2097,7 +2050,7 @@ async def patch19(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2125,7 +2078,7 @@ async def rekey19(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2153,16 +2106,23 @@ async def renew19(
 
 
 @router.delete(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete20(
-    event_destination_id: str, certificate_id: str, request: Request, response: Response
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> None:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "event_destination_id": event_destination_id,
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -2171,19 +2131,26 @@ async def delete20(
 
 
 @router.get(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get20(
-    event_destination_id: str, certificate_id: str, request: Request, response: Response
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "event_destination_id": event_destination_id,
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -2194,12 +2161,14 @@ async def get20(
 
 
 @router.patch(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch20(
-    event_destination_id: str,
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
     certificate_id: str,
     request: Request,
     response: Response,
@@ -2207,7 +2176,9 @@ async def patch20(
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "event_destination_id": event_destination_id,
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -2217,12 +2188,14 @@ async def patch20(
 
 
 @router.post(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
 async def rekey20(
-    event_destination_id: str,
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
     certificate_id: str,
     request: Request,
     response: Response,
@@ -2230,7 +2203,9 @@ async def rekey20(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "event_destination_id": event_destination_id,
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -2241,12 +2216,14 @@ async def rekey20(
 
 
 @router.post(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
 async def renew20(
-    event_destination_id: str,
+    resource_block_id: str,
+    computer_system_id: str,
+    database_id: str,
     certificate_id: str,
     request: Request,
     response: Response,
@@ -2254,7 +2231,9 @@ async def renew20(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "event_destination_id": event_destination_id,
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "database_id": database_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -2265,7 +2244,7 @@ async def renew20(
 
 
 @router.delete(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2283,11 +2262,11 @@ async def delete21(
 
 
 @router.get(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get21(
@@ -2306,7 +2285,7 @@ async def get21(
 
 
 @router.patch(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2329,7 +2308,7 @@ async def patch21(
 
 
 @router.post(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2353,7 +2332,7 @@ async def rekey21(
 
 
 @router.post(
-    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2377,11 +2356,123 @@ async def renew21(
 
 
 @router.delete(
-    "/redfish/v1/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete22(
+    event_destination_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get22(
+    event_destination_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch22(
+    event_destination_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey22(
+    event_destination_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew22(
+    event_destination_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "event_destination_id": event_destination_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete23(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -2402,7 +2493,7 @@ async def delete22(
     "/redfish/v1/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get22(
+async def get23(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -2422,7 +2513,7 @@ async def get22(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch22(
+async def patch23(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -2445,7 +2536,7 @@ async def patch22(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey22(
+async def rekey23(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -2469,134 +2560,7 @@ async def rekey22(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew22(
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RenewRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def delete23(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get23(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch23(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey23(
-    resource_block_id: str,
-    computer_system_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RekeyRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
-        "computer_system_id": computer_system_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def renew23(
-    resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -2605,7 +2569,6 @@ async def renew23(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "certificate_id": certificate_id,
         "request": request,
@@ -2617,7 +2580,7 @@ async def renew23(
 
 
 @router.delete(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2640,11 +2603,11 @@ async def delete24(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get24(
@@ -2668,7 +2631,7 @@ async def get24(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2693,7 +2656,7 @@ async def patch24(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2719,7 +2682,7 @@ async def rekey24(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -2745,11 +2708,139 @@ async def renew24(
 
 
 @router.delete(
-    "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete25(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get25(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch25(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey25(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew25(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete26(
     computer_system_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2775,7 +2866,7 @@ async def delete25(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get25(
+async def get26(
     computer_system_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2800,7 +2891,7 @@ async def get25(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch25(
+async def patch26(
     computer_system_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2825,7 +2916,7 @@ async def patch25(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey25(
+async def rekey26(
     computer_system_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2851,7 +2942,7 @@ async def rekey25(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew25(
+async def renew26(
     computer_system_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2877,7 +2968,7 @@ async def renew25(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete26(
+async def delete27(
     chassis_id: str, memory_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -2899,7 +2990,7 @@ async def delete26(
     "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get26(
+async def get27(
     chassis_id: str, memory_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -2920,7 +3011,7 @@ async def get26(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch26(
+async def patch27(
     chassis_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2945,7 +3036,7 @@ async def patch26(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey26(
+async def rekey27(
     chassis_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2971,7 +3062,7 @@ async def rekey26(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew26(
+async def renew27(
     chassis_id: str,
     memory_id: str,
     certificate_id: str,
@@ -2997,7 +3088,7 @@ async def renew26(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete27(
+async def delete28(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3023,7 +3114,7 @@ async def delete27(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get27(
+async def get28(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3048,7 +3139,7 @@ async def get27(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch27(
+async def patch28(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3073,7 +3164,7 @@ async def patch27(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey27(
+async def rekey28(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3099,7 +3190,7 @@ async def rekey27(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew27(
+async def renew28(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3125,7 +3216,7 @@ async def renew27(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete28(
+async def delete29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3153,7 +3244,7 @@ async def delete28(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get28(
+async def get29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3180,7 +3271,7 @@ async def get28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch28(
+async def patch29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3207,7 +3298,7 @@ async def patch28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey28(
+async def rekey29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3235,7 +3326,7 @@ async def rekey28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew28(
+async def renew29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3263,7 +3354,7 @@ async def renew28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete29(
+async def delete30(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3289,7 +3380,7 @@ async def delete29(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get29(
+async def get30(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3314,7 +3405,7 @@ async def get29(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch29(
+async def patch30(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3339,7 +3430,7 @@ async def patch29(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey29(
+async def rekey30(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3365,7 +3456,7 @@ async def rekey29(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew29(
+async def renew30(
     resource_block_id: str,
     memory_id: str,
     certificate_id: str,
@@ -3391,7 +3482,7 @@ async def renew29(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete30(
+async def delete31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3419,7 +3510,7 @@ async def delete30(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get30(
+async def get31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3446,7 +3537,7 @@ async def get30(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch30(
+async def patch31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3473,7 +3564,7 @@ async def patch30(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey30(
+async def rekey31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3501,7 +3592,7 @@ async def rekey30(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew30(
+async def renew31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -3529,7 +3620,7 @@ async def renew30(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete31(
+async def delete32(
     computer_system_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3555,7 +3646,7 @@ async def delete31(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get31(
+async def get32(
     computer_system_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3580,7 +3671,7 @@ async def get31(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch31(
+async def patch32(
     computer_system_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3605,7 +3696,7 @@ async def patch31(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey31(
+async def rekey32(
     computer_system_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3631,7 +3722,7 @@ async def rekey31(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew31(
+async def renew32(
     computer_system_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3657,7 +3748,7 @@ async def renew31(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete32(
+async def delete33(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3683,7 +3774,7 @@ async def delete32(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get32(
+async def get33(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3708,7 +3799,7 @@ async def get32(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch32(
+async def patch33(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3733,7 +3824,7 @@ async def patch32(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey32(
+async def rekey33(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3759,7 +3850,7 @@ async def rekey32(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew32(
+async def renew33(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3785,7 +3876,7 @@ async def renew32(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete33(
+async def delete34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -3813,7 +3904,7 @@ async def delete33(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get33(
+async def get34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -3840,7 +3931,7 @@ async def get33(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch33(
+async def patch34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -3867,7 +3958,7 @@ async def patch33(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey33(
+async def rekey34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -3895,7 +3986,7 @@ async def rekey33(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew33(
+async def renew34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -3923,7 +4014,7 @@ async def renew33(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete34(
+async def delete35(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3949,7 +4040,7 @@ async def delete34(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get34(
+async def get35(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3974,7 +4065,7 @@ async def get34(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch34(
+async def patch35(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -3999,7 +4090,7 @@ async def patch34(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey34(
+async def rekey35(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -4025,7 +4116,7 @@ async def rekey34(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew34(
+async def renew35(
     resource_block_id: str,
     processor_id: str,
     certificate_id: str,
@@ -4051,7 +4142,7 @@ async def renew34(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete35(
+async def delete36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -4079,7 +4170,7 @@ async def delete35(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get35(
+async def get36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -4106,7 +4197,7 @@ async def get35(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch35(
+async def patch36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -4133,7 +4224,7 @@ async def patch35(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey35(
+async def rekey36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -4161,7 +4252,7 @@ async def rekey35(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew35(
+async def renew36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -4189,7 +4280,7 @@ async def renew35(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete36(
+async def delete37(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -4215,7 +4306,7 @@ async def delete36(
     "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get36(
+async def get37(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -4240,7 +4331,7 @@ async def get36(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch36(
+async def patch37(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -4265,7 +4356,7 @@ async def patch36(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey36(
+async def rekey37(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -4291,7 +4382,7 @@ async def rekey36(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew36(
+async def renew37(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -4317,7 +4408,7 @@ async def renew36(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete37(
+async def delete38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4345,7 +4436,7 @@ async def delete37(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get37(
+async def get38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4372,7 +4463,7 @@ async def get37(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch37(
+async def patch38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4399,7 +4490,7 @@ async def patch37(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey37(
+async def rekey38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4427,7 +4518,7 @@ async def rekey37(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew37(
+async def renew38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4455,7 +4546,7 @@ async def renew37(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete38(
+async def delete39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4483,7 +4574,7 @@ async def delete38(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get38(
+async def get39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4510,7 +4601,7 @@ async def get38(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch38(
+async def patch39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4537,7 +4628,7 @@ async def patch38(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey38(
+async def rekey39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4565,7 +4656,7 @@ async def rekey38(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew38(
+async def renew39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4593,7 +4684,7 @@ async def renew38(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete39(
+async def delete40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4623,7 +4714,7 @@ async def delete39(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get39(
+async def get40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4652,7 +4743,7 @@ async def get39(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch39(
+async def patch40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4681,7 +4772,7 @@ async def patch39(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey39(
+async def rekey40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4711,7 +4802,7 @@ async def rekey39(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew39(
+async def renew40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4741,7 +4832,7 @@ async def renew39(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete40(
+async def delete41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4769,7 +4860,7 @@ async def delete40(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get40(
+async def get41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4796,7 +4887,7 @@ async def get40(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch40(
+async def patch41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4823,7 +4914,7 @@ async def patch40(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey40(
+async def rekey41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4851,7 +4942,7 @@ async def rekey40(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew40(
+async def renew41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -4879,7 +4970,7 @@ async def renew40(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete41(
+async def delete42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4909,7 +5000,7 @@ async def delete41(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get41(
+async def get42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4938,7 +5029,7 @@ async def get41(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch41(
+async def patch42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4967,7 +5058,7 @@ async def patch41(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey41(
+async def rekey42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -4997,7 +5088,7 @@ async def rekey41(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew41(
+async def renew42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5027,7 +5118,7 @@ async def renew41(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete42(
+async def delete43(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -5053,7 +5144,7 @@ async def delete42(
     "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get42(
+async def get43(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -5078,7 +5169,7 @@ async def get42(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch42(
+async def patch43(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -5103,7 +5194,7 @@ async def patch42(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey42(
+async def rekey43(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -5129,7 +5220,7 @@ async def rekey42(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew42(
+async def renew43(
     storage_id: str,
     storage_controller_id: str,
     certificate_id: str,
@@ -5155,7 +5246,7 @@ async def renew42(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete43(
+async def delete44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5183,7 +5274,7 @@ async def delete43(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get43(
+async def get44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5210,7 +5301,7 @@ async def get43(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch43(
+async def patch44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5237,7 +5328,7 @@ async def patch43(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey43(
+async def rekey44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5265,7 +5356,7 @@ async def rekey43(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew43(
+async def renew44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5293,7 +5384,7 @@ async def renew43(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete44(
+async def delete45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5321,7 +5412,7 @@ async def delete44(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get44(
+async def get45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5348,7 +5439,7 @@ async def get44(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch44(
+async def patch45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5375,7 +5466,7 @@ async def patch44(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey44(
+async def rekey45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5403,7 +5494,7 @@ async def rekey44(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew44(
+async def renew45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5431,7 +5522,7 @@ async def renew44(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete45(
+async def delete46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5461,7 +5552,7 @@ async def delete45(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get45(
+async def get46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5490,7 +5581,7 @@ async def get45(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch45(
+async def patch46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5519,7 +5610,7 @@ async def patch45(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey45(
+async def rekey46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5549,7 +5640,7 @@ async def rekey45(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew45(
+async def renew46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5579,7 +5670,7 @@ async def renew45(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete46(
+async def delete47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5607,7 +5698,7 @@ async def delete46(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get46(
+async def get47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5634,7 +5725,7 @@ async def get46(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch46(
+async def patch47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5661,7 +5752,7 @@ async def patch46(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey46(
+async def rekey47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5689,7 +5780,7 @@ async def rekey46(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew46(
+async def renew47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -5717,7 +5808,7 @@ async def renew46(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete47(
+async def delete48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5747,7 +5838,7 @@ async def delete47(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get47(
+async def get48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5776,7 +5867,7 @@ async def get47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch47(
+async def patch48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5805,7 +5896,7 @@ async def patch47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey47(
+async def rekey48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5835,7 +5926,7 @@ async def rekey47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew47(
+async def renew48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -5865,7 +5956,7 @@ async def renew47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete48(
+async def delete49(
     fabric_id: str, switch_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -5887,7 +5978,7 @@ async def delete48(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get48(
+async def get49(
     fabric_id: str, switch_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -5908,7 +5999,7 @@ async def get48(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch48(
+async def patch49(
     fabric_id: str,
     switch_id: str,
     certificate_id: str,
@@ -5933,7 +6024,7 @@ async def patch48(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey48(
+async def rekey49(
     fabric_id: str,
     switch_id: str,
     certificate_id: str,
@@ -5959,7 +6050,7 @@ async def rekey48(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew48(
+async def renew49(
     fabric_id: str,
     switch_id: str,
     certificate_id: str,
@@ -5985,7 +6076,7 @@ async def renew48(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete49(
+async def delete50(
     chassis_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -6006,7 +6097,7 @@ async def delete49(
     "/redfish/v1/Chassis/{chassis_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get49(
+async def get50(
     chassis_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -6026,7 +6117,7 @@ async def get49(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch49(
+async def patch50(
     chassis_id: str,
     certificate_id: str,
     request: Request,
@@ -6049,7 +6140,7 @@ async def patch49(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey49(
+async def rekey50(
     chassis_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
@@ -6069,7 +6160,7 @@ async def rekey49(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew49(
+async def renew50(
     chassis_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
@@ -6089,7 +6180,7 @@ async def renew49(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete50(
+async def delete51(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -6117,7 +6208,7 @@ async def delete50(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get50(
+async def get51(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -6144,7 +6235,7 @@ async def get50(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch50(
+async def patch51(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -6171,7 +6262,7 @@ async def patch50(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey50(
+async def rekey51(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -6199,7 +6290,7 @@ async def rekey50(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew50(
+async def renew51(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -6227,7 +6318,7 @@ async def renew50(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete51(
+async def delete52(
     chassis_id: str, drive_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -6249,7 +6340,7 @@ async def delete51(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get51(
+async def get52(
     chassis_id: str, drive_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -6270,7 +6361,7 @@ async def get51(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch51(
+async def patch52(
     chassis_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6295,7 +6386,7 @@ async def patch51(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey51(
+async def rekey52(
     chassis_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6321,7 +6412,7 @@ async def rekey51(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew51(
+async def renew52(
     chassis_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6347,7 +6438,7 @@ async def renew51(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete52(
+async def delete53(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6375,7 +6466,7 @@ async def delete52(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get52(
+async def get53(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6402,7 +6493,7 @@ async def get52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch52(
+async def patch53(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6429,7 +6520,7 @@ async def patch52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey52(
+async def rekey53(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6457,7 +6548,7 @@ async def rekey52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew52(
+async def renew53(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6485,7 +6576,7 @@ async def renew52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete53(
+async def delete54(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6511,7 +6602,7 @@ async def delete53(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get53(
+async def get54(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6536,7 +6627,7 @@ async def get53(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch53(
+async def patch54(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6561,7 +6652,7 @@ async def patch53(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey53(
+async def rekey54(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6587,7 +6678,7 @@ async def rekey53(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew53(
+async def renew54(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6613,7 +6704,7 @@ async def renew53(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete54(
+async def delete55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -6643,7 +6734,7 @@ async def delete54(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get54(
+async def get55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -6672,7 +6763,7 @@ async def get54(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch54(
+async def patch55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -6701,7 +6792,7 @@ async def patch54(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey54(
+async def rekey55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -6731,7 +6822,7 @@ async def rekey54(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew54(
+async def renew55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -6761,7 +6852,7 @@ async def renew54(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete55(
+async def delete56(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6789,7 +6880,7 @@ async def delete55(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get55(
+async def get56(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6816,7 +6907,7 @@ async def get55(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch55(
+async def patch56(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6843,7 +6934,7 @@ async def patch55(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey55(
+async def rekey56(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6871,7 +6962,7 @@ async def rekey55(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew55(
+async def renew56(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -6899,7 +6990,7 @@ async def renew55(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete56(
+async def delete57(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6925,7 +7016,7 @@ async def delete56(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get56(
+async def get57(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6950,7 +7041,7 @@ async def get56(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch56(
+async def patch57(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -6975,7 +7066,7 @@ async def patch56(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey56(
+async def rekey57(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -7001,7 +7092,7 @@ async def rekey56(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew56(
+async def renew57(
     resource_block_id: str,
     drive_id: str,
     certificate_id: str,
@@ -7027,7 +7118,7 @@ async def renew56(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete57(
+async def delete58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -7057,7 +7148,7 @@ async def delete57(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get57(
+async def get58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -7086,7 +7177,7 @@ async def get57(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch57(
+async def patch58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -7115,7 +7206,7 @@ async def patch57(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey57(
+async def rekey58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -7145,7 +7236,7 @@ async def rekey57(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew57(
+async def renew58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -7175,7 +7266,7 @@ async def renew57(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete58(
+async def delete59(
     chassis_id: str,
     network_adapter_id: str,
     certificate_id: str,
@@ -7201,7 +7292,7 @@ async def delete58(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get58(
+async def get59(
     chassis_id: str,
     network_adapter_id: str,
     certificate_id: str,
@@ -7226,7 +7317,7 @@ async def get58(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch58(
+async def patch59(
     chassis_id: str,
     network_adapter_id: str,
     certificate_id: str,
@@ -7251,7 +7342,7 @@ async def patch58(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey58(
+async def rekey59(
     chassis_id: str,
     network_adapter_id: str,
     certificate_id: str,
@@ -7277,7 +7368,7 @@ async def rekey58(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew58(
+async def renew59(
     chassis_id: str,
     network_adapter_id: str,
     certificate_id: str,
@@ -7303,134 +7394,6 @@ async def renew58(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete59(
-    computer_system_id: str,
-    virtual_media_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "virtual_media_id": virtual_media_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get59(
-    computer_system_id: str,
-    virtual_media_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "virtual_media_id": virtual_media_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch59(
-    computer_system_id: str,
-    virtual_media_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "virtual_media_id": virtual_media_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey59(
-    computer_system_id: str,
-    virtual_media_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RekeyRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "virtual_media_id": virtual_media_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew59(
-    computer_system_id: str,
-    virtual_media_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: RenewRequest,
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "computer_system_id": computer_system_id,
-        "virtual_media_id": virtual_media_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def delete60(
     computer_system_id: str,
     virtual_media_id: str,
@@ -7450,11 +7413,11 @@ async def delete60(
 
 
 @router.get(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get60(
@@ -7478,7 +7441,7 @@ async def get60(
 
 
 @router.patch(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7503,7 +7466,7 @@ async def patch60(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7529,7 +7492,7 @@ async def rekey60(
 
 
 @router.post(
-    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7555,12 +7518,11 @@ async def renew60(
 
 
 @router.delete(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete61(
-    resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
     certificate_id: str,
@@ -7569,7 +7531,6 @@ async def delete61(
 ) -> None:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
@@ -7580,15 +7541,14 @@ async def delete61(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get61(
-    resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
     certificate_id: str,
@@ -7597,7 +7557,6 @@ async def get61(
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
@@ -7610,12 +7569,11 @@ async def get61(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch61(
-    resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
     certificate_id: str,
@@ -7625,7 +7583,6 @@ async def patch61(
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
@@ -7637,12 +7594,11 @@ async def patch61(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
 async def rekey61(
-    resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
     certificate_id: str,
@@ -7652,7 +7608,6 @@ async def rekey61(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
@@ -7665,12 +7620,11 @@ async def rekey61(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
 async def renew61(
-    resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
     certificate_id: str,
@@ -7680,7 +7634,6 @@ async def renew61(
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
-        "resource_block_id": resource_block_id,
         "computer_system_id": computer_system_id,
         "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
@@ -7693,7 +7646,7 @@ async def renew61(
 
 
 @router.delete(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7718,11 +7671,11 @@ async def delete62(
 
 
 @router.get(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get62(
@@ -7748,7 +7701,7 @@ async def get62(
 
 
 @router.patch(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7775,7 +7728,7 @@ async def patch62(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7803,7 +7756,7 @@ async def rekey62(
 
 
 @router.post(
-    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7831,7 +7784,7 @@ async def renew62(
 
 
 @router.delete(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7856,11 +7809,11 @@ async def delete63(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get63(
@@ -7886,7 +7839,7 @@ async def get63(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7913,7 +7866,7 @@ async def patch63(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7941,7 +7894,7 @@ async def rekey63(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7969,7 +7922,7 @@ async def renew63(
 
 
 @router.delete(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -7994,11 +7947,11 @@ async def delete64(
 
 
 @router.get(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get64(
@@ -8024,7 +7977,7 @@ async def get64(
 
 
 @router.patch(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8051,7 +8004,7 @@ async def patch64(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8079,7 +8032,7 @@ async def rekey64(
 
 
 @router.post(
-    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8107,13 +8060,23 @@ async def renew64(
 
 
 @router.delete(
-    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete65(certificate_id: str, request: Request, response: Response) -> None:
+async def delete65(
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -8122,16 +8085,26 @@ async def delete65(certificate_id: str, request: Request, response: Response) ->
 
 
 @router.get(
-    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get65(certificate_id: str, request: Request, response: Response) -> Certificate:
+async def get65(
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -8142,15 +8115,24 @@ async def get65(certificate_id: str, request: Request, response: Response) -> Ce
 
 
 @router.patch(
-    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def patch65(
-    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -8160,15 +8142,24 @@ async def patch65(
 
 
 @router.post(
-    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
 async def rekey65(
-    certificate_id: str, request: Request, response: Response, body: RekeyRequest
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -8179,15 +8170,24 @@ async def rekey65(
 
 
 @router.post(
-    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
 async def renew65(
-    certificate_id: str, request: Request, response: Response, body: RenewRequest
+    resource_block_id: str,
+    computer_system_id: str,
+    virtual_media_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "virtual_media_id": virtual_media_id,
         "certificate_id": certificate_id,
         "request": request,
         "response": response,
@@ -8198,7 +8198,7 @@ async def renew65(
 
 
 @router.delete(
-    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8213,11 +8213,11 @@ async def delete66(certificate_id: str, request: Request, response: Response) ->
 
 
 @router.get(
-    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get66(certificate_id: str, request: Request, response: Response) -> Certificate:
@@ -8233,7 +8233,7 @@ async def get66(certificate_id: str, request: Request, response: Response) -> Ce
 
 
 @router.patch(
-    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8251,7 +8251,7 @@ async def patch66(
 
 
 @router.post(
-    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8270,7 +8270,7 @@ async def rekey66(
 
 
 @router.post(
-    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/UpdateService/RemoteServerCertificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -8289,11 +8289,102 @@ async def renew66(
 
 
 @router.delete(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete67(certificate_id: str, request: Request, response: Response) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get67(certificate_id: str, request: Request, response: Response) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch67(
+    certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey67(
+    certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/UpdateService/ClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew67(
+    certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
     "/redfish/v1/Managers/{manager_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete67(
+async def delete68(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -8314,7 +8405,7 @@ async def delete67(
     "/redfish/v1/Managers/{manager_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get67(
+async def get68(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -8334,7 +8425,7 @@ async def get67(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch67(
+async def patch68(
     manager_id: str,
     certificate_id: str,
     request: Request,
@@ -8357,7 +8448,7 @@ async def patch67(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey67(
+async def rekey68(
     manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
@@ -8377,7 +8468,7 @@ async def rekey67(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew67(
+async def renew68(
     manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
@@ -8397,7 +8488,7 @@ async def renew67(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete68(
+async def delete69(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -8418,7 +8509,7 @@ async def delete68(
     "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get68(
+async def get69(
     computer_system_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -8438,7 +8529,7 @@ async def get68(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch68(
+async def patch69(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -8461,7 +8552,7 @@ async def patch68(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey68(
+async def rekey69(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -8485,7 +8576,119 @@ async def rekey68(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew68(
+async def renew69(
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete70(
+    computer_system_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get70(
+    computer_system_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch70(
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey70(
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew70(
     computer_system_id: str,
     certificate_id: str,
     request: Request,
@@ -8509,7 +8712,7 @@ async def renew68(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete69(
+async def delete71(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8535,7 +8738,7 @@ async def delete69(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get69(
+async def get71(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8560,7 +8763,7 @@ async def get69(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch69(
+async def patch71(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8585,7 +8788,7 @@ async def patch69(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey69(
+async def rekey71(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8611,7 +8814,135 @@ async def rekey69(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew69(
+async def renew71(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete72(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get72(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch72(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey72(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew72(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8637,7 +8968,7 @@ async def renew69(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete70(
+async def delete73(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8663,7 +8994,7 @@ async def delete70(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get70(
+async def get73(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8688,7 +9019,7 @@ async def get70(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch70(
+async def patch73(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8713,7 +9044,7 @@ async def patch70(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey70(
+async def rekey73(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8739,7 +9070,135 @@ async def rekey70(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew70(
+async def renew73(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete74(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get74(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch74(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey74(
+    resource_block_id: str,
+    computer_system_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew74(
     resource_block_id: str,
     computer_system_id: str,
     certificate_id: str,
@@ -8765,422 +9224,6 @@ async def renew70(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete71(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get71(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch71(
-    manager_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey71(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew71(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def delete72(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get72(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch72(
-    manager_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey72(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew72(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def delete73(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get73(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch73(
-    manager_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey73(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew73(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def delete74(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> None:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    return s.delete(**b)
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-async def get74(
-    manager_id: str, certificate_id: str, request: Request, response: Response
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-    }
-    m = cast(Certificate, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.patch(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def patch74(
-    manager_id: str,
-    certificate_id: str,
-    request: Request,
-    response: Response,
-    body: CertificateOnUpdate,
-) -> Certificate:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.patch(**b))
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}/Actions/Certificate.Rekey",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def rekey74(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Rekey",
-    }
-    return s.action(**b)
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}/Actions/Certificate.Renew",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def renew74(
-    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
-) -> RedfishError:
-    s: Service = get_service(Certificate, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "certificate_id": certificate_id,
-        "request": request,
-        "response": response,
-        "body": body,
-        "action": "Renew",
-    }
-    return s.action(**b)
-
-
-@router.delete(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
-    response_model_exclude_none=True,
-)
-@authenticate
 async def delete75(
     manager_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
@@ -9195,11 +9238,11 @@ async def delete75(
 
 
 @router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get75(
@@ -9218,7 +9261,7 @@ async def get75(
 
 
 @router.patch(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9241,7 +9284,7 @@ async def patch75(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9261,7 +9304,7 @@ async def rekey75(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9281,7 +9324,7 @@ async def renew75(
 
 
 @router.delete(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9299,11 +9342,11 @@ async def delete76(
 
 
 @router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 async def get76(
@@ -9322,7 +9365,7 @@ async def get76(
 
 
 @router.patch(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9345,7 +9388,7 @@ async def patch76(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}/Actions/Certificate.Rekey",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9365,7 +9408,7 @@ async def rekey76(
 
 
 @router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}/Actions/Certificate.Renew",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/{certificate_id}/Actions/Certificate.Renew",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -9385,11 +9428,427 @@ async def renew76(
 
 
 @router.delete(
-    "/redfish/v1/Chassis/{chassis_id}/TrustedComponents/{trusted_component_id}/Certificates/{certificate_id}",
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
 @authenticate
 async def delete77(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get77(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch77(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey77(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew77(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete78(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get78(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch78(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey78(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew78(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete79(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get79(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch79(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey79(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew79(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete80(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get80(
+    manager_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch80(
+    manager_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey80(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RekeyRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew80(
+    manager_id: str, certificate_id: str, request: Request, response: Response, body: RenewRequest
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Chassis/{chassis_id}/TrustedComponents/{trusted_component_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete81(
     chassis_id: str,
     trusted_component_id: str,
     certificate_id: str,
@@ -9415,7 +9874,7 @@ async def delete77(
     "/redfish/v1/Chassis/{chassis_id}/TrustedComponents/{trusted_component_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get77(
+async def get81(
     chassis_id: str,
     trusted_component_id: str,
     certificate_id: str,
@@ -9440,7 +9899,7 @@ async def get77(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch77(
+async def patch81(
     chassis_id: str,
     trusted_component_id: str,
     certificate_id: str,
@@ -9465,7 +9924,7 @@ async def patch77(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey77(
+async def rekey81(
     chassis_id: str,
     trusted_component_id: str,
     certificate_id: str,
@@ -9491,7 +9950,7 @@ async def rekey77(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew77(
+async def renew81(
     chassis_id: str,
     trusted_component_id: str,
     certificate_id: str,
@@ -9517,7 +9976,7 @@ async def renew77(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete78(
+async def delete82(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -9538,7 +9997,7 @@ async def delete78(
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get78(
+async def get82(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -9558,7 +10017,7 @@ async def get78(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch78(
+async def patch82(
     outbound_connection_id: str,
     certificate_id: str,
     request: Request,
@@ -9581,7 +10040,7 @@ async def patch78(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey78(
+async def rekey82(
     outbound_connection_id: str,
     certificate_id: str,
     request: Request,
@@ -9605,7 +10064,7 @@ async def rekey78(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew78(
+async def renew82(
     outbound_connection_id: str,
     certificate_id: str,
     request: Request,
@@ -9629,7 +10088,7 @@ async def renew78(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete79(
+async def delete83(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> None:
     s: Service = get_service(Certificate, request)
@@ -9650,7 +10109,7 @@ async def delete79(
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/ClientCertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get79(
+async def get83(
     outbound_connection_id: str, certificate_id: str, request: Request, response: Response
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -9670,7 +10129,7 @@ async def get79(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch79(
+async def patch83(
     outbound_connection_id: str,
     certificate_id: str,
     request: Request,
@@ -9693,7 +10152,7 @@ async def patch79(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey79(
+async def rekey83(
     outbound_connection_id: str,
     certificate_id: str,
     request: Request,
@@ -9717,7 +10176,7 @@ async def rekey79(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew79(
+async def renew83(
     outbound_connection_id: str,
     certificate_id: str,
     request: Request,
@@ -9741,7 +10200,7 @@ async def renew79(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete80(
+async def delete84(
     chassis_id: str,
     power_supply_id: str,
     certificate_id: str,
@@ -9767,7 +10226,7 @@ async def delete80(
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies/{power_supply_id}/Certificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get80(
+async def get84(
     chassis_id: str,
     power_supply_id: str,
     certificate_id: str,
@@ -9792,7 +10251,7 @@ async def get80(
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch80(
+async def patch84(
     chassis_id: str,
     power_supply_id: str,
     certificate_id: str,
@@ -9817,7 +10276,7 @@ async def patch80(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey80(
+async def rekey84(
     chassis_id: str,
     power_supply_id: str,
     certificate_id: str,
@@ -9843,7 +10302,7 @@ async def rekey80(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew80(
+async def renew84(
     chassis_id: str,
     power_supply_id: str,
     certificate_id: str,
@@ -9869,7 +10328,7 @@ async def renew80(
     response_model_exclude_none=True,
 )
 @authenticate
-async def delete81(certificate_id: str, request: Request, response: Response) -> None:
+async def delete85(certificate_id: str, request: Request, response: Response) -> None:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
@@ -9887,7 +10346,7 @@ async def delete81(certificate_id: str, request: Request, response: Response) ->
     "/redfish/v1/CertificateService/EnrollmentCACertificates/{certificate_id}",
     response_model_exclude_none=True,
 )
-async def get81(certificate_id: str, request: Request, response: Response) -> Certificate:
+async def get85(certificate_id: str, request: Request, response: Response) -> Certificate:
     s: Service = get_service(Certificate, request)
     b: dict[str, Any] = {
         "certificate_id": certificate_id,
@@ -9904,7 +10363,7 @@ async def get81(certificate_id: str, request: Request, response: Response) -> Ce
     response_model_exclude_none=True,
 )
 @authenticate
-async def patch81(
+async def patch85(
     certificate_id: str, request: Request, response: Response, body: CertificateOnUpdate
 ) -> Certificate:
     s: Service = get_service(Certificate, request)
@@ -9922,7 +10381,7 @@ async def patch81(
     response_model_exclude_none=True,
 )
 @authenticate
-async def rekey81(
+async def rekey85(
     certificate_id: str, request: Request, response: Response, body: RekeyRequest
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)
@@ -9941,7 +10400,7 @@ async def rekey81(
     response_model_exclude_none=True,
 )
 @authenticate
-async def renew81(
+async def renew85(
     certificate_id: str, request: Request, response: Response, body: RenewRequest
 ) -> RedfishError:
     s: Service = get_service(Certificate, request)

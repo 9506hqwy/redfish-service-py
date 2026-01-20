@@ -1,5 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
+from enum import StrEnum
 from typing import Any
 
 from pydantic import Field
@@ -17,11 +18,15 @@ class Actions(RedfishModel):
 
 
 class Cxl(RedfishModel):
+    max_supported_p_ids: int | None = Field(serialization_alias="MaxSupportedPIDs", default=None)
     max_vc_ss_supported: int | None = Field(serialization_alias="MaxVCSsSupported", default=None)
     number_of_boundv_pp_bs: int | None = Field(
         serialization_alias="NumberOfBoundvPPBs", default=None
     )
     pbr_capable: bool | None = Field(serialization_alias="PBRCapable", default=None)
+    pid_target_list: list[PidTargetList] | None = Field(
+        serialization_alias="PIDTargetList", default=None
+    )
     total_hdm_decoders: int | None = Field(serialization_alias="TotalHDMDecoders", default=None)
     total_numberv_pp_bs: int | None = Field(serialization_alias="TotalNumbervPPBs", default=None)
     vcs: VcsSwitch | None = Field(serialization_alias="VCS", default=None)
@@ -44,6 +49,15 @@ class Links(RedfishModel):
     pcie_device: IdRef | None = Field(serialization_alias="PCIeDevice", default=None)
 
 
+class PidTargetList(RedfishModel):
+    instance_id: int | None = Field(serialization_alias="InstanceID", default=None)
+    pid: int | None = Field(serialization_alias="PID", default=None)
+    port_id: int | None = Field(serialization_alias="PortID", default=None)
+    target_id: int | None = Field(serialization_alias="TargetID", default=None)
+    target_type: TargetType | None = None
+    vcs_id: int | None = Field(serialization_alias="VcsID", default=None)
+
+
 class Reset(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -57,7 +71,7 @@ class Switch(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Switch.v1_10_0.Switch")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Switch.v1_11_0.Switch")
     actions: Actions | None = None
     asset_tag: str | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
@@ -112,6 +126,12 @@ class SwitchOnUpdate(RedfishModelOnUpdate):
     oem: dict[str, Any] | None = None
     redundancy: list[IdRef] | None = None
     status: Status | None = None
+
+
+class TargetType(StrEnum):
+    FABRIC_PORT = "FabricPort"
+    HOST_EDGE_PORT = "HostEdgePort"
+    DOWNSTREAM_EDGE_PORT = "DownstreamEdgePort"
 
 
 class VcsSwitch(RedfishModel):

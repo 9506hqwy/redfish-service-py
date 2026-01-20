@@ -148,7 +148,7 @@ class ComputerSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_26_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_27_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -235,7 +235,7 @@ class ComputerSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_26_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_27_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -485,6 +485,9 @@ class KmipServer(RedfishModel):
 
 class KeyManagement(RedfishModel):
     kmip_certificates: IdRef | None = Field(serialization_alias="KMIPCertificates", default=None)
+    kmip_client_certificates: IdRef | None = Field(
+        serialization_alias="KMIPClientCertificates", default=None
+    )
     kmip_servers: list[KmipServer] | None = Field(serialization_alias="KMIPServers", default=None)
 
 

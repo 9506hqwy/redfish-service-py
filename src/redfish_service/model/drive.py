@@ -14,12 +14,27 @@ from .swordfish.volume import OperationType
 
 
 class Actions(RedfishModel):
+    freeze_personality: FreezePersonality | None = Field(
+        serialization_alias="#Drive.FreezePersonality", default=None
+    )
+    get_personality_nonce: GetPersonalityNonce | None = Field(
+        serialization_alias="#Drive.GetPersonalityNonce", default=None
+    )
     reset: Reset | None = Field(serialization_alias="#Drive.Reset", default=None)
+    revert_personalities_to_defaults: RevertPersonalitiesToDefaults | None = Field(
+        serialization_alias="#Drive.RevertPersonalitiesToDefaults", default=None
+    )
     revert_to_original_factory_state: RevertToOriginalFactoryState | None = Field(
         serialization_alias="#Drive.RevertToOriginalFactoryState", default=None
     )
     secure_erase: SecureErase | None = Field(
         serialization_alias="#Drive.SecureErase", default=None
+    )
+    set_personality_key: SetPersonalityKey | None = Field(
+        serialization_alias="#Drive.SetPersonalityKey", default=None
+    )
+    unfreeze_personality: UnfreezePersonality | None = Field(
+        serialization_alias="#Drive.UnfreezePersonality", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -47,7 +62,7 @@ class Drive(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Drive.v1_21_0.Drive")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Drive.v1_22_0.Drive")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -94,6 +109,7 @@ class Drive(RedfishModel):
     revision: str | None = None
     rotation_speed_rpm: float | None = Field(serialization_alias="RotationSpeedRPM", default=None)
     sku: str | None = Field(serialization_alias="SKU", default=None)
+    security_id_owned: bool | None = Field(serialization_alias="SecurityIDOwned", default=None)
     serial_number: str | None = None
     slot_capable_protocols: list[Protocol] | None = None
     slot_form_factor: FormFactor | None = None
@@ -165,6 +181,20 @@ class FormFactor(StrEnum):
     OEM = "OEM"
 
 
+class FreezePersonality(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class FreezePersonalityRequest(RedfishModel):
+    personality: int
+
+
+class GetPersonalityNonce(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class HotspareReplacementModeType(StrEnum):
     REVERTIBLE = "Revertible"
     NON_REVERTIBLE = "NonRevertible"
@@ -214,7 +244,25 @@ class MediaType(StrEnum):
     SMR = "SMR"
 
 
+class NmVeMinimumRequiredResetType(StrEnum):
+    NO_RESET = "NoReset"
+    CONTROLLER_LEVEL = "ControllerLevel"
+    LIMITED_CONTROLLER_LEVEL = "LimitedControllerLevel"
+    NVM_SUBSYSTEM_RESET = "NVMSubsystemReset"
+    POWER_CYCLE = "PowerCycle"
+
+
+class NmVePersonalityKeyAlgorithm(StrEnum):
+    HMA_C_SHA384 = "HMAC_SHA384"
+
+
+class NmVeUnfreezeAuthMode(StrEnum):
+    PROGRAMMED_KEY = "ProgrammedKey"
+    PHYSICAL_ID = "PhysicalId"
+
+
 class Nvme(RedfishModel):
+    active_personalities: list[NvmePersonality] | None = None
     configuration_lock_state: NvmeConfigurationLockState | None = None
 
 
@@ -224,6 +272,17 @@ class NvmeConfigurationLockState(RedfishModel):
     lockdown: ConfigLockOptions | None = None
     security_send: ConfigLockOptions | None = None
     vpd_write: ConfigLockOptions | None = Field(serialization_alias="VPDWrite", default=None)
+
+
+class NvmePersonality(RedfishModel):
+    change_affects_user_data: bool | None = None
+    data: str | None = None
+    default: bool | None = None
+    frozen: bool | None = None
+    identifier: int | None = None
+    minimum_required_reset_type: NmVeMinimumRequiredResetType | None = None
+    pending: bool | None = None
+    unfreeze_authentication_modes: list[NmVeUnfreezeAuthMode] | None = None
 
 
 class Operations(RedfishModel):
@@ -240,6 +299,11 @@ class Reset(RedfishModel):
 
 class ResetRequest(RedfishModel):
     reset_type: ResetType | None = None
+
+
+class RevertPersonalitiesToDefaults(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class RevertToOriginalFactoryState(RedfishModel):
@@ -261,6 +325,16 @@ class SecureEraseRequest(RedfishModel):
     sanitization_type: DataSanitizationType | None = None
 
 
+class SetPersonalityKey(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class SetPersonalityKeyRequest(RedfishModel):
+    algorithm: NmVePersonalityKeyAlgorithm
+    key: str
+
+
 class StatusIndicator(StrEnum):
     OK = "OK"
     FAIL = "Fail"
@@ -273,3 +347,15 @@ class StatusIndicator(StrEnum):
 
 class TargetConfigurationLockLevel(StrEnum):
     BASELINE = "Baseline"
+
+
+class UnfreezePersonality(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class UnfreezePersonalityRequest(RedfishModel):
+    authentication_method: NmVeUnfreezeAuthMode
+    key: str
+    nonce: str | None = None
+    personality: int

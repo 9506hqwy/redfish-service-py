@@ -49,7 +49,7 @@ class ServiceRoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ServiceRoot.v1_19_0.ServiceRoot"
+        serialization_alias="@odata.type", default="#ServiceRoot.v1_20_0.ServiceRoot"
     )
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None
@@ -82,6 +82,7 @@ class ServiceRoot(RedfishModel):
     resource_blocks: IdRef | None = None
     service_conditions: IdRef | None = None
     service_identification: str | None = None
+    service_use_notification: str | None = None
     session_service: IdRef | None = None
     storage: IdRef | None = None
     storage_services: IdRef | None = None

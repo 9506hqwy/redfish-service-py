@@ -39,7 +39,7 @@ class CoolingUnit(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolingUnit.v1_4_0.CoolingUnit"
+        serialization_alias="@odata.type", default="#CoolingUnit.v1_5_0.CoolingUnit"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -47,6 +47,7 @@ class CoolingUnit(RedfishModel):
     coolant: Coolant | None = None
     coolant_connector_redundancy: list[RedundantGroup] | None = None
     cooling_capacity_watts: int | None = None
+    cooling_unit_redundancy: list[RedundantGroup] | None = None
     description: str | None = None
     environment_metrics: IdRef | None = None
     equipment_type: CoolingEquipmentType
@@ -83,6 +84,7 @@ class CoolingUnitOnUpdate(RedfishModelOnUpdate):
     asset_tag: str | None = None
     coolant: Coolant | None = None
     coolant_connector_redundancy: list[RedundantGroup] | None = None
+    cooling_unit_redundancy: list[RedundantGroup] | None = None
     filter_redundancy: list[RedundantGroup] | None = None
     links: Links | None = None
     location: Location | None = None

@@ -74,7 +74,7 @@ class NetworkAdapter(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#NetworkAdapter.v1_13_0.NetworkAdapter"
+        serialization_alias="@odata.type", default="#NetworkAdapter.v1_14_0.NetworkAdapter"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -95,6 +95,7 @@ class NetworkAdapter(RedfishModel):
     network_ports: IdRef | None = None
     oem: dict[str, Any] | None = None
     part_number: str | None = None
+    port_aggregation: PortAggregation | None = None
     port_splitting: PortSplitting | None = None
     ports: IdRef | None = None
     processors: IdRef | None = None
@@ -111,6 +112,7 @@ class NetworkAdapterOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     measurements: list[MeasurementBlock] | None = None
     oem: dict[str, Any] | None = None
+    port_aggregation: PortAggregation | None = None
     port_splitting: PortSplitting | None = None
     status: Status | None = None
 
@@ -118,6 +120,14 @@ class NetworkAdapterOnUpdate(RedfishModelOnUpdate):
 class NicPartitioning(RedfishModel):
     npar_capable: bool | None = None
     npar_enabled: bool | None = None
+
+
+class PortAggregation(RedfishModel):
+    aggregation_enabled: bool | None = None
+    allowable_physical_ports_per_aggregation: list[int] | None = None
+    configured_aggregated_ports: int | None = None
+    configured_physical_ports_per_aggregation: int | None = None
+    total_physical_ports: int | None = None
 
 
 class PortSplitting(RedfishModel):

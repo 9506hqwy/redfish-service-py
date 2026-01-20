@@ -15,6 +15,12 @@ from .swordfish.volume import RaidType
 
 
 class Actions(RedfishModel):
+    freeze_personality: FreezePersonality | None = Field(
+        serialization_alias="#Storage.FreezePersonality", default=None
+    )
+    get_personality_nonce: GetPersonalityNonce | None = Field(
+        serialization_alias="#Storage.GetPersonalityNonce", default=None
+    )
     import_foreign_drives: ImportForeignDrives | None = Field(
         serialization_alias="#Storage.ImportForeignDrives", default=None
     )
@@ -24,11 +30,20 @@ class Actions(RedfishModel):
     reset_to_defaults: ResetToDefaults | None = Field(
         serialization_alias="#Storage.ResetToDefaults", default=None
     )
+    revert_personalities_to_defaults: RevertPersonalitiesToDefaults | None = Field(
+        serialization_alias="#Storage.RevertPersonalitiesToDefaults", default=None
+    )
     set_controller_password: SetControllerPassword | None = Field(
         serialization_alias="#Storage.SetControllerPassword", default=None
     )
     set_encryption_key: SetEncryptionKey | None = Field(
         serialization_alias="#Storage.SetEncryptionKey", default=None
+    )
+    set_personality_key: SetPersonalityKey | None = Field(
+        serialization_alias="#Storage.SetPersonalityKey", default=None
+    )
+    unfreeze_personality: UnfreezePersonality | None = Field(
+        serialization_alias="#Storage.UnfreezePersonality", default=None
     )
     oem: dict[str, Any] | None = None
 
@@ -68,6 +83,20 @@ class EncryptionMode(StrEnum):
     PASSWORD_ONLY = "PasswordOnly"  # noqa: S105
     PASSWORD_WITH_EXTERNAL_KEY = "PasswordWithExternalKey"  # noqa: S105
     PASSWORD_WITH_LOCAL_KEY = "PasswordWithLocalKey"  # noqa: S105
+
+
+class FreezePersonality(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class FreezePersonalityRequest(RedfishModel):
+    personality: int
+
+
+class GetPersonalityNonce(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
 
 
 class HotspareActivationPolicy(StrEnum):
@@ -132,6 +161,23 @@ class Mpf(RedfishModel):
     volume_assignment_policy: VolumeAssignmentPolicy | None = None
 
 
+class NmVeMinimumRequiredResetType(StrEnum):
+    NO_RESET = "NoReset"
+    CONTROLLER_LEVEL = "ControllerLevel"
+    LIMITED_CONTROLLER_LEVEL = "LimitedControllerLevel"
+    NVM_SUBSYSTEM_RESET = "NVMSubsystemReset"
+    POWER_CYCLE = "PowerCycle"
+
+
+class NmVePersonalityKeyAlgorithm(StrEnum):
+    HMA_C_SHA384 = "HMAC_SHA384"
+
+
+class NmVeUnfreezeAuthMode(StrEnum):
+    PROGRAMMED_KEY = "ProgrammedKey"
+    PHYSICAL_ID = "PhysicalId"
+
+
 class NvmeConfigurationLockState(RedfishModel):
     firmware_commit: ConfigLockOptions | None = None
     firmware_image_download: ConfigLockOptions | None = None
@@ -140,7 +186,19 @@ class NvmeConfigurationLockState(RedfishModel):
     vpd_write: ConfigLockOptions | None = Field(serialization_alias="VPDWrite", default=None)
 
 
+class NvmePersonality(RedfishModel):
+    change_affects_user_data: bool | None = None
+    data: str | None = None
+    default: bool | None = None
+    frozen: bool | None = None
+    identifier: int | None = None
+    minimum_required_reset_type: NmVeMinimumRequiredResetType | None = None
+    pending: bool | None = None
+    unfreeze_authentication_modes: list[NmVeUnfreezeAuthMode] | None = None
+
+
 class NvmeSubsystemProperties(RedfishModel):
+    active_personalities: list[NvmePersonality] | None = None
     configuration_lock_state: NvmeConfigurationLockState | None = None
     max_namespaces_supported: float | None = None
     shared_namespace_controller_attachment_supported: bool | None = None
@@ -171,6 +229,11 @@ class ResetToDefaultsType(StrEnum):
     PRESERVE_VOLUMES = "PreserveVolumes"
 
 
+class RevertPersonalitiesToDefaults(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class SetControllerPassword(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -193,11 +256,21 @@ class SetEncryptionKeyRequest(RedfishModel):
     encryption_key_identifier: str | None = None
 
 
+class SetPersonalityKey(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class SetPersonalityKeyRequest(RedfishModel):
+    algorithm: NmVePersonalityKeyAlgorithm
+    key: str
+
+
 class Storage(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_20_0.Storage")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_21_0.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     block_security_id_policy: bool | None = Field(
@@ -315,6 +388,18 @@ class StorageControllerLinks(RedfishModel):
 
 class TargetConfigurationLockLevel(StrEnum):
     BASELINE = "Baseline"
+
+
+class UnfreezePersonality(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class UnfreezePersonalityRequest(RedfishModel):
+    authentication_method: NmVeUnfreezeAuthMode
+    key: str
+    nonce: str | None = None
+    personality: int
 
 
 class VolumeAssignmentPolicy(StrEnum):

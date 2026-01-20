@@ -32,7 +32,7 @@ class DiagnosticDataTypes(StrEnum):
 
 class Event(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_12_0.Event")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_13_0.Event")
     actions: Actions | None = None
     context: str | None = None
     description: str | None = None
@@ -65,6 +65,7 @@ class EventRecord(RedfishModel):
         serialization_alias="OEMDiagnosticDataType", default=None
     )
     oem: dict[str, Any] | None = None
+    origin_address: str | None = None
     origin_of_condition: IdRef | None = None
     origin_of_condition_unavailable: bool | None = None
     resolution: str | None = None

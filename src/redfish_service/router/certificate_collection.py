@@ -104,6 +104,27 @@ async def post3(request: Request, response: Response, body: CertificateOnCreate)
     return cast(Certificate, s.post(**b))
 
 
+@router.get("/redfish/v1/AccountService/OAuth2/Certificates", response_model_exclude_none=True)
+@router.head("/redfish/v1/AccountService/OAuth2/Certificates", response_model_exclude_none=True)
+async def get4(request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post("/redfish/v1/AccountService/OAuth2/Certificates", response_model_exclude_none=True)
+@router.post(
+    "/redfish/v1/AccountService/OAuth2/Certificates/Members", response_model_exclude_none=True
+)
+@authenticate
+async def post4(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {"request": request, "response": response, "body": body}
+    return cast(Certificate, s.post(**b))
+
+
 @router.get(
     "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates",
     response_model_exclude_none=True,
@@ -112,7 +133,7 @@ async def post3(request: Request, response: Response, body: CertificateOnCreate)
     "/redfish/v1/AccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get4(
+async def get5(
     external_account_provider_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -135,7 +156,7 @@ async def get4(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post4(
+async def post5(
     external_account_provider_id: str,
     request: Request,
     response: Response,
@@ -159,7 +180,7 @@ async def post4(
     "/redfish/v1/AccountService/MultiFactorAuth/ClientCertificate/Certificates",
     response_model_exclude_none=True,
 )
-async def get5(request: Request, response: Response) -> CertificateCollection:
+async def get6(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -176,7 +197,7 @@ async def get5(request: Request, response: Response) -> CertificateCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def post5(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+async def post6(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(Certificate, s.post(**b))
@@ -190,7 +211,7 @@ async def post5(request: Request, response: Response, body: CertificateOnCreate)
     "/redfish/v1/AccountService/MultiFactorAuth/SecurID/Certificates",
     response_model_exclude_none=True,
 )
-async def get6(request: Request, response: Response) -> CertificateCollection:
+async def get7(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -207,7 +228,7 @@ async def get6(request: Request, response: Response) -> CertificateCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def post6(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+async def post7(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(Certificate, s.post(**b))
@@ -221,7 +242,7 @@ async def post6(request: Request, response: Response, body: CertificateOnCreate)
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/Accounts/{manager_account_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get7(
+async def get8(
     manager_id: str, manager_account_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -245,7 +266,7 @@ async def get7(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post7(
+async def post8(
     manager_id: str,
     manager_account_id: str,
     request: Request,
@@ -271,7 +292,7 @@ async def post7(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates",
     response_model_exclude_none=True,
 )
-async def get8(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get9(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -285,44 +306,6 @@ async def get8(manager_id: str, request: Request, response: Response) -> Certifi
 )
 @router.post(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ActiveDirectory/Certificates/Members",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def post8(
-    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
-) -> Certificate:
-    s: ServiceCollection = get_service_collection(CertificateCollection, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.post(**b))
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates",
-    response_model_exclude_none=True,
-)
-async def get9(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = get_service(CertificateCollection, request)
-    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    m = cast(CertificateCollection, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates",
-    response_model_exclude_none=True,
-)
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/Members",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -340,6 +323,44 @@ async def post9(
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates",
+    response_model_exclude_none=True,
+)
+async def get10(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/LDAP/Certificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post10(
+    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates",
     response_model_exclude_none=True,
 )
@@ -347,7 +368,7 @@ async def post9(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/ExternalAccountProviders/{external_account_provider_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get10(
+async def get11(
     manager_id: str, external_account_provider_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -371,7 +392,7 @@ async def get10(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post10(
+async def post11(
     manager_id: str,
     external_account_provider_id: str,
     request: Request,
@@ -397,7 +418,7 @@ async def post10(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates",
     response_model_exclude_none=True,
 )
-async def get11(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get12(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -411,44 +432,6 @@ async def get11(manager_id: str, request: Request, response: Response) -> Certif
 )
 @router.post(
     "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/ClientCertificate/Certificates/Members",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def post11(
-    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
-) -> Certificate:
-    s: ServiceCollection = get_service_collection(CertificateCollection, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.post(**b))
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates",
-    response_model_exclude_none=True,
-)
-async def get12(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = get_service(CertificateCollection, request)
-    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    m = cast(CertificateCollection, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates",
-    response_model_exclude_none=True,
-)
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/Members",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -466,6 +449,44 @@ async def post12(
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates",
+    response_model_exclude_none=True,
+)
+async def get13(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/RemoteAccountService/MultiFactorAuth/SecurID/Certificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post13(
+    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
     "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates",
     response_model_exclude_none=True,
 )
@@ -473,7 +494,7 @@ async def post12(
     "/redfish/v1/Managers/{manager_id}/NetworkProtocol/HTTPS/Certificates",
     response_model_exclude_none=True,
 )
-async def get13(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get14(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -490,7 +511,7 @@ async def get13(manager_id: str, request: Request, response: Response) -> Certif
     response_model_exclude_none=True,
 )
 @authenticate
-async def post13(
+async def post14(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -509,7 +530,7 @@ async def post13(
 @router.head(
     "/redfish/v1/Systems/{computer_system_id}/Boot/Certificates", response_model_exclude_none=True
 )
-async def get14(
+async def get15(
     computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -531,7 +552,7 @@ async def get14(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post14(
+async def post15(
     computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -552,7 +573,7 @@ async def post14(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates",
     response_model_exclude_none=True,
 )
-async def get15(
+async def get16(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -576,7 +597,7 @@ async def get15(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post15(
+async def post16(
     resource_block_id: str,
     computer_system_id: str,
     request: Request,
@@ -602,7 +623,7 @@ async def post15(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Boot/Certificates",
     response_model_exclude_none=True,
 )
-async def get16(
+async def get17(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -626,7 +647,7 @@ async def get16(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post16(
+async def post17(
     resource_block_id: str,
     computer_system_id: str,
     request: Request,
@@ -652,7 +673,7 @@ async def post16(
     "/redfish/v1/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get17(
+async def get18(
     computer_system_id: str, database_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -676,7 +697,7 @@ async def get17(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post17(
+async def post18(
     computer_system_id: str,
     database_id: str,
     request: Request,
@@ -702,7 +723,7 @@ async def post17(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get18(
+async def get19(
     resource_block_id: str,
     computer_system_id: str,
     database_id: str,
@@ -731,7 +752,7 @@ async def get18(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post18(
+async def post19(
     resource_block_id: str,
     computer_system_id: str,
     database_id: str,
@@ -759,7 +780,7 @@ async def post18(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/SecureBoot/SecureBootDatabases/{database_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get19(
+async def get20(
     resource_block_id: str,
     computer_system_id: str,
     database_id: str,
@@ -788,7 +809,7 @@ async def get19(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post19(
+async def post20(
     resource_block_id: str,
     computer_system_id: str,
     database_id: str,
@@ -816,7 +837,7 @@ async def post19(
     "/redfish/v1/EventService/Subscriptions/{event_destination_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get20(
+async def get21(
     event_destination_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -839,7 +860,7 @@ async def get20(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post20(
+async def post21(
     event_destination_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -860,7 +881,7 @@ async def post20(
     "/redfish/v1/EventService/Subscriptions/{event_destination_id}/ClientCertificates",
     response_model_exclude_none=True,
 )
-async def get21(
+async def get22(
     event_destination_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -883,7 +904,7 @@ async def get21(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post21(
+async def post22(
     event_destination_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -902,7 +923,7 @@ async def post21(
 @router.head(
     "/redfish/v1/Systems/{computer_system_id}/Certificates", response_model_exclude_none=True
 )
-async def get22(
+async def get23(
     computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -924,7 +945,7 @@ async def get22(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post22(
+async def post23(
     computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -945,7 +966,7 @@ async def post22(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get23(
+async def get24(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -969,7 +990,7 @@ async def get23(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post23(
+async def post24(
     resource_block_id: str,
     computer_system_id: str,
     request: Request,
@@ -995,7 +1016,7 @@ async def post23(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get24(
+async def get25(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1019,7 +1040,7 @@ async def get24(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post24(
+async def post25(
     resource_block_id: str,
     computer_system_id: str,
     request: Request,
@@ -1045,7 +1066,7 @@ async def post24(
     "/redfish/v1/Systems/{computer_system_id}/Memory/{memory_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get25(
+async def get26(
     computer_system_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1069,7 +1090,7 @@ async def get25(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post25(
+async def post26(
     computer_system_id: str,
     memory_id: str,
     request: Request,
@@ -1095,7 +1116,7 @@ async def post25(
     "/redfish/v1/Chassis/{chassis_id}/Memory/{memory_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get26(
+async def get27(
     chassis_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1119,7 +1140,7 @@ async def get26(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post26(
+async def post27(
     chassis_id: str,
     memory_id: str,
     request: Request,
@@ -1145,7 +1166,7 @@ async def post26(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get27(
+async def get28(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1169,7 +1190,7 @@ async def get27(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post27(
+async def post28(
     resource_block_id: str,
     memory_id: str,
     request: Request,
@@ -1195,7 +1216,7 @@ async def post27(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get28(
+async def get29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -1224,7 +1245,7 @@ async def get28(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post28(
+async def post29(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -1252,7 +1273,7 @@ async def post28(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Memory/{memory_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get29(
+async def get30(
     resource_block_id: str, memory_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1276,7 +1297,7 @@ async def get29(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post29(
+async def post30(
     resource_block_id: str,
     memory_id: str,
     request: Request,
@@ -1302,7 +1323,7 @@ async def post29(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Memory/{memory_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get30(
+async def get31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -1331,7 +1352,7 @@ async def get30(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post30(
+async def post31(
     resource_block_id: str,
     computer_system_id: str,
     memory_id: str,
@@ -1359,7 +1380,7 @@ async def post30(
     "/redfish/v1/Systems/{computer_system_id}/Processors/{processor_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get31(
+async def get32(
     computer_system_id: str, processor_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1383,7 +1404,7 @@ async def get31(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post31(
+async def post32(
     computer_system_id: str,
     processor_id: str,
     request: Request,
@@ -1409,7 +1430,7 @@ async def post31(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get32(
+async def get33(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1433,7 +1454,7 @@ async def get32(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post32(
+async def post33(
     resource_block_id: str,
     processor_id: str,
     request: Request,
@@ -1459,7 +1480,7 @@ async def post32(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get33(
+async def get34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -1488,7 +1509,7 @@ async def get33(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post33(
+async def post34(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -1516,7 +1537,7 @@ async def post33(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Processors/{processor_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get34(
+async def get35(
     resource_block_id: str, processor_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1540,7 +1561,7 @@ async def get34(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post34(
+async def post35(
     resource_block_id: str,
     processor_id: str,
     request: Request,
@@ -1566,7 +1587,7 @@ async def post34(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Processors/{processor_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get35(
+async def get36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -1595,7 +1616,7 @@ async def get35(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post35(
+async def post36(
     resource_block_id: str,
     computer_system_id: str,
     processor_id: str,
@@ -1623,7 +1644,7 @@ async def post35(
     "/redfish/v1/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get36(
+async def get37(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1647,7 +1668,7 @@ async def get36(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post36(
+async def post37(
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -1673,7 +1694,7 @@ async def post36(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get37(
+async def get38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -1702,7 +1723,7 @@ async def get37(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post37(
+async def post38(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -1730,7 +1751,7 @@ async def post37(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get38(
+async def get39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -1759,7 +1780,7 @@ async def get38(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post38(
+async def post39(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -1787,7 +1808,7 @@ async def post38(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get39(
+async def get40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -1818,7 +1839,7 @@ async def get39(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post39(
+async def post40(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -1848,7 +1869,7 @@ async def post39(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get40(
+async def get41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -1877,7 +1898,7 @@ async def get40(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post40(
+async def post41(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -1905,7 +1926,7 @@ async def post40(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/StorageControllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get41(
+async def get42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -1936,7 +1957,7 @@ async def get41(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post41(
+async def post42(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -1966,7 +1987,7 @@ async def post41(
     "/redfish/v1/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get42(
+async def get43(
     storage_id: str, storage_controller_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -1990,7 +2011,7 @@ async def get42(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post42(
+async def post43(
     storage_id: str,
     storage_controller_id: str,
     request: Request,
@@ -2016,7 +2037,7 @@ async def post42(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get43(
+async def get44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -2045,7 +2066,7 @@ async def get43(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post43(
+async def post44(
     computer_system_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -2073,7 +2094,7 @@ async def post43(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get44(
+async def get45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -2102,7 +2123,7 @@ async def get44(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post44(
+async def post45(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -2130,7 +2151,7 @@ async def post44(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get45(
+async def get46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2161,7 +2182,7 @@ async def get45(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post45(
+async def post46(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2191,7 +2212,7 @@ async def post45(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get46(
+async def get47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -2220,7 +2241,7 @@ async def get46(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post46(
+async def post47(
     resource_block_id: str,
     storage_id: str,
     storage_controller_id: str,
@@ -2248,7 +2269,7 @@ async def post46(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Controllers/{storage_controller_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get47(
+async def get48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2279,7 +2300,7 @@ async def get47(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post47(
+async def post48(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2309,7 +2330,7 @@ async def post47(
     "/redfish/v1/Fabrics/{fabric_id}/Switches/{switch_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get48(
+async def get49(
     fabric_id: str, switch_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2333,7 +2354,7 @@ async def get48(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post48(
+async def post49(
     fabric_id: str, switch_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -2349,7 +2370,7 @@ async def post48(
 
 @router.get("/redfish/v1/Chassis/{chassis_id}/Certificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/Chassis/{chassis_id}/Certificates", response_model_exclude_none=True)
-async def get49(chassis_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get50(chassis_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"chassis_id": chassis_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -2362,7 +2383,7 @@ async def get49(chassis_id: str, request: Request, response: Response) -> Certif
     "/redfish/v1/Chassis/{chassis_id}/Certificates/Members", response_model_exclude_none=True
 )
 @authenticate
-async def post49(
+async def post50(
     chassis_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -2383,7 +2404,7 @@ async def post49(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get50(
+async def get51(
     computer_system_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2408,7 +2429,7 @@ async def get50(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post50(
+async def post51(
     computer_system_id: str,
     storage_id: str,
     drive_id: str,
@@ -2436,7 +2457,7 @@ async def post50(
     "/redfish/v1/Chassis/{chassis_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get51(
+async def get52(
     chassis_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2460,7 +2481,7 @@ async def get51(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post51(
+async def post52(
     chassis_id: str, drive_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -2482,7 +2503,7 @@ async def post51(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get52(
+async def get53(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2507,7 +2528,7 @@ async def get52(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post52(
+async def post53(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -2535,7 +2556,7 @@ async def post52(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get53(
+async def get54(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2559,7 +2580,7 @@ async def get53(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post53(
+async def post54(
     resource_block_id: str,
     drive_id: str,
     request: Request,
@@ -2585,7 +2606,7 @@ async def post53(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get54(
+async def get55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2616,7 +2637,7 @@ async def get54(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post54(
+async def post55(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2646,7 +2667,7 @@ async def post54(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get55(
+async def get56(
     resource_block_id: str, storage_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2671,7 +2692,7 @@ async def get55(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post55(
+async def post56(
     resource_block_id: str,
     storage_id: str,
     drive_id: str,
@@ -2699,7 +2720,7 @@ async def post55(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get56(
+async def get57(
     resource_block_id: str, drive_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2723,7 +2744,7 @@ async def get56(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post56(
+async def post57(
     resource_block_id: str,
     drive_id: str,
     request: Request,
@@ -2749,7 +2770,7 @@ async def post56(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Drives/{drive_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get57(
+async def get58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2780,7 +2801,7 @@ async def get57(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post57(
+async def post58(
     resource_block_id: str,
     computer_system_id: str,
     storage_id: str,
@@ -2810,7 +2831,7 @@ async def post57(
     "/redfish/v1/Chassis/{chassis_id}/NetworkAdapters/{network_adapter_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get58(
+async def get59(
     chassis_id: str, network_adapter_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2834,7 +2855,7 @@ async def get58(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post58(
+async def post59(
     chassis_id: str,
     network_adapter_id: str,
     request: Request,
@@ -2860,7 +2881,7 @@ async def post58(
     "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get59(
+async def get60(
     computer_system_id: str, virtual_media_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2884,7 +2905,7 @@ async def get59(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post59(
+async def post60(
     computer_system_id: str,
     virtual_media_id: str,
     request: Request,
@@ -2910,7 +2931,7 @@ async def post59(
     "/redfish/v1/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates",
     response_model_exclude_none=True,
 )
-async def get60(
+async def get61(
     computer_system_id: str, virtual_media_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -2934,7 +2955,7 @@ async def get60(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post60(
+async def post61(
     computer_system_id: str,
     virtual_media_id: str,
     request: Request,
@@ -2960,7 +2981,7 @@ async def post60(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get61(
+async def get62(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -2989,7 +3010,7 @@ async def get61(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post61(
+async def post62(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3017,7 +3038,7 @@ async def post61(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates",
     response_model_exclude_none=True,
 )
-async def get62(
+async def get63(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3046,7 +3067,7 @@ async def get62(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post62(
+async def post63(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3074,7 +3095,7 @@ async def post62(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get63(
+async def get64(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3103,7 +3124,7 @@ async def get63(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post63(
+async def post64(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3131,7 +3152,7 @@ async def post63(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/VirtualMedia/{virtual_media_id}/ClientCertificates",
     response_model_exclude_none=True,
 )
-async def get64(
+async def get65(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3160,7 +3181,7 @@ async def get64(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post64(
+async def post65(
     resource_block_id: str,
     computer_system_id: str,
     virtual_media_id: str,
@@ -3184,7 +3205,7 @@ async def post64(
 @router.head(
     "/redfish/v1/UpdateService/RemoteServerCertificates", response_model_exclude_none=True
 )
-async def get65(request: Request, response: Response) -> CertificateCollection:
+async def get66(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -3199,7 +3220,7 @@ async def get65(request: Request, response: Response) -> CertificateCollection:
     "/redfish/v1/UpdateService/RemoteServerCertificates/Members", response_model_exclude_none=True
 )
 @authenticate
-async def post65(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+async def post66(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(Certificate, s.post(**b))
@@ -3207,7 +3228,7 @@ async def post65(request: Request, response: Response, body: CertificateOnCreate
 
 @router.get("/redfish/v1/UpdateService/ClientCertificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/UpdateService/ClientCertificates", response_model_exclude_none=True)
-async def get66(request: Request, response: Response) -> CertificateCollection:
+async def get67(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -3220,7 +3241,7 @@ async def get66(request: Request, response: Response) -> CertificateCollection:
     "/redfish/v1/UpdateService/ClientCertificates/Members", response_model_exclude_none=True
 )
 @authenticate
-async def post66(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+async def post67(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(Certificate, s.post(**b))
@@ -3228,7 +3249,7 @@ async def post66(request: Request, response: Response, body: CertificateOnCreate
 
 @router.get("/redfish/v1/Managers/{manager_id}/Certificates", response_model_exclude_none=True)
 @router.head("/redfish/v1/Managers/{manager_id}/Certificates", response_model_exclude_none=True)
-async def get67(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get68(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -3241,7 +3262,7 @@ async def get67(manager_id: str, request: Request, response: Response) -> Certif
     "/redfish/v1/Managers/{manager_id}/Certificates/Members", response_model_exclude_none=True
 )
 @authenticate
-async def post67(
+async def post68(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -3262,7 +3283,7 @@ async def post67(
     "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPCertificates",
     response_model_exclude_none=True,
 )
-async def get68(
+async def get69(
     computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3285,7 +3306,51 @@ async def get68(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post68(
+async def post69(
+    computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+async def get70(
+    computer_system_id: str, request: Request, response: Response
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post70(
     computer_system_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -3306,7 +3371,7 @@ async def post68(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates",
     response_model_exclude_none=True,
 )
-async def get69(
+async def get71(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3330,7 +3395,57 @@ async def get69(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post69(
+async def post71(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnCreate,
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+async def get72(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post72(
     resource_block_id: str,
     computer_system_id: str,
     request: Request,
@@ -3356,7 +3471,7 @@ async def post69(
     "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPCertificates",
     response_model_exclude_none=True,
 )
-async def get70(
+async def get73(
     resource_block_id: str, computer_system_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3380,7 +3495,57 @@ async def get70(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post70(
+async def post73(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnCreate,
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+async def get74(
+    resource_block_id: str, computer_system_id: str, request: Request, response: Response
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/KeyManagement/KMIPClientCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post74(
     resource_block_id: str,
     computer_system_id: str,
     request: Request,
@@ -3406,7 +3571,7 @@ async def post70(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates",
     response_model_exclude_none=True,
 )
-async def get71(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get75(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -3420,158 +3585,6 @@ async def get71(manager_id: str, request: Request, response: Response) -> Certif
 )
 @router.post(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/TrustedCertificates/Members",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def post71(
-    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
-) -> Certificate:
-    s: ServiceCollection = get_service_collection(CertificateCollection, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.post(**b))
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates",
-    response_model_exclude_none=True,
-)
-async def get72(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = get_service(CertificateCollection, request)
-    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    m = cast(CertificateCollection, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates",
-    response_model_exclude_none=True,
-)
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/Members",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def post72(
-    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
-) -> Certificate:
-    s: ServiceCollection = get_service_collection(CertificateCollection, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.post(**b))
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates",
-    response_model_exclude_none=True,
-)
-async def get73(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = get_service(CertificateCollection, request)
-    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    m = cast(CertificateCollection, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates",
-    response_model_exclude_none=True,
-)
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/Members",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def post73(
-    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
-) -> Certificate:
-    s: ServiceCollection = get_service_collection(CertificateCollection, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.post(**b))
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates",
-    response_model_exclude_none=True,
-)
-async def get74(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = get_service(CertificateCollection, request)
-    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    m = cast(CertificateCollection, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates",
-    response_model_exclude_none=True,
-)
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/Members",
-    response_model_exclude_none=True,
-)
-@authenticate
-async def post74(
-    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
-) -> Certificate:
-    s: ServiceCollection = get_service_collection(CertificateCollection, request)
-    b: dict[str, Any] = {
-        "manager_id": manager_id,
-        "request": request,
-        "response": response,
-        "body": body,
-    }
-    return cast(Certificate, s.post(**b))
-
-
-@router.get(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates",
-    response_model_exclude_none=True,
-)
-@router.head(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates",
-    response_model_exclude_none=True,
-)
-async def get75(manager_id: str, request: Request, response: Response) -> CertificateCollection:
-    s: Service = get_service(CertificateCollection, request)
-    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
-    m = cast(CertificateCollection, s.get(**b))
-    set_link_header(m, response)
-    return m
-
-
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates",
-    response_model_exclude_none=True,
-)
-@router.post(
-    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/Members",
     response_model_exclude_none=True,
 )
 @authenticate
@@ -3589,6 +3602,158 @@ async def post75(
 
 
 @router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates",
+    response_model_exclude_none=True,
+)
+async def get76(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/SPDM/RevokedCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post76(
+    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates",
+    response_model_exclude_none=True,
+)
+async def get77(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/TrustedCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post77(
+    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates",
+    response_model_exclude_none=True,
+)
+async def get78(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Client/RevokedCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post78(
+    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates",
+    response_model_exclude_none=True,
+)
+async def get79(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/TrustedCertificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post79(
+    manager_id: str, request: Request, response: Response, body: CertificateOnCreate
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates",
     response_model_exclude_none=True,
 )
@@ -3596,7 +3761,7 @@ async def post75(
     "/redfish/v1/Managers/{manager_id}/SecurityPolicy/TLS/Server/RevokedCertificates",
     response_model_exclude_none=True,
 )
-async def get76(manager_id: str, request: Request, response: Response) -> CertificateCollection:
+async def get80(manager_id: str, request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -3613,7 +3778,7 @@ async def get76(manager_id: str, request: Request, response: Response) -> Certif
     response_model_exclude_none=True,
 )
 @authenticate
-async def post76(
+async def post80(
     manager_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -3634,7 +3799,7 @@ async def post76(
     "/redfish/v1/Chassis/{chassis_id}/TrustedComponents/{trusted_component_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get77(
+async def get81(
     chassis_id: str, trusted_component_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3658,7 +3823,7 @@ async def get77(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post77(
+async def post81(
     chassis_id: str,
     trusted_component_id: str,
     request: Request,
@@ -3684,7 +3849,7 @@ async def post77(
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get78(
+async def get82(
     outbound_connection_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3707,7 +3872,7 @@ async def get78(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post78(
+async def post82(
     outbound_connection_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -3728,7 +3893,7 @@ async def post78(
     "/redfish/v1/AccountService/OutboundConnections/{outbound_connection_id}/ClientCertificates",
     response_model_exclude_none=True,
 )
-async def get79(
+async def get83(
     outbound_connection_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3751,7 +3916,7 @@ async def get79(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post79(
+async def post83(
     outbound_connection_id: str, request: Request, response: Response, body: CertificateOnCreate
 ) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
@@ -3772,7 +3937,7 @@ async def post79(
     "/redfish/v1/Chassis/{chassis_id}/PowerSubsystem/PowerSupplies/{power_supply_id}/Certificates",
     response_model_exclude_none=True,
 )
-async def get80(
+async def get84(
     chassis_id: str, power_supply_id: str, request: Request, response: Response
 ) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
@@ -3796,7 +3961,7 @@ async def get80(
     response_model_exclude_none=True,
 )
 @authenticate
-async def post80(
+async def post84(
     chassis_id: str,
     power_supply_id: str,
     request: Request,
@@ -3820,7 +3985,7 @@ async def post80(
 @router.head(
     "/redfish/v1/CertificateService/EnrollmentCACertificates", response_model_exclude_none=True
 )
-async def get81(request: Request, response: Response) -> CertificateCollection:
+async def get85(request: Request, response: Response) -> CertificateCollection:
     s: Service = get_service(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response}
     m = cast(CertificateCollection, s.get(**b))
@@ -3836,7 +4001,7 @@ async def get81(request: Request, response: Response) -> CertificateCollection:
     response_model_exclude_none=True,
 )
 @authenticate
-async def post81(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
+async def post85(request: Request, response: Response, body: CertificateOnCreate) -> Certificate:
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(Certificate, s.post(**b))

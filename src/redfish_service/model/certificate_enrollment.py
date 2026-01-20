@@ -53,7 +53,7 @@ class CertificateEnrollment(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#CertificateEnrollment.v1_0_0.CertificateEnrollment",
+        default="#CertificateEnrollment.v1_0_1.CertificateEnrollment",
     )
     acme: AcmeConfiguration | None = Field(serialization_alias="ACME", default=None)
     actions: Actions | None = None
@@ -78,7 +78,7 @@ class CertificateEnrollmentOnCreate(RedfishModel):
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
         serialization_alias="@odata.type",
-        default="#CertificateEnrollment.v1_0_0.CertificateEnrollment",
+        default="#CertificateEnrollment.v1_0_1.CertificateEnrollment",
     )
     acme: AcmeConfiguration | None = Field(serialization_alias="ACME", default=None)
     actions: Actions | None = None

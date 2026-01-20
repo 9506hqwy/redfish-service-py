@@ -115,7 +115,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_23_0.Manager")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_24_0.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
@@ -164,6 +164,7 @@ class Manager(RedfishModel):
         serialization_alias="ServiceEntryPointUUID", default=None
     )
     service_identification: str | None = None
+    service_use_notification: str | None = None
     shared_network_ports: IdRef | None = None
     spare_part_number: str | None = None
     status: Status | None = None
@@ -194,6 +195,7 @@ class ManagerOnUpdate(RedfishModelOnUpdate):
     redundancy: list[IdRef] | None = None
     serial_console: SerialConsole | None = None
     service_identification: str | None = None
+    service_use_notification: str | None = None
     shared_network_ports: IdRef | None = None
     status: Status | None = None
     time_zone_name: str | None = None

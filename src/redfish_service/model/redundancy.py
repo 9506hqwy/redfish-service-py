@@ -24,6 +24,7 @@ class Redundancy(RedfishModel):
     max_num_supported: int | None = None
     member_id: str
     min_num_needed: int | None = None
+    min_num_needed_for_fault_tolerance: int | None = None
     mode: RedundancyMode | None = None
     name: str
     oem: dict[str, Any] | None = None
@@ -58,6 +59,7 @@ class RedundantGroup(RedfishModel):
     )
     group_name: str | None = None
     max_supported_in_group: int | None = None
+    min_needed_for_fault_tolerance: int | None = None
     min_needed_in_group: int | None = None
     redundancy_group: list[IdRef]
     redundancy_group_odata_count: int | None = Field(
