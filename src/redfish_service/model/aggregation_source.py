@@ -26,7 +26,7 @@ class AggregationSource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AggregationSource.v1_5_0.AggregationSource"
+        serialization_alias="@odata.type", default="#AggregationSource.v1_6_0.AggregationSource"
     )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
@@ -50,7 +50,7 @@ class AggregationSourceOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#AggregationSource.v1_5_0.AggregationSource"
+        serialization_alias="@odata.type", default="#AggregationSource.v1_6_0.AggregationSource"
     )
     actions: Actions | None = None
     aggregation_type: AggregationType | None = None
@@ -137,6 +137,7 @@ class SnmpSettings(RedfishModel):
     authentication_key: str | None = None
     authentication_key_set: bool | None = None
     authentication_protocol: SnmpAuthenticationProtocols | None = None
+    community_string: str | None = None
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
     encryption_protocol: SnmpEncryptionProtocols | None = None

@@ -7,6 +7,8 @@ from ..model.cxl_logical_device import (
     CxlLogicalDevice,
     CxlLogicalDeviceOnUpdate,
     DisablePassphraseRequest,
+    DynamicCapacityAddRequest,
+    DynamicCapacityReleaseRequest,
     PassphraseSecureEraseRequest,
     SetPassphraseRequest,
     UnlockRequest,
@@ -93,6 +95,58 @@ async def disable_passphrase1(
         "response": response,
         "body": body,
         "action": "DisablePassphrase",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/CXLLogicalDevices/{cxl_logical_device_id}/Actions/CXLLogicalDevice.DynamicCapacityAdd",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def dynamic_capacity_add1(
+    chassis_id: str,
+    pcie_device_id: str,
+    cxl_logical_device_id: str,
+    request: Request,
+    response: Response,
+    body: DynamicCapacityAddRequest,
+) -> RedfishError:
+    s: Service = get_service(CxlLogicalDevice, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "cxl_logical_device_id": cxl_logical_device_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "DynamicCapacityAdd",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/CXLLogicalDevices/{cxl_logical_device_id}/Actions/CXLLogicalDevice.DynamicCapacityRelease",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def dynamic_capacity_release1(
+    chassis_id: str,
+    pcie_device_id: str,
+    cxl_logical_device_id: str,
+    request: Request,
+    response: Response,
+    body: DynamicCapacityReleaseRequest,
+) -> RedfishError:
+    s: Service = get_service(CxlLogicalDevice, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "cxl_logical_device_id": cxl_logical_device_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "DynamicCapacityRelease",
     }
     return s.action(**b)
 

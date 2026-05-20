@@ -31,3 +31,4 @@ class ResolutionType(StrEnum):
     RESET_TO_DEFAULTS = "ResetToDefaults"
     COLLECT_DIAGNOSTIC_DATA = "CollectDiagnosticData"
     OEM = "OEM"
+    RETRY_OPERATION = "RetryOperation"

@@ -37,7 +37,7 @@ class ThermalMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ThermalMetrics.v1_3_2.ThermalMetrics"
+        serialization_alias="@odata.type", default="#ThermalMetrics.v1_3_3.ThermalMetrics"
     )
     actions: Actions | None = None
     air_flow_cubic_meters_per_minute: SensorExcerpt | None = None

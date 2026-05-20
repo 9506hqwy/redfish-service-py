@@ -31,7 +31,7 @@ class CertificateService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CertificateService.v1_2_1.CertificateService"
+        serialization_alias="@odata.type", default="#CertificateService.v1_2_2.CertificateService"
     )
     actions: Actions | None = None
     automatic_certificate_enrollment: AutomaticCertificateEnrollment | None = None
@@ -62,7 +62,7 @@ class GenerateCsrRequest(RedfishModel):
     certificate_collection: IdRef
     challenge_password: str | None = None
     city: str | None = None
-    common_name: str
+    common_name: str | None = None
     contact_person: str | None = None
     country: str | None = None
     email: str | None = None

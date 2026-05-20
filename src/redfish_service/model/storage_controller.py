@@ -145,11 +145,13 @@ class NvmeControllerType(StrEnum):
 
 
 class NvmeSmartCriticalWarnings(RedfishModel):
+    indeterminate_personality_status: bool | None = None
     media_in_read_only: bool | None = None
     overall_subsystem_degraded: bool | None = None
     pmr_unreliable: bool | None = Field(serialization_alias="PMRUnreliable", default=None)
     power_backup_failed: bool | None = None
     spare_capacity_worn_out: bool | None = None
+    temperature_threshold_condition: bool | None = None
 
 
 class Rates(RedfishModel):
@@ -194,7 +196,7 @@ class StorageController(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StorageController.v1_11_0.StorageController"
+        serialization_alias="@odata.type", default="#StorageController.v1_12_0.StorageController"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

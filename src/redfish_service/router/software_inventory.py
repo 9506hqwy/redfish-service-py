@@ -6,6 +6,7 @@ from ..authenticate import authenticate
 from ..model.redfish_error import RedfishError
 from ..model.software_inventory import (
     ActivateRequest,
+    CancelRequest,
     SoftwareInventory,
     SoftwareInventoryOnUpdate,
 )
@@ -92,6 +93,25 @@ async def activate1(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/UpdateService/SoftwareInventory/{software_inventory_id}/Actions/SoftwareInventory.Cancel",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def cancel1(
+    software_inventory_id: str, request: Request, response: Response, body: CancelRequest
+) -> RedfishError:
+    s: Service = get_service(SoftwareInventory, request)
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Cancel",
+    }
+    return s.action(**b)
+
+
 @router.delete(
     "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}",
     response_model_exclude_none=True,
@@ -169,6 +189,25 @@ async def activate2(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/UpdateService/FirmwareInventory/{software_inventory_id}/Actions/SoftwareInventory.Cancel",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def cancel2(
+    software_inventory_id: str, request: Request, response: Response, body: CancelRequest
+) -> RedfishError:
+    s: Service = get_service(SoftwareInventory, request)
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Cancel",
+    }
+    return s.action(**b)
+
+
 @router.delete(
     "/redfish/v1/UpdateService/LocalImageStore/{software_inventory_id}",
     response_model_exclude_none=True,
@@ -242,5 +281,24 @@ async def activate3(
         "response": response,
         "body": body,
         "action": "Activate",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/UpdateService/LocalImageStore/{software_inventory_id}/Actions/SoftwareInventory.Cancel",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def cancel3(
+    software_inventory_id: str, request: Request, response: Response, body: CancelRequest
+) -> RedfishError:
+    s: Service = get_service(SoftwareInventory, request)
+    b: dict[str, Any] = {
+        "software_inventory_id": software_inventory_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Cancel",
     }
     return s.action(**b)

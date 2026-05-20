@@ -11,6 +11,9 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    tpm_clear: TpmClear | None = Field(
+        serialization_alias="#TrustedComponent.TPMClear", default=None
+    )
     tpm_get_event_log: TpmGetEventLog | None = Field(
         serialization_alias="#TrustedComponent.TPMGetEventLog", default=None
     )
@@ -45,6 +48,11 @@ class Tpm(RedfishModel):
     )
 
 
+class TpmClear(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class TpmGetEventLog(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -55,7 +63,7 @@ class TrustedComponent(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#TrustedComponent.v1_4_0.TrustedComponent"
+        serialization_alias="@odata.type", default="#TrustedComponent.v1_5_0.TrustedComponent"
     )
     actions: Actions | None = None
     certificates: IdRef | None = None

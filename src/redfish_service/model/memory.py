@@ -145,7 +145,7 @@ class Memory(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_23_0.Memory")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Memory.v1_24_0.Memory")
     actions: Actions | None = None
     allocation_alignment_mib: int | None = Field(
         serialization_alias="AllocationAlignmentMiB", default=None
@@ -320,6 +320,8 @@ class MemoryDeviceType(StrEnum):
     HBM2 = "HBM2"
     HBM2_E = "HBM2E"
     HBM3 = "HBM3"
+    HBM3_E = "HBM3E"
+    HBM4 = "HBM4"
     GDDR = "GDDR"
     GDDR2 = "GDDR2"
     GDDR3 = "GDDR3"

@@ -19,7 +19,7 @@ class Filter(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Filter.v1_1_0.Filter")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Filter.v1_1_1.Filter")
     actions: Actions | None = None
     assembly: IdRef | None = None
     delta_liquid_pressurek_pa: SensorExcerpt | None = None

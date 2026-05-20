@@ -13,7 +13,7 @@ class ActionInfo(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ActionInfo.v1_5_0.ActionInfo"
+        serialization_alias="@odata.type", default="#ActionInfo.v1_6_0.ActionInfo"
     )
     description: str | None = None
     id: str
@@ -39,6 +39,7 @@ class Parameters(RedfishModel):
     allowable_values: list[str] | None = None
     array_size_maximum: int | None = None
     array_size_minimum: int | None = None
+    conditional_requirement: str | None = None
     data_type: ParameterTypes | None = None
     default_value: str | None = None
     maximum_value: float | None = None

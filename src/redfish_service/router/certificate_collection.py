@@ -4005,3 +4005,217 @@ async def post85(request: Request, response: Response, body: CertificateOnCreate
     s: ServiceCollection = get_service_collection(CertificateCollection, request)
     b: dict[str, Any] = {"request": request, "response": response, "body": body}
     return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+async def get86(
+    chassis_id: str, pcie_device_id: str, request: Request, response: Response
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post86(
+    chassis_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnCreate,
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+async def get87(
+    computer_system_id: str, pcie_device_id: str, request: Request, response: Response
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post87(
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnCreate,
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+async def get88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnCreate,
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+async def get89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
+) -> CertificateCollection:
+    s: Service = get_service(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(CertificateCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates",
+    response_model_exclude_none=True,
+)
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnCreate,
+) -> Certificate:
+    s: ServiceCollection = get_service_collection(CertificateCollection, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.post(**b))

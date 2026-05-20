@@ -20,7 +20,7 @@ class Bios(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Bios.v1_2_3.Bios")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Bios.v1_3_0.Bios")
     actions: Actions | None = None
     attribute_registry: str | None = None
     attributes: dict[str, Any] | None = None
@@ -29,6 +29,7 @@ class Bios(RedfishModel):
     links: Links | None = None
     name: str
     oem: dict[str, Any] | None = None
+    passwords: Passwords | None = None
     reset_bios_to_defaults_pending: bool | None = None
 
 
@@ -37,6 +38,7 @@ class BiosOnUpdate(RedfishModelOnUpdate):
     attributes: dict[str, Any] | None = None
     links: Links | None = None
     oem: dict[str, Any] | None = None
+    passwords: Passwords | None = None
 
 
 class ChangePassword(RedfishModel):
@@ -46,7 +48,7 @@ class ChangePassword(RedfishModel):
 
 class ChangePasswordRequest(RedfishModel):
     new_password: str
-    old_password: str
+    old_password: str | None = None
     password_name: str
 
 
@@ -57,6 +59,16 @@ class Links(RedfishModel):
     software_images_odata_count: int | None = Field(
         serialization_alias="SoftwareImages@odata.count", default=None
     )
+
+
+class Password(RedfishModel):
+    name: str | None = None
+    set: bool | None = None
+
+
+class Passwords(RedfishModel):
+    boot: Password | None = None
+    setup: Password | None = None
 
 
 class ResetBios(RedfishModel):

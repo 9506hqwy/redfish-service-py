@@ -15,6 +15,7 @@ class Actions(RedfishModel):
     activate: Activate | None = Field(
         serialization_alias="#SoftwareInventory.Activate", default=None
     )
+    cancel: Cancel | None = Field(serialization_alias="#SoftwareInventory.Cancel", default=None)
     oem: dict[str, Any] | None = None
 
 
@@ -35,6 +36,15 @@ class AdditionalVersions(RedfishModel):
     microcode: str | None = None
     os_distribution: str | None = Field(serialization_alias="OSDistribution", default=None)
     oem: dict[str, Any] | None = None
+
+
+class Cancel(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class CancelRequest(RedfishModel):
+    targets: list[IdRef] | None = None
 
 
 class Links(RedfishModel):
@@ -66,7 +76,7 @@ class SoftwareInventory(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SoftwareInventory.v1_13_0.SoftwareInventory"
+        serialization_alias="@odata.type", default="#SoftwareInventory.v1_14_0.SoftwareInventory"
     )
     actions: Actions | None = None
     active: bool | None = None

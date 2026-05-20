@@ -47,6 +47,7 @@ class DateTimeSource(StrEnum):
     HOST = "Host"
     NTP = "NTP"
     PTP = "PTP"
+    DHCP = "DHCP"
 
 
 class DaylightSavingTime(RedfishModel):
@@ -115,7 +116,7 @@ class Manager(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_24_0.Manager")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Manager.v1_25_0.Manager")
     actions: Actions | None = None
     additional_firmware_versions: AdditionalVersions | None = None
     auto_dst_enabled: bool | None = Field(serialization_alias="AutoDSTEnabled", default=None)
@@ -244,6 +245,7 @@ class ResetToDefaultsType(StrEnum):
     RESET_ALL = "ResetAll"
     PRESERVE_NETWORK_AND_USERS = "PreserveNetworkAndUsers"
     PRESERVE_NETWORK = "PreserveNetwork"
+    SENSOR_THRESHOLDS = "SensorThresholds"
 
 
 class SecurityModeTypes(StrEnum):

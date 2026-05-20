@@ -13,10 +13,11 @@ class Actions(RedfishModel):
 
 class MessageRegistry(RedfishModel):
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MessageRegistry.v1_7_0.MessageRegistry"
+        serialization_alias="@odata.type", default="#MessageRegistry.v1_8_0.MessageRegistry"
     )
     actions: Actions | None = None
     description: str | None = None
+    example: str | None = None
     id: str
     language: str
     messages: dict[str, Any]

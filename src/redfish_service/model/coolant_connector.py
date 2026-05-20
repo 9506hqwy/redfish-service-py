@@ -9,6 +9,7 @@ from . import RedfishModel, RedfishModelOnUpdate
 from .control import ControlSingleLoopExcerpt
 from .cooling_loop import Coolant
 from .odata_v4 import IdRef
+from .redundancy import RedundantGroup
 from .resource import Status
 from .sensor import SensorExcerpt
 
@@ -25,9 +26,10 @@ class CoolantConnector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolantConnector.v1_3_0.CoolantConnector"
+        serialization_alias="@odata.type", default="#CoolantConnector.v1_4_0.CoolantConnector"
     )
     actions: Actions | None = None
+    connector_group: RedundantGroup | None = None
     coolant: Coolant | None = None
     coolant_connector_type: CoolantConnectorType | None = None
     cooling_loop_name: str | None = None
@@ -37,6 +39,7 @@ class CoolantConnector(RedfishModel):
     delta_temperature_celsius: SensorExcerpt | None = None
     delta_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
     description: str | None = None
+    dew_point_proximity_celsius: SensorExcerpt | None = None
     flow_control_liters_per_minute: ControlSingleLoopExcerpt | None = None
     flow_liters_per_minute: SensorExcerpt | None = None
     heat_removedk_w: SensorExcerpt | None = None
@@ -67,6 +70,7 @@ class CoolantConnector(RedfishModel):
 
 class CoolantConnectorOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
+    connector_group: RedundantGroup | None = None
     coolant: Coolant | None = None
     cooling_loop_name: str | None = None
     cooling_manager_uri: str | None = Field(serialization_alias="CoolingManagerURI", default=None)
@@ -82,6 +86,9 @@ class CoolantConnectorType(StrEnum):
     RETURN = "Return"
     INLINE = "Inline"
     CLOSED = "Closed"
+    PAIR_GROUP_MEMBER = "PairGroupMember"
+    SUPPLY_GROUP_MEMBER = "SupplyGroupMember"
+    RETURN_GROUP_MEMBER = "ReturnGroupMember"
 
 
 class Links(RedfishModel):

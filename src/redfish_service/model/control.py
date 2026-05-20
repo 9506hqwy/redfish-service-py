@@ -23,7 +23,7 @@ class Control(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_7_0.Control")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_8_0.Control")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None
@@ -94,6 +94,12 @@ class ControlLoop(RedfishModel):
     proportional: float | None = None
 
 
+class ControlLoopControlSingleLoopExcerpt(RedfishModel):
+    differential: float | None = None
+    integral: float | None = None
+    proportional: float | None = None
+
+
 class ControlMode(StrEnum):
     AUTOMATIC = "Automatic"
     OVERRIDE = "Override"
@@ -136,7 +142,7 @@ class ControlSingleExcerpt(RedfishModel):
 class ControlSingleLoopExcerpt(RedfishModel):
     allowable_max: float | None = None
     allowable_min: float | None = None
-    control_loop: ControlLoop | None = None
+    control_loop: ControlLoopControlSingleLoopExcerpt | None = None
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
     reading: float | None = None
@@ -160,6 +166,7 @@ class ControlType(StrEnum):
     ROTATIONAL_VELOCITY = "RotationalVelocity"
     ROTATIONAL_ACCELERATION = "RotationalAcceleration"
     LIQUID_FLOW_LPM = "LiquidFlowLPM"
+    VOLTAGE = "Voltage"
 
 
 class ImplementationType(StrEnum):

@@ -62,7 +62,7 @@ class Outlet(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Outlet.v1_4_4.Outlet")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Outlet.v1_5_0.Outlet")
     actions: Actions | None = None
     configuration_locked: bool | None = None
     current_amps: SensorCurrentExcerpt | None = None
@@ -78,6 +78,7 @@ class Outlet(RedfishModel):
     name: str
     nominal_voltage: NominalVoltageType | None = None
     oem: dict[str, Any] | None = None
+    outlet_combination_types: list[ReceptacleType] | None = None
     outlet_type: ReceptacleType | None = None
     phase_wiring_type: PhaseWiringType | None = None
     poly_phase_current_amps: CurrentSensors | None = None
@@ -143,13 +144,16 @@ class ReceptacleType(StrEnum):
     NEM_A_L6_20_R = "NEMA_L6_20R"
     NEM_A_L6_30_R = "NEMA_L6_30R"
     IE_C_60320_C13 = "IEC_60320_C13"
+    IE_C_60320_C15 = "IEC_60320_C15"
     IE_C_60320_C19 = "IEC_60320_C19"
+    IE_C_60320_C21 = "IEC_60320_C21"
     CE_E_7_TYPE_E = "CEE_7_Type_E"
     CE_E_7_TYPE_F = "CEE_7_Type_F"
     SE_V_1011_TYP_E_12 = "SEV_1011_TYPE_12"
     SE_V_1011_TYP_E_23 = "SEV_1011_TYPE_23"
     B_S_1363_TYPE_G = "BS_1363_Type_G"
     BUS_CONNECTION = "BusConnection"
+    COMBINATION = "Combination"
 
 
 class ResetMetrics(RedfishModel):

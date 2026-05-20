@@ -11,6 +11,7 @@ from ..model.storage import (
     SetControllerPasswordRequest,
     SetEncryptionKeyRequest,
     SetPersonalityKeyRequest,
+    SetPredictedMediaLifeLeftThresholdRequest,
     Storage,
     StorageOnUpdate,
     UnfreezePersonalityRequest,
@@ -156,6 +157,28 @@ async def set_personality_key1(
         "response": response,
         "body": body,
         "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Storage/{storage_id}/Actions/Storage.SetPredictedMediaLifeLeftThreshold",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_predicted_media_life_left_threshold1(
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: SetPredictedMediaLifeLeftThresholdRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPredictedMediaLifeLeftThreshold",
     }
     return s.action(**b)
 
@@ -370,6 +393,30 @@ async def set_personality_key2(
 
 
 @router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.SetPredictedMediaLifeLeftThreshold",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_predicted_media_life_left_threshold2(
+    computer_system_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: SetPredictedMediaLifeLeftThresholdRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPredictedMediaLifeLeftThreshold",
+    }
+    return s.action(**b)
+
+
+@router.post(
     "/redfish/v1/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.UnfreezePersonality",
     response_model_exclude_none=True,
 )
@@ -579,6 +626,30 @@ async def set_personality_key3(
         "response": response,
         "body": body,
         "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Actions/Storage.SetPredictedMediaLifeLeftThreshold",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_predicted_media_life_left_threshold3(
+    resource_block_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: SetPredictedMediaLifeLeftThresholdRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPredictedMediaLifeLeftThreshold",
     }
     return s.action(**b)
 
@@ -817,6 +888,32 @@ async def set_personality_key4(
 
 
 @router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.SetPredictedMediaLifeLeftThreshold",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_predicted_media_life_left_threshold4(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: SetPredictedMediaLifeLeftThresholdRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPredictedMediaLifeLeftThreshold",
+    }
+    return s.action(**b)
+
+
+@router.post(
     "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.UnfreezePersonality",
     response_model_exclude_none=True,
 )
@@ -1028,6 +1125,30 @@ async def set_personality_key5(
         "response": response,
         "body": body,
         "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Storage/{storage_id}/Actions/Storage.SetPredictedMediaLifeLeftThreshold",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_predicted_media_life_left_threshold5(
+    resource_block_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: SetPredictedMediaLifeLeftThresholdRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPredictedMediaLifeLeftThreshold",
     }
     return s.action(**b)
 
@@ -1261,6 +1382,32 @@ async def set_personality_key6(
         "response": response,
         "body": body,
         "action": "SetPersonalityKey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Storage/{storage_id}/Actions/Storage.SetPredictedMediaLifeLeftThreshold",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def set_predicted_media_life_left_threshold6(
+    resource_block_id: str,
+    computer_system_id: str,
+    storage_id: str,
+    request: Request,
+    response: Response,
+    body: SetPredictedMediaLifeLeftThresholdRequest,
+) -> RedfishError:
+    s: Service = get_service(Storage, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "storage_id": storage_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "SetPredictedMediaLifeLeftThreshold",
     }
     return s.action(**b)
 

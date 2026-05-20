@@ -34,7 +34,7 @@ class SecureBoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SecureBoot.v1_1_2.SecureBoot"
+        serialization_alias="@odata.type", default="#SecureBoot.v1_2_0.SecureBoot"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -43,6 +43,7 @@ class SecureBoot(RedfishModel):
     oem: dict[str, Any] | None = None
     secure_boot_current_boot: SecureBootCurrentBootType | None = None
     secure_boot_databases: IdRef | None = None
+    secure_boot_desired_mode: SecureBootModeType | None = None
     secure_boot_enable: bool | None = None
     secure_boot_mode: SecureBootModeType | None = None
 
@@ -50,6 +51,7 @@ class SecureBoot(RedfishModel):
 class SecureBootOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     oem: dict[str, Any] | None = None
+    secure_boot_desired_mode: SecureBootModeType | None = None
     secure_boot_enable: bool | None = None
 
 

@@ -131,6 +131,8 @@ from ..model.memory_chunks_collection import MemoryChunksCollection
 from ..model.memory_collection import MemoryCollection
 from ..model.memory_domain import MemoryDomain
 from ..model.memory_domain_collection import MemoryDomainCollection
+from ..model.memory_extent import MemoryExtent
+from ..model.memory_extent_collection import MemoryExtentCollection
 from ..model.memory_metrics import MemoryMetrics
 from ..model.memory_region import MemoryRegion
 from ..model.memory_region_collection import MemoryRegionCollection
@@ -390,6 +392,8 @@ from . import (
     memory_collection,
     memory_domain,
     memory_domain_collection,
+    memory_extent,
+    memory_extent_collection,
     memory_metrics,
     memory_region,
     memory_region_collection,
@@ -912,6 +916,12 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
 
     if find_service(MemoryDomainCollection):
         app.include_router(memory_domain_collection.router)
+
+    if find_service(MemoryExtent):
+        app.include_router(memory_extent.router)
+
+    if find_service(MemoryExtentCollection):
+        app.include_router(memory_extent_collection.router)
 
     if find_service(MemoryMetrics):
         app.include_router(memory_metrics.router)

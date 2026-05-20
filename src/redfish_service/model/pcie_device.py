@@ -11,6 +11,9 @@ from .resource import Location, Status
 
 
 class Actions(RedfishModel):
+    cxl_reference_dc_memory: CxlReferenceDcMemory | None = Field(
+        serialization_alias="#PCIeDevice.CXLReferenceDCMemory", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -38,6 +41,7 @@ class CxlDynamicCapacity(RedfishModel):
     max_dynamic_capacity_regions: int | None = None
     max_hosts: int | None = None
     memory_block_sizes_supported: list[CxlRegionBlockSizes] | None = None
+    memory_extents: IdRef | None = None
     release_capacity_policies_supported: list[CxlDynamicCapacityPolicies] | None = None
     sanitization_on_release_support: list[CxlRegionSanitization] | None = None
     total_dynamic_capacity_mib: int | None = Field(
@@ -50,6 +54,7 @@ class CxlDynamicCapacityPolicies(StrEnum):
     CONTIGUOUS = "Contiguous"
     PRESCRIPTIVE = "Prescriptive"
     TAG_BASED = "TagBased"
+    ENABLE_SHARED_ACCESS = "EnableSharedAccess"
 
 
 class CxlProtocolVersion(StrEnum):
@@ -60,6 +65,11 @@ class CxlProtocolVersion(StrEnum):
     CX_L3_2 = "CXL3_2"
 
 
+class CxlReferenceDcMemory(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class CxlRegionBlockSizes(RedfishModel):
     block_size_mib: list[int] | None = Field(serialization_alias="BlockSizeMiB", default=None)
     region_number: int | None = None
@@ -68,6 +78,11 @@ class CxlRegionBlockSizes(RedfishModel):
 class CxlRegionSanitization(RedfishModel):
     region_number: int | None = None
     sanitization_on_release_supported: bool | None = None
+
+
+class CxlReferenceDcMemoryRequest(RedfishModel):
+    fm_reference: bool = Field(serialization_alias="FMReference")
+    tag: str
 
 
 class DeviceType(StrEnum):
@@ -111,7 +126,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_21_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_22_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -120,6 +135,7 @@ class PcieDevice(RedfishModel):
     cxl_logical_devices: IdRef | None = Field(
         serialization_alias="CXLLogicalDevices", default=None
     )
+    certificates: IdRef | None = None
     description: str | None = None
     device_type: DeviceType | None = None
     environment_metrics: IdRef | None = None
@@ -160,15 +176,22 @@ class PcieDeviceOnUpdate(RedfishModelOnUpdate):
 class PcieErrors(RedfishModel):
     bad_dllp_count: int | None = Field(serialization_alias="BadDLLPCount", default=None)
     bad_tlp_count: int | None = Field(serialization_alias="BadTLPCount", default=None)
+    cdr_errors_per_lane: list[int] | None = Field(
+        serialization_alias="CDRErrorsPerLane", default=None
+    )
     correctable_error_count: int | None = None
+    dllpcrc_error_count: int | None = Field(serialization_alias="DLLPCRCErrorCount", default=None)
     fatal_error_count: int | None = None
     flow_control_timeout_errors: int | None = None
+    framing_error_count: int | None = None
     l0_to_recovery_count: int | None = None
+    link_down_count: int | None = None
     nak_received_count: int | None = Field(serialization_alias="NAKReceivedCount", default=None)
     nak_sent_count: int | None = Field(serialization_alias="NAKSentCount", default=None)
     non_fatal_error_count: int | None = None
     replay_count: int | None = None
     replay_rollover_count: int | None = None
+    training_sequence_error_count: int | None = None
     unsupported_request_count: int | None = None
 
 
@@ -182,6 +205,12 @@ class PcieInterface(RedfishModel):
 
 class PcieMetrics(RedfishModel):
     completion_credit_exhaustion_drops: int | None = None
+    inbound_completion_tlp_bytes: int | None = Field(
+        serialization_alias="InboundCompletionTLPBytes", default=None
+    )
+    inbound_completion_tlp_count: int | None = Field(
+        serialization_alias="InboundCompletionTLPCount", default=None
+    )
     np_credit_exhaustion_drops: int | None = Field(
         serialization_alias="NPCreditExhaustionDrops", default=None
     )

@@ -14,6 +14,7 @@ class ApplyTime(StrEnum):
     ON_RESET = "OnReset"
     AT_MAINTENANCE_WINDOW_START = "AtMaintenanceWindowStart"
     IN_MAINTENANCE_WINDOW_ON_RESET = "InMaintenanceWindowOnReset"
+    DEFERRED = "Deferred"
 
 
 class MaintenanceWindow(RedfishModel):

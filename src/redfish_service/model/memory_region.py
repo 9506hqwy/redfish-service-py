@@ -20,8 +20,10 @@ class MemoryChunk(RedfishModel):
 
 
 class MemoryExtent(RedfishModel):
+    extent_link: IdRef | None = None
     extent_offset_mib: int | None = Field(serialization_alias="ExtentOffsetMiB", default=None)
     extent_size_mib: int | None = Field(serialization_alias="ExtentSizeMiB", default=None)
+    pending: bool | None = None
     sequence_number: int | None = None
     tag: str | None = None
 
@@ -31,7 +33,7 @@ class MemoryRegion(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion"
+        serialization_alias="@odata.type", default="#MemoryRegion.v1_1_0.MemoryRegion"
     )
     actions: Actions | None = None
     block_size_mib: int | None = Field(serialization_alias="BlockSizeMiB", default=None)
@@ -39,11 +41,15 @@ class MemoryRegion(RedfishModel):
     extents_count: int | None = None
     hardware_managed_coherency_region: bool | None = None
     id: str
+    interconnect_specific_dc_management: bool | None = Field(
+        serialization_alias="InterconnectSpecificDCManagement", default=None
+    )
     memory_chunks: list[MemoryChunk] | None = None
     memory_extents: list[MemoryExtent] | None = None
     name: str
     non_volatile_region: bool | None = None
     oem: dict[str, Any] | None = None
+    read_only_region: bool | None = None
     region_base_offset_mib: int | None = Field(
         serialization_alias="RegionBaseOffsetMiB", default=None
     )
@@ -60,7 +66,7 @@ class MemoryRegionOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#MemoryRegion.v1_0_3.MemoryRegion"
+        serialization_alias="@odata.type", default="#MemoryRegion.v1_1_0.MemoryRegion"
     )
     actions: Actions | None = None
     block_size_mib: int | None = Field(serialization_alias="BlockSizeMiB", default=None)
@@ -68,11 +74,15 @@ class MemoryRegionOnCreate(RedfishModel):
     extents_count: int | None = None
     hardware_managed_coherency_region: bool | None = None
     id: str | None = None
+    interconnect_specific_dc_management: bool | None = Field(
+        serialization_alias="InterconnectSpecificDCManagement", default=None
+    )
     memory_chunks: list[MemoryChunk] | None = None
     memory_extents: list[MemoryExtent] | None = None
     name: str | None = None
     non_volatile_region: bool | None = None
     oem: dict[str, Any] | None = None
+    read_only_region: bool | None = None
     region_base_offset_mib: int | None = Field(
         serialization_alias="RegionBaseOffsetMiB", default=None
     )

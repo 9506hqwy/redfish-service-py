@@ -31,7 +31,7 @@ class EnvironmentMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_5_0.EnvironmentMetrics"
+        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_6_0.EnvironmentMetrics"
     )
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
@@ -39,6 +39,7 @@ class EnvironmentMetrics(RedfishModel):
     current_amps: SensorCurrentExcerpt | None = None
     description: str | None = None
     dew_point_celsius: SensorExcerpt | None = None
+    dew_point_proximity_celsius: SensorExcerpt | None = None
     energy_joules: SensorExcerpt | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     fan_speeds_percent: list[SensorFanArrayExcerpt] | None = None

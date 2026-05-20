@@ -39,6 +39,7 @@ class Links(RedfishModel):
     endpoints_odata_count: int | None = Field(
         serialization_alias="Endpoints@odata.count", default=None
     )
+    memory_extent: IdRef | None = None
     memory_regions: list[IdRef] | None = None
     memory_regions_odata_count: int | None = Field(
         serialization_alias="MemoryRegions@odata.count", default=None
@@ -57,7 +58,7 @@ class MemoryChunks(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MemoryChunks.v1_6_2.MemoryChunks"
+        serialization_alias="@odata.type", default="#MemoryChunks.v1_7_0.MemoryChunks"
     )
     actions: Actions | None = None
     address_range_offset_mib: int | None = Field(
@@ -86,7 +87,7 @@ class MemoryChunksOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#MemoryChunks.v1_6_2.MemoryChunks"
+        serialization_alias="@odata.type", default="#MemoryChunks.v1_7_0.MemoryChunks"
     )
     actions: Actions | None = None
     address_range_offset_mib: int | None = Field(

@@ -148,13 +148,14 @@ class ComputerSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_27_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_28_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
     bios: IdRef | None = None
     bios_version: str | None = None
     boot: Boot | None = None
+    boot_image_push_uri: str | None = Field(serialization_alias="BootImagePushURI", default=None)
     boot_progress: BootProgress | None = None
     certificates: IdRef | None = None
     composition: Composition | None = None
@@ -228,6 +229,7 @@ class ComputerSystem(RedfishModel):
     uuid: str | None = Field(serialization_alias="UUID", default=None)
     virtual_media: IdRef | None = None
     virtual_media_config: VirtualMediaConfig | None = None
+    virtualization: Virtualization | None = None
 
 
 class ComputerSystemOnCreate(RedfishModel):
@@ -235,13 +237,14 @@ class ComputerSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_27_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_28_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
     bios: IdRef | None = None
     bios_version: str | None = None
     boot: Boot | None = None
+    boot_image_push_uri: str | None = Field(serialization_alias="BootImagePushURI", default=None)
     boot_progress: BootProgress | None = None
     certificates: IdRef | None = None
     composition: Composition | None = None
@@ -315,6 +318,7 @@ class ComputerSystemOnCreate(RedfishModel):
     uuid: str | None = Field(serialization_alias="UUID", default=None)
     virtual_media: IdRef | None = None
     virtual_media_config: VirtualMediaConfig | None = None
+    virtualization: Virtualization | None = None
 
 
 class ComputerSystemOnUpdate(RedfishModelOnUpdate):
@@ -348,6 +352,7 @@ class ComputerSystemOnUpdate(RedfishModelOnUpdate):
     status: Status | None = None
     trusted_modules: list[TrustedModules] | None = None
     virtual_media_config: VirtualMediaConfig | None = None
+    virtualization: Virtualization | None = None
 
 
 class Decommission(RedfishModel):
@@ -668,6 +673,11 @@ class TrustedModules(RedfishModel):
 class VirtualMediaConfig(RedfishModel):
     port: int | None = None
     service_enabled: bool | None = None
+
+
+class Virtualization(RedfishModel):
+    cpu_offload: bool | None = Field(serialization_alias="CPUOffload", default=None)
+    device_isolation: bool | None = None
 
 
 class WatchdogTimeoutActions(StrEnum):

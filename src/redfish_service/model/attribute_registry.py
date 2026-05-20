@@ -14,7 +14,7 @@ class Actions(RedfishModel):
 
 class AttributeRegistry(RedfishModel):
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AttributeRegistry.v1_4_0.AttributeRegistry"
+        serialization_alias="@odata.type", default="#AttributeRegistry.v1_5_0.AttributeRegistry"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -95,6 +95,7 @@ class MapFrom(RedfishModel):
     map_from_property: MapFromProperty | None = None
     map_from_value: str | None = None
     map_terms: MapTerms | None = None
+    subexpressions: list[MapFrom] | None = None
 
 
 class MapFromCondition(StrEnum):
@@ -104,6 +105,8 @@ class MapFromCondition(StrEnum):
     GEQ = "GEQ"
     LSS = "LSS"
     LEQ = "LEQ"
+    BITAND = "BITAND"
+    BITOR = "BITOR"
 
 
 class MapFromProperty(StrEnum):
@@ -123,6 +126,7 @@ class MapFromProperty(StrEnum):
 class MapTerms(StrEnum):
     AND = "AND"
     OR = "OR"
+    NOT = "NOT"
 
 
 class MapToProperty(StrEnum):

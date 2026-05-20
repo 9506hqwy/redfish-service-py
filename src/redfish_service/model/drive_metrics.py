@@ -5,6 +5,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel
+from .sensor import SensorLowerCriticalExcerpt
 from .storage_controller_metrics import NvmeSmartMetrics
 
 
@@ -17,7 +18,7 @@ class DriveMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#DriveMetrics.v1_3_0.DriveMetrics"
+        serialization_alias="@odata.type", default="#DriveMetrics.v1_4_0.DriveMetrics"
     )
     actions: Actions | None = None
     bad_block_count: int | None = None
@@ -34,7 +35,9 @@ class DriveMetrics(RedfishModel):
     name: str
     native_command_queue_depth: int | None = None
     oem: dict[str, Any] | None = None
+    power_cycles_lifetime: int | None = None
     power_on_hours: float | None = None
+    predicted_media_life_left_percent: SensorLowerCriticalExcerpt | None = None
     read_io_kibytes: int | None = Field(serialization_alias="ReadIOKiBytes", default=None)
     uncorrectable_io_read_error_count: int | None = Field(
         serialization_alias="UncorrectableIOReadErrorCount", default=None

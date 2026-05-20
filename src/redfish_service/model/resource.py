@@ -181,6 +181,8 @@ class PowerState(StrEnum):
     POWERING_ON = "PoweringOn"
     POWERING_OFF = "PoweringOff"
     PAUSED = "Paused"
+    SLEEPING = "Sleeping"
+    HIBERNATING = "Hibernating"
 
 
 class RackUnits(StrEnum):
@@ -218,6 +220,8 @@ class ResetType(StrEnum):
     PAUSE = "Pause"
     RESUME = "Resume"
     FULL_POWER_CYCLE = "FullPowerCycle"
+    SLEEP = "Sleep"
+    HIBERNATE = "Hibernate"
 
 
 class Resource(RedfishModel):
@@ -225,7 +229,7 @@ class Resource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Resource.v1_23_0.Resource"
+        serialization_alias="@odata.type", default="#Resource.v1_24_0.Resource"
     )
     description: str | None = None
     id: str
@@ -238,7 +242,7 @@ class ResourceCollection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ResourceCollection.v1_23_0.ResourceCollection"
+        serialization_alias="@odata.type", default="#ResourceCollection.v1_24_0.ResourceCollection"
     )
     description: str | None = None
     name: str

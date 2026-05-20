@@ -42,6 +42,9 @@ class Actions(RedfishModel):
     set_personality_key: SetPersonalityKey | None = Field(
         serialization_alias="#Storage.SetPersonalityKey", default=None
     )
+    set_predicted_media_life_left_threshold: SetPredictedMediaLifeLeftThreshold | None = Field(
+        serialization_alias="#Storage.SetPredictedMediaLifeLeftThreshold", default=None
+    )
     unfreeze_personality: UnfreezePersonality | None = Field(
         serialization_alias="#Storage.UnfreezePersonality", default=None
     )
@@ -266,11 +269,20 @@ class SetPersonalityKeyRequest(RedfishModel):
     key: str
 
 
+class SetPredictedMediaLifeLeftThreshold(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class SetPredictedMediaLifeLeftThresholdRequest(RedfishModel):
+    predicted_media_life_left_threshold: int
+
+
 class Storage(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_21_0.Storage")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_22_0.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     block_security_id_policy: bool | None = Field(

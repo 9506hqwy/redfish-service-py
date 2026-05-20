@@ -29,6 +29,7 @@ class Links(RedfishModel):
 
 
 class ProtocolFeaturesSupported(RedfishModel):
+    client_context_query: bool | None = None
     deep_operations: DeepOperations | None = None
     excerpt_query: bool | None = None
     expand_query: Expand | None = None
@@ -49,7 +50,7 @@ class ServiceRoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ServiceRoot.v1_20_0.ServiceRoot"
+        serialization_alias="@odata.type", default="#ServiceRoot.v1_21_0.ServiceRoot"
     )
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None

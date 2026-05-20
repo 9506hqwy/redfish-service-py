@@ -25,7 +25,7 @@ class ComponentIntegrity(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComponentIntegrity.v1_3_2.ComponentIntegrity"
+        serialization_alias="@odata.type", default="#ComponentIntegrity.v1_4_0.ComponentIntegrity"
     )
     actions: Actions | None = None
     component_integrity_enabled: bool | None = None
@@ -69,6 +69,10 @@ class DmtFmeasurementTypes(StrEnum):
     MUTABLE_FIRMWARE_VERSION = "MutableFirmwareVersion"
     MUTABLE_FIRMWARE_SECURITY_VERSION_NUMBER = "MutableFirmwareSecurityVersionNumber"
     MEASUREMENT_MANIFEST = "MeasurementManifest"
+    DEBUG_AND_DEVICE_MODE = "DebugAndDeviceMode"
+    HASH_EXTEND_MEASUREMENT = "HashExtendMeasurement"
+    INFORMATIONAL = "Informational"
+    STRUCTURED_MEASUREMENT_MANIFEST = "StructuredMeasurementManifest"
 
 
 class Links(RedfishModel):
@@ -145,6 +149,7 @@ class SecureSessionType(StrEnum):
 
 
 class SingleSessionInfo(RedfishModel):
+    session_algorithm: str | None = None
     session_id: int | None = None
     session_type: SecureSessionType | None = None
 

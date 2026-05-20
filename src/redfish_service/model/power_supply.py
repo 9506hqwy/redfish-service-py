@@ -7,6 +7,7 @@ from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
 from .circuit import NominalVoltageType, PhaseWiringType, PlugType
+from .control import ControlExcerpt
 from .odata_v4 import IdRef
 from .physical_context import PhysicalContext
 from .resource import Location, ResetType, Status
@@ -49,6 +50,7 @@ class Links(RedfishModel):
 class OutputRail(RedfishModel):
     nominal_voltage: float | None = None
     physical_context: PhysicalContext | None = None
+    voltage_control: ControlExcerpt | None = None
 
 
 class PowerSupply(RedfishModel):
@@ -56,7 +58,7 @@ class PowerSupply(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerSupply.v1_6_0.PowerSupply"
+        serialization_alias="@odata.type", default="#PowerSupply.v1_7_0.PowerSupply"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

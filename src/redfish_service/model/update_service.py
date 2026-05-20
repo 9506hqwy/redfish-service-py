@@ -131,7 +131,7 @@ class UpdateService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#UpdateService.v1_17_0.UpdateService"
+        serialization_alias="@odata.type", default="#UpdateService.v1_17_1.UpdateService"
     )
     actions: Actions | None = None
     client_certificates: IdRef | None = None

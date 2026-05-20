@@ -85,6 +85,7 @@ class EthernetProperties(RedfishModel):
     lldp_enabled: bool | None = Field(serialization_alias="LLDPEnabled", default=None)
     lldp_receive: LldpReceive | None = Field(serialization_alias="LLDPReceive", default=None)
     lldp_transmit: LldpTransmit | None = Field(serialization_alias="LLDPTransmit", default=None)
+    po_e: PoE | None = None
     supported_ethernet_capabilities: list[SupportedEthernetCapabilities] | None = None
     wake_on_lan_enabled: bool | None = Field(serialization_alias="WakeOnLANEnabled", default=None)
 
@@ -282,11 +283,51 @@ class MediumType(StrEnum):
     FIBER_OPTIC = "FiberOptic"
 
 
+class PcieProperties(RedfishModel):
+    reference_clock_mode: PcieReferenceClockMode | None = None
+
+
+class PcieReferenceClockMode(StrEnum):
+    COMMON_CLOCK = "CommonClock"
+    SEPARATE_CLOCK = "SeparateClock"
+
+
+class PoE(RedfishModel):
+    capable_power_watts: float | None = None
+    configured_power_watts: float | None = None
+    detection_status: PoEDetectionStatus | None = None
+    enabled: bool | None = None
+    power_class: int | None = None
+    power_mode: PoEPowerMode | None = None
+    standard: PoEStandard | None = None
+
+
+class PoEDetectionStatus(StrEnum):
+    DISABLED = "Disabled"
+    SEARCHING = "Searching"
+    DELIVERING_POWER = "DeliveringPower"
+    FAULT = "Fault"
+    TEST = "Test"
+    OTHER_FAULT = "OtherFault"
+
+
+class PoEPowerMode(StrEnum):
+    PSE = "PSE"
+    PD = "PD"
+    NONE = "None"
+
+
+class PoEStandard(StrEnum):
+    IEE_E8023AF = "IEEE8023af"
+    IEE_E8023AT = "IEEE8023at"
+    IEE_E8023BT = "IEEE8023bt"
+
+
 class Port(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_18_0.Port")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_19_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
     associated_physical_port: int | None = None
@@ -324,6 +365,7 @@ class Port(RedfishModel):
     metrics: IdRef | None = None
     name: str
     oem: dict[str, Any] | None = None
+    pcie: PcieProperties | None = Field(serialization_alias="PCIe", default=None)
     port_id: str | None = None
     port_medium: PortMedium | None = None
     port_protocol: Protocol | None = None
@@ -357,6 +399,7 @@ class PortOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     location_indicator_active: bool | None = None
     oem: dict[str, Any] | None = None
+    pcie: PcieProperties | None = Field(serialization_alias="PCIe", default=None)
     port_type: PortType | None = None
     sfp: Sfp | None = Field(serialization_alias="SFP", default=None)
     status: Status | None = None

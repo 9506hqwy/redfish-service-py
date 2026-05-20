@@ -26,13 +26,18 @@ class HttpsProtocol(RedfishModel):
     protocol_enabled: bool | None = None
 
 
+class Ipv6AddressGenerationMode(StrEnum):
+    STABLE_PRIVACY = "StablePrivacy"
+    EUI64 = "EUI64"
+
+
 class ManagerNetworkProtocol(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#ManagerNetworkProtocol.v1_12_0.ManagerNetworkProtocol",
+        default="#ManagerNetworkProtocol.v1_13_0.ManagerNetworkProtocol",
     )
     actions: Actions | None = None
     dhcp: Protocol | None = Field(serialization_alias="DHCP", default=None)
@@ -45,6 +50,9 @@ class ManagerNetworkProtocol(RedfishModel):
     https: HttpsProtocol | None = Field(serialization_alias="HTTPS", default=None)
     host_name: str | None = None
     ipmi: Protocol | None = Field(serialization_alias="IPMI", default=None)
+    ipv6_address_generation_mode: Ipv6AddressGenerationMode | None = Field(
+        serialization_alias="IPv6AddressGenerationMode", default=None
+    )
     id: str
     kvmip: Protocol | None = Field(serialization_alias="KVMIP", default=None)
     modbus: ModbusProtocol | None = None
@@ -57,7 +65,7 @@ class ManagerNetworkProtocol(RedfishModel):
     sftp: Protocol | None = Field(serialization_alias="SFTP", default=None)
     snmp: SnmpProtocol | None = Field(serialization_alias="SNMP", default=None)
     ssdp: SsdProtocol | None = Field(serialization_alias="SSDP", default=None)
-    ssh: Protocol | None = Field(serialization_alias="SSH", default=None)
+    ssh: SshProtocol | None = Field(serialization_alias="SSH", default=None)
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
@@ -73,6 +81,9 @@ class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     http: Protocol | None = Field(serialization_alias="HTTP", default=None)
     https: HttpsProtocol | None = Field(serialization_alias="HTTPS", default=None)
     ipmi: Protocol | None = Field(serialization_alias="IPMI", default=None)
+    ipv6_address_generation_mode: Ipv6AddressGenerationMode | None = Field(
+        serialization_alias="IPv6AddressGenerationMode", default=None
+    )
     kvmip: Protocol | None = Field(serialization_alias="KVMIP", default=None)
     modbus: ModbusProtocol | None = None
     ntp: NtpProtocol | None = Field(serialization_alias="NTP", default=None)
@@ -83,7 +94,7 @@ class ManagerNetworkProtocolOnUpdate(RedfishModelOnUpdate):
     sftp: Protocol | None = Field(serialization_alias="SFTP", default=None)
     snmp: SnmpProtocol | None = Field(serialization_alias="SNMP", default=None)
     ssdp: SsdProtocol | None = Field(serialization_alias="SSDP", default=None)
-    ssh: Protocol | None = Field(serialization_alias="SSH", default=None)
+    ssh: SshProtocol | None = Field(serialization_alias="SSH", default=None)
     status: Status | None = None
     telnet: Protocol | None = None
     virtual_media: Protocol | None = None
@@ -140,6 +151,7 @@ class SnmpAuthenticationProtocols(StrEnum):
     HMA_C192_SHA256 = "HMAC192_SHA256"
     HMA_C256_SHA384 = "HMAC256_SHA384"
     HMA_C384_SHA512 = "HMAC384_SHA512"
+    NONE = "None"
 
 
 class SnmpCommunity(RedfishModel):
@@ -193,4 +205,18 @@ class SsdProtocol(RedfishModel):
     notify_multicast_interval_seconds: int | None = None
     notify_ttl: int | None = Field(serialization_alias="NotifyTTL", default=None)
     port: int | None = None
+    protocol_enabled: bool | None = None
+
+
+class SshPreferredAuthentication(StrEnum):
+    PASSWORD = "Password"  # noqa: S105
+    PUBLIC_KEY = "PublicKey"
+    KEYBOARD_INTERACTIVE = "KeyboardInteractive"
+    GSSAPI_WITH_MIC = "GSSAPIWithMIC"
+    HOST_BASED = "HostBased"
+
+
+class SshProtocol(RedfishModel):
+    port: int | None = None
+    preferred_authentications: list[SshPreferredAuthentication] | None = None
     protocol_enabled: bool | None = None

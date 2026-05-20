@@ -118,12 +118,19 @@ class Networking(RedfishModel):
     tx_unicast_frames: int | None = Field(serialization_alias="TXUnicastFrames", default=None)
 
 
+class PoEMetrics(RedfishModel):
+    current_amps: float | None = None
+    negotiated_power_watts: float | None = None
+    power_watts: float | None = None
+    voltage_volts: float | None = None
+
+
 class PortMetrics(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PortMetrics.v1_8_1.PortMetrics"
+        serialization_alias="@odata.type", default="#PortMetrics.v1_9_0.PortMetrics"
     )
     actions: Actions | None = None
     cxl: Cxl | None = Field(serialization_alias="CXL", default=None)
@@ -136,6 +143,7 @@ class PortMetrics(RedfishModel):
     oem: dict[str, Any] | None = None
     pcie_errors: PcieErrors | None = Field(serialization_alias="PCIeErrors", default=None)
     pcie_metrics: PcieMetrics | None = Field(serialization_alias="PCIeMetrics", default=None)
+    po_e: PoEMetrics | None = None
     rx_bytes: int | None = Field(serialization_alias="RXBytes", default=None)
     rx_errors: int | None = Field(serialization_alias="RXErrors", default=None)
     sas: list[Sas] | None = Field(serialization_alias="SAS", default=None)

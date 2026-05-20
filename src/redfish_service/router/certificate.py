@@ -10412,3 +10412,527 @@ async def renew85(
         "action": "Renew",
     }
     return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete86(
+    chassis_id: str, pcie_device_id: str, certificate_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get86(
+    chassis_id: str, pcie_device_id: str, certificate_id: str, request: Request, response: Response
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch86(
+    chassis_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey86(
+    chassis_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Chassis/{chassis_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew86(
+    chassis_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "chassis_id": chassis_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete87(
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get87(
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch87(
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey87(
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew87(
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew88(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)
+
+
+@router.delete(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> None:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+async def get89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(Certificate, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: CertificateOnUpdate,
+) -> Certificate:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(Certificate, s.patch(**b))
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Rekey",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def rekey89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RekeyRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Rekey",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/PCIeDevices/{pcie_device_id}/Certificates/{certificate_id}/Actions/Certificate.Renew",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def renew89(
+    resource_block_id: str,
+    computer_system_id: str,
+    pcie_device_id: str,
+    certificate_id: str,
+    request: Request,
+    response: Response,
+    body: RenewRequest,
+) -> RedfishError:
+    s: Service = get_service(Certificate, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "pcie_device_id": pcie_device_id,
+        "certificate_id": certificate_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "Renew",
+    }
+    return s.action(**b)

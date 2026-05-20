@@ -7,12 +7,19 @@ from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
 from .odata_v4 import IdRef
+from .pcie_device import CxlDynamicCapacityPolicies
 from .resource import Identifier, Status
 
 
 class Actions(RedfishModel):
     disable_passphrase: DisablePassphrase | None = Field(
         serialization_alias="#CXLLogicalDevice.DisablePassphrase", default=None
+    )
+    dynamic_capacity_add: DynamicCapacityAdd | None = Field(
+        serialization_alias="#CXLLogicalDevice.DynamicCapacityAdd", default=None
+    )
+    dynamic_capacity_release: DynamicCapacityRelease | None = Field(
+        serialization_alias="#CXLLogicalDevice.DynamicCapacityRelease", default=None
     )
     freeze_security_state: FreezeSecurityState | None = Field(
         serialization_alias="#CXLLogicalDevice.FreezeSecurityState", default=None
@@ -32,9 +39,11 @@ class CxlLogicalDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CXLLogicalDevice.v1_3_0.CXLLogicalDevice"
+        serialization_alias="@odata.type", default="#CXLLogicalDevice.v1_4_0.CXLLogicalDevice"
     )
     actions: Actions | None = None
+    available_extents: int | None = None
+    available_tags: int | None = None
     description: str | None = None
     id: str
     identifiers: list[Identifier] | None = None
@@ -50,6 +59,8 @@ class CxlLogicalDevice(RedfishModel):
     )
     semantics_supported: list[CxlSemantic] | None = None
     status: Status | None = None
+    total_supported_extents: int | None = None
+    total_supported_tags: int | None = None
 
 
 class CxlLogicalDeviceOnUpdate(RedfishModelOnUpdate):
@@ -78,6 +89,33 @@ class DisablePassphrase(RedfishModel):
 class DisablePassphraseRequest(RedfishModel):
     passphrase: str
     passphrase_type: PassphraseType
+
+
+class DynamicCapacityAdd(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class DynamicCapacityAddRequest(RedfishModel):
+    extent_list: list[IdRef] | None = None
+    length: int | None = None
+    policy: CxlDynamicCapacityPolicies
+    region_number: int | None = None
+    tag: str | None = None
+
+
+class DynamicCapacityRelease(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class DynamicCapacityReleaseRequest(RedfishModel):
+    extent_list: list[IdRef] | None = None
+    forced_removal: bool
+    length: int | None = None
+    policy: CxlDynamicCapacityPolicies
+    sanitize_on_release: bool
+    tag: str | None = None
 
 
 class FreezeSecurityState(RedfishModel):
