@@ -159,7 +159,9 @@ class IfMatchHeaderMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         methods = get_methods(request.scope, self.router)
 
-        if methods in ["PATCH", "PUT"] and request.method in ["PATCH", "PUT"]:
+        exist_patch = "PATCH" in methods
+        exist_put = "PUT" in methods
+        if (exist_patch or exist_put) and request.method in ["PATCH", "PUT"]:
             if not request.headers.get("If-Match", None):
                 exc = PreconditionRequiredError()
                 return JSONResponse(
