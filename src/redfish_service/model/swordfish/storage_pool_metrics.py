@@ -17,7 +17,7 @@ class StoragePoolMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#StoragePoolMetrics.v1_1_0.StoragePoolMetrics"
+        serialization_alias="@odata.type", default="#StoragePoolMetrics.v1_2_0.StoragePoolMetrics"
     )
     actions: Actions | None = None
     compression_savings_bytes: int | None = None
@@ -32,6 +32,7 @@ class StoragePoolMetrics(RedfishModel):
     description: str | None = None
     io_statistics: IoStatistics | None = Field(serialization_alias="IOStatistics", default=None)
     id: str
+    lifetime_start_date_time: str | None = None
     name: str
     oem: dict[str, Any] | None = None
     rebuild_error_count: float | None = None

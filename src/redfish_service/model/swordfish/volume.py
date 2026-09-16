@@ -28,6 +28,9 @@ class Actions(RedfishModel):
     check_consistency: CheckConsistency | None = Field(
         serialization_alias="#Volume.CheckConsistency", default=None
     )
+    clear_reservations: ClearReservations | None = Field(
+        serialization_alias="#Volume.ClearReservations", default=None
+    )
     create_replica_target: CreateReplicaTarget | None = Field(
         serialization_alias="#Volume.CreateReplicaTarget", default=None
     )
@@ -77,6 +80,11 @@ class ChangeRaidLayoutRequest(RedfishModel):
 
 
 class CheckConsistency(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class ClearReservations(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
 
@@ -310,6 +318,21 @@ class RemoveReplicaRelationshipRequest(RedfishModel):
     target_volume: str
 
 
+class ReservationState(RedfishModel):
+    registered_keys: list[int] | None = None
+    reservation_holder: list[int] | None = None
+    reservation_type: ReservationType | None = None
+
+
+class ReservationType(StrEnum):
+    WRITE_EXCLUSIVE = "WriteExclusive"
+    EXCLUSIVE_ACCESS = "ExclusiveAccess"
+    WRITE_EXCLUSIVE_REGISTRANTS_ONLY = "WriteExclusiveRegistrantsOnly"
+    EXCLUSIVE_ACCESS_REGISTRANTS_ONLY = "ExclusiveAccessRegistrantsOnly"
+    WRITE_EXCLUSIVE_ALL_REGISTRANTS = "WriteExclusiveAllRegistrants"
+    EXCLUSIVE_ACCESS_ALL_REGISTRANTS = "ExclusiveAccessAllRegistrants"
+
+
 class ResumeReplication(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -350,7 +373,7 @@ class Volume(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Volume.v1_10_2.Volume")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Volume.v1_11_0.Volume")
     alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
     actions: Actions | None = None
@@ -409,6 +432,7 @@ class Volume(RedfishModel):
         serialization_alias="ReplicaTargets@odata.count", default=None
     )
     replication_enabled: bool | None = None
+    reservation_state: ReservationState | None = None
     status: Status | None = None
     storage_groups: IdRef | None = None
     strip_size_bytes: int | None = None
@@ -424,7 +448,7 @@ class VolumeOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Volume.v1_10_2.Volume"
+        serialization_alias="@odata.type", default="#Volume.v1_11_0.Volume"
     )
     alua: Alua | None = Field(serialization_alias="ALUA", default=None)
     access_capabilities: list[StorageAccessCapability] | None = None
@@ -484,6 +508,7 @@ class VolumeOnCreate(RedfishModel):
         serialization_alias="ReplicaTargets@odata.count", default=None
     )
     replication_enabled: bool | None = None
+    reservation_state: ReservationState | None = None
     status: Status | None = None
     storage_groups: IdRef | None = None
     strip_size_bytes: int | None = None
@@ -524,6 +549,7 @@ class VolumeOnUpdate(RedfishModelOnUpdate):
     recoverable_capacity_source_count: int | None = None
     replica_info: ReplicaInfo | None = None
     replication_enabled: bool | None = None
+    reservation_state: ReservationState | None = None
     status: Status | None = None
     strip_size_bytes: int | None = None
     write_cache_policy: WriteCachePolicyType | None = None

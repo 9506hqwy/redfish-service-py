@@ -3,7 +3,7 @@
 set -eu
 
 DSP8010_VERSION='2026.1'
-SWORDFISH_VERSION='1.2.8'
+SWORDFISH_VERSION='1.2.9'
 
 DSP8010_FILE="DSP8010_${DSP8010_VERSION}.zip"
 # Cloudflare Bot Management prevents download file using curl.
