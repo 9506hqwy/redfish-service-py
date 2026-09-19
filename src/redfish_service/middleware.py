@@ -48,7 +48,7 @@ class AcceptHeaderMiddleware:
         headers = Headers(scope=scope)
 
         if path in REDFISH_XML_PATH:
-            if v := headers.getlist(self.HEADER_NAME):
+            if v := headers.getlist(self.HEADER_NAME):  # noqa: SIM102
                 if not supported_headers(self.SUPPORTED_XML_MIMES, v):
                     exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
                     err = OdataMetadata(status_code=exc.status_code)
@@ -56,14 +56,14 @@ class AcceptHeaderMiddleware:
                     return
 
         elif path in REDFISH_YAML_PATH:
-            if v := headers.getlist(self.HEADER_NAME):
+            if v := headers.getlist(self.HEADER_NAME):  # noqa: SIM102
                 if not supported_headers(self.SUPPORTED_YAML_MIMES, v):
                     exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
                     perr = PlainTextResponse(status_code=exc.status_code)
                     await perr(scope, receive, send)
                     return
 
-        elif v := headers.getlist(self.HEADER_NAME):
+        elif v := headers.getlist(self.HEADER_NAME):  # noqa: SIM102
             if not supported_headers(self.SUPPORTED_JSON_MIMES, v):
                 exc = GeneralErrorError(HTTPStatus.NOT_ACCEPTABLE)
                 res = JSONResponse(
@@ -137,7 +137,7 @@ class ContentTypeHeaderMiddleware:
             return
 
         headers = Headers(scope=scope)
-        if v := headers.getlist(self.HEADER_NAME):
+        if v := headers.getlist(self.HEADER_NAME):  # noqa: SIM102
             if not supported_headers(self.SUPPORTED_MIMES, v):
                 exc = GeneralErrorError(HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
                 res = JSONResponse(
@@ -161,12 +161,15 @@ class IfMatchHeaderMiddleware(BaseHTTPMiddleware):
 
         exist_patch = "PATCH" in methods
         exist_put = "PUT" in methods
-        if (exist_patch or exist_put) and request.method in ["PATCH", "PUT"]:
-            if not request.headers.get("If-Match", None):
-                exc = PreconditionRequiredError()
-                return JSONResponse(
-                    exc.error.model_dump(exclude_none=True), status_code=exc.status_code
-                )
+        if (
+            (exist_patch or exist_put)
+            and request.method in ["PATCH", "PUT"]
+            and not request.headers.get("If-Match", None)
+        ):
+            exc = PreconditionRequiredError()
+            return JSONResponse(
+                exc.error.model_dump(exclude_none=True), status_code=exc.status_code
+            )
 
         return await call_next(request)
 
@@ -195,7 +198,7 @@ class OdataVersionHeaderMiddleware:
             await send(message)
 
         headers = Headers(scope=scope)
-        if v := headers.getlist(self.HEADER_NAME):
+        if v := headers.getlist(self.HEADER_NAME):  # noqa: SIM102
             if not supported_headers(self.SUPPORTED_VETRSIONS, v):
                 exc = PreconditionFailedError()
                 res = JSONResponse(

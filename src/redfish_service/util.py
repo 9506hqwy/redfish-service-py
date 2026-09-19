@@ -1,6 +1,6 @@
 from __future__ import annotations  # PEP563 Forward References
 
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import cast
 
 from fastapi import Request, Response
@@ -11,7 +11,7 @@ from .service import Service, ServiceCollection, find_service, find_service_coll
 
 
 def create_etag() -> str:
-    return f"{datetime.now().timestamp()!s}"
+    return f"{datetime.now(tz=UTC).timestamp()!s}"
 
 
 def get_service[T: RedfishModel](ty: type[T], req: Request) -> Service:

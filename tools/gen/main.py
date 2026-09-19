@@ -60,7 +60,7 @@ class ClassInfo:
     def cls_name(self) -> str:
         name = get_class_name(self.name)
 
-        if mapping := ALIAS_CLASS_NAMES.get(self.module, None):
+        if mapping := ALIAS_CLASS_NAMES.get(self.module, None):  # noqa: SIM102
             if alias := mapping.get(name):
                 return alias
 
@@ -207,7 +207,7 @@ class EnumInfo:
     def cls_name(self) -> str:
         name = get_class_name(self.name)
 
-        if mapping := ALIAS_CLASS_NAMES.get(self.module, None):
+        if mapping := ALIAS_CLASS_NAMES.get(self.module, None):  # noqa: SIM102
             if alias := mapping.get(name):
                 return alias
 
@@ -696,7 +696,7 @@ def resolve_property_type(
                 except IndexError:
                     nonable = False
 
-                if len(types) == 1:
+                if len(types) == 1:  # noqa: SIM102
                     if name := get_primitive_type_name({"type": types[0]}):
                         return (name, False, nonable)
 
@@ -779,19 +779,19 @@ def write_classes(out_path: Path, classall: list[ClassInfo | EnumInfo]) -> None:
     out_path = out_path / "model"
 
     count = 0
-    domains = sorted(list(classall), key=lambda m: m.domain)
+    domains = sorted(classall, key=lambda m: m.domain)
     for domain_name, modules_iter in itertools.groupby(domains, lambda c: c.domain):
         out_file = out_path
         if domain_name == "swordfish":
             out_file = out_path / "swordfish"
 
         values: list[EnumInfo] = []
-        modules = sorted(list(modules_iter), key=lambda m: m.module)
+        modules = sorted(modules_iter, key=lambda m: m.module)
         for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
             if module_name.find(".") > -1:
                 continue
 
-            classes = sorted(list(classes_iter), key=lambda c: c.name)
+            classes = sorted(classes_iter, key=lambda c: c.name)
             if len(classes) == 0:
                 continue
 
@@ -860,7 +860,7 @@ def write_imports_to(
 
     w.write(f"from {parent} import RedfishModel, RedfishModelOnUpdate\n")
 
-    imports: set[ClassInfo | EnumInfo] = set([])
+    imports: set[ClassInfo | EnumInfo] = set()
     for c in classall:
         if isinstance(c, EnumInfo):
             continue
@@ -869,9 +869,8 @@ def write_imports_to(
             if isinstance(p.type, EnumInfo):
                 imports.add(p.type)
 
-            if isinstance(p.type, ClassInfo):
-                if not p.type.is_primitive and not p.type.raw:
-                    imports.add(p.type)
+            if isinstance(p.type, ClassInfo) and not p.type.is_primitive and not p.type.raw:
+                imports.add(p.type)
 
     for i in sorted(imports, key=lambda i: i.module):
         if i.name in CIRCULAR_REFERENCE_VALUES:
@@ -958,7 +957,7 @@ def write_routers(  # noqa: PLR0912, PLR0915
 
     urls: list[str] = []
     routing: list[ClassInfo | EnumInfo] = []
-    domains = sorted(list(classall), key=lambda m: m.domain)
+    domains = sorted(classall, key=lambda m: m.domain)
     for domain_name, modules_iter in itertools.groupby(domains, lambda c: c.domain):
         out_dir = out_path
         if domain_name == "swordfish":
@@ -967,7 +966,7 @@ def write_routers(  # noqa: PLR0912, PLR0915
         if not out_dir.exists():
             out_dir.mkdir()
 
-        modules = sorted(list(modules_iter), key=lambda m: m.module)
+        modules = sorted(modules_iter, key=lambda m: m.module)
         for module_name, classes_iter in itertools.groupby(modules, lambda c: c.module):
             if module_name.find(".") > -1:
                 continue
@@ -1141,7 +1140,7 @@ def write_routers(  # noqa: PLR0912, PLR0915
                                             "\n",
                                             "\n",
                                             f'@router.post("{action_url}", response_model_exclude_none=True)\n',  # noqa E501
-                                            "@authenticate\n"
+                                            "@authenticate\n",
                                             f"async def {action.property_name}{index}({aargs}) -> RedfishError:\n",  # noqa E501
                                             f"    s: Service = get_service({c.cls_name}, request)\n",  # noqa E501
                                             f"    b: dict[str, Any] = {{{abody}}}\n",

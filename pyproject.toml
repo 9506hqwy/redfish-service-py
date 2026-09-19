@@ -105,6 +105,10 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "src/redfish_service/router/*" = [
   "PLR0913", # too-many-arguments (PLR0913)
+  "PLR0917", # too-many-positional-arguments (PLR0917)
+]
+"tools/gen/*" = [
+  "TRY002", # raise-vanilla-class (TRY002)
 ]
 "test/*" = [
   "S101", # assert (S101)
