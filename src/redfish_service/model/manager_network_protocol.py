@@ -37,7 +37,7 @@ class ManagerNetworkProtocol(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#ManagerNetworkProtocol.v1_13_0.ManagerNetworkProtocol",
+        default="#ManagerNetworkProtocol.v1_14_0.ManagerNetworkProtocol",
     )
     actions: Actions | None = None
     dhcp: Protocol | None = Field(serialization_alias="DHCP", default=None)
@@ -114,9 +114,19 @@ class ModbusProtocol(RedfishModel):
 
 class NtpProtocol(RedfishModel):
     ntp_servers: list[str] | None = Field(serialization_alias="NTPServers", default=None)
+    ntp_state: NtpState | None = Field(serialization_alias="NTPState", default=None)
     network_supplied_servers: list[str] | None = None
+    not_synchronized_servers: list[str] | None = None
     port: int | None = None
     protocol_enabled: bool | None = None
+    unreachable_servers: list[str] | None = None
+
+
+class NtpState(StrEnum):
+    SYNCHRONIZED = "Synchronized"
+    NOT_SYNCHRONIZED = "NotSynchronized"
+    DISABLED = "Disabled"
+    UNREACHABLE = "Unreachable"
 
 
 class NotifyIpv6Scope(StrEnum):

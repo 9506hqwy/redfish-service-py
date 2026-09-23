@@ -19,3 +19,4 @@ class Message(RedfishModel):
     severity: str | None = None
     user_authentication_source: str | None = None
     username: str | None = None
+    vendor_code: str | None = None

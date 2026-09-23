@@ -26,7 +26,7 @@ class AccountService(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#AccountService.v1_18_1.AccountService"
+        serialization_alias="@odata.type", default="#AccountService.v1_19_0.AccountService"
     )
     account_lockout_counter_reset_after: int | None = None
     account_lockout_counter_reset_enabled: bool | None = None
@@ -109,9 +109,12 @@ class Authentication(RedfishModel):
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
     kerberos_keytab: str | None = None
+    kerberos_keytab_set: bool | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
+    password_set: bool | None = None
     token: str | None = None
+    token_set: bool | None = None
     username: str | None = None
 
 

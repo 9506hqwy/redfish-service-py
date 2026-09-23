@@ -14,6 +14,9 @@ from .resource import Location, ResetType, Status
 class Actions(RedfishModel):
     reset: Reset | None = Field(serialization_alias="#Port.Reset", default=None)
     reset_ppb: ResetPpb | None = Field(serialization_alias="#Port.ResetPPB", default=None)
+    reset_transceivers: ResetTransceivers | None = Field(
+        serialization_alias="#Port.ResetTransceivers", default=None
+    )
     oem: dict[str, Any] | None = None
 
 
@@ -235,6 +238,36 @@ class LinkNetworkTechnology(StrEnum):
     PCIE = "PCIe"
 
 
+class LinkPartnerExpected(RedfishModel):
+    device_type: PartnerDeviceType | None = None
+    link_partner_id: str | None = None
+    port_id: str | None = None
+
+
+class LinkPartnerReceived(RedfishModel):
+    device_type: PartnerDeviceType | None = None
+    link_partner_id: str | None = None
+    pbr_id: int | None = Field(serialization_alias="PBRId", default=None)
+    port_id: str | None = None
+    primary_fm_id: str | None = Field(serialization_alias="PrimaryFMId", default=None)
+    secondary_fm_id: str | None = Field(serialization_alias="SecondaryFMId", default=None)
+
+
+class LinkPartnerTransmit(RedfishModel):
+    device_type: PartnerDeviceType | None = None
+    link_partner_id: str | None = None
+    pbr_id: int | None = Field(serialization_alias="PBRId", default=None)
+    port_id: str | None = None
+    primary_fm_id: str | None = Field(serialization_alias="PrimaryFMId", default=None)
+    secondary_fm_id: str | None = Field(serialization_alias="SecondaryFMId", default=None)
+
+
+class LinkPartnerValidation(RedfishModel):
+    device_check_enabled: bool | None = None
+    port_check_enabled: bool | None = None
+    validation_state: PartnerValidationState | None = None
+
+
 class LinkState(StrEnum):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
@@ -256,6 +289,12 @@ class Links(RedfishModel):
     associated_physical_ports: list[IdRef] | None = None
     associated_physical_ports_odata_count: int | None = Field(
         serialization_alias="AssociatedPhysicalPorts@odata.count", default=None
+    )
+    cxl_logical_devices: list[IdRef] | None = Field(
+        serialization_alias="CXLLogicalDevices", default=None
+    )
+    cxl_logical_devices_odata_count: int | None = Field(
+        serialization_alias="CXLLogicalDevices@odata.count", default=None
     )
     cables: list[IdRef] | None = None
     cables_odata_count: int | None = Field(serialization_alias="Cables@odata.count", default=None)
@@ -290,6 +329,19 @@ class PcieProperties(RedfishModel):
 class PcieReferenceClockMode(StrEnum):
     COMMON_CLOCK = "CommonClock"
     SEPARATE_CLOCK = "SeparateClock"
+
+
+class PartnerDeviceType(StrEnum):
+    SWITCH = "Switch"
+    ENDPOINT = "Endpoint"
+
+
+class PartnerValidationState(StrEnum):
+    DISABLED = "Disabled"
+    LINK_DOWN = "LinkDown"
+    DISCOVERING = "Discovering"
+    INVALID = "Invalid"
+    VALIDATED = "Validated"
 
 
 class PoE(RedfishModel):
@@ -327,7 +379,7 @@ class Port(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_19_0.Port")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Port.v1_20_0.Port")
     actions: Actions | None = None
     active_width: int | None = None
     associated_physical_port: int | None = None
@@ -354,6 +406,10 @@ class Port(RedfishModel):
     is_split: bool | None = None
     link_configuration: list[LinkConfiguration] | None = None
     link_network_technology: LinkNetworkTechnology | None = None
+    link_partner_expected: LinkPartnerExpected | None = None
+    link_partner_received: LinkPartnerReceived | None = None
+    link_partner_transmit: LinkPartnerTransmit | None = None
+    link_partner_validation: LinkPartnerValidation | None = None
     link_state: LinkState | None = None
     link_status: LinkStatus | None = None
     link_transition_indicator: int | None = None
@@ -393,6 +449,10 @@ class PortOnUpdate(RedfishModelOnUpdate):
     infini_band: InfiniBandProperties | None = None
     interface_enabled: bool | None = None
     link_configuration: list[LinkConfiguration] | None = None
+    link_partner_expected: LinkPartnerExpected | None = None
+    link_partner_received: LinkPartnerReceived | None = None
+    link_partner_transmit: LinkPartnerTransmit | None = None
+    link_partner_validation: LinkPartnerValidation | None = None
     link_state: LinkState | None = None
     link_transition_indicator: int | None = None
     links: Links | None = None
@@ -459,6 +519,11 @@ class ResetRequest(RedfishModel):
     reset_type: ResetType | None = None
 
 
+class ResetTransceivers(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
 class Sfp(RedfishModel):
     date_code: str | None = None
     fiber_connection_type: FiberConnectionType | None = None
@@ -505,13 +570,97 @@ class TransceiverManagementInterfaceType(StrEnum):
 
 class UaLink(RedfishModel):
     authentication_mode_enabled: bool | None = None
+    dl_down_delay_milliseconds: int | None = Field(
+        serialization_alias="DLDownDelayMilliseconds", default=None
+    )
+    dl_state: UaLinkDlState | None = Field(serialization_alias="DLState", default=None)
     generation: UaLinkGeneration | None = None
+    link_folding_enabled: bool | None = None
+    link_folding_supported: bool | None = None
+    link_resiliency_enabled: bool | None = None
+    link_resiliency_supported: bool | None = None
     non_strict_ordering_mode_enabled: bool | None = None
+    pldl_admin_enabled: bool | None = Field(serialization_alias="PLDLAdminEnabled", default=None)
+    pl_state: UaLinkPlState | None = Field(serialization_alias="PLState", default=None)
+    tl_state: UaLinkTlState | None = Field(serialization_alias="TLState", default=None)
+    tlupli_admin_enabled: bool | None = Field(
+        serialization_alias="TLUPLIAdminEnabled", default=None
+    )
+    tx_ack_timeout_nanoseconds: int | None = Field(
+        serialization_alias="TXAckTimeoutNanoseconds", default=None
+    )
+    ua_link128_g_extended_speed_mode: UaLink128GExtendedSpeedMode | None = Field(
+        serialization_alias="UALink128GExtendedSpeedMode", default=None
+    )
+    ua_link200_g_codeword_interleave: UaLink200GCodewordInterleave | None = Field(
+        serialization_alias="UALink200GCodewordInterleave", default=None
+    )
+    ua_link200_g_serial_rate: UaLink200GSerialRate | None = Field(
+        serialization_alias="UALink200GSerialRate", default=None
+    )
+    uart_admin_enabled: bool | None = Field(serialization_alias="UARTAdminEnabled", default=None)
+    upli_completer_state: UaLinkUpliCompleterState | None = Field(
+        serialization_alias="UPLICompleterState", default=None
+    )
+    upli_originator_state: UaLinkUpliOriginatorState | None = Field(
+        serialization_alias="UPLIOriginatorState", default=None
+    )
     upli_watchdog_timer_microseconds: int | None = Field(
         serialization_alias="UPLIWatchdogTimerMicroseconds", default=None
     )
 
 
+class UaLink128GExtendedSpeedMode(StrEnum):
+    NO_ESM = "NoESM"
+    N104G = "104G"
+    N112G = "112G"
+    N120G = "120G"
+    N128G = "128G"
+
+
+class UaLink200GCodewordInterleave(StrEnum):
+    ONE_WAY = "OneWay"
+    TWO_WAY = "TwoWay"
+    FOUR_WAY = "FourWay"
+
+
+class UaLink200GSerialRate(StrEnum):
+    N100G = "100G"
+    N200G = "200G"
+
+
+class UaLinkDlState(StrEnum):
+    IDLE = "Idle"
+    NOP = "NOP"
+    FAULT = "Fault"
+    POWER_DOWN = "PowerDown"
+    UP = "Up"
+
+
 class UaLinkGeneration(StrEnum):
     UA_LINK128_G = "UALink128G"
     UA_LINK200_G = "UALink200G"
+
+
+class UaLinkPlState(StrEnum):
+    IDLE = "Idle"
+    TRAINING_IN_PROGRESS = "TrainingInProgress"
+    TRAINING_FAILED = "TrainingFailed"
+    TRAINING_TIMEOUT = "TrainingTimeout"
+    UP = "Up"
+
+
+class UaLinkTlState(StrEnum):
+    DROP_MODE = "DropMode"
+    ENABLED = "Enabled"
+
+
+class UaLinkUpliCompleterState(StrEnum):
+    DROP_MODE = "DropMode"
+    ENABLED = "Enabled"
+
+
+class UaLinkUpliOriginatorState(StrEnum):
+    DROP_MODE = "DropMode"
+    ISOLATION_MODE = "IsolationMode"
+    ENABLED = "Enabled"

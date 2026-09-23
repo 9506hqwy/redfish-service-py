@@ -23,7 +23,7 @@ class Control(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_8_0.Control")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Control.v1_8_1.Control")
     accuracy: float | None = None
     actions: Actions | None = None
     allowable_max: float | None = None
@@ -84,6 +84,7 @@ class ControlExcerpt(RedfishModel):
     allowable_min: float | None = None
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
 
 
@@ -112,6 +113,7 @@ class ControlNodeExcerpt(RedfishModel):
     allowable_min: float | None = None
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     reading_units: str | None = None
     set_point: float | None = None
@@ -124,6 +126,7 @@ class ControlRangeExcerpt(RedfishModel):
     allowable_numeric_values: list[float] | None = None
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     setting_max: float | None = None
     setting_min: float | None = None
@@ -135,6 +138,7 @@ class ControlSingleExcerpt(RedfishModel):
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
     default_set_point: float | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     set_point: float | None = None
 
@@ -145,6 +149,7 @@ class ControlSingleLoopExcerpt(RedfishModel):
     control_loop: ControlLoopControlSingleLoopExcerpt | None = None
     control_mode: ControlMode | None = None
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     set_point: float | None = None
 

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Request, Response
 from ..authenticate import authenticate
 from ..model.power_distribution import (
     ExportConfigurationRequest,
+    PowerControlRequest,
     PowerDistribution,
     PowerDistributionOnUpdate,
 )
@@ -77,6 +78,25 @@ async def export_configuration1(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/RackPDUs/{power_distribution_id}/Actions/PowerDistribution.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control1(
+    power_distribution_id: str, request: Request, response: Response, body: PowerControlRequest
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}",
     response_model_exclude_none=True,
@@ -138,6 +158,25 @@ async def export_configuration2(
         "response": response,
         "body": body,
         "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/FloorPDUs/{power_distribution_id}/Actions/PowerDistribution.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control2(
+    power_distribution_id: str, request: Request, response: Response, body: PowerControlRequest
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
     }
     return s.action(**b)
 
@@ -207,6 +246,25 @@ async def export_configuration3(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/TransferSwitches/{power_distribution_id}/Actions/PowerDistribution.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control3(
+    power_distribution_id: str, request: Request, response: Response, body: PowerControlRequest
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}",
     response_model_exclude_none=True,
@@ -268,6 +326,25 @@ async def export_configuration4(
         "response": response,
         "body": body,
         "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/PowerShelves/{power_distribution_id}/Actions/PowerDistribution.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control4(
+    power_distribution_id: str, request: Request, response: Response, body: PowerControlRequest
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
     }
     return s.action(**b)
 
@@ -337,6 +414,25 @@ async def export_configuration5(
     return s.action(**b)
 
 
+@router.post(
+    "/redfish/v1/PowerEquipment/Switchgear/{power_distribution_id}/Actions/PowerDistribution.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control5(
+    power_distribution_id: str, request: Request, response: Response, body: PowerControlRequest
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
+    }
+    return s.action(**b)
+
+
 @router.get(
     "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}",
     response_model_exclude_none=True,
@@ -398,5 +494,24 @@ async def export_configuration6(
         "response": response,
         "body": body,
         "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/PowerEquipment/ElectricalBuses/{power_distribution_id}/Actions/PowerDistribution.PowerControl",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def power_control6(
+    power_distribution_id: str, request: Request, response: Response, body: PowerControlRequest
+) -> RedfishError:
+    s: Service = get_service(PowerDistribution, request)
+    b: dict[str, Any] = {
+        "power_distribution_id": power_distribution_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "PowerControl",
     }
     return s.action(**b)

@@ -168,6 +168,9 @@ from ..model.pcie_device_collection import PcieDeviceCollection
 from ..model.pcie_function import PcieFunction
 from ..model.pcie_function_collection import PcieFunctionCollection
 from ..model.pcie_slots import PcieSlots
+from ..model.policy import Policy
+from ..model.policy_collection import PolicyCollection
+from ..model.policy_service import PolicyService
 from ..model.port import Port
 from ..model.port_collection import PortCollection
 from ..model.port_metrics import PortMetrics
@@ -429,6 +432,9 @@ from . import (
     pcie_function,
     pcie_function_collection,
     pcie_slots,
+    policy,
+    policy_collection,
+    policy_service,
     port,
     port_collection,
     port_metrics,
@@ -1027,6 +1033,15 @@ def include_router(app: FastAPI) -> None:  # noqa: PLR0912, PLR0915
 
     if find_service(PcieSlots):
         app.include_router(pcie_slots.router)
+
+    if find_service(Policy):
+        app.include_router(policy.router)
+
+    if find_service(PolicyCollection):
+        app.include_router(policy_collection.router)
+
+    if find_service(PolicyService):
+        app.include_router(policy_service.router)
 
     if find_service(Port):
         app.include_router(port.router)

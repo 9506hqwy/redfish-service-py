@@ -25,7 +25,7 @@ class ComponentIntegrity(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComponentIntegrity.v1_4_0.ComponentIntegrity"
+        serialization_alias="@odata.type", default="#ComponentIntegrity.v1_5_0.ComponentIntegrity"
     )
     actions: Actions | None = None
     component_integrity_enabled: bool | None = None
@@ -157,6 +157,7 @@ class SingleSessionInfo(RedfishModel):
 class SpdmGetSignedMeasurementsRequest(RedfishModel):
     measurement_indices: list[int] | None = None
     nonce: str | None = None
+    raw_bitstream: bool | None = None
     slot_id: int | None = None
 
 

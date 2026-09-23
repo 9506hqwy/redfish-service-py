@@ -29,9 +29,12 @@ class Authentication(RedfishModel):
     encryption_key: str | None = None
     encryption_key_set: bool | None = None
     kerberos_keytab: str | None = None
+    kerberos_keytab_set: bool | None = None
     oem: dict[str, Any] | None = None
     password: str | None = None
+    password_set: bool | None = None
     token: str | None = None
+    token_set: bool | None = None
     username: str | None = None
 
 
@@ -48,7 +51,7 @@ class ExternalAccountProvider(RedfishModel):
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
         serialization_alias="@odata.type",
-        default="#ExternalAccountProvider.v1_8_2.ExternalAccountProvider",
+        default="#ExternalAccountProvider.v1_9_0.ExternalAccountProvider",
     )
     account_provider_type: AccountProviderTypes | None = None
     actions: Actions | None = None
@@ -78,7 +81,7 @@ class ExternalAccountProviderOnCreate(RedfishModel):
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
         serialization_alias="@odata.type",
-        default="#ExternalAccountProvider.v1_8_2.ExternalAccountProvider",
+        default="#ExternalAccountProvider.v1_9_0.ExternalAccountProvider",
     )
     account_provider_type: AccountProviderTypes | None = None
     actions: Actions | None = None

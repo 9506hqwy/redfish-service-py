@@ -50,7 +50,7 @@ class Circuit(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Circuit.v1_9_0.Circuit")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Circuit.v1_10_0.Circuit")
     actions: Actions | None = None
     breaker_state: BreakerStates | None = None
     circuit_type: CircuitType | None = None
@@ -83,6 +83,7 @@ class Circuit(RedfishModel):
     power_control_locked: bool | None = None
     power_cycle_delay_seconds: float | None = None
     power_enabled: bool | None = None
+    power_flow_direction: PowerFlowDirection | None = None
     power_load_percent: SensorExcerpt | None = None
     power_off_delay_seconds: float | None = None
     power_on_delay_seconds: float | None = None
@@ -190,6 +191,7 @@ class NominalVoltageType(StrEnum):
     AC400_V = "AC400V"
     AC480_V = "AC480V"
     DC48_V = "DC48V"
+    OPEN_RACK_V3 = "OpenRackV3"
     DC240_V = "DC240V"
     DC380_V = "DC380V"
     DC400_V = "DC400V"
@@ -254,6 +256,12 @@ class PowerControl(RedfishModel):
 
 class PowerControlRequest(RedfishModel):
     power_state: CircuitPowerState | None = None
+
+
+class PowerFlowDirection(StrEnum):
+    SOURCE = "Source"
+    LOAD = "Load"
+    BIDIRECTIONAL = "Bidirectional"
 
 
 class PowerRestorePolicyTypes(StrEnum):

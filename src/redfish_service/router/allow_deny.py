@@ -512,3 +512,67 @@ async def patch6(
         "body": body,
     }
     return cast(AllowDeny, s.patch(**b))
+
+
+@router.delete(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny/{allow_deny_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def delete7(
+    manager_id: str, allow_deny_id: str, request: Request, response: Response
+) -> None:
+    s: Service = get_service(AllowDeny, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
+    }
+    return s.delete(**b)
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny/{allow_deny_id}",
+    response_model_exclude_none=True,
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny/{allow_deny_id}",
+    response_model_exclude_none=True,
+)
+async def get7(
+    manager_id: str, allow_deny_id: str, request: Request, response: Response
+) -> AllowDeny:
+    s: Service = get_service(AllowDeny, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
+    }
+    m = cast(AllowDeny, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.patch(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny/{allow_deny_id}",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def patch7(
+    manager_id: str,
+    allow_deny_id: str,
+    request: Request,
+    response: Response,
+    body: AllowDenyOnUpdate,
+) -> AllowDeny:
+    s: Service = get_service(AllowDeny, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "allow_deny_id": allow_deny_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(AllowDeny, s.patch(**b))

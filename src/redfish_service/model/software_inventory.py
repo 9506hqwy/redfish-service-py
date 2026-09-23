@@ -47,10 +47,22 @@ class CancelRequest(RedfishModel):
     targets: list[IdRef] | None = None
 
 
+class ImageState(StrEnum):
+    ACTIVE = "Active"
+    STAGED = "Staged"
+    ARMED = "Armed"
+    TARGET_SPECIFIC = "TargetSpecific"
+    OEM = "OEM"
+
+
 class Links(RedfishModel):
     active_targets: list[IdRef] | None = None
     active_targets_odata_count: int | None = Field(
         serialization_alias="ActiveTargets@odata.count", default=None
+    )
+    armed_targets: list[IdRef] | None = None
+    armed_targets_odata_count: int | None = Field(
+        serialization_alias="ArmedTargets@odata.count", default=None
     )
     staged_targets: list[IdRef] | None = None
     staged_targets_odata_count: int | None = Field(
@@ -76,20 +88,23 @@ class SoftwareInventory(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SoftwareInventory.v1_14_0.SoftwareInventory"
+        serialization_alias="@odata.type", default="#SoftwareInventory.v1_15_0.SoftwareInventory"
     )
     actions: Actions | None = None
     active: bool | None = None
     additional_versions: AdditionalVersions | None = None
+    armed: bool | None = None
     associated_physical_context: PhysicalContext | None = None
     description: str | None = None
     id: str
     image_data_uri: str | None = Field(serialization_alias="ImageDataURI", default=None)
+    image_state: ImageState | None = None
     links: Links | None = None
     lowest_supported_version: str | None = None
     manufacturer: str | None = None
     measurement: MeasurementBlock | None = None
     name: str
+    oem_image_state: str | None = Field(serialization_alias="OEMImageState", default=None)
     oem: dict[str, Any] | None = None
     related_item: list[IdRef] | None = None
     related_item_odata_count: int | None = Field(

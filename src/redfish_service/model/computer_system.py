@@ -21,6 +21,15 @@ class Actions(RedfishModel):
     export_configuration: ExportConfiguration | None = Field(
         serialization_alias="#ComputerSystem.ExportConfiguration", default=None
     )
+    graphical_console_get_one_time_url: GraphicalConsoleGetOneTimeUrl | None = Field(
+        serialization_alias="#ComputerSystem.GraphicalConsoleGetOneTimeURL", default=None
+    )
+    graphical_console_set_one_time_password: GraphicalConsoleSetOneTimePassword | None = Field(
+        serialization_alias="#ComputerSystem.GraphicalConsoleSetOneTimePassword", default=None
+    )
+    graphical_console_set_password: GraphicalConsoleSetPassword | None = Field(
+        serialization_alias="#ComputerSystem.GraphicalConsoleSetPassword", default=None
+    )
     remove_resource_block: RemoveResourceBlock | None = Field(
         serialization_alias="#ComputerSystem.RemoveResourceBlock", default=None
     )
@@ -148,7 +157,7 @@ class ComputerSystem(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_28_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_29_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -211,6 +220,7 @@ class ComputerSystem(RedfishModel):
     power_state: PowerState | None = None
     processor_summary: ProcessorSummary | None = None
     processors: IdRef | None = None
+    production_date: str | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(
         serialization_alias="Redundancy@odata.count", default=None
@@ -237,7 +247,7 @@ class ComputerSystemOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#ComputerSystem.v1_28_0.ComputerSystem"
+        serialization_alias="@odata.type", default="#ComputerSystem.v1_29_0.ComputerSystem"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -300,6 +310,7 @@ class ComputerSystemOnCreate(RedfishModel):
     power_state: PowerState | None = None
     processor_summary: ProcessorSummary | None = None
     processors: IdRef | None = None
+    production_date: str | None = None
     redundancy: list[IdRef] | None = None
     redundancy_odata_count: int | None = Field(
         serialization_alias="Redundancy@odata.count", default=None
@@ -353,6 +364,17 @@ class ComputerSystemOnUpdate(RedfishModelOnUpdate):
     trusted_modules: list[TrustedModules] | None = None
     virtual_media_config: VirtualMediaConfig | None = None
     virtualization: Virtualization | None = None
+
+
+class ConsoleAccessMode(StrEnum):
+    READ_WRITE = "ReadWrite"
+    READ_ONLY = "ReadOnly"
+
+
+class ConsoleAuthenticationMethod(StrEnum):
+    EXPLICIT_LOGIN = "ExplicitLogin"
+    ONE_TIME_URL = "OneTimeURL"
+    ONE_TIME_PASSWORD = "OneTimePassword"  # noqa: S105
 
 
 class Decommission(RedfishModel):
@@ -412,11 +434,77 @@ class GraphicalConnectTypesSupported(StrEnum):
     OEM = "OEM"
 
 
-class HostGraphicalConsole(RedfishModel):
-    connect_types_supported: list[GraphicalConnectTypesSupported] | None = None
-    max_concurrent_sessions: int | None = None
+class GraphicalConsoleGetOneTimeUrl(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class GraphicalConsoleGetOneTimeUrlRequest(RedfishModel):
+    access_mode: ConsoleAccessMode | None = None
+    console_type: GraphicalConsoleType | None = None
+    validity_period_seconds: int | None = None
+
+
+class GraphicalConsoleProtocol(RedfishModel):
+    allows_shared_access: bool | None = None
+    authentication_method: ConsoleAuthenticationMethod | None = None
+    host_name: str | None = None
     port: int | None = None
     service_enabled: bool | None = None
+    supported_access_modes: list[ConsoleAccessMode] | None = None
+
+
+class GraphicalConsoleSetOneTimePassword(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class GraphicalConsoleSetOneTimePasswordRequest(RedfishModel):
+    access_mode: ConsoleAccessMode | None = None
+    console_type: GraphicalConsoleType | None = None
+    password: str | None = None
+    validity_period_seconds: int | None = None
+
+
+class GraphicalConsoleSetPassword(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class GraphicalConsoleSetPasswordRequest(RedfishModel):
+    console_type: GraphicalConsoleType
+    password: str
+
+
+class GraphicalConsoleType(StrEnum):
+    VNC = "VNC"
+    RDP = "RDP"
+    HTML5 = "HTML5"
+    KVMIP = "KVMIP"
+
+
+class Html5Console(RedfishModel):
+    allows_shared_access: bool | None = None
+    authentication_method: ConsoleAuthenticationMethod | None = None
+    console_uri: str | None = Field(serialization_alias="ConsoleURI", default=None)
+    host_name: str | None = None
+    port: int | None = None
+    service_enabled: bool | None = None
+    supported_access_modes: list[ConsoleAccessMode] | None = None
+    supports_one_time_url: bool | None = Field(
+        serialization_alias="SupportsOneTimeURL", default=None
+    )
+
+
+class HostGraphicalConsole(RedfishModel):
+    connect_types_supported: list[GraphicalConnectTypesSupported] | None = None
+    html5: Html5Console | None = Field(serialization_alias="HTML5", default=None)
+    kvmip: GraphicalConsoleProtocol | None = Field(serialization_alias="KVMIP", default=None)
+    max_concurrent_sessions: int | None = None
+    port: int | None = None
+    rdp: GraphicalConsoleProtocol | None = Field(serialization_alias="RDP", default=None)
+    service_enabled: bool | None = None
+    vnc: VncConsole | None = Field(serialization_alias="VNC", default=None)
 
 
 class HostSerialConsole(RedfishModel):
@@ -668,6 +756,18 @@ class TrustedModules(RedfishModel):
     interface_type_selection: InterfaceTypeSelection | None = None
     oem: dict[str, Any] | None = None
     status: Status | None = None
+
+
+class VncConsole(RedfishModel):
+    allows_shared_access: bool | None = None
+    authentication_method: ConsoleAuthenticationMethod | None = None
+    host_name: str | None = None
+    port: int | None = None
+    service_enabled: bool | None = None
+    supported_access_modes: list[ConsoleAccessMode] | None = None
+    supported_encodings: list[str] | None = None
+    supports_one_time_password: bool | None = None
+    supports_persistent_password: bool | None = None
 
 
 class VirtualMediaConfig(RedfishModel):

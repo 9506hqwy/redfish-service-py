@@ -22,7 +22,7 @@ class Session(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Session.v1_8_0.Session")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Session.v1_9_0.Session")
     actions: Actions | None = None
     client_origin_ip_address: str | None = Field(
         serialization_alias="ClientOriginIPAddress", default=None
@@ -40,6 +40,7 @@ class Session(RedfishModel):
     roles: list[str] | None = None
     session_type: SessionTypes | None = None
     token: str | None = None
+    user_authentication_source: str | None = None
     user_name: str | None = None
 
 
@@ -48,7 +49,7 @@ class SessionOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Session.v1_8_0.Session"
+        serialization_alias="@odata.type", default="#Session.v1_9_0.Session"
     )
     actions: Actions | None = None
     client_origin_ip_address: str | None = Field(
@@ -67,6 +68,7 @@ class SessionOnCreate(RedfishModel):
     roles: list[str] | None = None
     session_type: SessionTypes | None = None
     token: str | None = None
+    user_authentication_source: str | None = None
     user_name: str | None = None
 
 

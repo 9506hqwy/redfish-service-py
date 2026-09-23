@@ -32,7 +32,7 @@ class DiagnosticDataTypes(StrEnum):
 
 class Event(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_13_0.Event")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Event.v1_14_0.Event")
     actions: Actions | None = None
     context: str | None = None
     description: str | None = None
@@ -74,6 +74,7 @@ class EventRecord(RedfishModel):
     specific_event_exists_in_group: bool | None = None
     user_authentication_source: str | None = None
     username: str | None = None
+    vendor_code: str | None = None
 
 
 class EventRecordActions(RedfishModel):

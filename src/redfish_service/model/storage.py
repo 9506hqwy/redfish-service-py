@@ -218,6 +218,14 @@ class RekeyExternalKey(RedfishModel):
     title: str | None = Field(serialization_alias="title", default=None)
 
 
+class ReservationCapabilities(StrEnum):
+    COMPATIBLE_RESERVATION_HANDLING = "CompatibleReservationHandling"
+    SPECIFY_INITIATOR_PORTS = "SpecifyInitiatorPorts"
+    MULTIPLE_TARGET_PORTS = "MultipleTargetPorts"
+    PERSIST_THROUGH_POWER_LOSS = "PersistThroughPowerLoss"
+    SUPPORT_CLEAR_RESERVATIONS_OUT_OF_BAND = "SupportClearReservationsOutOfBand"
+
+
 class ResetToDefaults(RedfishModel):
     target: str | None = Field(serialization_alias="target", default=None)
     title: str | None = Field(serialization_alias="title", default=None)
@@ -282,7 +290,7 @@ class Storage(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_22_0.Storage")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Storage.v1_23_0.Storage")
     actions: Actions | None = None
     auto_volume_create: AutoVolumeCreate | None = None
     block_security_id_policy: bool | None = Field(
@@ -314,6 +322,7 @@ class Storage(RedfishModel):
     redundancy_odata_count: int | None = Field(
         serialization_alias="Redundancy@odata.count", default=None
     )
+    reservation_capabilities: list[ReservationCapabilities] | None = None
     status: Status | None = None
     storage_controllers: list[StorageController] | None = None
     storage_controllers_odata_count: int | None = Field(

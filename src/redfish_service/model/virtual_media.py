@@ -46,6 +46,7 @@ class InsertMedia(RedfishModel):
 
 
 class InsertMediaRequest(RedfishModel):
+    http_headers: dict[str, Any] | None = Field(serialization_alias="HTTPHeaders", default=None)
     image: str
     inserted: bool | None = None
     password: str | None = None
@@ -84,7 +85,7 @@ class VirtualMedia(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#VirtualMedia.v1_6_5.VirtualMedia"
+        serialization_alias="@odata.type", default="#VirtualMedia.v1_7_0.VirtualMedia"
     )
     actions: Actions | None = None
     certificates: IdRef | None = None
@@ -93,6 +94,7 @@ class VirtualMedia(RedfishModel):
     description: str | None = None
     eject_policy: EjectPolicy | None = None
     eject_timeout: str | None = None
+    http_headers: dict[str, Any] | None = Field(serialization_alias="HTTPHeaders", default=None)
     id: str
     image: str | None = None
     image_name: str | None = None
@@ -113,6 +115,7 @@ class VirtualMediaOnUpdate(RedfishModelOnUpdate):
     actions: Actions | None = None
     eject_policy: EjectPolicy | None = None
     eject_timeout: str | None = None
+    http_headers: dict[str, Any] | None = Field(serialization_alias="HTTPHeaders", default=None)
     image: str | None = None
     inserted: bool | None = None
     oem: dict[str, Any] | None = None

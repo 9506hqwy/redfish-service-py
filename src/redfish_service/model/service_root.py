@@ -29,6 +29,7 @@ class Links(RedfishModel):
 
 
 class ProtocolFeaturesSupported(RedfishModel):
+    alias: bool | None = None
     client_context_query: bool | None = None
     deep_operations: DeepOperations | None = None
     excerpt_query: bool | None = None
@@ -50,7 +51,7 @@ class ServiceRoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ServiceRoot.v1_21_0.ServiceRoot"
+        serialization_alias="@odata.type", default="#ServiceRoot.v1_22_0.ServiceRoot"
     )
     account_service: IdRef | None = None
     aggregation_service: IdRef | None = None
@@ -74,6 +75,7 @@ class ServiceRoot(RedfishModel):
     nvme_domains: IdRef | None = Field(serialization_alias="NVMeDomains", default=None)
     name: str
     oem: dict[str, Any] | None = None
+    policy_service: IdRef | None = None
     power_equipment: IdRef | None = None
     product: str | None = None
     protocol_features_supported: ProtocolFeaturesSupported | None = None

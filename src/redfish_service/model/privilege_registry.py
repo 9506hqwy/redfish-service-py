@@ -8,6 +8,11 @@ from . import RedfishModel
 from .privileges import PrivilegeType
 
 
+class ActionPrivilege(RedfishModel):
+    action_name: str | None = None
+    privileges: list[OperationPrivilege] | None = None
+
+
 class Actions(RedfishModel):
     oem: dict[str, Any] | None = None
 
@@ -23,6 +28,7 @@ class Mapping(RedfishModel):
 
 
 class OperationMap(RedfishModel):
+    action_privileges: list[ActionPrivilege] | None = None
     delete: list[OperationPrivilege] | None = Field(serialization_alias="DELETE", default=None)
     get: list[OperationPrivilege] | None = Field(serialization_alias="GET", default=None)
     head: list[OperationPrivilege] | None = Field(serialization_alias="HEAD", default=None)
@@ -32,12 +38,13 @@ class OperationMap(RedfishModel):
 
 
 class OperationPrivilege(RedfishModel):
+    oem: dict[str, Any] | None = None
     privilege: list[str] | None = None
 
 
 class PrivilegeRegistry(RedfishModel):
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PrivilegeRegistry.v1_2_0.PrivilegeRegistry"
+        serialization_alias="@odata.type", default="#PrivilegeRegistry.v1_3_0.PrivilegeRegistry"
     )
     actions: Actions | None = None
     description: str | None = None

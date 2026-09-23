@@ -32,7 +32,7 @@ class MediaController(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MediaController.v1_3_2.MediaController"
+        serialization_alias="@odata.type", default="#MediaController.v1_3_3.MediaController"
     )
     actions: Actions | None = None
     description: str | None = None

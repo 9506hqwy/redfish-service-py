@@ -13,17 +13,17 @@ class Actions(RedfishModel):
 
 class MessageRegistry(RedfishModel):
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#MessageRegistry.v1_8_0.MessageRegistry"
+        serialization_alias="@odata.type", default="#MessageRegistry.v1_9_0.MessageRegistry"
     )
     actions: Actions | None = None
     description: str | None = None
-    example: str | None = None
     id: str
-    language: str
-    messages: dict[str, Any]
+    language: str | None = None
+    messages: dict[str, Any] | None = None
     name: str
     oem: dict[str, Any] | None = None
-    owning_entity: str
-    registry_prefix: str
-    registry_version: str
+    owning_entity: str | None = None
+    referenced_registry: str | None = None
+    registry_prefix: str | None = None
+    registry_version: str | None = None
     release: str | None = None

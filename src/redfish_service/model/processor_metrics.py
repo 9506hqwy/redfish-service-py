@@ -77,7 +77,7 @@ class ProcessorMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ProcessorMetrics.v1_7_0.ProcessorMetrics"
+        serialization_alias="@odata.type", default="#ProcessorMetrics.v1_7_1.ProcessorMetrics"
     )
     actions: Actions | None = None
     average_frequency_mhz: float | None = Field(

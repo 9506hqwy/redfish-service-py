@@ -54,9 +54,10 @@ class PowerSupplyMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerSupplyMetrics.v1_2_0.PowerSupplyMetrics"
+        serialization_alias="@odata.type", default="#PowerSupplyMetrics.v1_3_0.PowerSupplyMetrics"
     )
     actions: Actions | None = None
+    charge_percent: SensorExcerpt | None = None
     description: str | None = None
     energyk_wh: SensorEnergykWhExcerpt | None = None
     fan_speed_percent: SensorFanExcerpt | None = None
@@ -76,6 +77,7 @@ class PowerSupplyMetrics(RedfishModel):
     poly_phase_energyk_wh: EnergySensors | None = None
     poly_phase_power_watts: PowerSensors | None = None
     poly_phase_voltage: VoltageSensors | None = None
+    power_load_percent: SensorExcerpt | None = None
     rail_current_amps: list[SensorCurrentExcerpt] | None = None
     rail_current_amps_odata_count: int | None = Field(
         serialization_alias="RailCurrentAmps@odata.count", default=None

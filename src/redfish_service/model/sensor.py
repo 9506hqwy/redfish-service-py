@@ -97,6 +97,9 @@ class ReadingType(StrEnum):
     ROTATIONAL_VELOCITY = "RotationalVelocity"
     ROTATIONAL_ACCELERATION = "RotationalAcceleration"
     VALVE = "Valve"
+    TURBIDITY = "Turbidity"
+    LIQUID_CONDUCTIVITY = "LiquidConductivity"
+    PH = "pH"
 
 
 class ResetMetrics(RedfishModel):
@@ -118,7 +121,7 @@ class Sensor(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_13_0.Sensor")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Sensor.v1_14_0.Sensor")
     accuracy: float | None = None
     actions: Actions | None = None
     adjusted_max_allowable_operating_value: float | None = None
@@ -209,6 +212,7 @@ class SensorOnUpdate(RedfishModelOnUpdate):
 class SensorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     device_name: str | None = None
+    oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
     reading: float | None = None
@@ -217,6 +221,7 @@ class SensorArrayExcerpt(RedfishModel):
 class SensorCurrentExcerpt(RedfishModel):
     crest_factor: float | None = None
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     thd_percent: float | None = Field(serialization_alias="THDPercent", default=None)
 
@@ -225,6 +230,7 @@ class SensorEnergykWhExcerpt(RedfishModel):
     apparent_kvah: float | None = Field(serialization_alias="ApparentkVAh", default=None)
     data_source_uri: str | None = None
     lifetime_reading: float | None = None
+    oem: dict[str, Any] | None = None
     reactive_kvarh: float | None = Field(serialization_alias="ReactivekVARh", default=None)
     reading: float | None = None
     sensor_reset_time: str | None = None
@@ -232,12 +238,14 @@ class SensorEnergykWhExcerpt(RedfishModel):
 
 class SensorExcerpt(RedfishModel):
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
 
 
 class SensorFanArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     device_name: str | None = None
+    oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
     reading: float | None = None
@@ -246,12 +254,14 @@ class SensorFanArrayExcerpt(RedfishModel):
 
 class SensorFanExcerpt(RedfishModel):
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     speed_rpm: float | None = Field(serialization_alias="SpeedRPM", default=None)
 
 
 class SensorLowerCriticalExcerpt(RedfishModel):
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     thresholds: ThresholdsSensorLowerCriticalExcerpt | None = None
 
@@ -259,6 +269,7 @@ class SensorLowerCriticalExcerpt(RedfishModel):
 class SensorPowerArrayExcerpt(RedfishModel):
     apparent_va: float | None = Field(serialization_alias="ApparentVA", default=None)
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     phase_angle_degrees: float | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
@@ -270,6 +281,7 @@ class SensorPowerArrayExcerpt(RedfishModel):
 class SensorPowerExcerpt(RedfishModel):
     apparent_va: float | None = Field(serialization_alias="ApparentVA", default=None)
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     phase_angle_degrees: float | None = None
     power_factor: float | None = None
     reactive_var: float | None = Field(serialization_alias="ReactiveVAR", default=None)
@@ -278,6 +290,7 @@ class SensorPowerExcerpt(RedfishModel):
 
 class SensorPumpExcerpt(RedfishModel):
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     speed_rpm: float | None = Field(serialization_alias="SpeedRPM", default=None)
 
@@ -285,6 +298,7 @@ class SensorPumpExcerpt(RedfishModel):
 class SensorVoltageExcerpt(RedfishModel):
     crest_factor: float | None = None
     data_source_uri: str | None = None
+    oem: dict[str, Any] | None = None
     reading: float | None = None
     thd_percent: float | None = Field(serialization_alias="THDPercent", default=None)
 

@@ -58,7 +58,7 @@ class PowerSupply(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerSupply.v1_7_0.PowerSupply"
+        serialization_alias="@odata.type", default="#PowerSupply.v1_8_0.PowerSupply"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -119,6 +119,7 @@ class PowerSupplyType(StrEnum):
     DC = "DC"
     A_COR_DC = "ACorDC"
     DC_REGULATOR = "DCRegulator"
+    PSU = "PSU"
 
 
 class Reset(RedfishModel):

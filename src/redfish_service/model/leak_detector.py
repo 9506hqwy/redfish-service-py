@@ -28,7 +28,7 @@ class LeakDetector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LeakDetector.v1_6_0.LeakDetector"
+        serialization_alias="@odata.type", default="#LeakDetector.v1_6_1.LeakDetector"
     )
     actions: Actions | None = None
     critical_reaction_type: ReactionType | None = None
@@ -75,6 +75,7 @@ class LeakDetectorArrayExcerpt(RedfishModel):
     data_source_uri: str | None = None
     detector_state: DetectorState | None = None
     device_name: str | None = None
+    oem: dict[str, Any] | None = None
     physical_context: PhysicalContext | None = None
     physical_sub_context: PhysicalSubContext | None = None
 
@@ -82,6 +83,7 @@ class LeakDetectorArrayExcerpt(RedfishModel):
 class LeakDetectorExcerpt(RedfishModel):
     data_source_uri: str | None = None
     detector_state: DetectorState | None = None
+    oem: dict[str, Any] | None = None
 
 
 class LeakDetectorType(StrEnum):

@@ -26,9 +26,12 @@ class CoolantConnector(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolantConnector.v1_4_0.CoolantConnector"
+        serialization_alias="@odata.type", default="#CoolantConnector.v1_5_0.CoolantConnector"
     )
     actions: Actions | None = None
+    conductivity_ms_per_cm: SensorExcerpt | None = Field(
+        serialization_alias="ConductivityMSPerCm", default=None
+    )
     connector_group: RedundantGroup | None = None
     coolant: Coolant | None = None
     coolant_connector_type: CoolantConnectorType | None = None
@@ -64,8 +67,10 @@ class CoolantConnector(RedfishModel):
     supply_pressurek_pa: SensorExcerpt | None = None
     supply_temperature_celsius: SensorExcerpt | None = None
     supply_temperature_control_celsius: ControlSingleLoopExcerpt | None = None
+    turbidity_ntu: SensorExcerpt | None = Field(serialization_alias="TurbidityNTU", default=None)
     valve_position_control_percent: ControlSingleLoopExcerpt | None = None
     valve_position_percent: SensorExcerpt | None = None
+    ph: SensorExcerpt | None = Field(serialization_alias="pH", default=None)
 
 
 class CoolantConnectorOnUpdate(RedfishModelOnUpdate):

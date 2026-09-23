@@ -359,3 +359,38 @@ async def post6(
         "body": body,
     }
     return cast(AllowDeny, s.post(**b))
+
+
+@router.get(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny", response_model_exclude_none=True
+)
+@router.head(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny", response_model_exclude_none=True
+)
+async def get7(manager_id: str, request: Request, response: Response) -> AllowDenyCollection:
+    s: Service = get_service(AllowDenyCollection, request)
+    b: dict[str, Any] = {"manager_id": manager_id, "request": request, "response": response}
+    m = cast(AllowDenyCollection, s.get(**b))
+    set_link_header(m, response)
+    return m
+
+
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny", response_model_exclude_none=True
+)
+@router.post(
+    "/redfish/v1/Managers/{manager_id}/SecurityPolicy/AllowDeny/Members",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def post7(
+    manager_id: str, request: Request, response: Response, body: AllowDenyOnCreate
+) -> AllowDeny:
+    s: ServiceCollection = get_service_collection(AllowDenyCollection, request)
+    b: dict[str, Any] = {
+        "manager_id": manager_id,
+        "request": request,
+        "response": response,
+        "body": body,
+    }
+    return cast(AllowDeny, s.post(**b))

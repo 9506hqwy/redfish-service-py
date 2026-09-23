@@ -17,7 +17,7 @@ class RouteEntry(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#RouteEntry.v1_0_2.RouteEntry"
+        serialization_alias="@odata.type", default="#RouteEntry.v1_1_0.RouteEntry"
     )
     actions: Actions | None = None
     description: str | None = None
@@ -34,7 +34,7 @@ class RouteEntryOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#RouteEntry.v1_0_2.RouteEntry"
+        serialization_alias="@odata.type", default="#RouteEntry.v1_1_0.RouteEntry"
     )
     actions: Actions | None = None
     description: str | None = None

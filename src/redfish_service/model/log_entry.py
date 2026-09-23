@@ -63,7 +63,7 @@ class LogEntry(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#LogEntry.v1_21_0.LogEntry"
+        serialization_alias="@odata.type", default="#LogEntry.v1_22_0.LogEntry"
     )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
@@ -115,6 +115,7 @@ class LogEntry(RedfishModel):
     specific_event_exists_in_group: bool | None = None
     user_authentication_source: str | None = None
     username: str | None = None
+    vendor_code: str | None = None
 
 
 class LogEntryOnCreate(RedfishModel):
@@ -122,7 +123,7 @@ class LogEntryOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#LogEntry.v1_21_0.LogEntry"
+        serialization_alias="@odata.type", default="#LogEntry.v1_22_0.LogEntry"
     )
     actions: Actions | None = None
     additional_data_size_bytes: int | None = None
@@ -174,6 +175,7 @@ class LogEntryOnCreate(RedfishModel):
     specific_event_exists_in_group: bool | None = None
     user_authentication_source: str | None = None
     username: str | None = None
+    vendor_code: str | None = None
 
 
 class LogEntryOnUpdate(RedfishModelOnUpdate):

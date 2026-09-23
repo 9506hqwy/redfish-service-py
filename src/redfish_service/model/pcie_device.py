@@ -20,6 +20,7 @@ class Actions(RedfishModel):
 class CxlDevice(RedfishModel):
     capable_protocol_versions: list[CxlProtocolVersion] | None = None
     current_protocol_version: CxlProtocolVersion | None = None
+    device_class: CxlDeviceClass | None = None
     device_type: CxlDeviceType | None = None
     dynamic_capacity: CxlDynamicCapacity | None = None
     egress_port_congestion_support: bool | None = None
@@ -28,6 +29,13 @@ class CxlDevice(RedfishModel):
     temporary_throughput_reduction_supported: bool | None = None
     throughput_reduction_support: bool | None = None
     timestamp: str | None = None
+
+
+class CxlDeviceClass(StrEnum):
+    SLD = "SLD"
+    MLD = "MLD"
+    M_H_SLD = "MH_SLD"
+    M_H_MLD = "MH_MLD"
 
 
 class CxlDeviceType(StrEnum):
@@ -109,6 +117,10 @@ class Links(RedfishModel):
     connected_pcie_ports_odata_count: int | None = Field(
         serialization_alias="ConnectedPCIePorts@odata.count", default=None
     )
+    fabric_adapters: list[IdRef] | None = None
+    fabric_adapters_odata_count: int | None = Field(
+        serialization_alias="FabricAdapters@odata.count", default=None
+    )
     oem: dict[str, Any] | None = None
     pcie_functions: list[IdRef] | None = Field(serialization_alias="PCIeFunctions", default=None)
     pcie_functions_odata_count: int | None = Field(
@@ -126,7 +138,7 @@ class PcieDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PCIeDevice.v1_22_0.PCIeDevice"
+        serialization_alias="@odata.type", default="#PCIeDevice.v1_23_0.PCIeDevice"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None

@@ -31,7 +31,7 @@ class OutboundConnection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#OutboundConnection.v1_0_2.OutboundConnection"
+        serialization_alias="@odata.type", default="#OutboundConnection.v1_0_3.OutboundConnection"
     )
     actions: Actions | None = None
     authentication: AuthenticationType | None = None
@@ -58,7 +58,7 @@ class OutboundConnectionOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#OutboundConnection.v1_0_2.OutboundConnection"
+        serialization_alias="@odata.type", default="#OutboundConnection.v1_0_3.OutboundConnection"
     )
     actions: Actions | None = None
     authentication: AuthenticationType | None = None

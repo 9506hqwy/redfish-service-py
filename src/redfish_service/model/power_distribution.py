@@ -6,6 +6,7 @@ from typing import Any
 from pydantic import Field
 
 from . import RedfishModel, RedfishModelOnUpdate
+from .circuit import PowerRestorePolicyTypes
 from .odata_v4 import IdRef
 from .redundancy import RedundantGroup
 from .resource import Location, Status
@@ -14,6 +15,9 @@ from .resource import Location, Status
 class Actions(RedfishModel):
     export_configuration: ExportConfiguration | None = Field(
         serialization_alias="#PowerDistribution.ExportConfiguration", default=None
+    )
+    power_control: PowerControl | None = Field(
+        serialization_alias="#PowerDistribution.PowerControl", default=None
     )
     transfer_control: TransferControl | None = Field(
         serialization_alias="#PowerDistribution.TransferControl", default=None
@@ -65,12 +69,21 @@ class Links(RedfishModel):
     oem: dict[str, Any] | None = None
 
 
+class PowerControl(RedfishModel):
+    target: str | None = Field(serialization_alias="target", default=None)
+    title: str | None = Field(serialization_alias="title", default=None)
+
+
+class PowerControlRequest(RedfishModel):
+    power_state: PowerState | None = None
+
+
 class PowerDistribution(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#PowerDistribution.v1_6_0.PowerDistribution"
+        serialization_alias="@odata.type", default="#PowerDistribution.v1_7_0.PowerDistribution"
     )
     actions: Actions | None = None
     asset_tag: str | None = None
@@ -96,12 +109,17 @@ class PowerDistribution(RedfishModel):
     outlets: IdRef | None = None
     part_number: str | None = None
     power_capacity_va: int | None = Field(serialization_alias="PowerCapacityVA", default=None)
+    power_cycle_delay_seconds: float | None = None
     power_distribution_redundancy: list[RedundantGroup] | None = None
+    power_on_delay_seconds: float | None = None
+    power_restore_delay_seconds: float | None = None
+    power_restore_policy: PowerRestorePolicyTypes | None = None
     power_supplies: IdRef | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     production_date: str | None = None
     sensors: IdRef | None = None
     serial_number: str | None = None
+    spare_part_number: str | None = None
     status: Status | None = None
     subfeeds: IdRef | None = None
     transfer_configuration: TransferConfiguration | None = None
@@ -118,7 +136,11 @@ class PowerDistributionOnUpdate(RedfishModelOnUpdate):
     location: Location | None = None
     mains_redundancy: RedundantGroup | None = None
     oem: dict[str, Any] | None = None
+    power_cycle_delay_seconds: float | None = None
     power_distribution_redundancy: list[RedundantGroup] | None = None
+    power_on_delay_seconds: float | None = None
+    power_restore_delay_seconds: float | None = None
+    power_restore_policy: PowerRestorePolicyTypes | None = None
     power_supply_redundancy: list[RedundantGroup] | None = None
     status: Status | None = None
     transfer_configuration: TransferConfiguration | None = None
@@ -135,6 +157,12 @@ class PowerEquipmentType(StrEnum):
     POWER_SHELF = "PowerShelf"
     BUS = "Bus"
     BATTERY_SHELF = "BatteryShelf"
+
+
+class PowerState(StrEnum):
+    ON = "On"
+    OFF = "Off"
+    POWER_CYCLE = "PowerCycle"
 
 
 class TransferConfiguration(RedfishModel):

@@ -39,7 +39,7 @@ class CxlLogicalDevice(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CXLLogicalDevice.v1_4_0.CXLLogicalDevice"
+        serialization_alias="@odata.type", default="#CXLLogicalDevice.v1_5_0.CXLLogicalDevice"
     )
     actions: Actions | None = None
     available_extents: int | None = None
@@ -141,6 +141,7 @@ class Links(RedfishModel):
     pcie_functions_odata_count: int | None = Field(
         serialization_alias="PCIeFunctions@odata.count", default=None
     )
+    port: IdRef | None = None
 
 
 class PassphraseSecureErase(RedfishModel):

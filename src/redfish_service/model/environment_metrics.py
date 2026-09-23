@@ -31,11 +31,12 @@ class EnvironmentMetrics(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_6_0.EnvironmentMetrics"
+        serialization_alias="@odata.type", default="#EnvironmentMetrics.v1_7_0.EnvironmentMetrics"
     )
     absolute_humidity: SensorExcerpt | None = None
     actions: Actions | None = None
     ambient_temperature_celsius: SensorExcerpt | None = None
+    barometric_pressure_mm: SensorExcerpt | None = None
     current_amps: SensorCurrentExcerpt | None = None
     description: str | None = None
     dew_point_celsius: SensorExcerpt | None = None

@@ -39,7 +39,7 @@ class CoolingUnit(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#CoolingUnit.v1_5_0.CoolingUnit"
+        serialization_alias="@odata.type", default="#CoolingUnit.v1_6_0.CoolingUnit"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -74,6 +74,7 @@ class CoolingUnit(RedfishModel):
     reservoirs: IdRef | None = None
     secondary_coolant_connectors: IdRef | None = None
     serial_number: str | None = None
+    spare_part_number: str | None = None
     status: Status | None = None
     user_label: str | None = None
     version: str | None = None

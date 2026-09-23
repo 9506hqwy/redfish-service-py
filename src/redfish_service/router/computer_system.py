@@ -9,6 +9,9 @@ from ..model.computer_system import (
     ComputerSystemOnUpdate,
     DecommissionRequest,
     ExportConfigurationRequest,
+    GraphicalConsoleGetOneTimeUrlRequest,
+    GraphicalConsoleSetOneTimePasswordRequest,
+    GraphicalConsoleSetPasswordRequest,
     RemoveResourceBlockRequest,
     ResetRequest,
 )
@@ -113,6 +116,72 @@ async def export_configuration1(
         "response": response,
         "body": body,
         "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleGetOneTimeURL",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_get_one_time_url1(
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleGetOneTimeUrlRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleGetOneTimeURL",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleSetOneTimePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_set_one_time_password1(
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleSetOneTimePasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleSetOneTimePassword",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleSetPassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_set_password1(
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleSetPasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleSetPassword",
     }
     return s.action(**b)
 
@@ -287,6 +356,78 @@ async def export_configuration2(
         "response": response,
         "body": body,
         "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleGetOneTimeURL",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_get_one_time_url2(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleGetOneTimeUrlRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleGetOneTimeURL",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleSetOneTimePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_set_one_time_password2(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleSetOneTimePasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleSetOneTimePassword",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/CompositionService/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleSetPassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_set_password2(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleSetPasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleSetPassword",
     }
     return s.action(**b)
 
@@ -471,6 +612,78 @@ async def export_configuration3(
         "response": response,
         "body": body,
         "action": "ExportConfiguration",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleGetOneTimeURL",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_get_one_time_url3(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleGetOneTimeUrlRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleGetOneTimeURL",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleSetOneTimePassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_set_one_time_password3(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleSetOneTimePasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleSetOneTimePassword",
+    }
+    return s.action(**b)
+
+
+@router.post(
+    "/redfish/v1/ResourceBlocks/{resource_block_id}/Systems/{computer_system_id}/Actions/ComputerSystem.GraphicalConsoleSetPassword",
+    response_model_exclude_none=True,
+)
+@authenticate
+async def graphical_console_set_password3(
+    resource_block_id: str,
+    computer_system_id: str,
+    request: Request,
+    response: Response,
+    body: GraphicalConsoleSetPasswordRequest,
+) -> RedfishError:
+    s: Service = get_service(ComputerSystem, request)
+    b: dict[str, Any] = {
+        "resource_block_id": resource_block_id,
+        "computer_system_id": computer_system_id,
+        "request": request,
+        "response": response,
+        "body": body,
+        "action": "GraphicalConsoleSetPassword",
     }
     return s.action(**b)
 

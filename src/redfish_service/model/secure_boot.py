@@ -34,7 +34,7 @@ class SecureBoot(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#SecureBoot.v1_2_0.SecureBoot"
+        serialization_alias="@odata.type", default="#SecureBoot.v1_2_1.SecureBoot"
     )
     actions: Actions | None = None
     description: str | None = None

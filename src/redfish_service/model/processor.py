@@ -117,7 +117,7 @@ class Processor(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Processor.v1_23_0.Processor"
+        serialization_alias="@odata.type", default="#Processor.v1_24_0.Processor"
     )
     acceleration_functions: IdRef | None = None
     actions: Actions | None = None
@@ -134,6 +134,7 @@ class Processor(RedfishModel):
     fpga: Fpga | None = Field(serialization_alias="FPGA", default=None)
     family: str | None = None
     firmware_version: str | None = None
+    hardware_security_version: str | None = None
     high_speed_core_ids: list[int] | None = Field(
         serialization_alias="HighSpeedCoreIDs", default=None
     )
@@ -332,3 +333,6 @@ class TurboState(StrEnum):
 
 class UaLink(RedfishModel):
     accelerator_id: int | None = Field(serialization_alias="AcceleratorID", default=None)
+    max_supported_accelerator_id: int | None = Field(
+        serialization_alias="MaxSupportedAcceleratorID", default=None
+    )

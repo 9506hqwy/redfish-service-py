@@ -24,6 +24,8 @@ class AuthenticationMode(StrEnum):
 class CredentialBootstrapping(RedfishModel):
     enable_after_reset: bool | None = None
     enabled: bool | None = None
+    expiration_window_enabled: bool | None = None
+    expiration_window_minutes: int | None = None
     role_id: str | None = None
 
 
@@ -32,7 +34,7 @@ class HostInterface(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#HostInterface.v1_3_3.HostInterface"
+        serialization_alias="@odata.type", default="#HostInterface.v1_4_0.HostInterface"
     )
     actions: Actions | None = None
     auth_none_role_id: str | None = None

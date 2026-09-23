@@ -20,7 +20,7 @@ class Chassis(RedfishModel):
     odata_context: str | None = Field(serialization_alias="@odata.context", default=None)
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
-    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_28_0.Chassis")
+    odata_type: str = Field(serialization_alias="@odata.type", default="#Chassis.v1_29_0.Chassis")
     actions: Actions | None = None
     assembly: IdRef | None = None
     asset_tag: str | None = None
@@ -72,6 +72,7 @@ class Chassis(RedfishModel):
     power_subsystem: IdRef | None = None
     powered_by_parent: bool | None = None
     processors: IdRef | None = None
+    production_date: str | None = None
     rack_mount_capacity_units: float | None = None
     rack_mount_depth_mm: float | None = None
     rack_mount_width: RackMountWidth | None = None
@@ -99,7 +100,7 @@ class ChassisOnCreate(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str | None = Field(serialization_alias="@odata.id", default=None)
     odata_type: str | None = Field(
-        serialization_alias="@odata.type", default="#Chassis.v1_28_0.Chassis"
+        serialization_alias="@odata.type", default="#Chassis.v1_29_0.Chassis"
     )
     actions: Actions | None = None
     assembly: IdRef | None = None
@@ -152,6 +153,7 @@ class ChassisOnCreate(RedfishModel):
     power_subsystem: IdRef | None = None
     powered_by_parent: bool | None = None
     processors: IdRef | None = None
+    production_date: str | None = None
     rack_mount_capacity_units: float | None = None
     rack_mount_depth_mm: float | None = None
     rack_mount_width: RackMountWidth | None = None
@@ -357,6 +359,8 @@ class PhysicalSecurity(RedfishModel):
 
 
 class RackMountWidth(StrEnum):
+    OPEN_RACK = "OpenRack"
+    OPEN_RACK_WIDE = "OpenRackWide"
     OPEN_U = "OpenU"
     EI_A_310 = "EIA_310"
     EI_A_310_TELCO = "EIA_310_Telco"

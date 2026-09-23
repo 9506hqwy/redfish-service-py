@@ -24,6 +24,7 @@ class Condition(RedfishModel):
     timestamp: str | None = None
     user_authentication_source: str | None = None
     username: str | None = None
+    vendor_code: str | None = None
 
 
 class ConditionType(StrEnum):
@@ -229,7 +230,7 @@ class Resource(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#Resource.v1_24_0.Resource"
+        serialization_alias="@odata.type", default="#Resource.v1_25_0.Resource"
     )
     description: str | None = None
     id: str
@@ -242,7 +243,7 @@ class ResourceCollection(RedfishModel):
     odata_etag: str | None = Field(serialization_alias="@odata.etag", default=None)
     odata_id: str = Field(serialization_alias="@odata.id")
     odata_type: str = Field(
-        serialization_alias="@odata.type", default="#ResourceCollection.v1_24_0.ResourceCollection"
+        serialization_alias="@odata.type", default="#ResourceCollection.v1_25_0.ResourceCollection"
     )
     description: str | None = None
     name: str
